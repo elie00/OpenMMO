@@ -146,15 +146,37 @@ internal constructor(
       checkNotNull(battles) { "Battle service is unavailable" }
           .startScriptedBattle(session, dexId, level, moveIds.toList())
 
-  /** Fight the decomp trainer with this id, using the region the player is standing in. */
+  /**
+   * True once this character has beaten the trainer with this id. The decomp keeps one flag per
+   * trainer in the TRAINER_FLAGS_START block and checks it before starting a battle, so a beaten
+   * trainer only repeats their post battle line.
+   */
+  fun hasBeatenTrainer(trainerId: Int): Boolean = isFlagSet(trainerFlag(trainerId))
+
+  /**
+   * Fight the decomp trainer with this id, using the region the player is standing in. A win marks
+   * the trainer beaten, the way the decomp's CB2_EndTrainerBattle does, so the fight cannot be
+   * farmed by talking to them again.
+   */
   suspend fun trainerBattle(trainerId: Int): BattleResult {
-    val region =
-        checkNotNull(Region.byWireValue(state.regionId.toByte())) {
-          "Scene ran in unknown region ${state.regionId}"
-        }
-    return checkNotNull(battles) { "Battle service is unavailable" }
-        .startTrainerBattle(session, region, trainerId)
+    val result =
+        checkNotNull(battles) { "Battle service is unavailable" }
+            .startTrainerBattle(session, region(), trainerId)
+    if (result == BattleResult.VICTORY) setFlag(trainerFlag(trainerId))
+    return result
   }
+
+  private fun region(): Region =
+      checkNotNull(Region.byWireValue(state.regionId.toByte())) {
+        "Scene ran in unknown region ${state.regionId}"
+      }
+
+  /**
+   * The story key holding "this trainer is beaten". Namespaced by region like every other story
+   * key, and by "trainer" so it can never collide with a decomp FLAG_ name.
+   */
+  private fun trainerFlag(trainerId: Int): String =
+      "${region().name.lowercase()}/trainer/$trainerId"
 
   /**
    * Walk the map npc with decomp local id [localId] (its entityIdx) through [steps] and wait for
