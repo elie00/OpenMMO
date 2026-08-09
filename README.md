@@ -22,6 +22,10 @@ The goal is it to provide a free and open-source alternative to the PokeMMO serv
 
 ## Building
 
+OpenMMO requires **JDK 25**. Check the JVM Gradle uses with `./gradlew --version`
+before building. The configured Foojay resolver downloads compilation
+toolchains, but Gradle itself must be launched by a JVM version 25 or newer.
+
 The map data is generated at build time from the [pret](https://github.com/pret)
 decompilation projects, which are vendored as git submodules under `decomp/`.
 Clone the repository with its submodules:
@@ -60,10 +64,19 @@ docker compose up -d          # start all docker containers
 ./gradlew runAll              # build and run the servers
 ```
 
+`runAll` starts the login and game servers together and stops both as soon as
+either one exits. Use `Ctrl-C` to stop the environment.
+
+Set `OPENMMO_ENVIRONMENT=production` in deployed environments. Production mode
+refuses to start if dev seed data is enabled, a default database password or
+session secret is still configured, or the shared private key is missing. The
+required values are documented in [`.env.example`](.env.example).
+
 For local-only tweaks to the container setup, create a
 `docker-compose.override.yml` (also gitignored). 
 Docker Compose merges it automatically on `docker compose up`. 
-For deployment,supply a proper `.env` and run `docker compose -f docker-compose.yml up -d` to skip any override.
+For deployment, supply a proper `.env` and run
+`docker compose -f docker-compose.yml up -d` to skip any override.
 
 ### Server key
 

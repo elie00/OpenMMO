@@ -23,6 +23,11 @@ L'objectif est de fournir une alternative libre et open source au serveur PokeMM
 
 ## Compilation
 
+OpenMMO nécessite **JDK 25**. Vérifiez la version utilisée par Gradle avec
+`./gradlew --version` avant de compiler. Le résolveur Foojay configuré dans le
+projet télécharge automatiquement les toolchains de compilation, mais Gradle
+lui-même doit être lancé par une JVM 25 ou plus récente.
+
 Les données de cartes sont générées au moment de la compilation à partir des
 projets de décompilation [pret](https://github.com/pret), intégrés comme
 sous-modules git dans `decomp/`. Clonez le dépôt avec ses sous-modules :
@@ -62,6 +67,15 @@ cp .env.example .env          # puis ajustez les valeurs
 docker compose up -d          # démarre tous les conteneurs docker
 ./gradlew runAll              # compile et lance les serveurs
 ```
+
+`runAll` lance les serveurs login et game ensemble et les arrête ensemble dès
+que l'un des deux se termine. Utilisez `Ctrl-C` pour arrêter l'environnement.
+
+Définissez `OPENMMO_ENVIRONMENT=production` dans les environnements déployés.
+Le mode production refuse de démarrer si les données de développement sont
+activées, si un mot de passe de base ou un secret de session par défaut subsiste,
+ou si la clé privée partagée est absente. Les valeurs requises sont documentées
+dans [`.env.example`](.env.example).
 
 Pour des ajustements purement locaux de la configuration des conteneurs, créez un
 fichier `docker-compose.override.yml` (également ignoré par git).

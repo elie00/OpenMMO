@@ -6,7 +6,8 @@ description: How persistence works and how dev data is seeded.
 OpenMMO uses two PostgreSQL databases, matching the two servers:
 
 - **login-db**: accounts (`users` table), owned by `server.login`.
-- **game-db**: characters, pokemon, and items, owned by `server.game`.
+- **game-db**: characters, pokemon, items, social relations, and guilds, owned
+  by `server.game`.
 
 They stay separate on purpose. The game server never looks up accounts, it
 trusts the `userId` handed over through the session token. That is also why
@@ -31,15 +32,19 @@ To change the schema, add a new `V<next>__short_name.sql` file and rebuild.
 Never edit an already merged migration. Keep the DDL standard SQL, the jOOQ
 parser does not know exotic Postgres extensions.
 
-## Memory is the live version
+## Character memory is the live version
 
-The game server does not query the database during gameplay.
-`CharacterStore` loads a character when its player logs in and all reads and
-writes hit memory. Changes mark the character dirty, and a background flusher
-writes dirty characters back after a short debounce. Warps and disconnects
-flush immediately, and a disconnect also evicts the character from memory
-once its last write succeeded. So the database always trails memory by a few
-seconds at most, and only connected players are cached.
+`CharacterStore` loads a character when its player logs in and all subsequent
+character reads and writes hit memory. Changes mark the character dirty, and a
+background flusher writes dirty characters back after a short debounce. Warps
+and disconnects flush immediately, and a disconnect also evicts the character
+from memory once its last write succeeded. So character rows trail memory by a
+few seconds at most, and only connected players are cached.
+
+Social relations and guild state use jOOQ stores directly. Friend, block, guild
+membership, rank, permission, label, and activity-log mutations are therefore
+durable as soon as their request completes. Guild service operations also apply
+permission and rank-hierarchy checks before the store is mutated.
 
 ## Dev data seeding
 

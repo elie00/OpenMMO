@@ -24,6 +24,10 @@ export default defineConfig({
           items: [{ autogenerate: { directory: "concepts" } }],
         },
         { label: "Guides", items: [{ autogenerate: { directory: "guides" } }] },
+        {
+          label: "Reference",
+          items: [{ autogenerate: { directory: "reference" } }],
+        },
       ],
     }),
   ],
