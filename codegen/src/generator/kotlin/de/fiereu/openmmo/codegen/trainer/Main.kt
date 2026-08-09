@@ -16,7 +16,11 @@ fun main(args: Array<String>) {
     val (region, decomp) = spec.split("|")
     val trainers = TrainerParser(File(decomp)).parseAll()
     println("[trainer] $region: parsed ${trainers.size} trainers from $decomp")
-    TrainerRenderer(region, templatesDir, outputDir, classCacheDir).render(trainers)
+    val renderer = TrainerRenderer(region, templatesDir, outputDir, classCacheDir)
+    renderer.render(trainers)
+    val constants = readTrainerConstants(File(decomp), trainers.mapTo(HashSet()) { it.id })
+    println("[trainer] $region: ${constants.size} id constants")
+    renderer.renderConstants(constants)
   }
   println("[trainer] done")
 }

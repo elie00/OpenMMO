@@ -15,14 +15,17 @@ class TrainerRenderer(
     private val chunkSize: Int = 25,
 ) {
 
-  fun render(trainers: List<ParsedTrainer>) {
+  private fun engine(): TemplateEngine {
     classCacheDir.mkdirs()
-    val engine =
-        TemplateEngine.create(
-            DirectoryCodeResolver(templatesDir.toPath()),
-            classCacheDir.toPath(),
-            ContentType.Plain,
-        )
+    return TemplateEngine.create(
+        DirectoryCodeResolver(templatesDir.toPath()),
+        classCacheDir.toPath(),
+        ContentType.Plain,
+    )
+  }
+
+  fun render(trainers: List<ParsedTrainer>) {
+    val engine = engine()
 
     val objectName = "Generated${region.replaceFirstChar { it.uppercase() }}Trainers"
     val file = File(outputDir, "${BASE_PACKAGE.replace('.', '/')}/$objectName.kt")
@@ -36,6 +39,25 @@ class TrainerRenderer(
               "region" to region,
               "chunks" to trainers.chunked(chunkSize),
           ),
+          out,
+      )
+    }
+  }
+
+  /**
+   * Emits the public `<Region>Trainers` object of id constants. It is public where the registration
+   * object is internal, because ported scripts in server.game reference it by name.
+   */
+  fun renderConstants(constants: List<TrainerConstant>) {
+    val engine = engine()
+
+    val objectName = "${region.replaceFirstChar { it.uppercase() }}Trainers"
+    val file = File(outputDir, "${BASE_PACKAGE.replace('.', '/')}/$objectName.kt")
+    file.parentFile.mkdirs()
+    FileOutput(file.toPath()).use { out ->
+      engine.render(
+          "TrainerConstants.jte",
+          mapOf("pkg" to BASE_PACKAGE, "objectName" to objectName, "constants" to constants),
           out,
       )
     }
