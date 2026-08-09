@@ -2,6 +2,8 @@
 
 [![](https://dcbadge.limes.pink/api/server/SQwGXyY2gz)](https://discord.gg/SQwGXyY2gz)
 
+Read this in another language: [Français](README.fr.md)
+
 ## ToC
 - [Description](#description)
 - [Building](#building)
