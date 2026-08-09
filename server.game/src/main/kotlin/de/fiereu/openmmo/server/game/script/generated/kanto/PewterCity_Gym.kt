@@ -71,10 +71,25 @@ internal object PewterCity_Gym_EventScript_GymStatue : Script {
   override suspend fun run(ctx: ScriptContext) = TODO("port PewterCity_Gym_EventScript_GymStatue")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox PewterCity_Gym_Text_GymStatuePlayerWon
+ * releaseall
+ * end
+ * ```
+ */
+internal object PewterCity_Gym_EventScript_GymStatuePostVictory : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port PewterCity_Gym_EventScript_GymStatuePostVictory")
+}
+
 internal val PewterCity_GymScripts: Map<String, Script> =
     mapOf(
         "PewterCity_Gym_EventScript_Brock" to PewterCity_Gym_EventScript_Brock,
         "PewterCity_Gym_EventScript_Liam" to PewterCity_Gym_EventScript_Liam,
         "PewterCity_Gym_EventScript_GymGuy" to PewterCity_Gym_EventScript_GymGuy,
         "PewterCity_Gym_EventScript_GymStatue" to PewterCity_Gym_EventScript_GymStatue,
+        "PewterCity_Gym_EventScript_GymStatuePostVictory" to
+            PewterCity_Gym_EventScript_GymStatuePostVictory,
     )

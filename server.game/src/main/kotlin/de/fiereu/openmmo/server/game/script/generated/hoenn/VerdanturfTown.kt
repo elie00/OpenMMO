@@ -3,6 +3,7 @@ package de.fiereu.openmmo.server.game.script.generated.hoenn
 import de.fiereu.openmmo.dialog.generated.hoenn.VerdanturfTown
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 
 internal object VerdanturfTown_EventScript_Man : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.say(VerdanturfTown.AirCleanHere)
@@ -26,7 +27,7 @@ internal object VerdanturfTown_EventScript_Twin : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -37,7 +38,11 @@ internal object VerdanturfTown_EventScript_Twin : Script {
  * ```
  */
 internal object VerdanturfTown_EventScript_Boy : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port VerdanturfTown_EventScript_Boy")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(HoennFlags.FLAG_RUSTURF_TUNNEL_OPENED))
+        return VerdanturfTown_EventScript_BoyTunnelOpen.run(ctx)
+    ctx.say(VerdanturfTown.GuyTryingToBustThroughCave)
+  }
 }
 
 internal object VerdanturfTown_EventScript_Camper : Script {
@@ -60,6 +65,19 @@ internal object VerdanturfTown_EventScript_RusturfTunnelSign : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(VerdanturfTown.RusturfTunnelSign)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox VerdanturfTown_Text_EasyToGetToRustboroNow, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object VerdanturfTown_EventScript_BoyTunnelOpen : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port VerdanturfTown_EventScript_BoyTunnelOpen")
+}
+
 internal val VerdanturfTownScripts: Map<String, Script> =
     mapOf(
         "VerdanturfTown_EventScript_Man" to VerdanturfTown_EventScript_Man,
@@ -71,4 +89,5 @@ internal val VerdanturfTownScripts: Map<String, Script> =
         "VerdanturfTown_EventScript_BattleTentSign" to VerdanturfTown_EventScript_BattleTentSign,
         "VerdanturfTown_EventScript_RusturfTunnelSign" to
             VerdanturfTown_EventScript_RusturfTunnelSign,
+        "VerdanturfTown_EventScript_BoyTunnelOpen" to VerdanturfTown_EventScript_BoyTunnelOpen,
     )

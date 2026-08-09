@@ -87,7 +87,7 @@ internal object BattleFrontier_BattleFactoryLobby_EventScript_ShowDoublesResults
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lockall
  * msgbox BattleFrontier_BattleFactoryLobby_Text_RulesAreListed, MSGBOX_DEFAULT
@@ -96,8 +96,32 @@ internal object BattleFrontier_BattleFactoryLobby_EventScript_ShowDoublesResults
  * ```
  */
 internal object BattleFrontier_BattleFactoryLobby_EventScript_RulesBoard : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(BattleFrontier_BattleFactoryLobby.RulesAreListed)
+    return BattleFrontier_BattleFactoryLobby_EventScript_ReadRulesBoard.run(ctx)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * message BattleFrontier_BattleFactoryLobby_Text_ReadWhichHeading
+ * waitmessage
+ * multichoice 17, 0, MULTI_BATTLE_FACTORY_RULES, FALSE
+ * switch VAR_RESULT
+ * case 0, BattleFrontier_BattleFactoryLobby_EventScript_RulesBasics
+ * case 1, BattleFrontier_BattleFactoryLobby_EventScript_RulesSwapPartner
+ * case 2, BattleFrontier_BattleFactoryLobby_EventScript_RulesSwapNumber
+ * case 3, BattleFrontier_BattleFactoryLobby_EventScript_RulesSwapNotes
+ * case 4, BattleFrontier_BattleFactoryLobby_EventScript_RulesOpenLv
+ * case 5, BattleFrontier_BattleFactoryLobby_EventScript_ExitRules
+ * case MULTI_B_PRESSED, BattleFrontier_BattleFactoryLobby_EventScript_ExitRules
+ * end
+ * ```
+ */
+internal object BattleFrontier_BattleFactoryLobby_EventScript_ReadRulesBoard : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port BattleFrontier_BattleFactoryLobby_EventScript_RulesBoard")
+      TODO("port BattleFrontier_BattleFactoryLobby_EventScript_ReadRulesBoard")
 }
 
 internal val BattleFrontier_BattleFactoryLobbyScripts: Map<String, Script> =
@@ -120,4 +144,6 @@ internal val BattleFrontier_BattleFactoryLobbyScripts: Map<String, Script> =
             BattleFrontier_BattleFactoryLobby_EventScript_ShowDoublesResults,
         "BattleFrontier_BattleFactoryLobby_EventScript_RulesBoard" to
             BattleFrontier_BattleFactoryLobby_EventScript_RulesBoard,
+        "BattleFrontier_BattleFactoryLobby_EventScript_ReadRulesBoard" to
+            BattleFrontier_BattleFactoryLobby_EventScript_ReadRulesBoard,
     )

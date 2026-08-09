@@ -7,7 +7,7 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
 import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -18,7 +18,11 @@ import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
  * ```
  */
 internal object LilycoveCity_EventScript_Sailor2 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port LilycoveCity_EventScript_Sailor2")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(HoennFlags.FLAG_TEAM_AQUA_ESCAPED_IN_SUBMARINE))
+        return LilycoveCity_EventScript_Sailor2AquaGone.run(ctx)
+    ctx.say(LilycoveCity.TeamAquaBeenTrainingWailmer)
+  }
 }
 
 /**
@@ -49,7 +53,7 @@ internal object LilycoveCity_EventScript_Man2 : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -60,7 +64,11 @@ internal object LilycoveCity_EventScript_Man2 : Script {
  * ```
  */
 internal object LilycoveCity_EventScript_Woman2 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port LilycoveCity_EventScript_Woman2")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(HoennFlags.FLAG_TEAM_AQUA_ESCAPED_IN_SUBMARINE))
+        return LilycoveCity_EventScript_Woman2AquaGone.run(ctx)
+    ctx.say(LilycoveCity.SomeoneStoleMyPokemon)
+  }
 }
 
 internal object LilycoveCity_EventScript_ExpertM1 : Script {
@@ -278,6 +286,70 @@ internal object LilycoveCity_EventScript_MoveDeletersHouseSign : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(LilycoveCity.MoveDeletersHouseSign)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox LilycoveCity_Text_SomeonePuntedTeamAquaOut, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object LilycoveCity_EventScript_Sailor2AquaGone : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LilycoveCity_EventScript_Sailor2AquaGone")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox LilycoveCity_Text_TeamAquaLotGoneForGood, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object LilycoveCity_EventScript_ExpertM2AquaGone : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LilycoveCity_EventScript_ExpertM2AquaGone")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox LilycoveCity_Text_GoingToMoveDeleterForHMs, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object LilycoveCity_EventScript_GirlAquaGone : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port LilycoveCity_EventScript_GirlAquaGone")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox LilycoveCity_Text_MissingPokemonCameBack, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object LilycoveCity_EventScript_Woman2AquaGone : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LilycoveCity_EventScript_Woman2AquaGone")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox LilycoveCity_Text_HarborSign, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object LilycoveCity_EventScript_HarborSignFerryReady : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LilycoveCity_EventScript_HarborSignFerryReady")
+}
+
 internal val LilycoveCityScripts: Map<String, Script> =
     mapOf(
         "LilycoveCity_EventScript_Sailor2" to LilycoveCity_EventScript_Sailor2,
@@ -314,4 +386,10 @@ internal val LilycoveCityScripts: Map<String, Script> =
             LilycoveCity_EventScript_TrainerFanClubSign,
         "LilycoveCity_EventScript_MoveDeletersHouseSign" to
             LilycoveCity_EventScript_MoveDeletersHouseSign,
+        "LilycoveCity_EventScript_Sailor2AquaGone" to LilycoveCity_EventScript_Sailor2AquaGone,
+        "LilycoveCity_EventScript_ExpertM2AquaGone" to LilycoveCity_EventScript_ExpertM2AquaGone,
+        "LilycoveCity_EventScript_GirlAquaGone" to LilycoveCity_EventScript_GirlAquaGone,
+        "LilycoveCity_EventScript_Woman2AquaGone" to LilycoveCity_EventScript_Woman2AquaGone,
+        "LilycoveCity_EventScript_HarborSignFerryReady" to
+            LilycoveCity_EventScript_HarborSignFerryReady,
     )

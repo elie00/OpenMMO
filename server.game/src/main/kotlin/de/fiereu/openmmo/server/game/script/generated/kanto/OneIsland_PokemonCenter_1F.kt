@@ -3,6 +3,7 @@ package de.fiereu.openmmo.server.game.script.generated.kanto
 import de.fiereu.openmmo.dialog.generated.kanto.OneIsland_PokemonCenter_1F
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 
 /**
  * Not ported yet. Decomp body:
@@ -20,7 +21,7 @@ internal object OneIsland_PokemonCenter_1F_EventScript_Nurse : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * goto_if_set FLAG_SEVII_DETOUR_FINISHED, OneIsland_PokemonCenter_1F_EventScript_BillGoTakeStroll
@@ -30,8 +31,11 @@ internal object OneIsland_PokemonCenter_1F_EventScript_Nurse : Script {
  * ```
  */
 internal object OneIsland_PokemonCenter_1F_EventScript_Bill : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port OneIsland_PokemonCenter_1F_EventScript_Bill")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(KantoFlags.FLAG_SEVII_DETOUR_FINISHED))
+        return OneIsland_PokemonCenter_1F_EventScript_BillGoTakeStroll.run(ctx)
+    ctx.say(OneIsland_PokemonCenter_1F.HmmHowAboutLikeThis)
+  }
 }
 
 /**
@@ -103,6 +107,34 @@ internal object OneIsland_PokemonCenter_1F_EventScript_NetworkMachine : Script {
       TODO("port OneIsland_PokemonCenter_1F_EventScript_NetworkMachine")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox OneIsland_PokemonCenter_1F_Text_TradedWithFarAwayBoyfriend
+ * release
+ * end
+ * ```
+ */
+internal object OneIsland_PokemonCenter_1F_EventScript_CrushGirlHoennLinked : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port OneIsland_PokemonCenter_1F_EventScript_CrushGirlHoennLinked")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_ONE_ISLAND_POKEMON_CENTER_BILL, Common_Movement_FacePlayer
+ * waitmovement 0
+ * msgbox OneIsland_PokemonCenter_1F_Text_GotPCWorkingStrollAWhileMore
+ * release
+ * end
+ * ```
+ */
+internal object OneIsland_PokemonCenter_1F_EventScript_BillGoTakeStroll : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port OneIsland_PokemonCenter_1F_EventScript_BillGoTakeStroll")
+}
+
 internal val OneIsland_PokemonCenter_1FScripts: Map<String, Script> =
     mapOf(
         "OneIsland_PokemonCenter_1F_EventScript_Nurse" to
@@ -119,4 +151,8 @@ internal val OneIsland_PokemonCenter_1FScripts: Map<String, Script> =
             OneIsland_PokemonCenter_1F_EventScript_CrushGirl,
         "OneIsland_PokemonCenter_1F_EventScript_NetworkMachine" to
             OneIsland_PokemonCenter_1F_EventScript_NetworkMachine,
+        "OneIsland_PokemonCenter_1F_EventScript_CrushGirlHoennLinked" to
+            OneIsland_PokemonCenter_1F_EventScript_CrushGirlHoennLinked,
+        "OneIsland_PokemonCenter_1F_EventScript_BillGoTakeStroll" to
+            OneIsland_PokemonCenter_1F_EventScript_BillGoTakeStroll,
     )

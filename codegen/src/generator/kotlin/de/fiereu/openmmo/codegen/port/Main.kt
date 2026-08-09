@@ -32,7 +32,8 @@ fun main(args: Array<String>) {
     val report = TrainerBattlePorter(region, File(decomp)).portDirectory(dir, write = !check)
     changed += report.filesChanged
     println(
-        "[port] $region: ported ${report.ported} in ${report.filesChanged} files " +
+        "[port] $region: ported ${report.ported}, emitted ${report.emitted} sub scripts, " +
+            "in ${report.filesChanged} files " +
             "(skipped ${report.skippedShape} unsupported shapes, " +
             "${report.skippedTrainer} unknown trainers, ${report.skippedText} unknown texts, " +
             "${report.skippedItem} unresolvable items, " +

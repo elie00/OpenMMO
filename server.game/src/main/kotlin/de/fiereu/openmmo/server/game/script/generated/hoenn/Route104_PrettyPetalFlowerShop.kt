@@ -1,7 +1,9 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
+import de.fiereu.openmmo.dialog.generated.hoenn.Route104_PrettyPetalFlowerShop
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 
 /**
  * Not ported yet. Decomp body:
@@ -25,7 +27,7 @@ internal object Route104_PrettyPetalFlowerShop_EventScript_ShopOwner : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -36,8 +38,11 @@ internal object Route104_PrettyPetalFlowerShop_EventScript_ShopOwner : Script {
  * ```
  */
 internal object Route104_PrettyPetalFlowerShop_EventScript_WailmerPailGirl : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port Route104_PrettyPetalFlowerShop_EventScript_WailmerPailGirl")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.isFlagSet(HoennFlags.FLAG_RECEIVED_WAILMER_PAIL))
+        return Route104_PrettyPetalFlowerShop_EventScript_GiveWailmerPail.run(ctx)
+    ctx.say(Route104_PrettyPetalFlowerShop.WailmerPailExplanation)
+  }
 }
 
 /**
@@ -63,6 +68,22 @@ internal object Route104_PrettyPetalFlowerShop_EventScript_RandomBerryGirl : Scr
       TODO("port Route104_PrettyPetalFlowerShop_EventScript_RandomBerryGirl")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox Route104_PrettyPetalFlowerShop_Text_YouCanHaveThis, MSGBOX_DEFAULT
+ * giveitem ITEM_WAILMER_PAIL
+ * msgbox Route104_PrettyPetalFlowerShop_Text_WailmerPailExplanation, MSGBOX_DEFAULT
+ * setflag FLAG_RECEIVED_WAILMER_PAIL
+ * release
+ * end
+ * ```
+ */
+internal object Route104_PrettyPetalFlowerShop_EventScript_GiveWailmerPail : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port Route104_PrettyPetalFlowerShop_EventScript_GiveWailmerPail")
+}
+
 internal val Route104_PrettyPetalFlowerShopScripts: Map<String, Script> =
     mapOf(
         "Route104_PrettyPetalFlowerShop_EventScript_ShopOwner" to
@@ -71,4 +92,6 @@ internal val Route104_PrettyPetalFlowerShopScripts: Map<String, Script> =
             Route104_PrettyPetalFlowerShop_EventScript_WailmerPailGirl,
         "Route104_PrettyPetalFlowerShop_EventScript_RandomBerryGirl" to
             Route104_PrettyPetalFlowerShop_EventScript_RandomBerryGirl,
+        "Route104_PrettyPetalFlowerShop_EventScript_GiveWailmerPail" to
+            Route104_PrettyPetalFlowerShop_EventScript_GiveWailmerPail,
     )

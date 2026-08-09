@@ -76,6 +76,19 @@ internal object LilycoveCity_PokemonCenter_1F_EventScript_ContestLadyMon : Scrip
       TODO("port LilycoveCity_PokemonCenter_1F_EventScript_ContestLadyMon")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox LilycoveCity_PokemonCenter_1F_Text_HaventSeenRottenScoundrels, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object LilycoveCity_PokemonCenter_1F_EventScript_ManiacBadTeamGone : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LilycoveCity_PokemonCenter_1F_EventScript_ManiacBadTeamGone")
+}
+
 internal val LilycoveCity_PokemonCenter_1FScripts: Map<String, Script> =
     mapOf(
         "LilycoveCity_PokemonCenter_1F_EventScript_Nurse" to
@@ -88,4 +101,6 @@ internal val LilycoveCity_PokemonCenter_1FScripts: Map<String, Script> =
             LilycoveCity_PokemonCenter_1F_EventScript_LilycoveLady,
         "LilycoveCity_PokemonCenter_1F_EventScript_ContestLadyMon" to
             LilycoveCity_PokemonCenter_1F_EventScript_ContestLadyMon,
+        "LilycoveCity_PokemonCenter_1F_EventScript_ManiacBadTeamGone" to
+            LilycoveCity_PokemonCenter_1F_EventScript_ManiacBadTeamGone,
     )

@@ -4,6 +4,7 @@ import de.fiereu.openmmo.dialog.generated.kanto.FuchsiaCity_Gym
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
@@ -135,7 +136,7 @@ internal object FuchsiaCity_Gym_EventScript_Koga : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -146,7 +147,11 @@ internal object FuchsiaCity_Gym_EventScript_Koga : Script {
  * ```
  */
 internal object FuchsiaCity_Gym_EventScript_GymGuy : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port FuchsiaCity_Gym_EventScript_GymGuy")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(KantoFlags.FLAG_DEFEATED_KOGA))
+        return FuchsiaCity_Gym_EventScript_GymGuyPostVictory.run(ctx)
+    ctx.say(FuchsiaCity_Gym.GymGuyAdvice)
+  }
 }
 
 /**
@@ -163,6 +168,32 @@ internal object FuchsiaCity_Gym_EventScript_GymStatue : Script {
   override suspend fun run(ctx: ScriptContext) = TODO("port FuchsiaCity_Gym_EventScript_GymStatue")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox FuchsiaCity_Gym_Text_GymStatuePlayerWon
+ * releaseall
+ * end
+ * ```
+ */
+internal object FuchsiaCity_Gym_EventScript_GymStatuePostVictory : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port FuchsiaCity_Gym_EventScript_GymStatuePostVictory")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox FuchsiaCity_Gym_Text_GymGuyPostVictory
+ * release
+ * end
+ * ```
+ */
+internal object FuchsiaCity_Gym_EventScript_GymGuyPostVictory : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port FuchsiaCity_Gym_EventScript_GymGuyPostVictory")
+}
+
 internal val FuchsiaCity_GymScripts: Map<String, Script> =
     mapOf(
         "FuchsiaCity_Gym_EventScript_Kayden" to FuchsiaCity_Gym_EventScript_Kayden,
@@ -174,4 +205,8 @@ internal val FuchsiaCity_GymScripts: Map<String, Script> =
         "FuchsiaCity_Gym_EventScript_Koga" to FuchsiaCity_Gym_EventScript_Koga,
         "FuchsiaCity_Gym_EventScript_GymGuy" to FuchsiaCity_Gym_EventScript_GymGuy,
         "FuchsiaCity_Gym_EventScript_GymStatue" to FuchsiaCity_Gym_EventScript_GymStatue,
+        "FuchsiaCity_Gym_EventScript_GymStatuePostVictory" to
+            FuchsiaCity_Gym_EventScript_GymStatuePostVictory,
+        "FuchsiaCity_Gym_EventScript_GymGuyPostVictory" to
+            FuchsiaCity_Gym_EventScript_GymGuyPostVictory,
     )

@@ -162,6 +162,19 @@ internal object CeladonCity_Gym_EventScript_GymStatue : Script {
   override suspend fun run(ctx: ScriptContext) = TODO("port CeladonCity_Gym_EventScript_GymStatue")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox CeladonCity_Gym_Text_GymStatuePlayerWon
+ * releaseall
+ * end
+ * ```
+ */
+internal object CeladonCity_Gym_EventScript_GymStatuePostVictory : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port CeladonCity_Gym_EventScript_GymStatuePostVictory")
+}
+
 internal val CeladonCity_GymScripts: Map<String, Script> =
     mapOf(
         "CeladonCity_Gym_EventScript_Kay" to CeladonCity_Gym_EventScript_Kay,
@@ -173,4 +186,6 @@ internal val CeladonCity_GymScripts: Map<String, Script> =
         "CeladonCity_Gym_EventScript_Erika" to CeladonCity_Gym_EventScript_Erika,
         "CeladonCity_Gym_EventScript_Mary" to CeladonCity_Gym_EventScript_Mary,
         "CeladonCity_Gym_EventScript_GymStatue" to CeladonCity_Gym_EventScript_GymStatue,
+        "CeladonCity_Gym_EventScript_GymStatuePostVictory" to
+            CeladonCity_Gym_EventScript_GymStatuePostVictory,
     )

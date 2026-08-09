@@ -1,7 +1,9 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
+import de.fiereu.openmmo.dialog.generated.hoenn.DewfordTown_Gym
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 
 /**
  * Not ported yet. Decomp body:
@@ -56,7 +58,7 @@ internal object DewfordTown_Gym_EventScript_Laura : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -67,7 +69,11 @@ internal object DewfordTown_Gym_EventScript_Laura : Script {
  * ```
  */
 internal object DewfordTown_Gym_EventScript_GymGuide : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port DewfordTown_Gym_EventScript_GymGuide")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(HoennFlags.FLAG_DEFEATED_DEWFORD_GYM))
+        return DewfordTown_Gym_EventScript_GymGuidePostVictory.run(ctx)
+    ctx.say(DewfordTown_Gym.GymGuideAdvice)
+  }
 }
 
 /**
@@ -134,6 +140,19 @@ internal object DewfordTown_Gym_EventScript_RightGymStatue : Script {
       TODO("port DewfordTown_Gym_EventScript_RightGymStatue")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox DewfordTown_Gym_Text_GymGuidePostVictory, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object DewfordTown_Gym_EventScript_GymGuidePostVictory : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port DewfordTown_Gym_EventScript_GymGuidePostVictory")
+}
+
 internal val DewfordTown_GymScripts: Map<String, Script> =
     mapOf(
         "DewfordTown_Gym_EventScript_Brawly" to DewfordTown_Gym_EventScript_Brawly,
@@ -146,4 +165,6 @@ internal val DewfordTown_GymScripts: Map<String, Script> =
         "DewfordTown_Gym_EventScript_Brenden" to DewfordTown_Gym_EventScript_Brenden,
         "DewfordTown_Gym_EventScript_LeftGymStatue" to DewfordTown_Gym_EventScript_LeftGymStatue,
         "DewfordTown_Gym_EventScript_RightGymStatue" to DewfordTown_Gym_EventScript_RightGymStatue,
+        "DewfordTown_Gym_EventScript_GymGuidePostVictory" to
+            DewfordTown_Gym_EventScript_GymGuidePostVictory,
     )

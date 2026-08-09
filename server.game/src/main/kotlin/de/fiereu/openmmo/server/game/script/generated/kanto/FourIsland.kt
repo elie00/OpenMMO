@@ -95,6 +95,20 @@ internal object FourIsland_EventScript_LoreleisHouseSign : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(FourIsland.LoreleisHouse)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * famechecker FAMECHECKER_LORELEI, 5
+ * msgbox FourIsland_Text_LoreleiMetLaprasAsChild
+ * release
+ * end
+ * ```
+ */
+internal object FourIsland_EventScript_OldWomanLoreleiLeft : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port FourIsland_EventScript_OldWomanLoreleiLeft")
+}
+
 internal val FourIslandScripts: Map<String, Script> =
     mapOf(
         "FourIsland_EventScript_DaycareMan" to FourIsland_EventScript_DaycareMan,
@@ -105,4 +119,5 @@ internal val FourIslandScripts: Map<String, Script> =
         "FourIsland_EventScript_LittleGirl" to FourIsland_EventScript_LittleGirl,
         "FourIsland_EventScript_IslandSign" to FourIsland_EventScript_IslandSign,
         "FourIsland_EventScript_LoreleisHouseSign" to FourIsland_EventScript_LoreleisHouseSign,
+        "FourIsland_EventScript_OldWomanLoreleiLeft" to FourIsland_EventScript_OldWomanLoreleiLeft,
     )

@@ -1,7 +1,9 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.dialog.generated.kanto.Route12_FishingHouse
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 
 /**
  * Not ported yet. Decomp body:
@@ -22,7 +24,7 @@ internal object Route12_FishingHouse_EventScript_FishingGuruBrother : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lockall
  * goto_if_set FLAG_GOT_RECORD_SETTING_MAGIKARP, Route12_FishingHouse_EventScript_MagikarpRecordSignRecordSet
@@ -32,8 +34,25 @@ internal object Route12_FishingHouse_EventScript_FishingGuruBrother : Script {
  * ```
  */
 internal object Route12_FishingHouse_EventScript_MagikarpRecordSign : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(KantoFlags.FLAG_GOT_RECORD_SETTING_MAGIKARP))
+        return Route12_FishingHouse_EventScript_MagikarpRecordSignRecordSet.run(ctx)
+    ctx.say(Route12_FishingHouse.BlankChartOfSomeSort)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * special GetMagikarpSizeRecordInfo
+ * msgbox Route12_FishingHouse_Text_MostGiganticMagikarpXInches
+ * releaseall
+ * end
+ * ```
+ */
+internal object Route12_FishingHouse_EventScript_MagikarpRecordSignRecordSet : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port Route12_FishingHouse_EventScript_MagikarpRecordSign")
+      TODO("port Route12_FishingHouse_EventScript_MagikarpRecordSignRecordSet")
 }
 
 internal val Route12_FishingHouseScripts: Map<String, Script> =
@@ -42,4 +61,6 @@ internal val Route12_FishingHouseScripts: Map<String, Script> =
             Route12_FishingHouse_EventScript_FishingGuruBrother,
         "Route12_FishingHouse_EventScript_MagikarpRecordSign" to
             Route12_FishingHouse_EventScript_MagikarpRecordSign,
+        "Route12_FishingHouse_EventScript_MagikarpRecordSignRecordSet" to
+            Route12_FishingHouse_EventScript_MagikarpRecordSignRecordSet,
     )

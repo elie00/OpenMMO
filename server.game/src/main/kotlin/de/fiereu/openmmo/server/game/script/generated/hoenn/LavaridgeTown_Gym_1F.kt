@@ -1,7 +1,9 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
+import de.fiereu.openmmo.dialog.generated.hoenn.LavaridgeTown_Gym_1F
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 
 /**
  * Not ported yet. Decomp body:
@@ -71,7 +73,7 @@ internal object LavaridgeTown_Gym_1F_EventScript_Danielle : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -82,8 +84,11 @@ internal object LavaridgeTown_Gym_1F_EventScript_Danielle : Script {
  * ```
  */
 internal object LavaridgeTown_Gym_1F_EventScript_GymGuide : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LavaridgeTown_Gym_1F_EventScript_GymGuide")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(HoennFlags.FLAG_DEFEATED_LAVARIDGE_GYM))
+        return LavaridgeTown_Gym_1F_EventScript_GymGuidePostVictory.run(ctx)
+    ctx.say(LavaridgeTown_Gym_1F.GymGuideAdvice)
+  }
 }
 
 /**
@@ -114,6 +119,19 @@ internal object LavaridgeTown_Gym_1F_EventScript_RightGymStatue : Script {
       TODO("port LavaridgeTown_Gym_1F_EventScript_RightGymStatue")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox LavaridgeTown_Gym_1F_Text_GymGuidePostVictory, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object LavaridgeTown_Gym_1F_EventScript_GymGuidePostVictory : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LavaridgeTown_Gym_1F_EventScript_GymGuidePostVictory")
+}
+
 internal val LavaridgeTown_Gym_1FScripts: Map<String, Script> =
     mapOf(
         "LavaridgeTown_Gym_1F_EventScript_Flannery" to LavaridgeTown_Gym_1F_EventScript_Flannery,
@@ -126,4 +144,6 @@ internal val LavaridgeTown_Gym_1FScripts: Map<String, Script> =
             LavaridgeTown_Gym_1F_EventScript_LeftGymStatue,
         "LavaridgeTown_Gym_1F_EventScript_RightGymStatue" to
             LavaridgeTown_Gym_1F_EventScript_RightGymStatue,
+        "LavaridgeTown_Gym_1F_EventScript_GymGuidePostVictory" to
+            LavaridgeTown_Gym_1F_EventScript_GymGuidePostVictory,
     )

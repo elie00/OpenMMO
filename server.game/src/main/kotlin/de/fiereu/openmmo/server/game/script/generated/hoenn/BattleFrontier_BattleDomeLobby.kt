@@ -116,7 +116,7 @@ internal object BattleFrontier_BattleDomeLobby_EventScript_ShowDoublesResults : 
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lockall
  * msgbox BattleFrontier_BattleDomeLobby_Text_RulesAreListed, MSGBOX_DEFAULT
@@ -125,8 +125,30 @@ internal object BattleFrontier_BattleDomeLobby_EventScript_ShowDoublesResults : 
  * ```
  */
 internal object BattleFrontier_BattleDomeLobby_EventScript_RulesBoard : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(BattleFrontier_BattleDomeLobby.RulesAreListed)
+    return BattleFrontier_BattleDomeLobby_EventScript_ReadRulesBoard.run(ctx)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * message BattleFrontier_BattleDomeLobby_Text_ReadWhichHeading
+ * waitmessage
+ * multichoice 17, 4, MULTI_BATTLE_DOME_RULES, FALSE
+ * switch VAR_RESULT
+ * case 0, BattleFrontier_BattleDomeLobby_EventScript_RulesMatchup
+ * case 1, BattleFrontier_BattleDomeLobby_EventScript_RulesTourneyTree
+ * case 2, BattleFrontier_BattleDomeLobby_EventScript_RulesDoubleKO
+ * case 3, BattleFrontier_BattleDomeLobby_EventScript_ExitRules
+ * case MULTI_B_PRESSED, BattleFrontier_BattleDomeLobby_EventScript_ExitRules
+ * end
+ * ```
+ */
+internal object BattleFrontier_BattleDomeLobby_EventScript_ReadRulesBoard : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port BattleFrontier_BattleDomeLobby_EventScript_RulesBoard")
+      TODO("port BattleFrontier_BattleDomeLobby_EventScript_ReadRulesBoard")
 }
 
 internal val BattleFrontier_BattleDomeLobbyScripts: Map<String, Script> =
@@ -151,4 +173,6 @@ internal val BattleFrontier_BattleDomeLobbyScripts: Map<String, Script> =
             BattleFrontier_BattleDomeLobby_EventScript_ShowDoublesResults,
         "BattleFrontier_BattleDomeLobby_EventScript_RulesBoard" to
             BattleFrontier_BattleDomeLobby_EventScript_RulesBoard,
+        "BattleFrontier_BattleDomeLobby_EventScript_ReadRulesBoard" to
+            BattleFrontier_BattleDomeLobby_EventScript_ReadRulesBoard,
     )

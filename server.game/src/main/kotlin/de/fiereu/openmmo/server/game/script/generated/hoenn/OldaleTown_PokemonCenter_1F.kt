@@ -45,6 +45,19 @@ internal object OldaleTown_PokemonCenter_1F_EventScript_Girl : Script {
       TODO("port OldaleTown_PokemonCenter_1F_EventScript_Girl")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox OldaleTown_PokemonCenter_1F_Text_TradedInWirelessClub, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object OldaleTown_PokemonCenter_1F_EventScript_WirelessClubAvailable : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port OldaleTown_PokemonCenter_1F_EventScript_WirelessClubAvailable")
+}
+
 internal val OldaleTown_PokemonCenter_1FScripts: Map<String, Script> =
     mapOf(
         "OldaleTown_PokemonCenter_1F_EventScript_Nurse" to
@@ -55,4 +68,6 @@ internal val OldaleTown_PokemonCenter_1FScripts: Map<String, Script> =
             OldaleTown_PokemonCenter_1F_EventScript_Boy,
         "OldaleTown_PokemonCenter_1F_EventScript_Girl" to
             OldaleTown_PokemonCenter_1F_EventScript_Girl,
+        "OldaleTown_PokemonCenter_1F_EventScript_WirelessClubAvailable" to
+            OldaleTown_PokemonCenter_1F_EventScript_WirelessClubAvailable,
     )

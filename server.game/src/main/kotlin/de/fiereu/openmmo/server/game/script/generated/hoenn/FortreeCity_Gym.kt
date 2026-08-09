@@ -4,6 +4,7 @@ import de.fiereu.openmmo.dialog.generated.hoenn.FortreeCity_Gym
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
@@ -103,7 +104,7 @@ internal object FortreeCity_Gym_EventScript_Edwardo : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -114,7 +115,11 @@ internal object FortreeCity_Gym_EventScript_Edwardo : Script {
  * ```
  */
 internal object FortreeCity_Gym_EventScript_GymGuide : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port FortreeCity_Gym_EventScript_GymGuide")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(HoennFlags.FLAG_DEFEATED_FORTREE_GYM))
+        return FortreeCity_Gym_EventScript_GymGuidePostVictory.run(ctx)
+    ctx.say(FortreeCity_Gym.GymGuideAdvice)
+  }
 }
 
 /**
@@ -185,6 +190,19 @@ internal object FortreeCity_Gym_EventScript_RightGymStatue : Script {
       TODO("port FortreeCity_Gym_EventScript_RightGymStatue")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox FortreeCity_Gym_Text_GymGuidePostVictory, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object FortreeCity_Gym_EventScript_GymGuidePostVictory : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port FortreeCity_Gym_EventScript_GymGuidePostVictory")
+}
+
 internal val FortreeCity_GymScripts: Map<String, Script> =
     mapOf(
         "FortreeCity_Gym_EventScript_Winona" to FortreeCity_Gym_EventScript_Winona,
@@ -197,4 +215,6 @@ internal val FortreeCity_GymScripts: Map<String, Script> =
         "FortreeCity_Gym_EventScript_Darius" to FortreeCity_Gym_EventScript_Darius,
         "FortreeCity_Gym_EventScript_LeftGymStatue" to FortreeCity_Gym_EventScript_LeftGymStatue,
         "FortreeCity_Gym_EventScript_RightGymStatue" to FortreeCity_Gym_EventScript_RightGymStatue,
+        "FortreeCity_Gym_EventScript_GymGuidePostVictory" to
+            FortreeCity_Gym_EventScript_GymGuidePostVictory,
     )

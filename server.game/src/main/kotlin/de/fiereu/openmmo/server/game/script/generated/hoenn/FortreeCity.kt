@@ -3,6 +3,7 @@ package de.fiereu.openmmo.server.game.script.generated.hoenn
 import de.fiereu.openmmo.dialog.generated.hoenn.FortreeCity
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 
 internal object FortreeCity_EventScript_Man : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.say(FortreeCity.SawGiganticPokemonInSky)
@@ -13,7 +14,7 @@ internal object FortreeCity_EventScript_Girl : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -24,7 +25,11 @@ internal object FortreeCity_EventScript_Girl : Script {
  * ```
  */
 internal object FortreeCity_EventScript_Woman : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port FortreeCity_EventScript_Woman")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(HoennFlags.FLAG_KECLEON_FLED_FORTREE))
+        return FortreeCity_EventScript_WomanGymAccessible.run(ctx)
+    ctx.say(FortreeCity.SomethingBlockingGym)
+  }
 }
 
 internal object FortreeCity_EventScript_Boy : Script {
@@ -63,6 +68,19 @@ internal object FortreeCity_EventScript_GymSign : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(FortreeCity.GymSign)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox FortreeCity_Text_ThisTimeIllBeatWinona, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object FortreeCity_EventScript_WomanGymAccessible : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port FortreeCity_EventScript_WomanGymAccessible")
+}
+
 internal val FortreeCityScripts: Map<String, Script> =
     mapOf(
         "FortreeCity_EventScript_Man" to FortreeCity_EventScript_Man,
@@ -74,4 +92,5 @@ internal val FortreeCityScripts: Map<String, Script> =
         "FortreeCity_EventScript_Kecleon" to FortreeCity_EventScript_Kecleon,
         "FortreeCity_EventScript_CitySign" to FortreeCity_EventScript_CitySign,
         "FortreeCity_EventScript_GymSign" to FortreeCity_EventScript_GymSign,
+        "FortreeCity_EventScript_WomanGymAccessible" to FortreeCity_EventScript_WomanGymAccessible,
     )

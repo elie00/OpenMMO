@@ -45,9 +45,24 @@ internal object LilycoveCity_Harbor_EventScript_Sailor : Script {
   override suspend fun run(ctx: ScriptContext) = TODO("port LilycoveCity_Harbor_EventScript_Sailor")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox LilycoveCity_Harbor_Text_SailorFerryAvailable, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object LilycoveCity_Harbor_EventScript_SailorFerryAvailable : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LilycoveCity_Harbor_EventScript_SailorFerryAvailable")
+}
+
 internal val LilycoveCity_HarborScripts: Map<String, Script> =
     mapOf(
         "LilycoveCity_Harbor_EventScript_FerryAttendant" to
             LilycoveCity_Harbor_EventScript_FerryAttendant,
         "LilycoveCity_Harbor_EventScript_Sailor" to LilycoveCity_Harbor_EventScript_Sailor,
+        "LilycoveCity_Harbor_EventScript_SailorFerryAvailable" to
+            LilycoveCity_Harbor_EventScript_SailorFerryAvailable,
     )

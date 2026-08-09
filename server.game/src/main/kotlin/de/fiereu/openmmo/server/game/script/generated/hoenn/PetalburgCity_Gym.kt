@@ -181,7 +181,7 @@ internal object PetalburgCity_Gym_EventScript_Berke : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -192,7 +192,11 @@ internal object PetalburgCity_Gym_EventScript_Berke : Script {
  * ```
  */
 internal object PetalburgCity_Gym_EventScript_GymGuide : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PetalburgCity_Gym_EventScript_GymGuide")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(HoennFlags.FLAG_DEFEATED_PETALBURG_GYM))
+        return PetalburgCity_Gym_EventScript_GymGuidePostVictory.run(ctx)
+    ctx.say(PetalburgCity_Gym.GymGuideAdvice)
+  }
 }
 
 /**
@@ -439,6 +443,19 @@ internal object PetalburgCity_Gym_EventScript_RightGymStatue : Script {
       TODO("port PetalburgCity_Gym_EventScript_RightGymStatue")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox PetalburgCity_Gym_Text_GymGuidePostVictory, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object PetalburgCity_Gym_EventScript_GymGuidePostVictory : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port PetalburgCity_Gym_EventScript_GymGuidePostVictory")
+}
+
 internal val PetalburgCity_GymScripts: Map<String, Script> =
     mapOf(
         "PetalburgCity_Gym_OnTransition" to PetalburgCity_Gym_OnTransition,
@@ -481,4 +498,6 @@ internal val PetalburgCity_GymScripts: Map<String, Script> =
             PetalburgCity_Gym_EventScript_LeftGymStatue,
         "PetalburgCity_Gym_EventScript_RightGymStatue" to
             PetalburgCity_Gym_EventScript_RightGymStatue,
+        "PetalburgCity_Gym_EventScript_GymGuidePostVictory" to
+            PetalburgCity_Gym_EventScript_GymGuidePostVictory,
     )

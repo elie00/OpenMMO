@@ -1,10 +1,12 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.dialog.generated.kanto.LavenderTown_House1
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -15,8 +17,11 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object LavenderTown_House1_EventScript_CooltrainerF : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LavenderTown_House1_EventScript_CooltrainerF")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(KantoFlags.FLAG_RESCUED_MR_FUJI))
+        return LavenderTown_House1_EventScript_CooltrainerFGhostGone.run(ctx)
+    ctx.say(LavenderTown_House1.RocketsKilledCubonesMother)
+  }
 }
 
 /**
@@ -36,9 +41,24 @@ internal object LavenderTown_House1_EventScript_Cubone : Script {
   override suspend fun run(ctx: ScriptContext) = TODO("port LavenderTown_House1_EventScript_Cubone")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox LavenderTown_House1_Text_GhostOfPokemonTowerIsGone
+ * release
+ * end
+ * ```
+ */
+internal object LavenderTown_House1_EventScript_CooltrainerFGhostGone : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LavenderTown_House1_EventScript_CooltrainerFGhostGone")
+}
+
 internal val LavenderTown_House1Scripts: Map<String, Script> =
     mapOf(
         "LavenderTown_House1_EventScript_CooltrainerF" to
             LavenderTown_House1_EventScript_CooltrainerF,
         "LavenderTown_House1_EventScript_Cubone" to LavenderTown_House1_EventScript_Cubone,
+        "LavenderTown_House1_EventScript_CooltrainerFGhostGone" to
+            LavenderTown_House1_EventScript_CooltrainerFGhostGone,
     )

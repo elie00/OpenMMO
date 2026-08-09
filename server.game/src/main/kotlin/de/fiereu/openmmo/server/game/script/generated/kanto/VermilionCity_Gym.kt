@@ -4,6 +4,7 @@ import de.fiereu.openmmo.dialog.generated.kanto.VermilionCity_Gym
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
@@ -55,7 +56,7 @@ internal object VermilionCity_Gym_EventScript_Dwayne : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -66,7 +67,11 @@ internal object VermilionCity_Gym_EventScript_Dwayne : Script {
  * ```
  */
 internal object VermilionCity_Gym_EventScript_GymGuy : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port VermilionCity_Gym_EventScript_GymGuy")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(KantoFlags.FLAG_DEFEATED_LT_SURGE))
+        return VermilionCity_Gym_EventScript_GymGuyPostVictory.run(ctx)
+    ctx.say(VermilionCity_Gym.GymGuyAdvice)
+  }
 }
 
 /**
@@ -307,6 +312,32 @@ internal object VermilionCity_Gym_EventScript_TrashCan15 : Script {
       TODO("port VermilionCity_Gym_EventScript_TrashCan15")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox VermilionCity_Gym_Text_GymGuyPostVictory
+ * release
+ * end
+ * ```
+ */
+internal object VermilionCity_Gym_EventScript_GymGuyPostVictory : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port VermilionCity_Gym_EventScript_GymGuyPostVictory")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox VermilionCity_Gym_Text_GymStatuePlayerWon
+ * releaseall
+ * end
+ * ```
+ */
+internal object VermilionCity_Gym_EventScript_GymStatuePostVictory : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port VermilionCity_Gym_EventScript_GymStatuePostVictory")
+}
+
 internal val VermilionCity_GymScripts: Map<String, Script> =
     mapOf(
         "VermilionCity_Gym_EventScript_LtSurge" to VermilionCity_Gym_EventScript_LtSurge,
@@ -330,4 +361,8 @@ internal val VermilionCity_GymScripts: Map<String, Script> =
         "VermilionCity_Gym_EventScript_TrashCan13" to VermilionCity_Gym_EventScript_TrashCan13,
         "VermilionCity_Gym_EventScript_TrashCan14" to VermilionCity_Gym_EventScript_TrashCan14,
         "VermilionCity_Gym_EventScript_TrashCan15" to VermilionCity_Gym_EventScript_TrashCan15,
+        "VermilionCity_Gym_EventScript_GymGuyPostVictory" to
+            VermilionCity_Gym_EventScript_GymGuyPostVictory,
+        "VermilionCity_Gym_EventScript_GymStatuePostVictory" to
+            VermilionCity_Gym_EventScript_GymStatuePostVictory,
     )

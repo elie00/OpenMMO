@@ -73,7 +73,7 @@ internal object RustboroCity_PokemonSchool_EventScript_Scott : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lockall
  * msgbox RustboroCity_PokemonSchool_Text_BlackboardListsStatusChanges, MSGBOX_DEFAULT
@@ -82,12 +82,36 @@ internal object RustboroCity_PokemonSchool_EventScript_Scott : Script {
  * ```
  */
 internal object RustboroCity_PokemonSchool_EventScript_Blackboard : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port RustboroCity_PokemonSchool_EventScript_Blackboard")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(RustboroCity_PokemonSchool.BlackboardListsStatusChanges)
+    return RustboroCity_PokemonSchool_EventScript_ChooseBlackboardTopic.run(ctx)
+  }
 }
 
 internal object RustboroCity_PokemonSchool_EventScript_StudentNotebook : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(RustboroCity_PokemonSchool.StudentsNotes)
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * message RustboroCity_PokemonSchool_Text_ReadWhichTopic
+ * waitmessage
+ * multichoicegrid 8, 1, MULTI_STATUS_INFO, 3, FALSE
+ * switch VAR_RESULT
+ * case 0, RustboroCity_PokemonSchool_EventScript_Poison
+ * case 1, RustboroCity_PokemonSchool_EventScript_Paralysis
+ * case 2, RustboroCity_PokemonSchool_EventScript_Sleep
+ * case 3, RustboroCity_PokemonSchool_EventScript_Burn
+ * case 4, RustboroCity_PokemonSchool_EventScript_Freeze
+ * case 5, RustboroCity_PokemonSchool_EventScript_ExitTopicSelect
+ * case MULTI_B_PRESSED, RustboroCity_PokemonSchool_EventScript_ExitTopicSelect
+ * end
+ * ```
+ */
+internal object RustboroCity_PokemonSchool_EventScript_ChooseBlackboardTopic : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port RustboroCity_PokemonSchool_EventScript_ChooseBlackboardTopic")
 }
 
 internal val RustboroCity_PokemonSchoolScripts: Map<String, Script> =
@@ -110,4 +134,6 @@ internal val RustboroCity_PokemonSchoolScripts: Map<String, Script> =
             RustboroCity_PokemonSchool_EventScript_Blackboard,
         "RustboroCity_PokemonSchool_EventScript_StudentNotebook" to
             RustboroCity_PokemonSchool_EventScript_StudentNotebook,
+        "RustboroCity_PokemonSchool_EventScript_ChooseBlackboardTopic" to
+            RustboroCity_PokemonSchool_EventScript_ChooseBlackboardTopic,
     )

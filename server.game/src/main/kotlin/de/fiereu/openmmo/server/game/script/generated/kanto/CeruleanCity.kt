@@ -4,6 +4,7 @@ import de.fiereu.openmmo.dialog.generated.kanto.CeruleanCity
 import de.fiereu.openmmo.dialog.generated.kanto.CeruleanCity_BikeShop
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 
 /**
  * Ported from the decomp:
@@ -48,7 +49,7 @@ internal object CeruleanCity_EventScript_Grunt : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -59,7 +60,11 @@ internal object CeruleanCity_EventScript_Grunt : Script {
  * ```
  */
 internal object CeruleanCity_EventScript_LittleBoy : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port CeruleanCity_EventScript_LittleBoy")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(KantoFlags.FLAG_GOT_SS_TICKET))
+        return CeruleanCity_EventScript_LittleBoySlowbroMoved.run(ctx)
+    ctx.say(CeruleanCity.IfSlowbroWasntThereCouldCutTree)
+  }
 }
 
 internal object CeruleanCity_EventScript_BaldingMan : Script {
@@ -170,6 +175,19 @@ internal object CeruleanCity_BikeShop_EventScript_Bicycle : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(CeruleanCity_BikeShop.ShinyNewBicycle)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox CeruleanCity_Text_YouCanCutDownSmallTrees
+ * release
+ * end
+ * ```
+ */
+internal object CeruleanCity_EventScript_LittleBoySlowbroMoved : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port CeruleanCity_EventScript_LittleBoySlowbroMoved")
+}
+
 internal val CeruleanCityScripts: Map<String, Script> =
     mapOf(
         "CeruleanCity_EventScript_Policeman" to CeruleanCity_EventScript_Policeman,
@@ -186,4 +204,6 @@ internal val CeruleanCityScripts: Map<String, Script> =
         "CeruleanCity_EventScript_BikeShopSign" to CeruleanCity_EventScript_BikeShopSign,
         "CeruleanCity_EventScript_TrainerTips" to CeruleanCity_EventScript_TrainerTips,
         "CeruleanCity_BikeShop_EventScript_Bicycle" to CeruleanCity_BikeShop_EventScript_Bicycle,
+        "CeruleanCity_EventScript_LittleBoySlowbroMoved" to
+            CeruleanCity_EventScript_LittleBoySlowbroMoved,
     )

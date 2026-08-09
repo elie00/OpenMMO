@@ -1,7 +1,9 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
+import de.fiereu.openmmo.dialog.generated.hoenn.SootopolisCity_Gym_1F
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 
 /**
  * Not ported yet. Decomp body:
@@ -21,7 +23,7 @@ internal object SootopolisCity_Gym_1F_EventScript_Juan : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -32,8 +34,11 @@ internal object SootopolisCity_Gym_1F_EventScript_Juan : Script {
  * ```
  */
 internal object SootopolisCity_Gym_1F_EventScript_GymGuide : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SootopolisCity_Gym_1F_EventScript_GymGuide")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(HoennFlags.FLAG_DEFEATED_SOOTOPOLIS_GYM))
+        return SootopolisCity_Gym_1F_EventScript_GymGuidePostVictory.run(ctx)
+    ctx.say(SootopolisCity_Gym_1F.GymGuideAdvice)
+  }
 }
 
 /**
@@ -64,6 +69,19 @@ internal object SootopolisCity_Gym_1F_EventScript_RightGymStatue : Script {
       TODO("port SootopolisCity_Gym_1F_EventScript_RightGymStatue")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox SootopolisCity_Gym_1F_Text_GymGuidePostVictory, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object SootopolisCity_Gym_1F_EventScript_GymGuidePostVictory : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SootopolisCity_Gym_1F_EventScript_GymGuidePostVictory")
+}
+
 internal val SootopolisCity_Gym_1FScripts: Map<String, Script> =
     mapOf(
         "SootopolisCity_Gym_1F_EventScript_Juan" to SootopolisCity_Gym_1F_EventScript_Juan,
@@ -72,4 +90,6 @@ internal val SootopolisCity_Gym_1FScripts: Map<String, Script> =
             SootopolisCity_Gym_1F_EventScript_LeftGymStatue,
         "SootopolisCity_Gym_1F_EventScript_RightGymStatue" to
             SootopolisCity_Gym_1F_EventScript_RightGymStatue,
+        "SootopolisCity_Gym_1F_EventScript_GymGuidePostVictory" to
+            SootopolisCity_Gym_1F_EventScript_GymGuidePostVictory,
     )

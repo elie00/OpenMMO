@@ -3,6 +3,7 @@ package de.fiereu.openmmo.server.game.script.generated.hoenn
 import de.fiereu.openmmo.dialog.generated.hoenn.LilycoveCity_LilycoveMuseum_2F
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 
 /**
  * Not ported yet. Decomp body:
@@ -41,7 +42,7 @@ internal object LilycoveCity_LilycoveMuseum_2F_EventScript_RichBoy : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lockall
  * goto_if_set FLAG_CUTE_PAINTING_MADE, LilycoveCity_LilycoveMuseum_2F_EventScript_ShowCutePainting
@@ -50,12 +51,15 @@ internal object LilycoveCity_LilycoveMuseum_2F_EventScript_RichBoy : Script {
  * ```
  */
 internal object LilycoveCity_LilycoveMuseum_2F_EventScript_CutePainting : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LilycoveCity_LilycoveMuseum_2F_EventScript_CutePainting")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(HoennFlags.FLAG_CUTE_PAINTING_MADE))
+        return LilycoveCity_LilycoveMuseum_2F_EventScript_ShowCutePainting.run(ctx)
+    ctx.say(LilycoveCity_LilycoveMuseum_2F.ItsPinkPictureFrame)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lockall
  * goto_if_set FLAG_TOUGH_PAINTING_MADE, LilycoveCity_LilycoveMuseum_2F_EventScript_ShowToughPainting
@@ -64,12 +68,15 @@ internal object LilycoveCity_LilycoveMuseum_2F_EventScript_CutePainting : Script
  * ```
  */
 internal object LilycoveCity_LilycoveMuseum_2F_EventScript_ToughPainting : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LilycoveCity_LilycoveMuseum_2F_EventScript_ToughPainting")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(HoennFlags.FLAG_TOUGH_PAINTING_MADE))
+        return LilycoveCity_LilycoveMuseum_2F_EventScript_ShowToughPainting.run(ctx)
+    ctx.say(LilycoveCity_LilycoveMuseum_2F.ItsYellowPictureFrame)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lockall
  * goto_if_set FLAG_COOL_PAINTING_MADE, LilycoveCity_LilycoveMuseum_2F_EventScript_ShowCoolPainting
@@ -78,12 +85,15 @@ internal object LilycoveCity_LilycoveMuseum_2F_EventScript_ToughPainting : Scrip
  * ```
  */
 internal object LilycoveCity_LilycoveMuseum_2F_EventScript_CoolPainting : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LilycoveCity_LilycoveMuseum_2F_EventScript_CoolPainting")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(HoennFlags.FLAG_COOL_PAINTING_MADE))
+        return LilycoveCity_LilycoveMuseum_2F_EventScript_ShowCoolPainting.run(ctx)
+    ctx.say(LilycoveCity_LilycoveMuseum_2F.ItsRedPictureFrame)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lockall
  * goto_if_set FLAG_BEAUTY_PAINTING_MADE, LilycoveCity_LilycoveMuseum_2F_EventScript_ShowBeautyPainting
@@ -92,12 +102,15 @@ internal object LilycoveCity_LilycoveMuseum_2F_EventScript_CoolPainting : Script
  * ```
  */
 internal object LilycoveCity_LilycoveMuseum_2F_EventScript_BeautyPainting : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LilycoveCity_LilycoveMuseum_2F_EventScript_BeautyPainting")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(HoennFlags.FLAG_BEAUTY_PAINTING_MADE))
+        return LilycoveCity_LilycoveMuseum_2F_EventScript_ShowBeautyPainting.run(ctx)
+    ctx.say(LilycoveCity_LilycoveMuseum_2F.ItsBluePictureFrame)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lockall
  * goto_if_set FLAG_SMART_PAINTING_MADE, LilycoveCity_LilycoveMuseum_2F_EventScript_ShowSmartPainting
@@ -106,8 +119,86 @@ internal object LilycoveCity_LilycoveMuseum_2F_EventScript_BeautyPainting : Scri
  * ```
  */
 internal object LilycoveCity_LilycoveMuseum_2F_EventScript_SmartPainting : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(HoennFlags.FLAG_SMART_PAINTING_MADE))
+        return LilycoveCity_LilycoveMuseum_2F_EventScript_ShowSmartPainting.run(ctx)
+    ctx.say(LilycoveCity_LilycoveMuseum_2F.ItsGreenPictureFrame)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox LilycoveCity_LilycoveMuseum_2F_Text_ItsPaintingOfPokemon, MSGBOX_SIGN
+ * fadescreen FADE_TO_BLACK
+ * showcontestpainting CONTEST_WINNER_MUSEUM_COOL
+ * releaseall
+ * end
+ * ```
+ */
+internal object LilycoveCity_LilycoveMuseum_2F_EventScript_ShowCoolPainting : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port LilycoveCity_LilycoveMuseum_2F_EventScript_SmartPainting")
+      TODO("port LilycoveCity_LilycoveMuseum_2F_EventScript_ShowCoolPainting")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox LilycoveCity_LilycoveMuseum_2F_Text_ItsPaintingOfPokemon, MSGBOX_SIGN
+ * fadescreen FADE_TO_BLACK
+ * showcontestpainting CONTEST_WINNER_MUSEUM_TOUGH
+ * releaseall
+ * end
+ * ```
+ */
+internal object LilycoveCity_LilycoveMuseum_2F_EventScript_ShowToughPainting : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LilycoveCity_LilycoveMuseum_2F_EventScript_ShowToughPainting")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox LilycoveCity_LilycoveMuseum_2F_Text_ItsPaintingOfPokemon, MSGBOX_SIGN
+ * fadescreen FADE_TO_BLACK
+ * showcontestpainting CONTEST_WINNER_MUSEUM_BEAUTY
+ * releaseall
+ * end
+ * ```
+ */
+internal object LilycoveCity_LilycoveMuseum_2F_EventScript_ShowBeautyPainting : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LilycoveCity_LilycoveMuseum_2F_EventScript_ShowBeautyPainting")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox LilycoveCity_LilycoveMuseum_2F_Text_ItsPaintingOfPokemon, MSGBOX_SIGN
+ * fadescreen FADE_TO_BLACK
+ * showcontestpainting CONTEST_WINNER_MUSEUM_CUTE
+ * releaseall
+ * end
+ * ```
+ */
+internal object LilycoveCity_LilycoveMuseum_2F_EventScript_ShowCutePainting : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LilycoveCity_LilycoveMuseum_2F_EventScript_ShowCutePainting")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox LilycoveCity_LilycoveMuseum_2F_Text_ItsPaintingOfPokemon, MSGBOX_SIGN
+ * fadescreen FADE_TO_BLACK
+ * showcontestpainting CONTEST_WINNER_MUSEUM_SMART
+ * releaseall
+ * end
+ * ```
+ */
+internal object LilycoveCity_LilycoveMuseum_2F_EventScript_ShowSmartPainting : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LilycoveCity_LilycoveMuseum_2F_EventScript_ShowSmartPainting")
 }
 
 internal val LilycoveCity_LilycoveMuseum_2FScripts: Map<String, Script> =
@@ -130,4 +221,14 @@ internal val LilycoveCity_LilycoveMuseum_2FScripts: Map<String, Script> =
             LilycoveCity_LilycoveMuseum_2F_EventScript_BeautyPainting,
         "LilycoveCity_LilycoveMuseum_2F_EventScript_SmartPainting" to
             LilycoveCity_LilycoveMuseum_2F_EventScript_SmartPainting,
+        "LilycoveCity_LilycoveMuseum_2F_EventScript_ShowCoolPainting" to
+            LilycoveCity_LilycoveMuseum_2F_EventScript_ShowCoolPainting,
+        "LilycoveCity_LilycoveMuseum_2F_EventScript_ShowToughPainting" to
+            LilycoveCity_LilycoveMuseum_2F_EventScript_ShowToughPainting,
+        "LilycoveCity_LilycoveMuseum_2F_EventScript_ShowBeautyPainting" to
+            LilycoveCity_LilycoveMuseum_2F_EventScript_ShowBeautyPainting,
+        "LilycoveCity_LilycoveMuseum_2F_EventScript_ShowCutePainting" to
+            LilycoveCity_LilycoveMuseum_2F_EventScript_ShowCutePainting,
+        "LilycoveCity_LilycoveMuseum_2F_EventScript_ShowSmartPainting" to
+            LilycoveCity_LilycoveMuseum_2F_EventScript_ShowSmartPainting,
     )

@@ -4,6 +4,7 @@ import de.fiereu.openmmo.dialog.generated.kanto.ViridianCity_Gym
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
@@ -186,7 +187,7 @@ internal object ViridianCity_Gym_EventScript_Warren : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -197,7 +198,11 @@ internal object ViridianCity_Gym_EventScript_Warren : Script {
  * ```
  */
 internal object ViridianCity_Gym_EventScript_GymGuy : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port ViridianCity_Gym_EventScript_GymGuy")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(KantoFlags.FLAG_DEFEATED_LEADER_GIOVANNI))
+        return ViridianCity_Gym_EventScript_GymGuyPostVictory.run(ctx)
+    ctx.say(ViridianCity_Gym.GymGuyAdvice)
+  }
 }
 
 /**
@@ -214,6 +219,33 @@ internal object ViridianCity_Gym_EventScript_GymStatue : Script {
   override suspend fun run(ctx: ScriptContext) = TODO("port ViridianCity_Gym_EventScript_GymStatue")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox ViridianCity_Gym_Text_GymStatuePlayerWon
+ * releaseall
+ * end
+ * ```
+ */
+internal object ViridianCity_Gym_EventScript_GymStatuePostVictory : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port ViridianCity_Gym_EventScript_GymStatuePostVictory")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * famechecker FAMECHECKER_GIOVANNI, 4
+ * msgbox ViridianCity_Gym_Text_GymGuyPostVictory
+ * release
+ * end
+ * ```
+ */
+internal object ViridianCity_Gym_EventScript_GymGuyPostVictory : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port ViridianCity_Gym_EventScript_GymGuyPostVictory")
+}
+
 internal val ViridianCity_GymScripts: Map<String, Script> =
     mapOf(
         "ViridianCity_Gym_EventScript_Takashi" to ViridianCity_Gym_EventScript_Takashi,
@@ -227,4 +259,8 @@ internal val ViridianCity_GymScripts: Map<String, Script> =
         "ViridianCity_Gym_EventScript_Warren" to ViridianCity_Gym_EventScript_Warren,
         "ViridianCity_Gym_EventScript_GymGuy" to ViridianCity_Gym_EventScript_GymGuy,
         "ViridianCity_Gym_EventScript_GymStatue" to ViridianCity_Gym_EventScript_GymStatue,
+        "ViridianCity_Gym_EventScript_GymStatuePostVictory" to
+            ViridianCity_Gym_EventScript_GymStatuePostVictory,
+        "ViridianCity_Gym_EventScript_GymGuyPostVictory" to
+            ViridianCity_Gym_EventScript_GymGuyPostVictory,
     )

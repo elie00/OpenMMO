@@ -1,7 +1,9 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.dialog.generated.kanto.SixIsland_WaterPath_House1
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 
 /**
  * Not ported yet. Decomp body:
@@ -34,7 +36,7 @@ internal object SixIsland_WaterPath_House1_EventScript_Beauty : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lockall
  * goto_if_set FLAG_GOT_NEST_BALL_FROM_WATER_PATH_HOUSE_1, SixIsland_WaterPath_House1_EventScript_SizeRecordNonEmpty
@@ -44,8 +46,25 @@ internal object SixIsland_WaterPath_House1_EventScript_Beauty : Script {
  * ```
  */
 internal object SixIsland_WaterPath_House1_EventScript_SizeRecord : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(KantoFlags.FLAG_GOT_NEST_BALL_FROM_WATER_PATH_HOUSE_1))
+        return SixIsland_WaterPath_House1_EventScript_SizeRecordNonEmpty.run(ctx)
+    ctx.say(SixIsland_WaterPath_House1.BlankChartOfSomeSort)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * special GetHeracrossSizeRecordInfo
+ * msgbox SixIsland_WaterPath_House1_Text_BiggestHeracrossIsXInches
+ * releaseall
+ * end
+ * ```
+ */
+internal object SixIsland_WaterPath_House1_EventScript_SizeRecordNonEmpty : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port SixIsland_WaterPath_House1_EventScript_SizeRecord")
+      TODO("port SixIsland_WaterPath_House1_EventScript_SizeRecordNonEmpty")
 }
 
 internal val SixIsland_WaterPath_House1Scripts: Map<String, Script> =
@@ -54,4 +73,6 @@ internal val SixIsland_WaterPath_House1Scripts: Map<String, Script> =
             SixIsland_WaterPath_House1_EventScript_Beauty,
         "SixIsland_WaterPath_House1_EventScript_SizeRecord" to
             SixIsland_WaterPath_House1_EventScript_SizeRecord,
+        "SixIsland_WaterPath_House1_EventScript_SizeRecordNonEmpty" to
+            SixIsland_WaterPath_House1_EventScript_SizeRecordNonEmpty,
     )

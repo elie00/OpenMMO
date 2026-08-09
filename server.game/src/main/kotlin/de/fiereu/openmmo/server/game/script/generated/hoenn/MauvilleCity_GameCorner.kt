@@ -88,7 +88,7 @@ internal object MauvilleCity_GameCorner_EventScript_PokefanM : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -98,12 +98,14 @@ internal object MauvilleCity_GameCorner_EventScript_PokefanM : Script {
  * ```
  */
 internal object MauvilleCity_GameCorner_EventScript_OldMan : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port MauvilleCity_GameCorner_EventScript_OldMan")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MauvilleCity_GameCorner.RouletteTablesDifferentRates)
+    return MauvilleCity_GameCorner_EventScript_NPCReturnToSlots.run(ctx)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -113,8 +115,10 @@ internal object MauvilleCity_GameCorner_EventScript_OldMan : Script {
  * ```
  */
 internal object MauvilleCity_GameCorner_EventScript_Cook : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port MauvilleCity_GameCorner_EventScript_Cook")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MauvilleCity_GameCorner.EasyToLoseTrackOfTime)
+    return MauvilleCity_GameCorner_EventScript_NPCReturnToSlots.run(ctx)
+  }
 }
 
 /**
@@ -135,7 +139,7 @@ internal object MauvilleCity_GameCorner_EventScript_PrizeCornerTMs : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -145,12 +149,14 @@ internal object MauvilleCity_GameCorner_EventScript_PrizeCornerTMs : Script {
  * ```
  */
 internal object MauvilleCity_GameCorner_EventScript_Man : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port MauvilleCity_GameCorner_EventScript_Man")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MauvilleCity_GameCorner.UpTo3CoinsCanBeUsed)
+    return MauvilleCity_GameCorner_EventScript_NPCReturnToSlots.run(ctx)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -160,12 +166,14 @@ internal object MauvilleCity_GameCorner_EventScript_Man : Script {
  * ```
  */
 internal object MauvilleCity_GameCorner_EventScript_Maniac : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port MauvilleCity_GameCorner_EventScript_Maniac")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MauvilleCity_GameCorner.DifficultToStopOn7)
+    return MauvilleCity_GameCorner_EventScript_NPCReturnToSlots.run(ctx)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -175,8 +183,10 @@ internal object MauvilleCity_GameCorner_EventScript_Maniac : Script {
  * ```
  */
 internal object MauvilleCity_GameCorner_EventScript_Woman : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port MauvilleCity_GameCorner_EventScript_Woman")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MauvilleCity_GameCorner.HeresSomeSlotsInfo)
+    return MauvilleCity_GameCorner_EventScript_NPCReturnToSlots.run(ctx)
+  }
 }
 
 /**
@@ -429,6 +439,21 @@ internal object Roulette_EventScript_Table2 : Script {
   override suspend fun run(ctx: ScriptContext) = TODO("port Roulette_EventScript_Table2")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * closemessage
+ * applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
+ * waitmovement 0
+ * release
+ * end
+ * ```
+ */
+internal object MauvilleCity_GameCorner_EventScript_NPCReturnToSlots : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port MauvilleCity_GameCorner_EventScript_NPCReturnToSlots")
+}
+
 internal val MauvilleCity_GameCornerScripts: Map<String, Script> =
     mapOf(
         "MauvilleCity_GameCorner_EventScript_Woman2" to MauvilleCity_GameCorner_EventScript_Woman2,
@@ -474,4 +499,6 @@ internal val MauvilleCity_GameCornerScripts: Map<String, Script> =
             MauvilleCity_GameCorner_EventScript_SlotMachine11,
         "Roulette_EventScript_Table1" to Roulette_EventScript_Table1,
         "Roulette_EventScript_Table2" to Roulette_EventScript_Table2,
+        "MauvilleCity_GameCorner_EventScript_NPCReturnToSlots" to
+            MauvilleCity_GameCorner_EventScript_NPCReturnToSlots,
     )

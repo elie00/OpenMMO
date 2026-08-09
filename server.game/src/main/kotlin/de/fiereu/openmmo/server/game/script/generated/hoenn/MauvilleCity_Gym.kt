@@ -4,6 +4,7 @@ import de.fiereu.openmmo.dialog.generated.hoenn.MauvilleCity_Gym
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
@@ -104,7 +105,7 @@ internal object MauvilleCity_Gym_EventScript_Kirk : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -115,7 +116,11 @@ internal object MauvilleCity_Gym_EventScript_Kirk : Script {
  * ```
  */
 internal object MauvilleCity_Gym_EventScript_GymGuide : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MauvilleCity_Gym_EventScript_GymGuide")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(HoennFlags.FLAG_DEFEATED_MAUVILLE_GYM))
+        return MauvilleCity_Gym_EventScript_GymGuidePostVictory.run(ctx)
+    ctx.say(MauvilleCity_Gym.GymGuideAdvice)
+  }
 }
 
 /**
@@ -166,6 +171,19 @@ internal object MauvilleCity_Gym_EventScript_RightGymStatue : Script {
       TODO("port MauvilleCity_Gym_EventScript_RightGymStatue")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox MauvilleCity_Gym_Text_GymGuidePostVictory, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object MauvilleCity_Gym_EventScript_GymGuidePostVictory : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port MauvilleCity_Gym_EventScript_GymGuidePostVictory")
+}
+
 internal val MauvilleCity_GymScripts: Map<String, Script> =
     mapOf(
         "MauvilleCity_Gym_EventScript_Wattson" to MauvilleCity_Gym_EventScript_Wattson,
@@ -178,4 +196,6 @@ internal val MauvilleCity_GymScripts: Map<String, Script> =
         "MauvilleCity_Gym_EventScript_LeftGymStatue" to MauvilleCity_Gym_EventScript_LeftGymStatue,
         "MauvilleCity_Gym_EventScript_RightGymStatue" to
             MauvilleCity_Gym_EventScript_RightGymStatue,
+        "MauvilleCity_Gym_EventScript_GymGuidePostVictory" to
+            MauvilleCity_Gym_EventScript_GymGuidePostVictory,
     )

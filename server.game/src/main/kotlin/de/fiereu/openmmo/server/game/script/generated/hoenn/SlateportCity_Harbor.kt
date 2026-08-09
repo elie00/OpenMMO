@@ -66,6 +66,21 @@ internal object SlateportCity_Harbor_EventScript_CaptStern : Script {
       TODO("port SlateportCity_Harbor_EventScript_CaptStern")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox SlateportCity_Harbor_Text_MayISeeYourTicket, MSGBOX_DEFAULT
+ * message SlateportCity_Harbor_Text_FlashedTicketWhereTo
+ * waitmessage
+ * goto SlateportCity_Harbor_EventScript_ChooseDestination
+ * end
+ * ```
+ */
+internal object SlateportCity_Harbor_EventScript_AskForTicket : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SlateportCity_Harbor_EventScript_AskForTicket")
+}
+
 internal val SlateportCity_HarborScripts: Map<String, Script> =
     mapOf(
         "SlateportCity_Harbor_EventScript_FerryAttendant" to
@@ -73,4 +88,6 @@ internal val SlateportCity_HarborScripts: Map<String, Script> =
         "SlateportCity_Harbor_EventScript_Sailor" to SlateportCity_Harbor_EventScript_Sailor,
         "SlateportCity_Harbor_EventScript_FatMan" to SlateportCity_Harbor_EventScript_FatMan,
         "SlateportCity_Harbor_EventScript_CaptStern" to SlateportCity_Harbor_EventScript_CaptStern,
+        "SlateportCity_Harbor_EventScript_AskForTicket" to
+            SlateportCity_Harbor_EventScript_AskForTicket,
     )

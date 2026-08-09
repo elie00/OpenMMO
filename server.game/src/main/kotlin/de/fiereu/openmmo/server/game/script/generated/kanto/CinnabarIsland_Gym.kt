@@ -4,6 +4,7 @@ import de.fiereu.openmmo.dialog.generated.kanto.CinnabarIsland_Gym
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
@@ -115,7 +116,7 @@ internal object CinnabarIsland_Gym_EventScript_Blaine : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -126,7 +127,11 @@ internal object CinnabarIsland_Gym_EventScript_Blaine : Script {
  * ```
  */
 internal object CinnabarIsland_Gym_EventScript_GymGuy : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port CinnabarIsland_Gym_EventScript_GymGuy")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(KantoFlags.FLAG_DEFEATED_BLAINE))
+        return CinnabarIsland_Gym_EventScript_GymGuyPostVictory.run(ctx)
+    ctx.say(CinnabarIsland_Gym.GymGuyAdvice)
+  }
 }
 
 /**
@@ -328,6 +333,116 @@ internal object CinnabarIsland_Gym_EventScript_BlaineFujiPhoto : Script {
       TODO("port CinnabarIsland_Gym_EventScript_BlaineFujiPhoto")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox CinnabarIsland_Gym_Text_GymStatuePlayerWon
+ * releaseall
+ * end
+ * ```
+ */
+internal object CinnabarIsland_Gym_EventScript_GymStatuePostVictory : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port CinnabarIsland_Gym_EventScript_GymStatuePostVictory")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox CinnabarIsland_Gym_Text_PokemonQuizRules
+ * msgbox CinnabarIsland_Gym_Text_QuizQuestion6, MSGBOX_YESNO
+ * goto_if_eq VAR_RESULT, YES, CinnabarIsland_Gym_EventScript_Quiz6Incorrect
+ * goto_if_eq VAR_RESULT, NO, CinnabarIsland_Gym_EventScript_Quiz6Correct
+ * end
+ * ```
+ */
+internal object CinnabarIsland_Gym_EventScript_Quiz6 : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port CinnabarIsland_Gym_EventScript_Quiz6")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox CinnabarIsland_Gym_Text_PokemonQuizRules
+ * msgbox CinnabarIsland_Gym_Text_QuizQuestion5, MSGBOX_YESNO
+ * goto_if_eq VAR_RESULT, YES, CinnabarIsland_Gym_EventScript_Quiz5Correct
+ * goto_if_eq VAR_RESULT, NO, CinnabarIsland_Gym_EventScript_Quiz5Incorrect
+ * end
+ * ```
+ */
+internal object CinnabarIsland_Gym_EventScript_Quiz5 : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port CinnabarIsland_Gym_EventScript_Quiz5")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox CinnabarIsland_Gym_Text_PokemonQuizRules
+ * msgbox CinnabarIsland_Gym_Text_QuizQuestion4, MSGBOX_YESNO
+ * goto_if_eq VAR_RESULT, YES, CinnabarIsland_Gym_EventScript_Quiz4Incorrect
+ * goto_if_eq VAR_RESULT, NO, CinnabarIsland_Gym_EventScript_Quiz4Correct
+ * end
+ * ```
+ */
+internal object CinnabarIsland_Gym_EventScript_Quiz4 : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port CinnabarIsland_Gym_EventScript_Quiz4")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox CinnabarIsland_Gym_Text_PokemonQuizRules
+ * msgbox CinnabarIsland_Gym_Text_QuizQuestion3, MSGBOX_YESNO
+ * goto_if_eq VAR_RESULT, YES, CinnabarIsland_Gym_EventScript_Quiz3Incorrect
+ * goto_if_eq VAR_RESULT, NO, CinnabarIsland_Gym_EventScript_Quiz3Correct
+ * end
+ * ```
+ */
+internal object CinnabarIsland_Gym_EventScript_Quiz3 : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port CinnabarIsland_Gym_EventScript_Quiz3")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox CinnabarIsland_Gym_Text_PokemonQuizRules
+ * msgbox CinnabarIsland_Gym_Text_QuizQuestion2, MSGBOX_YESNO
+ * goto_if_eq VAR_RESULT, YES, CinnabarIsland_Gym_EventScript_Quiz2Incorrect
+ * goto_if_eq VAR_RESULT, NO, CinnabarIsland_Gym_EventScript_Quiz2Correct
+ * end
+ * ```
+ */
+internal object CinnabarIsland_Gym_EventScript_Quiz2 : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port CinnabarIsland_Gym_EventScript_Quiz2")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox CinnabarIsland_Gym_Text_GymGuyPostVictory
+ * release
+ * end
+ * ```
+ */
+internal object CinnabarIsland_Gym_EventScript_GymGuyPostVictory : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port CinnabarIsland_Gym_EventScript_GymGuyPostVictory")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox CinnabarIsland_Gym_Text_PokemonQuizRules
+ * msgbox CinnabarIsland_Gym_Text_QuizQuestion1, MSGBOX_YESNO
+ * goto_if_eq VAR_RESULT, YES, CinnabarIsland_Gym_EventScript_Quiz1Correct
+ * goto_if_eq VAR_RESULT, NO, CinnabarIsland_Gym_EventScript_Quiz1Incorrect
+ * end
+ * ```
+ */
+internal object CinnabarIsland_Gym_EventScript_Quiz1 : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port CinnabarIsland_Gym_EventScript_Quiz1")
+}
+
 internal val CinnabarIsland_GymScripts: Map<String, Script> =
     mapOf(
         "CinnabarIsland_Gym_EventScript_Quinn" to CinnabarIsland_Gym_EventScript_Quinn,
@@ -354,4 +469,14 @@ internal val CinnabarIsland_GymScripts: Map<String, Script> =
         "CinnabarIsland_Gym_EventScript_Quiz6Right" to CinnabarIsland_Gym_EventScript_Quiz6Right,
         "CinnabarIsland_Gym_EventScript_BlaineFujiPhoto" to
             CinnabarIsland_Gym_EventScript_BlaineFujiPhoto,
+        "CinnabarIsland_Gym_EventScript_GymStatuePostVictory" to
+            CinnabarIsland_Gym_EventScript_GymStatuePostVictory,
+        "CinnabarIsland_Gym_EventScript_Quiz6" to CinnabarIsland_Gym_EventScript_Quiz6,
+        "CinnabarIsland_Gym_EventScript_Quiz5" to CinnabarIsland_Gym_EventScript_Quiz5,
+        "CinnabarIsland_Gym_EventScript_Quiz4" to CinnabarIsland_Gym_EventScript_Quiz4,
+        "CinnabarIsland_Gym_EventScript_Quiz3" to CinnabarIsland_Gym_EventScript_Quiz3,
+        "CinnabarIsland_Gym_EventScript_Quiz2" to CinnabarIsland_Gym_EventScript_Quiz2,
+        "CinnabarIsland_Gym_EventScript_GymGuyPostVictory" to
+            CinnabarIsland_Gym_EventScript_GymGuyPostVictory,
+        "CinnabarIsland_Gym_EventScript_Quiz1" to CinnabarIsland_Gym_EventScript_Quiz1,
     )

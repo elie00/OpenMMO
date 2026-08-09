@@ -3,13 +3,14 @@ package de.fiereu.openmmo.server.game.script.generated.hoenn
 import de.fiereu.openmmo.dialog.generated.hoenn.FallarborTown
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 
 internal object FallarborTown_EventScript_Girl : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.say(FallarborTown.MyPreciousAzurill)
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -20,7 +21,11 @@ internal object FallarborTown_EventScript_Girl : Script {
  * ```
  */
 internal object FallarborTown_EventScript_ExpertM : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port FallarborTown_EventScript_ExpertM")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(HoennFlags.FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY))
+        return FallarborTown_EventScript_ExpertMNormal.run(ctx)
+    ctx.say(FallarborTown.ShadyCharactersCozmosHome)
+  }
 }
 
 internal object FallarborTown_EventScript_Gentleman : Script {
@@ -56,6 +61,19 @@ internal object FallarborTown_EventScript_MoveTutorSign : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(FallarborTown.MoveTutorSign)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox FallarborTown_Text_RegionKnownForMeteors, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object FallarborTown_EventScript_ExpertMNormal : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port FallarborTown_EventScript_ExpertMNormal")
+}
+
 internal val FallarborTownScripts: Map<String, Script> =
     mapOf(
         "FallarborTown_EventScript_Girl" to FallarborTown_EventScript_Girl,
@@ -65,4 +83,5 @@ internal val FallarborTownScripts: Map<String, Script> =
         "FallarborTown_EventScript_BattleTentSign" to FallarborTown_EventScript_BattleTentSign,
         "FallarborTown_EventScript_TownSign" to FallarborTown_EventScript_TownSign,
         "FallarborTown_EventScript_MoveTutorSign" to FallarborTown_EventScript_MoveTutorSign,
+        "FallarborTown_EventScript_ExpertMNormal" to FallarborTown_EventScript_ExpertMNormal,
     )

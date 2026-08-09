@@ -4,6 +4,7 @@ import de.fiereu.openmmo.dialog.generated.kanto.CeruleanCity_Gym
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
@@ -55,7 +56,7 @@ internal object CeruleanCity_Gym_EventScript_Misty : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -66,7 +67,11 @@ internal object CeruleanCity_Gym_EventScript_Misty : Script {
  * ```
  */
 internal object CeruleanCity_Gym_EventScript_GymGuy : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port CeruleanCity_Gym_EventScript_GymGuy")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(KantoFlags.FLAG_DEFEATED_MISTY))
+        return CeruleanCity_Gym_EventScript_GymGuyPostVictory.run(ctx)
+    ctx.say(CeruleanCity_Gym.GymGuyAdvice)
+  }
 }
 
 /**
@@ -83,6 +88,32 @@ internal object CeruleanCity_Gym_EventScript_GymStatue : Script {
   override suspend fun run(ctx: ScriptContext) = TODO("port CeruleanCity_Gym_EventScript_GymStatue")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox CeruleanCity_Gym_Text_GymStatuePlayerWon
+ * releaseall
+ * end
+ * ```
+ */
+internal object CeruleanCity_Gym_EventScript_GymStatuePostVictory : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port CeruleanCity_Gym_EventScript_GymStatuePostVictory")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox CeruleanCity_Gym_Text_WeMakePrettyGoodTeam
+ * release
+ * end
+ * ```
+ */
+internal object CeruleanCity_Gym_EventScript_GymGuyPostVictory : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port CeruleanCity_Gym_EventScript_GymGuyPostVictory")
+}
+
 internal val CeruleanCity_GymScripts: Map<String, Script> =
     mapOf(
         "CeruleanCity_Gym_EventScript_Luis" to CeruleanCity_Gym_EventScript_Luis,
@@ -90,4 +121,8 @@ internal val CeruleanCity_GymScripts: Map<String, Script> =
         "CeruleanCity_Gym_EventScript_Misty" to CeruleanCity_Gym_EventScript_Misty,
         "CeruleanCity_Gym_EventScript_GymGuy" to CeruleanCity_Gym_EventScript_GymGuy,
         "CeruleanCity_Gym_EventScript_GymStatue" to CeruleanCity_Gym_EventScript_GymStatue,
+        "CeruleanCity_Gym_EventScript_GymStatuePostVictory" to
+            CeruleanCity_Gym_EventScript_GymStatuePostVictory,
+        "CeruleanCity_Gym_EventScript_GymGuyPostVictory" to
+            CeruleanCity_Gym_EventScript_GymGuyPostVictory,
     )

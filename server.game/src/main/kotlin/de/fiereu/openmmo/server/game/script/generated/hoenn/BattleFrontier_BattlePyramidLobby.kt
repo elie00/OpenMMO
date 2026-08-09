@@ -73,7 +73,7 @@ internal object BattleFrontier_BattlePyramidLobby_EventScript_ShowResults : Scri
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lockall
  * msgbox BattleFrontier_BattlePyramidLobby_Text_RulesAreListed, MSGBOX_DEFAULT
@@ -82,8 +82,31 @@ internal object BattleFrontier_BattlePyramidLobby_EventScript_ShowResults : Scri
  * ```
  */
 internal object BattleFrontier_BattlePyramidLobby_EventScript_RulesBoard : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(BattleFrontier_BattlePyramidLobby.RulesAreListed)
+    return BattleFrontier_BattlePyramidLobby_EventScript_ReadRulesBoard.run(ctx)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * message BattleFrontier_BattlePyramidLobby_Text_ReadWhichHeading
+ * waitmessage
+ * multichoice 15, 2, MULTI_BATTLE_PYRAMID_RULES, FALSE
+ * switch VAR_RESULT
+ * case 0, BattleFrontier_BattlePyramidLobby_EventScript_RulesPokemon
+ * case 1, BattleFrontier_BattlePyramidLobby_EventScript_RulesTrainers
+ * case 2, BattleFrontier_BattlePyramidLobby_EventScript_RulesMaze
+ * case 3, BattleFrontier_BattlePyramidLobby_EventScript_RulesBag
+ * case 4, BattleFrontier_BattlePyramidLobby_EventScript_ExitRules
+ * case MULTI_B_PRESSED, BattleFrontier_BattlePyramidLobby_EventScript_ExitRules
+ * end
+ * ```
+ */
+internal object BattleFrontier_BattlePyramidLobby_EventScript_ReadRulesBoard : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port BattleFrontier_BattlePyramidLobby_EventScript_RulesBoard")
+      TODO("port BattleFrontier_BattlePyramidLobby_EventScript_ReadRulesBoard")
 }
 
 internal val BattleFrontier_BattlePyramidLobbyScripts: Map<String, Script> =
@@ -100,4 +123,6 @@ internal val BattleFrontier_BattlePyramidLobbyScripts: Map<String, Script> =
             BattleFrontier_BattlePyramidLobby_EventScript_ShowResults,
         "BattleFrontier_BattlePyramidLobby_EventScript_RulesBoard" to
             BattleFrontier_BattlePyramidLobby_EventScript_RulesBoard,
+        "BattleFrontier_BattlePyramidLobby_EventScript_ReadRulesBoard" to
+            BattleFrontier_BattlePyramidLobby_EventScript_ReadRulesBoard,
     )

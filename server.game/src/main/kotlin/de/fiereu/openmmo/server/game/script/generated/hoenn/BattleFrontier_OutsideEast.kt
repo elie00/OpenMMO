@@ -3,6 +3,7 @@ package de.fiereu.openmmo.server.game.script.generated.hoenn
 import de.fiereu.openmmo.dialog.generated.hoenn.BattleFrontier_OutsideEast
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 
 internal object BattleFrontier_OutsideEast_EventScript_NinjaBoy : Script {
   override suspend fun run(ctx: ScriptContext) =
@@ -144,7 +145,7 @@ internal object BattleFrontier_OutsideEast_EventScript_Woman3 : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -155,8 +156,11 @@ internal object BattleFrontier_OutsideEast_EventScript_Woman3 : Script {
  * ```
  */
 internal object BattleFrontier_OutsideEast_EventScript_OldWoman : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port BattleFrontier_OutsideEast_EventScript_OldWoman")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(HoennFlags.FLAG_DEFEATED_SUDOWOODO))
+        return BattleFrontier_OutsideEast_EventScript_OldWomanSudowoodoGone.run(ctx)
+    ctx.say(BattleFrontier_OutsideEast.OddTreeHereSeemsToWiggle)
+  }
 }
 
 internal object BattleFrontier_OutsideEast_EventScript_Gentleman : Script {
@@ -208,6 +212,19 @@ internal object BattleFrontier_OutsideEast_EventScript_RankingHallSign : Script 
 internal object Common_EventScript_ShowPokemonCenterSign : Script {
   override suspend fun run(ctx: ScriptContext) =
       TODO("port Common_EventScript_ShowPokemonCenterSign")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox BattleFrontier_OutsideEast_Text_OnceAnOddTreePastHere, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object BattleFrontier_OutsideEast_EventScript_OldWomanSudowoodoGone : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port BattleFrontier_OutsideEast_EventScript_OldWomanSudowoodoGone")
 }
 
 internal val BattleFrontier_OutsideEastScripts: Map<String, Script> =
@@ -277,4 +294,6 @@ internal val BattleFrontier_OutsideEastScripts: Map<String, Script> =
         "BattleFrontier_OutsideEast_EventScript_RankingHallSign" to
             BattleFrontier_OutsideEast_EventScript_RankingHallSign,
         "Common_EventScript_ShowPokemonCenterSign" to Common_EventScript_ShowPokemonCenterSign,
+        "BattleFrontier_OutsideEast_EventScript_OldWomanSudowoodoGone" to
+            BattleFrontier_OutsideEast_EventScript_OldWomanSudowoodoGone,
     )

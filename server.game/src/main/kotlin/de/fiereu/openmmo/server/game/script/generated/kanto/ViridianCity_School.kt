@@ -71,7 +71,7 @@ internal object ViridianCity_School_EventScript_Notebook : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lockall
  * msgbox ViridianCity_School_Text_BlackboardListsStatusProblems
@@ -80,8 +80,10 @@ internal object ViridianCity_School_EventScript_Notebook : Script {
  * ```
  */
 internal object ViridianCity_School_EventScript_Blackboard : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port ViridianCity_School_EventScript_Blackboard")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(ViridianCity_School.BlackboardListsStatusProblems)
+    return ViridianCity_School_EventScript_ChooseBlackboardTopic.run(ctx)
+  }
 }
 
 /**
@@ -102,6 +104,28 @@ internal object ViridianCity_School_EventScript_PokemonJournal : Script {
       TODO("port ViridianCity_School_EventScript_PokemonJournal")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * message ViridianCity_School_Text_ReadWhichTopic
+ * waitmessage
+ * multichoicegrid 7, 1, MULTICHOICE_TRAINER_SCHOOL_WHITEBOARD, 3, FALSE
+ * switch VAR_RESULT
+ * case 0, ViridianCity_School_EventScript_ReadSleep
+ * case 1, ViridianCity_School_EventScript_ReadPoison
+ * case 2, ViridianCity_School_EventScript_ReadParalysis
+ * case 3, ViridianCity_School_EventScript_ReadBurn
+ * case 4, ViridianCity_School_EventScript_ReadFreeze
+ * case 5, ViridianCity_School_EventScript_ExitBlackboard
+ * case 127, ViridianCity_School_EventScript_ExitBlackboard
+ * end
+ * ```
+ */
+internal object ViridianCity_School_EventScript_ChooseBlackboardTopic : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port ViridianCity_School_EventScript_ChooseBlackboardTopic")
+}
+
 internal val ViridianCity_SchoolScripts: Map<String, Script> =
     mapOf(
         "ViridianCity_School_EventScript_Woman" to ViridianCity_School_EventScript_Woman,
@@ -110,4 +134,6 @@ internal val ViridianCity_SchoolScripts: Map<String, Script> =
         "ViridianCity_School_EventScript_Blackboard" to ViridianCity_School_EventScript_Blackboard,
         "ViridianCity_School_EventScript_PokemonJournal" to
             ViridianCity_School_EventScript_PokemonJournal,
+        "ViridianCity_School_EventScript_ChooseBlackboardTopic" to
+            ViridianCity_School_EventScript_ChooseBlackboardTopic,
     )

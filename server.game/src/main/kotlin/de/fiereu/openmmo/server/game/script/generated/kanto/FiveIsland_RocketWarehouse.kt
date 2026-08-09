@@ -161,7 +161,7 @@ internal object FiveIsland_RocketWarehouse_EventScript_ItemUpGrade : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lockall
  * goto_if_set FLAG_DEFEATED_ROCKETS_IN_WAREHOUSE, FiveIsland_RocketWarehouse_EventScript_CageUnlocked
@@ -171,13 +171,29 @@ internal object FiveIsland_RocketWarehouse_EventScript_ItemUpGrade : Script {
  * ```
  */
 internal object FiveIsland_RocketWarehouse_EventScript_Cage : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port FiveIsland_RocketWarehouse_EventScript_Cage")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(KantoFlags.FLAG_DEFEATED_ROCKETS_IN_WAREHOUSE))
+        return FiveIsland_RocketWarehouse_EventScript_CageUnlocked.run(ctx)
+    ctx.say(FiveIsland_RocketWarehouse.ManyMonsLockedInPen)
+  }
 }
 
 internal object FiveIsland_RocketWarehouse_EventScript_Computer : Script {
   override suspend fun run(ctx: ScriptContext) =
       ctx.sign(FiveIsland_RocketWarehouse.ReportWithGraphsAndText)
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox FiveIsland_RocketWarehouse_Text_PenUnlockedMonsFled
+ * releaseall
+ * end
+ * ```
+ */
+internal object FiveIsland_RocketWarehouse_EventScript_CageUnlocked : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port FiveIsland_RocketWarehouse_EventScript_CageUnlocked")
 }
 
 internal val FiveIsland_RocketWarehouseScripts: Map<String, Script> =
@@ -206,4 +222,6 @@ internal val FiveIsland_RocketWarehouseScripts: Map<String, Script> =
             FiveIsland_RocketWarehouse_EventScript_Cage,
         "FiveIsland_RocketWarehouse_EventScript_Computer" to
             FiveIsland_RocketWarehouse_EventScript_Computer,
+        "FiveIsland_RocketWarehouse_EventScript_CageUnlocked" to
+            FiveIsland_RocketWarehouse_EventScript_CageUnlocked,
     )

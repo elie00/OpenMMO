@@ -82,7 +82,7 @@ internal object VerdanturfTown_BattleTentLobby_EventScript_LittleBoy : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lockall
  * msgbox VerdanturfTown_BattleTentLobby_Text_RulesAreListed, MSGBOX_DEFAULT
@@ -91,8 +91,34 @@ internal object VerdanturfTown_BattleTentLobby_EventScript_LittleBoy : Script {
  * ```
  */
 internal object VerdanturfTown_BattleTentLobby_EventScript_RulesBoard : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(VerdanturfTown_BattleTentLobby.RulesAreListed)
+    return VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard.run(ctx)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * message BattleFrontier_BattlePalaceLobby_Text_ReadWhichHeading
+ * waitmessage
+ * setvar VAR_0x8004, SCROLL_MULTI_BATTLE_TENT_RULES
+ * special ShowScrollableMultichoice
+ * switch VAR_RESULT
+ * case 0, VerdanturfTown_BattleTentLobby_EventScript_RulesLevel
+ * case 1, VerdanturfTown_BattleTentLobby_EventScript_RulesBasics
+ * case 2, VerdanturfTown_BattleTentLobby_EventScript_RulesNature
+ * case 3, VerdanturfTown_BattleTentLobby_EventScript_RulesMoves
+ * case 4, VerdanturfTown_BattleTentLobby_EventScript_RulesUnderpowered
+ * case 5, VerdanturfTown_BattleTentLobby_EventScript_RulesWhenInDanger
+ * case 6, VerdanturfTown_BattleTentLobby_EventScript_ExitRules
+ * case MULTI_B_PRESSED, VerdanturfTown_BattleTentLobby_EventScript_ExitRules
+ * end
+ * ```
+ */
+internal object VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port VerdanturfTown_BattleTentLobby_EventScript_RulesBoard")
+      TODO("port VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard")
 }
 
 internal val VerdanturfTown_BattleTentLobbyScripts: Map<String, Script> =
@@ -111,4 +137,6 @@ internal val VerdanturfTown_BattleTentLobbyScripts: Map<String, Script> =
             VerdanturfTown_BattleTentLobby_EventScript_LittleBoy,
         "VerdanturfTown_BattleTentLobby_EventScript_RulesBoard" to
             VerdanturfTown_BattleTentLobby_EventScript_RulesBoard,
+        "VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard" to
+            VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard,
     )

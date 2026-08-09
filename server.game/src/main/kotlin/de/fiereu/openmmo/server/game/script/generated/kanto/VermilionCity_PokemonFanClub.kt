@@ -124,6 +124,20 @@ internal object VermilionCity_PokemonFanClub_EventScript_RulesSign2 : Script {
       ctx.sign(VermilionCity_PokemonFanClub.SomeoneBragsBragBack)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * famechecker FAMECHECKER_DAISY, 1
+ * msgbox VermilionCity_PokemonFanClub_Text_ChairmanReallyAdoresHisMons
+ * release
+ * end
+ * ```
+ */
+internal object VermilionCity_PokemonFanClub_EventScript_WorkerFGameClear : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port VermilionCity_PokemonFanClub_EventScript_WorkerFGameClear")
+}
+
 internal val VermilionCity_PokemonFanClubScripts: Map<String, Script> =
     mapOf(
         "VermilionCity_PokemonFanClub_EventScript_Chairman" to
@@ -142,4 +156,6 @@ internal val VermilionCity_PokemonFanClubScripts: Map<String, Script> =
             VermilionCity_PokemonFanClub_EventScript_RulesSign1,
         "VermilionCity_PokemonFanClub_EventScript_RulesSign2" to
             VermilionCity_PokemonFanClub_EventScript_RulesSign2,
+        "VermilionCity_PokemonFanClub_EventScript_WorkerFGameClear" to
+            VermilionCity_PokemonFanClub_EventScript_WorkerFGameClear,
     )

@@ -3,6 +3,7 @@ package de.fiereu.openmmo.codegen.port
 import de.fiereu.openmmo.codegen.defineTable
 import de.fiereu.openmmo.codegen.dialog.RenderUtil
 import de.fiereu.openmmo.codegen.dialog.TextParser
+import de.fiereu.openmmo.codegen.script.ScriptIndex
 import de.fiereu.openmmo.codegen.trainer.TrainerParser
 import java.io.File
 
@@ -22,9 +23,12 @@ class TrainerBattlePorter(private val region: String, decompDir: File) {
   private val textLabels = TextParser(decompDir).parseAll().mapTo(HashSet()) { it.label }
   private val itemIds = defineTable(File(decompDir, "include/constants/items.h"), "ITEM_")
   private val flagNames = defineTable(File(decompDir, "include/constants/flags.h"), "FLAG_").keys
+  private val varNames = defineTable(File(decompDir, "include/constants/vars.h"), "VAR_").keys
   private val mapObjects = MapObjectIndex(decompDir)
+  private val subScripts = SubScriptEmitter(ScriptIndex.build(decompDir))
   private val trainersObject = "${region.replaceFirstChar { it.uppercase() }}Trainers"
   private val flagsObject = "${region.replaceFirstChar { it.uppercase() }}Flags"
+  private val varsObject = "${region.replaceFirstChar { it.uppercase() }}Vars"
 
   /** Counts of what happened, so a run can report what it declined instead of failing silently. */
   data class Report(
@@ -33,6 +37,8 @@ class TrainerBattlePorter(private val region: String, decompDir: File) {
       var skippedTrainer: Int = 0,
       var skippedText: Int = 0,
       var skippedItem: Int = 0,
+      var skippedJump: Int = 0,
+      var emitted: Int = 0,
       var filesChanged: Int = 0,
       var filesRefused: Int = 0,
   )
@@ -46,9 +52,24 @@ class TrainerBattlePorter(private val region: String, decompDir: File) {
 
   private fun portFile(file: File, write: Boolean, report: Report) {
     val lines = file.readText().split("\n").toMutableList()
-    val stubs = findStubs(lines)
+    var stubs = findStubs(lines)
     if (stubs.isEmpty()) return
 
+    // Emit the jump targets first, so the stubs that reach into them become portable in this same
+    // run rather than needing a second one. An emitted script can itself be a jump whose target is
+    // missing, so keep going until the file stops growing, otherwise a second run would still have
+    // work to do and the task would not be idempotent.
+    var added = 0
+    while (true) {
+      val referenced = stubs.mapNotNullTo(HashSet()) { JumpForm.parse(it.coreLines)?.target }
+      val round = subScripts.emitInto(lines, referenced)
+      if (round == 0) break
+      added += round
+      report.emitted += round
+      stubs = findStubs(lines)
+    }
+
+    val defined = DEFINED.findAll(lines.joinToString("\n")).mapTo(HashSet()) { it.groupValues[1] }
     val splices = mutableListOf<Splice>()
     val imports = sortedSetOf<String>()
     for (stub in stubs) {
@@ -56,11 +77,15 @@ class TrainerBattlePorter(private val region: String, decompDir: File) {
       val item = if (battle == null) FindItemForm.parse(stub.decompLines) else null
       val facing =
           if (battle == null && item == null) FacingDialogueForm.parse(stub.coreLines) else null
+      val jump =
+          if (battle == null && item == null && facing == null) JumpForm.parse(stub.coreLines)
+          else null
       val rendered =
           when {
             battle != null -> renderTrainerBattle(stub, battle, imports, report)
             item != null -> renderFindItem(stub, item, imports, report)
             facing != null -> renderFacingDialogue(stub, facing, imports, report)
+            jump != null -> renderJump(stub, jump, defined, imports, report)
             else -> {
               report.skippedShape++
               null
@@ -70,7 +95,13 @@ class TrainerBattlePorter(private val region: String, decompDir: File) {
       splices += Splice(stub.from, stub.toExclusive, rendered)
       report.ported++
     }
-    if (splices.isEmpty()) return
+    if (splices.isEmpty()) {
+      if (added > 0) {
+        report.filesChanged++
+        if (write) file.writeText(lines.joinToString("\n"))
+      }
+      return
+    }
 
     // A file whose import block cannot be edited safely keeps every one of its stubs.
     if (!canInsertImports(lines, imports)) {
@@ -187,6 +218,64 @@ class TrainerBattlePorter(private val region: String, decompDir: File) {
       add("    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb")
       add("    //  for an object event's original facing, so it keeps looking at the player.")
     }
+  }
+
+  private fun renderJump(
+      stub: Stub,
+      form: JumpForm,
+      defined: Set<String>,
+      imports: MutableSet<String>,
+      report: Report,
+  ): List<String>? {
+    // The target has to be an object in this file, otherwise the call does not compile.
+    if (form.target !in defined) {
+      report.skippedJump++
+      return null
+    }
+    val text =
+        when (form) {
+          is JumpForm.BranchOnFlag -> resolveText(form.textLabel)
+          is JumpForm.MessageThenJump -> resolveText(form.textLabel)
+          is JumpForm.SetVarThenJump -> null
+        }
+    val body =
+        when (form) {
+          is JumpForm.SetVarThenJump -> {
+            if (form.varName !in varNames || !form.value.all { it.isDigit() || it == '-' }) {
+              report.skippedJump++
+              return null
+            }
+            imports += "de.fiereu.openmmo.story.generated.$region.$varsObject"
+            listOf(
+                "    ctx.setVar($varsObject.${form.varName}, ${form.value})",
+                "    return ${form.target}.run(ctx)",
+            )
+          }
+          is JumpForm.BranchOnFlag -> {
+            if (form.flag !in flagNames || text == null) {
+              report.skippedJump++
+              return null
+            }
+            imports += "de.fiereu.openmmo.story.generated.$region.$flagsObject"
+            imports += text.import
+            val condition =
+                if (form.negated) "!ctx.isFlagSet($flagsObject.${form.flag})"
+                else "ctx.isFlagSet($flagsObject.${form.flag})"
+            listOf(
+                "    if ($condition) return ${form.target}.run(ctx)",
+                "    ctx.say(${text.reference})",
+            )
+          }
+          is JumpForm.MessageThenJump -> {
+            if (text == null) {
+              report.skippedJump++
+              return null
+            }
+            imports += text.import
+            listOf("    ctx.say(${text.reference})", "    return ${form.target}.run(ctx)")
+          }
+        }
+    return body(stub) { addAll(body) }
   }
 
   /** The shared shell: provenance KDoc, object header, and the run body the caller fills in. */
@@ -318,6 +407,7 @@ class TrainerBattlePorter(private val region: String, decompDir: File) {
         )
     const val FENCE = " * ```"
     const val IMPORT = "import "
+    val DEFINED = Regex("""internal object (\w+)\s*:\s*Script \{""")
     val OBJECT = Regex("""^internal object (\w+) : Script \{$""")
     val BODY_INLINE =
         Regex("""^ {2}override suspend fun run\(ctx: ScriptContext\) = TODO\("port (\w+)"\)$""")
@@ -423,6 +513,61 @@ data class TrainerBattleForm(
           listOf(battle.groupValues[2], battle.groupValues[3], message.groupValues[1]),
           rematch,
       )
+    }
+  }
+}
+
+/**
+ * A body that ends by handing over to another script in the same map.
+ *
+ * Every generated script is an object with one `run`, so the decomp's `goto` is a tail call and its
+ * `call` is a plain one, exactly as the porting guide describes. The target has to exist as an
+ * object, which is what [SubScriptEmitter] is for.
+ */
+sealed interface JumpForm {
+  val target: String
+
+  /** `setvar VAR, n` then `goto Label`. */
+  data class SetVarThenJump(val varName: String, val value: String, override val target: String) :
+      JumpForm
+
+  /** `goto_if_set FLAG, Label` then a message for the other branch. */
+  data class BranchOnFlag(
+      val flag: String,
+      override val target: String,
+      val textLabel: String,
+      val negated: Boolean,
+  ) : JumpForm
+
+  /** A message then `goto Label`. */
+  data class MessageThenJump(val textLabel: String, override val target: String) : JumpForm
+
+  companion object {
+    private val SETVAR = Regex("""^setvar (VAR_[A-Z0-9_]+), (-?\d+|[A-Z][A-Z0-9_]*)$""")
+    private val GOTO = Regex("""^goto ([A-Za-z]\w*)$""")
+    private val GOTO_IF_FLAG = Regex("""^goto_if_(set|unset) (FLAG_[A-Z0-9_]+), ([A-Za-z]\w*)$""")
+    private val MESSAGE = Regex("""^msgbox ([A-Za-z0-9_]+)(?:, (MSGBOX_[A-Z_]+))?$""")
+
+    fun parse(core: List<String>): JumpForm? {
+      if (core.size != 2) return null
+      SETVAR.matchEntire(core[0])?.let { set ->
+        val jump = GOTO.matchEntire(core[1]) ?: return null
+        return SetVarThenJump(set.groupValues[1], set.groupValues[2], jump.groupValues[1])
+      }
+      GOTO_IF_FLAG.matchEntire(core[0])?.let { branch ->
+        val message = MESSAGE.matchEntire(core[1]) ?: return null
+        return BranchOnFlag(
+            branch.groupValues[2],
+            branch.groupValues[3],
+            message.groupValues[1],
+            negated = branch.groupValues[1] == "unset",
+        )
+      }
+      MESSAGE.matchEntire(core[0])?.let { message ->
+        val jump = GOTO.matchEntire(core[1]) ?: return null
+        return MessageThenJump(message.groupValues[1], jump.groupValues[1])
+      }
+      return null
     }
   }
 }

@@ -24,7 +24,7 @@ internal object BattleFrontier_Lounge3_EventScript_Gambler : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -34,12 +34,14 @@ internal object BattleFrontier_Lounge3_EventScript_Gambler : Script {
  * ```
  */
 internal object BattleFrontier_Lounge3_EventScript_FatMan : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port BattleFrontier_Lounge3_EventScript_FatMan")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(BattleFrontier_Lounge3.TrainerGoodButRattled)
+    return BattleFrontier_Lounge3_EventScript_FaceOriginalDirection.run(ctx)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -49,12 +51,14 @@ internal object BattleFrontier_Lounge3_EventScript_FatMan : Script {
  * ```
  */
 internal object BattleFrontier_Lounge3_EventScript_Woman : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port BattleFrontier_Lounge3_EventScript_Woman")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(BattleFrontier_Lounge3.BackedWrongTrainer)
+    return BattleFrontier_Lounge3_EventScript_FaceOriginalDirection.run(ctx)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -64,13 +68,30 @@ internal object BattleFrontier_Lounge3_EventScript_Woman : Script {
  * ```
  */
 internal object BattleFrontier_Lounge3_EventScript_PokefanF : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port BattleFrontier_Lounge3_EventScript_PokefanF")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(BattleFrontier_Lounge3.KnowWinnerWhenISeeOne)
+    return BattleFrontier_Lounge3_EventScript_FaceOriginalDirection.run(ctx)
+  }
 }
 
 internal object BattleFrontier_Lounge3_EventScript_Man : Script {
   override suspend fun run(ctx: ScriptContext) =
       ctx.say(BattleFrontier_Lounge3.ShouldBeTakingChallenges)
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * closemessage
+ * applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
+ * waitmovement 0
+ * release
+ * end
+ * ```
+ */
+internal object BattleFrontier_Lounge3_EventScript_FaceOriginalDirection : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port BattleFrontier_Lounge3_EventScript_FaceOriginalDirection")
 }
 
 internal val BattleFrontier_Lounge3Scripts: Map<String, Script> =
@@ -81,4 +102,6 @@ internal val BattleFrontier_Lounge3Scripts: Map<String, Script> =
         "BattleFrontier_Lounge3_EventScript_PokefanF" to
             BattleFrontier_Lounge3_EventScript_PokefanF,
         "BattleFrontier_Lounge3_EventScript_Man" to BattleFrontier_Lounge3_EventScript_Man,
+        "BattleFrontier_Lounge3_EventScript_FaceOriginalDirection" to
+            BattleFrontier_Lounge3_EventScript_FaceOriginalDirection,
     )

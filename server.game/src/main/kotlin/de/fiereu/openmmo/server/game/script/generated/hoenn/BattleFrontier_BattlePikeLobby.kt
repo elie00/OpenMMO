@@ -60,7 +60,7 @@ internal object BattleFrontier_BattlePikeLobby_EventScript_ShowResults : Script 
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lockall
  * msgbox BattleFrontier_BattlePikeLobby_Text_RulesAreListed, MSGBOX_DEFAULT
@@ -69,8 +69,30 @@ internal object BattleFrontier_BattlePikeLobby_EventScript_ShowResults : Script 
  * ```
  */
 internal object BattleFrontier_BattlePikeLobby_EventScript_RulesBoard : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(BattleFrontier_BattlePikeLobby.RulesAreListed)
+    return BattleFrontier_BattlePikeLobby_EventScript_ReadRulesBoard.run(ctx)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * message BattleFrontier_BattlePikeLobby_Text_ReadWhichHeading
+ * waitmessage
+ * multichoice 16, 4, MULTI_BATTLE_PIKE_RULES, FALSE
+ * switch VAR_RESULT
+ * case 0, BattleFrontier_BattlePikeLobby_EventScript_RulesPokenavBag
+ * case 1, BattleFrontier_BattlePikeLobby_EventScript_RulesHeldItems
+ * case 2, BattleFrontier_BattlePikeLobby_EventScript_RulesMonOrder
+ * case 3, BattleFrontier_BattlePikeLobby_EventScript_ExitRules
+ * case MULTI_B_PRESSED, BattleFrontier_BattlePikeLobby_EventScript_ExitRules
+ * end
+ * ```
+ */
+internal object BattleFrontier_BattlePikeLobby_EventScript_ReadRulesBoard : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port BattleFrontier_BattlePikeLobby_EventScript_RulesBoard")
+      TODO("port BattleFrontier_BattlePikeLobby_EventScript_ReadRulesBoard")
 }
 
 internal val BattleFrontier_BattlePikeLobbyScripts: Map<String, Script> =
@@ -87,4 +109,6 @@ internal val BattleFrontier_BattlePikeLobbyScripts: Map<String, Script> =
             BattleFrontier_BattlePikeLobby_EventScript_ShowResults,
         "BattleFrontier_BattlePikeLobby_EventScript_RulesBoard" to
             BattleFrontier_BattlePikeLobby_EventScript_RulesBoard,
+        "BattleFrontier_BattlePikeLobby_EventScript_ReadRulesBoard" to
+            BattleFrontier_BattlePikeLobby_EventScript_ReadRulesBoard,
     )

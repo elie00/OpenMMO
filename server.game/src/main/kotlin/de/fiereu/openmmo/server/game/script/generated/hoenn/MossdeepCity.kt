@@ -7,7 +7,7 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
 import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -18,7 +18,11 @@ import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
  * ```
  */
 internal object MossdeepCity_EventScript_Sailor : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MossdeepCity_EventScript_Sailor")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(HoennFlags.FLAG_RECEIVED_HM_DIVE))
+        return MossdeepCity_EventScript_SailorMagmaGone.run(ctx)
+    ctx.say(MossdeepCity.MossdeepTargetedByMagma)
+  }
 }
 
 internal object MossdeepCity_EventScript_ExpertM : Script {
@@ -26,7 +30,7 @@ internal object MossdeepCity_EventScript_ExpertM : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -37,7 +41,11 @@ internal object MossdeepCity_EventScript_ExpertM : Script {
  * ```
  */
 internal object MossdeepCity_EventScript_PokefanF : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MossdeepCity_EventScript_PokefanF")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(HoennFlags.FLAG_RECEIVED_HM_DIVE))
+        return MossdeepCity_EventScript_PokefanFMagmaGone.run(ctx)
+    ctx.say(MossdeepCity.SpaceCenterReceivedLetter)
+  }
 }
 
 internal object MossdeepCity_EventScript_NinjaBoy : Script {
@@ -169,6 +177,32 @@ internal object MossdeepCity_EventScript_WhiteRock : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(MossdeepCity.ItsAWhiteRock)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox MossdeepCity_Text_FeelReliefOnLand, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object MossdeepCity_EventScript_SailorMagmaGone : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port MossdeepCity_EventScript_SailorMagmaGone")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox MossdeepCity_Text_SpaceCenterLaunchingRockets, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object MossdeepCity_EventScript_PokefanFMagmaGone : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port MossdeepCity_EventScript_PokefanFMagmaGone")
+}
+
 internal val MossdeepCityScripts: Map<String, Script> =
     mapOf(
         "MossdeepCity_EventScript_Sailor" to MossdeepCity_EventScript_Sailor,
@@ -187,4 +221,6 @@ internal val MossdeepCityScripts: Map<String, Script> =
         "MossdeepCity_EventScript_GymSign" to MossdeepCity_EventScript_GymSign,
         "MossdeepCity_EventScript_SpaceCenterSign" to MossdeepCity_EventScript_SpaceCenterSign,
         "MossdeepCity_EventScript_WhiteRock" to MossdeepCity_EventScript_WhiteRock,
+        "MossdeepCity_EventScript_SailorMagmaGone" to MossdeepCity_EventScript_SailorMagmaGone,
+        "MossdeepCity_EventScript_PokefanFMagmaGone" to MossdeepCity_EventScript_PokefanFMagmaGone,
     )

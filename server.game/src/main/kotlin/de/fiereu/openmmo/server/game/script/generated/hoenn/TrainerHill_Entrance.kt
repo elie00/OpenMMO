@@ -91,6 +91,30 @@ internal object TrainerHill_Entrance_EventScript_Records : Script {
       TODO("port TrainerHill_Entrance_EventScript_Records")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox TrainerHill_Entrance_Text_CantWaitToTestTheWaters, MSGBOX_NPC
+ * end
+ * ```
+ */
+internal object TrainerHill_Entrance_EventScript_ManTrainerHillClosed : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port TrainerHill_Entrance_EventScript_ManTrainerHillClosed")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox TrainerHill_Entrance_Text_DoYouKnowWhenTheyOpen, MSGBOX_NPC
+ * end
+ * ```
+ */
+internal object TrainerHill_Entrance_EventScript_GirlTrainerHillClosed : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port TrainerHill_Entrance_EventScript_GirlTrainerHillClosed")
+}
+
 internal val TrainerHill_EntranceScripts: Map<String, Script> =
     mapOf(
         "TrainerHill_Entrance_EventScript_Attendant" to TrainerHill_Entrance_EventScript_Attendant,
@@ -99,4 +123,8 @@ internal val TrainerHill_EntranceScripts: Map<String, Script> =
         "TrainerHill_Entrance_EventScript_Girl" to TrainerHill_Entrance_EventScript_Girl,
         "TrainerHill_Entrance_EventScript_Man" to TrainerHill_Entrance_EventScript_Man,
         "TrainerHill_Entrance_EventScript_Records" to TrainerHill_Entrance_EventScript_Records,
+        "TrainerHill_Entrance_EventScript_ManTrainerHillClosed" to
+            TrainerHill_Entrance_EventScript_ManTrainerHillClosed,
+        "TrainerHill_Entrance_EventScript_GirlTrainerHillClosed" to
+            TrainerHill_Entrance_EventScript_GirlTrainerHillClosed,
     )

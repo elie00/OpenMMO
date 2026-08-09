@@ -4,6 +4,7 @@ import de.fiereu.openmmo.dialog.generated.kanto.SaffronCity_Gym
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
@@ -155,7 +156,7 @@ internal object SaffronCity_Gym_EventScript_Tyron : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -166,7 +167,11 @@ internal object SaffronCity_Gym_EventScript_Tyron : Script {
  * ```
  */
 internal object SaffronCity_Gym_EventScript_GymGuy : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SaffronCity_Gym_EventScript_GymGuy")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(KantoFlags.FLAG_DEFEATED_SABRINA))
+        return SaffronCity_Gym_EventScript_GymGuyPostVictory.run(ctx)
+    ctx.say(SaffronCity_Gym.GymGuyAdvice)
+  }
 }
 
 /**
@@ -183,6 +188,32 @@ internal object SaffronCity_Gym_EventScript_GymStatue : Script {
   override suspend fun run(ctx: ScriptContext) = TODO("port SaffronCity_Gym_EventScript_GymStatue")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox SaffronCity_Gym_Text_GymGuyPostVictory
+ * release
+ * end
+ * ```
+ */
+internal object SaffronCity_Gym_EventScript_GymGuyPostVictory : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SaffronCity_Gym_EventScript_GymGuyPostVictory")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox SaffronCity_Gym_Text_GymStatuePlayerWon
+ * releaseall
+ * end
+ * ```
+ */
+internal object SaffronCity_Gym_EventScript_GymStatuePostVictory : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SaffronCity_Gym_EventScript_GymStatuePostVictory")
+}
+
 internal val SaffronCity_GymScripts: Map<String, Script> =
     mapOf(
         "SaffronCity_Gym_EventScript_Cameron" to SaffronCity_Gym_EventScript_Cameron,
@@ -195,4 +226,8 @@ internal val SaffronCity_GymScripts: Map<String, Script> =
         "SaffronCity_Gym_EventScript_Tyron" to SaffronCity_Gym_EventScript_Tyron,
         "SaffronCity_Gym_EventScript_GymGuy" to SaffronCity_Gym_EventScript_GymGuy,
         "SaffronCity_Gym_EventScript_GymStatue" to SaffronCity_Gym_EventScript_GymStatue,
+        "SaffronCity_Gym_EventScript_GymGuyPostVictory" to
+            SaffronCity_Gym_EventScript_GymGuyPostVictory,
+        "SaffronCity_Gym_EventScript_GymStatuePostVictory" to
+            SaffronCity_Gym_EventScript_GymStatuePostVictory,
     )

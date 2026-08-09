@@ -4,6 +4,7 @@ import de.fiereu.openmmo.dialog.generated.hoenn.MossdeepCity_Gym
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
@@ -144,7 +145,7 @@ internal object MossdeepCity_Gym_EventScript_Hannah : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -155,7 +156,11 @@ internal object MossdeepCity_Gym_EventScript_Hannah : Script {
  * ```
  */
 internal object MossdeepCity_Gym_EventScript_GymGuide : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MossdeepCity_Gym_EventScript_GymGuide")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(HoennFlags.FLAG_DEFEATED_MOSSDEEP_GYM))
+        return MossdeepCity_Gym_EventScript_GymGuidePostVictory.run(ctx)
+    ctx.say(MossdeepCity_Gym.GymGuideAdvice)
+  }
 }
 
 /**
@@ -306,6 +311,19 @@ internal object MossdeepCity_Gym_EventScript_RightGymStatue : Script {
       TODO("port MossdeepCity_Gym_EventScript_RightGymStatue")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox MossdeepCity_Gym_Text_GymGuidePostVictory, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object MossdeepCity_Gym_EventScript_GymGuidePostVictory : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port MossdeepCity_Gym_EventScript_GymGuidePostVictory")
+}
+
 internal val MossdeepCity_GymScripts: Map<String, Script> =
     mapOf(
         "MossdeepCity_Gym_EventScript_TateAndLiza" to MossdeepCity_Gym_EventScript_TateAndLiza,
@@ -325,4 +343,6 @@ internal val MossdeepCity_GymScripts: Map<String, Script> =
         "MossdeepCity_Gym_EventScript_LeftGymStatue" to MossdeepCity_Gym_EventScript_LeftGymStatue,
         "MossdeepCity_Gym_EventScript_RightGymStatue" to
             MossdeepCity_Gym_EventScript_RightGymStatue,
+        "MossdeepCity_Gym_EventScript_GymGuidePostVictory" to
+            MossdeepCity_Gym_EventScript_GymGuidePostVictory,
     )

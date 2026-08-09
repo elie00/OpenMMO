@@ -35,7 +35,7 @@ internal object CeladonCity_GameCorner_EventScript_CoinsClerk : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -45,12 +45,14 @@ internal object CeladonCity_GameCorner_EventScript_CoinsClerk : Script {
  * ```
  */
 internal object CeladonCity_GameCorner_EventScript_BaldingMan : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port CeladonCity_GameCorner_EventScript_BaldingMan")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(CeladonCity_GameCorner.RumoredTeamRocketRunsThisPlace)
+    return CeladonCity_GameCorner_EventScript_FaceSlotMachine.run(ctx)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -60,8 +62,10 @@ internal object CeladonCity_GameCorner_EventScript_BaldingMan : Script {
  * ```
  */
 internal object CeladonCity_GameCorner_EventScript_Woman1 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port CeladonCity_GameCorner_EventScript_Woman1")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(CeladonCity_GameCorner.ThinkMachinesHaveDifferentOdds)
+    return CeladonCity_GameCorner_EventScript_FaceSlotMachine.run(ctx)
+  }
 }
 
 /**
@@ -106,7 +110,7 @@ internal object CeladonCity_GameCorner_EventScript_GymGuy : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -116,12 +120,14 @@ internal object CeladonCity_GameCorner_EventScript_GymGuy : Script {
  * ```
  */
 internal object CeladonCity_GameCorner_EventScript_Woman2 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port CeladonCity_GameCorner_EventScript_Woman2")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(CeladonCity_GameCorner.WinOrLoseItsOnlyLuck)
+    return CeladonCity_GameCorner_EventScript_FaceSlotMachine.run(ctx)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -131,8 +137,10 @@ internal object CeladonCity_GameCorner_EventScript_Woman2 : Script {
  * ```
  */
 internal object CeladonCity_GameCorner_EventScript_OldMan : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port CeladonCity_GameCorner_EventScript_OldMan")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(CeladonCity_GameCorner.SoEasyToGetHooked)
+    return CeladonCity_GameCorner_EventScript_FaceSlotMachine.run(ctx)
+  }
 }
 
 /**
@@ -520,6 +528,21 @@ internal object CeladonCity_GameCorner_EventScript_PhotoPrinter : Script {
       TODO("port CeladonCity_GameCorner_EventScript_PhotoPrinter")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * closemessage
+ * applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
+ * waitmovement 0
+ * release
+ * end
+ * ```
+ */
+internal object CeladonCity_GameCorner_EventScript_FaceSlotMachine : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port CeladonCity_GameCorner_EventScript_FaceSlotMachine")
+}
+
 internal val CeladonCity_GameCornerScripts: Map<String, Script> =
     mapOf(
         "CeladonCity_GameCorner_EventScript_InfoClerk" to
@@ -586,4 +609,6 @@ internal val CeladonCity_GameCornerScripts: Map<String, Script> =
         "CeladonCity_GameCorner_EventScript_Poster" to CeladonCity_GameCorner_EventScript_Poster,
         "CeladonCity_GameCorner_EventScript_PhotoPrinter" to
             CeladonCity_GameCorner_EventScript_PhotoPrinter,
+        "CeladonCity_GameCorner_EventScript_FaceSlotMachine" to
+            CeladonCity_GameCorner_EventScript_FaceSlotMachine,
     )

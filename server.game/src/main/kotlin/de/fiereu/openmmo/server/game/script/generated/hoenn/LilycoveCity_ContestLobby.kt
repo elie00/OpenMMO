@@ -4,6 +4,7 @@ import de.fiereu.openmmo.dialog.generated.hoenn.BerryBlender
 import de.fiereu.openmmo.dialog.generated.hoenn.LilycoveCity_ContestLobby
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 
 /**
  * Not ported yet. Decomp body:
@@ -155,7 +156,7 @@ internal object LilycoveCity_ContestLobby_EventScript_BlendMasterOnlooker3 : Scr
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -165,12 +166,14 @@ internal object LilycoveCity_ContestLobby_EventScript_BlendMasterOnlooker3 : Scr
  * ```
  */
 internal object LilycoveCity_ContestLobby_EventScript_BlendMasterOnlooker4 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LilycoveCity_ContestLobby_EventScript_BlendMasterOnlooker4")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(BerryBlender.MadeAmazingPokeblocksWithMaster)
+    return LilycoveCity_ContestLobby_EventScript_FaceOriginalDirection.run(ctx)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -180,12 +183,14 @@ internal object LilycoveCity_ContestLobby_EventScript_BlendMasterOnlooker4 : Scr
  * ```
  */
 internal object LilycoveCity_ContestLobby_EventScript_BlendMasterOnlooker5 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LilycoveCity_ContestLobby_EventScript_BlendMasterOnlooker5")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(BerryBlender.QualitiesOfBlendMaster)
+    return LilycoveCity_ContestLobby_EventScript_FaceOriginalDirection.run(ctx)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -195,8 +200,10 @@ internal object LilycoveCity_ContestLobby_EventScript_BlendMasterOnlooker5 : Scr
  * ```
  */
 internal object LilycoveCity_ContestLobby_EventScript_BlendMasterOnlooker6 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LilycoveCity_ContestLobby_EventScript_BlendMasterOnlooker6")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(BerryBlender.MasterWorksOnSkillsInMountains)
+    return LilycoveCity_ContestLobby_EventScript_FaceOriginalDirection.run(ctx)
+  }
 }
 
 /**
@@ -214,7 +221,7 @@ internal object LilycoveCity_ContestLobby_EventScript_BlendMasterOnlooker1 : Scr
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -224,12 +231,14 @@ internal object LilycoveCity_ContestLobby_EventScript_BlendMasterOnlooker1 : Scr
  * ```
  */
 internal object LilycoveCity_ContestLobby_EventScript_BlendMaster : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LilycoveCity_ContestLobby_EventScript_BlendMaster")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(BerryBlender.BlendWithTheBlendMaster)
+    return LilycoveCity_ContestLobby_EventScript_FaceOriginalDirection.run(ctx)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -240,8 +249,11 @@ internal object LilycoveCity_ContestLobby_EventScript_BlendMaster : Script {
  * ```
  */
 internal object LilycoveCity_ContestLobby_EventScript_LittleGirl : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LilycoveCity_ContestLobby_EventScript_LittleGirl")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(HoennFlags.FLAG_RECEIVED_POKEBLOCK_CASE))
+        return LilycoveCity_ContestLobby_EventScript_LittleGirlHaveCase.run(ctx)
+    ctx.say(LilycoveCity_ContestLobby.LadyGaveMePokeblockCase)
+  }
 }
 
 /**
@@ -441,6 +453,34 @@ internal object LilycoveCity_ContestLobby_EventScript_LinkContestResults : Scrip
       TODO("port LilycoveCity_ContestLobby_EventScript_LinkContestResults")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox LilycoveCity_ContestLobby_Text_MakePokeblocksDifferentBerries, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object LilycoveCity_ContestLobby_EventScript_LittleGirlHaveCase : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LilycoveCity_ContestLobby_EventScript_LittleGirlHaveCase")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * closemessage
+ * applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
+ * waitmovement 0
+ * release
+ * end
+ * ```
+ */
+internal object LilycoveCity_ContestLobby_EventScript_FaceOriginalDirection : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LilycoveCity_ContestLobby_EventScript_FaceOriginalDirection")
+}
+
 internal val LilycoveCity_ContestLobbyScripts: Map<String, Script> =
     mapOf(
         "LilycoveCity_ContestLobby_EventScript_ContestReceptionist" to
@@ -504,4 +544,8 @@ internal val LilycoveCity_ContestLobbyScripts: Map<String, Script> =
         "BerryBlender_EventScript_BerryBlender2" to BerryBlender_EventScript_BerryBlender2,
         "LilycoveCity_ContestLobby_EventScript_LinkContestResults" to
             LilycoveCity_ContestLobby_EventScript_LinkContestResults,
+        "LilycoveCity_ContestLobby_EventScript_LittleGirlHaveCase" to
+            LilycoveCity_ContestLobby_EventScript_LittleGirlHaveCase,
+        "LilycoveCity_ContestLobby_EventScript_FaceOriginalDirection" to
+            LilycoveCity_ContestLobby_EventScript_FaceOriginalDirection,
     )

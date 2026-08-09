@@ -53,9 +53,24 @@ internal object MossdeepCity_House4_EventScript_Skitty : Script {
   override suspend fun run(ctx: ScriptContext) = TODO("port MossdeepCity_House4_EventScript_Skitty")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox MossdeepCity_House4_Text_BrotherLikesToVisitBasesAndBattle, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object MossdeepCity_House4_EventScript_CanBattleAtSecretBases : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port MossdeepCity_House4_EventScript_CanBattleAtSecretBases")
+}
+
 internal val MossdeepCity_House4Scripts: Map<String, Script> =
     mapOf(
         "MossdeepCity_House4_EventScript_Woman" to MossdeepCity_House4_EventScript_Woman,
         "MossdeepCity_House4_EventScript_NinjaBoy" to MossdeepCity_House4_EventScript_NinjaBoy,
         "MossdeepCity_House4_EventScript_Skitty" to MossdeepCity_House4_EventScript_Skitty,
+        "MossdeepCity_House4_EventScript_CanBattleAtSecretBases" to
+            MossdeepCity_House4_EventScript_CanBattleAtSecretBases,
     )

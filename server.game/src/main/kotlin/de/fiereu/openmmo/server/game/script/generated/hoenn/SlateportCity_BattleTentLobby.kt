@@ -1,5 +1,6 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
+import de.fiereu.openmmo.dialog.generated.hoenn.BattleFrontier_BattleFactoryLobby
 import de.fiereu.openmmo.dialog.generated.hoenn.SlateportCity_BattleTentLobby
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
@@ -64,7 +65,7 @@ internal object SlateportCity_BattleTentLobby_EventScript_Woman : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lockall
  * msgbox BattleFrontier_BattleFactoryLobby_Text_RulesAreListed, MSGBOX_DEFAULT
@@ -73,8 +74,32 @@ internal object SlateportCity_BattleTentLobby_EventScript_Woman : Script {
  * ```
  */
 internal object SlateportCity_BattleTentLobby_EventScript_RulesBoard : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(BattleFrontier_BattleFactoryLobby.RulesAreListed)
+    return SlateportCity_BattleTentLobby_EventScript_ReadRulesBoard.run(ctx)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * message BattleFrontier_BattleFactoryLobby_Text_ReadWhichHeading
+ * waitmessage
+ * multichoice 17, 0, MULTI_SLATEPORT_TENT_RULES, FALSE
+ * switch VAR_RESULT
+ * case 0, SlateportCity_BattleTentLobby_EventScript_RulesBasics
+ * case 1, SlateportCity_BattleTentLobby_EventScript_RulesSwapPartner
+ * case 2, SlateportCity_BattleTentLobby_EventScript_RulesSwapNumber
+ * case 3, SlateportCity_BattleTentLobby_EventScript_RulesSwapNotes
+ * case 4, SlateportCity_BattleTentLobby_EventScript_RulesMons
+ * case 5, SlateportCity_BattleTentLobby_EventScript_ExitRules
+ * case MULTI_B_PRESSED, SlateportCity_BattleTentLobby_EventScript_ExitRules
+ * end
+ * ```
+ */
+internal object SlateportCity_BattleTentLobby_EventScript_ReadRulesBoard : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port SlateportCity_BattleTentLobby_EventScript_RulesBoard")
+      TODO("port SlateportCity_BattleTentLobby_EventScript_ReadRulesBoard")
 }
 
 internal val SlateportCity_BattleTentLobbyScripts: Map<String, Script> =
@@ -91,4 +116,6 @@ internal val SlateportCity_BattleTentLobbyScripts: Map<String, Script> =
             SlateportCity_BattleTentLobby_EventScript_Woman,
         "SlateportCity_BattleTentLobby_EventScript_RulesBoard" to
             SlateportCity_BattleTentLobby_EventScript_RulesBoard,
+        "SlateportCity_BattleTentLobby_EventScript_ReadRulesBoard" to
+            SlateportCity_BattleTentLobby_EventScript_ReadRulesBoard,
     )

@@ -1,5 +1,6 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
+import de.fiereu.openmmo.dialog.generated.hoenn.BattleFrontier_BattleArenaLobby
 import de.fiereu.openmmo.dialog.generated.hoenn.FallarborTown_BattleTentLobby
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
@@ -62,7 +63,7 @@ internal object FallarborTown_BattleTentLobby_EventScript_Scott : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lockall
  * msgbox BattleFrontier_BattleArenaLobby_Text_RulesAreListed, MSGBOX_DEFAULT
@@ -71,8 +72,32 @@ internal object FallarborTown_BattleTentLobby_EventScript_Scott : Script {
  * ```
  */
 internal object FallarborTown_BattleTentLobby_EventScript_RulesBoard : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(BattleFrontier_BattleArenaLobby.RulesAreListed)
+    return FallarborTown_BattleTentLobby_EventScript_ReadRulesBoard.run(ctx)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * message BattleFrontier_BattleArenaLobby_Text_ReadWhichHeading
+ * waitmessage
+ * multichoice 17, 0, MULTI_FALLARBOR_TENT_RULES, FALSE
+ * switch VAR_RESULT
+ * case 0, FallarborTown_BattleTentLobby_EventScript_RulesLevel
+ * case 1, FallarborTown_BattleTentLobby_EventScript_RulesBattle
+ * case 2, FallarborTown_BattleTentLobby_EventScript_RulesMind
+ * case 3, FallarborTown_BattleTentLobby_EventScript_RulesSkill
+ * case 4, FallarborTown_BattleTentLobby_EventScript_RulesBody
+ * case 5, FallarborTown_BattleTentLobby_EventScript_ExitRules
+ * case MULTI_B_PRESSED, FallarborTown_BattleTentLobby_EventScript_ExitRules
+ * end
+ * ```
+ */
+internal object FallarborTown_BattleTentLobby_EventScript_ReadRulesBoard : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port FallarborTown_BattleTentLobby_EventScript_RulesBoard")
+      TODO("port FallarborTown_BattleTentLobby_EventScript_ReadRulesBoard")
 }
 
 internal val FallarborTown_BattleTentLobbyScripts: Map<String, Script> =
@@ -89,4 +114,6 @@ internal val FallarborTown_BattleTentLobbyScripts: Map<String, Script> =
             FallarborTown_BattleTentLobby_EventScript_Scott,
         "FallarborTown_BattleTentLobby_EventScript_RulesBoard" to
             FallarborTown_BattleTentLobby_EventScript_RulesBoard,
+        "FallarborTown_BattleTentLobby_EventScript_ReadRulesBoard" to
+            FallarborTown_BattleTentLobby_EventScript_ReadRulesBoard,
     )

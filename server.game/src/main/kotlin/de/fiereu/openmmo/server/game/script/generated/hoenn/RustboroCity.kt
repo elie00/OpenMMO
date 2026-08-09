@@ -17,7 +17,7 @@ internal object RustboroCity_EventScript_Woman : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -28,7 +28,11 @@ internal object RustboroCity_EventScript_Woman : Script {
  * ```
  */
 internal object RustboroCity_EventScript_FatMan : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port RustboroCity_EventScript_FatMan")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(HoennFlags.FLAG_DEVON_GOODS_STOLEN))
+        return RustboroCity_EventScript_FatManSawGrunt.run(ctx)
+    ctx.say(RustboroCity.WeShortenItToDevon)
+  }
 }
 
 internal object RustboroCity_EventScript_NinjaBoy : Script {
@@ -41,7 +45,7 @@ internal object RustboroCity_EventScript_Twin : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -52,7 +56,11 @@ internal object RustboroCity_EventScript_Twin : Script {
  * ```
  */
 internal object RustboroCity_EventScript_Boy2 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port RustboroCity_EventScript_Boy2")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(HoennFlags.FLAG_RECEIVED_POKENAV))
+        return RustboroCity_EventScript_Boy2BrineyLeftTunnel.run(ctx)
+    ctx.say(RustboroCity.MrBrineyWalksInTheTunnel)
+  }
 }
 
 /**
@@ -113,7 +121,7 @@ internal object RustboroCity_EventScript_LittleGirl : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -124,8 +132,11 @@ internal object RustboroCity_EventScript_LittleGirl : Script {
  * ```
  */
 internal object RustboroCity_EventScript_DevonEmployee1 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port RustboroCity_EventScript_DevonEmployee1")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(HoennFlags.FLAG_RECOVERED_DEVON_GOODS))
+        return RustboroCity_EventScript_ReturnGoodsSpokeToEmployee.run(ctx)
+    ctx.say(RustboroCity.ShadyCharacterTookOffTowardsTunnel)
+  }
 }
 
 internal object RustboroCity_EventScript_DevonEmployee2 : Script {
@@ -191,6 +202,58 @@ internal object RustboroCity_EventScript_CuttersHouseSign : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(RustboroCity.CuttersHouse)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox RustboroCity_Text_MrBrineyLovesPeeko, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object RustboroCity_EventScript_Boy2BrineyLeftTunnel : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port RustboroCity_EventScript_Boy2BrineyLeftTunnel")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox RustboroCity_Text_SneakyLookingManWentAroundCorner, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object RustboroCity_EventScript_FatManSawGrunt : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port RustboroCity_EventScript_FatManSawGrunt")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox RustboroCity_Text_HeyThatsRustborosGymBadge, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object RustboroCity_EventScript_Man1HaveBadge : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port RustboroCity_EventScript_Man1HaveBadge")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * waitse
+ * setvar VAR_TEMP_1, 4
+ * goto RustboroCity_EventScript_ReturnGoods
+ * end
+ * ```
+ */
+internal object RustboroCity_EventScript_ReturnGoodsSpokeToEmployee : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port RustboroCity_EventScript_ReturnGoodsSpokeToEmployee")
+}
+
 internal val RustboroCityScripts: Map<String, Script> =
     mapOf(
         "RustboroCity_OnTransition" to RustboroCity_OnTransition,
@@ -215,4 +278,10 @@ internal val RustboroCityScripts: Map<String, Script> =
         "RustboroCity_EventScript_DevonCorpSign" to RustboroCity_EventScript_DevonCorpSign,
         "RustboroCity_EventScript_TunnelSign" to RustboroCity_EventScript_TunnelSign,
         "RustboroCity_EventScript_CuttersHouseSign" to RustboroCity_EventScript_CuttersHouseSign,
+        "RustboroCity_EventScript_Boy2BrineyLeftTunnel" to
+            RustboroCity_EventScript_Boy2BrineyLeftTunnel,
+        "RustboroCity_EventScript_FatManSawGrunt" to RustboroCity_EventScript_FatManSawGrunt,
+        "RustboroCity_EventScript_Man1HaveBadge" to RustboroCity_EventScript_Man1HaveBadge,
+        "RustboroCity_EventScript_ReturnGoodsSpokeToEmployee" to
+            RustboroCity_EventScript_ReturnGoodsSpokeToEmployee,
     )

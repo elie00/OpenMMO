@@ -3,6 +3,7 @@ package de.fiereu.openmmo.server.game.script.generated.hoenn
 import de.fiereu.openmmo.dialog.generated.hoenn.SlateportCity
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 
 /**
  * Not ported yet. Decomp body:
@@ -47,7 +48,7 @@ internal object SlateportCity_EventScript_RichBoy : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -58,7 +59,11 @@ internal object SlateportCity_EventScript_RichBoy : Script {
  * ```
  */
 internal object SlateportCity_EventScript_Woman1 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SlateportCity_EventScript_Woman1")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(HoennFlags.FLAG_DOCK_REJECTED_DEVON_GOODS))
+        return SlateportCity_EventScript_Woman1AquaGone.run(ctx)
+    ctx.say(SlateportCity.WhatsLongLineOverThere)
+  }
 }
 
 /**
@@ -643,6 +648,32 @@ internal object SlateportCity_EventScript_BerryCrushRankingsSign : Script {
       TODO("port SlateportCity_EventScript_BerryCrushRankingsSign")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox SlateportCity_Text_HarborSign, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object SlateportCity_EventScript_HarborSignFerryComplete : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SlateportCity_EventScript_HarborSignFerryComplete")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox SlateportCity_Text_VisitedMuseumOften, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object SlateportCity_EventScript_Woman1AquaGone : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SlateportCity_EventScript_Woman1AquaGone")
+}
+
 internal val SlateportCityScripts: Map<String, Script> =
     mapOf(
         "SlateportCity_EventScript_FatMan" to SlateportCity_EventScript_FatMan,
@@ -694,4 +725,7 @@ internal val SlateportCityScripts: Map<String, Script> =
             SlateportCity_EventScript_SternsShipyardSign,
         "SlateportCity_EventScript_BerryCrushRankingsSign" to
             SlateportCity_EventScript_BerryCrushRankingsSign,
+        "SlateportCity_EventScript_HarborSignFerryComplete" to
+            SlateportCity_EventScript_HarborSignFerryComplete,
+        "SlateportCity_EventScript_Woman1AquaGone" to SlateportCity_EventScript_Woman1AquaGone,
     )

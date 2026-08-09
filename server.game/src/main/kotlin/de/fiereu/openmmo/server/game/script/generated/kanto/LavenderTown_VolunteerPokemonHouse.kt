@@ -3,6 +3,7 @@ package de.fiereu.openmmo.server.game.script.generated.kanto
 import de.fiereu.openmmo.dialog.generated.kanto.LavenderTown_VolunteerPokemonHouse
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 
 /**
  * Not ported yet. Decomp body:
@@ -67,7 +68,7 @@ internal object LavenderTown_VolunteerPokemonHouse_EventScript_LittleBoy : Scrip
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -78,8 +79,11 @@ internal object LavenderTown_VolunteerPokemonHouse_EventScript_LittleBoy : Scrip
  * ```
  */
 internal object LavenderTown_VolunteerPokemonHouse_EventScript_Youngster : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LavenderTown_VolunteerPokemonHouse_EventScript_Youngster")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(KantoFlags.FLAG_RESCUED_MR_FUJI))
+        return LavenderTown_VolunteerPokemonHouse_EventScript_YoungsterFujiBack.run(ctx)
+    ctx.say(LavenderTown_VolunteerPokemonHouse.WhereDidMrFujiGo)
+  }
 }
 
 /**
@@ -118,6 +122,19 @@ internal object LavenderTown_VolunteerPokemonHouse_EventScript_Bookshelf : Scrip
       ctx.sign(LavenderTown_VolunteerPokemonHouse.PokemonMagazinesLineShelf)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox LavenderTown_VolunteerPokemonHouse_Text_MrFujiWasPrayingForCubonesMother
+ * release
+ * end
+ * ```
+ */
+internal object LavenderTown_VolunteerPokemonHouse_EventScript_YoungsterFujiBack : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LavenderTown_VolunteerPokemonHouse_EventScript_YoungsterFujiBack")
+}
+
 internal val LavenderTown_VolunteerPokemonHouseScripts: Map<String, Script> =
     mapOf(
         "LavenderTown_VolunteerPokemonHouse_EventScript_MrFuji" to
@@ -136,4 +153,6 @@ internal val LavenderTown_VolunteerPokemonHouseScripts: Map<String, Script> =
             LavenderTown_VolunteerPokemonHouse_EventScript_PokemonFanMagazine,
         "LavenderTown_VolunteerPokemonHouse_EventScript_Bookshelf" to
             LavenderTown_VolunteerPokemonHouse_EventScript_Bookshelf,
+        "LavenderTown_VolunteerPokemonHouse_EventScript_YoungsterFujiBack" to
+            LavenderTown_VolunteerPokemonHouse_EventScript_YoungsterFujiBack,
     )
