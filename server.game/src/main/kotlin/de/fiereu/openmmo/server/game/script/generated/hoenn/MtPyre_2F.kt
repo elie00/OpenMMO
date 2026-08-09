@@ -1,11 +1,13 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.dialog.generated.hoenn.MtPyre_2F
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_MARK, MtPyre_2F_Text_MarkIntro, MtPyre_2F_Text_MarkDefeat
  * msgbox MtPyre_2F_Text_MarkPostBattle, MSGBOX_AUTOCLOSE
@@ -13,7 +15,15 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object MtPyre_2F_EventScript_Mark : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtPyre_2F_EventScript_Mark")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_MARK
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(MtPyre_2F.MarkPostBattle)
+    }
+    ctx.say(MtPyre_2F.MarkIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(MtPyre_2F.MarkDefeat)
+  }
 }
 
 /**
@@ -60,7 +70,7 @@ internal object MtPyre_2F_EventScript_Luke : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_ZANDER, MtPyre_2F_Text_ZanderIntro, MtPyre_2F_Text_ZanderDefeat
  * msgbox MtPyre_2F_Text_ZanderPostBattle, MSGBOX_AUTOCLOSE
@@ -68,11 +78,19 @@ internal object MtPyre_2F_EventScript_Luke : Script {
  * ```
  */
 internal object MtPyre_2F_EventScript_Zander : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtPyre_2F_EventScript_Zander")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_ZANDER
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(MtPyre_2F.ZanderPostBattle)
+    }
+    ctx.say(MtPyre_2F.ZanderIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(MtPyre_2F.ZanderDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_LEAH, MtPyre_2F_Text_LeahIntro, MtPyre_2F_Text_LeahDefeat
  * msgbox MtPyre_2F_Text_LeahPostBattle, MSGBOX_AUTOCLOSE
@@ -80,7 +98,15 @@ internal object MtPyre_2F_EventScript_Zander : Script {
  * ```
  */
 internal object MtPyre_2F_EventScript_Leah : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtPyre_2F_EventScript_Leah")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_LEAH
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(MtPyre_2F.LeahPostBattle)
+    }
+    ctx.say(MtPyre_2F.LeahIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(MtPyre_2F.LeahDefeat)
+  }
 }
 
 internal val MtPyre_2FScripts: Map<String, Script> =

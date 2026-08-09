@@ -1,10 +1,13 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.dialog.generated.kanto.PokemonTower_4F
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_CHANNELER_LAUREL, PokemonTower_4F_Text_LaurelIntro, PokemonTower_4F_Text_LaurelDefeat
  * msgbox PokemonTower_4F_Text_LaurelPostBattle, MSGBOX_AUTOCLOSE
@@ -12,11 +15,19 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object PokemonTower_4F_EventScript_Laurel : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PokemonTower_4F_EventScript_Laurel")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_CHANNELER_LAUREL
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(PokemonTower_4F.LaurelPostBattle)
+    }
+    ctx.say(PokemonTower_4F.LaurelIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(PokemonTower_4F.LaurelDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_CHANNELER_JODY, PokemonTower_4F_Text_JodyIntro, PokemonTower_4F_Text_JodyDefeat
  * msgbox PokemonTower_4F_Text_JodyPostBattle, MSGBOX_AUTOCLOSE
@@ -24,11 +35,19 @@ internal object PokemonTower_4F_EventScript_Laurel : Script {
  * ```
  */
 internal object PokemonTower_4F_EventScript_Jody : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PokemonTower_4F_EventScript_Jody")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_CHANNELER_JODY
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(PokemonTower_4F.JodyPostBattle)
+    }
+    ctx.say(PokemonTower_4F.JodyIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(PokemonTower_4F.JodyDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_CHANNELER_PAULA, PokemonTower_4F_Text_PaulaIntro, PokemonTower_4F_Text_PaulaDefeat
  * msgbox PokemonTower_4F_Text_PaulaPostBattle, MSGBOX_AUTOCLOSE
@@ -36,7 +55,15 @@ internal object PokemonTower_4F_EventScript_Jody : Script {
  * ```
  */
 internal object PokemonTower_4F_EventScript_Paula : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PokemonTower_4F_EventScript_Paula")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_CHANNELER_PAULA
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(PokemonTower_4F.PaulaPostBattle)
+    }
+    ctx.say(PokemonTower_4F.PaulaIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(PokemonTower_4F.PaulaDefeat)
+  }
 }
 
 /**

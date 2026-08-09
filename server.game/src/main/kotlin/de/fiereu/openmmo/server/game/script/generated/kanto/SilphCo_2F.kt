@@ -1,11 +1,13 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.SilphCo_2F
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_24, SilphCo_2F_Text_Grunt2Intro, SilphCo_2F_Text_Grunt2Defeat
  * msgbox SilphCo_2F_Text_Grunt2PostBattle, MSGBOX_AUTOCLOSE
@@ -13,11 +15,19 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object SilphCo_2F_EventScript_Grunt2 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SilphCo_2F_EventScript_Grunt2")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_TEAM_ROCKET_GRUNT_24
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(SilphCo_2F.Grunt2PostBattle)
+    }
+    ctx.say(SilphCo_2F.Grunt2Intro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(SilphCo_2F.Grunt2Defeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_SCIENTIST_JERRY, SilphCo_2F_Text_JerryIntro, SilphCo_2F_Text_JerryDefeat
  * msgbox SilphCo_2F_Text_JerryPostBattle, MSGBOX_AUTOCLOSE
@@ -25,11 +35,19 @@ internal object SilphCo_2F_EventScript_Grunt2 : Script {
  * ```
  */
 internal object SilphCo_2F_EventScript_Jerry : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SilphCo_2F_EventScript_Jerry")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_SCIENTIST_JERRY
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(SilphCo_2F.JerryPostBattle)
+    }
+    ctx.say(SilphCo_2F.JerryIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(SilphCo_2F.JerryDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_23, SilphCo_2F_Text_Grunt1Intro, SilphCo_2F_Text_Grunt1Defeat
  * msgbox SilphCo_2F_Text_Grunt1PostBattle, MSGBOX_AUTOCLOSE
@@ -37,11 +55,19 @@ internal object SilphCo_2F_EventScript_Jerry : Script {
  * ```
  */
 internal object SilphCo_2F_EventScript_Grunt1 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SilphCo_2F_EventScript_Grunt1")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_TEAM_ROCKET_GRUNT_23
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(SilphCo_2F.Grunt1PostBattle)
+    }
+    ctx.say(SilphCo_2F.Grunt1Intro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(SilphCo_2F.Grunt1Defeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_SCIENTIST_CONNOR, SilphCo_2F_Text_ConnorIntro, SilphCo_2F_Text_ConnorDefeat
  * msgbox SilphCo_2F_Text_ConnorPostBattle, MSGBOX_AUTOCLOSE
@@ -49,7 +75,15 @@ internal object SilphCo_2F_EventScript_Grunt1 : Script {
  * ```
  */
 internal object SilphCo_2F_EventScript_Connor : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SilphCo_2F_EventScript_Connor")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_SCIENTIST_CONNOR
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(SilphCo_2F.ConnorPostBattle)
+    }
+    ctx.say(SilphCo_2F.ConnorIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(SilphCo_2F.ConnorDefeat)
+  }
 }
 
 /**

@@ -1,8 +1,10 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.PokemonMansion_B1F
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
  * Not ported yet. Decomp body:
@@ -17,7 +19,7 @@ internal object PokemonMansion_B1F_EventScript_ItemTM22 : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_BURGLAR_LEWIS, PokemonMansion_B1F_Text_LewisIntro, PokemonMansion_B1F_Text_LewisDefeat
  * msgbox PokemonMansion_B1F_Text_LewisPostBattle, MSGBOX_AUTOCLOSE
@@ -25,11 +27,19 @@ internal object PokemonMansion_B1F_EventScript_ItemTM22 : Script {
  * ```
  */
 internal object PokemonMansion_B1F_EventScript_Lewis : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PokemonMansion_B1F_EventScript_Lewis")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_BURGLAR_LEWIS
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(PokemonMansion_B1F.LewisPostBattle)
+    }
+    ctx.say(PokemonMansion_B1F.LewisIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(PokemonMansion_B1F.LewisDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_SCIENTIST_IVAN, PokemonMansion_B1F_Text_IvanIntro, PokemonMansion_B1F_Text_IvanDefeat
  * msgbox PokemonMansion_B1F_Text_IvanPostBattle, MSGBOX_AUTOCLOSE
@@ -37,7 +47,15 @@ internal object PokemonMansion_B1F_EventScript_Lewis : Script {
  * ```
  */
 internal object PokemonMansion_B1F_EventScript_Ivan : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PokemonMansion_B1F_EventScript_Ivan")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_SCIENTIST_IVAN
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(PokemonMansion_B1F.IvanPostBattle)
+    }
+    ctx.say(PokemonMansion_B1F.IvanIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(PokemonMansion_B1F.IvanDefeat)
+  }
 }
 
 /**

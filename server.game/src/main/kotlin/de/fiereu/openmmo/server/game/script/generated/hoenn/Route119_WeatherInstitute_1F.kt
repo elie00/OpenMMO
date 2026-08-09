@@ -1,11 +1,13 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.dialog.generated.hoenn.Route119_WeatherInstitute_1F
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_GRUNT_WEATHER_INST_1, Route119_WeatherInstitute_1F_Text_Grunt1Intro, Route119_WeatherInstitute_1F_Text_Grunt1Defeat
  * msgbox Route119_WeatherInstitute_1F_Text_Grunt1PostBattle, MSGBOX_AUTOCLOSE
@@ -13,12 +15,19 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object Route119_WeatherInstitute_1F_EventScript_Grunt1 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port Route119_WeatherInstitute_1F_EventScript_Grunt1")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_GRUNT_WEATHER_INST_1
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(Route119_WeatherInstitute_1F.Grunt1PostBattle)
+    }
+    ctx.say(Route119_WeatherInstitute_1F.Grunt1Intro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route119_WeatherInstitute_1F.Grunt1Defeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_GRUNT_WEATHER_INST_4, Route119_WeatherInstitute_1F_Text_Grunt4Intro, Route119_WeatherInstitute_1F_Text_Grunt4Defeat
  * msgbox Route119_WeatherInstitute_1F_Text_Grunt4PostBattle, MSGBOX_AUTOCLOSE
@@ -26,8 +35,15 @@ internal object Route119_WeatherInstitute_1F_EventScript_Grunt1 : Script {
  * ```
  */
 internal object Route119_WeatherInstitute_1F_EventScript_Grunt4 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port Route119_WeatherInstitute_1F_EventScript_Grunt4")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_GRUNT_WEATHER_INST_4
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(Route119_WeatherInstitute_1F.Grunt4PostBattle)
+    }
+    ctx.say(Route119_WeatherInstitute_1F.Grunt4Intro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route119_WeatherInstitute_1F.Grunt4Defeat)
+  }
 }
 
 internal object Route119_WeatherInstitute_1F_EventScript_InstituteWorker2 : Script {

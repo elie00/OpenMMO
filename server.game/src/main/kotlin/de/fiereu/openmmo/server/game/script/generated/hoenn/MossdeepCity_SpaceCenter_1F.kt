@@ -1,8 +1,10 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.dialog.generated.hoenn.MossdeepCity_SpaceCenter_1F
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
  * Not ported yet. Decomp body:
@@ -99,7 +101,7 @@ internal object MossdeepCity_SpaceCenter_1F_EventScript_Woman : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_GRUNT_SPACE_CENTER_3, MossdeepCity_SpaceCenter_1F_Text_Grunt3Intro, MossdeepCity_SpaceCenter_1F_Text_Grunt3Defeat
  * msgbox MossdeepCity_SpaceCenter_1F_Text_Grunt3PostBattle, MSGBOX_AUTOCLOSE
@@ -107,12 +109,19 @@ internal object MossdeepCity_SpaceCenter_1F_EventScript_Woman : Script {
  * ```
  */
 internal object MossdeepCity_SpaceCenter_1F_EventScript_Grunt3 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port MossdeepCity_SpaceCenter_1F_EventScript_Grunt3")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_GRUNT_SPACE_CENTER_3
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(MossdeepCity_SpaceCenter_1F.Grunt3PostBattle)
+    }
+    ctx.say(MossdeepCity_SpaceCenter_1F.Grunt3Intro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(MossdeepCity_SpaceCenter_1F.Grunt3Defeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_GRUNT_SPACE_CENTER_1, MossdeepCity_SpaceCenter_1F_Text_Grunt1Intro, MossdeepCity_SpaceCenter_1F_Text_Grunt1Defeat
  * msgbox MossdeepCity_SpaceCenter_1F_Text_Grunt1PostBattle, MSGBOX_AUTOCLOSE
@@ -120,12 +129,19 @@ internal object MossdeepCity_SpaceCenter_1F_EventScript_Grunt3 : Script {
  * ```
  */
 internal object MossdeepCity_SpaceCenter_1F_EventScript_Grunt1 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port MossdeepCity_SpaceCenter_1F_EventScript_Grunt1")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_GRUNT_SPACE_CENTER_1
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(MossdeepCity_SpaceCenter_1F.Grunt1PostBattle)
+    }
+    ctx.say(MossdeepCity_SpaceCenter_1F.Grunt1Intro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(MossdeepCity_SpaceCenter_1F.Grunt1Defeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_GRUNT_SPACE_CENTER_4, MossdeepCity_SpaceCenter_1F_Text_Grunt4Intro, MossdeepCity_SpaceCenter_1F_Text_Grunt4Defeat
  * msgbox MossdeepCity_SpaceCenter_1F_Text_Grunt4PostBattle, MSGBOX_AUTOCLOSE
@@ -133,8 +149,15 @@ internal object MossdeepCity_SpaceCenter_1F_EventScript_Grunt1 : Script {
  * ```
  */
 internal object MossdeepCity_SpaceCenter_1F_EventScript_Grunt4 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port MossdeepCity_SpaceCenter_1F_EventScript_Grunt4")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_GRUNT_SPACE_CENTER_4
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(MossdeepCity_SpaceCenter_1F.Grunt4PostBattle)
+    }
+    ctx.say(MossdeepCity_SpaceCenter_1F.Grunt4Intro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(MossdeepCity_SpaceCenter_1F.Grunt4Defeat)
+  }
 }
 
 /**

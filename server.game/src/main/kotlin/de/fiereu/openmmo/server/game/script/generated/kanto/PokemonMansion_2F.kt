@@ -1,11 +1,13 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.PokemonMansion_1F
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_BURGLAR_ARNIE, PokemonMansion_1F_Text_ArnieIntro, PokemonMansion_1F_Text_ArnieDefeat
  * msgbox PokemonMansion_1F_Text_ArniePostBattle, MSGBOX_AUTOCLOSE
@@ -13,7 +15,15 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object PokemonMansion_2F_EventScript_Arnie : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PokemonMansion_2F_EventScript_Arnie")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_BURGLAR_ARNIE
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(PokemonMansion_1F.ArniePostBattle)
+    }
+    ctx.say(PokemonMansion_1F.ArnieIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(PokemonMansion_1F.ArnieDefeat)
+  }
 }
 
 /**

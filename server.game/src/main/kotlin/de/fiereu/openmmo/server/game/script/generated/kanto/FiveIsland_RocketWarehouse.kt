@@ -1,11 +1,13 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.FiveIsland_RocketWarehouse
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_47, FiveIsland_RocketWarehouse_Text_Grunt2Intro, FiveIsland_RocketWarehouse_Text_Grunt2Defeat
  * msgbox FiveIsland_RocketWarehouse_Text_Grunt2PostBattle, MSGBOX_AUTOCLOSE
@@ -13,12 +15,19 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object FiveIsland_RocketWarehouse_EventScript_Grunt2 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port FiveIsland_RocketWarehouse_EventScript_Grunt2")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_TEAM_ROCKET_GRUNT_47
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(FiveIsland_RocketWarehouse.Grunt2PostBattle)
+    }
+    ctx.say(FiveIsland_RocketWarehouse.Grunt2Intro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(FiveIsland_RocketWarehouse.Grunt2Defeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_48, FiveIsland_RocketWarehouse_Text_Grunt3Intro, FiveIsland_RocketWarehouse_Text_Grunt3Defeat
  * msgbox FiveIsland_RocketWarehouse_Text_Grunt3PostBattle, MSGBOX_AUTOCLOSE
@@ -26,8 +35,15 @@ internal object FiveIsland_RocketWarehouse_EventScript_Grunt2 : Script {
  * ```
  */
 internal object FiveIsland_RocketWarehouse_EventScript_Grunt3 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port FiveIsland_RocketWarehouse_EventScript_Grunt3")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_TEAM_ROCKET_GRUNT_48
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(FiveIsland_RocketWarehouse.Grunt3PostBattle)
+    }
+    ctx.say(FiveIsland_RocketWarehouse.Grunt3Intro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(FiveIsland_RocketWarehouse.Grunt3Defeat)
+  }
 }
 
 /**
@@ -57,7 +73,7 @@ internal object FiveIsland_RocketWarehouse_EventScript_Admin2 : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_42, FiveIsland_RocketWarehouse_Text_Grunt1Intro, FiveIsland_RocketWarehouse_Text_Grunt1Defeat
  * msgbox FiveIsland_RocketWarehouse_Text_Grunt1PostBattle, MSGBOX_AUTOCLOSE
@@ -65,8 +81,15 @@ internal object FiveIsland_RocketWarehouse_EventScript_Admin2 : Script {
  * ```
  */
 internal object FiveIsland_RocketWarehouse_EventScript_Grunt1 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port FiveIsland_RocketWarehouse_EventScript_Grunt1")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_TEAM_ROCKET_GRUNT_42
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(FiveIsland_RocketWarehouse.Grunt1PostBattle)
+    }
+    ctx.say(FiveIsland_RocketWarehouse.Grunt1Intro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(FiveIsland_RocketWarehouse.Grunt1Defeat)
+  }
 }
 
 /**

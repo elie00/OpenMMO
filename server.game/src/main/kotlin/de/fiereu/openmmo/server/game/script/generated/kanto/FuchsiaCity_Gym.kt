@@ -1,10 +1,13 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.dialog.generated.kanto.FuchsiaCity_Gym
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_JUGGLER_KAYDEN, FuchsiaCity_Gym_Text_KaydenIntro, FuchsiaCity_Gym_Text_KaydenDefeat
  * msgbox FuchsiaCity_Gym_Text_KaydenPostBattle, MSGBOX_AUTOCLOSE
@@ -12,11 +15,19 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object FuchsiaCity_Gym_EventScript_Kayden : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port FuchsiaCity_Gym_EventScript_Kayden")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_JUGGLER_KAYDEN
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(FuchsiaCity_Gym.KaydenPostBattle)
+    }
+    ctx.say(FuchsiaCity_Gym.KaydenIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(FuchsiaCity_Gym.KaydenDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_JUGGLER_SHAWN, FuchsiaCity_Gym_Text_ShawnIntro, FuchsiaCity_Gym_Text_ShawnDefeat
  * msgbox FuchsiaCity_Gym_Text_ShawnPostBattle, MSGBOX_AUTOCLOSE
@@ -24,7 +35,15 @@ internal object FuchsiaCity_Gym_EventScript_Kayden : Script {
  * ```
  */
 internal object FuchsiaCity_Gym_EventScript_Shawn : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port FuchsiaCity_Gym_EventScript_Shawn")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_JUGGLER_SHAWN
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(FuchsiaCity_Gym.ShawnPostBattle)
+    }
+    ctx.say(FuchsiaCity_Gym.ShawnIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(FuchsiaCity_Gym.ShawnDefeat)
+  }
 }
 
 /**
@@ -41,7 +60,7 @@ internal object FuchsiaCity_Gym_EventScript_Kirk : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_TAMER_EDGAR, FuchsiaCity_Gym_Text_EdgarIntro, FuchsiaCity_Gym_Text_EdgarDefeat
  * msgbox FuchsiaCity_Gym_Text_EdgarPostBattle, MSGBOX_AUTOCLOSE
@@ -49,11 +68,19 @@ internal object FuchsiaCity_Gym_EventScript_Kirk : Script {
  * ```
  */
 internal object FuchsiaCity_Gym_EventScript_Edgar : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port FuchsiaCity_Gym_EventScript_Edgar")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_TAMER_EDGAR
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(FuchsiaCity_Gym.EdgarPostBattle)
+    }
+    ctx.say(FuchsiaCity_Gym.EdgarIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(FuchsiaCity_Gym.EdgarDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_TAMER_PHIL, FuchsiaCity_Gym_Text_PhilIntro, FuchsiaCity_Gym_Text_PhilDefeat
  * msgbox FuchsiaCity_Gym_Text_PhilPostBattle, MSGBOX_AUTOCLOSE
@@ -61,11 +88,19 @@ internal object FuchsiaCity_Gym_EventScript_Edgar : Script {
  * ```
  */
 internal object FuchsiaCity_Gym_EventScript_Phil : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port FuchsiaCity_Gym_EventScript_Phil")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_TAMER_PHIL
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(FuchsiaCity_Gym.PhilPostBattle)
+    }
+    ctx.say(FuchsiaCity_Gym.PhilIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(FuchsiaCity_Gym.PhilDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_JUGGLER_NATE, FuchsiaCity_Gym_Text_NateIntro, FuchsiaCity_Gym_Text_NateDefeat
  * msgbox FuchsiaCity_Gym_Text_NatePostBattle, MSGBOX_AUTOCLOSE
@@ -73,7 +108,15 @@ internal object FuchsiaCity_Gym_EventScript_Phil : Script {
  * ```
  */
 internal object FuchsiaCity_Gym_EventScript_Nate : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port FuchsiaCity_Gym_EventScript_Nate")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_JUGGLER_NATE
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(FuchsiaCity_Gym.NatePostBattle)
+    }
+    ctx.say(FuchsiaCity_Gym.NateIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(FuchsiaCity_Gym.NateDefeat)
+  }
 }
 
 /**

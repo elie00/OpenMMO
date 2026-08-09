@@ -11,6 +11,7 @@ import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 import de.fiereu.openmmo.story.generated.hoenn.HoennVars
+import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 private const val LOCALID_AQUA_GRUNT = 2
 private const val LOCALID_DEVON_RESEARCHER = 3
@@ -130,7 +131,7 @@ internal object PetalburgWoods_EventScript_Boy1 : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_LYLE, PetalburgWoods_Text_GoBugPokemonTeam, PetalburgWoods_Text_ICouldntWin
  * msgbox PetalburgWoods_Text_ImOutOfPokeBalls, MSGBOX_AUTOCLOSE
@@ -138,7 +139,15 @@ internal object PetalburgWoods_EventScript_Boy1 : Script {
  * ```
  */
 internal object PetalburgWoods_EventScript_Lyle : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PetalburgWoods_EventScript_Lyle")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_LYLE
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(PetalburgWoods.ImOutOfPokeBalls)
+    }
+    ctx.say(PetalburgWoods.GoBugPokemonTeam)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(PetalburgWoods.ICouldntWin)
+  }
 }
 
 /**

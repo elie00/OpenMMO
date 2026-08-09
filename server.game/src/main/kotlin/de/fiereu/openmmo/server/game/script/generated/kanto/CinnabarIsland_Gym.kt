@@ -1,7 +1,10 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.dialog.generated.kanto.CinnabarIsland_Gym
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
  * Not ported yet. Decomp body:
@@ -16,7 +19,7 @@ internal object CinnabarIsland_Gym_EventScript_Quinn : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_SUPER_NERD_ERIK, CinnabarIsland_Gym_Text_ErikIntro, CinnabarIsland_Gym_Text_ErikDefeat
  * msgbox CinnabarIsland_Gym_Text_ErikPostBattle, MSGBOX_AUTOCLOSE
@@ -24,7 +27,15 @@ internal object CinnabarIsland_Gym_EventScript_Quinn : Script {
  * ```
  */
 internal object CinnabarIsland_Gym_EventScript_Erik : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port CinnabarIsland_Gym_EventScript_Erik")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_SUPER_NERD_ERIK
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(CinnabarIsland_Gym.ErikPostBattle)
+    }
+    ctx.say(CinnabarIsland_Gym.ErikIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(CinnabarIsland_Gym.ErikDefeat)
+  }
 }
 
 /**

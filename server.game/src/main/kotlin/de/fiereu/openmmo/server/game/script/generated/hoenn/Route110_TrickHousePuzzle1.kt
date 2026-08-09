@@ -1,10 +1,13 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
+import de.fiereu.openmmo.dialog.generated.hoenn.Route110_TrickHousePuzzle1
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_SALLY, Route110_TrickHousePuzzle1_Text_SallyIntro, Route110_TrickHousePuzzle1_Text_SallyDefeat
  * msgbox Route110_TrickHousePuzzle1_Text_SallyPostBattle, MSGBOX_AUTOCLOSE
@@ -12,12 +15,19 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object Route110_TrickHousePuzzle1_EventScript_Sally : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port Route110_TrickHousePuzzle1_EventScript_Sally")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_SALLY
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(Route110_TrickHousePuzzle1.SallyPostBattle)
+    }
+    ctx.say(Route110_TrickHousePuzzle1.SallyIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route110_TrickHousePuzzle1.SallyDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_EDDIE, Route110_TrickHousePuzzle1_Text_EddieIntro, Route110_TrickHousePuzzle1_Text_EddieDefeat
  * msgbox Route110_TrickHousePuzzle1_Text_EddiePostBattle, MSGBOX_AUTOCLOSE
@@ -25,12 +35,19 @@ internal object Route110_TrickHousePuzzle1_EventScript_Sally : Script {
  * ```
  */
 internal object Route110_TrickHousePuzzle1_EventScript_Eddie : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port Route110_TrickHousePuzzle1_EventScript_Eddie")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_EDDIE
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(Route110_TrickHousePuzzle1.EddiePostBattle)
+    }
+    ctx.say(Route110_TrickHousePuzzle1.EddieIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route110_TrickHousePuzzle1.EddieDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_ROBIN, Route110_TrickHousePuzzle1_Text_RobinIntro, Route110_TrickHousePuzzle1_Text_RobinDefeat
  * msgbox Route110_TrickHousePuzzle1_Text_RobinPostBattle, MSGBOX_AUTOCLOSE
@@ -38,8 +55,15 @@ internal object Route110_TrickHousePuzzle1_EventScript_Eddie : Script {
  * ```
  */
 internal object Route110_TrickHousePuzzle1_EventScript_Robin : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port Route110_TrickHousePuzzle1_EventScript_Robin")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_ROBIN
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(Route110_TrickHousePuzzle1.RobinPostBattle)
+    }
+    ctx.say(Route110_TrickHousePuzzle1.RobinIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route110_TrickHousePuzzle1.RobinDefeat)
+  }
 }
 
 /**

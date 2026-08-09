@@ -1,11 +1,13 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.SSAnne_1F_Room2
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_LASS_ANN, SSAnne_1F_Room2_Text_AnnIntro, SSAnne_1F_Room2_Text_AnnDefeat
  * msgbox SSAnne_1F_Room2_Text_AnnPostBattle, MSGBOX_AUTOCLOSE
@@ -13,11 +15,19 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object SSAnne_1F_Room2_EventScript_Ann : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SSAnne_1F_Room2_EventScript_Ann")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_LASS_ANN
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(SSAnne_1F_Room2.AnnPostBattle)
+    }
+    ctx.say(SSAnne_1F_Room2.AnnIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(SSAnne_1F_Room2.AnnDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_YOUNGSTER_TYLER, SSAnne_1F_Room2_Text_TylerIntro, SSAnne_1F_Room2_Text_TylerDefeat
  * msgbox SSAnne_1F_Room2_Text_TylerPostBattle, MSGBOX_AUTOCLOSE
@@ -25,7 +35,15 @@ internal object SSAnne_1F_Room2_EventScript_Ann : Script {
  * ```
  */
 internal object SSAnne_1F_Room2_EventScript_Tyler : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SSAnne_1F_Room2_EventScript_Tyler")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_YOUNGSTER_TYLER
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(SSAnne_1F_Room2.TylerPostBattle)
+    }
+    ctx.say(SSAnne_1F_Room2.TylerIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(SSAnne_1F_Room2.TylerDefeat)
+  }
 }
 
 internal object SSAnne_1F_Room2_EventScript_Woman : Script {

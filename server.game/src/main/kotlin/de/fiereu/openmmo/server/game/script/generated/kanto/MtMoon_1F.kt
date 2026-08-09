@@ -1,11 +1,13 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.MtMoon_1F
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_LASS_IRIS, MtMoon_1F_Text_IrisIntro, MtMoon_1F_Text_IrisDefeat
  * msgbox MtMoon_1F_Text_IrisPostBattle, MSGBOX_AUTOCLOSE
@@ -13,11 +15,19 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object MtMoon_1F_EventScript_Iris : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtMoon_1F_EventScript_Iris")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_LASS_IRIS
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(MtMoon_1F.IrisPostBattle)
+    }
+    ctx.say(MtMoon_1F.IrisIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(MtMoon_1F.IrisDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_BUG_CATCHER_ROBBY, MtMoon_1F_Text_RobbyIntro, MtMoon_1F_Text_RobbyDefeat
  * msgbox MtMoon_1F_Text_RobbyPostBattle, MSGBOX_AUTOCLOSE
@@ -25,11 +35,19 @@ internal object MtMoon_1F_EventScript_Iris : Script {
  * ```
  */
 internal object MtMoon_1F_EventScript_Robby : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtMoon_1F_EventScript_Robby")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_BUG_CATCHER_ROBBY
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(MtMoon_1F.RobbyPostBattle)
+    }
+    ctx.say(MtMoon_1F.RobbyIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(MtMoon_1F.RobbyDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_SUPER_NERD_JOVAN, MtMoon_1F_Text_JovanIntro, MtMoon_1F_Text_JovanDefeat
  * msgbox MtMoon_1F_Text_JovanPostBattle, MSGBOX_AUTOCLOSE
@@ -37,11 +55,19 @@ internal object MtMoon_1F_EventScript_Robby : Script {
  * ```
  */
 internal object MtMoon_1F_EventScript_Jovan : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtMoon_1F_EventScript_Jovan")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_SUPER_NERD_JOVAN
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(MtMoon_1F.JovanPostBattle)
+    }
+    ctx.say(MtMoon_1F.JovanIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(MtMoon_1F.JovanDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_LASS_MIRIAM, MtMoon_1F_Text_MiriamIntro, MtMoon_1F_Text_MiriamDefeat
  * msgbox MtMoon_1F_Text_MiriamPostBattle, MSGBOX_AUTOCLOSE
@@ -49,11 +75,19 @@ internal object MtMoon_1F_EventScript_Jovan : Script {
  * ```
  */
 internal object MtMoon_1F_EventScript_Miriam : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtMoon_1F_EventScript_Miriam")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_LASS_MIRIAM
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(MtMoon_1F.MiriamPostBattle)
+    }
+    ctx.say(MtMoon_1F.MiriamIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(MtMoon_1F.MiriamDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_BUG_CATCHER_KENT, MtMoon_1F_Text_KentIntro, MtMoon_1F_Text_KentDefeat
  * msgbox MtMoon_1F_Text_KentPostBattle, MSGBOX_AUTOCLOSE
@@ -61,11 +95,19 @@ internal object MtMoon_1F_EventScript_Miriam : Script {
  * ```
  */
 internal object MtMoon_1F_EventScript_Kent : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtMoon_1F_EventScript_Kent")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_BUG_CATCHER_KENT
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(MtMoon_1F.KentPostBattle)
+    }
+    ctx.say(MtMoon_1F.KentIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(MtMoon_1F.KentDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_YOUNGSTER_JOSH, MtMoon_1F_Text_JoshIntro, MtMoon_1F_Text_JoshDefeat
  * msgbox MtMoon_1F_Text_JoshPostBattle, MSGBOX_AUTOCLOSE
@@ -73,11 +115,19 @@ internal object MtMoon_1F_EventScript_Kent : Script {
  * ```
  */
 internal object MtMoon_1F_EventScript_Josh : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtMoon_1F_EventScript_Josh")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_YOUNGSTER_JOSH
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(MtMoon_1F.JoshPostBattle)
+    }
+    ctx.say(MtMoon_1F.JoshIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(MtMoon_1F.JoshDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_HIKER_MARCOS, MtMoon_1F_Text_MarcosIntro, MtMoon_1F_Text_MarcosDefeat
  * msgbox MtMoon_1F_Text_MarcosPostBattle, MSGBOX_AUTOCLOSE
@@ -85,7 +135,15 @@ internal object MtMoon_1F_EventScript_Josh : Script {
  * ```
  */
 internal object MtMoon_1F_EventScript_Marcos : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtMoon_1F_EventScript_Marcos")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_HIKER_MARCOS
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(MtMoon_1F.MarcosPostBattle)
+    }
+    ctx.say(MtMoon_1F.MarcosIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(MtMoon_1F.MarcosDefeat)
+  }
 }
 
 /**

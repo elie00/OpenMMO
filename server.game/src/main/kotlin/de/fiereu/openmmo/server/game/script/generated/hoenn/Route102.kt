@@ -1,8 +1,10 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.dialog.generated.hoenn.Route102
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 internal object Route102_EventScript_LittleBoy : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.say(Route102.ImNotVeryTall)
@@ -27,7 +29,7 @@ internal object Route102_EventScript_Calvin : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_RICK, Route102_Text_RickIntro, Route102_Text_RickDefeated
  * msgbox Route102_Text_RickPostBattle, MSGBOX_AUTOCLOSE
@@ -35,11 +37,19 @@ internal object Route102_EventScript_Calvin : Script {
  * ```
  */
 internal object Route102_EventScript_Rick : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route102_EventScript_Rick")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_RICK
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(Route102.RickPostBattle)
+    }
+    ctx.say(Route102.RickIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route102.RickDefeated)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_TIANA, Route102_Text_TianaIntro, Route102_Text_TianaDefeated
  * msgbox Route102_Text_TianaPostBattle, MSGBOX_AUTOCLOSE
@@ -47,7 +57,15 @@ internal object Route102_EventScript_Rick : Script {
  * ```
  */
 internal object Route102_EventScript_Tiana : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route102_EventScript_Tiana")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_TIANA
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(Route102.TianaPostBattle)
+    }
+    ctx.say(Route102.TianaIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route102.TianaDefeated)
+  }
 }
 
 internal object Route102_EventScript_Boy : Script {
@@ -85,7 +103,7 @@ internal object BerryTreeScript : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_ALLEN, Route102_Text_AllenIntro, Route102_Text_AllenDefeated
  * msgbox Route102_Text_AllenPostBattle, MSGBOX_AUTOCLOSE
@@ -93,7 +111,15 @@ internal object BerryTreeScript : Script {
  * ```
  */
 internal object Route102_EventScript_Allen : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route102_EventScript_Allen")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_ALLEN
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(Route102.AllenPostBattle)
+    }
+    ctx.say(Route102.AllenIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route102.AllenDefeated)
+  }
 }
 
 internal object Route102_EventScript_RouteSignPetalburg : Script {

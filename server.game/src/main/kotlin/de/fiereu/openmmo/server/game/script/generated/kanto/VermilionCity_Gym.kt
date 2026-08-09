@@ -1,7 +1,10 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.dialog.generated.kanto.VermilionCity_Gym
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
  * Not ported yet. Decomp body:
@@ -19,7 +22,7 @@ internal object VermilionCity_Gym_EventScript_LtSurge : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_ENGINEER_BAILY, VermilionCity_Gym_Text_BailyIntro, VermilionCity_Gym_Text_BailyDefeat
  * msgbox VermilionCity_Gym_Text_BailyPostBattle, MSGBOX_AUTOCLOSE
@@ -27,7 +30,15 @@ internal object VermilionCity_Gym_EventScript_LtSurge : Script {
  * ```
  */
 internal object VermilionCity_Gym_EventScript_Baily : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port VermilionCity_Gym_EventScript_Baily")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_ENGINEER_BAILY
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(VermilionCity_Gym.BailyPostBattle)
+    }
+    ctx.say(VermilionCity_Gym.BailyIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(VermilionCity_Gym.BailyDefeat)
+  }
 }
 
 /**

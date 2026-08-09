@@ -1,7 +1,10 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
+import de.fiereu.openmmo.dialog.generated.hoenn.AbandonedShip_Rooms2_1F
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
  * Not ported yet. Decomp body:
@@ -48,7 +51,7 @@ internal object AbandonedShip_Rooms2_1F_EventScript_ItemRevive : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_GARRISON, AbandonedShip_Rooms2_1F_Text_GarrisonIntro, AbandonedShip_Rooms2_1F_Text_GarrisonDefeat
  * msgbox AbandonedShip_Rooms2_1F_Text_GarrisonPostBattle, MSGBOX_AUTOCLOSE
@@ -56,12 +59,19 @@ internal object AbandonedShip_Rooms2_1F_EventScript_ItemRevive : Script {
  * ```
  */
 internal object AbandonedShip_Rooms2_1F_EventScript_Garrison : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port AbandonedShip_Rooms2_1F_EventScript_Garrison")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_GARRISON
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(AbandonedShip_Rooms2_1F.GarrisonPostBattle)
+    }
+    ctx.say(AbandonedShip_Rooms2_1F.GarrisonIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(AbandonedShip_Rooms2_1F.GarrisonDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_JANI, AbandonedShip_Rooms2_1F_Text_JaniIntro, AbandonedShip_Rooms2_1F_Text_JaniDefeat
  * msgbox AbandonedShip_Rooms2_1F_Text_JaniPostBattle, MSGBOX_AUTOCLOSE
@@ -69,8 +79,15 @@ internal object AbandonedShip_Rooms2_1F_EventScript_Garrison : Script {
  * ```
  */
 internal object AbandonedShip_Rooms2_1F_EventScript_Jani : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port AbandonedShip_Rooms2_1F_EventScript_Jani")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_JANI
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(AbandonedShip_Rooms2_1F.JaniPostBattle)
+    }
+    ctx.say(AbandonedShip_Rooms2_1F.JaniIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(AbandonedShip_Rooms2_1F.JaniDefeat)
+  }
 }
 
 internal val AbandonedShip_Rooms2_1FScripts: Map<String, Script> =

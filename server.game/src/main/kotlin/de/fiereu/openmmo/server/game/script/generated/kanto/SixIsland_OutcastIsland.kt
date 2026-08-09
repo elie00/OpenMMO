@@ -1,10 +1,13 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.dialog.generated.kanto.SixIsland_OutcastIsland
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_46, SixIsland_OutcastIsland_Text_RocketIntro, SixIsland_OutcastIsland_Text_RocketDefeat
  * msgbox SixIsland_OutcastIsland_Text_RocketPostBattle, MSGBOX_AUTOCLOSE
@@ -12,8 +15,15 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object SixIsland_OutcastIsland_EventScript_Rocket : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SixIsland_OutcastIsland_EventScript_Rocket")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_TEAM_ROCKET_GRUNT_46
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(SixIsland_OutcastIsland.RocketPostBattle)
+    }
+    ctx.say(SixIsland_OutcastIsland.RocketIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(SixIsland_OutcastIsland.RocketDefeat)
+  }
 }
 
 /**

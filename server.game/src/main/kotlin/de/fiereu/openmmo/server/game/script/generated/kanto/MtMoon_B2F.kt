@@ -1,7 +1,10 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.dialog.generated.kanto.MtMoon_B2F
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
  * Not ported yet. Decomp body:
@@ -82,7 +85,7 @@ internal object MtMoon_B2F_EventScript_Miguel : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_4, MtMoon_B2F_Text_Grunt4Intro, MtMoon_B2F_Text_Grunt4Defeat
  * msgbox MtMoon_B2F_Text_Grunt4PostBattle, MSGBOX_AUTOCLOSE
@@ -90,11 +93,19 @@ internal object MtMoon_B2F_EventScript_Miguel : Script {
  * ```
  */
 internal object MtMoon_B2F_EventScript_Grunt4 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtMoon_B2F_EventScript_Grunt4")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_TEAM_ROCKET_GRUNT_4
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(MtMoon_B2F.Grunt4PostBattle)
+    }
+    ctx.say(MtMoon_B2F.Grunt4Intro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(MtMoon_B2F.Grunt4Defeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT, MtMoon_B2F_Text_Grunt1Intro, MtMoon_B2F_Text_Grunt1Defeat
  * msgbox MtMoon_B2F_Text_Grunt1PostBattle, MSGBOX_AUTOCLOSE
@@ -102,11 +113,19 @@ internal object MtMoon_B2F_EventScript_Grunt4 : Script {
  * ```
  */
 internal object MtMoon_B2F_EventScript_Grunt1 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtMoon_B2F_EventScript_Grunt1")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_TEAM_ROCKET_GRUNT
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(MtMoon_B2F.Grunt1PostBattle)
+    }
+    ctx.say(MtMoon_B2F.Grunt1Intro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(MtMoon_B2F.Grunt1Defeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_3, MtMoon_B2F_Text_Grunt3Intro, MtMoon_B2F_Text_Grunt3Defeat
  * msgbox MtMoon_B2F_Text_Grunt3PostBattle, MSGBOX_AUTOCLOSE
@@ -114,11 +133,19 @@ internal object MtMoon_B2F_EventScript_Grunt1 : Script {
  * ```
  */
 internal object MtMoon_B2F_EventScript_Grunt3 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtMoon_B2F_EventScript_Grunt3")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_TEAM_ROCKET_GRUNT_3
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(MtMoon_B2F.Grunt3PostBattle)
+    }
+    ctx.say(MtMoon_B2F.Grunt3Intro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(MtMoon_B2F.Grunt3Defeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_2, MtMoon_B2F_Text_Grunt2Intro, MtMoon_B2F_Text_Grunt2Defeat
  * msgbox MtMoon_B2F_Text_Grunt2PostBattle, MSGBOX_AUTOCLOSE
@@ -126,7 +153,15 @@ internal object MtMoon_B2F_EventScript_Grunt3 : Script {
  * ```
  */
 internal object MtMoon_B2F_EventScript_Grunt2 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtMoon_B2F_EventScript_Grunt2")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_TEAM_ROCKET_GRUNT_2
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(MtMoon_B2F.Grunt2PostBattle)
+    }
+    ctx.say(MtMoon_B2F.Grunt2Intro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(MtMoon_B2F.Grunt2Defeat)
+  }
 }
 
 /**

@@ -1,11 +1,13 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.dialog.generated.hoenn.Route106
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_DOUGLAS, Route106_Text_DouglasIntro, Route106_Text_DouglasDefeated
  * msgbox Route106_Text_DouglasPostBattle, MSGBOX_AUTOCLOSE
@@ -13,11 +15,19 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object Route106_EventScript_Douglas : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route106_EventScript_Douglas")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_DOUGLAS
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(Route106.DouglasPostBattle)
+    }
+    ctx.say(Route106.DouglasIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route106.DouglasDefeated)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_KYLA, Route106_Text_KylaIntro, Route106_Text_KylaDefeated
  * msgbox Route106_Text_KylaPostBattle, MSGBOX_AUTOCLOSE
@@ -25,7 +35,15 @@ internal object Route106_EventScript_Douglas : Script {
  * ```
  */
 internal object Route106_EventScript_Kyla : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route106_EventScript_Kyla")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_KYLA
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(Route106.KylaPostBattle)
+    }
+    ctx.say(Route106.KylaIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route106.KylaDefeated)
+  }
 }
 
 /**
@@ -44,7 +62,7 @@ internal object Route106_EventScript_Elliot : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_NED, Route106_Text_NedIntro, Route106_Text_NedDefeated
  * msgbox Route106_Text_NedPostBattle, MSGBOX_AUTOCLOSE
@@ -52,7 +70,15 @@ internal object Route106_EventScript_Elliot : Script {
  * ```
  */
 internal object Route106_EventScript_Ned : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route106_EventScript_Ned")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_NED
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(Route106.NedPostBattle)
+    }
+    ctx.say(Route106.NedIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route106.NedDefeated)
+  }
 }
 
 /**

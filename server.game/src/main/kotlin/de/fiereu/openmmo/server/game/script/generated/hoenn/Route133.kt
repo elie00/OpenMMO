@@ -1,10 +1,13 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
+import de.fiereu.openmmo.dialog.generated.hoenn.Route133
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_FRANKLIN, Route133_Text_FranklinIntro, Route133_Text_FranklinDefeat
  * msgbox Route133_Text_FranklinPostBattle, MSGBOX_AUTOCLOSE
@@ -12,11 +15,19 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object Route133_EventScript_Franklin : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route133_EventScript_Franklin")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_FRANKLIN
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(Route133.FranklinPostBattle)
+    }
+    ctx.say(Route133.FranklinIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route133.FranklinDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_LINDA, Route133_Text_LindaIntro, Route133_Text_LindaDefeat
  * msgbox Route133_Text_LindaPostBattle, MSGBOX_AUTOCLOSE
@@ -24,11 +35,19 @@ internal object Route133_EventScript_Franklin : Script {
  * ```
  */
 internal object Route133_EventScript_Linda : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route133_EventScript_Linda")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_LINDA
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(Route133.LindaPostBattle)
+    }
+    ctx.say(Route133.LindaIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route133.LindaDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_DEBRA, Route133_Text_DebraIntro, Route133_Text_DebraDefeat
  * msgbox Route133_Text_DebraPostBattle, MSGBOX_AUTOCLOSE
@@ -36,7 +55,15 @@ internal object Route133_EventScript_Linda : Script {
  * ```
  */
 internal object Route133_EventScript_Debra : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route133_EventScript_Debra")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_DEBRA
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(Route133.DebraPostBattle)
+    }
+    ctx.say(Route133.DebraIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route133.DebraDefeat)
+  }
 }
 
 /**
@@ -62,7 +89,7 @@ internal object Route133_EventScript_ItemStarPiece : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_BECK, Route133_Text_BeckIntro, Route133_Text_BeckDefeat
  * msgbox Route133_Text_BeckPostBattle, MSGBOX_AUTOCLOSE
@@ -70,11 +97,19 @@ internal object Route133_EventScript_ItemStarPiece : Script {
  * ```
  */
 internal object Route133_EventScript_Beck : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route133_EventScript_Beck")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_BECK
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(Route133.BeckPostBattle)
+    }
+    ctx.say(Route133.BeckIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route133.BeckDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_WARREN, Route133_Text_WarrenIntro, Route133_Text_WarrenDefeat
  * msgbox Route133_Text_WarrenPostBattle, MSGBOX_AUTOCLOSE
@@ -82,11 +117,19 @@ internal object Route133_EventScript_Beck : Script {
  * ```
  */
 internal object Route133_EventScript_Warren : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route133_EventScript_Warren")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_WARREN
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(Route133.WarrenPostBattle)
+    }
+    ctx.say(Route133.WarrenIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route133.WarrenDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_MOLLIE, Route133_Text_MollieIntro, Route133_Text_MollieDefeat
  * msgbox Route133_Text_MolliePostBattle, MSGBOX_AUTOCLOSE
@@ -94,11 +137,19 @@ internal object Route133_EventScript_Warren : Script {
  * ```
  */
 internal object Route133_EventScript_Mollie : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route133_EventScript_Mollie")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_MOLLIE
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(Route133.MolliePostBattle)
+    }
+    ctx.say(Route133.MollieIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route133.MollieDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_CONOR, Route133_Text_ConorIntro, Route133_Text_ConorDefeat
  * msgbox Route133_Text_ConorPostBattle, MSGBOX_AUTOCLOSE
@@ -106,7 +157,15 @@ internal object Route133_EventScript_Mollie : Script {
  * ```
  */
 internal object Route133_EventScript_Conor : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route133_EventScript_Conor")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_CONOR
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(Route133.ConorPostBattle)
+    }
+    ctx.say(Route133.ConorIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route133.ConorDefeat)
+  }
 }
 
 /**

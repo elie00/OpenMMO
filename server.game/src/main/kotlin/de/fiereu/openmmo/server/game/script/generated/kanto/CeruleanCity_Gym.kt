@@ -1,7 +1,10 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.dialog.generated.kanto.CeruleanCity_Gym
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
  * Not ported yet. Decomp body:
@@ -17,7 +20,7 @@ internal object CeruleanCity_Gym_EventScript_Luis : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_PICNICKER_DIANA, CeruleanCity_Gym_Text_DianaIntro, CeruleanCity_Gym_Text_DianaDefeat
  * msgbox CeruleanCity_Gym_Text_DianaPostBattle, MSGBOX_AUTOCLOSE
@@ -25,7 +28,15 @@ internal object CeruleanCity_Gym_EventScript_Luis : Script {
  * ```
  */
 internal object CeruleanCity_Gym_EventScript_Diana : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port CeruleanCity_Gym_EventScript_Diana")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_PICNICKER_DIANA
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(CeruleanCity_Gym.DianaPostBattle)
+    }
+    ctx.say(CeruleanCity_Gym.DianaIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(CeruleanCity_Gym.DianaDefeat)
+  }
 }
 
 /**

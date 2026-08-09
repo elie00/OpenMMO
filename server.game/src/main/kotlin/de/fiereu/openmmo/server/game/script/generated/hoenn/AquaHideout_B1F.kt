@@ -1,7 +1,10 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
+import de.fiereu.openmmo.dialog.generated.hoenn.AquaHideout_B1F
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
  * Not ported yet. Decomp body:
@@ -40,7 +43,7 @@ internal object AquaHideout_B1F_EventScript_ItemMaxElixir : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_GRUNT_AQUA_HIDEOUT_5, AquaHideout_B1F_Text_Grunt5Intro, AquaHideout_B1F_Text_Grunt5Defeat
  * msgbox AquaHideout_B1F_Text_Grunt5PostBattle, MSGBOX_AUTOCLOSE
@@ -48,7 +51,15 @@ internal object AquaHideout_B1F_EventScript_ItemMaxElixir : Script {
  * ```
  */
 internal object AquaHideout_B1F_EventScript_Grunt5 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port AquaHideout_B1F_EventScript_Grunt5")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_GRUNT_AQUA_HIDEOUT_5
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(AquaHideout_B1F.Grunt5PostBattle)
+    }
+    ctx.say(AquaHideout_B1F.Grunt5Intro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(AquaHideout_B1F.Grunt5Defeat)
+  }
 }
 
 /**
@@ -127,7 +138,7 @@ internal object AquaHideout_B1F_EventScript_Electrode2 : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_GRUNT_AQUA_HIDEOUT_7, AquaHideout_B1F_Text_Grunt7Intro, AquaHideout_B1F_Text_Grunt7Defeat
  * msgbox AquaHideout_B1F_Text_Grunt7PostBattle, MSGBOX_AUTOCLOSE
@@ -135,7 +146,15 @@ internal object AquaHideout_B1F_EventScript_Electrode2 : Script {
  * ```
  */
 internal object AquaHideout_B1F_EventScript_Grunt7 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port AquaHideout_B1F_EventScript_Grunt7")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_GRUNT_AQUA_HIDEOUT_7
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(AquaHideout_B1F.Grunt7PostBattle)
+    }
+    ctx.say(AquaHideout_B1F.Grunt7Intro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(AquaHideout_B1F.Grunt7Defeat)
+  }
 }
 
 internal val AquaHideout_B1FScripts: Map<String, Script> =

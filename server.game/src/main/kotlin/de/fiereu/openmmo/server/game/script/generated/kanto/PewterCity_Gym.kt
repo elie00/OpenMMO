@@ -1,7 +1,10 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.dialog.generated.kanto.PewterCity_Gym
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
  * Not ported yet. Decomp body:
@@ -19,7 +22,7 @@ internal object PewterCity_Gym_EventScript_Brock : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_CAMPER_LIAM, PewterCity_Gym_Text_LiamIntro, PewterCity_Gym_Text_LiamDefeat
  * msgbox PewterCity_Gym_Text_LiamPostBattle, MSGBOX_AUTOCLOSE
@@ -27,7 +30,15 @@ internal object PewterCity_Gym_EventScript_Brock : Script {
  * ```
  */
 internal object PewterCity_Gym_EventScript_Liam : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PewterCity_Gym_EventScript_Liam")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_CAMPER_LIAM
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(PewterCity_Gym.LiamPostBattle)
+    }
+    ctx.say(PewterCity_Gym.LiamIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(PewterCity_Gym.LiamDefeat)
+  }
 }
 
 /**

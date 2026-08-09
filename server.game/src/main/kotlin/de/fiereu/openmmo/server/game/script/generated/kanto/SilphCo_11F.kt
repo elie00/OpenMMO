@@ -1,8 +1,10 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.SilphCo_11F
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
  * Not ported yet. Decomp body:
@@ -31,7 +33,7 @@ internal object SilphCo_11F_EventScript_Secretary : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_40, SilphCo_11F_Text_Grunt1Intro, SilphCo_11F_Text_Grunt1Defeat
  * msgbox SilphCo_11F_Text_Grunt1PostBattle, MSGBOX_AUTOCLOSE
@@ -39,7 +41,15 @@ internal object SilphCo_11F_EventScript_Secretary : Script {
  * ```
  */
 internal object SilphCo_11F_EventScript_Grunt1 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SilphCo_11F_EventScript_Grunt1")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_TEAM_ROCKET_GRUNT_40
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(SilphCo_11F.Grunt1PostBattle)
+    }
+    ctx.say(SilphCo_11F.Grunt1Intro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(SilphCo_11F.Grunt1Defeat)
+  }
 }
 
 /**
@@ -54,7 +64,7 @@ internal object SilphCo_11F_EventScript_ItemZinc : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_41, SilphCo_11F_Text_Grunt2Intro, SilphCo_11F_Text_Grunt2Defeat
  * msgbox SilphCo_11F_Text_Grunt2PostBattle, MSGBOX_AUTOCLOSE
@@ -62,7 +72,15 @@ internal object SilphCo_11F_EventScript_ItemZinc : Script {
  * ```
  */
 internal object SilphCo_11F_EventScript_Grunt2 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SilphCo_11F_EventScript_Grunt2")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_TEAM_ROCKET_GRUNT_41
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(SilphCo_11F.Grunt2PostBattle)
+    }
+    ctx.say(SilphCo_11F.Grunt2Intro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(SilphCo_11F.Grunt2Defeat)
+  }
 }
 
 /**

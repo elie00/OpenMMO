@@ -1,10 +1,13 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.dialog.generated.kanto.VictoryRoad_3F
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_COOLTRAINER_GEORGE, VictoryRoad_3F_Text_GeorgeIntro, VictoryRoad_3F_Text_GeorgeDefeat
  * msgbox VictoryRoad_3F_Text_GeorgePostBattle, MSGBOX_AUTOCLOSE
@@ -12,11 +15,19 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object VictoryRoad_3F_EventScript_George : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port VictoryRoad_3F_EventScript_George")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_COOLTRAINER_GEORGE
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(VictoryRoad_3F.GeorgePostBattle)
+    }
+    ctx.say(VictoryRoad_3F.GeorgeIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(VictoryRoad_3F.GeorgeDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_COOLTRAINER_ALEXA, VictoryRoad_3F_Text_AlexaIntro, VictoryRoad_3F_Text_AlexaDefeat
  * msgbox VictoryRoad_3F_Text_AlexaPostBattle, MSGBOX_AUTOCLOSE
@@ -24,11 +35,19 @@ internal object VictoryRoad_3F_EventScript_George : Script {
  * ```
  */
 internal object VictoryRoad_3F_EventScript_Alexa : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port VictoryRoad_3F_EventScript_Alexa")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_COOLTRAINER_ALEXA
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(VictoryRoad_3F.AlexaPostBattle)
+    }
+    ctx.say(VictoryRoad_3F.AlexaIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(VictoryRoad_3F.AlexaDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_COOLTRAINER_COLBY, VictoryRoad_3F_Text_ColbyIntro, VictoryRoad_3F_Text_ColbyDefeat
  * msgbox VictoryRoad_3F_Text_ColbyPostBattle, MSGBOX_AUTOCLOSE
@@ -36,11 +55,19 @@ internal object VictoryRoad_3F_EventScript_Alexa : Script {
  * ```
  */
 internal object VictoryRoad_3F_EventScript_Colby : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port VictoryRoad_3F_EventScript_Colby")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_COOLTRAINER_COLBY
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(VictoryRoad_3F.ColbyPostBattle)
+    }
+    ctx.say(VictoryRoad_3F.ColbyIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(VictoryRoad_3F.ColbyDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_COOLTRAINER_CAROLINE, VictoryRoad_3F_Text_CarolineIntro, VictoryRoad_3F_Text_CarolineDefeat
  * msgbox VictoryRoad_3F_Text_CarolinePostBattle, MSGBOX_AUTOCLOSE
@@ -48,7 +75,15 @@ internal object VictoryRoad_3F_EventScript_Colby : Script {
  * ```
  */
 internal object VictoryRoad_3F_EventScript_Caroline : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port VictoryRoad_3F_EventScript_Caroline")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_COOLTRAINER_CAROLINE
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(VictoryRoad_3F.CarolinePostBattle)
+    }
+    ctx.say(VictoryRoad_3F.CarolineIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(VictoryRoad_3F.CarolineDefeat)
+  }
 }
 
 /**

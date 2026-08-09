@@ -1,10 +1,13 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.dialog.generated.kanto.PokemonMansion_1F
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_SCIENTIST_TED, PokemonMansion_1F_Text_TedIntro, PokemonMansion_1F_Text_TedDefeat
  * msgbox PokemonMansion_1F_Text_TedPostBattle, MSGBOX_AUTOCLOSE
@@ -12,7 +15,15 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object PokemonMansion_1F_EventScript_Ted : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PokemonMansion_1F_EventScript_Ted")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_SCIENTIST_TED
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(PokemonMansion_1F.TedPostBattle)
+    }
+    ctx.say(PokemonMansion_1F.TedIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(PokemonMansion_1F.TedDefeat)
+  }
 }
 
 /**
@@ -52,7 +63,7 @@ internal object PokemonMansion_1F_EventScript_ItemProtein : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_YOUNGSTER_JOHNSON, PokemonMansion_1F_Text_JohnsonIntro, PokemonMansion_1F_Text_JohnsonDefeat
  * msgbox PokemonMansion_1F_Text_JohnsonPostBattle, MSGBOX_AUTOCLOSE
@@ -60,7 +71,15 @@ internal object PokemonMansion_1F_EventScript_ItemProtein : Script {
  * ```
  */
 internal object PokemonMansion_1F_EventScript_Johnson : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PokemonMansion_1F_EventScript_Johnson")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_YOUNGSTER_JOHNSON
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(PokemonMansion_1F.JohnsonPostBattle)
+    }
+    ctx.say(PokemonMansion_1F.JohnsonIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(PokemonMansion_1F.JohnsonDefeat)
+  }
 }
 
 /**

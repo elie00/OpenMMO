@@ -1,10 +1,13 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
+import de.fiereu.openmmo.dialog.generated.hoenn.JaggedPass
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_ERIC, JaggedPass_Text_EricIntro, JaggedPass_Text_EricDefeat
  * msgbox JaggedPass_Text_EricPostBattle, MSGBOX_AUTOCLOSE
@@ -12,7 +15,15 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object JaggedPass_EventScript_Eric : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port JaggedPass_EventScript_Eric")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_ERIC
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(JaggedPass.EricPostBattle)
+    }
+    ctx.say(JaggedPass.EricIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(JaggedPass.EricDefeat)
+  }
 }
 
 /**
@@ -85,7 +96,7 @@ internal object JaggedPass_EventScript_MagmaHideoutGuard : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_AUTUMN, JaggedPass_Text_AutumnIntro, JaggedPass_Text_AutumnDefeat
  * msgbox JaggedPass_Text_AutumnPostBattle, MSGBOX_AUTOCLOSE
@@ -93,11 +104,19 @@ internal object JaggedPass_EventScript_MagmaHideoutGuard : Script {
  * ```
  */
 internal object JaggedPass_EventScript_Autumn : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port JaggedPass_EventScript_Autumn")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_AUTUMN
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(JaggedPass.AutumnPostBattle)
+    }
+    ctx.say(JaggedPass.AutumnIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(JaggedPass.AutumnDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_JULIO, JaggedPass_Text_JulioIntro, JaggedPass_Text_JulioDefeat
  * msgbox JaggedPass_Text_JulioPostBattle, MSGBOX_AUTOCLOSE
@@ -105,7 +124,15 @@ internal object JaggedPass_EventScript_Autumn : Script {
  * ```
  */
 internal object JaggedPass_EventScript_Julio : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port JaggedPass_EventScript_Julio")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_JULIO
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(JaggedPass.JulioPostBattle)
+    }
+    ctx.say(JaggedPass.JulioIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(JaggedPass.JulioDefeat)
+  }
 }
 
 internal val JaggedPassScripts: Map<String, Script> =

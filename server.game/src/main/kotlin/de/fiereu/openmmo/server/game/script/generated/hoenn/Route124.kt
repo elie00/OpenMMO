@@ -1,11 +1,13 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.dialog.generated.hoenn.Route124
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_SPENCER, Route124_Text_SpencerIntro, Route124_Text_SpencerDefeat
  * msgbox Route124_Text_SpencerPostBattle, MSGBOX_AUTOCLOSE
@@ -13,11 +15,19 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object Route124_EventScript_Spencer : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route124_EventScript_Spencer")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_SPENCER
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(Route124.SpencerPostBattle)
+    }
+    ctx.say(Route124.SpencerIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route124.SpencerDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_ROLAND, Route124_Text_RolandIntro, Route124_Text_RolandDefeat
  * msgbox Route124_Text_RolandPostBattle, MSGBOX_AUTOCLOSE
@@ -25,7 +35,15 @@ internal object Route124_EventScript_Spencer : Script {
  * ```
  */
 internal object Route124_EventScript_Roland : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route124_EventScript_Roland")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_ROLAND
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(Route124.RolandPostBattle)
+    }
+    ctx.say(Route124.RolandIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route124.RolandDefeat)
+  }
 }
 
 /**
@@ -44,7 +62,7 @@ internal object Route124_EventScript_Jenny : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_GRACE, Route124_Text_GraceIntro, Route124_Text_GraceDefeat
  * msgbox Route124_Text_GracePostBattle, MSGBOX_AUTOCLOSE
@@ -52,11 +70,19 @@ internal object Route124_EventScript_Jenny : Script {
  * ```
  */
 internal object Route124_EventScript_Grace : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route124_EventScript_Grace")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_GRACE
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(Route124.GracePostBattle)
+    }
+    ctx.say(Route124.GraceIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route124.GraceDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_CHAD, Route124_Text_ChadIntro, Route124_Text_ChadDefeat
  * msgbox Route124_Text_ChadPostBattle, MSGBOX_AUTOCLOSE
@@ -64,7 +90,15 @@ internal object Route124_EventScript_Grace : Script {
  * ```
  */
 internal object Route124_EventScript_Chad : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route124_EventScript_Chad")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_CHAD
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(Route124.ChadPostBattle)
+    }
+    ctx.say(Route124.ChadIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route124.ChadDefeat)
+  }
 }
 
 /**
@@ -131,7 +165,7 @@ internal object Route124_EventScript_Roy : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_DECLAN, Route124_Text_DeclanIntro, Route124_Text_DeclanDefeat
  * msgbox Route124_Text_DeclanPostBattle, MSGBOX_AUTOCLOSE
@@ -139,11 +173,19 @@ internal object Route124_EventScript_Roy : Script {
  * ```
  */
 internal object Route124_EventScript_Declan : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route124_EventScript_Declan")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_DECLAN
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(Route124.DeclanPostBattle)
+    }
+    ctx.say(Route124.DeclanIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route124.DeclanDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_ISABELLA, Route124_Text_IsabellaIntro, Route124_Text_IsabellaDefeat
  * msgbox Route124_Text_IsabellaPostBattle, MSGBOX_AUTOCLOSE
@@ -151,7 +193,15 @@ internal object Route124_EventScript_Declan : Script {
  * ```
  */
 internal object Route124_EventScript_Isabella : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route124_EventScript_Isabella")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_ISABELLA
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(Route124.IsabellaPostBattle)
+    }
+    ctx.say(Route124.IsabellaIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route124.IsabellaDefeat)
+  }
 }
 
 internal object Route124_EventScript_HuntersHouseSign : Script {

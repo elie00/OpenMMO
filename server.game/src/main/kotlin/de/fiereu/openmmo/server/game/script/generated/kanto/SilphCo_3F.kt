@@ -1,11 +1,13 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.SilphCo_3F
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_25, SilphCo_3F_Text_GruntIntro, SilphCo_3F_Text_GruntDefeat
  * msgbox SilphCo_3F_Text_GruntPostBattle, MSGBOX_AUTOCLOSE
@@ -13,7 +15,15 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object SilphCo_3F_EventScript_Grunt : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SilphCo_3F_EventScript_Grunt")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_TEAM_ROCKET_GRUNT_25
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(SilphCo_3F.GruntPostBattle)
+    }
+    ctx.say(SilphCo_3F.GruntIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(SilphCo_3F.GruntDefeat)
+  }
 }
 
 /**
@@ -32,7 +42,7 @@ internal object SilphCo_3F_EventScript_WorkerM : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_SCIENTIST_JOSE, SilphCo_3F_Text_JoseIntro, SilphCo_3F_Text_JoseDefeat
  * msgbox SilphCo_3F_Text_JosePostBattle, MSGBOX_AUTOCLOSE
@@ -40,7 +50,15 @@ internal object SilphCo_3F_EventScript_WorkerM : Script {
  * ```
  */
 internal object SilphCo_3F_EventScript_Jose : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SilphCo_3F_EventScript_Jose")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_SCIENTIST_JOSE
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(SilphCo_3F.JosePostBattle)
+    }
+    ctx.say(SilphCo_3F.JoseIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(SilphCo_3F.JoseDefeat)
+  }
 }
 
 /**

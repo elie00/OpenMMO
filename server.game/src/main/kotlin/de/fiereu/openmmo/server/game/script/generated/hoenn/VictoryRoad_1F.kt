@@ -1,11 +1,13 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.dialog.generated.hoenn.VictoryRoad_1F
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_EDGAR, VictoryRoad_1F_Text_EdgarIntro, VictoryRoad_1F_Text_EdgarDefeat
  * msgbox VictoryRoad_1F_Text_EdgarPostBattle, MSGBOX_AUTOCLOSE
@@ -13,11 +15,19 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object VictoryRoad_1F_EventScript_Edgar : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port VictoryRoad_1F_EventScript_Edgar")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_EDGAR
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(VictoryRoad_1F.EdgarPostBattle)
+    }
+    ctx.say(VictoryRoad_1F.EdgarIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(VictoryRoad_1F.EdgarDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_HOPE, VictoryRoad_1F_Text_HopeIntro, VictoryRoad_1F_Text_HopeDefeat
  * msgbox VictoryRoad_1F_Text_HopePostBattle, MSGBOX_AUTOCLOSE
@@ -25,11 +35,19 @@ internal object VictoryRoad_1F_EventScript_Edgar : Script {
  * ```
  */
 internal object VictoryRoad_1F_EventScript_Hope : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port VictoryRoad_1F_EventScript_Hope")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_HOPE
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(VictoryRoad_1F.HopePostBattle)
+    }
+    ctx.say(VictoryRoad_1F.HopeIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(VictoryRoad_1F.HopeDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_ALBERT, VictoryRoad_1F_Text_AlbertIntro, VictoryRoad_1F_Text_AlbertDefeat
  * msgbox VictoryRoad_1F_Text_AlbertPostBattle, MSGBOX_AUTOCLOSE
@@ -37,7 +55,15 @@ internal object VictoryRoad_1F_EventScript_Hope : Script {
  * ```
  */
 internal object VictoryRoad_1F_EventScript_Albert : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port VictoryRoad_1F_EventScript_Albert")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_ALBERT
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(VictoryRoad_1F.AlbertPostBattle)
+    }
+    ctx.say(VictoryRoad_1F.AlbertIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(VictoryRoad_1F.AlbertDefeat)
+  }
 }
 
 internal object VictoryRoad_1F_EventScript_EntranceWally : Script {
@@ -82,7 +108,7 @@ internal object VictoryRoad_1F_EventScript_ExitWally : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_KATELYNN, VictoryRoad_1F_Text_KatelynnIntro, VictoryRoad_1F_Text_KatelynnDefeat
  * msgbox VictoryRoad_1F_Text_KatelynnPostBattle, MSGBOX_AUTOCLOSE
@@ -90,11 +116,19 @@ internal object VictoryRoad_1F_EventScript_ExitWally : Script {
  * ```
  */
 internal object VictoryRoad_1F_EventScript_Katelynn : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port VictoryRoad_1F_EventScript_Katelynn")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_KATELYNN
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(VictoryRoad_1F.KatelynnPostBattle)
+    }
+    ctx.say(VictoryRoad_1F.KatelynnIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(VictoryRoad_1F.KatelynnDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_QUINCY, VictoryRoad_1F_Text_QuincyIntro, VictoryRoad_1F_Text_QuincyDefeat
  * msgbox VictoryRoad_1F_Text_QuincyPostBattle, MSGBOX_AUTOCLOSE
@@ -102,7 +136,15 @@ internal object VictoryRoad_1F_EventScript_Katelynn : Script {
  * ```
  */
 internal object VictoryRoad_1F_EventScript_Quincy : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port VictoryRoad_1F_EventScript_Quincy")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_QUINCY
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(VictoryRoad_1F.QuincyPostBattle)
+    }
+    ctx.say(VictoryRoad_1F.QuincyIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(VictoryRoad_1F.QuincyDefeat)
+  }
 }
 
 internal val VictoryRoad_1FScripts: Map<String, Script> =

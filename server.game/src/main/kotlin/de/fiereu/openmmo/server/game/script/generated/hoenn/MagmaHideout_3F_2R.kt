@@ -1,10 +1,13 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
+import de.fiereu.openmmo.dialog.generated.hoenn.MagmaHideout_3F_2R
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_GRUNT_MAGMA_HIDEOUT_10, MagmaHideout_3F_2R_Text_Grunt10Intro, MagmaHideout_3F_2R_Text_Grunt10Defeat
  * msgbox MagmaHideout_3F_2R_Text_Grunt10PostBattle, MSGBOX_AUTOCLOSE
@@ -12,7 +15,15 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object MagmaHideout_3F_2R_EventScript_Grunt10 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MagmaHideout_3F_2R_EventScript_Grunt10")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_GRUNT_MAGMA_HIDEOUT_10
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(MagmaHideout_3F_2R.Grunt10PostBattle)
+    }
+    ctx.say(MagmaHideout_3F_2R.Grunt10Intro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(MagmaHideout_3F_2R.Grunt10Defeat)
+  }
 }
 
 /**

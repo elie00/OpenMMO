@@ -1,10 +1,13 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.dialog.generated.kanto.VictoryRoad_2F
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_POKEMANIAC_DAWSON, VictoryRoad_2F_Text_DawsonIntro, VictoryRoad_2F_Text_DawsonDefeat
  * msgbox VictoryRoad_2F_Text_DawsonPostBattle, MSGBOX_AUTOCLOSE
@@ -12,11 +15,19 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object VictoryRoad_2F_EventScript_Dawson : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port VictoryRoad_2F_EventScript_Dawson")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_POKEMANIAC_DAWSON
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(VictoryRoad_2F.DawsonPostBattle)
+    }
+    ctx.say(VictoryRoad_2F.DawsonIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(VictoryRoad_2F.DawsonDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_BLACK_BELT_DAISUKE, VictoryRoad_2F_Text_DaisukeIntro, VictoryRoad_2F_Text_DaisukeDefeat
  * msgbox VictoryRoad_2F_Text_DaisukePostBattle, MSGBOX_AUTOCLOSE
@@ -24,11 +35,19 @@ internal object VictoryRoad_2F_EventScript_Dawson : Script {
  * ```
  */
 internal object VictoryRoad_2F_EventScript_Daisuke : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port VictoryRoad_2F_EventScript_Daisuke")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_BLACK_BELT_DAISUKE
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(VictoryRoad_2F.DaisukePostBattle)
+    }
+    ctx.say(VictoryRoad_2F.DaisukeIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(VictoryRoad_2F.DaisukeDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_JUGGLER_NELSON, VictoryRoad_2F_Text_NelsonIntro, VictoryRoad_2F_Text_NelsonDefeat
  * msgbox VictoryRoad_2F_Text_NelsonPostBattle, MSGBOX_AUTOCLOSE
@@ -36,11 +55,19 @@ internal object VictoryRoad_2F_EventScript_Daisuke : Script {
  * ```
  */
 internal object VictoryRoad_2F_EventScript_Nelson : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port VictoryRoad_2F_EventScript_Nelson")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_JUGGLER_NELSON
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(VictoryRoad_2F.NelsonPostBattle)
+    }
+    ctx.say(VictoryRoad_2F.NelsonIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(VictoryRoad_2F.NelsonDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_TAMER_VINCENT, VictoryRoad_2F_Text_VincentIntro, VictoryRoad_2F_Text_VincentDefeat
  * msgbox VictoryRoad_2F_Text_VincentPostBattle, MSGBOX_AUTOCLOSE
@@ -48,11 +75,19 @@ internal object VictoryRoad_2F_EventScript_Nelson : Script {
  * ```
  */
 internal object VictoryRoad_2F_EventScript_Vincent : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port VictoryRoad_2F_EventScript_Vincent")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_TAMER_VINCENT
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(VictoryRoad_2F.VincentPostBattle)
+    }
+    ctx.say(VictoryRoad_2F.VincentIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(VictoryRoad_2F.VincentDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_JUGGLER_GREGORY, VictoryRoad_2F_Text_GregoryIntro, VictoryRoad_2F_Text_GregoryDefeat
  * msgbox VictoryRoad_2F_Text_GregoryPostBattle, MSGBOX_AUTOCLOSE
@@ -60,7 +95,15 @@ internal object VictoryRoad_2F_EventScript_Vincent : Script {
  * ```
  */
 internal object VictoryRoad_2F_EventScript_Gregory : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port VictoryRoad_2F_EventScript_Gregory")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_JUGGLER_GREGORY
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(VictoryRoad_2F.GregoryPostBattle)
+    }
+    ctx.say(VictoryRoad_2F.GregoryIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(VictoryRoad_2F.GregoryDefeat)
+  }
 }
 
 /**

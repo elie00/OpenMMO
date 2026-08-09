@@ -1,10 +1,13 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
+import de.fiereu.openmmo.dialog.generated.hoenn.Route127
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_CAMDEN, Route127_Text_CamdenIntro, Route127_Text_CamdenDefeat
  * msgbox Route127_Text_CamdenPostBattle, MSGBOX_AUTOCLOSE
@@ -12,11 +15,19 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object Route127_EventScript_Camden : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route127_EventScript_Camden")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_CAMDEN
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(Route127.CamdenPostBattle)
+    }
+    ctx.say(Route127.CamdenIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route127.CamdenDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_DONNY, Route127_Text_DonnyIntro, Route127_Text_DonnyDefeat
  * msgbox Route127_Text_DonnyPostBattle, MSGBOX_AUTOCLOSE
@@ -24,7 +35,15 @@ internal object Route127_EventScript_Camden : Script {
  * ```
  */
 internal object Route127_EventScript_Donny : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route127_EventScript_Donny")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_DONNY
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(Route127.DonnyPostBattle)
+    }
+    ctx.say(Route127.DonnyIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route127.DonnyDefeat)
+  }
 }
 
 /**
@@ -50,7 +69,7 @@ internal object Route127_EventScript_ItemCarbos : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_JONAH, Route127_Text_JonahIntro, Route127_Text_JonahDefeat
  * msgbox Route127_Text_JonahPostBattle, MSGBOX_AUTOCLOSE
@@ -58,11 +77,19 @@ internal object Route127_EventScript_ItemCarbos : Script {
  * ```
  */
 internal object Route127_EventScript_Jonah : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route127_EventScript_Jonah")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_JONAH
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(Route127.JonahPostBattle)
+    }
+    ctx.say(Route127.JonahIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route127.JonahDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_ROGER, Route127_Text_RogerIntro, Route127_Text_RogerDefeat
  * msgbox Route127_Text_RogerPostBattle, MSGBOX_AUTOCLOSE
@@ -70,11 +97,19 @@ internal object Route127_EventScript_Jonah : Script {
  * ```
  */
 internal object Route127_EventScript_Roger : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route127_EventScript_Roger")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_ROGER
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(Route127.RogerPostBattle)
+    }
+    ctx.say(Route127.RogerIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route127.RogerDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_HENRY, Route127_Text_HenryIntro, Route127_Text_HenryDefeat
  * msgbox Route127_Text_HenryPostBattle, MSGBOX_AUTOCLOSE
@@ -82,11 +117,19 @@ internal object Route127_EventScript_Roger : Script {
  * ```
  */
 internal object Route127_EventScript_Henry : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route127_EventScript_Henry")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_HENRY
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(Route127.HenryPostBattle)
+    }
+    ctx.say(Route127.HenryIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route127.HenryDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_AIDAN, Route127_Text_AidanIntro, Route127_Text_AidanDefeat
  * msgbox Route127_Text_AidanPostBattle, MSGBOX_AUTOCLOSE
@@ -94,7 +137,15 @@ internal object Route127_EventScript_Henry : Script {
  * ```
  */
 internal object Route127_EventScript_Aidan : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route127_EventScript_Aidan")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_AIDAN
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(Route127.AidanPostBattle)
+    }
+    ctx.say(Route127.AidanIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route127.AidanDefeat)
+  }
 }
 
 /**
@@ -113,7 +164,7 @@ internal object Route127_EventScript_Koji : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_ATHENA, Route127_Text_AthenaIntro, Route127_Text_AthenaDefeat
  * msgbox Route127_Text_AthenaPostBattle, MSGBOX_AUTOCLOSE
@@ -121,7 +172,15 @@ internal object Route127_EventScript_Koji : Script {
  * ```
  */
 internal object Route127_EventScript_Athena : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route127_EventScript_Athena")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_ATHENA
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(Route127.AthenaPostBattle)
+    }
+    ctx.say(Route127.AthenaIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route127.AthenaDefeat)
+  }
 }
 
 /**

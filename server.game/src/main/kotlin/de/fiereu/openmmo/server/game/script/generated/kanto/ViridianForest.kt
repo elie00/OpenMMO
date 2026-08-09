@@ -1,8 +1,10 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.ViridianForest
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 internal object ViridianForest_EventScript_Youngster : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.say(ViridianForest.FriendsItchingToBattle)
@@ -13,7 +15,7 @@ internal object ViridianForest_EventScript_Boy : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_BUG_CATCHER_RICK, ViridianForest_Text_RickIntro, ViridianForest_Text_RickDefeat
  * msgbox ViridianForest_Text_RickPostBattle, MSGBOX_AUTOCLOSE
@@ -21,11 +23,19 @@ internal object ViridianForest_EventScript_Boy : Script {
  * ```
  */
 internal object ViridianForest_EventScript_Rick : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port ViridianForest_EventScript_Rick")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_BUG_CATCHER_RICK
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(ViridianForest.RickPostBattle)
+    }
+    ctx.say(ViridianForest.RickIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(ViridianForest.RickDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_BUG_CATCHER_DOUG, ViridianForest_Text_DougIntro, ViridianForest_Text_DougDefeat
  * msgbox ViridianForest_Text_DougPostBattle, MSGBOX_AUTOCLOSE
@@ -33,11 +43,19 @@ internal object ViridianForest_EventScript_Rick : Script {
  * ```
  */
 internal object ViridianForest_EventScript_Doug : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port ViridianForest_EventScript_Doug")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_BUG_CATCHER_DOUG
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(ViridianForest.DougPostBattle)
+    }
+    ctx.say(ViridianForest.DougIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(ViridianForest.DougDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_BUG_CATCHER_SAMMY, ViridianForest_Text_SammyIntro, ViridianForest_Text_SammyDefeat
  * msgbox ViridianForest_Text_SammyPostBattle, MSGBOX_AUTOCLOSE
@@ -45,7 +63,15 @@ internal object ViridianForest_EventScript_Doug : Script {
  * ```
  */
 internal object ViridianForest_EventScript_Sammy : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port ViridianForest_EventScript_Sammy")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_BUG_CATCHER_SAMMY
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(ViridianForest.SammyPostBattle)
+    }
+    ctx.say(ViridianForest.SammyIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(ViridianForest.SammyDefeat)
+  }
 }
 
 /**
@@ -84,7 +110,7 @@ internal object ViridianForest_EventScript_ItemPotion : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_BUG_CATCHER_ANTHONY, ViridianForest_Text_AnthonyIntro, ViridianForest_Text_AnthonyDefeat
  * msgbox ViridianForest_Text_AnthonyPostBattle, MSGBOX_AUTOCLOSE
@@ -92,11 +118,19 @@ internal object ViridianForest_EventScript_ItemPotion : Script {
  * ```
  */
 internal object ViridianForest_EventScript_Anthony : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port ViridianForest_EventScript_Anthony")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_BUG_CATCHER_ANTHONY
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(ViridianForest.AnthonyPostBattle)
+    }
+    ctx.say(ViridianForest.AnthonyIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(ViridianForest.AnthonyDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_BUG_CATCHER_CHARLIE, ViridianForest_Text_CharlieIntro, ViridianForest_Text_CharlieDefeat
  * msgbox ViridianForest_Text_CharliePostBattle, MSGBOX_AUTOCLOSE
@@ -104,7 +138,15 @@ internal object ViridianForest_EventScript_Anthony : Script {
  * ```
  */
 internal object ViridianForest_EventScript_Charlie : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port ViridianForest_EventScript_Charlie")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_BUG_CATCHER_CHARLIE
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(ViridianForest.CharliePostBattle)
+    }
+    ctx.say(ViridianForest.CharlieIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(ViridianForest.CharlieDefeat)
+  }
 }
 
 /**

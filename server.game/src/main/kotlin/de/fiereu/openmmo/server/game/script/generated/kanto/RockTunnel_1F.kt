@@ -1,11 +1,13 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.RockTunnel_1F
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_PICNICKER_DANA, RockTunnel_1F_Text_DanaIntro, RockTunnel_1F_Text_DanaDefeat
  * msgbox RockTunnel_1F_Text_DanaPostBattle, MSGBOX_AUTOCLOSE
@@ -13,11 +15,19 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object RockTunnel_1F_EventScript_Dana : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port RockTunnel_1F_EventScript_Dana")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_PICNICKER_DANA
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(RockTunnel_1F.DanaPostBattle)
+    }
+    ctx.say(RockTunnel_1F.DanaIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(RockTunnel_1F.DanaDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_PICNICKER_ARIANA, RockTunnel_1F_Text_ArianaIntro, RockTunnel_1F_Text_ArianaDefeat
  * msgbox RockTunnel_1F_Text_ArianaPostBattle, MSGBOX_AUTOCLOSE
@@ -25,11 +35,19 @@ internal object RockTunnel_1F_EventScript_Dana : Script {
  * ```
  */
 internal object RockTunnel_1F_EventScript_Ariana : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port RockTunnel_1F_EventScript_Ariana")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_PICNICKER_ARIANA
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(RockTunnel_1F.ArianaPostBattle)
+    }
+    ctx.say(RockTunnel_1F.ArianaIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(RockTunnel_1F.ArianaDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_PICNICKER_LEAH, RockTunnel_1F_Text_LeahIntro, RockTunnel_1F_Text_LeahDefeat
  * msgbox RockTunnel_1F_Text_LeahPostBattle, MSGBOX_AUTOCLOSE
@@ -37,11 +55,19 @@ internal object RockTunnel_1F_EventScript_Ariana : Script {
  * ```
  */
 internal object RockTunnel_1F_EventScript_Leah : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port RockTunnel_1F_EventScript_Leah")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_PICNICKER_LEAH
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(RockTunnel_1F.LeahPostBattle)
+    }
+    ctx.say(RockTunnel_1F.LeahIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(RockTunnel_1F.LeahDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_HIKER_LUCAS, RockTunnel_1F_Text_LucasIntro, RockTunnel_1F_Text_LucasDefeat
  * msgbox RockTunnel_1F_Text_LucasPostBattle, MSGBOX_AUTOCLOSE
@@ -49,11 +75,19 @@ internal object RockTunnel_1F_EventScript_Leah : Script {
  * ```
  */
 internal object RockTunnel_1F_EventScript_Lucas : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port RockTunnel_1F_EventScript_Lucas")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_HIKER_LUCAS
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(RockTunnel_1F.LucasPostBattle)
+    }
+    ctx.say(RockTunnel_1F.LucasIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(RockTunnel_1F.LucasDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_HIKER_OLIVER, RockTunnel_1F_Text_OliverIntro, RockTunnel_1F_Text_OliverDefeat
  * msgbox RockTunnel_1F_Text_OliverPostBattle, MSGBOX_AUTOCLOSE
@@ -61,11 +95,19 @@ internal object RockTunnel_1F_EventScript_Lucas : Script {
  * ```
  */
 internal object RockTunnel_1F_EventScript_Oliver : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port RockTunnel_1F_EventScript_Oliver")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_HIKER_OLIVER
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(RockTunnel_1F.OliverPostBattle)
+    }
+    ctx.say(RockTunnel_1F.OliverIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(RockTunnel_1F.OliverDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_HIKER_LENNY, RockTunnel_1F_Text_LennyIntro, RockTunnel_1F_Text_LennyDefeat
  * msgbox RockTunnel_1F_Text_LennyPostBattle, MSGBOX_AUTOCLOSE
@@ -73,11 +115,19 @@ internal object RockTunnel_1F_EventScript_Oliver : Script {
  * ```
  */
 internal object RockTunnel_1F_EventScript_Lenny : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port RockTunnel_1F_EventScript_Lenny")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_HIKER_LENNY
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(RockTunnel_1F.LennyPostBattle)
+    }
+    ctx.say(RockTunnel_1F.LennyIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(RockTunnel_1F.LennyDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_POKEMANIAC_ASHTON, RockTunnel_1F_Text_AshtonIntro, RockTunnel_1F_Text_AshtonDefeat
  * msgbox RockTunnel_1F_Text_AshtonPostBattle, MSGBOX_AUTOCLOSE
@@ -85,7 +135,15 @@ internal object RockTunnel_1F_EventScript_Lenny : Script {
  * ```
  */
 internal object RockTunnel_1F_EventScript_Ashton : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port RockTunnel_1F_EventScript_Ashton")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_POKEMANIAC_ASHTON
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(RockTunnel_1F.AshtonPostBattle)
+    }
+    ctx.say(RockTunnel_1F.AshtonIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(RockTunnel_1F.AshtonDefeat)
+  }
 }
 
 /**

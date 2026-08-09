@@ -1,11 +1,13 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.PokemonTower_5F
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_CHANNELER_RUTH, PokemonTower_5F_Text_RuthIntro, PokemonTower_5F_Text_RuthDefeat
  * msgbox PokemonTower_5F_Text_RuthPostBattle, MSGBOX_AUTOCLOSE
@@ -13,11 +15,19 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object PokemonTower_5F_EventScript_Ruth : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PokemonTower_5F_EventScript_Ruth")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_CHANNELER_RUTH
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(PokemonTower_5F.RuthPostBattle)
+    }
+    ctx.say(PokemonTower_5F.RuthIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(PokemonTower_5F.RuthDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_CHANNELER_TAMMY, PokemonTower_5F_Text_TammyIntro, PokemonTower_5F_Text_TammyDefeat
  * msgbox PokemonTower_5F_Text_TammyPostBattle, MSGBOX_AUTOCLOSE
@@ -25,11 +35,19 @@ internal object PokemonTower_5F_EventScript_Ruth : Script {
  * ```
  */
 internal object PokemonTower_5F_EventScript_Tammy : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PokemonTower_5F_EventScript_Tammy")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_CHANNELER_TAMMY
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(PokemonTower_5F.TammyPostBattle)
+    }
+    ctx.say(PokemonTower_5F.TammyIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(PokemonTower_5F.TammyDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_CHANNELER_KARINA, PokemonTower_5F_Text_KarinaIntro, PokemonTower_5F_Text_KarinaDefeat
  * msgbox PokemonTower_5F_Text_KarinaPostBattle, MSGBOX_AUTOCLOSE
@@ -37,11 +55,19 @@ internal object PokemonTower_5F_EventScript_Tammy : Script {
  * ```
  */
 internal object PokemonTower_5F_EventScript_Karina : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PokemonTower_5F_EventScript_Karina")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_CHANNELER_KARINA
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(PokemonTower_5F.KarinaPostBattle)
+    }
+    ctx.say(PokemonTower_5F.KarinaIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(PokemonTower_5F.KarinaDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_CHANNELER_JANAE, PokemonTower_5F_Text_JanaeIntro, PokemonTower_5F_Text_JanaeDefeat
  * msgbox PokemonTower_5F_Text_JanaePostBattle, MSGBOX_AUTOCLOSE
@@ -49,7 +75,15 @@ internal object PokemonTower_5F_EventScript_Karina : Script {
  * ```
  */
 internal object PokemonTower_5F_EventScript_Janae : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PokemonTower_5F_EventScript_Janae")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_CHANNELER_JANAE
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(PokemonTower_5F.JanaePostBattle)
+    }
+    ctx.say(PokemonTower_5F.JanaeIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(PokemonTower_5F.JanaeDefeat)
+  }
 }
 
 internal object PokemonTower_5F_EventScript_Channeler : Script {

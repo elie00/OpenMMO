@@ -1,7 +1,10 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
+import de.fiereu.openmmo.dialog.generated.hoenn.MtPyre_Summit
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
  * Not ported yet. Decomp body:
@@ -38,7 +41,7 @@ internal object MtPyre_Summit_EventScript_OldLady : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_GRUNT_MT_PYRE_1, MtPyre_Summit_Text_Grunt1Intro, MtPyre_Summit_Text_Grunt1Defeat
  * msgbox MtPyre_Summit_Text_Grunt1PostBattle, MSGBOX_AUTOCLOSE
@@ -46,11 +49,19 @@ internal object MtPyre_Summit_EventScript_OldLady : Script {
  * ```
  */
 internal object MtPyre_Summit_EventScript_Grunt1 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtPyre_Summit_EventScript_Grunt1")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_GRUNT_MT_PYRE_1
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(MtPyre_Summit.Grunt1PostBattle)
+    }
+    ctx.say(MtPyre_Summit.Grunt1Intro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(MtPyre_Summit.Grunt1Defeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_GRUNT_MT_PYRE_2, MtPyre_Summit_Text_Grunt2Intro, MtPyre_Summit_Text_Grunt2Defeat
  * msgbox MtPyre_Summit_Text_Grunt2PostBattle, MSGBOX_AUTOCLOSE
@@ -58,11 +69,19 @@ internal object MtPyre_Summit_EventScript_Grunt1 : Script {
  * ```
  */
 internal object MtPyre_Summit_EventScript_Grunt2 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtPyre_Summit_EventScript_Grunt2")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_GRUNT_MT_PYRE_2
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(MtPyre_Summit.Grunt2PostBattle)
+    }
+    ctx.say(MtPyre_Summit.Grunt2Intro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(MtPyre_Summit.Grunt2Defeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_GRUNT_MT_PYRE_3, MtPyre_Summit_Text_Grunt3Intro, MtPyre_Summit_Text_Grunt3Defeat
  * msgbox MtPyre_Summit_Text_Grunt3PostBattle, MSGBOX_AUTOCLOSE
@@ -70,11 +89,19 @@ internal object MtPyre_Summit_EventScript_Grunt2 : Script {
  * ```
  */
 internal object MtPyre_Summit_EventScript_Grunt3 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtPyre_Summit_EventScript_Grunt3")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_GRUNT_MT_PYRE_3
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(MtPyre_Summit.Grunt3PostBattle)
+    }
+    ctx.say(MtPyre_Summit.Grunt3Intro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(MtPyre_Summit.Grunt3Defeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_GRUNT_MT_PYRE_4, MtPyre_Summit_Text_Grunt4Intro, MtPyre_Summit_Text_Grunt4Defeat
  * msgbox MtPyre_Summit_Text_Grunt4PostBattle, MSGBOX_AUTOCLOSE
@@ -82,7 +109,15 @@ internal object MtPyre_Summit_EventScript_Grunt3 : Script {
  * ```
  */
 internal object MtPyre_Summit_EventScript_Grunt4 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtPyre_Summit_EventScript_Grunt4")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_GRUNT_MT_PYRE_4
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(MtPyre_Summit.Grunt4PostBattle)
+    }
+    ctx.say(MtPyre_Summit.Grunt4Intro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(MtPyre_Summit.Grunt4Defeat)
+  }
 }
 
 internal val MtPyre_SummitScripts: Map<String, Script> =

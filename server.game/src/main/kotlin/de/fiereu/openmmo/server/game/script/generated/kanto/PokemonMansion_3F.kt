@@ -1,11 +1,13 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.PokemonMansion_1F
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_BURGLAR_SIMON, PokemonMansion_1F_Text_SimonIntro, PokemonMansion_1F_Text_SimonDefeat
  * msgbox PokemonMansion_1F_Text_SimonPostBattle, MSGBOX_AUTOCLOSE
@@ -13,11 +15,19 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object PokemonMansion_3F_EventScript_Simon : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PokemonMansion_3F_EventScript_Simon")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_BURGLAR_SIMON
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(PokemonMansion_1F.SimonPostBattle)
+    }
+    ctx.say(PokemonMansion_1F.SimonIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(PokemonMansion_1F.SimonDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_SCIENTIST_BRAYDON, PokemonMansion_1F_Text_BraydonIntro, PokemonMansion_1F_Text_BraydonDefeat
  * msgbox PokemonMansion_1F_Text_BraydonPostBattle, MSGBOX_AUTOCLOSE
@@ -25,7 +35,15 @@ internal object PokemonMansion_3F_EventScript_Simon : Script {
  * ```
  */
 internal object PokemonMansion_3F_EventScript_Braydon : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PokemonMansion_3F_EventScript_Braydon")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_SCIENTIST_BRAYDON
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(PokemonMansion_1F.BraydonPostBattle)
+    }
+    ctx.say(PokemonMansion_1F.BraydonIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(PokemonMansion_1F.BraydonDefeat)
+  }
 }
 
 /**

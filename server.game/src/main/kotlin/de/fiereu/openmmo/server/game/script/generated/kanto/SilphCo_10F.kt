@@ -1,11 +1,13 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.SilphCo_10F
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_SCIENTIST_TRAVIS, SilphCo_10F_Text_TravisIntro, SilphCo_10F_Text_TravisDefeat
  * msgbox SilphCo_10F_Text_TravisPostBattle, MSGBOX_AUTOCLOSE
@@ -13,7 +15,15 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object SilphCo_10F_EventScript_Travis : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SilphCo_10F_EventScript_Travis")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_SCIENTIST_TRAVIS
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(SilphCo_10F.TravisPostBattle)
+    }
+    ctx.say(SilphCo_10F.TravisIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(SilphCo_10F.TravisDefeat)
+  }
 }
 
 /**
@@ -32,7 +42,7 @@ internal object SilphCo_10F_EventScript_WorkerF : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_39, SilphCo_10F_Text_GruntIntro, SilphCo_10F_Text_GruntDefeat
  * msgbox SilphCo_10F_Text_GruntPostBattle, MSGBOX_AUTOCLOSE
@@ -40,7 +50,15 @@ internal object SilphCo_10F_EventScript_WorkerF : Script {
  * ```
  */
 internal object SilphCo_10F_EventScript_Grunt : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SilphCo_10F_EventScript_Grunt")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_TEAM_ROCKET_GRUNT_39
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(SilphCo_10F.GruntPostBattle)
+    }
+    ctx.say(SilphCo_10F.GruntIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(SilphCo_10F.GruntDefeat)
+  }
 }
 
 /**

@@ -1,11 +1,13 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.dialog.generated.hoenn.Route118
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_PERRY, Route118_Text_PerryIntro, Route118_Text_PerryDefeat
  * msgbox Route118_Text_PerryPostBattle, MSGBOX_AUTOCLOSE
@@ -13,7 +15,15 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object Route118_EventScript_Perry : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route118_EventScript_Perry")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_PERRY
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(Route118.PerryPostBattle)
+    }
+    ctx.say(Route118.PerryIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route118.PerryDefeat)
+  }
 }
 
 /**
@@ -104,7 +114,7 @@ internal object Route118_EventScript_Rose : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_WADE, Route118_Text_WadeIntro, Route118_Text_WadeDefeat
  * msgbox Route118_Text_WadePostBattle, MSGBOX_AUTOCLOSE
@@ -112,11 +122,19 @@ internal object Route118_EventScript_Rose : Script {
  * ```
  */
 internal object Route118_EventScript_Wade : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route118_EventScript_Wade")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_WADE
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(Route118.WadePostBattle)
+    }
+    ctx.say(Route118.WadeIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route118.WadeDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_CHESTER, Route118_Text_ChesterIntro, Route118_Text_ChesterDefeat
  * msgbox Route118_Text_ChesterPostBattle, MSGBOX_AUTOCLOSE
@@ -124,11 +142,19 @@ internal object Route118_EventScript_Wade : Script {
  * ```
  */
 internal object Route118_EventScript_Chester : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route118_EventScript_Chester")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_CHESTER
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(Route118.ChesterPostBattle)
+    }
+    ctx.say(Route118.ChesterIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route118.ChesterDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_BARNY, Route118_Text_BarnyIntro, Route118_Text_BarnyDefeat
  * msgbox Route118_Text_BarnyPostBattle, MSGBOX_AUTOCLOSE
@@ -136,7 +162,15 @@ internal object Route118_EventScript_Chester : Script {
  * ```
  */
 internal object Route118_EventScript_Barny : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route118_EventScript_Barny")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_BARNY
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(Route118.BarnyPostBattle)
+    }
+    ctx.say(Route118.BarnyIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route118.BarnyDefeat)
+  }
 }
 
 /**
@@ -166,7 +200,7 @@ internal object Route118_EventScript_ItemHyperPotion : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_DEANDRE, Route118_Text_DeandreIntro, Route118_Text_DeandreDefeat
  * msgbox Route118_Text_DeandrePostBattle, MSGBOX_AUTOCLOSE
@@ -174,7 +208,15 @@ internal object Route118_EventScript_ItemHyperPotion : Script {
  * ```
  */
 internal object Route118_EventScript_Deandre : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route118_EventScript_Deandre")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_DEANDRE
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(Route118.DeandrePostBattle)
+    }
+    ctx.say(Route118.DeandreIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route118.DeandreDefeat)
+  }
 }
 
 internal object Route118_EventScript_RouteSignMauville : Script {

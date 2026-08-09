@@ -1,8 +1,10 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.dialog.generated.hoenn.MtChimney
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
  * Not ported yet. Decomp body:
@@ -73,7 +75,7 @@ internal object MtChimney_EventScript_Maxie : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_TABITHA_MT_CHIMNEY, MtChimney_Text_TabithaIntro, MtChimney_Text_TabithaDefeat
  * msgbox MtChimney_Text_TabithaPostBattle, MSGBOX_AUTOCLOSE
@@ -81,7 +83,15 @@ internal object MtChimney_EventScript_Maxie : Script {
  * ```
  */
 internal object MtChimney_EventScript_Tabitha : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtChimney_EventScript_Tabitha")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_TABITHA_MT_CHIMNEY
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(MtChimney.TabithaPostBattle)
+    }
+    ctx.say(MtChimney.TabithaIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(MtChimney.TabithaDefeat)
+  }
 }
 
 internal object MtChimney_EventScript_BusyMagmaGrunt5 : Script {
@@ -153,7 +163,7 @@ internal object MtChimney_EventScript_BusyMagmaGrunt1 : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_GRUNT_MT_CHIMNEY_2, MtChimney_Text_Grunt2Intro, MtChimney_Text_Grunt2Defeat
  * msgbox MtChimney_Text_Grunt2PostBattle, MSGBOX_AUTOCLOSE
@@ -161,7 +171,15 @@ internal object MtChimney_EventScript_BusyMagmaGrunt1 : Script {
  * ```
  */
 internal object MtChimney_EventScript_Grunt2 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtChimney_EventScript_Grunt2")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_GRUNT_MT_CHIMNEY_2
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(MtChimney.Grunt2PostBattle)
+    }
+    ctx.say(MtChimney.Grunt2Intro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(MtChimney.Grunt2Defeat)
+  }
 }
 
 /**
@@ -180,7 +198,7 @@ internal object MtChimney_EventScript_Shelby : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_MELISSA, MtChimney_Text_MelissaIntro, MtChimney_Text_MelissaDefeat
  * msgbox MtChimney_Text_MelissaPostBattle, MSGBOX_AUTOCLOSE
@@ -188,11 +206,19 @@ internal object MtChimney_EventScript_Shelby : Script {
  * ```
  */
 internal object MtChimney_EventScript_Melissa : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtChimney_EventScript_Melissa")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_MELISSA
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(MtChimney.MelissaPostBattle)
+    }
+    ctx.say(MtChimney.MelissaIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(MtChimney.MelissaDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_SHEILA, MtChimney_Text_SheilaIntro, MtChimney_Text_SheilaDefeat
  * msgbox MtChimney_Text_SheilaPostBattle, MSGBOX_AUTOCLOSE
@@ -200,11 +226,19 @@ internal object MtChimney_EventScript_Melissa : Script {
  * ```
  */
 internal object MtChimney_EventScript_Sheila : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtChimney_EventScript_Sheila")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_SHEILA
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(MtChimney.SheilaPostBattle)
+    }
+    ctx.say(MtChimney.SheilaIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(MtChimney.SheilaDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_SHIRLEY, MtChimney_Text_ShirleyIntro, MtChimney_Text_ShirleyDefeat
  * msgbox MtChimney_Text_ShirleyPostBattle, MSGBOX_AUTOCLOSE
@@ -212,11 +246,19 @@ internal object MtChimney_EventScript_Sheila : Script {
  * ```
  */
 internal object MtChimney_EventScript_Shirley : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtChimney_EventScript_Shirley")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_SHIRLEY
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(MtChimney.ShirleyPostBattle)
+    }
+    ctx.say(MtChimney.ShirleyIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(MtChimney.ShirleyDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_GRUNT_MT_CHIMNEY_1, MtChimney_Text_Grunt1Intro, MtChimney_Text_Grunt1Defeat
  * msgbox MtChimney_Text_Grunt1PostBattle, MSGBOX_AUTOCLOSE
@@ -224,7 +266,15 @@ internal object MtChimney_EventScript_Shirley : Script {
  * ```
  */
 internal object MtChimney_EventScript_Grunt1 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtChimney_EventScript_Grunt1")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_GRUNT_MT_CHIMNEY_1
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(MtChimney.Grunt1PostBattle)
+    }
+    ctx.say(MtChimney.Grunt1Intro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(MtChimney.Grunt1Defeat)
+  }
 }
 
 /**

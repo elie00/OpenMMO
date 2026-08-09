@@ -1,10 +1,13 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.dialog.generated.kanto.SSAnne_B1F_Room2
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_SAILOR_HUEY, SSAnne_B1F_Room2_Text_HueyIntro, SSAnne_B1F_Room2_Text_HueyDefeat
  * msgbox SSAnne_B1F_Room2_Text_HueyPostBattle, MSGBOX_AUTOCLOSE
@@ -12,7 +15,15 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object SSAnne_B1F_Room2_EventScript_Huey : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SSAnne_B1F_Room2_EventScript_Huey")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_SAILOR_HUEY
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(SSAnne_B1F_Room2.HueyPostBattle)
+    }
+    ctx.say(SSAnne_B1F_Room2.HueyIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(SSAnne_B1F_Room2.HueyDefeat)
+  }
 }
 
 /**

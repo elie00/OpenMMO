@@ -1,8 +1,10 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.dialog.generated.hoenn.AbandonedShip_Rooms_1F
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 internal object AbandonedShip_Rooms_1F_EventScript_Gentleman : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.say(AbandonedShip_Rooms_1F.TakingALookAround)
@@ -37,7 +39,7 @@ internal object AbandonedShip_Rooms_1F_EventScript_Thalia : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_DEMETRIUS, AbandonedShip_Rooms_1F_Text_DemetriusIntro, AbandonedShip_Rooms_1F_Text_DemetriusDefeat
  * msgbox AbandonedShip_Rooms_1F_Text_DemetriusPostBattle, MSGBOX_AUTOCLOSE
@@ -45,8 +47,15 @@ internal object AbandonedShip_Rooms_1F_EventScript_Thalia : Script {
  * ```
  */
 internal object AbandonedShip_Rooms_1F_EventScript_Demetrius : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port AbandonedShip_Rooms_1F_EventScript_Demetrius")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_DEMETRIUS
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(AbandonedShip_Rooms_1F.DemetriusPostBattle)
+    }
+    ctx.say(AbandonedShip_Rooms_1F.DemetriusIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(AbandonedShip_Rooms_1F.DemetriusDefeat)
+  }
 }
 
 internal val AbandonedShip_Rooms_1FScripts: Map<String, Script> =

@@ -1,10 +1,13 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.dialog.generated.kanto.PokemonTower_6F
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_CHANNELER_ANGELICA, PokemonTower_6F_Text_AngelicaIntro, PokemonTower_6F_Text_AngelicaDefeat
  * msgbox PokemonTower_6F_Text_AngelicaPostBattle, MSGBOX_AUTOCLOSE
@@ -12,11 +15,19 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object PokemonTower_6F_EventScript_Angelica : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PokemonTower_6F_EventScript_Angelica")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_CHANNELER_ANGELICA
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(PokemonTower_6F.AngelicaPostBattle)
+    }
+    ctx.say(PokemonTower_6F.AngelicaIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(PokemonTower_6F.AngelicaDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_CHANNELER_JENNIFER, PokemonTower_6F_Text_JenniferIntro, PokemonTower_6F_Text_JenniferDefeat
  * msgbox PokemonTower_6F_Text_JenniferPostBattle, MSGBOX_AUTOCLOSE
@@ -24,11 +35,19 @@ internal object PokemonTower_6F_EventScript_Angelica : Script {
  * ```
  */
 internal object PokemonTower_6F_EventScript_Jennifer : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PokemonTower_6F_EventScript_Jennifer")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_CHANNELER_JENNIFER
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(PokemonTower_6F.JenniferPostBattle)
+    }
+    ctx.say(PokemonTower_6F.JenniferIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(PokemonTower_6F.JenniferDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_CHANNELER_EMILIA, PokemonTower_6F_Text_EmiliaIntro, PokemonTower_6F_Text_EmiliaDefeat
  * msgbox PokemonTower_6F_Text_EmiliaPostBattle, MSGBOX_AUTOCLOSE
@@ -36,7 +55,15 @@ internal object PokemonTower_6F_EventScript_Jennifer : Script {
  * ```
  */
 internal object PokemonTower_6F_EventScript_Emilia : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PokemonTower_6F_EventScript_Emilia")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_CHANNELER_EMILIA
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(PokemonTower_6F.EmiliaPostBattle)
+    }
+    ctx.say(PokemonTower_6F.EmiliaIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(PokemonTower_6F.EmiliaDefeat)
+  }
 }
 
 /**

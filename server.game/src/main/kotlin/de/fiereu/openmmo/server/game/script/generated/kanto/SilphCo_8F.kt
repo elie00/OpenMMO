@@ -1,11 +1,13 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.SilphCo_8F
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_32, SilphCo_8F_Text_Grunt1Intro, SilphCo_8F_Text_Grunt1Defeat
  * msgbox SilphCo_8F_Text_Grunt1PostBattle, MSGBOX_AUTOCLOSE
@@ -13,11 +15,19 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object SilphCo_8F_EventScript_Grunt1 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SilphCo_8F_EventScript_Grunt1")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_TEAM_ROCKET_GRUNT_32
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(SilphCo_8F.Grunt1PostBattle)
+    }
+    ctx.say(SilphCo_8F.Grunt1Intro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(SilphCo_8F.Grunt1Defeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_36, SilphCo_8F_Text_Grunt2Intro, SilphCo_8F_Text_Grunt2Defeat
  * msgbox SilphCo_8F_Text_Grunt2PostBattle, MSGBOX_AUTOCLOSE
@@ -25,11 +35,19 @@ internal object SilphCo_8F_EventScript_Grunt1 : Script {
  * ```
  */
 internal object SilphCo_8F_EventScript_Grunt2 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SilphCo_8F_EventScript_Grunt2")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_TEAM_ROCKET_GRUNT_36
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(SilphCo_8F.Grunt2PostBattle)
+    }
+    ctx.say(SilphCo_8F.Grunt2Intro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(SilphCo_8F.Grunt2Defeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_SCIENTIST_PARKER, SilphCo_8F_Text_ParkerIntro, SilphCo_8F_Text_ParkerDefeat
  * msgbox SilphCo_8F_Text_ParkerPostBattle, MSGBOX_AUTOCLOSE
@@ -37,7 +55,15 @@ internal object SilphCo_8F_EventScript_Grunt2 : Script {
  * ```
  */
 internal object SilphCo_8F_EventScript_Parker : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SilphCo_8F_EventScript_Parker")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_SCIENTIST_PARKER
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(SilphCo_8F.ParkerPostBattle)
+    }
+    ctx.say(SilphCo_8F.ParkerIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(SilphCo_8F.ParkerDefeat)
+  }
 }
 
 /**

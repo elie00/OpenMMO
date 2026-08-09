@@ -6,6 +6,7 @@ import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 import de.fiereu.openmmo.story.generated.hoenn.HoennVars
+import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 private const val GEODUDE = 74
 private const val NOSEPASS = 299
@@ -59,7 +60,7 @@ private suspend fun giveRockTomb(ctx: ScriptContext) {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_JOSH, RustboroCity_Gym_Text_JoshIntro, RustboroCity_Gym_Text_JoshDefeat
  * msgbox RustboroCity_Gym_Text_JoshPostBattle, MSGBOX_AUTOCLOSE
@@ -67,11 +68,19 @@ private suspend fun giveRockTomb(ctx: ScriptContext) {
  * ```
  */
 internal object RustboroCity_Gym_EventScript_Josh : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port RustboroCity_Gym_EventScript_Josh")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_JOSH
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(RustboroCity_Gym.JoshPostBattle)
+    }
+    ctx.say(RustboroCity_Gym.JoshIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(RustboroCity_Gym.JoshDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_TOMMY, RustboroCity_Gym_Text_TommyIntro, RustboroCity_Gym_Text_TommyDefeat
  * msgbox RustboroCity_Gym_Text_TommyPostBattle, MSGBOX_AUTOCLOSE
@@ -79,7 +88,15 @@ internal object RustboroCity_Gym_EventScript_Josh : Script {
  * ```
  */
 internal object RustboroCity_Gym_EventScript_Tommy : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port RustboroCity_Gym_EventScript_Tommy")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_TOMMY
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(RustboroCity_Gym.TommyPostBattle)
+    }
+    ctx.say(RustboroCity_Gym.TommyIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(RustboroCity_Gym.TommyDefeat)
+  }
 }
 
 /**
@@ -104,7 +121,7 @@ internal object RustboroCity_Gym_EventScript_GymGuide : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_MARC, RustboroCity_Gym_Text_MarcIntro, RustboroCity_Gym_Text_MarcDefeat
  * msgbox RustboroCity_Gym_Text_MarcPostBattle, MSGBOX_AUTOCLOSE
@@ -112,7 +129,15 @@ internal object RustboroCity_Gym_EventScript_GymGuide : Script {
  * ```
  */
 internal object RustboroCity_Gym_EventScript_Marc : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port RustboroCity_Gym_EventScript_Marc")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_MARC
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(RustboroCity_Gym.MarcPostBattle)
+    }
+    ctx.say(RustboroCity_Gym.MarcIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(RustboroCity_Gym.MarcDefeat)
+  }
 }
 
 /**

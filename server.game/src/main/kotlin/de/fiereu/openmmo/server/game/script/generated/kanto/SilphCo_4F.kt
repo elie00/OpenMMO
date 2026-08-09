@@ -1,11 +1,13 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.SilphCo_4F
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_27, SilphCo_4F_Text_Grunt2Intro, SilphCo_4F_Text_Grunt2Defeat
  * msgbox SilphCo_4F_Text_Grunt2PostBattle, MSGBOX_AUTOCLOSE
@@ -13,11 +15,19 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object SilphCo_4F_EventScript_Grunt2 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SilphCo_4F_EventScript_Grunt2")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_TEAM_ROCKET_GRUNT_27
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(SilphCo_4F.Grunt2PostBattle)
+    }
+    ctx.say(SilphCo_4F.Grunt2Intro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(SilphCo_4F.Grunt2Defeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_26, SilphCo_4F_Text_Grunt1Intro, SilphCo_4F_Text_Grunt1Defeat
  * msgbox SilphCo_4F_Text_Grunt1PostBattle, MSGBOX_AUTOCLOSE
@@ -25,11 +35,19 @@ internal object SilphCo_4F_EventScript_Grunt2 : Script {
  * ```
  */
 internal object SilphCo_4F_EventScript_Grunt1 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SilphCo_4F_EventScript_Grunt1")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_TEAM_ROCKET_GRUNT_26
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(SilphCo_4F.Grunt1PostBattle)
+    }
+    ctx.say(SilphCo_4F.Grunt1Intro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(SilphCo_4F.Grunt1Defeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_SCIENTIST_RODNEY, SilphCo_4F_Text_RodneyIntro, SilphCo_4F_Text_RodneyDefeat
  * msgbox SilphCo_4F_Text_RodneyPostBattle, MSGBOX_AUTOCLOSE
@@ -37,7 +55,15 @@ internal object SilphCo_4F_EventScript_Grunt1 : Script {
  * ```
  */
 internal object SilphCo_4F_EventScript_Rodney : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SilphCo_4F_EventScript_Rodney")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_SCIENTIST_RODNEY
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(SilphCo_4F.RodneyPostBattle)
+    }
+    ctx.say(SilphCo_4F.RodneyIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(SilphCo_4F.RodneyDefeat)
+  }
 }
 
 /**

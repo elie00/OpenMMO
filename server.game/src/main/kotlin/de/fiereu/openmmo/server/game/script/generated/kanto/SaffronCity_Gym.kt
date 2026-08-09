@@ -1,10 +1,13 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.dialog.generated.kanto.SaffronCity_Gym
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_PSYCHIC_CAMERON, SaffronCity_Gym_Text_CameronIntro, SaffronCity_Gym_Text_CameronDefeat
  * msgbox SaffronCity_Gym_Text_CameronPostBattle, MSGBOX_AUTOCLOSE
@@ -12,11 +15,19 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object SaffronCity_Gym_EventScript_Cameron : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SaffronCity_Gym_EventScript_Cameron")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_PSYCHIC_CAMERON
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(SaffronCity_Gym.CameronPostBattle)
+    }
+    ctx.say(SaffronCity_Gym.CameronIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(SaffronCity_Gym.CameronDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_PSYCHIC_JOHAN, SaffronCity_Gym_Text_JohanIntro, SaffronCity_Gym_Text_JohanDefeat
  * msgbox SaffronCity_Gym_Text_JohanPostBattle, MSGBOX_AUTOCLOSE
@@ -24,11 +35,19 @@ internal object SaffronCity_Gym_EventScript_Cameron : Script {
  * ```
  */
 internal object SaffronCity_Gym_EventScript_Johan : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SaffronCity_Gym_EventScript_Johan")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_PSYCHIC_JOHAN
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(SaffronCity_Gym.JohanPostBattle)
+    }
+    ctx.say(SaffronCity_Gym.JohanIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(SaffronCity_Gym.JohanDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_PSYCHIC_PRESTON, SaffronCity_Gym_Text_PrestonIntro, SaffronCity_Gym_Text_PrestonDefeat
  * msgbox SaffronCity_Gym_Text_PrestonPostBattle, MSGBOX_AUTOCLOSE
@@ -36,11 +55,19 @@ internal object SaffronCity_Gym_EventScript_Johan : Script {
  * ```
  */
 internal object SaffronCity_Gym_EventScript_Preston : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SaffronCity_Gym_EventScript_Preston")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_PSYCHIC_PRESTON
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(SaffronCity_Gym.PrestonPostBattle)
+    }
+    ctx.say(SaffronCity_Gym.PrestonIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(SaffronCity_Gym.PrestonDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_CHANNELER_AMANDA, SaffronCity_Gym_Text_AmandaIntro, SaffronCity_Gym_Text_AmandaDefeat
  * msgbox SaffronCity_Gym_Text_AmandaPostBattle, MSGBOX_AUTOCLOSE
@@ -48,11 +75,19 @@ internal object SaffronCity_Gym_EventScript_Preston : Script {
  * ```
  */
 internal object SaffronCity_Gym_EventScript_Amanda : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SaffronCity_Gym_EventScript_Amanda")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_CHANNELER_AMANDA
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(SaffronCity_Gym.AmandaPostBattle)
+    }
+    ctx.say(SaffronCity_Gym.AmandaIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(SaffronCity_Gym.AmandaDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_CHANNELER_STACY, SaffronCity_Gym_Text_StacyIntro, SaffronCity_Gym_Text_StacyDefeat
  * msgbox SaffronCity_Gym_Text_StacyPostBattle, MSGBOX_AUTOCLOSE
@@ -60,11 +95,19 @@ internal object SaffronCity_Gym_EventScript_Amanda : Script {
  * ```
  */
 internal object SaffronCity_Gym_EventScript_Stacy : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SaffronCity_Gym_EventScript_Stacy")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_CHANNELER_STACY
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(SaffronCity_Gym.StacyPostBattle)
+    }
+    ctx.say(SaffronCity_Gym.StacyIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(SaffronCity_Gym.StacyDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_CHANNELER_TASHA, SaffronCity_Gym_Text_TashaIntro, SaffronCity_Gym_Text_TashaDefeat
  * msgbox SaffronCity_Gym_Text_TashaPostBattle, MSGBOX_AUTOCLOSE
@@ -72,7 +115,15 @@ internal object SaffronCity_Gym_EventScript_Stacy : Script {
  * ```
  */
 internal object SaffronCity_Gym_EventScript_Tasha : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SaffronCity_Gym_EventScript_Tasha")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_CHANNELER_TASHA
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(SaffronCity_Gym.TashaPostBattle)
+    }
+    ctx.say(SaffronCity_Gym.TashaIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(SaffronCity_Gym.TashaDefeat)
+  }
 }
 
 /**

@@ -1,10 +1,13 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
+import de.fiereu.openmmo.dialog.generated.hoenn.MagmaHideout_4F
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_GRUNT_MAGMA_HIDEOUT_11, MagmaHideout_4F_Text_Grunt11Intro, MagmaHideout_4F_Text_Grunt11Defeat
  * msgbox MagmaHideout_4F_Text_Grunt11PostBattle, MSGBOX_AUTOCLOSE
@@ -12,11 +15,19 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object MagmaHideout_4F_EventScript_Grunt11 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MagmaHideout_4F_EventScript_Grunt11")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_GRUNT_MAGMA_HIDEOUT_11
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(MagmaHideout_4F.Grunt11PostBattle)
+    }
+    ctx.say(MagmaHideout_4F.Grunt11Intro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(MagmaHideout_4F.Grunt11Defeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_GRUNT_MAGMA_HIDEOUT_12, MagmaHideout_4F_Text_Grunt12Intro, MagmaHideout_4F_Text_Grunt12Defeat
  * msgbox MagmaHideout_4F_Text_Grunt12PostBattle, MSGBOX_AUTOCLOSE
@@ -24,11 +35,19 @@ internal object MagmaHideout_4F_EventScript_Grunt11 : Script {
  * ```
  */
 internal object MagmaHideout_4F_EventScript_Grunt12 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MagmaHideout_4F_EventScript_Grunt12")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_GRUNT_MAGMA_HIDEOUT_12
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(MagmaHideout_4F.Grunt12PostBattle)
+    }
+    ctx.say(MagmaHideout_4F.Grunt12Intro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(MagmaHideout_4F.Grunt12Defeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_GRUNT_MAGMA_HIDEOUT_13, MagmaHideout_4F_Text_Grunt13Intro, MagmaHideout_4F_Text_Grunt13Defeat
  * msgbox MagmaHideout_4F_Text_Grunt13PostBattle, MSGBOX_AUTOCLOSE
@@ -36,11 +55,19 @@ internal object MagmaHideout_4F_EventScript_Grunt12 : Script {
  * ```
  */
 internal object MagmaHideout_4F_EventScript_Grunt13 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MagmaHideout_4F_EventScript_Grunt13")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_GRUNT_MAGMA_HIDEOUT_13
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(MagmaHideout_4F.Grunt13PostBattle)
+    }
+    ctx.say(MagmaHideout_4F.Grunt13Intro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(MagmaHideout_4F.Grunt13Defeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_TABITHA_MAGMA_HIDEOUT, MagmaHideout_4F_Text_TabithaIntro, MagmaHideout_4F_Text_TabithaDefeat
  * msgbox MagmaHideout_4F_Text_TabithaPostBattle, MSGBOX_AUTOCLOSE
@@ -48,7 +75,15 @@ internal object MagmaHideout_4F_EventScript_Grunt13 : Script {
  * ```
  */
 internal object MagmaHideout_4F_EventScript_Tabitha : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MagmaHideout_4F_EventScript_Tabitha")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_TABITHA_MAGMA_HIDEOUT
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(MagmaHideout_4F.TabithaPostBattle)
+    }
+    ctx.say(MagmaHideout_4F.TabithaIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(MagmaHideout_4F.TabithaDefeat)
+  }
 }
 
 /**

@@ -1,8 +1,10 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.dialog.generated.hoenn.Route104
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 internal object Route104_EventScript_BugCatcher : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(Route104.WhatsItLikeAtBottomOfSea)
@@ -43,7 +45,7 @@ internal object Route104_EventScript_Girl2 : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_IVAN, Route104_Text_IvanIntro, Route104_Text_IvanDefeat
  * msgbox Route104_Text_IvanPostBattle, MSGBOX_AUTOCLOSE
@@ -51,7 +53,15 @@ internal object Route104_EventScript_Girl2 : Script {
  * ```
  */
 internal object Route104_EventScript_Ivan : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route104_EventScript_Ivan")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_IVAN
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(Route104.IvanPostBattle)
+    }
+    ctx.say(Route104.IvanIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route104.IvanDefeat)
+  }
 }
 
 /**
@@ -178,7 +188,7 @@ internal object Route104_EventScript_ItemPokeBall : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_BILLY, Route104_Text_BillyIntro, Route104_Text_BillyDefeat
  * msgbox Route104_Text_BillyPostBattle, MSGBOX_AUTOCLOSE
@@ -186,7 +196,15 @@ internal object Route104_EventScript_ItemPokeBall : Script {
  * ```
  */
 internal object Route104_EventScript_Billy : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route104_EventScript_Billy")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_BILLY
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(Route104.BillyPostBattle)
+    }
+    ctx.say(Route104.BillyIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route104.BillyDefeat)
+  }
 }
 
 /**
@@ -230,7 +248,7 @@ internal object Route104_EventScript_Boy2 : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_DARIAN, Route104_Text_DarianIntro, Route104_Text_DarianDefeat
  * msgbox Route104_Text_DarianPostBattle, MSGBOX_AUTOCLOSE
@@ -238,7 +256,15 @@ internal object Route104_EventScript_Boy2 : Script {
  * ```
  */
 internal object Route104_EventScript_Darian : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route104_EventScript_Darian")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_DARIAN
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(Route104.DarianPostBattle)
+    }
+    ctx.say(Route104.DarianIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route104.DarianDefeat)
+  }
 }
 
 /**

@@ -1,10 +1,13 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.dialog.generated.kanto.RocketHideout_B2F
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_13, RocketHideout_B2F_Text_GruntIntro, RocketHideout_B2F_Text_GruntDefeat
  * msgbox RocketHideout_B2F_Text_GruntPostBattle, MSGBOX_AUTOCLOSE
@@ -12,7 +15,15 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object RocketHideout_B2F_EventScript_Grunt : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port RocketHideout_B2F_EventScript_Grunt")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_TEAM_ROCKET_GRUNT_13
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(RocketHideout_B2F.GruntPostBattle)
+    }
+    ctx.say(RocketHideout_B2F.GruntIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(RocketHideout_B2F.GruntDefeat)
+  }
 }
 
 /**

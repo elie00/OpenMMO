@@ -1,7 +1,10 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
+import de.fiereu.openmmo.dialog.generated.hoenn.AquaHideout_B2F
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
  * Not ported yet. Decomp body:
@@ -41,7 +44,7 @@ internal object AquaHideout_B2F_EventScript_ItemNestBall : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_GRUNT_AQUA_HIDEOUT_6, AquaHideout_B2F_Text_Grunt6Intro, AquaHideout_B2F_Text_Grunt6Defeat
  * msgbox AquaHideout_B2F_Text_Grunt6PostBattle, MSGBOX_AUTOCLOSE
@@ -49,11 +52,19 @@ internal object AquaHideout_B2F_EventScript_ItemNestBall : Script {
  * ```
  */
 internal object AquaHideout_B2F_EventScript_Grunt6 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port AquaHideout_B2F_EventScript_Grunt6")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_GRUNT_AQUA_HIDEOUT_6
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(AquaHideout_B2F.Grunt6PostBattle)
+    }
+    ctx.say(AquaHideout_B2F.Grunt6Intro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(AquaHideout_B2F.Grunt6Defeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_GRUNT_AQUA_HIDEOUT_8, AquaHideout_B2F_Text_Grunt8Intro, AquaHideout_B2F_Text_Grunt8Defeat
  * msgbox AquaHideout_B2F_Text_Grunt8PostBattle, MSGBOX_AUTOCLOSE
@@ -61,7 +72,15 @@ internal object AquaHideout_B2F_EventScript_Grunt6 : Script {
  * ```
  */
 internal object AquaHideout_B2F_EventScript_Grunt8 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port AquaHideout_B2F_EventScript_Grunt8")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_GRUNT_AQUA_HIDEOUT_8
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(AquaHideout_B2F.Grunt8PostBattle)
+    }
+    ctx.say(AquaHideout_B2F.Grunt8Intro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(AquaHideout_B2F.Grunt8Defeat)
+  }
 }
 
 internal val AquaHideout_B2FScripts: Map<String, Script> =

@@ -1,10 +1,13 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.dialog.generated.kanto.CeladonCity_Gym
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_LASS_KAY, CeladonCity_Gym_Text_KayIntro, CeladonCity_Gym_Text_KayDefeat
  * msgbox CeladonCity_Gym_Text_KayPostBattle, MSGBOX_AUTOCLOSE
@@ -12,11 +15,19 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object CeladonCity_Gym_EventScript_Kay : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port CeladonCity_Gym_EventScript_Kay")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_LASS_KAY
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(CeladonCity_Gym.KayPostBattle)
+    }
+    ctx.say(CeladonCity_Gym.KayIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(CeladonCity_Gym.KayDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_BEAUTY_BRIDGET, CeladonCity_Gym_Text_BridgetIntro, CeladonCity_Gym_Text_BridgetDefeat
  * msgbox CeladonCity_Gym_Text_BridgetPostBattle, MSGBOX_AUTOCLOSE
@@ -24,11 +35,19 @@ internal object CeladonCity_Gym_EventScript_Kay : Script {
  * ```
  */
 internal object CeladonCity_Gym_EventScript_Bridget : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port CeladonCity_Gym_EventScript_Bridget")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_BEAUTY_BRIDGET
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(CeladonCity_Gym.BridgetPostBattle)
+    }
+    ctx.say(CeladonCity_Gym.BridgetIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(CeladonCity_Gym.BridgetDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_PICNICKER_TINA, CeladonCity_Gym_Text_TinaIntro, CeladonCity_Gym_Text_TinaDefeat
  * msgbox CeladonCity_Gym_Text_TinaPostBattle, MSGBOX_AUTOCLOSE
@@ -36,7 +55,15 @@ internal object CeladonCity_Gym_EventScript_Bridget : Script {
  * ```
  */
 internal object CeladonCity_Gym_EventScript_Tina : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port CeladonCity_Gym_EventScript_Tina")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_PICNICKER_TINA
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(CeladonCity_Gym.TinaPostBattle)
+    }
+    ctx.say(CeladonCity_Gym.TinaIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(CeladonCity_Gym.TinaDefeat)
+  }
 }
 
 /**
@@ -53,7 +80,7 @@ internal object CeladonCity_Gym_EventScript_Tamia : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_BEAUTY_LORI, CeladonCity_Gym_Text_LoriIntro, CeladonCity_Gym_Text_LoriDefeat
  * msgbox CeladonCity_Gym_Text_LoriPostBattle, MSGBOX_AUTOCLOSE
@@ -61,7 +88,15 @@ internal object CeladonCity_Gym_EventScript_Tamia : Script {
  * ```
  */
 internal object CeladonCity_Gym_EventScript_Lori : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port CeladonCity_Gym_EventScript_Lori")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_BEAUTY_LORI
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(CeladonCity_Gym.LoriPostBattle)
+    }
+    ctx.say(CeladonCity_Gym.LoriIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(CeladonCity_Gym.LoriDefeat)
+  }
 }
 
 /**
@@ -94,7 +129,7 @@ internal object CeladonCity_Gym_EventScript_Erika : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_COOLTRAINER_MARY, CeladonCity_Gym_Text_MaryIntro, CeladonCity_Gym_Text_MaryDefeat
  * msgbox CeladonCity_Gym_Text_MaryPostBattle, MSGBOX_AUTOCLOSE
@@ -102,7 +137,15 @@ internal object CeladonCity_Gym_EventScript_Erika : Script {
  * ```
  */
 internal object CeladonCity_Gym_EventScript_Mary : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port CeladonCity_Gym_EventScript_Mary")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_COOLTRAINER_MARY
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(CeladonCity_Gym.MaryPostBattle)
+    }
+    ctx.say(CeladonCity_Gym.MaryIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(CeladonCity_Gym.MaryDefeat)
+  }
 }
 
 /**

@@ -1,7 +1,10 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
+import de.fiereu.openmmo.dialog.generated.hoenn.FortreeCity_Gym
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
  * Not ported yet. Decomp body:
@@ -20,7 +23,7 @@ internal object FortreeCity_Gym_EventScript_Winona : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_JARED, FortreeCity_Gym_Text_JaredIntro, FortreeCity_Gym_Text_JaredDefeat
  * msgbox FortreeCity_Gym_Text_JaredPostBattle, MSGBOX_AUTOCLOSE
@@ -28,11 +31,19 @@ internal object FortreeCity_Gym_EventScript_Winona : Script {
  * ```
  */
 internal object FortreeCity_Gym_EventScript_Jared : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port FortreeCity_Gym_EventScript_Jared")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_JARED
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(FortreeCity_Gym.JaredPostBattle)
+    }
+    ctx.say(FortreeCity_Gym.JaredIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(FortreeCity_Gym.JaredDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_FLINT, FortreeCity_Gym_Text_FlintIntro, FortreeCity_Gym_Text_FlintDefeat
  * msgbox FortreeCity_Gym_Text_FlintPostBattle, MSGBOX_AUTOCLOSE
@@ -40,11 +51,19 @@ internal object FortreeCity_Gym_EventScript_Jared : Script {
  * ```
  */
 internal object FortreeCity_Gym_EventScript_Flint : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port FortreeCity_Gym_EventScript_Flint")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_FLINT
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(FortreeCity_Gym.FlintPostBattle)
+    }
+    ctx.say(FortreeCity_Gym.FlintIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(FortreeCity_Gym.FlintDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_ASHLEY, FortreeCity_Gym_Text_AshleyIntro, FortreeCity_Gym_Text_AshleyDefeat
  * msgbox FortreeCity_Gym_Text_AshleyPostBattle, MSGBOX_AUTOCLOSE
@@ -52,11 +71,19 @@ internal object FortreeCity_Gym_EventScript_Flint : Script {
  * ```
  */
 internal object FortreeCity_Gym_EventScript_Ashley : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port FortreeCity_Gym_EventScript_Ashley")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_ASHLEY
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(FortreeCity_Gym.AshleyPostBattle)
+    }
+    ctx.say(FortreeCity_Gym.AshleyIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(FortreeCity_Gym.AshleyDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_EDWARDO, FortreeCity_Gym_Text_EdwardoIntro, FortreeCity_Gym_Text_EdwardoDefeat
  * msgbox FortreeCity_Gym_Text_EdwardoPostBattle, MSGBOX_AUTOCLOSE
@@ -64,7 +91,15 @@ internal object FortreeCity_Gym_EventScript_Ashley : Script {
  * ```
  */
 internal object FortreeCity_Gym_EventScript_Edwardo : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port FortreeCity_Gym_EventScript_Edwardo")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_EDWARDO
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(FortreeCity_Gym.EdwardoPostBattle)
+    }
+    ctx.say(FortreeCity_Gym.EdwardoIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(FortreeCity_Gym.EdwardoDefeat)
+  }
 }
 
 /**
@@ -83,7 +118,7 @@ internal object FortreeCity_Gym_EventScript_GymGuide : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_HUMBERTO, FortreeCity_Gym_Text_HumbertoIntro, FortreeCity_Gym_Text_HumbertoDefeat
  * msgbox FortreeCity_Gym_Text_HumbertoPostBattle, MSGBOX_AUTOCLOSE
@@ -91,11 +126,19 @@ internal object FortreeCity_Gym_EventScript_GymGuide : Script {
  * ```
  */
 internal object FortreeCity_Gym_EventScript_Humberto : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port FortreeCity_Gym_EventScript_Humberto")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_HUMBERTO
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(FortreeCity_Gym.HumbertoPostBattle)
+    }
+    ctx.say(FortreeCity_Gym.HumbertoIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(FortreeCity_Gym.HumbertoDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_DARIUS, FortreeCity_Gym_Text_DariusIntro, FortreeCity_Gym_Text_DariusDefeat
  * msgbox FortreeCity_Gym_Text_DariusPostBattle, MSGBOX_AUTOCLOSE
@@ -103,7 +146,15 @@ internal object FortreeCity_Gym_EventScript_Humberto : Script {
  * ```
  */
 internal object FortreeCity_Gym_EventScript_Darius : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port FortreeCity_Gym_EventScript_Darius")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_DARIUS
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(FortreeCity_Gym.DariusPostBattle)
+    }
+    ctx.say(FortreeCity_Gym.DariusIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(FortreeCity_Gym.DariusDefeat)
+  }
 }
 
 /**

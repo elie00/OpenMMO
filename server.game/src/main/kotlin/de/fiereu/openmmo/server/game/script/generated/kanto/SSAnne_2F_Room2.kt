@@ -1,10 +1,13 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.dialog.generated.kanto.SSAnne_2F_Room2
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_FISHERMAN_DALE, SSAnne_2F_Room2_Text_DaleIntro, SSAnne_2F_Room2_Text_DaleDefeat
  * msgbox SSAnne_2F_Room2_Text_DalePostBattle, MSGBOX_AUTOCLOSE
@@ -12,11 +15,19 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object SSAnne_2F_Room2_EventScript_Dale : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SSAnne_2F_Room2_EventScript_Dale")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_FISHERMAN_DALE
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(SSAnne_2F_Room2.DalePostBattle)
+    }
+    ctx.say(SSAnne_2F_Room2.DaleIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(SSAnne_2F_Room2.DaleDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_GENTLEMAN_BROOKS, SSAnne_2F_Room2_Text_BrooksIntro, SSAnne_2F_Room2_Text_BrooksDefeat
  * msgbox SSAnne_2F_Room2_Text_BrooksPostBattle, MSGBOX_AUTOCLOSE
@@ -24,7 +35,15 @@ internal object SSAnne_2F_Room2_EventScript_Dale : Script {
  * ```
  */
 internal object SSAnne_2F_Room2_EventScript_Brooks : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SSAnne_2F_Room2_EventScript_Brooks")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_GENTLEMAN_BROOKS
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(SSAnne_2F_Room2.BrooksPostBattle)
+    }
+    ctx.say(SSAnne_2F_Room2.BrooksIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(SSAnne_2F_Room2.BrooksDefeat)
+  }
 }
 
 /**

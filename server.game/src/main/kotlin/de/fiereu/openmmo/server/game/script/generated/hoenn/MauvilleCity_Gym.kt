@@ -1,7 +1,10 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
+import de.fiereu.openmmo.dialog.generated.hoenn.MauvilleCity_Gym
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
  * Not ported yet. Decomp body:
@@ -21,7 +24,7 @@ internal object MauvilleCity_Gym_EventScript_Wattson : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_SHAWN, MauvilleCity_Gym_Text_ShawnIntro, MauvilleCity_Gym_Text_ShawnDefeat
  * msgbox MauvilleCity_Gym_Text_ShawnPostBattle, MSGBOX_AUTOCLOSE
@@ -29,11 +32,19 @@ internal object MauvilleCity_Gym_EventScript_Wattson : Script {
  * ```
  */
 internal object MauvilleCity_Gym_EventScript_Shawn : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MauvilleCity_Gym_EventScript_Shawn")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_SHAWN
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(MauvilleCity_Gym.ShawnPostBattle)
+    }
+    ctx.say(MauvilleCity_Gym.ShawnIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(MauvilleCity_Gym.ShawnDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_VIVIAN, MauvilleCity_Gym_Text_VivianIntro, MauvilleCity_Gym_Text_VivianDefeat
  * msgbox MauvilleCity_Gym_Text_VivianPostBattle, MSGBOX_AUTOCLOSE
@@ -41,11 +52,19 @@ internal object MauvilleCity_Gym_EventScript_Shawn : Script {
  * ```
  */
 internal object MauvilleCity_Gym_EventScript_Vivian : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MauvilleCity_Gym_EventScript_Vivian")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_VIVIAN
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(MauvilleCity_Gym.VivianPostBattle)
+    }
+    ctx.say(MauvilleCity_Gym.VivianIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(MauvilleCity_Gym.VivianDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_BEN, MauvilleCity_Gym_Text_BenIntro, MauvilleCity_Gym_Text_BenDefeat
  * msgbox MauvilleCity_Gym_Text_BenPostBattle, MSGBOX_AUTOCLOSE
@@ -53,11 +72,19 @@ internal object MauvilleCity_Gym_EventScript_Vivian : Script {
  * ```
  */
 internal object MauvilleCity_Gym_EventScript_Ben : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MauvilleCity_Gym_EventScript_Ben")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_BEN
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(MauvilleCity_Gym.BenPostBattle)
+    }
+    ctx.say(MauvilleCity_Gym.BenIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(MauvilleCity_Gym.BenDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_KIRK, MauvilleCity_Gym_Text_KirkIntro, MauvilleCity_Gym_Text_KirkDefeat
  * msgbox MauvilleCity_Gym_Text_KirkPostBattle, MSGBOX_AUTOCLOSE
@@ -65,7 +92,15 @@ internal object MauvilleCity_Gym_EventScript_Ben : Script {
  * ```
  */
 internal object MauvilleCity_Gym_EventScript_Kirk : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MauvilleCity_Gym_EventScript_Kirk")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_KIRK
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(MauvilleCity_Gym.KirkPostBattle)
+    }
+    ctx.say(MauvilleCity_Gym.KirkIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(MauvilleCity_Gym.KirkDefeat)
+  }
 }
 
 /**
@@ -84,7 +119,7 @@ internal object MauvilleCity_Gym_EventScript_GymGuide : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_ANGELO, MauvilleCity_Gym_Text_AngeloIntro, MauvilleCity_Gym_Text_AngeloDefeat
  * msgbox MauvilleCity_Gym_Text_AngeloPostBattle, MSGBOX_AUTOCLOSE
@@ -92,7 +127,15 @@ internal object MauvilleCity_Gym_EventScript_GymGuide : Script {
  * ```
  */
 internal object MauvilleCity_Gym_EventScript_Angelo : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MauvilleCity_Gym_EventScript_Angelo")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_ANGELO
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(MauvilleCity_Gym.AngeloPostBattle)
+    }
+    ctx.say(MauvilleCity_Gym.AngeloIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(MauvilleCity_Gym.AngeloDefeat)
+  }
 }
 
 /**

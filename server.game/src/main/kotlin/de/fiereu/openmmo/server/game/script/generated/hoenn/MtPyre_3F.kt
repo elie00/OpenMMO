@@ -1,10 +1,13 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
+import de.fiereu.openmmo.dialog.generated.hoenn.MtPyre_3F
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_WILLIAM, MtPyre_3F_Text_WilliamIntro, MtPyre_3F_Text_WilliamDefeat
  * msgbox MtPyre_3F_Text_WilliamPostBattle, MSGBOX_AUTOCLOSE
@@ -12,11 +15,19 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object MtPyre_3F_EventScript_William : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtPyre_3F_EventScript_William")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_WILLIAM
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(MtPyre_3F.WilliamPostBattle)
+    }
+    ctx.say(MtPyre_3F.WilliamIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(MtPyre_3F.WilliamDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_KAYLA, MtPyre_3F_Text_KaylaIntro, MtPyre_3F_Text_KaylaDefeat
  * msgbox MtPyre_3F_Text_KaylaPostBattle, MSGBOX_AUTOCLOSE
@@ -24,7 +35,15 @@ internal object MtPyre_3F_EventScript_William : Script {
  * ```
  */
 internal object MtPyre_3F_EventScript_Kayla : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtPyre_3F_EventScript_Kayla")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_KAYLA
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      return ctx.say(MtPyre_3F.KaylaPostBattle)
+    }
+    ctx.say(MtPyre_3F.KaylaIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(MtPyre_3F.KaylaDefeat)
+  }
 }
 
 /**
