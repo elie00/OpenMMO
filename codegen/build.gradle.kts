@@ -126,3 +126,23 @@ tasks.register<JavaExec>("generateScriptStubs") {
       "kanto|BPRE|${fireredDir.asFile.absolutePath}",
   )
 }
+
+// Ports the trainer battle stubs in place. Run by hand with `gradlew :codegen:portTrainerBattles`.
+// Unlike generateScriptStubs this never deletes a package: it only replaces TODO("port ...") blocks
+// whose decomp body it recognises exactly, so it is safe to run over hand edited sources. Pass
+// `--args=--check` to assert a run would change nothing.
+tasks.register<JavaExec>("portTrainerBattles") {
+  group = "codegen"
+  description = "Port the recognised trainer battle stubs (manual, not part of the build)"
+  val fireredDir = rootProject.layout.projectDirectory.dir("decomp/pokefirered")
+  val generatedScripts =
+      rootProject.layout.projectDirectory.dir(
+          "server.game/src/main/kotlin/de/fiereu/openmmo/server/game/script/generated")
+  classpath = sourceSets["generator"].runtimeClasspath
+  mainClass.set("de.fiereu.openmmo.codegen.port.Main")
+  args(
+      generatedScripts.asFile.absolutePath,
+      "hoenn|${sourceDecompDir.asFile.absolutePath}",
+      "kanto|${fireredDir.asFile.absolutePath}",
+  )
+}
