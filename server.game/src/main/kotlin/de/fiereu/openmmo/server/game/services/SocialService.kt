@@ -32,12 +32,12 @@ constructor(
     private val characterStore: CharacterStore,
 ) {
 
-  fun sendFriendList(ctx: SessionContext) {
+  suspend fun sendFriendList(ctx: SessionContext) {
     val state = ctx.attributes[PLAYER_STATE] ?: return
     ctx.send(buildFriendList(state.userId))
   }
 
-  fun onAddFriend(event: PacketEvent<AddFriendPacket>) {
+  suspend fun onAddFriend(event: PacketEvent<AddFriendPacket>) {
     val ctx = event.session
     val state = ctx.attributes[PLAYER_STATE] ?: return
     val name = event.packet.username
@@ -46,7 +46,7 @@ constructor(
     ctx.send(buildFriendList(state.userId))
   }
 
-  fun onRemoveFriend(event: PacketEvent<RemoveFriendPacket>) {
+  suspend fun onRemoveFriend(event: PacketEvent<RemoveFriendPacket>) {
     val ctx = event.session
     val state = ctx.attributes[PLAYER_STATE] ?: return
     val name = event.packet.username
@@ -55,11 +55,11 @@ constructor(
     ctx.send(buildFriendList(state.userId))
   }
 
-  fun onBlockPlayer(event: PacketEvent<BlockPlayerPacket>) {
+  suspend fun onBlockPlayer(event: PacketEvent<BlockPlayerPacket>) {
     val ctx = event.session
     val state = ctx.attributes[PLAYER_STATE] ?: return
     val packet = event.packet
-    socialStore.block(state.userId, packet.username)
+    socialStore.block(state.userId, packet.username, packet.reason)
     log.info {
       "BlockPlayer user=${state.userId} name='${packet.username}' reason='${packet.reason}'"
     }
@@ -72,7 +72,7 @@ constructor(
         ))
   }
 
-  fun onUnblockPlayer(event: PacketEvent<UnblockPlayerPacket>) {
+  suspend fun onUnblockPlayer(event: PacketEvent<UnblockPlayerPacket>) {
     val ctx = event.session
     val state = ctx.attributes[PLAYER_STATE] ?: return
     val name = event.packet.username
@@ -93,7 +93,7 @@ constructor(
     log.info { "CancelSocialInteraction from ${event.session.remoteAddress}" }
   }
 
-  private fun buildFriendList(userId: Int): FriendListPacket {
+  private suspend fun buildFriendList(userId: Int): FriendListPacket {
     val entries =
         socialStore.getFriends(userId).map { name ->
           FriendListEntry(

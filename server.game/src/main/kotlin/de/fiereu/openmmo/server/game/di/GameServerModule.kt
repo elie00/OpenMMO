@@ -10,7 +10,11 @@ import de.fiereu.openmmo.common.io.pemStream
 import de.fiereu.openmmo.server.game.config.GameServerConfig
 import de.fiereu.openmmo.server.game.script.ScriptRegistry
 import de.fiereu.openmmo.server.game.storage.CharacterRepository
+import de.fiereu.openmmo.server.game.storage.GuildStore
 import de.fiereu.openmmo.server.game.storage.JooqCharacterRepository
+import de.fiereu.openmmo.server.game.storage.JooqGuildStore
+import de.fiereu.openmmo.server.game.storage.JooqSocialStore
+import de.fiereu.openmmo.server.game.storage.SocialStore
 import de.fiereu.openmmo.server.game.world.interest.InterestPolicy
 import de.fiereu.openmmo.server.game.world.interest.PassThroughInterestPolicy
 import io.netty.channel.EventLoopGroup
@@ -63,6 +67,10 @@ object GameServerModule {
   @Provides
   @Singleton
   fun characterRepository(impl: JooqCharacterRepository): CharacterRepository = impl
+
+  @Provides @Singleton fun socialStore(impl: JooqSocialStore): SocialStore = impl
+
+  @Provides @Singleton fun guildStore(impl: JooqGuildStore): GuildStore = impl
 
   // Never touch the database while building the Dagger graph. The explicit
   // migrate() call in main() is the fail-fast connection check.

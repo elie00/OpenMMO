@@ -30,6 +30,8 @@ interface CharacterRepository {
 
   suspend fun loadById(id: Long): StoredCharacter?
 
+  suspend fun loadByName(name: String): StoredCharacter?
+
   suspend fun insertAggregate(stored: StoredCharacter)
 
   /** A null [previous] writes every row. */
@@ -55,6 +57,12 @@ constructor(
   override suspend fun loadById(id: Long): StoredCharacter? =
       withContext(dispatcher) {
         val row = dsl.selectFrom(CHARACTERS).where(CHARACTERS.ID.eq(id)).fetchOne()
+        row?.let { hydrate(listOf(it)).single() }
+      }
+
+  override suspend fun loadByName(name: String): StoredCharacter? =
+      withContext(dispatcher) {
+        val row = dsl.selectFrom(CHARACTERS).where(CHARACTERS.NAME.equalIgnoreCase(name)).fetchOne()
         row?.let { hydrate(listOf(it)).single() }
       }
 

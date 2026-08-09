@@ -7,7 +7,7 @@ import io.kotest.matchers.shouldBe
 class GuildStoreTest :
     FunSpec({
       test("creating a guild registers the leader as a member and binds the lookup") {
-        val store = GuildStore()
+        val store = InMemoryGuildStore()
         store.getGuildForChar(100L) shouldBe null
 
         val guild = store.createGuild("Knights", "KNT", leaderId = 100L, leaderName = "Leader")
@@ -19,14 +19,15 @@ class GuildStoreTest :
       }
 
       test("invited members append to the roster") {
-        val store = GuildStore()
+        val store = InMemoryGuildStore()
         val guild = store.createGuild("Knights", "KNT", leaderId = 100L, leaderName = "Leader")
         store.addMember(guild, GuildMember(200L, "Grunt", GuildRank.GRUNT, leader = false))
         guild.members.map { it.name } shouldBe listOf("Leader", "Grunt")
+        store.getGuildForChar(200L) shouldBe guild
       }
 
       test("rank assign updates a member and kick removes them") {
-        val store = GuildStore()
+        val store = InMemoryGuildStore()
         val guild = store.createGuild("Knights", "KNT", leaderId = 100L, leaderName = "Leader")
         store.addMember(guild, GuildMember(200L, "Recruit", GuildRank.GRUNT, leader = false))
 
@@ -38,7 +39,7 @@ class GuildStoreTest :
       }
 
       test("transferring leadership promotes the target and demotes the old Boss to Executive") {
-        val store = GuildStore()
+        val store = InMemoryGuildStore()
         val guild = store.createGuild("Knights", "KNT", leaderId = 100L, leaderName = "Leader")
         store.addMember(guild, GuildMember(200L, "Heir", GuildRank.OFFICER, leader = false))
 
@@ -52,7 +53,7 @@ class GuildStoreTest :
       }
 
       test("leave unbinds the leaver and disband removes the guild") {
-        val store = GuildStore()
+        val store = InMemoryGuildStore()
         store.createGuild("Knights", "KNT", leaderId = 100L, leaderName = "Leader")
         store.leaveGuild(100L)
         store.getGuildForChar(100L) shouldBe null

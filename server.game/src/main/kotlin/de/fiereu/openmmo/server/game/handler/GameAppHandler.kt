@@ -115,23 +115,27 @@ constructor(
     onSuspend<DialogActionResponsePacket> { event -> dialogService.onInteractive(event) }
     onSuspend<DialogChoicePacket> { event -> dialogService.onDialogChoice(event) }
 
-    on<AddFriendPacket> { event -> socialService.onAddFriend(event) }
-    on<RemoveFriendPacket> { event -> socialService.onRemoveFriend(event) }
-    on<BlockPlayerPacket> { event -> socialService.onBlockPlayer(event) }
-    on<UnblockPlayerPacket> { event -> socialService.onUnblockPlayer(event) }
+    onSuspend<AddFriendPacket> { event -> socialService.onAddFriend(event) }
+    onSuspend<RemoveFriendPacket> { event -> socialService.onRemoveFriend(event) }
+    onSuspend<BlockPlayerPacket> { event -> socialService.onBlockPlayer(event) }
+    onSuspend<UnblockPlayerPacket> { event -> socialService.onUnblockPlayer(event) }
     on<RequestSocialProfilePacket> { event -> socialService.onRequestSocialProfile(event) }
     on<CancelSocialInteractionPacket> { event -> socialService.onCancelSocialInteraction(event) }
 
-    on<GuildCreatePacket> { event -> guildService.onCreateGuild(event) }
-    on<GuildInvitePacket> { event -> guildService.onGuildInvite(event) }
-    on<GuildRankPermissionUpdatePacket> { event -> guildService.onRankPermissionUpdate(event) }
-    on<GuildMemberRankAssignPacket> { event -> guildService.onRankAssign(event) }
-    on<GuildMemberKickPacket> { event -> guildService.onKick(event) }
-    on<GuildLeavePacket> { event -> guildService.onLeave(event) }
-    on<GuildDisbandPacket> { event -> guildService.onDisband(event) }
-    on<GuildMotdUpdatePacket> { event -> guildService.onMotdUpdate(event) }
-    on<GuildRankLabelUpdatePacket> { event -> guildService.onRankLabelUpdate(event) }
-    on<GuildActivityLogPageRequestPacket> { event -> guildService.onActivityLogPageRequest(event) }
+    onSuspend<GuildCreatePacket> { event -> guildService.onCreateGuild(event) }
+    onSuspend<GuildInvitePacket> { event -> guildService.onGuildInvite(event) }
+    onSuspend<GuildRankPermissionUpdatePacket> { event ->
+      guildService.onRankPermissionUpdate(event)
+    }
+    onSuspend<GuildMemberRankAssignPacket> { event -> guildService.onRankAssign(event) }
+    onSuspend<GuildMemberKickPacket> { event -> guildService.onKick(event) }
+    onSuspend<GuildLeavePacket> { event -> guildService.onLeave(event) }
+    onSuspend<GuildDisbandPacket> { event -> guildService.onDisband(event) }
+    onSuspend<GuildMotdUpdatePacket> { event -> guildService.onMotdUpdate(event) }
+    onSuspend<GuildRankLabelUpdatePacket> { event -> guildService.onRankLabelUpdate(event) }
+    onSuspend<GuildActivityLogPageRequestPacket> { event ->
+      guildService.onActivityLogPageRequest(event)
+    }
 
     on<MoveLearnReplyPacket> { event -> battleService.onMoveLearnReply(event) }
     on<BattlePartySwitchPacket> { event -> battleService.onBattlePacket(event) }

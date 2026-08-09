@@ -1,31 +1,43 @@
 package de.fiereu.openmmo.server.game.storage
 
 import java.util.concurrent.ConcurrentHashMap
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class SocialStore @Inject constructor() {
+interface SocialStore {
+  suspend fun getFriends(userId: Int): Set<String>
+
+  suspend fun addFriend(userId: Int, name: String)
+
+  suspend fun removeFriend(userId: Int, name: String): Boolean
+
+  suspend fun getBlocked(userId: Int): Set<String>
+
+  suspend fun block(userId: Int, name: String, reason: String = "")
+
+  suspend fun unblock(userId: Int, name: String): Boolean
+}
+
+/** Fast deterministic implementation for unit tests. Production uses [JooqSocialStore]. */
+class InMemorySocialStore : SocialStore {
   private val friendsByUser = ConcurrentHashMap<Int, MutableSet<String>>()
   private val blockedByUser = ConcurrentHashMap<Int, MutableSet<String>>()
 
-  fun getFriends(userId: Int): Set<String> = friendsByUser.getOrPut(userId) { seedFriends() }
+  override suspend fun getFriends(userId: Int): Set<String> =
+      friendsByUser.getOrPut(userId) { ConcurrentHashMap.newKeySet() }.toSet()
 
-  fun addFriend(userId: Int, name: String) {
-    friendsByUser.getOrPut(userId) { seedFriends() }.add(name)
+  override suspend fun addFriend(userId: Int, name: String) {
+    friendsByUser.getOrPut(userId) { ConcurrentHashMap.newKeySet() }.add(name)
   }
 
-  fun removeFriend(userId: Int, name: String): Boolean =
-      friendsByUser.getOrPut(userId) { seedFriends() }.remove(name)
+  override suspend fun removeFriend(userId: Int, name: String): Boolean =
+      friendsByUser.getOrPut(userId) { ConcurrentHashMap.newKeySet() }.remove(name)
 
-  fun getBlocked(userId: Int): Set<String> = blockedByUser.getOrPut(userId) { mutableSetOf() }
+  override suspend fun getBlocked(userId: Int): Set<String> =
+      blockedByUser.getOrPut(userId) { ConcurrentHashMap.newKeySet() }.toSet()
 
-  fun block(userId: Int, name: String) {
-    blockedByUser.getOrPut(userId) { mutableSetOf() }.add(name)
+  override suspend fun block(userId: Int, name: String, reason: String) {
+    blockedByUser.getOrPut(userId) { ConcurrentHashMap.newKeySet() }.add(name)
   }
 
-  fun unblock(userId: Int, name: String): Boolean =
-      blockedByUser.getOrPut(userId) { mutableSetOf() }.remove(name)
-
-  private fun seedFriends(): MutableSet<String> = linkedSetOf("Red", "Blue", "Green")
+  override suspend fun unblock(userId: Int, name: String): Boolean =
+      blockedByUser.getOrPut(userId) { ConcurrentHashMap.newKeySet() }.remove(name)
 }
