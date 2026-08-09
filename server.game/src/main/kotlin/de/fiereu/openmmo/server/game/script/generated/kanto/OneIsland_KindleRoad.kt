@@ -358,6 +358,32 @@ internal object OneIsland_KindleRoad_EventScript_RouteSign : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(OneIsland_KindleRoad.RouteSign)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch_double TRAINER_CRUSH_KIN_MIK_KIA, OneIsland_KindleRoad_Text_MikRematchIntro, OneIsland_KindleRoad_Text_MikDefeat, OneIsland_KindleRoad_Text_MikNotEnoughMons
+ * msgbox OneIsland_KindleRoad_Text_MikPostBattle, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object OneIsland_KindleRoad_EventScript_MikRematch : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port OneIsland_KindleRoad_EventScript_MikRematch")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch_double TRAINER_CRUSH_KIN_MIK_KIA, OneIsland_KindleRoad_Text_KiaRematchIntro, OneIsland_KindleRoad_Text_KiaDefeat, OneIsland_KindleRoad_Text_KiaNotEnoughMons
+ * msgbox OneIsland_KindleRoad_Text_KiaPostBattle, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object OneIsland_KindleRoad_EventScript_KiaRematch : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port OneIsland_KindleRoad_EventScript_KiaRematch")
+}
+
 internal val OneIsland_KindleRoadScripts: Map<String, Script> =
     mapOf(
         "OneIsland_KindleRoad_EventScript_Maria" to OneIsland_KindleRoad_EventScript_Maria,
@@ -381,4 +407,8 @@ internal val OneIsland_KindleRoadScripts: Map<String, Script> =
         "OneIsland_KindleRoad_EventScript_EmberSpaSign" to
             OneIsland_KindleRoad_EventScript_EmberSpaSign,
         "OneIsland_KindleRoad_EventScript_RouteSign" to OneIsland_KindleRoad_EventScript_RouteSign,
+        "OneIsland_KindleRoad_EventScript_MikRematch" to
+            OneIsland_KindleRoad_EventScript_MikRematch,
+        "OneIsland_KindleRoad_EventScript_KiaRematch" to
+            OneIsland_KindleRoad_EventScript_KiaRematch,
     )

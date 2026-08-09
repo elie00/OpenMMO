@@ -5,7 +5,7 @@ import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -15,8 +15,9 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object VermilionCity_PokemonCenter_1F_EventScript_Nurse : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port VermilionCity_PokemonCenter_1F_EventScript_Nurse")
+  override suspend fun run(ctx: ScriptContext) {
+    EventScript_PkmnCenterNurse.run(ctx)
+  }
 }
 
 internal object VermilionCity_PokemonCenter_1F_EventScript_Man : Script {

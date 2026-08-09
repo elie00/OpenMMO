@@ -32,9 +32,35 @@ internal object FourIsland_House1_EventScript_FatMan : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.say(FourIsland_House1.YoureAwfullyHeavy)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox Text_BodySlamTaught
+ * release
+ * end
+ * ```
+ */
+internal object EventScript_BodySlamTaught : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_BodySlamTaught")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox Text_BodySlamDeclined
+ * release
+ * end
+ * ```
+ */
+internal object EventScript_BodySlamDeclined : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_BodySlamDeclined")
+}
+
 internal val FourIsland_House1Scripts: Map<String, Script> =
     mapOf(
         "FourIsland_House1_EventScript_BodySlamTutor" to
             FourIsland_House1_EventScript_BodySlamTutor,
         "FourIsland_House1_EventScript_FatMan" to FourIsland_House1_EventScript_FatMan,
+        "EventScript_BodySlamTaught" to EventScript_BodySlamTaught,
+        "EventScript_BodySlamDeclined" to EventScript_BodySlamDeclined,
     )

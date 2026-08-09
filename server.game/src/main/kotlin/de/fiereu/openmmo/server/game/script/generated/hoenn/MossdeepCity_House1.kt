@@ -28,8 +28,24 @@ internal object MossdeepCity_House1_EventScript_Woman : Script {
       ctx.say(MossdeepCity_House1.HusbandCanTellPokeblockMonLikes)
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MossdeepCity_House1_Text_DoesntLikeOrDislikePokeblocks, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object MossdeepCity_House1_EventScript_NeutralNature : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MossdeepCity_House1.DoesntLikeOrDislikePokeblocks)
+  }
+}
+
 internal val MossdeepCity_House1Scripts: Map<String, Script> =
     mapOf(
         "MossdeepCity_House1_EventScript_BlackBelt" to MossdeepCity_House1_EventScript_BlackBelt,
         "MossdeepCity_House1_EventScript_Woman" to MossdeepCity_House1_EventScript_Woman,
+        "MossdeepCity_House1_EventScript_NeutralNature" to
+            MossdeepCity_House1_EventScript_NeutralNature,
     )

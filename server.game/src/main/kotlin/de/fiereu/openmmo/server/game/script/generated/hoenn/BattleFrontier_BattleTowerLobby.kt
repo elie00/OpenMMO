@@ -269,6 +269,129 @@ internal object BattleFrontier_BattleTowerLobby_EventScript_ReadRulesBoard : Scr
       TODO("port BattleFrontier_BattleTowerLobby_EventScript_ReadRulesBoard")
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox BattleFrontier_BattleTowerLobby_Text_SorryWeDisturbedYou, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object BattleFrontier_BattleTowerLobby_EventScript_DeclineInterview : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(BattleFrontier_BattleTowerLobby.SorryWeDisturbedYou)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox BattleFrontier_BattleTowerLobby_Text_LookingForwardToNextBattle, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object BattleFrontier_BattleTowerLobby_EventScript_AlreadyInterviewed : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(BattleFrontier_BattleTowerLobby.LookingForwardToNextBattle)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * message BattleFrontier_BattleTowerLobby_Text_HowDidBattleTowerTurnOut
+ * waitmessage
+ * multichoice 20, 8, MULTI_SATISFACTION, TRUE
+ * copyvar VAR_0x8008, VAR_RESULT
+ * call_if_eq VAR_RESULT, 0, BattleFrontier_BattleTowerLobby_EventScript_Satisfied
+ * call_if_eq VAR_RESULT, 1, BattleFrontier_BattleTowerLobby_EventScript_Dissatisfied
+ * msgbox BattleFrontier_BattleTowerLobby_Text_DescribeYourBattle, MSGBOX_DEFAULT
+ * setvar VAR_0x8004, EASY_CHAT_TYPE_BATTLE_TOWER_INTERVIEW
+ * copyvar VAR_0x8005, VAR_0x8009
+ * call Common_ShowEasyChatScreen
+ * lock
+ * faceplayer
+ * goto_if_eq VAR_RESULT, 1, BattleFrontier_BattleTowerLobby_EventScript_SubmitResponse
+ * goto_if_eq VAR_RESULT, 0, BattleFrontier_BattleTowerLobby_EventScript_CancelInterview
+ * end
+ * ```
+ */
+internal object BattleFrontier_BattleTowerLobby_EventScript_AcceptInterview : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port BattleFrontier_BattleTowerLobby_EventScript_AcceptInterview")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox BattleFrontier_BattleTowerLobby_Text_DifficultToMakeBattleTurnOutAsPlanned, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object BattleFrontier_BattleTowerLobby_EventScript_Dissatisfied : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(BattleFrontier_BattleTowerLobby.DifficultToMakeBattleTurnOutAsPlanned)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox BattleFrontier_BattleTowerLobby_Text_SilentType, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object BattleFrontier_BattleTowerLobby_EventScript_CancelInterview : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(BattleFrontier_BattleTowerLobby.SilentType)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * goto_if_eq VAR_RESULT, 0, BattleFrontier_BattleTowerLobby_EventScript_CancelInterview
+ * msgbox BattleFrontier_BattleTowerLobby_Text_ThatsGreatLine, MSGBOX_DEFAULT
+ * setflag FLAG_TEMP_2
+ * copyvar VAR_0x8004, VAR_0x8008
+ * setvar VAR_0x8005, TVSHOW_BRAVO_TRAINER_BATTLE_TOWER_PROFILE
+ * goto Interview_EventScript_EndInterview
+ * end
+ * ```
+ */
+internal object BattleFrontier_BattleTowerLobby_EventScript_SubmitResponse : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port BattleFrontier_BattleTowerLobby_EventScript_SubmitResponse")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox BattleFrontier_BattleTowerLobby_Text_ObviousYouHadGreatBattle, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object BattleFrontier_BattleTowerLobby_EventScript_Satisfied : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(BattleFrontier_BattleTowerLobby.ObviousYouHadGreatBattle)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * special InterviewAfter
+ * incrementgamestat GAME_STAT_GOT_INTERVIEWED
+ * release
+ * end
+ * ```
+ */
+internal object Interview_EventScript_EndInterview : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Interview_EventScript_EndInterview")
+}
+
 internal val BattleFrontier_BattleTowerLobbyScripts: Map<String, Script> =
     mapOf(
         "BattleFrontier_BattleTowerLobby_EventScript_SinglesAttendant" to
@@ -301,4 +424,19 @@ internal val BattleFrontier_BattleTowerLobbyScripts: Map<String, Script> =
             BattleFrontier_BattleTowerLobby_EventScript_RulesBoard,
         "BattleFrontier_BattleTowerLobby_EventScript_ReadRulesBoard" to
             BattleFrontier_BattleTowerLobby_EventScript_ReadRulesBoard,
+        "BattleFrontier_BattleTowerLobby_EventScript_DeclineInterview" to
+            BattleFrontier_BattleTowerLobby_EventScript_DeclineInterview,
+        "BattleFrontier_BattleTowerLobby_EventScript_AlreadyInterviewed" to
+            BattleFrontier_BattleTowerLobby_EventScript_AlreadyInterviewed,
+        "BattleFrontier_BattleTowerLobby_EventScript_AcceptInterview" to
+            BattleFrontier_BattleTowerLobby_EventScript_AcceptInterview,
+        "BattleFrontier_BattleTowerLobby_EventScript_Dissatisfied" to
+            BattleFrontier_BattleTowerLobby_EventScript_Dissatisfied,
+        "BattleFrontier_BattleTowerLobby_EventScript_CancelInterview" to
+            BattleFrontier_BattleTowerLobby_EventScript_CancelInterview,
+        "BattleFrontier_BattleTowerLobby_EventScript_SubmitResponse" to
+            BattleFrontier_BattleTowerLobby_EventScript_SubmitResponse,
+        "BattleFrontier_BattleTowerLobby_EventScript_Satisfied" to
+            BattleFrontier_BattleTowerLobby_EventScript_Satisfied,
+        "Interview_EventScript_EndInterview" to Interview_EventScript_EndInterview,
     )

@@ -2,6 +2,7 @@ package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 
 /**
  * Not ported yet. Decomp body:
@@ -36,7 +37,37 @@ internal object MtEmber_Summit_EventScript_Moltres : Script {
   override suspend fun run(ctx: ScriptContext) = TODO("port MtEmber_Summit_EventScript_Moltres")
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * setflag FLAG_FOUGHT_MOLTRES
+ * goto EventScript_RemoveStaticMon
+ * end
+ * ```
+ */
+internal object MtEmber_Summit_EventScript_DefeatedMoltres : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.setFlag(KantoFlags.FLAG_FOUGHT_MOLTRES)
+    return EventScript_RemoveStaticMon.run(ctx)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * setvar VAR_0x8004, SPECIES_MOLTRES
+ * goto EventScript_MonFlewAway
+ * end
+ * ```
+ */
+internal object MtEmber_Summit_EventScript_RanFromMoltres : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port MtEmber_Summit_EventScript_RanFromMoltres")
+}
+
 internal val MtEmber_SummitScripts: Map<String, Script> =
     mapOf(
         "MtEmber_Summit_EventScript_Moltres" to MtEmber_Summit_EventScript_Moltres,
+        "MtEmber_Summit_EventScript_DefeatedMoltres" to MtEmber_Summit_EventScript_DefeatedMoltres,
+        "MtEmber_Summit_EventScript_RanFromMoltres" to MtEmber_Summit_EventScript_RanFromMoltres,
     )

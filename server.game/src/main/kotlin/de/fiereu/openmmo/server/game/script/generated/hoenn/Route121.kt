@@ -248,6 +248,42 @@ internal object Route121_EventScript_SafariZoneSign : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(Route121.SafariZoneSign)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch TRAINER_JESSICA_1, Route121_Text_JessicaRematchIntro, Route121_Text_JessicaRematchDefeat
+ * msgbox Route121_Text_JessicaPostRematch, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route121_EventScript_RematchJessica : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route121_EventScript_RematchJessica")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch TRAINER_WALTER_1, Route121_Text_WalterRematchIntro, Route121_Text_WalterRematchDefeat
+ * msgbox Route121_Text_WalterPostRematch, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route121_EventScript_RematchWalter : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route121_EventScript_RematchWalter")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch TRAINER_CRISTIN_1, Route121_Text_CristinRematchIntro, Route121_Text_CristinRematchDefeat
+ * msgbox Route121_Text_CristinPostRematch, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route121_EventScript_RematchCristin : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route121_EventScript_RematchCristin")
+}
+
 internal val Route121Scripts: Map<String, Script> =
     mapOf(
         "Route121_EventScript_Woman" to Route121_EventScript_Woman,
@@ -267,4 +303,7 @@ internal val Route121Scripts: Map<String, Script> =
         "Route121_EventScript_ItemZinc" to Route121_EventScript_ItemZinc,
         "Route121_EventScript_MtPyrePierSign" to Route121_EventScript_MtPyrePierSign,
         "Route121_EventScript_SafariZoneSign" to Route121_EventScript_SafariZoneSign,
+        "Route121_EventScript_RematchJessica" to Route121_EventScript_RematchJessica,
+        "Route121_EventScript_RematchWalter" to Route121_EventScript_RematchWalter,
+        "Route121_EventScript_RematchCristin" to Route121_EventScript_RematchCristin,
     )

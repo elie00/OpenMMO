@@ -26,10 +26,26 @@ internal object PacifidlogTown_House5_EventScript_Gentleman : Script {
       ctx.say(PacifidlogTown_House5.MirageIslandAppearDependingOnWeather)
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox PacifidlogTown_House5_Text_CanSeeMirageIslandToday, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object PacifidlogTown_House5_EventScript_MirageIslandPresent : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(PacifidlogTown_House5.CanSeeMirageIslandToday)
+  }
+}
+
 internal val PacifidlogTown_House5Scripts: Map<String, Script> =
     mapOf(
         "PacifidlogTown_House5_EventScript_MirageIslandWatcher" to
             PacifidlogTown_House5_EventScript_MirageIslandWatcher,
         "PacifidlogTown_House5_EventScript_Gentleman" to
             PacifidlogTown_House5_EventScript_Gentleman,
+        "PacifidlogTown_House5_EventScript_MirageIslandPresent" to
+            PacifidlogTown_House5_EventScript_MirageIslandPresent,
     )

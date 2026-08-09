@@ -287,7 +287,7 @@ internal object LilycoveCity_EventScript_MoveDeletersHouseSign : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox LilycoveCity_Text_SomeonePuntedTeamAquaOut, MSGBOX_DEFAULT
  * release
@@ -295,12 +295,13 @@ internal object LilycoveCity_EventScript_MoveDeletersHouseSign : Script {
  * ```
  */
 internal object LilycoveCity_EventScript_Sailor2AquaGone : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LilycoveCity_EventScript_Sailor2AquaGone")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity.SomeonePuntedTeamAquaOut)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox LilycoveCity_Text_TeamAquaLotGoneForGood, MSGBOX_DEFAULT
  * release
@@ -308,12 +309,13 @@ internal object LilycoveCity_EventScript_Sailor2AquaGone : Script {
  * ```
  */
 internal object LilycoveCity_EventScript_ExpertM2AquaGone : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LilycoveCity_EventScript_ExpertM2AquaGone")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity.TeamAquaLotGoneForGood)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox LilycoveCity_Text_GoingToMoveDeleterForHMs, MSGBOX_DEFAULT
  * release
@@ -321,11 +323,13 @@ internal object LilycoveCity_EventScript_ExpertM2AquaGone : Script {
  * ```
  */
 internal object LilycoveCity_EventScript_GirlAquaGone : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port LilycoveCity_EventScript_GirlAquaGone")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity.GoingToMoveDeleterForHMs)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox LilycoveCity_Text_MissingPokemonCameBack, MSGBOX_DEFAULT
  * release
@@ -333,12 +337,13 @@ internal object LilycoveCity_EventScript_GirlAquaGone : Script {
  * ```
  */
 internal object LilycoveCity_EventScript_Woman2AquaGone : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LilycoveCity_EventScript_Woman2AquaGone")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity.MissingPokemonCameBack)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox LilycoveCity_Text_HarborSign, MSGBOX_DEFAULT
  * releaseall
@@ -346,8 +351,181 @@ internal object LilycoveCity_EventScript_Woman2AquaGone : Script {
  * ```
  */
 internal object LilycoveCity_EventScript_HarborSignFerryReady : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity.HarborSign)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox LilycoveCity_Text_WailmerLeapOutOfWater, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object LilycoveCity_EventScript_MetWailmerTrainer : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity.WailmerLeapOutOfWater)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * playbgm MUS_ENCOUNTER_MAY, TRUE
+ * call_if_set FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE, LilycoveCity_EventScript_MayAskToBattleAgain
+ * call_if_unset FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE, LilycoveCity_EventScript_MayAskToBattle
+ * goto_if_eq VAR_RESULT, NO, LilycoveCity_EventScript_DeclineMayBattle
+ * msgbox LilycoveCity_Text_MayWontBeBeaten, MSGBOX_DEFAULT
+ * switch VAR_STARTER_MON
+ * case 0, LilycoveCity_EventScript_BattleMayTreecko
+ * case 1, LilycoveCity_EventScript_BattleMayTorchic
+ * case 2, LilycoveCity_EventScript_BattleMayMudkip
+ * end
+ * ```
+ */
+internal object LilycoveCity_EventScript_May : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port LilycoveCity_EventScript_May")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox LilycoveCity_Text_ExplainBerryBlender, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object LilycoveCity_EventScript_DontKnowAboutBerryBlender : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity.ExplainBerryBlender)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox LilycoveCity_Text_PokeblocksSuitPokemon, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object LilycoveCity_EventScript_ReceivedBerry : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity.PokeblocksSuitPokemon)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * playbgm MUS_ENCOUNTER_BRENDAN, TRUE
+ * call_if_set FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE, LilycoveCity_EventScript_BrendanAskToBattleAgain
+ * call_if_unset FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE, LilycoveCity_EventScript_BrendanAskToBattle
+ * goto_if_eq VAR_RESULT, NO, LilycoveCity_EventScript_DeclineBrendanBattle
+ * msgbox LilycoveCity_Text_BrendanWontBeBeaten, MSGBOX_DEFAULT
+ * switch VAR_STARTER_MON
+ * case 0, LilycoveCity_EventScript_BattleBrendanTreecko
+ * case 1, LilycoveCity_EventScript_BattleBrendanTorchic
+ * case 2, LilycoveCity_EventScript_BattleBrendanMudkip
+ * end
+ * ```
+ */
+internal object LilycoveCity_EventScript_Brendan : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port LilycoveCity_EventScript_Brendan")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox LilycoveCity_Text_FasterSpinBetterPokeblocks, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object LilycoveCity_EventScript_KnowAboutBerryBlender : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity.FasterSpinBetterPokeblocks)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox LilycoveCity_Text_MayShoppingLetsBattle, MSGBOX_YESNO
+ * return
+ * ```
+ */
+internal object LilycoveCity_EventScript_MayAskToBattle : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port LilycoveCity_EventScript_HarborSignFerryReady")
+      TODO("port LilycoveCity_EventScript_MayAskToBattle")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox LilycoveCity_Text_MayBattleMe, MSGBOX_YESNO
+ * return
+ * ```
+ */
+internal object LilycoveCity_EventScript_MayAskToBattleAgain : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LilycoveCity_EventScript_MayAskToBattleAgain")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox LilycoveCity_Text_BrendanShoppingLetsBattle, MSGBOX_YESNO
+ * return
+ * ```
+ */
+internal object LilycoveCity_EventScript_BrendanAskToBattle : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LilycoveCity_EventScript_BrendanAskToBattle")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * setflag FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE
+ * msgbox LilycoveCity_Text_BrendanNoConfidence, MSGBOX_DEFAULT
+ * savebgm MUS_DUMMY
+ * fadedefaultbgm
+ * release
+ * end
+ * ```
+ */
+internal object LilycoveCity_EventScript_DeclineBrendanBattle : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LilycoveCity_EventScript_DeclineBrendanBattle")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * setflag FLAG_DECLINED_RIVAL_BATTLE_LILYCOVE
+ * msgbox LilycoveCity_Text_MayNotRaisingPokemon, MSGBOX_DEFAULT
+ * savebgm MUS_DUMMY
+ * fadedefaultbgm
+ * release
+ * end
+ * ```
+ */
+internal object LilycoveCity_EventScript_DeclineMayBattle : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LilycoveCity_EventScript_DeclineMayBattle")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox LilycoveCity_Text_BrendanBattleMe, MSGBOX_YESNO
+ * return
+ * ```
+ */
+internal object LilycoveCity_EventScript_BrendanAskToBattleAgain : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LilycoveCity_EventScript_BrendanAskToBattleAgain")
 }
 
 internal val LilycoveCityScripts: Map<String, Script> =
@@ -392,4 +570,22 @@ internal val LilycoveCityScripts: Map<String, Script> =
         "LilycoveCity_EventScript_Woman2AquaGone" to LilycoveCity_EventScript_Woman2AquaGone,
         "LilycoveCity_EventScript_HarborSignFerryReady" to
             LilycoveCity_EventScript_HarborSignFerryReady,
+        "LilycoveCity_EventScript_MetWailmerTrainer" to LilycoveCity_EventScript_MetWailmerTrainer,
+        "LilycoveCity_EventScript_May" to LilycoveCity_EventScript_May,
+        "LilycoveCity_EventScript_DontKnowAboutBerryBlender" to
+            LilycoveCity_EventScript_DontKnowAboutBerryBlender,
+        "LilycoveCity_EventScript_ReceivedBerry" to LilycoveCity_EventScript_ReceivedBerry,
+        "LilycoveCity_EventScript_Brendan" to LilycoveCity_EventScript_Brendan,
+        "LilycoveCity_EventScript_KnowAboutBerryBlender" to
+            LilycoveCity_EventScript_KnowAboutBerryBlender,
+        "LilycoveCity_EventScript_MayAskToBattle" to LilycoveCity_EventScript_MayAskToBattle,
+        "LilycoveCity_EventScript_MayAskToBattleAgain" to
+            LilycoveCity_EventScript_MayAskToBattleAgain,
+        "LilycoveCity_EventScript_BrendanAskToBattle" to
+            LilycoveCity_EventScript_BrendanAskToBattle,
+        "LilycoveCity_EventScript_DeclineBrendanBattle" to
+            LilycoveCity_EventScript_DeclineBrendanBattle,
+        "LilycoveCity_EventScript_DeclineMayBattle" to LilycoveCity_EventScript_DeclineMayBattle,
+        "LilycoveCity_EventScript_BrendanAskToBattleAgain" to
+            LilycoveCity_EventScript_BrendanAskToBattleAgain,
     )

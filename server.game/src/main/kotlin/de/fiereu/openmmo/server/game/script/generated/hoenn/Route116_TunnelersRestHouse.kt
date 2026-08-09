@@ -35,7 +35,7 @@ internal object Route116_TunnelersRestHouse_EventScript_Tunneler2 : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox Route116_TunnelersRestHouse_Text_TunnelHasGoneThrough, MSGBOX_DEFAULT
  * release
@@ -43,8 +43,9 @@ internal object Route116_TunnelersRestHouse_EventScript_Tunneler2 : Script {
  * ```
  */
 internal object Route116_TunnelersRestHouse_EventScript_TunnelOpened : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port Route116_TunnelersRestHouse_EventScript_TunnelOpened")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route116_TunnelersRestHouse.TunnelHasGoneThrough)
+  }
 }
 
 internal val Route116_TunnelersRestHouseScripts: Map<String, Script> =

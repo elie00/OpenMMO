@@ -6,6 +6,7 @@ import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
+import de.fiereu.openmmo.story.generated.hoenn.HoennVars
 import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
@@ -524,7 +525,7 @@ internal object Route111_EventScript_ItemElixir : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -537,7 +538,15 @@ internal object Route111_EventScript_ItemElixir : Script {
  * ```
  */
 internal object Route111_EventScript_Hiker : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route111_EventScript_Hiker")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.getVar(HoennVars.VAR_MIRAGE_TOWER_STATE) == 3)
+        return Route111_EventScript_HikerMirageTowerGone.run(ctx)
+    if (ctx.getVar(HoennVars.VAR_MIRAGE_TOWER_STATE) == 2)
+        return Route111_EventScript_HikerMirageTowerDisintegrated.run(ctx)
+    if (ctx.isFlagSet(HoennFlags.FLAG_MIRAGE_TOWER_VISIBLE))
+        return Route111_EventScript_HikerMirageTowerVisible.run(ctx)
+    ctx.say(Route111.ShouldBeMirageTowerAroundHere)
+  }
 }
 
 /**
@@ -587,6 +596,260 @@ internal object Route111_EventScript_TrainerHillSign : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(Route111.TrainerHillSign)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox Route111_Text_VictorIntro, MSGBOX_DEFAULT
+ * trainerbattle_no_intro TRAINER_VICTOR, Route111_Text_VictorDefeat
+ * applymovement LOCALID_ROUTE111_VICTOR, Common_Movement_WalkInPlaceFasterUp
+ * waitmovement 0
+ * call Route111_EventScript_OpenWinstrateDoor
+ * msgbox Route111_Text_VictorPostBattle, MSGBOX_DEFAULT
+ * closemessage
+ * applymovement LOCALID_ROUTE111_VICTOR, Route111_Movement_WinstrateEnterHouse
+ * waitmovement 0
+ * removeobject LOCALID_ROUTE111_VICTOR
+ * call Route111_EventScript_CloseWinstrateDoor
+ * applymovement LOCALID_PLAYER, Route111_Movement_WaitForNextWinstrate
+ * waitmovement 0
+ * call Route111_EventScript_OpenWinstrateDoor
+ * addobject LOCALID_ROUTE111_VICTORIA
+ * applymovement LOCALID_ROUTE111_VICTORIA, Route111_Movement_WinstrateExitHouse
+ * waitmovement 0
+ * call Route111_EventScript_CloseWinstrateDoor
+ * msgbox Route111_Text_VictoriaIntro, MSGBOX_DEFAULT
+ * trainerbattle_no_intro TRAINER_VICTORIA, Route111_Text_VictoriaDefeat
+ * applymovement LOCALID_ROUTE111_VICTORIA, Common_Movement_WalkInPlaceFasterUp
+ * waitmovement 0
+ * call Route111_EventScript_OpenWinstrateDoor
+ * msgbox Route111_Text_VictoriaPostBattle, MSGBOX_DEFAULT
+ * closemessage
+ * applymovement LOCALID_ROUTE111_VICTORIA, Route111_Movement_WinstrateEnterHouse
+ * waitmovement 0
+ * removeobject LOCALID_ROUTE111_VICTORIA
+ * call Route111_EventScript_CloseWinstrateDoor
+ * applymovement LOCALID_PLAYER, Route111_Movement_WaitForNextWinstrate
+ * waitmovement 0
+ * call Route111_EventScript_OpenWinstrateDoor
+ * addobject LOCALID_ROUTE111_VIVI
+ * applymovement LOCALID_ROUTE111_VIVI, Route111_Movement_WinstrateExitHouse
+ * waitmovement 0
+ * call Route111_EventScript_CloseWinstrateDoor
+ * msgbox Route111_Text_ViviIntro, MSGBOX_DEFAULT
+ * trainerbattle_no_intro TRAINER_VIVI, Route111_Text_ViviDefeat
+ * applymovement LOCALID_ROUTE111_VIVI, Common_Movement_WalkInPlaceFasterUp
+ * waitmovement 0
+ * call Route111_EventScript_OpenWinstrateDoor
+ * msgbox Route111_Text_ViviPostBattle, MSGBOX_DEFAULT
+ * closemessage
+ * applymovement LOCALID_ROUTE111_VIVI, Route111_Movement_WinstrateEnterHouse
+ * waitmovement 0
+ * removeobject LOCALID_ROUTE111_VIVI
+ * call Route111_EventScript_CloseWinstrateDoor
+ * applymovement LOCALID_PLAYER, Route111_Movement_WaitForNextWinstrate
+ * waitmovement 0
+ * call Route111_EventScript_OpenWinstrateDoor
+ * addobject LOCALID_ROUTE111_VICKY
+ * applymovement LOCALID_ROUTE111_VICKY, Route111_Movement_WinstrateExitHouse
+ * waitmovement 0
+ * call Route111_EventScript_CloseWinstrateDoor
+ * msgbox Route111_Text_VickyIntro, MSGBOX_DEFAULT
+ * trainerbattle_no_intro TRAINER_VICKY, Route111_Text_VickyDefeat
+ * msgbox Route111_Text_VickyPostBattle, MSGBOX_DEFAULT
+ * closemessage
+ * applymovement LOCALID_ROUTE111_VICKY, Common_Movement_WalkInPlaceFasterUp
+ * waitmovement 0
+ * call Route111_EventScript_OpenWinstrateDoor
+ * applymovement LOCALID_ROUTE111_VICKY, Route111_Movement_WinstrateEnterHouse
+ * waitmovement 0
+ * removeobject LOCALID_ROUTE111_VICKY
+ * call Route111_EventScript_CloseWinstrateDoor
+ * release
+ * end
+ * ```
+ */
+internal object Route111_EventScript_BattleWinstrates : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route111_EventScript_BattleWinstrates")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Route111_Text_WhatColorBerriesToLookForToday, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object Route111_EventScript_ReceivedBerry : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route111.WhatColorBerriesToLookForToday)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Route111_Text_ThatWasShockingSandRainedDown, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object Route111_EventScript_HikerMirageTowerDisintegrated : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route111.ThatWasShockingSandRainedDown)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch TRAINER_BROOKE_1, Route111_Text_BrookeRematchIntro, Route111_Text_BrookeRematchDefeat
+ * msgbox Route111_Text_BrookePostRematch, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route111_EventScript_RematchBrooke : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route111_EventScript_RematchBrooke")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch TRAINER_DUSTY_1, Route111_Text_DustyRematchIntro, Route111_Text_DustyRematchDefeat
+ * msgbox Route111_Text_DustyPostRematch, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route111_EventScript_RematchDusty : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route111_EventScript_RematchDusty")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Route111_Text_MirageTowerHasntBeenSeenSince, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object Route111_EventScript_HikerMirageTowerGone : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route111.MirageTowerHasntBeenSeenSince)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * giveitem ITEM_TM_SECRET_POWER
+ * goto_if_eq VAR_RESULT, FALSE, Route111_EventScript_NoRoomForSecretPower
+ * msgbox Route111_Text_ExplainSecretPower, MSGBOX_DEFAULT
+ * closemessage
+ * setflag FLAG_RECEIVED_SECRET_POWER
+ * clearflag FLAG_HIDE_SLATEPORT_CITY_TM_SALESMAN
+ * call_if_eq VAR_FACING, DIR_WEST, Route111_EventScript_SecretPowerManExit
+ * call_if_eq VAR_FACING, DIR_EAST, Route111_EventScript_SecretPowerManExit
+ * call_if_eq VAR_FACING, DIR_NORTH, Route111_EventScript_SecretPowerManExitNorth
+ * removeobject VAR_LAST_TALKED
+ * release
+ * end
+ * ```
+ */
+internal object Route111_EventScript_GiveSecretPower : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route111_EventScript_GiveSecretPower")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch TRAINER_WILTON_1, Route111_Text_WiltonRematchIntro, Route111_Text_WiltonRematchDefeat
+ * msgbox Route111_Text_WiltonPostRematch, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route111_EventScript_RematchWilton : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route111_EventScript_RematchWilton")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Route111_Text_MirageTowerClearlyVisible, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object Route111_EventScript_HikerMirageTowerVisible : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route111.MirageTowerClearlyVisible)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * opendoor 13, 113
+ * waitdooranim
+ * return
+ * ```
+ */
+internal object Route111_EventScript_OpenWinstrateDoor : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route111_EventScript_OpenWinstrateDoor")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * closedoor 13, 113
+ * waitdooranim
+ * return
+ * ```
+ */
+internal object Route111_EventScript_CloseWinstrateDoor : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port Route111_EventScript_CloseWinstrateDoor")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement VAR_LAST_TALKED, Route111_Movement_SecretPowerManExitNorth
+ * waitmovement 0
+ * return
+ * ```
+ */
+internal object Route111_EventScript_SecretPowerManExitNorth : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port Route111_EventScript_SecretPowerManExitNorth")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement VAR_LAST_TALKED, Route111_Movement_SecretPowerManExit
+ * waitmovement 0
+ * return
+ * ```
+ */
+internal object Route111_EventScript_SecretPowerManExit : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port Route111_EventScript_SecretPowerManExit")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Route111_Text_DontHaveAnyRoom, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object Route111_EventScript_NoRoomForSecretPower : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route111.DontHaveAnyRoom)
+  }
+}
+
 internal val Route111Scripts: Map<String, Script> =
     mapOf(
         "Route111_EventScript_Victor" to Route111_EventScript_Victor,
@@ -630,4 +893,21 @@ internal val Route111Scripts: Map<String, Script> =
         "Route111_EventScript_OldLadysRestStopSign" to Route111_EventScript_OldLadysRestStopSign,
         "Route111_EventScript_TrainerTipsSpAtkSpDef" to Route111_EventScript_TrainerTipsSpAtkSpDef,
         "Route111_EventScript_TrainerHillSign" to Route111_EventScript_TrainerHillSign,
+        "Route111_EventScript_BattleWinstrates" to Route111_EventScript_BattleWinstrates,
+        "Route111_EventScript_ReceivedBerry" to Route111_EventScript_ReceivedBerry,
+        "Route111_EventScript_HikerMirageTowerDisintegrated" to
+            Route111_EventScript_HikerMirageTowerDisintegrated,
+        "Route111_EventScript_RematchBrooke" to Route111_EventScript_RematchBrooke,
+        "Route111_EventScript_RematchDusty" to Route111_EventScript_RematchDusty,
+        "Route111_EventScript_HikerMirageTowerGone" to Route111_EventScript_HikerMirageTowerGone,
+        "Route111_EventScript_GiveSecretPower" to Route111_EventScript_GiveSecretPower,
+        "Route111_EventScript_RematchWilton" to Route111_EventScript_RematchWilton,
+        "Route111_EventScript_HikerMirageTowerVisible" to
+            Route111_EventScript_HikerMirageTowerVisible,
+        "Route111_EventScript_OpenWinstrateDoor" to Route111_EventScript_OpenWinstrateDoor,
+        "Route111_EventScript_CloseWinstrateDoor" to Route111_EventScript_CloseWinstrateDoor,
+        "Route111_EventScript_SecretPowerManExitNorth" to
+            Route111_EventScript_SecretPowerManExitNorth,
+        "Route111_EventScript_SecretPowerManExit" to Route111_EventScript_SecretPowerManExit,
+        "Route111_EventScript_NoRoomForSecretPower" to Route111_EventScript_NoRoomForSecretPower,
     )

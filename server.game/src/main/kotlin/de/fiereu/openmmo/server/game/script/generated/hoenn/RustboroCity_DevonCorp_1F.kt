@@ -3,9 +3,10 @@ package de.fiereu.openmmo.server.game.script.generated.hoenn
 import de.fiereu.openmmo.dialog.generated.hoenn.RustboroCity_DevonCorp_1F
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -17,12 +18,17 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object RustboroCity_DevonCorp_1F_EventScript_Employee : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port RustboroCity_DevonCorp_1F_EventScript_Employee")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(HoennFlags.FLAG_RETURNED_DEVON_GOODS))
+        return RustboroCity_DevonCorp_1F_EventScript_GoodsRecovered.run(ctx)
+    if (ctx.isFlagSet(HoennFlags.FLAG_DEVON_GOODS_STOLEN))
+        return RustboroCity_DevonCorp_1F_EventScript_RobberWasntBright.run(ctx)
+    ctx.say(RustboroCity_DevonCorp_1F.ThoseShoesAreOurProduct)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -35,12 +41,19 @@ internal object RustboroCity_DevonCorp_1F_EventScript_Employee : Script {
  * ```
  */
 internal object RustboroCity_DevonCorp_1F_EventScript_StairGuard : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port RustboroCity_DevonCorp_1F_EventScript_StairGuard")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(HoennFlags.FLAG_RETURNED_DEVON_GOODS))
+        return RustboroCity_DevonCorp_1F_EventScript_AlwaysWelcome.run(ctx)
+    if (ctx.isFlagSet(HoennFlags.FLAG_RECOVERED_DEVON_GOODS))
+        return RustboroCity_DevonCorp_1F_EventScript_GotRobbed.run(ctx)
+    if (ctx.isFlagSet(HoennFlags.FLAG_DEVON_GOODS_STOLEN))
+        return RustboroCity_DevonCorp_1F_EventScript_GotRobbed.run(ctx)
+    ctx.say(RustboroCity_DevonCorp_1F.OnlyAuthorizedPeopleEnter)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -53,8 +66,15 @@ internal object RustboroCity_DevonCorp_1F_EventScript_StairGuard : Script {
  * ```
  */
 internal object RustboroCity_DevonCorp_1F_EventScript_Greeter : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port RustboroCity_DevonCorp_1F_EventScript_Greeter")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(HoennFlags.FLAG_RETURNED_DEVON_GOODS))
+        return RustboroCity_DevonCorp_1F_EventScript_WelcomeToDevonCorp.run(ctx)
+    if (ctx.isFlagSet(HoennFlags.FLAG_RECOVERED_DEVON_GOODS))
+        return RustboroCity_DevonCorp_1F_EventScript_StaffGotRobbed.run(ctx)
+    if (ctx.isFlagSet(HoennFlags.FLAG_DEVON_GOODS_STOLEN))
+        return RustboroCity_DevonCorp_1F_EventScript_StaffGotRobbed.run(ctx)
+    ctx.say(RustboroCity_DevonCorp_1F.WelcomeToDevonCorp)
+  }
 }
 
 internal object RustboroCity_DevonCorp_1F_EventScript_ProductsDisplay : Script {
@@ -64,6 +84,90 @@ internal object RustboroCity_DevonCorp_1F_EventScript_ProductsDisplay : Script {
 internal object RustboroCity_DevonCorp_1F_EventScript_RocksMetalDisplay : Script {
   override suspend fun run(ctx: ScriptContext) =
       ctx.sign(RustboroCity_DevonCorp_1F.RocksMetalDisplay)
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox RustboroCity_DevonCorp_1F_Text_StaffGotRobbed, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object RustboroCity_DevonCorp_1F_EventScript_StaffGotRobbed : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(RustboroCity_DevonCorp_1F.StaffGotRobbed)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox RustboroCity_DevonCorp_1F_Text_SoundsLikeStolenGoodsRecovered, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object RustboroCity_DevonCorp_1F_EventScript_GoodsRecovered : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(RustboroCity_DevonCorp_1F.SoundsLikeStolenGoodsRecovered)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox RustboroCity_DevonCorp_1F_Text_YoureAlwaysWelcomeHere, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object RustboroCity_DevonCorp_1F_EventScript_AlwaysWelcome : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(RustboroCity_DevonCorp_1F.YoureAlwaysWelcomeHere)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox RustboroCity_DevonCorp_1F_Text_HowCouldWeGetRobbed, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object RustboroCity_DevonCorp_1F_EventScript_GotRobbed : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(RustboroCity_DevonCorp_1F.HowCouldWeGetRobbed)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox RustboroCity_DevonCorp_1F_Text_WelcomeToDevonCorp, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object RustboroCity_DevonCorp_1F_EventScript_WelcomeToDevonCorp : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(RustboroCity_DevonCorp_1F.WelcomeToDevonCorp)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox RustboroCity_DevonCorp_1F_Text_RobberWasntVeryBright, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object RustboroCity_DevonCorp_1F_EventScript_RobberWasntBright : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(RustboroCity_DevonCorp_1F.RobberWasntVeryBright)
+  }
 }
 
 internal val RustboroCity_DevonCorp_1FScripts: Map<String, Script> =
@@ -78,4 +182,16 @@ internal val RustboroCity_DevonCorp_1FScripts: Map<String, Script> =
             RustboroCity_DevonCorp_1F_EventScript_ProductsDisplay,
         "RustboroCity_DevonCorp_1F_EventScript_RocksMetalDisplay" to
             RustboroCity_DevonCorp_1F_EventScript_RocksMetalDisplay,
+        "RustboroCity_DevonCorp_1F_EventScript_StaffGotRobbed" to
+            RustboroCity_DevonCorp_1F_EventScript_StaffGotRobbed,
+        "RustboroCity_DevonCorp_1F_EventScript_GoodsRecovered" to
+            RustboroCity_DevonCorp_1F_EventScript_GoodsRecovered,
+        "RustboroCity_DevonCorp_1F_EventScript_AlwaysWelcome" to
+            RustboroCity_DevonCorp_1F_EventScript_AlwaysWelcome,
+        "RustboroCity_DevonCorp_1F_EventScript_GotRobbed" to
+            RustboroCity_DevonCorp_1F_EventScript_GotRobbed,
+        "RustboroCity_DevonCorp_1F_EventScript_WelcomeToDevonCorp" to
+            RustboroCity_DevonCorp_1F_EventScript_WelcomeToDevonCorp,
+        "RustboroCity_DevonCorp_1F_EventScript_RobberWasntBright" to
+            RustboroCity_DevonCorp_1F_EventScript_RobberWasntBright,
     )

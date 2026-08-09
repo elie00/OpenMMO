@@ -201,6 +201,20 @@ internal object LilycoveCity_LilycoveMuseum_2F_EventScript_ShowSmartPainting : S
       TODO("port LilycoveCity_LilycoveMuseum_2F_EventScript_ShowSmartPainting")
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox LilycoveCity_LilycoveMuseum_2F_Text_HonorToHaveYouVisit, MSGBOX_NPC
+ * releaseall
+ * end
+ * ```
+ */
+internal object LilycoveCity_LilycoveMuseum_2F_EventScript_ReceivedGlassOrnament : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity_LilycoveMuseum_2F.HonorToHaveYouVisit)
+  }
+}
+
 internal val LilycoveCity_LilycoveMuseum_2FScripts: Map<String, Script> =
     mapOf(
         "LilycoveCity_LilycoveMuseum_2F_EventScript_Curator" to
@@ -231,4 +245,6 @@ internal val LilycoveCity_LilycoveMuseum_2FScripts: Map<String, Script> =
             LilycoveCity_LilycoveMuseum_2F_EventScript_ShowCutePainting,
         "LilycoveCity_LilycoveMuseum_2F_EventScript_ShowSmartPainting" to
             LilycoveCity_LilycoveMuseum_2F_EventScript_ShowSmartPainting,
+        "LilycoveCity_LilycoveMuseum_2F_EventScript_ReceivedGlassOrnament" to
+            LilycoveCity_LilycoveMuseum_2F_EventScript_ReceivedGlassOrnament,
     )

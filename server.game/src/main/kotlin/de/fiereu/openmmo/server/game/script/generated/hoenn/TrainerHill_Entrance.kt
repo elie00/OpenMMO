@@ -1,5 +1,6 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
+import de.fiereu.openmmo.dialog.generated.hoenn.TrainerHill_Entrance
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 
@@ -92,27 +93,69 @@ internal object TrainerHill_Entrance_EventScript_Records : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox TrainerHill_Entrance_Text_CantWaitToTestTheWaters, MSGBOX_NPC
  * end
  * ```
  */
 internal object TrainerHill_Entrance_EventScript_ManTrainerHillClosed : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port TrainerHill_Entrance_EventScript_ManTrainerHillClosed")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(TrainerHill_Entrance.CantWaitToTestTheWaters)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox TrainerHill_Entrance_Text_DoYouKnowWhenTheyOpen, MSGBOX_NPC
  * end
  * ```
  */
 internal object TrainerHill_Entrance_EventScript_GirlTrainerHillClosed : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(TrainerHill_Entrance.DoYouKnowWhenTheyOpen)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox TrainerHill_Entrance_Text_ThankYouForPlaying, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object TrainerHill_Entrance_EventScript_ThanksForPlaying : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(TrainerHill_Entrance.ThankYouForPlaying)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * pokemart TrainerHill_Entrance_Pokemart_Expanded
+ * msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object TrainerHill_Entrance_EventScript_ExpandedPokemart : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port TrainerHill_Entrance_EventScript_GirlTrainerHillClosed")
+      TODO("port TrainerHill_Entrance_EventScript_ExpandedPokemart")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * release
+ * end
+ * ```
+ */
+internal object TrainerHill_Entrance_EventScript_AttendantEnd : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port TrainerHill_Entrance_EventScript_AttendantEnd")
 }
 
 internal val TrainerHill_EntranceScripts: Map<String, Script> =
@@ -127,4 +170,10 @@ internal val TrainerHill_EntranceScripts: Map<String, Script> =
             TrainerHill_Entrance_EventScript_ManTrainerHillClosed,
         "TrainerHill_Entrance_EventScript_GirlTrainerHillClosed" to
             TrainerHill_Entrance_EventScript_GirlTrainerHillClosed,
+        "TrainerHill_Entrance_EventScript_ThanksForPlaying" to
+            TrainerHill_Entrance_EventScript_ThanksForPlaying,
+        "TrainerHill_Entrance_EventScript_ExpandedPokemart" to
+            TrainerHill_Entrance_EventScript_ExpandedPokemart,
+        "TrainerHill_Entrance_EventScript_AttendantEnd" to
+            TrainerHill_Entrance_EventScript_AttendantEnd,
     )

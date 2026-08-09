@@ -1,5 +1,7 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
+import de.fiereu.openmmo.dialog.generated.hoenn.EventTicket
+import de.fiereu.openmmo.dialog.generated.hoenn.FarawayIsland_Entrance
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 
@@ -30,19 +32,36 @@ internal object FarawayIsland_Entrance_EventScript_Sailor : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox FarawayIsland_Entrance_Text_Sign, MSGBOX_SIGN
  * end
  * ```
  */
 internal object FarawayIsland_Entrance_EventScript_Sign : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port FarawayIsland_Entrance_EventScript_Sign")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.sign(FarawayIsland_Entrance.Sign)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox EventTicket_Text_AsYouLike, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object FarawayIsland_Entrance_EventScript_AsYouLike : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(EventTicket.AsYouLike)
+  }
 }
 
 internal val FarawayIsland_EntranceScripts: Map<String, Script> =
     mapOf(
         "FarawayIsland_Entrance_EventScript_Sailor" to FarawayIsland_Entrance_EventScript_Sailor,
         "FarawayIsland_Entrance_EventScript_Sign" to FarawayIsland_Entrance_EventScript_Sign,
+        "FarawayIsland_Entrance_EventScript_AsYouLike" to
+            FarawayIsland_Entrance_EventScript_AsYouLike,
     )

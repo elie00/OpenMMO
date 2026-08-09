@@ -52,9 +52,22 @@ internal object MtPyre_6F_EventScript_Cedric : Script {
   }
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch TRAINER_VALERIE_1, MtPyre_6F_Text_ValerieRematchIntro, MtPyre_6F_Text_ValerieRematchDefeat
+ * msgbox MtPyre_6F_Text_ValeriePostRematch, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object MtPyre_6F_EventScript_RematchValerie : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port MtPyre_6F_EventScript_RematchValerie")
+}
+
 internal val MtPyre_6FScripts: Map<String, Script> =
     mapOf(
         "MtPyre_6F_EventScript_Valerie" to MtPyre_6F_EventScript_Valerie,
         "MtPyre_6F_EventScript_ItemTMShadowBall" to MtPyre_6F_EventScript_ItemTMShadowBall,
         "MtPyre_6F_EventScript_Cedric" to MtPyre_6F_EventScript_Cedric,
+        "MtPyre_6F_EventScript_RematchValerie" to MtPyre_6F_EventScript_RematchValerie,
     )

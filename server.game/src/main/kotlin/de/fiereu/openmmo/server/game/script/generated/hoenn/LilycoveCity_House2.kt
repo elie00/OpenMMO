@@ -1,5 +1,6 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
+import de.fiereu.openmmo.dialog.generated.hoenn.LilycoveCity_House2
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 
@@ -22,7 +23,23 @@ internal object LilycoveCity_House2_EventScript_FatMan : Script {
   override suspend fun run(ctx: ScriptContext) = TODO("port LilycoveCity_House2_EventScript_FatMan")
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox LilycoveCity_House2_Text_SleepIsEssential, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object LilycoveCity_House2_EventScript_ReceivedRest : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity_House2.SleepIsEssential)
+  }
+}
+
 internal val LilycoveCity_House2Scripts: Map<String, Script> =
     mapOf(
         "LilycoveCity_House2_EventScript_FatMan" to LilycoveCity_House2_EventScript_FatMan,
+        "LilycoveCity_House2_EventScript_ReceivedRest" to
+            LilycoveCity_House2_EventScript_ReceivedRest,
     )

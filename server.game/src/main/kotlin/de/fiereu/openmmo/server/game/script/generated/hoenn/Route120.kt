@@ -7,6 +7,7 @@ import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
+import de.fiereu.openmmo.story.generated.hoenn.HoennVars
 import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
@@ -347,7 +348,7 @@ internal object Route120_EventScript_Riley : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -357,11 +358,14 @@ internal object Route120_EventScript_Riley : Script {
  * ```
  */
 internal object Route120_EventScript_Kecleon1 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route120_EventScript_Kecleon1")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.setVar(HoennVars.VAR_0x8009, 1)
+    return EventScript_Kecleon.run(ctx)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -371,11 +375,14 @@ internal object Route120_EventScript_Kecleon1 : Script {
  * ```
  */
 internal object Route120_EventScript_Kecleon2 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route120_EventScript_Kecleon2")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.setVar(HoennVars.VAR_0x8009, 2)
+    return EventScript_Kecleon.run(ctx)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -385,11 +392,14 @@ internal object Route120_EventScript_Kecleon2 : Script {
  * ```
  */
 internal object Route120_EventScript_Kecleon3 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route120_EventScript_Kecleon3")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.setVar(HoennVars.VAR_0x8009, 3)
+    return EventScript_Kecleon.run(ctx)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -399,11 +409,14 @@ internal object Route120_EventScript_Kecleon3 : Script {
  * ```
  */
 internal object Route120_EventScript_Kecleon5 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route120_EventScript_Kecleon5")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.setVar(HoennVars.VAR_0x8009, 5)
+    return EventScript_Kecleon.run(ctx)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -413,7 +426,10 @@ internal object Route120_EventScript_Kecleon5 : Script {
  * ```
  */
 internal object Route120_EventScript_Kecleon4 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route120_EventScript_Kecleon4")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.setVar(HoennVars.VAR_0x8009, 4)
+    return EventScript_Kecleon.run(ctx)
+  }
 }
 
 /**
@@ -477,6 +493,213 @@ internal object Route120_EventScript_RouteSign121 : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(Route120.RouteSign121)
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Route120_Text_MakeYourOwnImpressions, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object Route120_EventScript_BerryNotLove : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route120.MakeYourOwnImpressions)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox Route120_Text_StevenReadyForBattle, MSGBOX_YESNO
+ * goto_if_eq VAR_RESULT, NO, Route120_EventScript_StevenNotReady
+ * goto Route120_EventScript_StevenBattleKecleon
+ * end
+ * ```
+ */
+internal object Route120_EventScript_StevenAskReadyForBattle : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port Route120_EventScript_StevenAskReadyForBattle")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox Route120_Text_StevenShowMeYourPower, MSGBOX_DEFAULT
+ * closemessage
+ * call_if_eq VAR_FACING, DIR_NORTH, Route120_EventScript_PlayerApproachKecleonNorth
+ * call_if_eq VAR_FACING, DIR_WEST, Route120_EventScript_PlayerApproachKecleonWest
+ * applymovement LOCALID_ROUTE120_STEVEN, Common_Movement_WalkInPlaceFasterLeft
+ * waitmovement 0
+ * delay 20
+ * msgbox Route120_Text_StevenUsedDevonScope, MSGBOX_DEFAULT
+ * closemessage
+ * applymovement LOCALID_BRIDGE_KECLEON, Common_Movement_WalkInPlaceFasterRight
+ * waitmovement 0
+ * applymovement LOCALID_BRIDGE_KECLEON, Movement_KecleonAppears
+ * waitmovement 0
+ * waitse
+ * playmoncry SPECIES_KECLEON, CRY_MODE_ENCOUNTER
+ * delay 40
+ * waitmoncry
+ * setwildbattle SPECIES_KECLEON, 30
+ * setvar VAR_0x8009, 0
+ * setflag FLAG_SYS_CTRL_OBJ_DELETE
+ * dowildbattle
+ * clearflag FLAG_SYS_CTRL_OBJ_DELETE
+ * specialvar VAR_RESULT, GetBattleOutcome
+ * goto_if_eq VAR_RESULT, B_OUTCOME_WON, Route120_EventScript_RemoveBridgeKecleonPostBattle
+ * goto_if_eq VAR_RESULT, B_OUTCOME_RAN, Route120_EventScript_RemoveBridgeKecleonPostBattle
+ * goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, Route120_EventScript_RemoveBridgeKecleonPostBattle
+ * goto Route120_EventScript_StevenGiveDeconScope
+ * end
+ * ```
+ */
+internal object Route120_EventScript_StevenBattleKecleon : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port Route120_EventScript_StevenBattleKecleon")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Route120_Text_IllGetMoreBerriesFromBerryMaster, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object Route120_EventScript_ReceivedBerry : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route120.IllGetMoreBerriesFromBerryMaster)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch TRAINER_JEFFREY_1, Route120_Text_JeffreyRematchIntro, Route120_Text_JeffreyRematchDefeat
+ * msgbox Route120_Text_JeffreyPostRematch, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route120_EventScript_RematchJeffrey : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route120_EventScript_RematchJeffrey")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch TRAINER_ROBERT_1, Route120_Text_RobertRematchIntro, Route120_Text_RobertRematchDefeat
+ * msgbox Route120_Text_RobertPostRematch, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route120_EventScript_RematchRobert : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route120_EventScript_RematchRobert")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Route120_Text_YesYouUnderstand, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object Route120_EventScript_BerryLove : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route120.YesYouUnderstand)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Route120_Text_StevenIllWaitHere, MSGBOX_DEFAULT
+ * setflag FLAG_NOT_READY_FOR_BATTLE_ROUTE_120
+ * release
+ * end
+ * ```
+ */
+internal object Route120_EventScript_StevenNotReady : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route120.StevenIllWaitHere)
+    ctx.setFlag(HoennFlags.FLAG_NOT_READY_FOR_BATTLE_ROUTE_120)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * fadescreenswapbuffers FADE_TO_BLACK
+ * removeobject LOCALID_BRIDGE_KECLEON
+ * removeobject LOCALID_BRIDGE_KECLEON_SHADOW
+ * fadescreenswapbuffers FADE_FROM_BLACK
+ * goto Route120_EventScript_StevenGiveDeconScope
+ * end
+ * ```
+ */
+internal object Route120_EventScript_RemoveBridgeKecleonPostBattle : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port Route120_EventScript_RemoveBridgeKecleonPostBattle")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
+ * waitmovement 0
+ * return
+ * ```
+ */
+internal object Route120_EventScript_PlayerApproachKecleonNorth : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port Route120_EventScript_PlayerApproachKecleonNorth")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_PLAYER, Route120_Movement_ApproachKecleonWest
+ * waitmovement 0
+ * return
+ * ```
+ */
+internal object Route120_EventScript_PlayerApproachKecleonWest : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port Route120_EventScript_PlayerApproachKecleonWest")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_ROUTE120_STEVEN, Common_Movement_WalkInPlaceFasterDown
+ * applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp
+ * waitmovement 0
+ * msgbox Route120_Text_StevenGiveDevonScope, MSGBOX_DEFAULT
+ * giveitem ITEM_DEVON_SCOPE
+ * setflag FLAG_RECEIVED_DEVON_SCOPE
+ * msgbox Route120_Text_StevenGoodbye, MSGBOX_DEFAULT
+ * closemessage
+ * applymovement LOCALID_ROUTE120_STEVEN, Common_Movement_WalkInPlaceFasterDown
+ * waitmovement 0
+ * delay 50
+ * setfieldeffectargument 0, 1
+ * dofieldeffect FLDEFF_NPCFLY_OUT
+ * delay 15
+ * removeobject LOCALID_ROUTE120_STEVEN
+ * waitfieldeffect FLDEFF_NPCFLY_OUT
+ * setmetatile 13, 15, METATILE_Fortree_WoodBridge1_Top, FALSE
+ * setmetatile 12, 16, METATILE_Fortree_WoodBridge1_Bottom, FALSE
+ * setmetatile 12, 17, METATILE_General_ReflectiveWater, FALSE
+ * setmetatile 13, 17, METATILE_General_ReflectiveWater, FALSE
+ * special DrawWholeMapView
+ * release
+ * end
+ * ```
+ */
+internal object Route120_EventScript_StevenGiveDeconScope : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port Route120_EventScript_StevenGiveDeconScope")
+}
+
 internal val Route120Scripts: Map<String, Script> =
     mapOf(
         "Route120_EventScript_Colin" to Route120_EventScript_Colin,
@@ -509,4 +732,20 @@ internal val Route120Scripts: Map<String, Script> =
         "Route120_EventScript_ItemRevive" to Route120_EventScript_ItemRevive,
         "Route120_EventScript_RouteSignFortree" to Route120_EventScript_RouteSignFortree,
         "Route120_EventScript_RouteSign121" to Route120_EventScript_RouteSign121,
+        "Route120_EventScript_BerryNotLove" to Route120_EventScript_BerryNotLove,
+        "Route120_EventScript_StevenAskReadyForBattle" to
+            Route120_EventScript_StevenAskReadyForBattle,
+        "Route120_EventScript_StevenBattleKecleon" to Route120_EventScript_StevenBattleKecleon,
+        "Route120_EventScript_ReceivedBerry" to Route120_EventScript_ReceivedBerry,
+        "Route120_EventScript_RematchJeffrey" to Route120_EventScript_RematchJeffrey,
+        "Route120_EventScript_RematchRobert" to Route120_EventScript_RematchRobert,
+        "Route120_EventScript_BerryLove" to Route120_EventScript_BerryLove,
+        "Route120_EventScript_StevenNotReady" to Route120_EventScript_StevenNotReady,
+        "Route120_EventScript_RemoveBridgeKecleonPostBattle" to
+            Route120_EventScript_RemoveBridgeKecleonPostBattle,
+        "Route120_EventScript_PlayerApproachKecleonNorth" to
+            Route120_EventScript_PlayerApproachKecleonNorth,
+        "Route120_EventScript_PlayerApproachKecleonWest" to
+            Route120_EventScript_PlayerApproachKecleonWest,
+        "Route120_EventScript_StevenGiveDeconScope" to Route120_EventScript_StevenGiveDeconScope,
     )

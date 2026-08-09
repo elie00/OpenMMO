@@ -288,6 +288,30 @@ internal object Route19_EventScript_RouteSign : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(Route19.RouteSign)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch_double TRAINER_SIS_AND_BRO_LIA_LUC, Route19_Text_LucRematchIntro, Route19_Text_LucDefeat, Route19_Text_LucNotEnoughMons
+ * msgbox Route19_Text_LucPostBattle, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route19_EventScript_LucRematch : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route19_EventScript_LucRematch")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch_double TRAINER_SIS_AND_BRO_LIA_LUC, Route19_Text_LiaRematchIntro, Route19_Text_LiaDefeat, Route19_Text_LiaNotEnoughMons
+ * msgbox Route19_Text_LiaPostBattle, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route19_EventScript_LiaRematch : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route19_EventScript_LiaRematch")
+}
+
 internal val Route19Scripts: Map<String, Script> =
     mapOf(
         "Route19_EventScript_Reece" to Route19_EventScript_Reece,
@@ -303,4 +327,6 @@ internal val Route19Scripts: Map<String, Script> =
         "Route19_EventScript_Lia" to Route19_EventScript_Lia,
         "Route19_EventScript_Luc" to Route19_EventScript_Luc,
         "Route19_EventScript_RouteSign" to Route19_EventScript_RouteSign,
+        "Route19_EventScript_LucRematch" to Route19_EventScript_LucRematch,
+        "Route19_EventScript_LiaRematch" to Route19_EventScript_LiaRematch,
     )

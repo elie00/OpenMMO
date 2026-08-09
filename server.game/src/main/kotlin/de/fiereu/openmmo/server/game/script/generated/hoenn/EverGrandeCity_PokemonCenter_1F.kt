@@ -54,6 +54,32 @@ internal object EverGrandeCity_PokemonCenter_1F_EventScript_Scott : Script {
       TODO("port EverGrandeCity_PokemonCenter_1F_EventScript_Scott")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_EVER_GRANDE_SCOTT, EverGrandeCity_PokemonCenter_1F_Movement_ScottExitNorth
+ * waitmovement 0
+ * return
+ * ```
+ */
+internal object EverGrandeCity_PokemonCenter_1F_EventScript_ScottExitNorth : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port EverGrandeCity_PokemonCenter_1F_EventScript_ScottExitNorth")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_EVER_GRANDE_SCOTT, EverGrandeCity_PokemonCenter_1F_Movement_ScottExit
+ * waitmovement 0
+ * return
+ * ```
+ */
+internal object EverGrandeCity_PokemonCenter_1F_EventScript_ScottExit : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port EverGrandeCity_PokemonCenter_1F_EventScript_ScottExit")
+}
+
 internal val EverGrandeCity_PokemonCenter_1FScripts: Map<String, Script> =
     mapOf(
         "EverGrandeCity_PokemonCenter_1F_EventScript_Nurse" to
@@ -64,4 +90,8 @@ internal val EverGrandeCity_PokemonCenter_1FScripts: Map<String, Script> =
             EverGrandeCity_PokemonCenter_1F_EventScript_ExpertM,
         "EverGrandeCity_PokemonCenter_1F_EventScript_Scott" to
             EverGrandeCity_PokemonCenter_1F_EventScript_Scott,
+        "EverGrandeCity_PokemonCenter_1F_EventScript_ScottExitNorth" to
+            EverGrandeCity_PokemonCenter_1F_EventScript_ScottExitNorth,
+        "EverGrandeCity_PokemonCenter_1F_EventScript_ScottExit" to
+            EverGrandeCity_PokemonCenter_1F_EventScript_ScottExit,
     )

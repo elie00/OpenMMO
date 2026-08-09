@@ -151,6 +151,134 @@ internal object BattleFrontier_BattleDomeLobby_EventScript_ReadRulesBoard : Scri
       TODO("port BattleFrontier_BattleDomeLobby_EventScript_ReadRulesBoard")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * special SavePlayerParty
+ * call_if_eq VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES, BattleFrontier_BattleDomeLobby_EventScript_WelcomeSingles
+ * call_if_eq VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES, BattleFrontier_BattleDomeLobby_EventScript_WelcomeDoubles
+ * call_if_eq VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES, BattleFrontier_BattleDomeLobby_EventScript_TakeSinglesChallenge
+ * call_if_eq VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES, BattleFrontier_BattleDomeLobby_EventScript_TakeDoublesChallenge
+ * waitmessage
+ * multichoice 17, 6, MULTI_CHALLENGEINFO, FALSE
+ * switch VAR_RESULT
+ * case 0, BattleFrontier_BattleDomeLobby_EventScript_TryEnterChallenge
+ * case 1, BattleFrontier_BattleDomeLobby_EventScript_ExplainChallenge
+ * case 2, BattleFrontier_BattleDomeLobby_EventScript_CancelChallenge
+ * case MULTI_B_PRESSED, BattleFrontier_BattleDomeLobby_EventScript_CancelChallenge
+ * ```
+ */
+internal object BattleFrontier_BattleDomeLobby_EventScript_AttendantWelcome : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port BattleFrontier_BattleDomeLobby_EventScript_AttendantWelcome")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox BattleFrontier_BattleDomeLobby_Text_PrevTourneyResultsDoublesLvOpen, MSGBOX_SIGN
+ * return
+ * ```
+ */
+internal object BattleFrontier_BattleDomeLobby_EventScript_PrevTourneyResultsDoublesLvOpen :
+    Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.sign(BattleFrontier_BattleDomeLobby.PrevTourneyResultsDoublesLvOpen)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox BattleFrontier_BattleDomeLobby_Text_PrevTourneyResultsSinglesLv50, MSGBOX_SIGN
+ * return
+ * ```
+ */
+internal object BattleFrontier_BattleDomeLobby_EventScript_PrevTourneyResultsSinglesLv50 : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.sign(BattleFrontier_BattleDomeLobby.PrevTourneyResultsSinglesLv50)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox BattleFrontier_BattleDomeLobby_Text_PrevTourneyResultsDoublesLv50, MSGBOX_SIGN
+ * return
+ * ```
+ */
+internal object BattleFrontier_BattleDomeLobby_EventScript_PrevTourneyResultsDoublesLv50 : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.sign(BattleFrontier_BattleDomeLobby.PrevTourneyResultsDoublesLv50)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox BattleFrontier_BattleDomeLobby_Text_PrevTourneyResultsSinglesLvOpen, MSGBOX_SIGN
+ * return
+ * ```
+ */
+internal object BattleFrontier_BattleDomeLobby_EventScript_PrevTourneyResultsSinglesLvOpen :
+    Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.sign(BattleFrontier_BattleDomeLobby.PrevTourneyResultsSinglesLvOpen)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox BattleFrontier_BattleDomeLobby_Text_WelcomeSingleBattle, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object BattleFrontier_BattleDomeLobby_EventScript_WelcomeSingles : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(BattleFrontier_BattleDomeLobby.WelcomeSingleBattle)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * message BattleFrontier_BattleDomeLobby_Text_TakeDoublesChallenge
+ * return
+ * ```
+ */
+internal object BattleFrontier_BattleDomeLobby_EventScript_TakeDoublesChallenge : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(BattleFrontier_BattleDomeLobby.TakeDoublesChallenge)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox BattleFrontier_BattleDomeLobby_Text_WelcomeDoubleBattle, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object BattleFrontier_BattleDomeLobby_EventScript_WelcomeDoubles : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(BattleFrontier_BattleDomeLobby.WelcomeDoubleBattle)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * message BattleFrontier_BattleDomeLobby_Text_TakeSinglesChallenge
+ * return
+ * ```
+ */
+internal object BattleFrontier_BattleDomeLobby_EventScript_TakeSinglesChallenge : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(BattleFrontier_BattleDomeLobby.TakeSinglesChallenge)
+  }
+}
+
 internal val BattleFrontier_BattleDomeLobbyScripts: Map<String, Script> =
     mapOf(
         "BattleFrontier_BattleDomeLobby_EventScript_SinglesAttendant" to
@@ -175,4 +303,22 @@ internal val BattleFrontier_BattleDomeLobbyScripts: Map<String, Script> =
             BattleFrontier_BattleDomeLobby_EventScript_RulesBoard,
         "BattleFrontier_BattleDomeLobby_EventScript_ReadRulesBoard" to
             BattleFrontier_BattleDomeLobby_EventScript_ReadRulesBoard,
+        "BattleFrontier_BattleDomeLobby_EventScript_AttendantWelcome" to
+            BattleFrontier_BattleDomeLobby_EventScript_AttendantWelcome,
+        "BattleFrontier_BattleDomeLobby_EventScript_PrevTourneyResultsDoublesLvOpen" to
+            BattleFrontier_BattleDomeLobby_EventScript_PrevTourneyResultsDoublesLvOpen,
+        "BattleFrontier_BattleDomeLobby_EventScript_PrevTourneyResultsSinglesLv50" to
+            BattleFrontier_BattleDomeLobby_EventScript_PrevTourneyResultsSinglesLv50,
+        "BattleFrontier_BattleDomeLobby_EventScript_PrevTourneyResultsDoublesLv50" to
+            BattleFrontier_BattleDomeLobby_EventScript_PrevTourneyResultsDoublesLv50,
+        "BattleFrontier_BattleDomeLobby_EventScript_PrevTourneyResultsSinglesLvOpen" to
+            BattleFrontier_BattleDomeLobby_EventScript_PrevTourneyResultsSinglesLvOpen,
+        "BattleFrontier_BattleDomeLobby_EventScript_WelcomeSingles" to
+            BattleFrontier_BattleDomeLobby_EventScript_WelcomeSingles,
+        "BattleFrontier_BattleDomeLobby_EventScript_TakeDoublesChallenge" to
+            BattleFrontier_BattleDomeLobby_EventScript_TakeDoublesChallenge,
+        "BattleFrontier_BattleDomeLobby_EventScript_WelcomeDoubles" to
+            BattleFrontier_BattleDomeLobby_EventScript_WelcomeDoubles,
+        "BattleFrontier_BattleDomeLobby_EventScript_TakeSinglesChallenge" to
+            BattleFrontier_BattleDomeLobby_EventScript_TakeSinglesChallenge,
     )

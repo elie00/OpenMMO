@@ -74,15 +74,16 @@ private suspend fun tutorialBattle(ctx: ScriptContext) {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * goto EventScript_DreamEaterTutor
  * end
  * ```
  */
 internal object ViridianCity_EventScript_DreamEaterTutor : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port ViridianCity_EventScript_DreamEaterTutor")
+  override suspend fun run(ctx: ScriptContext) {
+    return EventScript_DreamEaterTutor.run(ctx)
+  }
 }
 
 internal object ViridianCity_EventScript_OldMan : Script {
@@ -163,6 +164,53 @@ internal object ViridianCity_EventScript_GymDoor : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(ViridianCity.GymDoorsAreLocked)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * lock
+ * faceplayer
+ * goto_if_set FLAG_TUTOR_DREAM_EATER, EventScript_DreamEaterTaught
+ * msgbox Text_DreamEaterTeach, MSGBOX_YESNO
+ * goto_if_eq VAR_RESULT, NO, EventScript_DreamEaterDeclined
+ * call EventScript_CanOnlyBeLearnedOnce
+ * goto_if_eq VAR_RESULT, NO, EventScript_DreamEaterDeclined
+ * msgbox Text_DreamEaterWhichMon
+ * setvar VAR_0x8005, MOVETUTOR_DREAM_EATER
+ * call EventScript_ChooseMoveTutorMon
+ * goto_if_eq VAR_RESULT, FALSE, EventScript_DreamEaterDeclined
+ * setflag FLAG_TUTOR_DREAM_EATER
+ * goto EventScript_DreamEaterTaught
+ * end
+ * ```
+ */
+internal object EventScript_DreamEaterTutor : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_DreamEaterTutor")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox Text_DreamEaterDeclined
+ * release
+ * end
+ * ```
+ */
+internal object EventScript_DreamEaterDeclined : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_DreamEaterDeclined")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox Text_DreamEaterTaught
+ * release
+ * end
+ * ```
+ */
+internal object EventScript_DreamEaterTaught : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_DreamEaterTaught")
+}
+
 internal val ViridianCityScripts: Map<String, Script> =
     mapOf(
         "ViridianCity_OnTransition" to ViridianCity_OnTransition,
@@ -184,4 +232,7 @@ internal val ViridianCityScripts: Map<String, Script> =
         "ViridianCity_EventScript_TrainerTips2" to ViridianCity_EventScript_TrainerTips2,
         "ViridianCity_EventScript_CitySign" to ViridianCity_EventScript_CitySign,
         "ViridianCity_EventScript_GymDoor" to ViridianCity_EventScript_GymDoor,
+        "EventScript_DreamEaterTutor" to EventScript_DreamEaterTutor,
+        "EventScript_DreamEaterDeclined" to EventScript_DreamEaterDeclined,
+        "EventScript_DreamEaterTaught" to EventScript_DreamEaterTaught,
     )

@@ -1,5 +1,6 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
+import de.fiereu.openmmo.dialog.generated.hoenn.MossdeepCity_House3
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 
@@ -24,8 +25,40 @@ internal object MossdeepCity_House3_EventScript_SuperRodFisherman : Script {
       TODO("port MossdeepCity_House3_EventScript_SuperRodFisherman")
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MossdeepCity_House3_Text_DontYouLikeToFish, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object MossdeepCity_House3_EventScript_DeclineSuperRod : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MossdeepCity_House3.DontYouLikeToFish)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MossdeepCity_House3_Text_GoAfterSeafloorPokemon, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object MossdeepCity_House3_EventScript_ReceivedSuperRod : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MossdeepCity_House3.GoAfterSeafloorPokemon)
+  }
+}
+
 internal val MossdeepCity_House3Scripts: Map<String, Script> =
     mapOf(
         "MossdeepCity_House3_EventScript_SuperRodFisherman" to
             MossdeepCity_House3_EventScript_SuperRodFisherman,
+        "MossdeepCity_House3_EventScript_DeclineSuperRod" to
+            MossdeepCity_House3_EventScript_DeclineSuperRod,
+        "MossdeepCity_House3_EventScript_ReceivedSuperRod" to
+            MossdeepCity_House3_EventScript_ReceivedSuperRod,
     )

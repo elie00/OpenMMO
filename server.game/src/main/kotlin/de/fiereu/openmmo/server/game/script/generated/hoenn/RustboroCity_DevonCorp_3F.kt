@@ -50,7 +50,7 @@ internal object RustboroCity_DevonCorp_3F_EventScript_RareRocksDisplay : Script 
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox RustboroCity_DevonCorp_3F_Text_RepeatAndTimerHugelyPopular, MSGBOX_DEFAULT
  * release
@@ -58,8 +58,49 @@ internal object RustboroCity_DevonCorp_3F_EventScript_RareRocksDisplay : Script 
  * ```
  */
 internal object RustboroCity_DevonCorp_3F_EventScript_EmployeeBalls : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(RustboroCity_DevonCorp_3F.RepeatAndTimerHugelyPopular)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox RustboroCity_DevonCorp_3F_Text_NotFamiliarWithTrends, MSGBOX_DEFAULT
+ * closemessage
+ * applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
+ * waitmovement 0
+ * release
+ * end
+ * ```
+ */
+internal object RustboroCity_DevonCorp_3F_EventScript_MrStoneAfterFavor : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(RustboroCity_DevonCorp_3F.NotFamiliarWithTrends)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox RustboroCity_DevonCorp_3F_Text_ThankYouForDeliveringLetter, MSGBOX_DEFAULT
+ * giveitem ITEM_EXP_SHARE
+ * goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+ * setflag FLAG_RECEIVED_EXP_SHARE
+ * msgbox RustboroCity_DevonCorp_3F_Text_ExplainExpShare, MSGBOX_DEFAULT
+ * closemessage
+ * applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
+ * waitmovement 0
+ * release
+ * end
+ * ```
+ */
+internal object RustboroCity_DevonCorp_3F_EventScript_GiveExpShare : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port RustboroCity_DevonCorp_3F_EventScript_EmployeeBalls")
+      TODO("port RustboroCity_DevonCorp_3F_EventScript_GiveExpShare")
 }
 
 internal val RustboroCity_DevonCorp_3FScripts: Map<String, Script> =
@@ -72,4 +113,8 @@ internal val RustboroCity_DevonCorp_3FScripts: Map<String, Script> =
             RustboroCity_DevonCorp_3F_EventScript_RareRocksDisplay,
         "RustboroCity_DevonCorp_3F_EventScript_EmployeeBalls" to
             RustboroCity_DevonCorp_3F_EventScript_EmployeeBalls,
+        "RustboroCity_DevonCorp_3F_EventScript_MrStoneAfterFavor" to
+            RustboroCity_DevonCorp_3F_EventScript_MrStoneAfterFavor,
+        "RustboroCity_DevonCorp_3F_EventScript_GiveExpShare" to
+            RustboroCity_DevonCorp_3F_EventScript_GiveExpShare,
     )

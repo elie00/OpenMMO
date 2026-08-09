@@ -156,6 +156,18 @@ internal object Route105_EventScript_Andres : Script {
   override suspend fun run(ctx: ScriptContext) = TODO("port Route105_EventScript_Andres")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch TRAINER_ANDRES_1, Route105_Text_AndresRematchIntro, Route105_Text_AndresRematchDefeated
+ * msgbox Route105_Text_AndresRematchPostBattle, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route105_EventScript_AndresRematch : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route105_EventScript_AndresRematch")
+}
+
 internal val Route105Scripts: Map<String, Script> =
     mapOf(
         "Route105_EventScript_Luis" to Route105_EventScript_Luis,
@@ -166,4 +178,5 @@ internal val Route105Scripts: Map<String, Script> =
         "Route105_EventScript_Foster" to Route105_EventScript_Foster,
         "Route105_EventScript_Josue" to Route105_EventScript_Josue,
         "Route105_EventScript_Andres" to Route105_EventScript_Andres,
+        "Route105_EventScript_AndresRematch" to Route105_EventScript_AndresRematch,
     )

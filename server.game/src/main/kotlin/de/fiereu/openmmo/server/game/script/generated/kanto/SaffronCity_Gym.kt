@@ -189,7 +189,7 @@ internal object SaffronCity_Gym_EventScript_GymStatue : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox SaffronCity_Gym_Text_GymGuyPostVictory
  * release
@@ -197,12 +197,13 @@ internal object SaffronCity_Gym_EventScript_GymStatue : Script {
  * ```
  */
 internal object SaffronCity_Gym_EventScript_GymGuyPostVictory : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SaffronCity_Gym_EventScript_GymGuyPostVictory")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SaffronCity_Gym.GymGuyPostVictory)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox SaffronCity_Gym_Text_GymStatuePlayerWon
  * releaseall
@@ -210,8 +211,40 @@ internal object SaffronCity_Gym_EventScript_GymGuyPostVictory : Script {
  * ```
  */
 internal object SaffronCity_Gym_EventScript_GymStatuePostVictory : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SaffronCity_Gym_EventScript_GymStatuePostVictory")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SaffronCity_Gym.GymStatuePlayerWon)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox SaffronCity_Gym_Text_ExplainMarshBadgeTakeThis
+ * checkitemspace ITEM_TM04
+ * goto_if_eq VAR_RESULT, FALSE, SaffronCity_Gym_EventScript_NoRoomForTM04
+ * giveitem_msg SaffronCity_Gym_Text_ReceivedTM04FromSabrina, ITEM_TM04
+ * setflag FLAG_GOT_TM04_FROM_SABRINA
+ * msgbox SaffronCity_Gym_Text_SabrinaPostBattle
+ * release
+ * end
+ * ```
+ */
+internal object SaffronCity_Gym_EventScript_GiveTM04 : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port SaffronCity_Gym_EventScript_GiveTM04")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SaffronCity_Gym_Text_BagFullOfOtherItems
+ * release
+ * end
+ * ```
+ */
+internal object SaffronCity_Gym_EventScript_NoRoomForTM04 : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SaffronCity_Gym.BagFullOfOtherItems)
+  }
 }
 
 internal val SaffronCity_GymScripts: Map<String, Script> =
@@ -230,4 +263,6 @@ internal val SaffronCity_GymScripts: Map<String, Script> =
             SaffronCity_Gym_EventScript_GymGuyPostVictory,
         "SaffronCity_Gym_EventScript_GymStatuePostVictory" to
             SaffronCity_Gym_EventScript_GymStatuePostVictory,
+        "SaffronCity_Gym_EventScript_GiveTM04" to SaffronCity_Gym_EventScript_GiveTM04,
+        "SaffronCity_Gym_EventScript_NoRoomForTM04" to SaffronCity_Gym_EventScript_NoRoomForTM04,
     )

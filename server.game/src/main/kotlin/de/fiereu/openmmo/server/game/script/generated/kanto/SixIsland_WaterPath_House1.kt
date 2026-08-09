@@ -67,6 +67,111 @@ internal object SixIsland_WaterPath_House1_EventScript_SizeRecordNonEmpty : Scri
       TODO("port SixIsland_WaterPath_House1_EventScript_SizeRecordNonEmpty")
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * goto_if_unset FLAG_GOT_NEST_BALL_FROM_WATER_PATH_HOUSE_1, SixIsland_WaterPath_House1_EventScript_ShownBigHeracross
+ * msgbox SixIsland_WaterPath_House1_Text_ItsXInchesYInchesWasBiggest
+ * release
+ * end
+ * ```
+ */
+internal object SixIsland_WaterPath_House1_EventScript_ShownSmallHeracross : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.isFlagSet(KantoFlags.FLAG_GOT_NEST_BALL_FROM_WATER_PATH_HOUSE_1))
+        return SixIsland_WaterPath_House1_EventScript_ShownBigHeracross.run(ctx)
+    ctx.say(SixIsland_WaterPath_House1.ItsXInchesYInchesWasBiggest)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * setflag FLAG_GOT_NEST_BALL_FROM_WATER_PATH_HOUSE_1
+ * msgbox SixIsland_WaterPath_House1_Text_ItsXInchesDeserveReward
+ * giveitem ITEM_NEST_BALL
+ * goto_if_eq VAR_RESULT, FALSE, SixIsland_WaterPath_House1_EventScript_NoRoomForNestBall
+ * msgbox SixIsland_WaterPath_House1_Text_WantToSeeBiggerOne
+ * release
+ * end
+ * ```
+ */
+internal object SixIsland_WaterPath_House1_EventScript_ShownBigHeracross : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SixIsland_WaterPath_House1_EventScript_ShownBigHeracross")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SixIsland_WaterPath_House1_Text_ThisWontDo
+ * release
+ * end
+ * ```
+ */
+internal object SixIsland_WaterPath_House1_EventScript_ShownNonHeracross : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SixIsland_WaterPath_House1.ThisWontDo)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * goto_if_unset FLAG_GOT_NEST_BALL_FROM_WATER_PATH_HOUSE_1, SixIsland_WaterPath_House1_EventScript_ShownBigHeracross
+ * msgbox SixIsland_WaterPath_House1_Text_ItsXInchesSameAsBefore
+ * release
+ * end
+ * ```
+ */
+internal object SixIsland_WaterPath_House1_EventScript_ShownTiedHeracross : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.isFlagSet(KantoFlags.FLAG_GOT_NEST_BALL_FROM_WATER_PATH_HOUSE_1))
+        return SixIsland_WaterPath_House1_EventScript_ShownBigHeracross.run(ctx)
+    ctx.say(SixIsland_WaterPath_House1.ItsXInchesSameAsBefore)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * release
+ * end
+ * ```
+ */
+internal object SixIsland_WaterPath_House1_EventScript_DontShowMon : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SixIsland_WaterPath_House1_EventScript_DontShowMon")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SixIsland_WaterPath_House1_Text_LoveItNeedItHeracross
+ * release
+ * end
+ * ```
+ */
+internal object SixIsland_WaterPath_House1_EventScript_NoHeracrossInParty : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SixIsland_WaterPath_House1.LoveItNeedItHeracross)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SixIsland_WaterPath_House1_Text_YourBagIsFull
+ * release
+ * end
+ * ```
+ */
+internal object SixIsland_WaterPath_House1_EventScript_NoRoomForNestBall : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SixIsland_WaterPath_House1.YourBagIsFull)
+  }
+}
+
 internal val SixIsland_WaterPath_House1Scripts: Map<String, Script> =
     mapOf(
         "SixIsland_WaterPath_House1_EventScript_Beauty" to
@@ -75,4 +180,18 @@ internal val SixIsland_WaterPath_House1Scripts: Map<String, Script> =
             SixIsland_WaterPath_House1_EventScript_SizeRecord,
         "SixIsland_WaterPath_House1_EventScript_SizeRecordNonEmpty" to
             SixIsland_WaterPath_House1_EventScript_SizeRecordNonEmpty,
+        "SixIsland_WaterPath_House1_EventScript_ShownSmallHeracross" to
+            SixIsland_WaterPath_House1_EventScript_ShownSmallHeracross,
+        "SixIsland_WaterPath_House1_EventScript_ShownBigHeracross" to
+            SixIsland_WaterPath_House1_EventScript_ShownBigHeracross,
+        "SixIsland_WaterPath_House1_EventScript_ShownNonHeracross" to
+            SixIsland_WaterPath_House1_EventScript_ShownNonHeracross,
+        "SixIsland_WaterPath_House1_EventScript_ShownTiedHeracross" to
+            SixIsland_WaterPath_House1_EventScript_ShownTiedHeracross,
+        "SixIsland_WaterPath_House1_EventScript_DontShowMon" to
+            SixIsland_WaterPath_House1_EventScript_DontShowMon,
+        "SixIsland_WaterPath_House1_EventScript_NoHeracrossInParty" to
+            SixIsland_WaterPath_House1_EventScript_NoHeracrossInParty,
+        "SixIsland_WaterPath_House1_EventScript_NoRoomForNestBall" to
+            SixIsland_WaterPath_House1_EventScript_NoRoomForNestBall,
     )

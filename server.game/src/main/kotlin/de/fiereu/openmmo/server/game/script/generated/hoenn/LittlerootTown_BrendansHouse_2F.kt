@@ -186,6 +186,36 @@ internal object PlayersHouse_2F_EventScript_GameCube : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(PlayersHouse_2F.ItsAGameCube)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox gText_PokemonTrainerSchoolEmail, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object LittlerootTown_BrendansHouse_2F_EventScript_CheckRivalsPC : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LittlerootTown_BrendansHouse_2F_EventScript_CheckRivalsPC")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * setvar VAR_0x8004, PC_LOCATION_BRENDANS_HOUSE
+ * special DoPCTurnOnEffect
+ * playse SE_PC_ON
+ * msgbox gText_PlayerHouseBootPC, MSGBOX_DEFAULT
+ * special BedroomPC
+ * releaseall
+ * end
+ * ```
+ */
+internal object LittlerootTown_BrendansHouse_2F_EventScript_CheckPlayersPC : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LittlerootTown_BrendansHouse_2F_EventScript_CheckPlayersPC")
+}
+
 internal val LittlerootTown_BrendansHouse_2FScripts: Map<String, Script> =
     mapOf(
         "LittlerootTown_BrendansHouse_2F_OnTransition" to
@@ -199,4 +229,8 @@ internal val LittlerootTown_BrendansHouse_2FScripts: Map<String, Script> =
         "LittlerootTown_BrendansHouse_2F_EventScript_WallClock" to
             LittlerootTown_BrendansHouse_2F_EventScript_WallClock,
         "PlayersHouse_2F_EventScript_GameCube" to PlayersHouse_2F_EventScript_GameCube,
+        "LittlerootTown_BrendansHouse_2F_EventScript_CheckRivalsPC" to
+            LittlerootTown_BrendansHouse_2F_EventScript_CheckRivalsPC,
+        "LittlerootTown_BrendansHouse_2F_EventScript_CheckPlayersPC" to
+            LittlerootTown_BrendansHouse_2F_EventScript_CheckPlayersPC,
     )

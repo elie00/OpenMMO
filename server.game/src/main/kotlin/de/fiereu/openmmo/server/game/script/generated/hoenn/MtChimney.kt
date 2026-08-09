@@ -315,6 +315,200 @@ internal object MtChimney_EventScript_RouteSign : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(MtChimney.RouteSign)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_MT_CHIMNEY_ARCHIE, MtChimney_Movement_ArchieApproachPlayerNorth
+ * waitmovement 0
+ * return
+ * ```
+ */
+internal object MtChimney_EventScript_ArchieApproachPlayerNorth : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port MtChimney_EventScript_ArchieApproachPlayerNorth")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_MT_CHIMNEY_ARCHIE, MtChimney_Movement_ArchieExitEast
+ * waitmovement 0
+ * return
+ * ```
+ */
+internal object MtChimney_EventScript_ArchieExitEast : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port MtChimney_EventScript_ArchieExitEast")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MtChimney_Text_PlayerLeftMeteorite, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object MtChimney_EventScript_LeaveMeteoriteAlone : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MtChimney.PlayerLeftMeteorite)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_MT_CHIMNEY_ARCHIE, MtChimney_Movement_ArchieApproachPlayerEast
+ * waitmovement 0
+ * return
+ * ```
+ */
+internal object MtChimney_EventScript_ArchieApproachPlayerEast : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port MtChimney_EventScript_ArchieApproachPlayerEast")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch TRAINER_SHELBY_1, MtChimney_Text_ShelbyRematchIntro, MtChimney_Text_ShelbyRematchDefeat
+ * msgbox MtChimney_Text_ShelbyPostRematch, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object MtChimney_EventScript_RematchShelby : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port MtChimney_EventScript_RematchShelby")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch TRAINER_SAWYER_1, MtChimney_Text_SawyerRematchIntro, MtChimney_Text_SawyerRematchDefeat
+ * msgbox MtChimney_Text_SawyerPostRematch, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object MtChimney_EventScript_SawyerRematch : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port MtChimney_EventScript_SawyerRematch")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * removemoney 200
+ * updatemoneybox
+ * return
+ * ```
+ */
+internal object MtChimney_EventScript_RemoveMoney : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port MtChimney_EventScript_RemoveMoney")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox MtChimney_Text_OhFineThen, MSGBOX_DEFAULT
+ * hidemoneybox
+ * release
+ * end
+ * ```
+ */
+internal object MtChimney_EventScript_DeclineLavaCookie : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port MtChimney_EventScript_DeclineLavaCookie")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox gText_TooBadBagIsFull, MSGBOX_DEFAULT
+ * hidemoneybox
+ * release
+ * end
+ * ```
+ */
+internal object MtChimney_EventScript_BagIsFull : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port MtChimney_EventScript_BagIsFull")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MtChimney_Text_ArchieIHaveMyHandsFull, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object MtChimney_EventScript_ArchieBusyFighting : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MtChimney.ArchieIHaveMyHandsFull)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MtChimney_Text_ArchieGoStopTeamMagma, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object MtChimney_EventScript_ArchieGoStopTeamMagma : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MtChimney.ArchieGoStopTeamMagma)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MtChimney_Text_MeteoriteFittedOnMachine, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object MtChimney_EventScript_MachineOn : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MtChimney.MeteoriteFittedOnMachine)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_MT_CHIMNEY_ARCHIE, MtChimney_Movement_ArchieExitNorth
+ * waitmovement 0
+ * return
+ * ```
+ */
+internal object MtChimney_EventScript_ArchieExitNorth : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port MtChimney_EventScript_ArchieExitNorth")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MtChimney_Text_MachineMakesNoResponse, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object MtChimney_EventScript_MachineOff : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MtChimney.MachineMakesNoResponse)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox MtChimney_Text_YouveNotGotTheMoney, MSGBOX_DEFAULT
+ * hidemoneybox
+ * release
+ * end
+ * ```
+ */
+internal object MtChimney_EventScript_NotEnoughMoney : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port MtChimney_EventScript_NotEnoughMoney")
+}
+
 internal val MtChimneyScripts: Map<String, Script> =
     mapOf(
         "MtChimney_EventScript_Archie" to MtChimney_EventScript_Archie,
@@ -341,4 +535,22 @@ internal val MtChimneyScripts: Map<String, Script> =
         "MtChimney_EventScript_Sawyer" to MtChimney_EventScript_Sawyer,
         "MtChimney_EventScript_MeteoriteMachine" to MtChimney_EventScript_MeteoriteMachine,
         "MtChimney_EventScript_RouteSign" to MtChimney_EventScript_RouteSign,
+        "MtChimney_EventScript_ArchieApproachPlayerNorth" to
+            MtChimney_EventScript_ArchieApproachPlayerNorth,
+        "MtChimney_EventScript_ArchieExitEast" to MtChimney_EventScript_ArchieExitEast,
+        "MtChimney_EventScript_LeaveMeteoriteAlone" to MtChimney_EventScript_LeaveMeteoriteAlone,
+        "MtChimney_EventScript_ArchieApproachPlayerEast" to
+            MtChimney_EventScript_ArchieApproachPlayerEast,
+        "MtChimney_EventScript_RematchShelby" to MtChimney_EventScript_RematchShelby,
+        "MtChimney_EventScript_SawyerRematch" to MtChimney_EventScript_SawyerRematch,
+        "MtChimney_EventScript_RemoveMoney" to MtChimney_EventScript_RemoveMoney,
+        "MtChimney_EventScript_DeclineLavaCookie" to MtChimney_EventScript_DeclineLavaCookie,
+        "MtChimney_EventScript_BagIsFull" to MtChimney_EventScript_BagIsFull,
+        "MtChimney_EventScript_ArchieBusyFighting" to MtChimney_EventScript_ArchieBusyFighting,
+        "MtChimney_EventScript_ArchieGoStopTeamMagma" to
+            MtChimney_EventScript_ArchieGoStopTeamMagma,
+        "MtChimney_EventScript_MachineOn" to MtChimney_EventScript_MachineOn,
+        "MtChimney_EventScript_ArchieExitNorth" to MtChimney_EventScript_ArchieExitNorth,
+        "MtChimney_EventScript_MachineOff" to MtChimney_EventScript_MachineOff,
+        "MtChimney_EventScript_NotEnoughMoney" to MtChimney_EventScript_NotEnoughMoney,
     )

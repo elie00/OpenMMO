@@ -192,6 +192,46 @@ internal object FuchsiaCity_EventScript_SafariGameSign : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(FuchsiaCity.SafariGameSign)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * setvar VAR_0x8004, SPECIES_OMANYTE
+ * special SetSeenMon
+ * showmonpic SPECIES_OMANYTE, 10, 3
+ * msgbox FuchsiaCity_Text_OmanyteSign
+ * hidemonpic
+ * releaseall
+ * end
+ * ```
+ */
+internal object FuchsiaCity_EventScript_OmanyteSign : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port FuchsiaCity_EventScript_OmanyteSign")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox Text_SubstituteDeclined
+ * release
+ * end
+ * ```
+ */
+internal object EventScript_SubstituteDeclined : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_SubstituteDeclined")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox Text_SubstituteTaught
+ * release
+ * end
+ * ```
+ */
+internal object EventScript_SubstituteTaught : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_SubstituteTaught")
+}
+
 internal val FuchsiaCityScripts: Map<String, Script> =
     mapOf(
         "FuchsiaCity_EventScript_Erik" to FuchsiaCity_EventScript_Erik,
@@ -211,4 +251,7 @@ internal val FuchsiaCityScripts: Map<String, Script> =
         "FuchsiaCity_EventScript_FossilMonSign" to FuchsiaCity_EventScript_FossilMonSign,
         "FuchsiaCity_EventScript_LaprasSign" to FuchsiaCity_EventScript_LaprasSign,
         "FuchsiaCity_EventScript_SafariGameSign" to FuchsiaCity_EventScript_SafariGameSign,
+        "FuchsiaCity_EventScript_OmanyteSign" to FuchsiaCity_EventScript_OmanyteSign,
+        "EventScript_SubstituteDeclined" to EventScript_SubstituteDeclined,
+        "EventScript_SubstituteTaught" to EventScript_SubstituteTaught,
     )

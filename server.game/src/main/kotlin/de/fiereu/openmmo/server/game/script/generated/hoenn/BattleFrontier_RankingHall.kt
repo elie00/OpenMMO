@@ -181,6 +181,37 @@ internal object BattleFrontier_RankingHall_EventScript_PalaceArenaPyramidRecords
       ctx.sign(BattleFrontier_RankingHall.PalaceArenaPyramidRecords)
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox BattleFrontier_RankingHall_Text_WowThatsSuper, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object BattleFrontier_RankingHall_EventScript_NinjaBoyNameOnList : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(BattleFrontier_RankingHall.WowThatsSuper)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * special ShowRankingHallRecordsWindow
+ * waitbuttonpress
+ * special ScrollRankingHallRecordsWindow
+ * waitbuttonpress
+ * special RemoveRecordsWindow
+ * releaseall
+ * end
+ * ```
+ */
+internal object BattleFrontier_RankingHall_EventScript_ShowRecords : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port BattleFrontier_RankingHall_EventScript_ShowRecords")
+}
+
 internal val BattleFrontier_RankingHallScripts: Map<String, Script> =
     mapOf(
         "BattleFrontier_RankingHall_EventScript_Attendant" to
@@ -212,4 +243,8 @@ internal val BattleFrontier_RankingHallScripts: Map<String, Script> =
             BattleFrontier_RankingHall_EventScript_DomePikeFactoryRecordsSign,
         "BattleFrontier_RankingHall_EventScript_PalaceArenaPyramidRecordsSIgn" to
             BattleFrontier_RankingHall_EventScript_PalaceArenaPyramidRecordsSIgn,
+        "BattleFrontier_RankingHall_EventScript_NinjaBoyNameOnList" to
+            BattleFrontier_RankingHall_EventScript_NinjaBoyNameOnList,
+        "BattleFrontier_RankingHall_EventScript_ShowRecords" to
+            BattleFrontier_RankingHall_EventScript_ShowRecords,
     )

@@ -220,7 +220,7 @@ internal object ViridianCity_Gym_EventScript_GymStatue : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox ViridianCity_Gym_Text_GymStatuePlayerWon
  * releaseall
@@ -228,8 +228,9 @@ internal object ViridianCity_Gym_EventScript_GymStatue : Script {
  * ```
  */
 internal object ViridianCity_Gym_EventScript_GymStatuePostVictory : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port ViridianCity_Gym_EventScript_GymStatuePostVictory")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(ViridianCity_Gym.GymStatuePlayerWon)
+  }
 }
 
 /**
@@ -244,6 +245,37 @@ internal object ViridianCity_Gym_EventScript_GymStatuePostVictory : Script {
 internal object ViridianCity_Gym_EventScript_GymGuyPostVictory : Script {
   override suspend fun run(ctx: ScriptContext) =
       TODO("port ViridianCity_Gym_EventScript_GymGuyPostVictory")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox ViridianCity_Gym_Text_ExplainEarthBadgeTakeThis
+ * checkitemspace ITEM_TM26
+ * goto_if_eq VAR_RESULT, FALSE, ViridianCity_Gym_EventScript_NoRoomForTM26
+ * giveitem_msg ViridianCity_Gym_Text_ReceivedTM26FromGiovanni, ITEM_TM26
+ * setflag FLAG_GOT_TM26_FROM_GIOVANNI
+ * msgbox ViridianCity_Gym_Text_ExplainTM26
+ * release
+ * end
+ * ```
+ */
+internal object ViridianCity_Gym_EventScript_GiveTM26 : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port ViridianCity_Gym_EventScript_GiveTM26")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox ViridianCity_Gym_Text_YouDoNotHaveSpace
+ * release
+ * end
+ * ```
+ */
+internal object ViridianCity_Gym_EventScript_NoRoomForTM26 : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(ViridianCity_Gym.YouDoNotHaveSpace)
+  }
 }
 
 internal val ViridianCity_GymScripts: Map<String, Script> =
@@ -263,4 +295,6 @@ internal val ViridianCity_GymScripts: Map<String, Script> =
             ViridianCity_Gym_EventScript_GymStatuePostVictory,
         "ViridianCity_Gym_EventScript_GymGuyPostVictory" to
             ViridianCity_Gym_EventScript_GymGuyPostVictory,
+        "ViridianCity_Gym_EventScript_GiveTM26" to ViridianCity_Gym_EventScript_GiveTM26,
+        "ViridianCity_Gym_EventScript_NoRoomForTM26" to ViridianCity_Gym_EventScript_NoRoomForTM26,
     )

@@ -176,7 +176,7 @@ internal object CeruleanCity_BikeShop_EventScript_Bicycle : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox CeruleanCity_Text_YouCanCutDownSmallTrees
  * release
@@ -184,8 +184,173 @@ internal object CeruleanCity_BikeShop_EventScript_Bicycle : Script {
  * ```
  */
 internal object CeruleanCity_EventScript_LittleBoySlowbroMoved : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port CeruleanCity_EventScript_LittleBoySlowbroMoved")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(CeruleanCity.YouCanCutDownSmallTrees)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox CeruleanCity_Text_SlowbroPayAttention
+ * return
+ * ```
+ */
+internal object CeruleanCity_EventScript_SlowbroFailed1 : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(CeruleanCity.SlowbroPayAttention)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox CeruleanCity_Text_NoYouBlewItAgain
+ * return
+ * ```
+ */
+internal object CeruleanCity_EventScript_SlowbroFailed2 : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(CeruleanCity.NoYouBlewItAgain)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox CeruleanCity_Text_HardToControlMonsObedience
+ * return
+ * ```
+ */
+internal object CeruleanCity_EventScript_SlowbroFailed3 : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(CeruleanCity.HardToControlMonsObedience)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox CeruleanCity_Text_OkayIllReturnStolenTM
+ * checkitemspace ITEM_TM28
+ * goto_if_eq VAR_RESULT, FALSE, CeruleanCity_EventScript_NoRoomForTM28
+ * giveitem_msg CeruleanCity_Text_RecoveredTM28FromGrunt, ITEM_TM28
+ * msgbox CeruleanCity_Text_BetterGetMovingBye
+ * closemessage
+ * fadescreen FADE_TO_BLACK
+ * removeobject LOCALID_CERULEAN_GRUNT
+ * fadescreen FADE_FROM_BLACK
+ * setflag FLAG_GOT_TM28_FROM_ROCKET
+ * release
+ * end
+ * ```
+ */
+internal object CeruleanCity_EventScript_GruntDefeated : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port CeruleanCity_EventScript_GruntDefeated")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox CeruleanCity_Text_SlowbroIgnoredOrders
+ * return
+ * ```
+ */
+internal object CeruleanCity_EventScript_SlowbroText4 : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(CeruleanCity.SlowbroIgnoredOrders)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox CeruleanCity_Text_SlowbroTookSnooze
+ * return
+ * ```
+ */
+internal object CeruleanCity_EventScript_SlowbroText1 : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(CeruleanCity.SlowbroTookSnooze)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * message CeruleanCity_Text_SlowbroWithdraw
+ * return
+ * ```
+ */
+internal object CeruleanCity_EventScript_SlowbroCommand3 : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(CeruleanCity.SlowbroWithdraw)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * message CeruleanCity_Text_SlowbroPunch
+ * return
+ * ```
+ */
+internal object CeruleanCity_EventScript_SlowbroCommand2 : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(CeruleanCity.SlowbroPunch)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox CeruleanCity_Text_SlowbroTurnedAway
+ * return
+ * ```
+ */
+internal object CeruleanCity_EventScript_SlowbroText3 : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(CeruleanCity.SlowbroTurnedAway)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * message CeruleanCity_Text_SlowbroUseSonicboom
+ * return
+ * ```
+ */
+internal object CeruleanCity_EventScript_SlowbroCommand1 : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(CeruleanCity.SlowbroUseSonicboom)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox CeruleanCity_Text_SlowbroLoafingAround
+ * return
+ * ```
+ */
+internal object CeruleanCity_EventScript_SlowbroText2 : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(CeruleanCity.SlowbroLoafingAround)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * textcolor NPC_TEXT_COLOR_MALE
+ * msgbox CeruleanCity_Text_MakeRoomForThisCantRun
+ * release
+ * end
+ * ```
+ */
+internal object CeruleanCity_EventScript_NoRoomForTM28 : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port CeruleanCity_EventScript_NoRoomForTM28")
 }
 
 internal val CeruleanCityScripts: Map<String, Script> =
@@ -206,4 +371,16 @@ internal val CeruleanCityScripts: Map<String, Script> =
         "CeruleanCity_BikeShop_EventScript_Bicycle" to CeruleanCity_BikeShop_EventScript_Bicycle,
         "CeruleanCity_EventScript_LittleBoySlowbroMoved" to
             CeruleanCity_EventScript_LittleBoySlowbroMoved,
+        "CeruleanCity_EventScript_SlowbroFailed1" to CeruleanCity_EventScript_SlowbroFailed1,
+        "CeruleanCity_EventScript_SlowbroFailed2" to CeruleanCity_EventScript_SlowbroFailed2,
+        "CeruleanCity_EventScript_SlowbroFailed3" to CeruleanCity_EventScript_SlowbroFailed3,
+        "CeruleanCity_EventScript_GruntDefeated" to CeruleanCity_EventScript_GruntDefeated,
+        "CeruleanCity_EventScript_SlowbroText4" to CeruleanCity_EventScript_SlowbroText4,
+        "CeruleanCity_EventScript_SlowbroText1" to CeruleanCity_EventScript_SlowbroText1,
+        "CeruleanCity_EventScript_SlowbroCommand3" to CeruleanCity_EventScript_SlowbroCommand3,
+        "CeruleanCity_EventScript_SlowbroCommand2" to CeruleanCity_EventScript_SlowbroCommand2,
+        "CeruleanCity_EventScript_SlowbroText3" to CeruleanCity_EventScript_SlowbroText3,
+        "CeruleanCity_EventScript_SlowbroCommand1" to CeruleanCity_EventScript_SlowbroCommand1,
+        "CeruleanCity_EventScript_SlowbroText2" to CeruleanCity_EventScript_SlowbroText2,
+        "CeruleanCity_EventScript_NoRoomForTM28" to CeruleanCity_EventScript_NoRoomForTM28,
     )

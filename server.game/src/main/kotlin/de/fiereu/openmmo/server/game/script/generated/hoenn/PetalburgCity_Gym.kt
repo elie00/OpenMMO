@@ -444,7 +444,7 @@ internal object PetalburgCity_Gym_EventScript_RightGymStatue : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox PetalburgCity_Gym_Text_GymGuidePostVictory, MSGBOX_DEFAULT
  * release
@@ -452,8 +452,170 @@ internal object PetalburgCity_Gym_EventScript_RightGymStatue : Script {
  * ```
  */
 internal object PetalburgCity_Gym_EventScript_GymGuidePostVictory : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(PetalburgCity_Gym.GymGuidePostVictory)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * releaseall
+ * end
+ * ```
+ */
+internal object PetalburgCity_Gym_EventScript_DontEnterRoom : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port PetalburgCity_Gym_EventScript_GymGuidePostVictory")
+      TODO("port PetalburgCity_Gym_EventScript_DontEnterRoom")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox PetalburgCity_Gym_Text_DoorAppearsLocked, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object PetalburgCity_Gym_EventScript_DoorLocked : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(PetalburgCity_Gym.DoorAppearsLocked)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * closemessage
+ * delay 30
+ * warpdoor MAP_PETALBURG_CITY_GYM, VAR_0x8008, VAR_0x8009
+ * waitstate
+ * releaseall
+ * end
+ * ```
+ */
+internal object PetalburgCity_Gym_EventScript_EnterRoom : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port PetalburgCity_Gym_EventScript_EnterRoom")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox PetalburgCity_Gym_Text_JodyPostBadge, MSGBOX_NPC
+ * end
+ * ```
+ */
+internal object PetalburgCity_Gym_EventScript_JodyPostBadge : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(PetalburgCity_Gym.JodyPostBadge)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox PetalburgCity_Gym_Text_GymStatueCertified, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object PetalburgCity_Gym_EventScript_GymStatueCertified : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(PetalburgCity_Gym.GymStatueCertified)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox PetalburgCity_Gym_Text_GeorgePostBadge, MSGBOX_NPC
+ * end
+ * ```
+ */
+internal object PetalburgCity_Gym_EventScript_GeorgePostBadge : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(PetalburgCity_Gym.GeorgePostBadge)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox PetalburgCity_Gym_Text_BerkePostBadge, MSGBOX_NPC
+ * end
+ * ```
+ */
+internal object PetalburgCity_Gym_EventScript_BerkePostBadge : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(PetalburgCity_Gym.BerkePostBadge)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox PetalburgCity_Gym_Text_MaryPostBadge, MSGBOX_NPC
+ * end
+ * ```
+ */
+internal object PetalburgCity_Gym_EventScript_MaryPostBadge : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(PetalburgCity_Gym.MaryPostBadge)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox PetalburgCity_Gym_Text_GymStatue, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object PetalburgCity_Gym_EventScript_GymStatue : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(PetalburgCity_Gym.GymStatue)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox PetalburgCity_Gym_Text_ParkerPostBadge, MSGBOX_NPC
+ * end
+ * ```
+ */
+internal object PetalburgCity_Gym_EventScript_ParkerPostBadge : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(PetalburgCity_Gym.ParkerPostBadge)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox PetalburgCity_Gym_Text_RandallPostBadge, MSGBOX_NPC
+ * end
+ * ```
+ */
+internal object PetalburgCity_Gym_EventScript_RandallPostBadge : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(PetalburgCity_Gym.RandallPostBadge)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox PetalburgCity_Gym_Text_AlexiaPostBadge, MSGBOX_NPC
+ * end
+ * ```
+ */
+internal object PetalburgCity_Gym_EventScript_AlexiaPostBadge : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(PetalburgCity_Gym.AlexiaPostBadge)
+  }
 }
 
 internal val PetalburgCity_GymScripts: Map<String, Script> =
@@ -500,4 +662,25 @@ internal val PetalburgCity_GymScripts: Map<String, Script> =
             PetalburgCity_Gym_EventScript_RightGymStatue,
         "PetalburgCity_Gym_EventScript_GymGuidePostVictory" to
             PetalburgCity_Gym_EventScript_GymGuidePostVictory,
+        "PetalburgCity_Gym_EventScript_DontEnterRoom" to
+            PetalburgCity_Gym_EventScript_DontEnterRoom,
+        "PetalburgCity_Gym_EventScript_DoorLocked" to PetalburgCity_Gym_EventScript_DoorLocked,
+        "PetalburgCity_Gym_EventScript_EnterRoom" to PetalburgCity_Gym_EventScript_EnterRoom,
+        "PetalburgCity_Gym_EventScript_JodyPostBadge" to
+            PetalburgCity_Gym_EventScript_JodyPostBadge,
+        "PetalburgCity_Gym_EventScript_GymStatueCertified" to
+            PetalburgCity_Gym_EventScript_GymStatueCertified,
+        "PetalburgCity_Gym_EventScript_GeorgePostBadge" to
+            PetalburgCity_Gym_EventScript_GeorgePostBadge,
+        "PetalburgCity_Gym_EventScript_BerkePostBadge" to
+            PetalburgCity_Gym_EventScript_BerkePostBadge,
+        "PetalburgCity_Gym_EventScript_MaryPostBadge" to
+            PetalburgCity_Gym_EventScript_MaryPostBadge,
+        "PetalburgCity_Gym_EventScript_GymStatue" to PetalburgCity_Gym_EventScript_GymStatue,
+        "PetalburgCity_Gym_EventScript_ParkerPostBadge" to
+            PetalburgCity_Gym_EventScript_ParkerPostBadge,
+        "PetalburgCity_Gym_EventScript_RandallPostBadge" to
+            PetalburgCity_Gym_EventScript_RandallPostBadge,
+        "PetalburgCity_Gym_EventScript_AlexiaPostBadge" to
+            PetalburgCity_Gym_EventScript_AlexiaPostBadge,
     )

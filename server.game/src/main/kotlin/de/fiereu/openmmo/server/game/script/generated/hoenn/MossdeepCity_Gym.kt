@@ -312,7 +312,7 @@ internal object MossdeepCity_Gym_EventScript_RightGymStatue : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox MossdeepCity_Gym_Text_GymGuidePostVictory, MSGBOX_DEFAULT
  * release
@@ -320,8 +320,66 @@ internal object MossdeepCity_Gym_EventScript_RightGymStatue : Script {
  * ```
  */
 internal object MossdeepCity_Gym_EventScript_GymGuidePostVictory : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MossdeepCity_Gym.GymGuidePostVictory)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MossdeepCity_Gym_Text_GymStatueCertified, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object MossdeepCity_Gym_EventScript_GymStatueCertified : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MossdeepCity_Gym.GymStatueCertified)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch_double TRAINER_TATE_AND_LIZA_1, MossdeepCity_Gym_Text_TateAndLizaPreRematch, MossdeepCity_Gym_Text_TateAndLizaRematchDefeat, MossdeepCity_Gym_Text_TateAndLizaRematchNeedTwoMons
+ * msgbox MossdeepCity_Gym_Text_TateAndLizaPostRematch, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object MossdeepCity_Gym_EventScript_TateAndLizaRematch : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port MossdeepCity_Gym_EventScript_GymGuidePostVictory")
+      TODO("port MossdeepCity_Gym_EventScript_TateAndLizaRematch")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * giveitem ITEM_TM_CALM_MIND
+ * goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+ * msgbox MossdeepCity_Gym_Text_ExplainCalmMind, MSGBOX_DEFAULT
+ * setflag FLAG_RECEIVED_TM_CALM_MIND
+ * release
+ * end
+ * ```
+ */
+internal object MossdeepCity_Gym_EventScript_GiveCalmMind2 : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port MossdeepCity_Gym_EventScript_GiveCalmMind2")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MossdeepCity_Gym_Text_GymStatue, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object MossdeepCity_Gym_EventScript_GymStatue : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MossdeepCity_Gym.GymStatue)
+  }
 }
 
 internal val MossdeepCity_GymScripts: Map<String, Script> =
@@ -345,4 +403,10 @@ internal val MossdeepCity_GymScripts: Map<String, Script> =
             MossdeepCity_Gym_EventScript_RightGymStatue,
         "MossdeepCity_Gym_EventScript_GymGuidePostVictory" to
             MossdeepCity_Gym_EventScript_GymGuidePostVictory,
+        "MossdeepCity_Gym_EventScript_GymStatueCertified" to
+            MossdeepCity_Gym_EventScript_GymStatueCertified,
+        "MossdeepCity_Gym_EventScript_TateAndLizaRematch" to
+            MossdeepCity_Gym_EventScript_TateAndLizaRematch,
+        "MossdeepCity_Gym_EventScript_GiveCalmMind2" to MossdeepCity_Gym_EventScript_GiveCalmMind2,
+        "MossdeepCity_Gym_EventScript_GymStatue" to MossdeepCity_Gym_EventScript_GymStatue,
     )

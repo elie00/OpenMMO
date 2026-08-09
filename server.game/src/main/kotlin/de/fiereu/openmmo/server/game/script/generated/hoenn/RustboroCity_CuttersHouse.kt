@@ -28,9 +28,25 @@ internal object RustboroCity_CuttersHouse_EventScript_Lass : Script {
       ctx.say(RustboroCity_CuttersHouse.DadHelpedClearLandOfTrees)
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox RustboroCity_CuttersHouse_Text_ExplainCut, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object RustboroCity_CuttersHouse_EventScript_ExplainCut : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(RustboroCity_CuttersHouse.ExplainCut)
+  }
+}
+
 internal val RustboroCity_CuttersHouseScripts: Map<String, Script> =
     mapOf(
         "RustboroCity_CuttersHouse_EventScript_Cutter" to
             RustboroCity_CuttersHouse_EventScript_Cutter,
         "RustboroCity_CuttersHouse_EventScript_Lass" to RustboroCity_CuttersHouse_EventScript_Lass,
+        "RustboroCity_CuttersHouse_EventScript_ExplainCut" to
+            RustboroCity_CuttersHouse_EventScript_ExplainCut,
     )

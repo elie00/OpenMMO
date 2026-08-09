@@ -288,6 +288,30 @@ internal object Route14_EventScript_RouteSign : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(Route14.RouteSign)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch_double TRAINER_TWINS_KIRI_JAN, Route14_Text_JanRematchIntro, Route14_Text_JanDefeat, Route14_Text_JanNotEnoughMons
+ * msgbox Route14_Text_JanPostBattle, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route14_EventScript_JanRematch : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route14_EventScript_JanRematch")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch_double TRAINER_TWINS_KIRI_JAN, Route14_Text_KiriRematchIntro, Route14_Text_KiriDefeat, Route14_Text_KiriNotEnoughMons
+ * msgbox Route14_Text_KiriPostBattle, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route14_EventScript_KiriRematch : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route14_EventScript_KiriRematch")
+}
+
 internal val Route14Scripts: Map<String, Script> =
     mapOf(
         "Route14_EventScript_Gerald" to Route14_EventScript_Gerald,
@@ -303,4 +327,6 @@ internal val Route14Scripts: Map<String, Script> =
         "Route14_EventScript_Jan" to Route14_EventScript_Jan,
         "Route14_EventScript_Kiri" to Route14_EventScript_Kiri,
         "Route14_EventScript_RouteSign" to Route14_EventScript_RouteSign,
+        "Route14_EventScript_JanRematch" to Route14_EventScript_JanRematch,
+        "Route14_EventScript_KiriRematch" to Route14_EventScript_KiriRematch,
     )

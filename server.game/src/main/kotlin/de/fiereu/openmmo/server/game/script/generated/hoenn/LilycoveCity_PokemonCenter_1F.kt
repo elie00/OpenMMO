@@ -77,7 +77,7 @@ internal object LilycoveCity_PokemonCenter_1F_EventScript_ContestLadyMon : Scrip
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox LilycoveCity_PokemonCenter_1F_Text_HaventSeenRottenScoundrels, MSGBOX_DEFAULT
  * release
@@ -85,8 +85,99 @@ internal object LilycoveCity_PokemonCenter_1F_EventScript_ContestLadyMon : Scrip
  * ```
  */
 internal object LilycoveCity_PokemonCenter_1F_EventScript_ManiacBadTeamGone : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity_PokemonCenter_1F.HaventSeenRottenScoundrels)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * lock
+ * faceplayer
+ * waitse
+ * playmoncry VAR_0x8005, CRY_MODE_NORMAL
+ * msgbox LilycoveCity_PokemonCenter_1F_Text_Pikachu, MSGBOX_DEFAULT
+ * waitmoncry
+ * release
+ * end
+ * ```
+ */
+internal object LilycoveCity_PokemonCenter_1F_EventScript_Pikachu : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port LilycoveCity_PokemonCenter_1F_EventScript_ManiacBadTeamGone")
+      TODO("port LilycoveCity_PokemonCenter_1F_EventScript_Pikachu")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * lock
+ * faceplayer
+ * waitse
+ * playmoncry VAR_0x8005, CRY_MODE_NORMAL
+ * msgbox LilycoveCity_PokemonCenter_1F_Text_Poochyena, MSGBOX_DEFAULT
+ * waitmoncry
+ * release
+ * end
+ * ```
+ */
+internal object LilycoveCity_PokemonCenter_1F_EventScript_Poochyena : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LilycoveCity_PokemonCenter_1F_EventScript_Poochyena")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * lock
+ * faceplayer
+ * waitse
+ * playmoncry VAR_0x8005, CRY_MODE_NORMAL
+ * msgbox LilycoveCity_PokemonCenter_1F_Text_Zigzagoon, MSGBOX_DEFAULT
+ * waitmoncry
+ * release
+ * end
+ * ```
+ */
+internal object LilycoveCity_PokemonCenter_1F_EventScript_Zigzagoon : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LilycoveCity_PokemonCenter_1F_EventScript_Zigzagoon")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * lock
+ * faceplayer
+ * waitse
+ * playmoncry VAR_0x8005, CRY_MODE_NORMAL
+ * msgbox LilycoveCity_PokemonCenter_1F_Text_Kecleon, MSGBOX_DEFAULT
+ * waitmoncry
+ * release
+ * end
+ * ```
+ */
+internal object LilycoveCity_PokemonCenter_1F_EventScript_Kecleon : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LilycoveCity_PokemonCenter_1F_EventScript_Kecleon")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * lock
+ * faceplayer
+ * waitse
+ * playmoncry VAR_0x8005, CRY_MODE_NORMAL
+ * msgbox LilycoveCity_PokemonCenter_1F_Text_Skitty, MSGBOX_DEFAULT
+ * waitmoncry
+ * release
+ * end
+ * ```
+ */
+internal object LilycoveCity_PokemonCenter_1F_EventScript_Skitty : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LilycoveCity_PokemonCenter_1F_EventScript_Skitty")
 }
 
 internal val LilycoveCity_PokemonCenter_1FScripts: Map<String, Script> =
@@ -103,4 +194,14 @@ internal val LilycoveCity_PokemonCenter_1FScripts: Map<String, Script> =
             LilycoveCity_PokemonCenter_1F_EventScript_ContestLadyMon,
         "LilycoveCity_PokemonCenter_1F_EventScript_ManiacBadTeamGone" to
             LilycoveCity_PokemonCenter_1F_EventScript_ManiacBadTeamGone,
+        "LilycoveCity_PokemonCenter_1F_EventScript_Pikachu" to
+            LilycoveCity_PokemonCenter_1F_EventScript_Pikachu,
+        "LilycoveCity_PokemonCenter_1F_EventScript_Poochyena" to
+            LilycoveCity_PokemonCenter_1F_EventScript_Poochyena,
+        "LilycoveCity_PokemonCenter_1F_EventScript_Zigzagoon" to
+            LilycoveCity_PokemonCenter_1F_EventScript_Zigzagoon,
+        "LilycoveCity_PokemonCenter_1F_EventScript_Kecleon" to
+            LilycoveCity_PokemonCenter_1F_EventScript_Kecleon,
+        "LilycoveCity_PokemonCenter_1F_EventScript_Skitty" to
+            LilycoveCity_PokemonCenter_1F_EventScript_Skitty,
     )

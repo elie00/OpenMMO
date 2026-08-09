@@ -95,7 +95,7 @@ internal object FiveIsland_Meadow_EventScript_ItemPPUp : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lockall
  * goto_if_set FLAG_UNLOCKED_ROCKET_WAREHOUSE, FiveIsland_Meadow_EventScript_WarehouseDoorAlreadyOpen
@@ -106,8 +106,59 @@ internal object FiveIsland_Meadow_EventScript_ItemPPUp : Script {
  * ```
  */
 internal object FiveIsland_Meadow_EventScript_WarehouseDoor : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(KantoFlags.FLAG_UNLOCKED_ROCKET_WAREHOUSE))
+        return FiveIsland_Meadow_EventScript_WarehouseDoorAlreadyOpen.run(ctx)
+    if (ctx.isFlagSet(KantoFlags.FLAG_LEARNED_YES_NAH_CHANSEY))
+        return FiveIsland_Meadow_EventScript_OpenWarehouseDoor.run(ctx)
+    ctx.say(FiveIsland_Meadow.EnteredPasswordAnotherNeeded)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox FiveIsland_Meadow_Text_WarehouseDoorAlreadyOpen
+ * releaseall
+ * end
+ * ```
+ */
+internal object FiveIsland_Meadow_EventScript_WarehouseDoorAlreadyOpen : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(FiveIsland_Meadow.WarehouseDoorAlreadyOpen)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * setflag FLAG_UNLOCKED_ROCKET_WAREHOUSE
+ * message FiveIsland_Meadow_Text_EnteredPasswordDoorOpened
+ * waitmessage
+ * delay 60
+ * call FiveIsland_Meadow_EventScript_SetWarehouseDoorUnlocked
+ * special DrawWholeMapView
+ * playse SE_PIN
+ * waitse
+ * releaseall
+ * end
+ * ```
+ */
+internal object FiveIsland_Meadow_EventScript_OpenWarehouseDoor : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port FiveIsland_Meadow_EventScript_WarehouseDoor")
+      TODO("port FiveIsland_Meadow_EventScript_OpenWarehouseDoor")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * setmetatile 12, 21, METATILE_SeviiIslands45_RocketWarehouseDoor_Unlocked, 1
+ * return
+ * ```
+ */
+internal object FiveIsland_Meadow_EventScript_SetWarehouseDoorUnlocked : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port FiveIsland_Meadow_EventScript_SetWarehouseDoorUnlocked")
 }
 
 internal val FiveIsland_MeadowScripts: Map<String, Script> =
@@ -120,4 +171,10 @@ internal val FiveIsland_MeadowScripts: Map<String, Script> =
         "FiveIsland_Meadow_EventScript_ItemPPUp" to FiveIsland_Meadow_EventScript_ItemPPUp,
         "FiveIsland_Meadow_EventScript_WarehouseDoor" to
             FiveIsland_Meadow_EventScript_WarehouseDoor,
+        "FiveIsland_Meadow_EventScript_WarehouseDoorAlreadyOpen" to
+            FiveIsland_Meadow_EventScript_WarehouseDoorAlreadyOpen,
+        "FiveIsland_Meadow_EventScript_OpenWarehouseDoor" to
+            FiveIsland_Meadow_EventScript_OpenWarehouseDoor,
+        "FiveIsland_Meadow_EventScript_SetWarehouseDoorUnlocked" to
+            FiveIsland_Meadow_EventScript_SetWarehouseDoorUnlocked,
     )

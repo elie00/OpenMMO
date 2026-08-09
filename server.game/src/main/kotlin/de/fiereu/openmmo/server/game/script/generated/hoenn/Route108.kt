@@ -136,6 +136,18 @@ internal object Route108_EventScript_ItemStarPiece : Script {
   }
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch TRAINER_CORY_1, Route108_Text_CoryRematchIntro, Route108_Text_CoryRematchDefeated
+ * msgbox Route108_Text_CoryRematchPostBattle, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route108_EventScript_CoryRematch : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route108_EventScript_CoryRematch")
+}
+
 internal val Route108Scripts: Map<String, Script> =
     mapOf(
         "Route108_EventScript_Jerome" to Route108_EventScript_Jerome,
@@ -145,4 +157,5 @@ internal val Route108Scripts: Map<String, Script> =
         "Route108_EventScript_Carolina" to Route108_EventScript_Carolina,
         "Route108_EventScript_Cory" to Route108_EventScript_Cory,
         "Route108_EventScript_ItemStarPiece" to Route108_EventScript_ItemStarPiece,
+        "Route108_EventScript_CoryRematch" to Route108_EventScript_CoryRematch,
     )

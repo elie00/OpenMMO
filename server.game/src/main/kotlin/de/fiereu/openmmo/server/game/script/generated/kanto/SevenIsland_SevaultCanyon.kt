@@ -247,6 +247,32 @@ internal object SevenIsland_SevaultCanyon_EventScript_RouteSign : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(SevenIsland_SevaultCanyon.RouteSign)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch_double TRAINER_COOL_COUPLE_LEX_NYA, SevenIsland_SevaultCanyon_Text_LexRematchIntro, SevenIsland_SevaultCanyon_Text_LexDefeat, SevenIsland_SevaultCanyon_Text_LexNotEnoughMons
+ * msgbox SevenIsland_SevaultCanyon_Text_LexPostBattle, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object SevenIsland_SevaultCanyon_EventScript_LexRematch : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SevenIsland_SevaultCanyon_EventScript_LexRematch")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch_double TRAINER_COOL_COUPLE_LEX_NYA, SevenIsland_SevaultCanyon_Text_NyaRematchIntro, SevenIsland_SevaultCanyon_Text_NyaDefeat, SevenIsland_SevaultCanyon_Text_NyaNotEnoughMons
+ * msgbox SevenIsland_SevaultCanyon_Text_NyaPostBattle, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object SevenIsland_SevaultCanyon_EventScript_NyaRematch : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SevenIsland_SevaultCanyon_EventScript_NyaRematch")
+}
+
 internal val SevenIsland_SevaultCanyonScripts: Map<String, Script> =
     mapOf(
         "SevenIsland_SevaultCanyon_EventScript_Cyndy" to
@@ -272,4 +298,8 @@ internal val SevenIsland_SevaultCanyonScripts: Map<String, Script> =
             SevenIsland_SevaultCanyon_EventScript_BlackBelt,
         "SevenIsland_SevaultCanyon_EventScript_RouteSign" to
             SevenIsland_SevaultCanyon_EventScript_RouteSign,
+        "SevenIsland_SevaultCanyon_EventScript_LexRematch" to
+            SevenIsland_SevaultCanyon_EventScript_LexRematch,
+        "SevenIsland_SevaultCanyon_EventScript_NyaRematch" to
+            SevenIsland_SevaultCanyon_EventScript_NyaRematch,
     )

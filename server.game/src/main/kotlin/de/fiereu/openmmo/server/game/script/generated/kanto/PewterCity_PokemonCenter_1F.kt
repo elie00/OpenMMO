@@ -30,7 +30,7 @@ internal object PewterCity_PokemonCenter_1F_EventScript_Gentleman : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -40,8 +40,9 @@ internal object PewterCity_PokemonCenter_1F_EventScript_Gentleman : Script {
  * ```
  */
 internal object PewterCity_PokemonCenter_1F_EventScript_Nurse : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port PewterCity_PokemonCenter_1F_EventScript_Nurse")
+  override suspend fun run(ctx: ScriptContext) {
+    EventScript_PkmnCenterNurse.run(ctx)
+  }
 }
 
 internal object PewterCity_PokemonCenter_1F_EventScript_Youngster : Script {

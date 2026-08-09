@@ -257,6 +257,42 @@ internal object Route103_EventScript_RouteSign : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(Route103.RouteSign)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch TRAINER_MIGUEL_1, Route103_Text_MiguelRematchIntro, Route103_Text_MiguelRematchDefeated
+ * msgbox Route103_Text_MiguelRematchPostBattle, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route103_EventScript_MiguelRematch : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route103_EventScript_MiguelRematch")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch_double TRAINER_AMY_AND_LIV_1, Route103_Text_LivRematchIntro, Route103_Text_LivRematchDefeated, Route103_Text_LivRematchNotEnoughPokemon
+ * msgbox Route103_Text_LivRematchPostBattle, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route102_EventScript_LivRematch : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route102_EventScript_LivRematch")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch_double TRAINER_AMY_AND_LIV_1, Route103_Text_AmyRematchIntro, Route103_Text_AmyRematchDefeated, Route103_Text_AmyRematchNotEnoughPokemon
+ * msgbox Route103_Text_AmyRematchPostBattle, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route102_EventScript_AmyRematch : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route102_EventScript_AmyRematch")
+}
+
 internal val Route103Scripts: Map<String, Script> =
     mapOf(
         "Route103_EventScript_Man" to Route103_EventScript_Man,
@@ -274,4 +310,7 @@ internal val Route103Scripts: Map<String, Script> =
         "Route103_EventScript_Pete" to Route103_EventScript_Pete,
         "Route103_EventScript_ItemPPUp" to Route103_EventScript_ItemPPUp,
         "Route103_EventScript_RouteSign" to Route103_EventScript_RouteSign,
+        "Route103_EventScript_MiguelRematch" to Route103_EventScript_MiguelRematch,
+        "Route102_EventScript_LivRematch" to Route102_EventScript_LivRematch,
+        "Route102_EventScript_AmyRematch" to Route102_EventScript_AmyRematch,
     )

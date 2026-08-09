@@ -47,7 +47,7 @@ internal object OldaleTown_Mart_EventScript_Boy : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox OldaleTown_Mart_Text_ImGoingToBuyPokeBalls, MSGBOX_DEFAULT
  * release
@@ -55,8 +55,22 @@ internal object OldaleTown_Mart_EventScript_Boy : Script {
  * ```
  */
 internal object OldaleTown_Mart_EventScript_PokeBallsInStock : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port OldaleTown_Mart_EventScript_PokeBallsInStock")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(OldaleTown_Mart.ImGoingToBuyPokeBalls)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * pokemart OldaleTown_Mart_Pokemart_Expanded
+ * msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object OldaleTown_Mart_ExpandedItems : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port OldaleTown_Mart_ExpandedItems")
 }
 
 internal val OldaleTown_MartScripts: Map<String, Script> =
@@ -66,4 +80,5 @@ internal val OldaleTown_MartScripts: Map<String, Script> =
         "OldaleTown_Mart_EventScript_Boy" to OldaleTown_Mart_EventScript_Boy,
         "OldaleTown_Mart_EventScript_PokeBallsInStock" to
             OldaleTown_Mart_EventScript_PokeBallsInStock,
+        "OldaleTown_Mart_ExpandedItems" to OldaleTown_Mart_ExpandedItems,
     )

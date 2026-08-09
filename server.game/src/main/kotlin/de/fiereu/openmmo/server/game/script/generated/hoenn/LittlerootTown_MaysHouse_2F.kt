@@ -161,6 +161,36 @@ internal object LittlerootTown_MaysHouse_2F_EventScript_PC : Script {
       TODO("port LittlerootTown_MaysHouse_2F_EventScript_PC")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox gText_PokemonTrainerSchoolEmail, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object LittlerootTown_MaysHouse_2F_EventScript_CheckRivalsPC : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LittlerootTown_MaysHouse_2F_EventScript_CheckRivalsPC")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * setvar VAR_0x8004, PC_LOCATION_MAYS_HOUSE
+ * special DoPCTurnOnEffect
+ * playse SE_PC_ON
+ * msgbox gText_PlayerHouseBootPC, MSGBOX_DEFAULT
+ * special BedroomPC
+ * releaseall
+ * end
+ * ```
+ */
+internal object LittlerootTown_MaysHouse_2F_EventScript_CheckPlayersPC : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LittlerootTown_MaysHouse_2F_EventScript_CheckPlayersPC")
+}
+
 internal val LittlerootTown_MaysHouse_2FScripts: Map<String, Script> =
     mapOf(
         "LittlerootTown_MaysHouse_2F_OnTransition" to LittlerootTown_MaysHouse_2F_OnTransition,
@@ -169,4 +199,8 @@ internal val LittlerootTown_MaysHouse_2FScripts: Map<String, Script> =
         "LittlerootTown_MaysHouse_2F_EventScript_WallClock" to
             LittlerootTown_MaysHouse_2F_EventScript_WallClock,
         "LittlerootTown_MaysHouse_2F_EventScript_PC" to LittlerootTown_MaysHouse_2F_EventScript_PC,
+        "LittlerootTown_MaysHouse_2F_EventScript_CheckRivalsPC" to
+            LittlerootTown_MaysHouse_2F_EventScript_CheckRivalsPC,
+        "LittlerootTown_MaysHouse_2F_EventScript_CheckPlayersPC" to
+            LittlerootTown_MaysHouse_2F_EventScript_CheckPlayersPC,
     )

@@ -155,6 +155,155 @@ internal object SlateportCity_OceanicMuseum_1F_EventScript_DepthMeasuringMachine
       ctx.sign(SlateportCity_OceanicMuseum_1F.DepthMeasuringMachine)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox SlateportCity_OceanicMuseum_1F_Text_InterviewRequestShort, MSGBOX_YESNO
+ * goto_if_eq VAR_RESULT, YES, SlateportCity_OceanicMuseum_1F_EventScript_AcceptInterview
+ * goto_if_eq VAR_RESULT, NO, SlateportCity_OceanicMuseum_1F_EventScript_DeclineInterview
+ * end
+ * ```
+ */
+internal object SlateportCity_OceanicMuseum_1F_EventScript_RequestInterviewShort : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SlateportCity_OceanicMuseum_1F_EventScript_RequestInterviewShort")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SlateportCity_OceanicMuseum_1F_Text_YouHaveToTakeThis, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object SlateportCity_OceanicMuseum_1F_EventScript_NoRoomForThief : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SlateportCity_OceanicMuseum_1F.YouHaveToTakeThis)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_PLAYER, SlateportCity_OceanicMuseum_1F_Movement_PlayerWatchGruntExitWestEast
+ * applymovement LOCALID_OCEANIC_MUSEUM_FAMILIAR_GRUNT, SlateportCity_OceanicMuseum_1F_Movement_FamiliarGruntExit
+ * waitmovement 0
+ * goto SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGruntExited
+ * end
+ * ```
+ */
+internal object SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGruntExitWestEast : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGruntExitWestEast")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SlateportCity_OceanicMuseum_1F_Text_BetterWriteUpStory, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object SlateportCity_OceanicMuseum_1F_EventScript_AlreadyInterviewed : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SlateportCity_OceanicMuseum_1F.BetterWriteUpStory)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox SlateportCity_OceanicMuseum_1F_Text_TellMeExperienceInvolvingPokemon, MSGBOX_DEFAULT
+ * setvar VAR_0x8004, EASY_CHAT_TYPE_INTERVIEW
+ * copyvar VAR_0x8005, VAR_0x8009
+ * setvar VAR_0x8006, EASY_CHAT_PERSON_REPORTER_MALE
+ * call Common_ShowEasyChatScreen
+ * lock
+ * faceplayer
+ * goto_if_eq VAR_RESULT, 1, SlateportCity_OceanicMuseum_1F_EventScript_SubmitResponse
+ * goto_if_eq VAR_RESULT, 0, SlateportCity_OceanicMuseum_1F_EventScript_DeclineInterview
+ * end
+ * ```
+ */
+internal object SlateportCity_OceanicMuseum_1F_EventScript_AcceptInterview : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SlateportCity_OceanicMuseum_1F_EventScript_AcceptInterview")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SlateportCity_OceanicMuseum_1F_Text_LetMeKnowIfYouHaveStory, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object SlateportCity_OceanicMuseum_1F_EventScript_DeclineInterview : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SlateportCity_OceanicMuseum_1F.LetMeKnowIfYouHaveStory)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_PLAYER, SlateportCity_OceanicMuseum_1F_Movement_PlayerWatchGruntExitNorth
+ * applymovement LOCALID_OCEANIC_MUSEUM_FAMILIAR_GRUNT, SlateportCity_OceanicMuseum_1F_Movement_FamiliarGruntExitNorth
+ * waitmovement 0
+ * goto SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGruntExited
+ * end
+ * ```
+ */
+internal object SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGruntExitNorth : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGruntExitNorth")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_OCEANIC_MUSEUM_FAMILIAR_GRUNT, SlateportCity_OceanicMuseum_1F_Movement_FamiliarGruntExit
+ * waitmovement 0
+ * goto SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGruntExited
+ * end
+ * ```
+ */
+internal object SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGruntExitSouth : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGruntExitSouth")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox SlateportCity_OceanicMuseum_1F_Text_ThatsAllForInterview, MSGBOX_DEFAULT
+ * setvar VAR_0x8005, TVSHOW_RECENT_HAPPENINGS
+ * goto Interview_EventScript_EndInterview
+ * end
+ * ```
+ */
+internal object SlateportCity_OceanicMuseum_1F_EventScript_SubmitResponse : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SlateportCity_OceanicMuseum_1F_EventScript_SubmitResponse")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * setflag FLAG_HIDE_SLATEPORT_CITY_OCEANIC_MUSEUM_FAMILIAR_AQUA_GRUNT
+ * playse SE_EXIT
+ * removeobject LOCALID_OCEANIC_MUSEUM_FAMILIAR_GRUNT
+ * release
+ * end
+ * ```
+ */
+internal object SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGruntExited : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGruntExited")
+}
+
 internal val SlateportCity_OceanicMuseum_1FScripts: Map<String, Script> =
     mapOf(
         "SlateportCity_OceanicMuseum_1F_EventScript_EntranceAttendant" to
@@ -201,4 +350,24 @@ internal val SlateportCity_OceanicMuseum_1FScripts: Map<String, Script> =
             SlateportCity_OceanicMuseum_1F_EventScript_FossilDisplay,
         "SlateportCity_OceanicMuseum_1F_EventScript_DepthMeasuringMachine" to
             SlateportCity_OceanicMuseum_1F_EventScript_DepthMeasuringMachine,
+        "SlateportCity_OceanicMuseum_1F_EventScript_RequestInterviewShort" to
+            SlateportCity_OceanicMuseum_1F_EventScript_RequestInterviewShort,
+        "SlateportCity_OceanicMuseum_1F_EventScript_NoRoomForThief" to
+            SlateportCity_OceanicMuseum_1F_EventScript_NoRoomForThief,
+        "SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGruntExitWestEast" to
+            SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGruntExitWestEast,
+        "SlateportCity_OceanicMuseum_1F_EventScript_AlreadyInterviewed" to
+            SlateportCity_OceanicMuseum_1F_EventScript_AlreadyInterviewed,
+        "SlateportCity_OceanicMuseum_1F_EventScript_AcceptInterview" to
+            SlateportCity_OceanicMuseum_1F_EventScript_AcceptInterview,
+        "SlateportCity_OceanicMuseum_1F_EventScript_DeclineInterview" to
+            SlateportCity_OceanicMuseum_1F_EventScript_DeclineInterview,
+        "SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGruntExitNorth" to
+            SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGruntExitNorth,
+        "SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGruntExitSouth" to
+            SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGruntExitSouth,
+        "SlateportCity_OceanicMuseum_1F_EventScript_SubmitResponse" to
+            SlateportCity_OceanicMuseum_1F_EventScript_SubmitResponse,
+        "SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGruntExited" to
+            SlateportCity_OceanicMuseum_1F_EventScript_FamiliarGruntExited,
     )

@@ -6,7 +6,7 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
 import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -20,8 +20,16 @@ import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
  * ```
  */
 internal object PetalburgCity_WallysHouse_EventScript_WallysDad : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port PetalburgCity_WallysHouse_EventScript_WallysDad")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(HoennFlags.FLAG_DEFEATED_WALLY_VICTORY_ROAD))
+        return PetalburgCity_WallysHouse_EventScript_DefeatedWallyInVictoryRoad.run(ctx)
+    if (ctx.isFlagSet(HoennFlags.FLAG_RECEIVED_HM_SURF))
+        return PetalburgCity_WallysHouse_EventScript_ReceievedHMSurf.run(ctx)
+    if (ctx.isFlagSet(HoennFlags.FLAG_THANKED_FOR_PLAYING_WITH_WALLY))
+        return PetalburgCity_WallysHouse_EventScript_PlayedWithWally.run(ctx)
+    ctx.say(PetalburgCity_WallysHouse.ThanksForPlayingWithWally)
+    ctx.setFlag(HoennFlags.FLAG_THANKED_FOR_PLAYING_WITH_WALLY)
+  }
 }
 
 /**
@@ -44,7 +52,7 @@ internal object PetalburgCity_WallysHouse_EventScript_WallysMom : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox PetalburgCity_WallysHouse_Text_WallyLeftWithoutTelling, MSGBOX_DEFAULT
  * release
@@ -52,8 +60,51 @@ internal object PetalburgCity_WallysHouse_EventScript_WallysMom : Script {
  * ```
  */
 internal object PetalburgCity_WallysHouse_EventScript_ReceivedHMSurf : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port PetalburgCity_WallysHouse_EventScript_ReceivedHMSurf")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(PetalburgCity_WallysHouse.WallyLeftWithoutTelling)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox PetalburgCity_WallysHouse_Text_WallyIsComingHomeSoon, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object PetalburgCity_WallysHouse_EventScript_ReceievedHMSurf : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(PetalburgCity_WallysHouse.WallyIsComingHomeSoon)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox PetalburgCity_WallysHouse_Text_YouMetWallyInEverGrandeCity, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object PetalburgCity_WallysHouse_EventScript_DefeatedWallyInVictoryRoad : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(PetalburgCity_WallysHouse.YouMetWallyInEverGrandeCity)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox PetalburgCity_WallysHouse_Text_WonderHowWallyIsDoing, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object PetalburgCity_WallysHouse_EventScript_PlayedWithWally : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(PetalburgCity_WallysHouse.WonderHowWallyIsDoing)
+  }
 }
 
 internal val PetalburgCity_WallysHouseScripts: Map<String, Script> =
@@ -64,4 +115,10 @@ internal val PetalburgCity_WallysHouseScripts: Map<String, Script> =
             PetalburgCity_WallysHouse_EventScript_WallysMom,
         "PetalburgCity_WallysHouse_EventScript_ReceivedHMSurf" to
             PetalburgCity_WallysHouse_EventScript_ReceivedHMSurf,
+        "PetalburgCity_WallysHouse_EventScript_ReceievedHMSurf" to
+            PetalburgCity_WallysHouse_EventScript_ReceievedHMSurf,
+        "PetalburgCity_WallysHouse_EventScript_DefeatedWallyInVictoryRoad" to
+            PetalburgCity_WallysHouse_EventScript_DefeatedWallyInVictoryRoad,
+        "PetalburgCity_WallysHouse_EventScript_PlayedWithWally" to
+            PetalburgCity_WallysHouse_EventScript_PlayedWithWally,
     )

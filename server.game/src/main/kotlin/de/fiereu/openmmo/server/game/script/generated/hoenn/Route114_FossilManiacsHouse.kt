@@ -33,6 +33,20 @@ internal object Route114_FossilManiacsHouse_EventScript_Bookshelf : Script {
       ctx.sign(Route114_FossilManiacsHouse.CrammedWithBooks)
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Route114_FossilManiacsHouse_Text_DigReturnsYouToEntrance, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object Route114_FossilManiacsHouse_EventScript_ReceivedDig : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route114_FossilManiacsHouse.DigReturnsYouToEntrance)
+  }
+}
+
 internal val Route114_FossilManiacsHouseScripts: Map<String, Script> =
     mapOf(
         "Route114_FossilManiacsHouse_EventScript_FossilManiacsBrother" to
@@ -41,4 +55,6 @@ internal val Route114_FossilManiacsHouseScripts: Map<String, Script> =
             Route114_FossilManiacsHouse_EventScript_RockDisplay,
         "Route114_FossilManiacsHouse_EventScript_Bookshelf" to
             Route114_FossilManiacsHouse_EventScript_Bookshelf,
+        "Route114_FossilManiacsHouse_EventScript_ReceivedDig" to
+            Route114_FossilManiacsHouse_EventScript_ReceivedDig,
     )

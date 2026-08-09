@@ -184,7 +184,7 @@ internal object FiveIsland_RocketWarehouse_EventScript_Computer : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox FiveIsland_RocketWarehouse_Text_PenUnlockedMonsFled
  * releaseall
@@ -192,8 +192,22 @@ internal object FiveIsland_RocketWarehouse_EventScript_Computer : Script {
  * ```
  */
 internal object FiveIsland_RocketWarehouse_EventScript_CageUnlocked : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(FiveIsland_RocketWarehouse.PenUnlockedMonsFled)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * famechecker FAMECHECKER_GIOVANNI, 5
+ * msgbox FiveIsland_RocketWarehouse_Text_GiovannisKidHasRedHair, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object FiveIsland_RocketWarehouse_EventScript_MentionGiovannisKid : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port FiveIsland_RocketWarehouse_EventScript_CageUnlocked")
+      TODO("port FiveIsland_RocketWarehouse_EventScript_MentionGiovannisKid")
 }
 
 internal val FiveIsland_RocketWarehouseScripts: Map<String, Script> =
@@ -224,4 +238,6 @@ internal val FiveIsland_RocketWarehouseScripts: Map<String, Script> =
             FiveIsland_RocketWarehouse_EventScript_Computer,
         "FiveIsland_RocketWarehouse_EventScript_CageUnlocked" to
             FiveIsland_RocketWarehouse_EventScript_CageUnlocked,
+        "FiveIsland_RocketWarehouse_EventScript_MentionGiovannisKid" to
+            FiveIsland_RocketWarehouse_EventScript_MentionGiovannisKid,
     )

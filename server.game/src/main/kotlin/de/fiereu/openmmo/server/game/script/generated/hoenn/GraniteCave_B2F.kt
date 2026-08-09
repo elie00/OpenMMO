@@ -55,9 +55,67 @@ internal object EventScript_RockSmash : Script {
   override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_RockSmash")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * closemessage
+ * releaseall
+ * end
+ * ```
+ */
+internal object EventScript_CancelSmash : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_CancelSmash")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement VAR_LAST_TALKED, Movement_SmashRock
+ * waitmovement 0
+ * removeobject VAR_LAST_TALKED
+ * specialvar VAR_RESULT, TryUpdateRusturfTunnelState
+ * goto_if_eq VAR_RESULT, TRUE, EventScript_EndSmash
+ * special RockSmashWildEncounter
+ * goto_if_eq VAR_RESULT, FALSE, EventScript_EndSmash
+ * waitstate
+ * releaseall
+ * end
+ * ```
+ */
+internal object EventScript_SmashRock : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_SmashRock")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox Text_CantSmash, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object EventScript_CantSmashRock : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_CantSmashRock")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * releaseall
+ * end
+ * ```
+ */
+internal object EventScript_EndSmash : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_EndSmash")
+}
+
 internal val GraniteCave_B2FScripts: Map<String, Script> =
     mapOf(
         "GraniteCave_B2F_EventScript_ItemRepel" to GraniteCave_B2F_EventScript_ItemRepel,
         "GraniteCave_B2F_EventScript_ItemRareCandy" to GraniteCave_B2F_EventScript_ItemRareCandy,
         "EventScript_RockSmash" to EventScript_RockSmash,
+        "EventScript_CancelSmash" to EventScript_CancelSmash,
+        "EventScript_SmashRock" to EventScript_SmashRock,
+        "EventScript_CantSmashRock" to EventScript_CantSmashRock,
+        "EventScript_EndSmash" to EventScript_EndSmash,
     )

@@ -396,6 +396,67 @@ internal object Route123_EventScript_BerryMastersHouseSign : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(Route123.BerryMastersHouse)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch TRAINER_CAMERON_1, Route123_Text_CameronRematchIntro, Route123_Text_CameronRematchDefeat
+ * msgbox Route123_Text_CameronPostRematch, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route123_EventScript_RematchCameron : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route123_EventScript_RematchCameron")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * release
+ * end
+ * ```
+ */
+internal object Route123_EventScript_NoGrassMons : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route123_EventScript_NoGrassMons")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch TRAINER_FERNANDO_1, Route123_Text_FernandoRematchIntro, Route123_Text_FernandoRematchDefeat
+ * msgbox Route123_Text_FernandoPostRematch, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route123_EventScript_RematchFernando : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route123_EventScript_RematchFernando")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch TRAINER_JACKI_1, Route123_Text_JackiRematchIntro, Route123_Text_JackiRematchDefeat
+ * msgbox Route123_Text_JackiPostRematch, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route123_EventScript_RematchJacki : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route123_EventScript_RematchJacki")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Route123_Text_CheckTreesWithMyGrassMon, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object Route123_EventScript_ReceivedGigaDrain : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route123.CheckTreesWithMyGrassMon)
+  }
+}
+
 internal val Route123Scripts: Map<String, Script> =
     mapOf(
         "Route123_EventScript_Wendy" to Route123_EventScript_Wendy,
@@ -423,4 +484,9 @@ internal val Route123Scripts: Map<String, Script> =
         "Route123_EventScript_RouteSignMtPyre" to Route123_EventScript_RouteSignMtPyre,
         "Route123_EventScript_RouteSign" to Route123_EventScript_RouteSign,
         "Route123_EventScript_BerryMastersHouseSign" to Route123_EventScript_BerryMastersHouseSign,
+        "Route123_EventScript_RematchCameron" to Route123_EventScript_RematchCameron,
+        "Route123_EventScript_NoGrassMons" to Route123_EventScript_NoGrassMons,
+        "Route123_EventScript_RematchFernando" to Route123_EventScript_RematchFernando,
+        "Route123_EventScript_RematchJacki" to Route123_EventScript_RematchJacki,
+        "Route123_EventScript_ReceivedGigaDrain" to Route123_EventScript_ReceivedGigaDrain,
     )

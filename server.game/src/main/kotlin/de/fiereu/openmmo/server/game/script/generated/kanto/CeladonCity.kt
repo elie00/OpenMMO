@@ -65,15 +65,16 @@ internal object CeladonCity_EventScript_OldMan2 : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * goto EventScript_SoftboiledTutor
  * end
  * ```
  */
 internal object CeladonCity_EventScript_SoftboiledTutor : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port CeladonCity_EventScript_SoftboiledTutor")
+  override suspend fun run(ctx: ScriptContext) {
+    return EventScript_SoftboiledTutor.run(ctx)
+  }
 }
 
 internal object CeladonCity_EventScript_RocketGrunt2 : Script {
@@ -147,6 +148,94 @@ internal object CeladonCity_EventScript_GymSign : Script {
   override suspend fun run(ctx: ScriptContext) = TODO("port CeladonCity_EventScript_GymSign")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * lock
+ * faceplayer
+ * goto_if_set FLAG_TUTOR_SOFT_BOILED, EventScript_SoftboiledTaught
+ * msgbox Text_SoftboiledTeach, MSGBOX_YESNO
+ * goto_if_eq VAR_RESULT, NO, EventScript_SoftboiledDeclined
+ * call EventScript_CanOnlyBeLearnedOnce
+ * goto_if_eq VAR_RESULT, NO, EventScript_SoftboiledDeclined
+ * msgbox Text_SoftboiledWhichMon
+ * setvar VAR_0x8005, MOVETUTOR_SOFT_BOILED
+ * call EventScript_ChooseMoveTutorMon
+ * goto_if_eq VAR_RESULT, FALSE, EventScript_SoftboiledDeclined
+ * setflag FLAG_TUTOR_SOFT_BOILED
+ * goto EventScript_SoftboiledTaught
+ * end
+ * ```
+ */
+internal object EventScript_SoftboiledTutor : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_SoftboiledTutor")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox Text_SoftboiledTaught
+ * release
+ * end
+ * ```
+ */
+internal object EventScript_SoftboiledTaught : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_SoftboiledTaught")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * special ChooseMonForMoveTutor
+ * waitstate
+ * lock
+ * faceplayer
+ * return
+ * ```
+ */
+internal object EventScript_ChooseMoveTutorMon : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_ChooseMoveTutorMon")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * textcolor NPC_TEXT_COLOR_NEUTRAL
+ * special DisableMsgBoxWalkaway
+ * signmsg
+ * msgbox Text_MoveCanOnlyBeLearnedOnce, MSGBOX_YESNO
+ * normalmsg
+ * call EventScript_RestorePrevTextColor
+ * return
+ * ```
+ */
+internal object EventScript_CanOnlyBeLearnedOnce : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_CanOnlyBeLearnedOnce")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox Text_SoftboiledDeclined
+ * release
+ * end
+ * ```
+ */
+internal object EventScript_SoftboiledDeclined : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_SoftboiledDeclined")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * copyvar VAR_TEXT_COLOR, VAR_PREV_TEXT_COLOR
+ * return
+ * ```
+ */
+internal object EventScript_RestorePrevTextColor : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_RestorePrevTextColor")
+}
+
 internal val CeladonCityScripts: Map<String, Script> =
     mapOf(
         "CeladonCity_EventScript_RocketGrunt1" to CeladonCity_EventScript_RocketGrunt1,
@@ -169,4 +258,10 @@ internal val CeladonCityScripts: Map<String, Script> =
         "CeladonCity_EventScript_TrainerTips1" to CeladonCity_EventScript_TrainerTips1,
         "CeladonCity_EventScript_DeptStoreSign" to CeladonCity_EventScript_DeptStoreSign,
         "CeladonCity_EventScript_GymSign" to CeladonCity_EventScript_GymSign,
+        "EventScript_SoftboiledTutor" to EventScript_SoftboiledTutor,
+        "EventScript_SoftboiledTaught" to EventScript_SoftboiledTaught,
+        "EventScript_ChooseMoveTutorMon" to EventScript_ChooseMoveTutorMon,
+        "EventScript_CanOnlyBeLearnedOnce" to EventScript_CanOnlyBeLearnedOnce,
+        "EventScript_SoftboiledDeclined" to EventScript_SoftboiledDeclined,
+        "EventScript_RestorePrevTextColor" to EventScript_RestorePrevTextColor,
     )

@@ -1,5 +1,6 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
+import de.fiereu.openmmo.dialog.generated.hoenn.ShoalCave
 import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
@@ -132,6 +133,34 @@ internal object ShoalCave_LowTideInnerRoom_EventScript_ShoalShell4 : Script {
       TODO("port ShoalCave_LowTideInnerRoom_EventScript_ShoalShell4")
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox ShoalCave_Text_WasShoalSaltNowNothing, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object ShoalCave_LowTideInnerRoom_EventScript_ReceivedShoalSalt : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(ShoalCave.WasShoalSaltNowNothing)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox ShoalCave_Text_WasShoallShellNowNothing, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object ShoalCave_LowTideInnerRoom_EventScript_ReceivedShoalShell : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(ShoalCave.WasShoallShellNowNothing)
+  }
+}
+
 internal val ShoalCave_LowTideInnerRoomScripts: Map<String, Script> =
     mapOf(
         "ShoalCave_LowTideInnerRoom_EventScript_ItemRareCandy" to
@@ -148,4 +177,8 @@ internal val ShoalCave_LowTideInnerRoomScripts: Map<String, Script> =
             ShoalCave_LowTideInnerRoom_EventScript_ShoalShell3,
         "ShoalCave_LowTideInnerRoom_EventScript_ShoalShell4" to
             ShoalCave_LowTideInnerRoom_EventScript_ShoalShell4,
+        "ShoalCave_LowTideInnerRoom_EventScript_ReceivedShoalSalt" to
+            ShoalCave_LowTideInnerRoom_EventScript_ReceivedShoalSalt,
+        "ShoalCave_LowTideInnerRoom_EventScript_ReceivedShoalShell" to
+            ShoalCave_LowTideInnerRoom_EventScript_ReceivedShoalShell,
     )

@@ -215,7 +215,7 @@ internal object Common_EventScript_ShowPokemonCenterSign : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox BattleFrontier_OutsideEast_Text_OnceAnOddTreePastHere, MSGBOX_DEFAULT
  * release
@@ -223,8 +223,9 @@ internal object Common_EventScript_ShowPokemonCenterSign : Script {
  * ```
  */
 internal object BattleFrontier_OutsideEast_EventScript_OldWomanSudowoodoGone : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port BattleFrontier_OutsideEast_EventScript_OldWomanSudowoodoGone")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(BattleFrontier_OutsideEast.OnceAnOddTreePastHere)
+  }
 }
 
 internal val BattleFrontier_OutsideEastScripts: Map<String, Script> =

@@ -3,6 +3,8 @@ package de.fiereu.openmmo.server.game.script.generated.kanto
 import de.fiereu.openmmo.dialog.generated.kanto.CeladonCity_GameCorner
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
+import de.fiereu.openmmo.story.generated.kanto.KantoVars
 
 internal object CeladonCity_GameCorner_EventScript_InfoClerk : Script {
   override suspend fun run(ctx: ScriptContext) =
@@ -94,7 +96,7 @@ internal object CeladonCity_GameCorner_EventScript_Fisher : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -105,8 +107,12 @@ internal object CeladonCity_GameCorner_EventScript_Fisher : Script {
  * ```
  */
 internal object CeladonCity_GameCorner_EventScript_GymGuy : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port CeladonCity_GameCorner_EventScript_GymGuy")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(KantoFlags.FLAG_DEFEATED_ERIKA))
+        return CeladonCity_GameCorner_EventScript_GymGuyPostVictory.run(ctx)
+    ctx.say(CeladonCity_GameCorner.GymGuyAdvice)
+    return CeladonCity_GameCorner_EventScript_FaceSlotMachine.run(ctx)
+  }
 }
 
 /**
@@ -207,7 +213,7 @@ internal object CeladonCity_GameCorner_EventScript_RocketGrunt : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lockall
  * setvar VAR_0x8004, 0
@@ -216,12 +222,14 @@ internal object CeladonCity_GameCorner_EventScript_RocketGrunt : Script {
  * ```
  */
 internal object CeladonCity_GameCorner_EventScript_SlotMachine0 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port CeladonCity_GameCorner_EventScript_SlotMachine0")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.setVar(KantoVars.VAR_0x8004, 0)
+    return CeladonCity_GameCorner_EventScript_SlotMachine.run(ctx)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lockall
  * setvar VAR_0x8004, 1
@@ -230,12 +238,14 @@ internal object CeladonCity_GameCorner_EventScript_SlotMachine0 : Script {
  * ```
  */
 internal object CeladonCity_GameCorner_EventScript_SlotMachine1 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port CeladonCity_GameCorner_EventScript_SlotMachine1")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.setVar(KantoVars.VAR_0x8004, 1)
+    return CeladonCity_GameCorner_EventScript_SlotMachine.run(ctx)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lockall
  * setvar VAR_0x8004, 2
@@ -244,12 +254,14 @@ internal object CeladonCity_GameCorner_EventScript_SlotMachine1 : Script {
  * ```
  */
 internal object CeladonCity_GameCorner_EventScript_SlotMachine2 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port CeladonCity_GameCorner_EventScript_SlotMachine2")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.setVar(KantoVars.VAR_0x8004, 2)
+    return CeladonCity_GameCorner_EventScript_SlotMachine.run(ctx)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lockall
  * setvar VAR_0x8004, 3
@@ -258,8 +270,10 @@ internal object CeladonCity_GameCorner_EventScript_SlotMachine2 : Script {
  * ```
  */
 internal object CeladonCity_GameCorner_EventScript_SlotMachine3 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port CeladonCity_GameCorner_EventScript_SlotMachine3")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.setVar(KantoVars.VAR_0x8004, 3)
+    return CeladonCity_GameCorner_EventScript_SlotMachine.run(ctx)
+  }
 }
 
 internal object CeladonCity_GameCorner_EventScript_UnusableSlotMachine1 : Script {
@@ -267,7 +281,7 @@ internal object CeladonCity_GameCorner_EventScript_UnusableSlotMachine1 : Script
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lockall
  * setvar VAR_0x8004, 5
@@ -276,12 +290,14 @@ internal object CeladonCity_GameCorner_EventScript_UnusableSlotMachine1 : Script
  * ```
  */
 internal object CeladonCity_GameCorner_EventScript_SlotMachine5 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port CeladonCity_GameCorner_EventScript_SlotMachine5")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.setVar(KantoVars.VAR_0x8004, 5)
+    return CeladonCity_GameCorner_EventScript_SlotMachine.run(ctx)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lockall
  * setvar VAR_0x8004, 6
@@ -290,12 +306,14 @@ internal object CeladonCity_GameCorner_EventScript_SlotMachine5 : Script {
  * ```
  */
 internal object CeladonCity_GameCorner_EventScript_SlotMachine6 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port CeladonCity_GameCorner_EventScript_SlotMachine6")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.setVar(KantoVars.VAR_0x8004, 6)
+    return CeladonCity_GameCorner_EventScript_SlotMachine.run(ctx)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lockall
  * setvar VAR_0x8004, 7
@@ -304,12 +322,14 @@ internal object CeladonCity_GameCorner_EventScript_SlotMachine6 : Script {
  * ```
  */
 internal object CeladonCity_GameCorner_EventScript_SlotMachine7 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port CeladonCity_GameCorner_EventScript_SlotMachine7")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.setVar(KantoVars.VAR_0x8004, 7)
+    return CeladonCity_GameCorner_EventScript_SlotMachine.run(ctx)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lockall
  * setvar VAR_0x8004, 8
@@ -318,12 +338,14 @@ internal object CeladonCity_GameCorner_EventScript_SlotMachine7 : Script {
  * ```
  */
 internal object CeladonCity_GameCorner_EventScript_SlotMachine8 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port CeladonCity_GameCorner_EventScript_SlotMachine8")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.setVar(KantoVars.VAR_0x8004, 8)
+    return CeladonCity_GameCorner_EventScript_SlotMachine.run(ctx)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lockall
  * setvar VAR_0x8004, 9
@@ -332,12 +354,14 @@ internal object CeladonCity_GameCorner_EventScript_SlotMachine8 : Script {
  * ```
  */
 internal object CeladonCity_GameCorner_EventScript_SlotMachine9 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port CeladonCity_GameCorner_EventScript_SlotMachine9")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.setVar(KantoVars.VAR_0x8004, 9)
+    return CeladonCity_GameCorner_EventScript_SlotMachine.run(ctx)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lockall
  * setvar VAR_0x8004, 10
@@ -346,12 +370,14 @@ internal object CeladonCity_GameCorner_EventScript_SlotMachine9 : Script {
  * ```
  */
 internal object CeladonCity_GameCorner_EventScript_SlotMachine10 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port CeladonCity_GameCorner_EventScript_SlotMachine10")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.setVar(KantoVars.VAR_0x8004, 10)
+    return CeladonCity_GameCorner_EventScript_SlotMachine.run(ctx)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lockall
  * setvar VAR_0x8004, 11
@@ -360,12 +386,14 @@ internal object CeladonCity_GameCorner_EventScript_SlotMachine10 : Script {
  * ```
  */
 internal object CeladonCity_GameCorner_EventScript_SlotMachine11 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port CeladonCity_GameCorner_EventScript_SlotMachine11")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.setVar(KantoVars.VAR_0x8004, 11)
+    return CeladonCity_GameCorner_EventScript_SlotMachine.run(ctx)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lockall
  * setvar VAR_0x8004, 12
@@ -374,12 +402,14 @@ internal object CeladonCity_GameCorner_EventScript_SlotMachine11 : Script {
  * ```
  */
 internal object CeladonCity_GameCorner_EventScript_SlotMachine12 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port CeladonCity_GameCorner_EventScript_SlotMachine12")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.setVar(KantoVars.VAR_0x8004, 12)
+    return CeladonCity_GameCorner_EventScript_SlotMachine.run(ctx)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lockall
  * setvar VAR_0x8004, 13
@@ -388,12 +418,14 @@ internal object CeladonCity_GameCorner_EventScript_SlotMachine12 : Script {
  * ```
  */
 internal object CeladonCity_GameCorner_EventScript_SlotMachine13 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port CeladonCity_GameCorner_EventScript_SlotMachine13")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.setVar(KantoVars.VAR_0x8004, 13)
+    return CeladonCity_GameCorner_EventScript_SlotMachine.run(ctx)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lockall
  * setvar VAR_0x8004, 14
@@ -402,8 +434,10 @@ internal object CeladonCity_GameCorner_EventScript_SlotMachine13 : Script {
  * ```
  */
 internal object CeladonCity_GameCorner_EventScript_SlotMachine14 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port CeladonCity_GameCorner_EventScript_SlotMachine14")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.setVar(KantoVars.VAR_0x8004, 14)
+    return CeladonCity_GameCorner_EventScript_SlotMachine.run(ctx)
+  }
 }
 
 internal object CeladonCity_GameCorner_EventScript_UnusableSlotMachine2 : Script {
@@ -411,7 +445,7 @@ internal object CeladonCity_GameCorner_EventScript_UnusableSlotMachine2 : Script
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lockall
  * setvar VAR_0x8004, 16
@@ -420,12 +454,14 @@ internal object CeladonCity_GameCorner_EventScript_UnusableSlotMachine2 : Script
  * ```
  */
 internal object CeladonCity_GameCorner_EventScript_SlotMachine16 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port CeladonCity_GameCorner_EventScript_SlotMachine16")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.setVar(KantoVars.VAR_0x8004, 16)
+    return CeladonCity_GameCorner_EventScript_SlotMachine.run(ctx)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lockall
  * setvar VAR_0x8004, 17
@@ -434,8 +470,10 @@ internal object CeladonCity_GameCorner_EventScript_SlotMachine16 : Script {
  * ```
  */
 internal object CeladonCity_GameCorner_EventScript_SlotMachine17 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port CeladonCity_GameCorner_EventScript_SlotMachine17")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.setVar(KantoVars.VAR_0x8004, 17)
+    return CeladonCity_GameCorner_EventScript_SlotMachine.run(ctx)
+  }
 }
 
 internal object CeladonCity_GameCorner_EventScript_UnusableSlotMachine3 : Script {
@@ -443,7 +481,7 @@ internal object CeladonCity_GameCorner_EventScript_UnusableSlotMachine3 : Script
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lockall
  * setvar VAR_0x8004, 19
@@ -452,12 +490,14 @@ internal object CeladonCity_GameCorner_EventScript_UnusableSlotMachine3 : Script
  * ```
  */
 internal object CeladonCity_GameCorner_EventScript_SlotMachine19 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port CeladonCity_GameCorner_EventScript_SlotMachine19")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.setVar(KantoVars.VAR_0x8004, 19)
+    return CeladonCity_GameCorner_EventScript_SlotMachine.run(ctx)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lockall
  * setvar VAR_0x8004, 20
@@ -466,12 +506,14 @@ internal object CeladonCity_GameCorner_EventScript_SlotMachine19 : Script {
  * ```
  */
 internal object CeladonCity_GameCorner_EventScript_SlotMachine20 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port CeladonCity_GameCorner_EventScript_SlotMachine20")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.setVar(KantoVars.VAR_0x8004, 20)
+    return CeladonCity_GameCorner_EventScript_SlotMachine.run(ctx)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lockall
  * setvar VAR_0x8004, 21
@@ -480,8 +522,10 @@ internal object CeladonCity_GameCorner_EventScript_SlotMachine20 : Script {
  * ```
  */
 internal object CeladonCity_GameCorner_EventScript_SlotMachine21 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port CeladonCity_GameCorner_EventScript_SlotMachine21")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.setVar(KantoVars.VAR_0x8004, 21)
+    return CeladonCity_GameCorner_EventScript_SlotMachine.run(ctx)
+  }
 }
 
 /**
@@ -541,6 +585,224 @@ internal object CeladonCity_GameCorner_EventScript_PhotoPrinter : Script {
 internal object CeladonCity_GameCorner_EventScript_FaceSlotMachine : Script {
   override suspend fun run(ctx: ScriptContext) =
       TODO("port CeladonCity_GameCorner_EventScript_FaceSlotMachine")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * textcolor NPC_TEXT_COLOR_NEUTRAL
+ * msgbox CeladonCity_GameCorner_Text_DontHaveCoinCase
+ * goto CeladonCity_GameCorner_EventScript_FaceSlotMachine
+ * end
+ * ```
+ */
+internal object CeladonCity_GameCorner_EventScript_GamblerNoCoinCase : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port CeladonCity_GameCorner_EventScript_GamblerNoCoinCase")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox CeladonCity_GameCorner_Text_YouHaveLotsOfCoins
+ * goto CeladonCity_GameCorner_EventScript_FaceSlotMachine
+ * end
+ * ```
+ */
+internal object CeladonCity_GameCorner_EventScript_ScientistNoRoomForCoins : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(CeladonCity_GameCorner.YouHaveLotsOfCoins)
+    return CeladonCity_GameCorner_EventScript_FaceSlotMachine.run(ctx)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * goto_if_unset FLAG_GOT_COIN_CASE, CeladonCity_GameCorner_EventScript_SlotMachineNoCoinCase
+ * msgbox CeladonCity_GameCorner_Text_SlotMachineWantToPlay, MSGBOX_YESNO
+ * goto_if_eq VAR_RESULT, NO, CeladonCity_GameCorner_EventScript_DontPlaySlotMachine
+ * setfieldeffectargument 0, LOCALID_PLAYER
+ * .ifdef BUGFIX
+ * setfieldeffectargument 1, MAP_NUM(MAP_CELADON_CITY_GAME_CORNER)
+ * setfieldeffectargument 2, MAP_GROUP(MAP_CELADON_CITY_GAME_CORNER)
+ * .else
+ * setfieldeffectargument 1, MAP_GROUP(MAP_CELADON_CITY_GAME_CORNER)
+ * setfieldeffectargument 2, MAP_NUM(MAP_CELADON_CITY_GAME_CORNER)
+ * .endif
+ * dofieldeffect FLDEFF_SMILEY_FACE_ICON
+ * waitfieldeffect FLDEFF_SMILEY_FACE_ICON
+ * specialvar VAR_RESULT, GetRandomSlotMachineId
+ * playslotmachine VAR_RESULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object CeladonCity_GameCorner_EventScript_SlotMachine : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port CeladonCity_GameCorner_EventScript_SlotMachine")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox CeladonCity_GameCorner_Text_WinsComeAndGo
+ * goto CeladonCity_GameCorner_EventScript_FaceSlotMachine
+ * end
+ * ```
+ */
+internal object CeladonCity_GameCorner_EventScript_FisherAlreadyGotCoins : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(CeladonCity_GameCorner.WinsComeAndGo)
+    return CeladonCity_GameCorner_EventScript_FaceSlotMachine.run(ctx)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * hidemoneybox
+ * releaseall
+ * end
+ * ```
+ */
+internal object CeladonCity_GameCorner_EventScript_DeclinePhoto : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port CeladonCity_GameCorner_EventScript_DeclinePhoto")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox CeladonCity_GameCorner_Text_WatchReelsClosely
+ * goto CeladonCity_GameCorner_EventScript_FaceSlotMachine
+ * end
+ * ```
+ */
+internal object CeladonCity_GameCorner_EventScript_GentlemanAlreadyGotCoins : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(CeladonCity_GameCorner.WatchReelsClosely)
+    return CeladonCity_GameCorner_EventScript_FaceSlotMachine.run(ctx)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox CeladonCity_GameCorner_Text_RareMonsForCoins
+ * goto CeladonCity_GameCorner_EventScript_FaceSlotMachine
+ * end
+ * ```
+ */
+internal object CeladonCity_GameCorner_EventScript_GymGuyPostVictory : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(CeladonCity_GameCorner.RareMonsForCoins)
+    return CeladonCity_GameCorner_EventScript_FaceSlotMachine.run(ctx)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox CeladonCity_GameCorner_Text_DontNeedMyCoins
+ * goto CeladonCity_GameCorner_EventScript_FaceSlotMachine
+ * end
+ * ```
+ */
+internal object CeladonCity_GameCorner_EventScript_FisherNoRoomForCoins : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(CeladonCity_GameCorner.DontNeedMyCoins)
+    return CeladonCity_GameCorner_EventScript_FaceSlotMachine.run(ctx)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * playse SE_UNLOCK
+ * setmetatile 15, 2, METATILE_GameCorner_Floor_StairsTop, 0
+ * setmetatile 16, 2, METATILE_GameCorner_StairsTop, 1
+ * setmetatile 17, 2, METATILE_GameCorner_StairsBottom, 1
+ * setmetatile 16, 3, METATILE_GameCorner_PurpleWall_StairsTop, 1
+ * setmetatile 17, 3, METATILE_GameCorner_PurpleWall_stairsBottom, 1
+ * special DrawWholeMapView
+ * setflag FLAG_OPENED_ROCKET_HIDEOUT
+ * return
+ * ```
+ */
+internal object CeladonCity_GameCorner_EventScript_OpenRocketHideout : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port CeladonCity_GameCorner_EventScript_OpenRocketHideout")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox CeladonCity_GameCorner_Text_DontHaveEnoughMoney
+ * hidemoneybox
+ * releaseall
+ * end
+ * ```
+ */
+internal object CeladonCity_GameCorner_EventScript_NotEnoughMoneyForPhoto : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port CeladonCity_GameCorner_EventScript_NotEnoughMoneyForPhoto")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox CeladonCity_GameCorner_Text_NeedMoreCoinsForMonIWant
+ * goto CeladonCity_GameCorner_EventScript_FaceSlotMachine
+ * end
+ * ```
+ */
+internal object CeladonCity_GameCorner_EventScript_ScientistAlreadyGotCoins : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(CeladonCity_GameCorner.NeedMoreCoinsForMonIWant)
+    return CeladonCity_GameCorner_EventScript_FaceSlotMachine.run(ctx)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox CeladonCity_GameCorner_Text_YouveGotPlentyCoins
+ * goto CeladonCity_GameCorner_EventScript_FaceSlotMachine
+ * end
+ * ```
+ */
+internal object CeladonCity_GameCorner_EventScript_GentlemanNoRoomForCoins : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(CeladonCity_GameCorner.YouveGotPlentyCoins)
+    return CeladonCity_GameCorner_EventScript_FaceSlotMachine.run(ctx)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox CeladonCity_GameCorner_Text_CoinCaseIsRequired
+ * releaseall
+ * end
+ * ```
+ */
+internal object CeladonCity_GameCorner_EventScript_SlotMachineNoCoinCase : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(CeladonCity_GameCorner.CoinCaseIsRequired)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * releaseall
+ * end
+ * ```
+ */
+internal object CeladonCity_GameCorner_EventScript_DontPlaySlotMachine : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port CeladonCity_GameCorner_EventScript_DontPlaySlotMachine")
 }
 
 internal val CeladonCity_GameCornerScripts: Map<String, Script> =
@@ -611,4 +873,32 @@ internal val CeladonCity_GameCornerScripts: Map<String, Script> =
             CeladonCity_GameCorner_EventScript_PhotoPrinter,
         "CeladonCity_GameCorner_EventScript_FaceSlotMachine" to
             CeladonCity_GameCorner_EventScript_FaceSlotMachine,
+        "CeladonCity_GameCorner_EventScript_GamblerNoCoinCase" to
+            CeladonCity_GameCorner_EventScript_GamblerNoCoinCase,
+        "CeladonCity_GameCorner_EventScript_ScientistNoRoomForCoins" to
+            CeladonCity_GameCorner_EventScript_ScientistNoRoomForCoins,
+        "CeladonCity_GameCorner_EventScript_SlotMachine" to
+            CeladonCity_GameCorner_EventScript_SlotMachine,
+        "CeladonCity_GameCorner_EventScript_FisherAlreadyGotCoins" to
+            CeladonCity_GameCorner_EventScript_FisherAlreadyGotCoins,
+        "CeladonCity_GameCorner_EventScript_DeclinePhoto" to
+            CeladonCity_GameCorner_EventScript_DeclinePhoto,
+        "CeladonCity_GameCorner_EventScript_GentlemanAlreadyGotCoins" to
+            CeladonCity_GameCorner_EventScript_GentlemanAlreadyGotCoins,
+        "CeladonCity_GameCorner_EventScript_GymGuyPostVictory" to
+            CeladonCity_GameCorner_EventScript_GymGuyPostVictory,
+        "CeladonCity_GameCorner_EventScript_FisherNoRoomForCoins" to
+            CeladonCity_GameCorner_EventScript_FisherNoRoomForCoins,
+        "CeladonCity_GameCorner_EventScript_OpenRocketHideout" to
+            CeladonCity_GameCorner_EventScript_OpenRocketHideout,
+        "CeladonCity_GameCorner_EventScript_NotEnoughMoneyForPhoto" to
+            CeladonCity_GameCorner_EventScript_NotEnoughMoneyForPhoto,
+        "CeladonCity_GameCorner_EventScript_ScientistAlreadyGotCoins" to
+            CeladonCity_GameCorner_EventScript_ScientistAlreadyGotCoins,
+        "CeladonCity_GameCorner_EventScript_GentlemanNoRoomForCoins" to
+            CeladonCity_GameCorner_EventScript_GentlemanNoRoomForCoins,
+        "CeladonCity_GameCorner_EventScript_SlotMachineNoCoinCase" to
+            CeladonCity_GameCorner_EventScript_SlotMachineNoCoinCase,
+        "CeladonCity_GameCorner_EventScript_DontPlaySlotMachine" to
+            CeladonCity_GameCorner_EventScript_DontPlaySlotMachine,
     )

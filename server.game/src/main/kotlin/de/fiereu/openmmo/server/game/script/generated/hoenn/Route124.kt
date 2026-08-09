@@ -216,6 +216,42 @@ internal object Route124_EventScript_HuntersHouseSign : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(Route124.HuntersHouse)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch_double TRAINER_LILA_AND_ROY_1, Route124_Text_LilaRematchIntro, Route124_Text_LilaRematchDefeat, Route124_Text_LilaRematchNotEnoughMons
+ * msgbox Route124_Text_LilaPostRematch, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route124_EventScript_RematchLila : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route124_EventScript_RematchLila")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch_double TRAINER_LILA_AND_ROY_1, Route124_Text_RoyRematchIntro, Route124_Text_RoyRematchDefeat, Route124_Text_RoyRematchNotEnoughMons
+ * msgbox Route124_Text_RoyPostRematch, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route124_EventScript_RematchRoy : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route124_EventScript_RematchRoy")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch TRAINER_JENNY_1, Route124_Text_JennyRematchIntro, Route124_Text_JennyRematchDefeat
+ * msgbox Route124_Text_JennyPostRematch, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route124_EventScript_RematchJenny : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route124_EventScript_RematchJenny")
+}
+
 internal val Route124Scripts: Map<String, Script> =
     mapOf(
         "Route124_EventScript_Spencer" to Route124_EventScript_Spencer,
@@ -231,4 +267,7 @@ internal val Route124Scripts: Map<String, Script> =
         "Route124_EventScript_Declan" to Route124_EventScript_Declan,
         "Route124_EventScript_Isabella" to Route124_EventScript_Isabella,
         "Route124_EventScript_HuntersHouseSign" to Route124_EventScript_HuntersHouseSign,
+        "Route124_EventScript_RematchLila" to Route124_EventScript_RematchLila,
+        "Route124_EventScript_RematchRoy" to Route124_EventScript_RematchRoy,
+        "Route124_EventScript_RematchJenny" to Route124_EventScript_RematchJenny,
     )

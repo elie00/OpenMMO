@@ -216,6 +216,102 @@ internal object PetalburgWoods_EventScript_Sign2 : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(PetalburgWoods.TrainerTipsPP)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * closemessage
+ * releaseall
+ * end
+ * ```
+ */
+internal object EventScript_CancelCut : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_CancelCut")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement VAR_LAST_TALKED, Movement_CutTreeDown
+ * waitmovement 0
+ * removeobject VAR_LAST_TALKED
+ * releaseall
+ * end
+ * ```
+ */
+internal object EventScript_CutTreeDown : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_CutTreeDown")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch TRAINER_JAMES_1, PetalburgWoods_Text_MyPokemonHaveGrown, PetalburgWoods_Text_CantBePopularIfLose
+ * msgbox PetalburgWoods_Text_IveBeenTrainingHard, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object PetalburgWoods_EventScript_JamesRematch : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port PetalburgWoods_EventScript_JamesRematch")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * goto_if_set FLAG_HAS_MATCH_CALL, PetalburgWoods_EventScript_RegisterJames2
+ * msgbox PetalburgWoods_Text_PeopleRespectYou, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object PetalburgWoods_EventScript_TryRegisterJames2 : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(HoennFlags.FLAG_HAS_MATCH_CALL))
+        return PetalburgWoods_EventScript_RegisterJames2.run(ctx)
+    ctx.say(PetalburgWoods.PeopleRespectYou)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox Text_CantCut, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object EventScript_CheckTreeCantCut : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_CheckTreeCantCut")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox PetalburgWoods_Text_MiracleSeedExplanation, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object PetalburgWoods_EventScript_ExplainMiracleSeed : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(PetalburgWoods.MiracleSeedExplanation)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox PetalburgWoods_Text_IWantRematch2, MSGBOX_DEFAULT
+ * register_matchcall TRAINER_JAMES_1
+ * release
+ * end
+ * ```
+ */
+internal object PetalburgWoods_EventScript_RegisterJames2 : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port PetalburgWoods_EventScript_RegisterJames2")
+}
+
 internal val PetalburgWoodsScripts: Map<String, Script> =
     mapOf(
         "PetalburgWoods_EventScript_DevonResearcherLeft" to
@@ -235,4 +331,13 @@ internal val PetalburgWoodsScripts: Map<String, Script> =
         "PetalburgWoods_EventScript_Girl" to PetalburgWoods_EventScript_Girl,
         "PetalburgWoods_EventScript_Sign1" to PetalburgWoods_EventScript_Sign1,
         "PetalburgWoods_EventScript_Sign2" to PetalburgWoods_EventScript_Sign2,
+        "EventScript_CancelCut" to EventScript_CancelCut,
+        "EventScript_CutTreeDown" to EventScript_CutTreeDown,
+        "PetalburgWoods_EventScript_JamesRematch" to PetalburgWoods_EventScript_JamesRematch,
+        "PetalburgWoods_EventScript_TryRegisterJames2" to
+            PetalburgWoods_EventScript_TryRegisterJames2,
+        "EventScript_CheckTreeCantCut" to EventScript_CheckTreeCantCut,
+        "PetalburgWoods_EventScript_ExplainMiracleSeed" to
+            PetalburgWoods_EventScript_ExplainMiracleSeed,
+        "PetalburgWoods_EventScript_RegisterJames2" to PetalburgWoods_EventScript_RegisterJames2,
     )

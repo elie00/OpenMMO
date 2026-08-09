@@ -104,6 +104,46 @@ internal object Route119_WeatherInstitute_1F_EventScript_Bed : Script {
       TODO("port Route119_WeatherInstitute_1F_EventScript_Bed")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * addvar VAR_0x8004, 1
+ * return
+ * ```
+ */
+internal object Route119_WeatherInstitute_1F_EventScript_LegendaryDefeated : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port Route119_WeatherInstitute_1F_EventScript_LegendaryDefeated")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Route119_WeatherInstitute_1F_Text_ProfStudyingRain, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object Route119_WeatherInstitute_1F_EventScript_StudyingRain : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route119_WeatherInstitute_1F.ProfStudyingRain)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Route119_WeatherInstitute_1F_Text_EveryoneWentUpstairs, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object Route119_WeatherInstitute_1F_EventScript_LittleBoyTeamAquaHere : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route119_WeatherInstitute_1F.EveryoneWentUpstairs)
+  }
+}
+
 internal val Route119_WeatherInstitute_1FScripts: Map<String, Script> =
     mapOf(
         "Route119_WeatherInstitute_1F_EventScript_Grunt1" to
@@ -118,4 +158,10 @@ internal val Route119_WeatherInstitute_1FScripts: Map<String, Script> =
             Route119_WeatherInstitute_1F_EventScript_LittleBoy,
         "Route119_WeatherInstitute_1F_EventScript_Bed" to
             Route119_WeatherInstitute_1F_EventScript_Bed,
+        "Route119_WeatherInstitute_1F_EventScript_LegendaryDefeated" to
+            Route119_WeatherInstitute_1F_EventScript_LegendaryDefeated,
+        "Route119_WeatherInstitute_1F_EventScript_StudyingRain" to
+            Route119_WeatherInstitute_1F_EventScript_StudyingRain,
+        "Route119_WeatherInstitute_1F_EventScript_LittleBoyTeamAquaHere" to
+            Route119_WeatherInstitute_1F_EventScript_LittleBoyTeamAquaHere,
     )

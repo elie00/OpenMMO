@@ -48,9 +48,63 @@ internal object FortreeCity_House4_EventScript_Wingull : Script {
   override suspend fun run(ctx: ScriptContext) = TODO("port FortreeCity_House4_EventScript_Wingull")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
+ * waitmovement 0
+ * msgbox FortreeCity_House4_Text_FriendsFarAwayThanksToWingull, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object FortreeCity_House4_EventScript_ReceivedMentalHerb : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port FortreeCity_House4_EventScript_ReceivedMentalHerb")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
+ * waitmovement 0
+ * msgbox FortreeCity_House4_Text_WelcomeWingullTakeMentalHerb, MSGBOX_DEFAULT
+ * giveitem ITEM_MENTAL_HERB
+ * goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+ * setflag FLAG_RECEIVED_MENTAL_HERB
+ * releaseall
+ * end
+ * ```
+ */
+internal object FortreeCity_House4_EventScript_WingullReturned : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port FortreeCity_House4_EventScript_WingullReturned")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
+ * waitmovement 0
+ * msgbox FortreeCity_House4_Text_AskedWingullToRunErrand, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object FortreeCity_House4_EventScript_WingullOnErrand : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port FortreeCity_House4_EventScript_WingullOnErrand")
+}
+
 internal val FortreeCity_House4Scripts: Map<String, Script> =
     mapOf(
         "FortreeCity_House4_EventScript_Woman" to FortreeCity_House4_EventScript_Woman,
         "FortreeCity_House4_EventScript_Boy" to FortreeCity_House4_EventScript_Boy,
         "FortreeCity_House4_EventScript_Wingull" to FortreeCity_House4_EventScript_Wingull,
+        "FortreeCity_House4_EventScript_ReceivedMentalHerb" to
+            FortreeCity_House4_EventScript_ReceivedMentalHerb,
+        "FortreeCity_House4_EventScript_WingullReturned" to
+            FortreeCity_House4_EventScript_WingullReturned,
+        "FortreeCity_House4_EventScript_WingullOnErrand" to
+            FortreeCity_House4_EventScript_WingullOnErrand,
     )

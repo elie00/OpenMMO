@@ -654,7 +654,7 @@ internal object SlateportCity_EventScript_BerryCrushRankingsSign : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox SlateportCity_Text_HarborSign, MSGBOX_DEFAULT
  * releaseall
@@ -662,12 +662,13 @@ internal object SlateportCity_EventScript_BerryCrushRankingsSign : Script {
  * ```
  */
 internal object SlateportCity_EventScript_HarborSignFerryComplete : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SlateportCity_EventScript_HarborSignFerryComplete")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SlateportCity.HarborSign)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox SlateportCity_Text_VisitedMuseumOften, MSGBOX_DEFAULT
  * release
@@ -675,20 +676,249 @@ internal object SlateportCity_EventScript_HarborSignFerryComplete : Script {
  * ```
  */
 internal object SlateportCity_EventScript_Woman1AquaGone : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SlateportCity_EventScript_Woman1AquaGone")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SlateportCity.VisitedMuseumOften)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox SlateportCity_Text_AmIOnTV, MSGBOX_SIGN
  * end
  * ```
  */
 internal object SlateportCity_EventScript_FatManSternInterview : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.sign(SlateportCity.AmIOnTV)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SlateportCity_Text_CaptainComeBackWithBigFish, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object SlateportCity_EventScript_CookSternInterview : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SlateportCity.CaptainComeBackWithBigFish)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SlateportCity_Text_SternsShipyardFerryComplete, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object SlateportCity_EventScript_SternsShipyardFerryComplete : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SlateportCity.SternsShipyardFerryComplete)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SlateportCity_Text_BuyBricksSoDecorWontGetDirty, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object SlateportCity_EventScript_GirlSecretBase : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SlateportCity.BuyBricksSoDecorWontGetDirty)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * setvar VAR_0x8004, 1
+ * specialvar VAR_RESULT, HasEnoughBerryPowder
+ * goto_if_eq VAR_RESULT, FALSE, SlateportCity_EventScript_ExplainBerryPowder
+ * msgbox SlateportCity_Text_BroughtMeSomeBerryPowder, MSGBOX_DEFAULT
+ * special DisplayBerryPowderVendorMenu
+ * goto SlateportCity_EventScript_ChooseBerryPowderItem
+ * end
+ * ```
+ */
+internal object SlateportCity_EventScript_ReceivedPowderJar : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port SlateportCity_EventScript_FatManSternInterview")
+      TODO("port SlateportCity_EventScript_ReceivedPowderJar")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SlateportCity_Text_CaptainsACelebrity, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object SlateportCity_EventScript_Man1SternInterview : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SlateportCity.CaptainsACelebrity)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SlateportCity_Text_SternSaysDiscoveredSomething, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object SlateportCity_EventScript_RichBoySternInterview : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SlateportCity.SternSaysDiscoveredSomething)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SlateportCity_Text_InterviewerSoCool, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object SlateportCity_EventScript_GirlSternInterview : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SlateportCity.InterviewerSoCool)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SlateportCity_Text_SternsShipyardNearsCompletion, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object SlateportCity_EventScript_SternsShipyardNearsCompletion : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SlateportCity.SternsShipyardNearsCompletion)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SlateportCity_Text_GetNameRaterToHelpYou, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object SlateportCity_EventScript_ManiacSternInterview : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SlateportCity.GetNameRaterToHelpYou)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox gText_ComeBackWithSecretPower, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object SlateportCity_EventScript_ComeBackWithSecretPower : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SlateportCity_EventScript_ComeBackWithSecretPower")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SlateportCity_Text_GoForItLittleHarder, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object SlateportCity_EventScript_MonEVsNotMaxed : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SlateportCity.GoForItLittleHarder)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SlateportCity_Text_EffortRibbonLooksGoodOnIt, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object SlateportCity_EventScript_MonHasEffortRibbon : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SlateportCity.EffortRibbonLooksGoodOnIt)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SlateportCity_Text_CaptSternBeingInterviewed, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object SlateportCity_EventScript_OldWomanSternInterview : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SlateportCity.CaptSternBeingInterviewed)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * message SlateportCity_Text_ExchangeWhatWithIt
+ * waitmessage
+ * setvar VAR_0x8004, SCROLL_MULTI_BERRY_POWDER_VENDOR
+ * special ShowScrollableMultichoice
+ * switch VAR_RESULT
+ * case 0, SlateportCity_EventScript_EnergyPowder
+ * case 1, SlateportCity_EventScript_EnergyRoot
+ * case 2, SlateportCity_EventScript_HealPowder
+ * case 3, SlateportCity_EventScript_RevivalHerb
+ * case 4, SlateportCity_EventScript_Protein
+ * case 5, SlateportCity_EventScript_Iron
+ * case 6, SlateportCity_EventScript_Carbos
+ * case 7, SlateportCity_EventScript_Calcium
+ * case 8, SlateportCity_EventScript_Zinc
+ * case 9, SlateportCity_EventScript_HPUp
+ * case 10, SlateportCity_EventScript_PPUp
+ * case 11, SlateportCity_EventScript_CancelPowderItemSelect
+ * case MULTI_B_PRESSED, SlateportCity_EventScript_CancelPowderItemSelect
+ * end
+ * ```
+ */
+internal object SlateportCity_EventScript_ChooseBerryPowderItem : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SlateportCity_EventScript_ChooseBerryPowderItem")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SlateportCity_Text_ExplainBerryPowder, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object SlateportCity_EventScript_ExplainBerryPowder : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SlateportCity.ExplainBerryPowder)
+  }
 }
 
 internal val SlateportCityScripts: Map<String, Script> =
@@ -747,4 +977,32 @@ internal val SlateportCityScripts: Map<String, Script> =
         "SlateportCity_EventScript_Woman1AquaGone" to SlateportCity_EventScript_Woman1AquaGone,
         "SlateportCity_EventScript_FatManSternInterview" to
             SlateportCity_EventScript_FatManSternInterview,
+        "SlateportCity_EventScript_CookSternInterview" to
+            SlateportCity_EventScript_CookSternInterview,
+        "SlateportCity_EventScript_SternsShipyardFerryComplete" to
+            SlateportCity_EventScript_SternsShipyardFerryComplete,
+        "SlateportCity_EventScript_GirlSecretBase" to SlateportCity_EventScript_GirlSecretBase,
+        "SlateportCity_EventScript_ReceivedPowderJar" to
+            SlateportCity_EventScript_ReceivedPowderJar,
+        "SlateportCity_EventScript_Man1SternInterview" to
+            SlateportCity_EventScript_Man1SternInterview,
+        "SlateportCity_EventScript_RichBoySternInterview" to
+            SlateportCity_EventScript_RichBoySternInterview,
+        "SlateportCity_EventScript_GirlSternInterview" to
+            SlateportCity_EventScript_GirlSternInterview,
+        "SlateportCity_EventScript_SternsShipyardNearsCompletion" to
+            SlateportCity_EventScript_SternsShipyardNearsCompletion,
+        "SlateportCity_EventScript_ManiacSternInterview" to
+            SlateportCity_EventScript_ManiacSternInterview,
+        "SlateportCity_EventScript_ComeBackWithSecretPower" to
+            SlateportCity_EventScript_ComeBackWithSecretPower,
+        "SlateportCity_EventScript_MonEVsNotMaxed" to SlateportCity_EventScript_MonEVsNotMaxed,
+        "SlateportCity_EventScript_MonHasEffortRibbon" to
+            SlateportCity_EventScript_MonHasEffortRibbon,
+        "SlateportCity_EventScript_OldWomanSternInterview" to
+            SlateportCity_EventScript_OldWomanSternInterview,
+        "SlateportCity_EventScript_ChooseBerryPowderItem" to
+            SlateportCity_EventScript_ChooseBerryPowderItem,
+        "SlateportCity_EventScript_ExplainBerryPowder" to
+            SlateportCity_EventScript_ExplainBerryPowder,
     )

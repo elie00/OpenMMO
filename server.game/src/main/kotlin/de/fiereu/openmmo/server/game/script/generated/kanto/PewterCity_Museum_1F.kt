@@ -135,6 +135,110 @@ internal object PewterCity_Museum_1F_EventScript_PokemonJournalBrock : Script {
       TODO("port PewterCity_Museum_1F_EventScript_PokemonJournalBrock")
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox PewterCity_Museum_1F_Text_GetOldAmberChecked
+ * release
+ * end
+ * ```
+ */
+internal object PewterCity_Museum_1F_EventScript_AlreadyGotOldAmber : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(PewterCity_Museum_1F.GetOldAmberChecked)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox Text_SeismicTossTaught
+ * release
+ * end
+ * ```
+ */
+internal object EventScript_SeismicTossTaught : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_SeismicTossTaught")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox Text_SeismicTossDeclined
+ * release
+ * end
+ * ```
+ */
+internal object EventScript_SeismicTossDeclined : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_SeismicTossDeclined")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox PewterCity_Museum_1F_Text_DoYouKnowWhatAmberIs, MSGBOX_YESNO
+ * goto_if_eq VAR_RESULT, YES, PewterCity_Museum_1F_EventScript_AmberHasGeneticMatter
+ * goto_if_eq VAR_RESULT, NO, PewterCity_Museum_1F_EventScript_ExplainAmber
+ * end
+ * ```
+ */
+internal object PewterCity_Museum_1F_EventScript_Scientist1BehindCounter : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port PewterCity_Museum_1F_EventScript_Scientist1BehindCounter")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox PewterCity_Museum_1F_Text_DontHaveSpaceForThis
+ * release
+ * end
+ * ```
+ */
+internal object PewterCity_Museum_1F_EventScript_NoRoomForOldAmber : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(PewterCity_Museum_1F.DontHaveSpaceForThis)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox PewterCity_Museum_1F_Text_AmberIsFossilizedSap
+ * applymovement LOCALID_MUSEUM_SCIENTIST1, Common_Movement_FaceOriginalDirection
+ * waitmovement 0
+ * release
+ * end
+ * ```
+ */
+internal object PewterCity_Museum_1F_EventScript_ExplainAmber : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(PewterCity_Museum_1F.AmberIsFossilizedSap)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox PewterCity_Museum_1F_Text_AmberContainsGeneticMatter
+ * applymovement LOCALID_MUSEUM_SCIENTIST1, Common_Movement_FaceOriginalDirection
+ * waitmovement 0
+ * release
+ * end
+ * ```
+ */
+internal object PewterCity_Museum_1F_EventScript_AmberHasGeneticMatter : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(PewterCity_Museum_1F.AmberContainsGeneticMatter)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
+}
+
 internal val PewterCity_Museum_1FScripts: Map<String, Script> =
     mapOf(
         "PewterCity_Museum_1F_EventScript_Scientist1" to
@@ -153,4 +257,16 @@ internal val PewterCity_Museum_1FScripts: Map<String, Script> =
             PewterCity_Museum_1F_EventScript_KabutopsFossil,
         "PewterCity_Museum_1F_EventScript_PokemonJournalBrock" to
             PewterCity_Museum_1F_EventScript_PokemonJournalBrock,
+        "PewterCity_Museum_1F_EventScript_AlreadyGotOldAmber" to
+            PewterCity_Museum_1F_EventScript_AlreadyGotOldAmber,
+        "EventScript_SeismicTossTaught" to EventScript_SeismicTossTaught,
+        "EventScript_SeismicTossDeclined" to EventScript_SeismicTossDeclined,
+        "PewterCity_Museum_1F_EventScript_Scientist1BehindCounter" to
+            PewterCity_Museum_1F_EventScript_Scientist1BehindCounter,
+        "PewterCity_Museum_1F_EventScript_NoRoomForOldAmber" to
+            PewterCity_Museum_1F_EventScript_NoRoomForOldAmber,
+        "PewterCity_Museum_1F_EventScript_ExplainAmber" to
+            PewterCity_Museum_1F_EventScript_ExplainAmber,
+        "PewterCity_Museum_1F_EventScript_AmberHasGeneticMatter" to
+            PewterCity_Museum_1F_EventScript_AmberHasGeneticMatter,
     )

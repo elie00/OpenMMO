@@ -1,5 +1,6 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
+import de.fiereu.openmmo.dialog.generated.hoenn.MoveTutor
 import de.fiereu.openmmo.dialog.generated.hoenn.VerdanturfTown_PokemonCenter_1F
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
@@ -54,6 +55,34 @@ internal object VerdanturfTown_PokemonCenter_1F_EventScript_FuryCutterTutor : Sc
       TODO("port VerdanturfTown_PokemonCenter_1F_EventScript_FuryCutterTutor")
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MoveTutor_Text_FuryCutterDeclined, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object MoveTutor_EventScript_FuryCutterDeclined : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MoveTutor.FuryCutterDeclined)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MoveTutor_Text_FuryCutterTaught, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object MoveTutor_EventScript_FuryCutterTaught : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MoveTutor.FuryCutterTaught)
+  }
+}
+
 internal val VerdanturfTown_PokemonCenter_1FScripts: Map<String, Script> =
     mapOf(
         "VerdanturfTown_PokemonCenter_1F_EventScript_Nurse" to
@@ -64,4 +93,6 @@ internal val VerdanturfTown_PokemonCenter_1FScripts: Map<String, Script> =
             VerdanturfTown_PokemonCenter_1F_EventScript_ExpertM,
         "VerdanturfTown_PokemonCenter_1F_EventScript_FuryCutterTutor" to
             VerdanturfTown_PokemonCenter_1F_EventScript_FuryCutterTutor,
+        "MoveTutor_EventScript_FuryCutterDeclined" to MoveTutor_EventScript_FuryCutterDeclined,
+        "MoveTutor_EventScript_FuryCutterTaught" to MoveTutor_EventScript_FuryCutterTaught,
     )

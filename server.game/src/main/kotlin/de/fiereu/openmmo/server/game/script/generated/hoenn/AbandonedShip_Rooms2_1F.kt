@@ -93,6 +93,32 @@ internal object AbandonedShip_Rooms2_1F_EventScript_Jani : Script {
   }
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch_double TRAINER_KIRA_AND_DAN_1, AbandonedShip_Rooms2_1F_Text_KiraRematchIntro, AbandonedShip_Rooms2_1F_Text_KiraRematchDefeat, AbandonedShip_Rooms2_1F_Text_KiraRematchNotEnoughMons
+ * msgbox AbandonedShip_Rooms2_1F_Text_KiraPostRematch, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object AbandonedShip_Rooms2_1F_EventScript_KiraRematch : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port AbandonedShip_Rooms2_1F_EventScript_KiraRematch")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch_double TRAINER_KIRA_AND_DAN_1, AbandonedShip_Rooms2_1F_Text_DanRematchIntro, AbandonedShip_Rooms2_1F_Text_DanRematchDefeat, AbandonedShip_Rooms2_1F_Text_DanRematchNotEnoughMons
+ * msgbox AbandonedShip_Rooms2_1F_Text_DanPostRematch, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object AbandonedShip_Rooms2_1F_EventScript_DanRematch : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port AbandonedShip_Rooms2_1F_EventScript_DanRematch")
+}
+
 internal val AbandonedShip_Rooms2_1FScripts: Map<String, Script> =
     mapOf(
         "AbandonedShip_Rooms2_1F_EventScript_Dan" to AbandonedShip_Rooms2_1F_EventScript_Dan,
@@ -102,4 +128,8 @@ internal val AbandonedShip_Rooms2_1FScripts: Map<String, Script> =
         "AbandonedShip_Rooms2_1F_EventScript_Garrison" to
             AbandonedShip_Rooms2_1F_EventScript_Garrison,
         "AbandonedShip_Rooms2_1F_EventScript_Jani" to AbandonedShip_Rooms2_1F_EventScript_Jani,
+        "AbandonedShip_Rooms2_1F_EventScript_KiraRematch" to
+            AbandonedShip_Rooms2_1F_EventScript_KiraRematch,
+        "AbandonedShip_Rooms2_1F_EventScript_DanRematch" to
+            AbandonedShip_Rooms2_1F_EventScript_DanRematch,
     )

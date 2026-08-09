@@ -44,6 +44,34 @@ internal object BattleFrontier_Lounge5_EventScript_LittleBoy : Script {
       ctx.say(BattleFrontier_Lounge5.GirlPlaysAtRedHouseALot)
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox BattleFrontier_Lounge5_Text_NatureGirlNoneShown, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object BattleFrontier_Lounge5_EventScript_NatureGirlNoneShown : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(BattleFrontier_Lounge5.NatureGirlNoneShown)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox BattleFrontier_Lounge5_Text_NatureGirlEgg, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object BattleFrontier_Lounge5_EventScript_NatureGirlEgg : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(BattleFrontier_Lounge5.NatureGirlEgg)
+  }
+}
+
 internal val BattleFrontier_Lounge5Scripts: Map<String, Script> =
     mapOf(
         "BattleFrontier_Lounge5_EventScript_NatureGirl" to
@@ -54,4 +82,8 @@ internal val BattleFrontier_Lounge5Scripts: Map<String, Script> =
             BattleFrontier_Lounge5_EventScript_BlackBelt,
         "BattleFrontier_Lounge5_EventScript_LittleBoy" to
             BattleFrontier_Lounge5_EventScript_LittleBoy,
+        "BattleFrontier_Lounge5_EventScript_NatureGirlNoneShown" to
+            BattleFrontier_Lounge5_EventScript_NatureGirlNoneShown,
+        "BattleFrontier_Lounge5_EventScript_NatureGirlEgg" to
+            BattleFrontier_Lounge5_EventScript_NatureGirlEgg,
     )

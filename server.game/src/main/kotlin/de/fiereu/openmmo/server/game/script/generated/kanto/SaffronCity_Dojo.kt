@@ -160,6 +160,123 @@ internal object SaffronCity_Dojo_EventScript_RightScroll : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(SaffronCity_Dojo.GoesAroundComesAround)
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SaffronCity_Dojo_Text_StayAndTrainWithUs
+ * release
+ * end
+ * ```
+ */
+internal object SaffronCity_Dojo_EventScript_MasterKoichiAlreadyGotHitmon : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SaffronCity_Dojo.StayAndTrainWithUs)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SaffronCity_Dojo_Text_BetterNotGetGreedy
+ * release
+ * end
+ * ```
+ */
+internal object SaffronCity_Dojo_EventScript_AlreadyGotHitmon : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SaffronCity_Dojo.BetterNotGetGreedy)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * hidemonpic
+ * givemon VAR_TEMP_1, 25
+ * goto_if_eq VAR_RESULT, 0, SaffronCity_Dojo_EventScript_ReceivedHitmonParty
+ * goto_if_eq VAR_RESULT, 1, SaffronCity_Dojo_EventScript_ReceivedHitmonPC
+ * goto_if_eq VAR_RESULT, 2, EventScript_NoMoreRoomForPokemon
+ * release
+ * end
+ * ```
+ */
+internal object SaffronCity_Dojo_EventScript_GiveHitmon : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SaffronCity_Dojo_EventScript_GiveHitmon")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * removeobject VAR_LAST_TALKED
+ * bufferspeciesname STR_VAR_1, VAR_TEMP_1
+ * playfanfare MUS_LEVEL_UP
+ * message SaffronCity_Dojo_Text_ReceivedMonFromKarateMaster
+ * waitmessage
+ * waitfanfare
+ * setflag FLAG_GOT_HITMON_FROM_DOJO
+ * msgbox Text_GiveNicknameToThisMon, MSGBOX_YESNO
+ * goto_if_eq VAR_RESULT, NO, SaffronCity_Dojo_EventScript_TransferredHitmonToPC
+ * call EventScript_NameReceivedBoxMon
+ * goto SaffronCity_Dojo_EventScript_TransferredHitmonToPC
+ * end
+ * ```
+ */
+internal object SaffronCity_Dojo_EventScript_ReceivedHitmonPC : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SaffronCity_Dojo_EventScript_ReceivedHitmonPC")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * removeobject VAR_LAST_TALKED
+ * bufferspeciesname STR_VAR_1, VAR_TEMP_1
+ * playfanfare MUS_LEVEL_UP
+ * message SaffronCity_Dojo_Text_ReceivedMonFromKarateMaster
+ * waitmessage
+ * waitfanfare
+ * setflag FLAG_GOT_HITMON_FROM_DOJO
+ * msgbox Text_GiveNicknameToThisMon, MSGBOX_YESNO
+ * goto_if_eq VAR_RESULT, NO, SaffronCity_Dojo_EventScript_EndGiveMon
+ * call EventScript_GetGiftMonPartySlot
+ * call EventScript_ChangePokemonNickname
+ * goto SaffronCity_Dojo_EventScript_EndGiveMon
+ * end
+ * ```
+ */
+internal object SaffronCity_Dojo_EventScript_ReceivedHitmonParty : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SaffronCity_Dojo_EventScript_ReceivedHitmonParty")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * call EventScript_TransferredToPC
+ * goto SaffronCity_Dojo_EventScript_EndGiveMon
+ * end
+ * ```
+ */
+internal object SaffronCity_Dojo_EventScript_TransferredHitmonToPC : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    EventScript_TransferredToPC.run(ctx)
+    return SaffronCity_Dojo_EventScript_EndGiveMon.run(ctx)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * release
+ * end
+ * ```
+ */
+internal object SaffronCity_Dojo_EventScript_EndGiveMon : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SaffronCity_Dojo_EventScript_EndGiveMon")
+}
+
 internal val SaffronCity_DojoScripts: Map<String, Script> =
     mapOf(
         "SaffronCity_Dojo_EventScript_Hitoshi" to SaffronCity_Dojo_EventScript_Hitoshi,
@@ -173,4 +290,16 @@ internal val SaffronCity_DojoScripts: Map<String, Script> =
         "SaffronCity_Dojo_EventScript_Statue" to SaffronCity_Dojo_EventScript_Statue,
         "SaffronCity_Dojo_EventScript_LeftScroll" to SaffronCity_Dojo_EventScript_LeftScroll,
         "SaffronCity_Dojo_EventScript_RightScroll" to SaffronCity_Dojo_EventScript_RightScroll,
+        "SaffronCity_Dojo_EventScript_MasterKoichiAlreadyGotHitmon" to
+            SaffronCity_Dojo_EventScript_MasterKoichiAlreadyGotHitmon,
+        "SaffronCity_Dojo_EventScript_AlreadyGotHitmon" to
+            SaffronCity_Dojo_EventScript_AlreadyGotHitmon,
+        "SaffronCity_Dojo_EventScript_GiveHitmon" to SaffronCity_Dojo_EventScript_GiveHitmon,
+        "SaffronCity_Dojo_EventScript_ReceivedHitmonPC" to
+            SaffronCity_Dojo_EventScript_ReceivedHitmonPC,
+        "SaffronCity_Dojo_EventScript_ReceivedHitmonParty" to
+            SaffronCity_Dojo_EventScript_ReceivedHitmonParty,
+        "SaffronCity_Dojo_EventScript_TransferredHitmonToPC" to
+            SaffronCity_Dojo_EventScript_TransferredHitmonToPC,
+        "SaffronCity_Dojo_EventScript_EndGiveMon" to SaffronCity_Dojo_EventScript_EndGiveMon,
     )

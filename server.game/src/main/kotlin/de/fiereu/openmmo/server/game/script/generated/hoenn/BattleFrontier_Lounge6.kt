@@ -1,5 +1,6 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
+import de.fiereu.openmmo.dialog.generated.hoenn.BattleFrontier_Lounge6
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 
@@ -37,7 +38,55 @@ internal object BattleFrontier_Lounge6_EventScript_Trader : Script {
       TODO("port BattleFrontier_Lounge6_EventScript_Trader")
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox BattleFrontier_Lounge6_Text_WellThatsFineToo, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object BattleFrontier_Lounge6_EventScript_DeclineTrade : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(BattleFrontier_Lounge6.WellThatsFineToo)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * bufferspeciesname STR_VAR_1, VAR_0x8009
+ * msgbox BattleFrontier_Lounge6_Text_DontTradeForAnythingButMon, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object BattleFrontier_Lounge6_EventScript_NotRequestedMon : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port BattleFrontier_Lounge6_EventScript_NotRequestedMon")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox BattleFrontier_Lounge6_Text_SkittySoMuchCuterThanImagined, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object BattleFrontier_Lounge6_EventScript_TradeCompleted : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(BattleFrontier_Lounge6.SkittySoMuchCuterThanImagined)
+  }
+}
+
 internal val BattleFrontier_Lounge6Scripts: Map<String, Script> =
     mapOf(
         "BattleFrontier_Lounge6_EventScript_Trader" to BattleFrontier_Lounge6_EventScript_Trader,
+        "BattleFrontier_Lounge6_EventScript_DeclineTrade" to
+            BattleFrontier_Lounge6_EventScript_DeclineTrade,
+        "BattleFrontier_Lounge6_EventScript_NotRequestedMon" to
+            BattleFrontier_Lounge6_EventScript_NotRequestedMon,
+        "BattleFrontier_Lounge6_EventScript_TradeCompleted" to
+            BattleFrontier_Lounge6_EventScript_TradeCompleted,
     )

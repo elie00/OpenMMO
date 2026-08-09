@@ -1,5 +1,6 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
+import de.fiereu.openmmo.dialog.generated.hoenn.GraniteCave_StevensRoom
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 
@@ -41,7 +42,69 @@ internal object GraniteCave_StevensRoom_EventScript_Steven : Script {
       TODO("port GraniteCave_StevensRoom_EventScript_Steven")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_GRANITE_CAVE_STEVEN, GraniteCave_StevensRoom_Movement_StevenExit
+ * waitmovement 0
+ * return
+ * ```
+ */
+internal object GraniteCave_StevensRoom_EventScript_StevenExitNorth : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port GraniteCave_StevensRoom_EventScript_StevenExitNorth")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_PLAYER, GraniteCave_StevensRoom_Movement_PlayerTurnTowardExit
+ * applymovement LOCALID_GRANITE_CAVE_STEVEN, GraniteCave_StevensRoom_Movement_StevenExitSouth
+ * waitmovement 0
+ * return
+ * ```
+ */
+internal object GraniteCave_StevensRoom_EventScript_StevenExitSouth : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port GraniteCave_StevensRoom_EventScript_StevenExitSouth")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_PLAYER, GraniteCave_StevensRoom_Movement_PlayerTurnTowardExit
+ * applymovement LOCALID_GRANITE_CAVE_STEVEN, GraniteCave_StevensRoom_Movement_StevenExit
+ * waitmovement 0
+ * return
+ * ```
+ */
+internal object GraniteCave_StevensRoom_EventScript_StevenExitWestEast : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port GraniteCave_StevensRoom_EventScript_StevenExitWestEast")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox GraniteCave_StevensRoom_Text_OhBagIsFull, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object GraniteCave_StevensRoom_EventScript_BagFull : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(GraniteCave_StevensRoom.OhBagIsFull)
+  }
+}
+
 internal val GraniteCave_StevensRoomScripts: Map<String, Script> =
     mapOf(
         "GraniteCave_StevensRoom_EventScript_Steven" to GraniteCave_StevensRoom_EventScript_Steven,
+        "GraniteCave_StevensRoom_EventScript_StevenExitNorth" to
+            GraniteCave_StevensRoom_EventScript_StevenExitNorth,
+        "GraniteCave_StevensRoom_EventScript_StevenExitSouth" to
+            GraniteCave_StevensRoom_EventScript_StevenExitSouth,
+        "GraniteCave_StevensRoom_EventScript_StevenExitWestEast" to
+            GraniteCave_StevensRoom_EventScript_StevenExitWestEast,
+        "GraniteCave_StevensRoom_EventScript_BagFull" to
+            GraniteCave_StevensRoom_EventScript_BagFull,
     )

@@ -189,6 +189,53 @@ internal object Route24_EventScript_ItemTM45 : Script {
   }
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Route24_Text_YoudBecomeTopRocketLeader
+ * release
+ * end
+ * ```
+ */
+internal object Route24_EventScript_RocketPostBattle : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route24.YoudBecomeTopRocketLeader)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Route24_Text_YouDontHaveAnyRoom
+ * release
+ * end
+ * ```
+ */
+internal object Route24_EventScript_NoRoomForNugget : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route24.YouDontHaveAnyRoom)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * giveitem_msg Route24_Text_ReceivedNuggetFromMysteryTrainer, ITEM_NUGGET
+ * message Route24_Text_JoinTeamRocket
+ * waitmessage
+ * playbgm MUS_ENCOUNTER_ROCKET, 0
+ * waitbuttonpress
+ * setvar VAR_LAST_TALKED, LOCALID_ROUTE24_ROCKET
+ * trainerbattle_no_intro TRAINER_TEAM_ROCKET_GRUNT_6, Route24_Text_RocketDefeat
+ * msgbox Route24_Text_YoudBecomeTopRocketLeader
+ * setvar VAR_MAP_SCENE_ROUTE24, 1
+ * return
+ * ```
+ */
+internal object Route24_EventScript_BattleRocket : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route24_EventScript_BattleRocket")
+}
+
 internal val Route24Scripts: Map<String, Script> =
     mapOf(
         "Route24_EventScript_Rocket" to Route24_EventScript_Rocket,
@@ -199,4 +246,7 @@ internal val Route24Scripts: Map<String, Script> =
         "Route24_EventScript_Cale" to Route24_EventScript_Cale,
         "Route24_EventScript_Shane" to Route24_EventScript_Shane,
         "Route24_EventScript_ItemTM45" to Route24_EventScript_ItemTM45,
+        "Route24_EventScript_RocketPostBattle" to Route24_EventScript_RocketPostBattle,
+        "Route24_EventScript_NoRoomForNugget" to Route24_EventScript_NoRoomForNugget,
+        "Route24_EventScript_BattleRocket" to Route24_EventScript_BattleRocket,
     )

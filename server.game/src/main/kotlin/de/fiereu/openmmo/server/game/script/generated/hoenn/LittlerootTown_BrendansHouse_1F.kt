@@ -2,6 +2,7 @@ package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.common.enums.Direction
 import de.fiereu.openmmo.dialog.generated.hoenn.PlayersHouse_1F
+import de.fiereu.openmmo.dialog.generated.hoenn.RivalsHouse_1F
 import de.fiereu.openmmo.server.game.script.MovementStep.FACE_LEFT
 import de.fiereu.openmmo.server.game.script.MovementStep.FACE_RIGHT
 import de.fiereu.openmmo.server.game.script.MovementStep.WALK_UP
@@ -178,6 +179,172 @@ internal object RivalsHouse_1F_EventScript_RivalSibling : Script {
       TODO("port RivalsHouse_1F_EventScript_RivalSibling")
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox RivalsHouse_1F_Text_TooBusyToNoticeVisit, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object RivalsHouse_1F_EventScript_RivalTooBusy : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(RivalsHouse_1F.TooBusyToNoticeVisit)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox PlayersHouse_1F_Text_YouShouldRestABit, MSGBOX_DEFAULT
+ * goto PlayersHouse_1F_EventScript_HealParty
+ * end
+ * ```
+ */
+internal object PlayersHouse_1F_EventScript_MomHealsParty : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(PlayersHouse_1F.YouShouldRestABit)
+    return PlayersHouse_1F_EventScript_HealParty.run(ctx)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox PlayersHouse_1F_Text_DidYouMeetProfBirch, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object PlayersHouse_1F_EventScript_DidYouMeetProfBirch : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(PlayersHouse_1F.DidYouMeetProfBirch)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox PlayersHouse_1F_Text_SeeYouHoney, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object PlayersHouse_1F_EventScript_SeeYouHoney : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(PlayersHouse_1F.SeeYouHoney)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox PlayersHouse_1F_Text_DontPushYourselfTooHard, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object PlayersHouse_1F_EventScript_DontPushYourselfTooHard : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(PlayersHouse_1F.DontPushYourselfTooHard)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox RivalsHouse_1F_Text_ShouldGoHomeEverySoOften, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object RivalsHouse_1F_EventScript_GoHomeEverySoOften : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(RivalsHouse_1F.ShouldGoHomeEverySoOften)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * goto_if_set FLAG_ENABLE_MOM_MATCH_CALL, PlayersHouse_1F_EventScript_CheckGiveAmuletCoin
+ * msgbox PlayersHouse_1F_Text_IsThatAPokenav, MSGBOX_DEFAULT
+ * closemessage
+ * delay 30
+ * playfanfare MUS_REGISTER_MATCH_CALL
+ * msgbox PlayersHouse_1F_Text_RegisteredMom, MSGBOX_DEFAULT
+ * waitfanfare
+ * closemessage
+ * delay 30
+ * setflag FLAG_ENABLE_MOM_MATCH_CALL
+ * release
+ * end
+ * ```
+ */
+internal object PlayersHouse_1F_EventScript_TryRegisterMom : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port PlayersHouse_1F_EventScript_TryRegisterMom")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox RivalsHouse_1F_Text_WentOutToRoute103, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object RivalsHouse_1F_EventScript_RivalIsOnRoute103 : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(RivalsHouse_1F.WentOutToRoute103)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * goto_if_set FLAG_BADGE05_GET, PlayersHouse_1F_EventScript_TryGiveAmuletCoin
+ * goto PlayersHouse_1F_EventScript_MomHealsParty
+ * ```
+ */
+internal object PlayersHouse_1F_EventScript_CheckGiveAmuletCoin : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port PlayersHouse_1F_EventScript_CheckGiveAmuletCoin")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * closemessage
+ * call Common_EventScript_OutOfCenterPartyHeal
+ * incrementgamestat GAME_STAT_RESTED_AT_HOME
+ * msgbox PlayersHouse_1F_Text_TakeCareHoney, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object PlayersHouse_1F_EventScript_HealParty : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port PlayersHouse_1F_EventScript_HealParty")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * goto_if_set FLAG_RECEIVED_AMULET_COIN, PlayersHouse_1F_EventScript_MomHealsParty
+ * msgbox PlayersHouse_1F_Text_GotDadsBadgeHeresSomethingFromMom, MSGBOX_DEFAULT
+ * giveitem ITEM_AMULET_COIN
+ * goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+ * msgbox PlayersHouse_1F_Text_DontPushYourselfTooHard, MSGBOX_DEFAULT
+ * setflag FLAG_RECEIVED_AMULET_COIN
+ * release
+ * end
+ * ```
+ */
+internal object PlayersHouse_1F_EventScript_TryGiveAmuletCoin : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port PlayersHouse_1F_EventScript_TryGiveAmuletCoin")
+}
+
 internal val LittlerootTown_BrendansHouse_1FScripts: Map<String, Script> =
     mapOf(
         "LittlerootTown_BrendansHouse_1F_OnTransition" to
@@ -200,4 +367,21 @@ internal val LittlerootTown_BrendansHouse_1FScripts: Map<String, Script> =
         "PlayersHouse_1F_EventScript_Vigoroth1" to PlayersHouse_1F_EventScript_Vigoroth1,
         "RivalsHouse_1F_EventScript_RivalMom" to RivalsHouse_1F_EventScript_RivalMom,
         "RivalsHouse_1F_EventScript_RivalSibling" to RivalsHouse_1F_EventScript_RivalSibling,
+        "RivalsHouse_1F_EventScript_RivalTooBusy" to RivalsHouse_1F_EventScript_RivalTooBusy,
+        "PlayersHouse_1F_EventScript_MomHealsParty" to PlayersHouse_1F_EventScript_MomHealsParty,
+        "PlayersHouse_1F_EventScript_DidYouMeetProfBirch" to
+            PlayersHouse_1F_EventScript_DidYouMeetProfBirch,
+        "PlayersHouse_1F_EventScript_SeeYouHoney" to PlayersHouse_1F_EventScript_SeeYouHoney,
+        "PlayersHouse_1F_EventScript_DontPushYourselfTooHard" to
+            PlayersHouse_1F_EventScript_DontPushYourselfTooHard,
+        "RivalsHouse_1F_EventScript_GoHomeEverySoOften" to
+            RivalsHouse_1F_EventScript_GoHomeEverySoOften,
+        "PlayersHouse_1F_EventScript_TryRegisterMom" to PlayersHouse_1F_EventScript_TryRegisterMom,
+        "RivalsHouse_1F_EventScript_RivalIsOnRoute103" to
+            RivalsHouse_1F_EventScript_RivalIsOnRoute103,
+        "PlayersHouse_1F_EventScript_CheckGiveAmuletCoin" to
+            PlayersHouse_1F_EventScript_CheckGiveAmuletCoin,
+        "PlayersHouse_1F_EventScript_HealParty" to PlayersHouse_1F_EventScript_HealParty,
+        "PlayersHouse_1F_EventScript_TryGiveAmuletCoin" to
+            PlayersHouse_1F_EventScript_TryGiveAmuletCoin,
     )

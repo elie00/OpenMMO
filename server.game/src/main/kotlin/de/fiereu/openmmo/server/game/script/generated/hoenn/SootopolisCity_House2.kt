@@ -1,5 +1,6 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
+import de.fiereu.openmmo.dialog.generated.hoenn.SootopolisCity_House2
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 
@@ -20,7 +21,37 @@ internal object SootopolisCity_House2_EventScript_ExpertF : Script {
       TODO("port SootopolisCity_House2_EventScript_ExpertF")
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SootopolisCity_House2_Text_YesTwoOrbsSideBySide, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object SootopolisCity_House2_EventScript_KnowAboutOrbs : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SootopolisCity_House2.YesTwoOrbsSideBySide)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SootopolisCity_House2_Text_OughtToVisitAndSee, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object SootopolisCity_House2_EventScript_DontKnowAboutOrbs : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SootopolisCity_House2.OughtToVisitAndSee)
+  }
+}
+
 internal val SootopolisCity_House2Scripts: Map<String, Script> =
     mapOf(
         "SootopolisCity_House2_EventScript_ExpertF" to SootopolisCity_House2_EventScript_ExpertF,
+        "SootopolisCity_House2_EventScript_KnowAboutOrbs" to
+            SootopolisCity_House2_EventScript_KnowAboutOrbs,
+        "SootopolisCity_House2_EventScript_DontKnowAboutOrbs" to
+            SootopolisCity_House2_EventScript_DontKnowAboutOrbs,
     )

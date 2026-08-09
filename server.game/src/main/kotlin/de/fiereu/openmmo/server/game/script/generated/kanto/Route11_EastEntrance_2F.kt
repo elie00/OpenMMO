@@ -1,6 +1,7 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.Route11_EastEntrance_2F
+import de.fiereu.openmmo.dialog.generated.kanto.Trade
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 import de.fiereu.openmmo.story.generated.kanto.KantoFlags
@@ -84,7 +85,7 @@ internal object Route11_EastEntrance_2F_EventScript_RightBinoculars : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox Route11_EastEntrance_2F_Text_WhatABreathtakingView
  * releaseall
@@ -92,8 +93,78 @@ internal object Route11_EastEntrance_2F_EventScript_RightBinoculars : Script {
  * ```
  */
 internal object Route11_EastEntrance_2F_EventScript_LeftBinocularsSnorlaxGone : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route11_EastEntrance_2F.WhatABreathtakingView)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Trade_Text_AwwOhWell
+ * release
+ * end
+ * ```
+ */
+internal object Route11_EastEntrance_2F_EventScript_DeclineTrade : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Trade.AwwOhWell)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * bufferspeciesname STR_VAR_1, VAR_0x8009
+ * msgbox Trade_Text_WhatThatsNoMon
+ * release
+ * end
+ * ```
+ */
+internal object Route11_EastEntrance_2F_EventScript_NotRequestedMon : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port Route11_EastEntrance_2F_EventScript_LeftBinocularsSnorlaxGone")
+      TODO("port Route11_EastEntrance_2F_EventScript_NotRequestedMon")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Route11_EastEntrance_2F_Text_ExplainItemfinder
+ * release
+ * end
+ * ```
+ */
+internal object Route11_EastEntrance_2F_EventScript_AlreadyGotItemfinder : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route11_EastEntrance_2F.ExplainItemfinder)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * buffernumberstring STR_VAR_1, REQUIRED_CAUGHT_MONS
+ * bufferitemname STR_VAR_2, ITEM_ITEMFINDER
+ * return
+ * ```
+ */
+internal object Route11_EastEntrance_2F_EventScript_GetAideRequestInfo : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port Route11_EastEntrance_2F_EventScript_GetAideRequestInfo")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Trade_Text_IsntMyOldMonGreat
+ * release
+ * end
+ * ```
+ */
+internal object Route11_EastEntrance_2F_EventScript_AlreadyTraded : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Trade.IsntMyOldMonGreat)
+  }
 }
 
 internal val Route11_EastEntrance_2FScripts: Map<String, Script> =
@@ -106,4 +177,14 @@ internal val Route11_EastEntrance_2FScripts: Map<String, Script> =
             Route11_EastEntrance_2F_EventScript_RightBinoculars,
         "Route11_EastEntrance_2F_EventScript_LeftBinocularsSnorlaxGone" to
             Route11_EastEntrance_2F_EventScript_LeftBinocularsSnorlaxGone,
+        "Route11_EastEntrance_2F_EventScript_DeclineTrade" to
+            Route11_EastEntrance_2F_EventScript_DeclineTrade,
+        "Route11_EastEntrance_2F_EventScript_NotRequestedMon" to
+            Route11_EastEntrance_2F_EventScript_NotRequestedMon,
+        "Route11_EastEntrance_2F_EventScript_AlreadyGotItemfinder" to
+            Route11_EastEntrance_2F_EventScript_AlreadyGotItemfinder,
+        "Route11_EastEntrance_2F_EventScript_GetAideRequestInfo" to
+            Route11_EastEntrance_2F_EventScript_GetAideRequestInfo,
+        "Route11_EastEntrance_2F_EventScript_AlreadyTraded" to
+            Route11_EastEntrance_2F_EventScript_AlreadyTraded,
     )

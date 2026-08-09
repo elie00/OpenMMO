@@ -40,10 +40,36 @@ internal object SevenIsland_EventScript_IslandSign : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(SevenIsland.IslandSign)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox Text_SwordsDanceTaught
+ * release
+ * end
+ * ```
+ */
+internal object EventScript_SwordsDanceTaught : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_SwordsDanceTaught")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox Text_SwordsDanceDeclined
+ * release
+ * end
+ * ```
+ */
+internal object EventScript_SwordsDanceDeclined : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_SwordsDanceDeclined")
+}
+
 internal val SevenIslandScripts: Map<String, Script> =
     mapOf(
         "SevenIsland_EventScript_SwordsDanceTutor" to SevenIsland_EventScript_SwordsDanceTutor,
         "SevenIsland_EventScript_OldWoman" to SevenIsland_EventScript_OldWoman,
         "SevenIsland_EventScript_Scientist" to SevenIsland_EventScript_Scientist,
         "SevenIsland_EventScript_IslandSign" to SevenIsland_EventScript_IslandSign,
+        "EventScript_SwordsDanceTaught" to EventScript_SwordsDanceTaught,
+        "EventScript_SwordsDanceDeclined" to EventScript_SwordsDanceDeclined,
     )

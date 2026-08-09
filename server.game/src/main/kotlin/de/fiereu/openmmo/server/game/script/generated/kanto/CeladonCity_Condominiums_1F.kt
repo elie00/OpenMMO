@@ -84,6 +84,48 @@ internal object CeladonCity_Condominiums_1F_EventScript_SuiteSign : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(CeladonCity_Condominiums_1F.ManagersSuite)
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox CeladonCity_Condominiums_1F_Text_MyDearMonsKeepMeCompany
+ * release
+ * end
+ * ```
+ */
+internal object CeladonCity_Condominiums_1F_EventScript_TeaWomanAfterTea : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(CeladonCity_Condominiums_1F.MyDearMonsKeepMeCompany)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * textcolor NPC_TEXT_COLOR_NEUTRAL
+ * msgbox Text_TooBadBagFull
+ * release
+ * end
+ * ```
+ */
+internal object EventScript_BagIsFull : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_BagIsFull")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * famechecker FAMECHECKER_DAISY, 4
+ * setflag FLAG_TALKED_TO_TEA_LADY_AFTER_HOF
+ * msgbox CeladonCity_Condominiums_1F_Text_DaisyComesToBuyTea
+ * release
+ * end
+ * ```
+ */
+internal object CeladonCity_Condominiums_1F_EventScript_TeaWomanMentionDaisy : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port CeladonCity_Condominiums_1F_EventScript_TeaWomanMentionDaisy")
+}
+
 internal val CeladonCity_Condominiums_1FScripts: Map<String, Script> =
     mapOf(
         "CeladonCity_Condominiums_1F_EventScript_Meowth" to
@@ -96,4 +138,9 @@ internal val CeladonCity_Condominiums_1FScripts: Map<String, Script> =
             CeladonCity_Condominiums_1F_EventScript_TeaWoman,
         "CeladonCity_Condominiums_1F_EventScript_SuiteSign" to
             CeladonCity_Condominiums_1F_EventScript_SuiteSign,
+        "CeladonCity_Condominiums_1F_EventScript_TeaWomanAfterTea" to
+            CeladonCity_Condominiums_1F_EventScript_TeaWomanAfterTea,
+        "EventScript_BagIsFull" to EventScript_BagIsFull,
+        "CeladonCity_Condominiums_1F_EventScript_TeaWomanMentionDaisy" to
+            CeladonCity_Condominiums_1F_EventScript_TeaWomanMentionDaisy,
     )

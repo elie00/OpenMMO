@@ -1,6 +1,7 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.Route2_House
+import de.fiereu.openmmo.dialog.generated.kanto.Trade
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 
@@ -33,8 +34,53 @@ internal object Route2_House_EventScript_Reyley : Script {
   override suspend fun run(ctx: ScriptContext) = TODO("port Route2_House_EventScript_Reyley")
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Trade_Text_AwwOhWell
+ * release
+ * end
+ * ```
+ */
+internal object Route2_House_EventScript_DeclineTrade : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Trade.AwwOhWell)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Trade_Text_IsntMyOldMonGreat
+ * release
+ * end
+ * ```
+ */
+internal object Route2_House_EventScript_AlreadyTraded : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Trade.IsntMyOldMonGreat)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * bufferspeciesname STR_VAR_1, VAR_0x8009
+ * msgbox Trade_Text_WhatThatsNoMon
+ * release
+ * end
+ * ```
+ */
+internal object Route2_House_EventScript_NotRequestedMon : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port Route2_House_EventScript_NotRequestedMon")
+}
+
 internal val Route2_HouseScripts: Map<String, Script> =
     mapOf(
         "Route2_House_EventScript_Scientist" to Route2_House_EventScript_Scientist,
         "Route2_House_EventScript_Reyley" to Route2_House_EventScript_Reyley,
+        "Route2_House_EventScript_DeclineTrade" to Route2_House_EventScript_DeclineTrade,
+        "Route2_House_EventScript_AlreadyTraded" to Route2_House_EventScript_AlreadyTraded,
+        "Route2_House_EventScript_NotRequestedMon" to Route2_House_EventScript_NotRequestedMon,
     )

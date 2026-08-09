@@ -1,5 +1,7 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
+import de.fiereu.openmmo.dialog.generated.hoenn.MoveTutor
+import de.fiereu.openmmo.dialog.generated.hoenn.SootopolisCity_PokemonCenter_1F
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 
@@ -77,6 +79,62 @@ internal object SootopolisCity_PokemonCenter_1F_EventScript_DoubleEdgeTutor : Sc
       TODO("port SootopolisCity_PokemonCenter_1F_EventScript_DoubleEdgeTutor")
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SootopolisCity_PokemonCenter_1F_Text_WallaceToughestInHoenn, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object SootopolisCity_PokemonCenter_1F_EventScript_GentlemanNoLegendaries : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SootopolisCity_PokemonCenter_1F.WallaceToughestInHoenn)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SootopolisCity_PokemonCenter_1F_Text_AlwaysBeFriendsWithPokemon, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object SootopolisCity_PokemonCenter_1F_EventScript_WomanNoLegendaries : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SootopolisCity_PokemonCenter_1F.AlwaysBeFriendsWithPokemon)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MoveTutor_Text_DoubleEdgeTaught, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object MoveTutor_EventScript_DoubleEdgeTaught : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MoveTutor.DoubleEdgeTaught)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MoveTutor_Text_DoubleEdgeDeclined, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object MoveTutor_EventScript_DoubleEdgeDeclined : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MoveTutor.DoubleEdgeDeclined)
+  }
+}
+
 internal val SootopolisCity_PokemonCenter_1FScripts: Map<String, Script> =
     mapOf(
         "SootopolisCity_PokemonCenter_1F_EventScript_Nurse" to
@@ -87,4 +145,10 @@ internal val SootopolisCity_PokemonCenter_1FScripts: Map<String, Script> =
             SootopolisCity_PokemonCenter_1F_EventScript_Woman,
         "SootopolisCity_PokemonCenter_1F_EventScript_DoubleEdgeTutor" to
             SootopolisCity_PokemonCenter_1F_EventScript_DoubleEdgeTutor,
+        "SootopolisCity_PokemonCenter_1F_EventScript_GentlemanNoLegendaries" to
+            SootopolisCity_PokemonCenter_1F_EventScript_GentlemanNoLegendaries,
+        "SootopolisCity_PokemonCenter_1F_EventScript_WomanNoLegendaries" to
+            SootopolisCity_PokemonCenter_1F_EventScript_WomanNoLegendaries,
+        "MoveTutor_EventScript_DoubleEdgeTaught" to MoveTutor_EventScript_DoubleEdgeTaught,
+        "MoveTutor_EventScript_DoubleEdgeDeclined" to MoveTutor_EventScript_DoubleEdgeDeclined,
     )

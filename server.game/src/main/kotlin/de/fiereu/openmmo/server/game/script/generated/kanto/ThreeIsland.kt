@@ -99,6 +99,170 @@ internal object ThreeIsland_EventScript_IslandSign : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(ThreeIsland.IslandSign)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * call_if_eq VAR_TEMP_1, 1, ThreeIsland_EventScript_PlayerFaceLeft
+ * call_if_eq VAR_TEMP_1, 2, ThreeIsland_EventScript_PlayerFaceLeft
+ * applymovement LOCALID_THREE_ISLAND_ANTIBIKER1, ThreeIsland_Movement_SpeakRight
+ * waitmovement 0
+ * msgbox ThreeIsland_Text_GoBackToKanto
+ * call_if_eq VAR_TEMP_1, 0, ThreeIsland_EventScript_PlayerFaceRight
+ * call_if_eq VAR_TEMP_1, 1, ThreeIsland_EventScript_PlayerFaceRight
+ * call_if_eq VAR_TEMP_1, 2, ThreeIsland_EventScript_PlayerFaceBiker
+ * applymovement LOCALID_THREE_ISLAND_BIKER1, ThreeIsland_Movement_SpeakLeft
+ * waitmovement 0
+ * msgbox ThreeIsland_Text_BossIsOnHisWay
+ * call_if_eq VAR_TEMP_1, 0, ThreeIsland_EventScript_PlayerFaceUp
+ * call_if_eq VAR_TEMP_1, 1, ThreeIsland_EventScript_PlayerFaceUp
+ * call_if_eq VAR_TEMP_1, 2, ThreeIsland_EventScript_PlayerFaceAntiBiker
+ * applymovement LOCALID_THREE_ISLAND_ANTIBIKER2, ThreeIsland_Movement_SpeakRight
+ * waitmovement 0
+ * msgbox ThreeIsland_Text_GetOffIslandNow
+ * call_if_eq VAR_TEMP_1, 0, ThreeIsland_EventScript_PlayerFaceRight
+ * call_if_eq VAR_TEMP_1, 1, ThreeIsland_EventScript_PlayerFaceRight
+ * call_if_eq VAR_TEMP_1, 2, ThreeIsland_EventScript_PlayerFaceBiker
+ * applymovement LOCALID_THREE_ISLAND_BIKER3, ThreeIsland_Movement_SpeakLeft
+ * waitmovement 0
+ * msgbox ThreeIsland_Text_WhosGonnaMakeMe
+ * return
+ * ```
+ */
+internal object ThreeIsland_EventScript_BikerArgumentScene : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port ThreeIsland_EventScript_BikerArgumentScene")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_THREE_ISLAND_ANTIBIKER1, Common_Movement_FacePlayer
+ * waitmovement 0
+ * msgbox ThreeIsland_Text_YouveGotImpressiveMons
+ * release
+ * end
+ * ```
+ */
+internal object ThreeIsland_EventScript_AntiBiker1GotFullRestore : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port ThreeIsland_EventScript_AntiBiker1GotFullRestore")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_THREE_ISLAND_ANTIBIKER1, Common_Movement_FacePlayer
+ * waitmovement 0
+ * msgbox ThreeIsland_Text_ThankYouOhYourMonGotHurt
+ * checkitemspace ITEM_FULL_RESTORE
+ * goto_if_eq VAR_RESULT, FALSE, ThreeIsland_EventScript_NoRoomForFullRestore
+ * msgreceiveditem ThreeIsland_Text_GivenFullRestore, ITEM_FULL_RESTORE
+ * additem ITEM_FULL_RESTORE
+ * setflag FLAG_GOT_FULL_RESTORE_FROM_THREE_ISLAND_DEFENDER
+ * msgbox ThreeIsland_Text_YouveGotImpressiveMons
+ * release
+ * end
+ * ```
+ */
+internal object ThreeIsland_EventScript_GiveFullRestore : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port ThreeIsland_EventScript_GiveFullRestore")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_THREE_ISLAND_ANTIBIKER2, Common_Movement_FacePlayer
+ * waitmovement 0
+ * msgbox ThreeIsland_Text_LostelleWentOffTowardsBondBridge
+ * release
+ * end
+ * ```
+ */
+internal object ThreeIsland_EventScript_AntiBiker2BikersGone : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port ThreeIsland_EventScript_AntiBiker2BikersGone")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight
+ * waitmovement 0
+ * return
+ * ```
+ */
+internal object ThreeIsland_EventScript_PlayerFaceRight : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port ThreeIsland_EventScript_PlayerFaceRight")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * getplayerxy VAR_0x8004, VAR_0x8005
+ * goto_if_ge VAR_0x8004, 9, ThreeIsland_EventScript_PlayerFaceUp
+ * goto ThreeIsland_EventScript_PlayerFaceRight
+ * end
+ * ```
+ */
+internal object ThreeIsland_EventScript_PlayerFaceBiker : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port ThreeIsland_EventScript_PlayerFaceBiker")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox ThreeIsland_Text_OhYourBagIsFull
+ * release
+ * end
+ * ```
+ */
+internal object ThreeIsland_EventScript_NoRoomForFullRestore : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(ThreeIsland.OhYourBagIsFull)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * getplayerxy VAR_0x8004, VAR_0x8005
+ * goto_if_ge VAR_0x8004, 9, ThreeIsland_EventScript_PlayerFaceLeft
+ * goto ThreeIsland_EventScript_PlayerFaceUp
+ * end
+ * ```
+ */
+internal object ThreeIsland_EventScript_PlayerFaceAntiBiker : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port ThreeIsland_EventScript_PlayerFaceAntiBiker")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
+ * waitmovement 0
+ * return
+ * ```
+ */
+internal object ThreeIsland_EventScript_PlayerFaceLeft : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port ThreeIsland_EventScript_PlayerFaceLeft")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp
+ * waitmovement 0
+ * return
+ * ```
+ */
+internal object ThreeIsland_EventScript_PlayerFaceUp : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port ThreeIsland_EventScript_PlayerFaceUp")
+}
+
 internal val ThreeIslandScripts: Map<String, Script> =
     mapOf(
         "ThreeIsland_EventScript_AntiBiker1" to ThreeIsland_EventScript_AntiBiker1,
@@ -110,4 +274,18 @@ internal val ThreeIslandScripts: Map<String, Script> =
         "ThreeIsland_EventScript_Doduo" to ThreeIsland_EventScript_Doduo,
         "ThreeIsland_EventScript_Biker6" to ThreeIsland_EventScript_Biker6,
         "ThreeIsland_EventScript_IslandSign" to ThreeIsland_EventScript_IslandSign,
+        "ThreeIsland_EventScript_BikerArgumentScene" to ThreeIsland_EventScript_BikerArgumentScene,
+        "ThreeIsland_EventScript_AntiBiker1GotFullRestore" to
+            ThreeIsland_EventScript_AntiBiker1GotFullRestore,
+        "ThreeIsland_EventScript_GiveFullRestore" to ThreeIsland_EventScript_GiveFullRestore,
+        "ThreeIsland_EventScript_AntiBiker2BikersGone" to
+            ThreeIsland_EventScript_AntiBiker2BikersGone,
+        "ThreeIsland_EventScript_PlayerFaceRight" to ThreeIsland_EventScript_PlayerFaceRight,
+        "ThreeIsland_EventScript_PlayerFaceBiker" to ThreeIsland_EventScript_PlayerFaceBiker,
+        "ThreeIsland_EventScript_NoRoomForFullRestore" to
+            ThreeIsland_EventScript_NoRoomForFullRestore,
+        "ThreeIsland_EventScript_PlayerFaceAntiBiker" to
+            ThreeIsland_EventScript_PlayerFaceAntiBiker,
+        "ThreeIsland_EventScript_PlayerFaceLeft" to ThreeIsland_EventScript_PlayerFaceLeft,
+        "ThreeIsland_EventScript_PlayerFaceUp" to ThreeIsland_EventScript_PlayerFaceUp,
     )

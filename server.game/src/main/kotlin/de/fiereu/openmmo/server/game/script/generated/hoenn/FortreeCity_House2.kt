@@ -1,7 +1,10 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
+import de.fiereu.openmmo.dialog.generated.hoenn.FortreeCity_House2
+import de.fiereu.openmmo.dialog.generated.hoenn.MoveTutor
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 
 /**
  * Not ported yet. Decomp body:
@@ -60,10 +63,72 @@ internal object FortreeCity_House2_EventScript_SleepTalkTutor : Script {
       TODO("port FortreeCity_House2_EventScript_SleepTalkTutor")
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox FortreeCity_House2_Text_ExplainHiddenPower, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object FortreeCity_House2_EventScript_ExplainHiddenPower : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(FortreeCity_House2.ExplainHiddenPower)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MoveTutor_Text_SleepTalkDeclined, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object MoveTutor_EventScript_SleepTalkDeclined : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MoveTutor.SleepTalkDeclined)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MoveTutor_Text_SleepTalkTaught, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object MoveTutor_EventScript_SleepTalkTaught : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MoveTutor.SleepTalkTaught)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox FortreeCity_House2_Text_HiddenPowersArousedByNature, MSGBOX_DEFAULT
+ * setflag FLAG_MET_HIDDEN_POWER_GIVER
+ * return
+ * ```
+ */
+internal object FortreeCity_House2_EventScript_Greeting : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(FortreeCity_House2.HiddenPowersArousedByNature)
+    ctx.setFlag(HoennFlags.FLAG_MET_HIDDEN_POWER_GIVER)
+  }
+}
+
 internal val FortreeCity_House2Scripts: Map<String, Script> =
     mapOf(
         "FortreeCity_House2_EventScript_HiddenPowerGiver" to
             FortreeCity_House2_EventScript_HiddenPowerGiver,
         "FortreeCity_House2_EventScript_SleepTalkTutor" to
             FortreeCity_House2_EventScript_SleepTalkTutor,
+        "FortreeCity_House2_EventScript_ExplainHiddenPower" to
+            FortreeCity_House2_EventScript_ExplainHiddenPower,
+        "MoveTutor_EventScript_SleepTalkDeclined" to MoveTutor_EventScript_SleepTalkDeclined,
+        "MoveTutor_EventScript_SleepTalkTaught" to MoveTutor_EventScript_SleepTalkTaught,
+        "FortreeCity_House2_EventScript_Greeting" to FortreeCity_House2_EventScript_Greeting,
     )

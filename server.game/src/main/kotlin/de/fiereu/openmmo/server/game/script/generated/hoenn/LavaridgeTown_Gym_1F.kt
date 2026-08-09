@@ -120,7 +120,7 @@ internal object LavaridgeTown_Gym_1F_EventScript_RightGymStatue : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox LavaridgeTown_Gym_1F_Text_GymGuidePostVictory, MSGBOX_DEFAULT
  * release
@@ -128,8 +128,66 @@ internal object LavaridgeTown_Gym_1F_EventScript_RightGymStatue : Script {
  * ```
  */
 internal object LavaridgeTown_Gym_1F_EventScript_GymGuidePostVictory : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LavaridgeTown_Gym_1F.GymGuidePostVictory)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch_double TRAINER_FLANNERY_1, LavaridgeTown_Gym_1F_Text_FlanneryPreRematch, LavaridgeTown_Gym_1F_Text_FlanneryRematchDefeat, LavaridgeTown_Gym_1F_Text_FlanneryRematchNeedTwoMons
+ * msgbox LavaridgeTown_Gym_1F_Text_FlanneryPostRematch, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object LavaridgeTown_Gym_1F_EventScript_FlanneryRematch : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port LavaridgeTown_Gym_1F_EventScript_GymGuidePostVictory")
+      TODO("port LavaridgeTown_Gym_1F_EventScript_FlanneryRematch")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * giveitem ITEM_TM_OVERHEAT
+ * goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+ * msgbox LavaridgeTown_Gym_1F_Text_ExplainOverheat, MSGBOX_DEFAULT
+ * setflag FLAG_RECEIVED_TM_OVERHEAT
+ * release
+ * end
+ * ```
+ */
+internal object LavaridgeTown_Gym_1F_EventScript_GiveOverheat2 : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LavaridgeTown_Gym_1F_EventScript_GiveOverheat2")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox LavaridgeTown_Gym_1F_Text_GymStatue, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object LavaridgeTown_Gym_1F_EventScript_GymStatue : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LavaridgeTown_Gym_1F.GymStatue)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox LavaridgeTown_Gym_1F_Text_GymStatueCertified, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object LavaridgeTown_Gym_1F_EventScript_GymStatueCertified : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LavaridgeTown_Gym_1F.GymStatueCertified)
+  }
 }
 
 internal val LavaridgeTown_Gym_1FScripts: Map<String, Script> =
@@ -146,4 +204,11 @@ internal val LavaridgeTown_Gym_1FScripts: Map<String, Script> =
             LavaridgeTown_Gym_1F_EventScript_RightGymStatue,
         "LavaridgeTown_Gym_1F_EventScript_GymGuidePostVictory" to
             LavaridgeTown_Gym_1F_EventScript_GymGuidePostVictory,
+        "LavaridgeTown_Gym_1F_EventScript_FlanneryRematch" to
+            LavaridgeTown_Gym_1F_EventScript_FlanneryRematch,
+        "LavaridgeTown_Gym_1F_EventScript_GiveOverheat2" to
+            LavaridgeTown_Gym_1F_EventScript_GiveOverheat2,
+        "LavaridgeTown_Gym_1F_EventScript_GymStatue" to LavaridgeTown_Gym_1F_EventScript_GymStatue,
+        "LavaridgeTown_Gym_1F_EventScript_GymStatueCertified" to
+            LavaridgeTown_Gym_1F_EventScript_GymStatueCertified,
     )

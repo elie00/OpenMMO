@@ -6,6 +6,7 @@ import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
+import de.fiereu.openmmo.story.generated.hoenn.HoennVars
 import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
@@ -406,7 +407,7 @@ internal object Route119_EventScript_Hideo : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -416,11 +417,14 @@ internal object Route119_EventScript_Hideo : Script {
  * ```
  */
 internal object Route119_EventScript_Kecleon1 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route119_EventScript_Kecleon1")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.setVar(HoennVars.VAR_0x8009, 6)
+    return EventScript_Kecleon.run(ctx)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -430,7 +434,10 @@ internal object Route119_EventScript_Kecleon1 : Script {
  * ```
  */
 internal object Route119_EventScript_Kecleon2 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route119_EventScript_Kecleon2")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.setVar(HoennVars.VAR_0x8009, 7)
+    return EventScript_Kecleon.run(ctx)
+  }
 }
 
 /**
@@ -551,6 +558,97 @@ internal object Route119_EventScript_TrainerTipsDecoration : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(Route119.TrainerTipsDecoration)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch TRAINER_CATHERINE_1, Route119_Text_CatherineRematchIntro, Route119_Text_CatherineRematchDefeat
+ * msgbox Route119_Text_CatherinePostRematch, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route119_EventScript_RematchCatherine : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route119_EventScript_RematchCatherine")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * checkitem ITEM_DEVON_SCOPE
+ * goto_if_eq VAR_RESULT, TRUE, EventScript_AskUseDevonScope
+ * msgbox Kecleon_Text_SomethingUnseeable, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object EventScript_Kecleon : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_Kecleon")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch TRAINER_JACKSON_1, Route119_Text_JacksonRematchIntro, Route119_Text_JacksonRematchDefeat
+ * msgbox Route119_Text_JacksonPostRematch, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route119_EventScript_RematchJackson : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route119_EventScript_RematchJackson")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox Kecleon_Text_WantToUseDevonScope, MSGBOX_YESNO
+ * goto_if_eq VAR_RESULT, YES, EventScript_BattleKecleon
+ * release
+ * end
+ * ```
+ */
+internal object EventScript_AskUseDevonScope : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_AskUseDevonScope")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox Kecleon_Text_UseDevonScopeMonAttacked, MSGBOX_DEFAULT
+ * closemessage
+ * applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
+ * waitmovement 0
+ * applymovement VAR_LAST_TALKED, Movement_KecleonAppears
+ * waitmovement 0
+ * waitse
+ * playmoncry SPECIES_KECLEON, CRY_MODE_ENCOUNTER
+ * delay 40
+ * waitmoncry
+ * setwildbattle SPECIES_KECLEON, 30
+ * setflag FLAG_SYS_CTRL_OBJ_DELETE
+ * dowildbattle
+ * clearflag FLAG_SYS_CTRL_OBJ_DELETE
+ * specialvar VAR_RESULT, GetBattleOutcome
+ * goto_if_eq VAR_RESULT, B_OUTCOME_WON, EventScript_RemoveKecleon
+ * goto_if_eq VAR_RESULT, B_OUTCOME_RAN, EventScript_RemoveKecleon
+ * goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, EventScript_RemoveKecleon
+ * release
+ * end
+ * ```
+ */
+internal object EventScript_BattleKecleon : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_BattleKecleon")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * goto Common_EventScript_RemoveStaticPokemon
+ * end
+ * ```
+ */
+internal object EventScript_RemoveKecleon : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_RemoveKecleon")
+}
+
 internal val Route119Scripts: Map<String, Script> =
     mapOf(
         "Route119_EventScript_Greg" to Route119_EventScript_Greg,
@@ -589,4 +687,10 @@ internal val Route119Scripts: Map<String, Script> =
         "Route119_EventScript_WeatherInstituteSign" to Route119_EventScript_WeatherInstituteSign,
         "Route119_EventScript_RouteSignFortree" to Route119_EventScript_RouteSignFortree,
         "Route119_EventScript_TrainerTipsDecoration" to Route119_EventScript_TrainerTipsDecoration,
+        "Route119_EventScript_RematchCatherine" to Route119_EventScript_RematchCatherine,
+        "EventScript_Kecleon" to EventScript_Kecleon,
+        "Route119_EventScript_RematchJackson" to Route119_EventScript_RematchJackson,
+        "EventScript_AskUseDevonScope" to EventScript_AskUseDevonScope,
+        "EventScript_BattleKecleon" to EventScript_BattleKecleon,
+        "EventScript_RemoveKecleon" to EventScript_RemoveKecleon,
     )

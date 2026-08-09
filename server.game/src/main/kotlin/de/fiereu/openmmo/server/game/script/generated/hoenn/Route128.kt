@@ -136,6 +136,30 @@ internal object Route128_EventScript_Harrison : Script {
   }
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch TRAINER_ISAIAH_1, Route128_Text_IsaiahRematchIntro, Route128_Text_IsaiahRematchDefeat
+ * msgbox Route128_Text_IsaiahPostRematch, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route128_EventScript_RematchIsaiah : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route128_EventScript_RematchIsaiah")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch TRAINER_KATELYN_1, Route128_Text_KatelynRematchIntro, Route128_Text_KatelynRematchDefeat
+ * msgbox Route128_Text_KatelynPostRematch, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route128_EventScript_RematchKatelyn : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route128_EventScript_RematchKatelyn")
+}
+
 internal val Route128Scripts: Map<String, Script> =
     mapOf(
         "Route128_EventScript_Isaiah" to Route128_EventScript_Isaiah,
@@ -145,4 +169,6 @@ internal val Route128Scripts: Map<String, Script> =
         "Route128_EventScript_Alexa" to Route128_EventScript_Alexa,
         "Route128_EventScript_Carlee" to Route128_EventScript_Carlee,
         "Route128_EventScript_Harrison" to Route128_EventScript_Harrison,
+        "Route128_EventScript_RematchIsaiah" to Route128_EventScript_RematchIsaiah,
+        "Route128_EventScript_RematchKatelyn" to Route128_EventScript_RematchKatelyn,
     )

@@ -30,6 +30,20 @@ internal object Route121_SafariZoneEntrance_EventScript_TrainerTipSign : Script 
   override suspend fun run(ctx: ScriptContext) = ctx.sign(Route121_SafariZoneEntrance.TrainerTip)
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Route121_SafariZoneEntrance_Text_FirstTimeInfo, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object Route121_SafariZoneEntrance_EventScript_FirstTimeInfo : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route121_SafariZoneEntrance.FirstTimeInfo)
+  }
+}
+
 internal val Route121_SafariZoneEntranceScripts: Map<String, Script> =
     mapOf(
         "Route121_SafariZoneEntrance_EventScript_WelcomeAttendant" to
@@ -38,4 +52,6 @@ internal val Route121_SafariZoneEntranceScripts: Map<String, Script> =
             Route121_SafariZoneEntrance_EventScript_InfoAttendant,
         "Route121_SafariZoneEntrance_EventScript_TrainerTipSign" to
             Route121_SafariZoneEntrance_EventScript_TrainerTipSign,
+        "Route121_SafariZoneEntrance_EventScript_FirstTimeInfo" to
+            Route121_SafariZoneEntrance_EventScript_FirstTimeInfo,
     )

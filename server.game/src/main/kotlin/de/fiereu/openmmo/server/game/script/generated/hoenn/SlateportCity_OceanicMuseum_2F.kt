@@ -3,6 +3,7 @@ package de.fiereu.openmmo.server.game.script.generated.hoenn
 import de.fiereu.openmmo.dialog.generated.hoenn.SlateportCity_OceanicMuseum_2F
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennVars
 
 /**
  * Not ported yet. Decomp body:
@@ -177,6 +178,71 @@ internal object SlateportCity_OceanicMuseum_2F_EventScript_PressureExperiment : 
       ctx.sign(SlateportCity_OceanicMuseum_2F.PressureExperiment)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_OCEANIC_MUSEUM_2F_CAPT_STERN, Common_Movement_WalkInPlaceFasterLeft
+ * waitmovement 0
+ * return
+ * ```
+ */
+internal object SlateportCity_OceanicMuseum_2F_EventScript_SternFaceGrunts : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SlateportCity_OceanicMuseum_2F_EventScript_SternFaceGrunts")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_PLAYER, SlateportCity_OceanicMuseum_2F_Movement_PlayerApproachGruntSouth
+ * waitmovement 0
+ * return
+ * ```
+ */
+internal object SlateportCity_OceanicMuseum_2F_EventScript_PlayerApproachGruntSouth : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SlateportCity_OceanicMuseum_2F_EventScript_PlayerApproachGruntSouth")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_PLAYER, SlateportCity_OceanicMuseum_2F_Movement_PlayerApproachGruntWest
+ * waitmovement 0
+ * return
+ * ```
+ */
+internal object SlateportCity_OceanicMuseum_2F_EventScript_PlayerApproachGruntWest : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SlateportCity_OceanicMuseum_2F_EventScript_PlayerApproachGruntWest")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * setvar VAR_REGISTER_BIRCH_STATE, 1
+ * return
+ * ```
+ */
+internal object SlateportCity_OceanicMuseum_2F_EventScript_ReadyRegisterBirch : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.setVar(HoennVars.VAR_REGISTER_BIRCH_STATE, 1)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
+ * waitmovement 0
+ * return
+ * ```
+ */
+internal object SlateportCity_OceanicMuseum_2F_EventScript_PlayerFaceGrunts : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SlateportCity_OceanicMuseum_2F_EventScript_PlayerFaceGrunts")
+}
+
 internal val SlateportCity_OceanicMuseum_2FScripts: Map<String, Script> =
     mapOf(
         "SlateportCity_OceanicMuseum_2F_EventScript_CaptStern" to
@@ -207,4 +273,14 @@ internal val SlateportCity_OceanicMuseum_2FScripts: Map<String, Script> =
             SlateportCity_OceanicMuseum_2F_EventScript_HoennModel,
         "SlateportCity_OceanicMuseum_2F_EventScript_PressureExperiment" to
             SlateportCity_OceanicMuseum_2F_EventScript_PressureExperiment,
+        "SlateportCity_OceanicMuseum_2F_EventScript_SternFaceGrunts" to
+            SlateportCity_OceanicMuseum_2F_EventScript_SternFaceGrunts,
+        "SlateportCity_OceanicMuseum_2F_EventScript_PlayerApproachGruntSouth" to
+            SlateportCity_OceanicMuseum_2F_EventScript_PlayerApproachGruntSouth,
+        "SlateportCity_OceanicMuseum_2F_EventScript_PlayerApproachGruntWest" to
+            SlateportCity_OceanicMuseum_2F_EventScript_PlayerApproachGruntWest,
+        "SlateportCity_OceanicMuseum_2F_EventScript_ReadyRegisterBirch" to
+            SlateportCity_OceanicMuseum_2F_EventScript_ReadyRegisterBirch,
+        "SlateportCity_OceanicMuseum_2F_EventScript_PlayerFaceGrunts" to
+            SlateportCity_OceanicMuseum_2F_EventScript_PlayerFaceGrunts,
     )

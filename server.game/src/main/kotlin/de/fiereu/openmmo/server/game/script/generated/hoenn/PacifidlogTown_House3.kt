@@ -43,8 +43,56 @@ internal object PacifidlogTown_House3_EventScript_Trader : Script {
       TODO("port PacifidlogTown_House3_EventScript_Trader")
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox PacifidlogTown_House3_Text_ReallyWantedToGetBagon, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object PacifidlogTown_House3_EventScript_TradeCompleted : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(PacifidlogTown_House3.ReallyWantedToGetBagon)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * bufferspeciesname STR_VAR_1, VAR_0x8009
+ * msgbox PacifidlogTown_House3_Text_WontAcceptAnyLessThanRealMon, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object PacifidlogTown_House3_EventScript_NotRequestedMon : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port PacifidlogTown_House3_EventScript_NotRequestedMon")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox PacifidlogTown_House3_Text_NotDesperateOrAnything, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object PacifidlogTown_House3_EventScript_DeclineTrade : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(PacifidlogTown_House3.NotDesperateOrAnything)
+  }
+}
+
 internal val PacifidlogTown_House3Scripts: Map<String, Script> =
     mapOf(
         "PacifidlogTown_House3_EventScript_Girl" to PacifidlogTown_House3_EventScript_Girl,
         "PacifidlogTown_House3_EventScript_Trader" to PacifidlogTown_House3_EventScript_Trader,
+        "PacifidlogTown_House3_EventScript_TradeCompleted" to
+            PacifidlogTown_House3_EventScript_TradeCompleted,
+        "PacifidlogTown_House3_EventScript_NotRequestedMon" to
+            PacifidlogTown_House3_EventScript_NotRequestedMon,
+        "PacifidlogTown_House3_EventScript_DeclineTrade" to
+            PacifidlogTown_House3_EventScript_DeclineTrade,
     )

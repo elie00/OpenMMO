@@ -203,7 +203,7 @@ internal object RustboroCity_EventScript_CuttersHouseSign : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox RustboroCity_Text_MrBrineyLovesPeeko, MSGBOX_DEFAULT
  * release
@@ -211,12 +211,13 @@ internal object RustboroCity_EventScript_CuttersHouseSign : Script {
  * ```
  */
 internal object RustboroCity_EventScript_Boy2BrineyLeftTunnel : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port RustboroCity_EventScript_Boy2BrineyLeftTunnel")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(RustboroCity.MrBrineyLovesPeeko)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox RustboroCity_Text_SneakyLookingManWentAroundCorner, MSGBOX_DEFAULT
  * release
@@ -224,12 +225,13 @@ internal object RustboroCity_EventScript_Boy2BrineyLeftTunnel : Script {
  * ```
  */
 internal object RustboroCity_EventScript_FatManSawGrunt : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port RustboroCity_EventScript_FatManSawGrunt")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(RustboroCity.SneakyLookingManWentAroundCorner)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox RustboroCity_Text_HeyThatsRustborosGymBadge, MSGBOX_DEFAULT
  * release
@@ -237,7 +239,9 @@ internal object RustboroCity_EventScript_FatManSawGrunt : Script {
  * ```
  */
 internal object RustboroCity_EventScript_Man1HaveBadge : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port RustboroCity_EventScript_Man1HaveBadge")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(RustboroCity.HeyThatsRustborosGymBadge)
+  }
 }
 
 /**
@@ -252,6 +256,357 @@ internal object RustboroCity_EventScript_Man1HaveBadge : Script {
 internal object RustboroCity_EventScript_ReturnGoodsSpokeToEmployee : Script {
   override suspend fun run(ctx: ScriptContext) =
       TODO("port RustboroCity_EventScript_ReturnGoodsSpokeToEmployee")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * checkplayergender
+ * goto_if_eq VAR_RESULT, MALE, RustboroCity_EventScript_MayEncounter
+ * goto_if_eq VAR_RESULT, FEMALE, RustboroCity_EventScript_BrendanEncounter
+ * end
+ * ```
+ */
+internal object RustboroCity_EventScript_RivalEncounter : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port RustboroCity_EventScript_RivalEncounter")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * checkplayergender
+ * goto_if_eq VAR_RESULT, MALE, RustboroCity_EventScript_PlayMayMusic
+ * goto_if_eq VAR_RESULT, FEMALE, RustboroCity_EventScript_PlayBrendanMusic
+ * return
+ * ```
+ */
+internal object RustboroCity_EventScript_PlayRivalMusic : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port RustboroCity_EventScript_PlayRivalMusic")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * call_if_eq VAR_TEMP_1, 0, RustboroCity_EventScript_EmployeeFacePlayerUp2
+ * call_if_eq VAR_TEMP_1, 1, RustboroCity_EventScript_EmployeeFacePlayerLeft2
+ * call_if_eq VAR_TEMP_1, 2, RustboroCity_EventScript_EmployeeFacePlayerDown2
+ * call_if_eq VAR_TEMP_1, 3, RustboroCity_EventScript_EmployeeApproachPlayerDown2
+ * call_if_eq VAR_TEMP_1, 4, RustboroCity_EventScript_EmployeeFacePlayerRight
+ * msgbox RustboroCity_Text_YouGotItThankYou, MSGBOX_DEFAULT
+ * giveitem ITEM_GREAT_BALL
+ * call_if_eq VAR_RESULT, FALSE, RustboroCity_EventScript_BagFull
+ * msgbox RustboroCity_Text_PleaseComeWithMe, MSGBOX_DEFAULT
+ * closemessage
+ * setflag FLAG_RETURNED_DEVON_GOODS
+ * setflag FLAG_HIDE_RUSTBORO_CITY_DEVON_EMPLOYEE_1
+ * setvar VAR_RUSTBORO_CITY_STATE, 5
+ * delay 30
+ * warp MAP_RUSTBORO_CITY_DEVON_CORP_3F, 2, 2
+ * waitstate
+ * releaseall
+ * end
+ * ```
+ */
+internal object RustboroCity_EventScript_ReturnGoods : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port RustboroCity_EventScript_ReturnGoods")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, Common_Movement_WalkInPlaceFasterLeft
+ * waitmovement 0
+ * playse SE_PIN
+ * applymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, Common_Movement_ExclamationMark
+ * waitmovement 0
+ * applymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, Common_Movement_Delay48
+ * waitmovement 0
+ * return
+ * ```
+ */
+internal object RustboroCity_EventScript_EmployeeFacePlayerRight : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port RustboroCity_EventScript_EmployeeFacePlayerRight")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * goto_if_set FLAG_DEFEATED_RIVAL_RUSTBORO, RustboroCity_EventScript_MayBrineyHint
+ * goto_if_set FLAG_MET_RIVAL_RUSTBORO, RustboroCity_EventScript_MayAskToBattle
+ * setflag FLAG_MET_RIVAL_RUSTBORO
+ * msgbox RustboroCity_Text_MayHiLetsRegister, MSGBOX_DEFAULT
+ * closemessage
+ * delay 30
+ * playfanfare MUS_REGISTER_MATCH_CALL
+ * msgbox RustboroCity_Text_RegisteredMay, MSGBOX_DEFAULT
+ * waitfanfare
+ * closemessage
+ * delay 30
+ * setflag FLAG_ENABLE_RIVAL_MATCH_CALL
+ * setvar VAR_RUSTBORO_CITY_STATE, 8
+ * setvar VAR_ROUTE104_STATE, 2
+ * setvar VAR_0x8008, 0
+ * msgbox RustboroCity_Text_MayPassedBrineyWantToBattle, MSGBOX_YESNO
+ * goto_if_eq VAR_RESULT, YES, RustboroCity_EventScript_BattleMay
+ * msgbox RustboroCity_Text_MayOhHaventRaisedPokemonEnough, MSGBOX_DEFAULT
+ * call RustboroCity_EventScript_RestoreBgm
+ * releaseall
+ * end
+ * ```
+ */
+internal object RustboroCity_EventScript_MayEncounter : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port RustboroCity_EventScript_MayEncounter")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * goto_if_set FLAG_DEFEATED_RIVAL_RUSTBORO, RustboroCity_EventScript_BrendanBrineyHint
+ * goto_if_set FLAG_MET_RIVAL_RUSTBORO, RustboroCity_EventScript_BrendanAskToBattle
+ * setflag FLAG_MET_RIVAL_RUSTBORO
+ * msgbox RustboroCity_Text_BrendanHiLetsRegister, MSGBOX_DEFAULT
+ * closemessage
+ * delay 30
+ * playfanfare MUS_REGISTER_MATCH_CALL
+ * msgbox RustboroCity_Text_RegisteredBrendan, MSGBOX_DEFAULT
+ * waitfanfare
+ * closemessage
+ * delay 30
+ * setflag FLAG_ENABLE_RIVAL_MATCH_CALL
+ * setvar VAR_RUSTBORO_CITY_STATE, 8
+ * setvar VAR_ROUTE104_STATE, 2
+ * msgbox RustboroCity_Text_BrendanPassedBrineyWantToBattle, MSGBOX_YESNO
+ * goto_if_eq VAR_RESULT, YES, RustboroCity_EventScript_BattleBrendan
+ * msgbox RustboroCity_Text_BrendanNoConfidenceInPokemon, MSGBOX_DEFAULT
+ * call RustboroCity_EventScript_RestoreBgm
+ * releaseall
+ * end
+ * ```
+ */
+internal object RustboroCity_EventScript_BrendanEncounter : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port RustboroCity_EventScript_BrendanEncounter")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * playbgm MUS_ENCOUNTER_BRENDAN, TRUE
+ * return
+ * ```
+ */
+internal object RustboroCity_EventScript_PlayBrendanMusic : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port RustboroCity_EventScript_PlayBrendanMusic")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox RustboroCity_Text_YoureLoadedWithItems, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object RustboroCity_EventScript_BagFull : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(RustboroCity.YoureLoadedWithItems)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, Common_Movement_WalkInPlaceFasterDown
+ * waitmovement 0
+ * playse SE_PIN
+ * applymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, Common_Movement_ExclamationMark
+ * waitmovement 0
+ * applymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, Common_Movement_Delay48
+ * waitmovement 0
+ * applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp
+ * waitmovement 0
+ * return
+ * ```
+ */
+internal object RustboroCity_EventScript_EmployeeFacePlayerDown2 : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port RustboroCity_EventScript_EmployeeFacePlayerDown2")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * playbgm MUS_ENCOUNTER_MAY, TRUE
+ * return
+ * ```
+ */
+internal object RustboroCity_EventScript_PlayMayMusic : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port RustboroCity_EventScript_PlayMayMusic")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, Common_Movement_WalkInPlaceFasterUp
+ * waitmovement 0
+ * playse SE_PIN
+ * applymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, Common_Movement_ExclamationMark
+ * waitmovement 0
+ * applymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, Common_Movement_Delay48
+ * waitmovement 0
+ * applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterDown
+ * waitmovement 0
+ * return
+ * ```
+ */
+internal object RustboroCity_EventScript_EmployeeFacePlayerUp2 : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port RustboroCity_EventScript_EmployeeFacePlayerUp2")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, Common_Movement_WalkInPlaceFasterDown
+ * waitmovement 0
+ * playse SE_PIN
+ * applymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, Common_Movement_ExclamationMark
+ * waitmovement 0
+ * applymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, Common_Movement_Delay48
+ * waitmovement 0
+ * applymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, RustboroCity_Movement_EmployeeApproachPlayerDown
+ * waitmovement 0
+ * applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp
+ * waitmovement 0
+ * return
+ * ```
+ */
+internal object RustboroCity_EventScript_EmployeeApproachPlayerDown2 : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port RustboroCity_EventScript_EmployeeApproachPlayerDown2")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, Common_Movement_WalkInPlaceFasterRight
+ * waitmovement 0
+ * playse SE_PIN
+ * applymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, Common_Movement_ExclamationMark
+ * waitmovement 0
+ * applymovement LOCALID_RUSTBORO_DEVON_EMPLOYEE, Common_Movement_Delay48
+ * waitmovement 0
+ * applymovement LOCALID_PLAYER, Common_Movement_FaceLeft
+ * waitmovement 0
+ * return
+ * ```
+ */
+internal object RustboroCity_EventScript_EmployeeFacePlayerLeft2 : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port RustboroCity_EventScript_EmployeeFacePlayerLeft2")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * savebgm MUS_DUMMY
+ * fadedefaultbgm
+ * return
+ * ```
+ */
+internal object RustboroCity_EventScript_RestoreBgm : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port RustboroCity_EventScript_RestoreBgm")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox RustboroCity_Text_BrendanWantToBattle, MSGBOX_YESNO
+ * goto_if_eq VAR_RESULT, YES, RustboroCity_EventScript_BattleBrendan
+ * msgbox RustboroCity_Text_BrendanNoConfidenceInPokemon, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object RustboroCity_EventScript_BrendanAskToBattle : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port RustboroCity_EventScript_BrendanAskToBattle")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox RustboroCity_Text_BrendanIWontGoEasy, MSGBOX_DEFAULT
+ * switch VAR_STARTER_MON
+ * case 0, RustboroCity_EventScript_BattleBrendanTreecko
+ * case 1, RustboroCity_EventScript_BattleBrendanTorchic
+ * case 2, RustboroCity_EventScript_BattleBrendanMudkip
+ * end
+ * ```
+ */
+internal object RustboroCity_EventScript_BattleBrendan : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port RustboroCity_EventScript_BattleBrendan")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox RustboroCity_Text_MayImNotGoingToLose, MSGBOX_DEFAULT
+ * switch VAR_STARTER_MON
+ * case 0, RustboroCity_EventScript_BattleMayTreecko
+ * case 1, RustboroCity_EventScript_BattleMayTorchic
+ * case 2, RustboroCity_EventScript_BattleMayMudkip
+ * end
+ * ```
+ */
+internal object RustboroCity_EventScript_BattleMay : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port RustboroCity_EventScript_BattleMay")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * setvar VAR_0x8008, 1
+ * msgbox RustboroCity_Text_MayWantToBattle, MSGBOX_YESNO
+ * goto_if_eq VAR_RESULT, YES, RustboroCity_EventScript_BattleMay
+ * msgbox RustboroCity_Text_MayOhHaventRaisedPokemonEnough, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object RustboroCity_EventScript_MayAskToBattle : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port RustboroCity_EventScript_MayAskToBattle")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox RustboroCity_Text_BrendanMrBrineyHint, MSGBOX_DEFAULT
+ * call_if_eq VAR_0x8008, 0, RustboroCity_EventScript_RestoreBgm
+ * releaseall
+ * end
+ * ```
+ */
+internal object RustboroCity_EventScript_BrendanBrineyHint : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port RustboroCity_EventScript_BrendanBrineyHint")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox RustboroCity_Text_MayMrBrineyHint, MSGBOX_DEFAULT
+ * call_if_eq VAR_0x8008, 0, RustboroCity_EventScript_RestoreBgm
+ * releaseall
+ * end
+ * ```
+ */
+internal object RustboroCity_EventScript_MayBrineyHint : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port RustboroCity_EventScript_MayBrineyHint")
 }
 
 internal val RustboroCityScripts: Map<String, Script> =
@@ -284,4 +639,30 @@ internal val RustboroCityScripts: Map<String, Script> =
         "RustboroCity_EventScript_Man1HaveBadge" to RustboroCity_EventScript_Man1HaveBadge,
         "RustboroCity_EventScript_ReturnGoodsSpokeToEmployee" to
             RustboroCity_EventScript_ReturnGoodsSpokeToEmployee,
+        "RustboroCity_EventScript_RivalEncounter" to RustboroCity_EventScript_RivalEncounter,
+        "RustboroCity_EventScript_PlayRivalMusic" to RustboroCity_EventScript_PlayRivalMusic,
+        "RustboroCity_EventScript_ReturnGoods" to RustboroCity_EventScript_ReturnGoods,
+        "RustboroCity_EventScript_EmployeeFacePlayerRight" to
+            RustboroCity_EventScript_EmployeeFacePlayerRight,
+        "RustboroCity_EventScript_MayEncounter" to RustboroCity_EventScript_MayEncounter,
+        "RustboroCity_EventScript_BrendanEncounter" to RustboroCity_EventScript_BrendanEncounter,
+        "RustboroCity_EventScript_PlayBrendanMusic" to RustboroCity_EventScript_PlayBrendanMusic,
+        "RustboroCity_EventScript_BagFull" to RustboroCity_EventScript_BagFull,
+        "RustboroCity_EventScript_EmployeeFacePlayerDown2" to
+            RustboroCity_EventScript_EmployeeFacePlayerDown2,
+        "RustboroCity_EventScript_PlayMayMusic" to RustboroCity_EventScript_PlayMayMusic,
+        "RustboroCity_EventScript_EmployeeFacePlayerUp2" to
+            RustboroCity_EventScript_EmployeeFacePlayerUp2,
+        "RustboroCity_EventScript_EmployeeApproachPlayerDown2" to
+            RustboroCity_EventScript_EmployeeApproachPlayerDown2,
+        "RustboroCity_EventScript_EmployeeFacePlayerLeft2" to
+            RustboroCity_EventScript_EmployeeFacePlayerLeft2,
+        "RustboroCity_EventScript_RestoreBgm" to RustboroCity_EventScript_RestoreBgm,
+        "RustboroCity_EventScript_BrendanAskToBattle" to
+            RustboroCity_EventScript_BrendanAskToBattle,
+        "RustboroCity_EventScript_BattleBrendan" to RustboroCity_EventScript_BattleBrendan,
+        "RustboroCity_EventScript_BattleMay" to RustboroCity_EventScript_BattleMay,
+        "RustboroCity_EventScript_MayAskToBattle" to RustboroCity_EventScript_MayAskToBattle,
+        "RustboroCity_EventScript_BrendanBrineyHint" to RustboroCity_EventScript_BrendanBrineyHint,
+        "RustboroCity_EventScript_MayBrineyHint" to RustboroCity_EventScript_MayBrineyHint,
     )

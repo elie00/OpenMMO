@@ -106,6 +106,60 @@ internal object SilphCo_11F_EventScript_FloorSign : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(SilphCo_11F.FloorSign)
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SilphCo_11F_Text_YouHaveNoRoomForThis
+ * release
+ * end
+ * ```
+ */
+internal object SilphCo_11F_EventScript_NoRoomForMasterBall : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SilphCo_11F.YouHaveNoRoomForThis)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SilphCo_11F_Text_ThanksForSavingMeDearBoy
+ * return
+ * ```
+ */
+internal object SilphCo_11F_EventScript_PresidentThanksMale : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SilphCo_11F.ThanksForSavingMeDearBoy)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SilphCo_11F_Text_ThanksForSavingMeDearGirl
+ * return
+ * ```
+ */
+internal object SilphCo_11F_EventScript_PresidentThanksFemale : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SilphCo_11F.ThanksForSavingMeDearGirl)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SilphCo_11F_Text_ThatsOurSecretPrototype
+ * release
+ * end
+ * ```
+ */
+internal object SilphCo_11F_EventScript_AlreadyGotMasterBall : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SilphCo_11F.ThatsOurSecretPrototype)
+  }
+}
+
 internal val SilphCo_11FScripts: Map<String, Script> =
     mapOf(
         "SilphCo_11F_EventScript_President" to SilphCo_11F_EventScript_President,
@@ -115,4 +169,12 @@ internal val SilphCo_11FScripts: Map<String, Script> =
         "SilphCo_11F_EventScript_Grunt2" to SilphCo_11F_EventScript_Grunt2,
         "SilphCo_11F_EventScript_Door" to SilphCo_11F_EventScript_Door,
         "SilphCo_11F_EventScript_FloorSign" to SilphCo_11F_EventScript_FloorSign,
+        "SilphCo_11F_EventScript_NoRoomForMasterBall" to
+            SilphCo_11F_EventScript_NoRoomForMasterBall,
+        "SilphCo_11F_EventScript_PresidentThanksMale" to
+            SilphCo_11F_EventScript_PresidentThanksMale,
+        "SilphCo_11F_EventScript_PresidentThanksFemale" to
+            SilphCo_11F_EventScript_PresidentThanksFemale,
+        "SilphCo_11F_EventScript_AlreadyGotMasterBall" to
+            SilphCo_11F_EventScript_AlreadyGotMasterBall,
     )

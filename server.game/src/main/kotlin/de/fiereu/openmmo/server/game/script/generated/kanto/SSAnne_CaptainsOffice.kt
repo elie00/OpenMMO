@@ -43,9 +43,26 @@ internal object SSAnne_CaptainsOffice_EventScript_TrashCan : Script {
       ctx.sign(SSAnne_CaptainsOffice.YuckShouldntHaveLooked)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_SS_ANNE_CAPTAIN, Common_Movement_FacePlayer
+ * waitmovement 0
+ * msgbox SSAnne_CaptainsOffice_Text_SSAnneWillSetSailSoon
+ * release
+ * end
+ * ```
+ */
+internal object SSAnne_CaptainsOffice_EventScript_AlreadyGotCut : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SSAnne_CaptainsOffice_EventScript_AlreadyGotCut")
+}
+
 internal val SSAnne_CaptainsOfficeScripts: Map<String, Script> =
     mapOf(
         "SSAnne_CaptainsOffice_EventScript_Captain" to SSAnne_CaptainsOffice_EventScript_Captain,
         "SSAnne_CaptainsOffice_EventScript_Book" to SSAnne_CaptainsOffice_EventScript_Book,
         "SSAnne_CaptainsOffice_EventScript_TrashCan" to SSAnne_CaptainsOffice_EventScript_TrashCan,
+        "SSAnne_CaptainsOffice_EventScript_AlreadyGotCut" to
+            SSAnne_CaptainsOffice_EventScript_AlreadyGotCut,
     )

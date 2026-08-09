@@ -109,6 +109,23 @@ internal object BattleFrontier_BattlePyramidLobby_EventScript_ReadRulesBoard : S
       TODO("port BattleFrontier_BattlePyramidLobby_EventScript_ReadRulesBoard")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * multichoice 17, 6, MULTI_LEVEL_MODE, FALSE
+ * switch VAR_RESULT
+ * case FRONTIER_LVL_50, BattleFrontier_BattlePyramidLobby_EventScript_GiveHintLv50
+ * case FRONTIER_LVL_OPEN, BattleFrontier_BattlePyramidLobby_EventScript_GiveHintLvOpen
+ * case FRONTIER_LVL_TENT, BattleFrontier_BattlePyramidLobby_EventScript_NoHint
+ * case MULTI_B_PRESSED, BattleFrontier_BattlePyramidLobby_EventScript_NoHint
+ * return
+ * ```
+ */
+internal object BattleFrontier_BattlePyramidLobby_EventScript_GiveHint : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port BattleFrontier_BattlePyramidLobby_EventScript_GiveHint")
+}
+
 internal val BattleFrontier_BattlePyramidLobbyScripts: Map<String, Script> =
     mapOf(
         "BattleFrontier_BattlePyramidLobby_EventScript_Attendant" to
@@ -125,4 +142,6 @@ internal val BattleFrontier_BattlePyramidLobbyScripts: Map<String, Script> =
             BattleFrontier_BattlePyramidLobby_EventScript_RulesBoard,
         "BattleFrontier_BattlePyramidLobby_EventScript_ReadRulesBoard" to
             BattleFrontier_BattlePyramidLobby_EventScript_ReadRulesBoard,
+        "BattleFrontier_BattlePyramidLobby_EventScript_GiveHint" to
+            BattleFrontier_BattlePyramidLobby_EventScript_GiveHint,
     )

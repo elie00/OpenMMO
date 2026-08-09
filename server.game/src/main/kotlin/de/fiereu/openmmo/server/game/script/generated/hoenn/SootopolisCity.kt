@@ -3,6 +3,7 @@ package de.fiereu.openmmo.server.game.script.generated.hoenn
 import de.fiereu.openmmo.dialog.generated.hoenn.SootopolisCity
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 import de.fiereu.openmmo.story.generated.hoenn.HoennVars
 
 /**
@@ -274,7 +275,7 @@ internal object SootopolisCity_EventScript_Archie : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -287,7 +288,15 @@ internal object SootopolisCity_EventScript_Archie : Script {
  * ```
  */
 internal object SootopolisCity_EventScript_Wallace : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SootopolisCity_EventScript_Wallace")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.getVar(HoennVars.VAR_SOOTOPOLIS_CITY_STATE) == 4)
+        return SootopolisCity_EventScript_GoToSkyPillar.run(ctx)
+    if (ctx.isFlagSet(HoennFlags.FLAG_RECEIVED_HM_WATERFALL))
+        return SootopolisCity_EventScript_GoToGym.run(ctx)
+    if (ctx.isFlagSet(HoennFlags.FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE))
+        return SootopolisCity_EventScript_GiveWaterfall.run(ctx)
+    ctx.say(SootopolisCity.AquaMagmaDidntMeanHarm)
+  }
 }
 
 internal object SootopolisCity_EventScript_GymSign : Script {
@@ -299,7 +308,7 @@ internal object SootopolisCity_EventScript_CitySign : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox SootopolisCity_Text_AfterAllOurScheming, MSGBOX_DEFAULT
  * setflag FLAG_MET_MAXIE_SOOTOPOLIS
@@ -309,12 +318,16 @@ internal object SootopolisCity_EventScript_CitySign : Script {
  * ```
  */
 internal object SootopolisCity_EventScript_MaxieRayquaza : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SootopolisCity_EventScript_MaxieRayquaza")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SootopolisCity.AfterAllOurScheming)
+    ctx.setFlag(HoennFlags.FLAG_MET_MAXIE_SOOTOPOLIS)
+    if (ctx.isFlagSet(HoennFlags.FLAG_MET_ARCHIE_SOOTOPOLIS))
+        return SootopolisCity_EventScript_MaxieArchieLeave.run(ctx)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox SootopolisCity_Text_TryingMeaninglessToPokemon, MSGBOX_DEFAULT
  * setflag FLAG_MET_ARCHIE_SOOTOPOLIS
@@ -324,8 +337,559 @@ internal object SootopolisCity_EventScript_MaxieRayquaza : Script {
  * ```
  */
 internal object SootopolisCity_EventScript_ArchieRayquaza : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SootopolisCity.TryingMeaninglessToPokemon)
+    ctx.setFlag(HoennFlags.FLAG_MET_ARCHIE_SOOTOPOLIS)
+    if (ctx.isFlagSet(HoennFlags.FLAG_MET_MAXIE_SOOTOPOLIS))
+        return SootopolisCity_EventScript_MaxieArchieLeave.run(ctx)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_SOOTOPOLIS_BLACK_BELT, Common_Movement_FacePlayer
+ * waitmovement 0
+ * msgbox SootopolisCity_Text_GreenOneSettlesThings, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object SootopolisCity_EventScript_BlackBeltRayquaza : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port SootopolisCity_EventScript_ArchieRayquaza")
+      TODO("port SootopolisCity_EventScript_BlackBeltRayquaza")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SootopolisCity_Text_WhatIsThatGreenPokemon, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object SootopolisCity_EventScript_Boy1Rayquaza : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SootopolisCity.WhatIsThatGreenPokemon)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SootopolisCity_Text_FearedWorstWhenPokemonFlewDown, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object SootopolisCity_EventScript_Woman1Rayquaza : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SootopolisCity.FearedWorstWhenPokemonFlewDown)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SootopolisCity_Text_HaventYouScaledSkyPillar, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object SootopolisCity_EventScript_GoToSkyPillar : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SootopolisCity.HaventYouScaledSkyPillar)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SootopolisCity_Text_AwakenedPokemonClash, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object SootopolisCity_EventScript_ExpertLegendaries : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SootopolisCity.AwakenedPokemonClash)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SootopolisCity_Text_MaxieArchieLeft, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object SootopolisCity_EventScript_StevenMaxieArchieLeft : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SootopolisCity.MaxieArchieLeft)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SootopolisCity_Text_FlyingMonStoppedRampage, MSGBOX_DEFAULT
+ * closemessage
+ * releaseall
+ * end
+ * ```
+ */
+internal object SootopolisCity_EventScript_Boy2Rayquaza : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SootopolisCity.FlyingMonStoppedRampage)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SootopolisCity_Text_CaveOfOriginSleepsToo, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object SootopolisCity_EventScript_ExpertPostLegendaries : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SootopolisCity.CaveOfOriginSleepsToo)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SootopolisCity_Text_NeverBeenToSkyPillar, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object SootopolisCity_EventScript_StevenHelpedWallace : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SootopolisCity.NeverBeenToSkyPillar)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * setflag FLAG_HIDE_SOOTOPOLIS_CITY_MAXIE
+ * setflag FLAG_HIDE_SOOTOPOLIS_CITY_ARCHIE
+ * setflag FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE
+ * clearflag FLAG_HIDE_MT_PYRE_SUMMIT_MAXIE
+ * clearflag FLAG_HIDE_MT_PYRE_SUMMIT_ARCHIE
+ * setvar VAR_MT_PYRE_STATE, 2
+ * warpsilent MAP_SOOTOPOLIS_CITY, 31, 34
+ * waitstate
+ * releaseall
+ * end
+ * ```
+ */
+internal object SootopolisCity_EventScript_MaxieArchieLeave : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SootopolisCity_EventScript_MaxieArchieLeave")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SootopolisCity_Text_LeadSuperiorTrainerToCave, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object SootopolisCity_EventScript_ExpertLeadToCave : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SootopolisCity.LeadSuperiorTrainerToCave)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SootopolisCity_Text_WhereDidLegendariesGo, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object SootopolisCity_EventScript_Boy1GameClear : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SootopolisCity.WhereDidLegendariesGo)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SootopolisCity_Text_YouBroughtFlyingMon, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object SootopolisCity_EventScript_Woman2Rayquaza : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SootopolisCity.YouBroughtFlyingMon)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SootopolisCity_Text_SootopolisDidntGetWrecked, MSGBOX_DEFAULT
+ * closemessage
+ * releaseall
+ * end
+ * ```
+ */
+internal object SootopolisCity_EventScript_GirlRayquaza : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SootopolisCity.SootopolisDidntGetWrecked)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SootopolisCity_Text_ThatWasWicked, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object SootopolisCity_EventScript_NinjaBoyRayquaza : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SootopolisCity.ThatWasWicked)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox SootopolisCity_Text_InvolvedWithCrisisComeWithMe, MSGBOX_DEFAULT
+ * closemessage
+ * call_if_eq VAR_FACING, DIR_WEST, SootopolisCity_EventScript_StartWalkToCaveOfOriginWest
+ * call_if_eq VAR_FACING, DIR_NORTH, SootopolisCity_EventScript_StartWalkToCaveOfOriginNorth
+ * msgbox SootopolisCity_Text_DoesThisMakeYourFearPokemon, MSGBOX_DEFAULT
+ * closemessage
+ * applymovement LOCALID_SOOTOPOLIS_STEVEN, SootopolisCity_Movement_StevenWalkToCaveOfOrigin
+ * applymovement LOCALID_PLAYER, SootopolisCity_Movement_PlayerWalkToCaveOfOrigin
+ * waitmovement 0
+ * delay 120
+ * applymovement LOCALID_SOOTOPOLIS_EXPERT, SootopolisCity_Movement_ExpertMoveAside
+ * waitmovement 0
+ * applymovement LOCALID_SOOTOPOLIS_STEVEN, SootopolisCity_Movement_StevenArriveCaveEntrance
+ * applymovement LOCALID_PLAYER, SootopolisCity_Movement_PlayerArriveCaveEntrance
+ * waitmovement 0
+ * msgbox SootopolisCity_Text_HereWereAreHelpWallace, MSGBOX_DEFAULT
+ * closemessage
+ * setflag FLAG_STEVEN_GUIDES_TO_CAVE_OF_ORIGIN
+ * applymovement LOCALID_PLAYER, SootopolisCity_Movement_PlayerEnterCaveOfOrigin
+ * waitmovement 0
+ * warp MAP_CAVE_OF_ORIGIN_ENTRANCE, 9, 20
+ * waitstate
+ * end
+ * ```
+ */
+internal object SootopolisCity_EventScript_StevenLeadPlayerCaveOfOrigin : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SootopolisCity_EventScript_StevenLeadPlayerCaveOfOrigin")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SootopolisCity_Text_SawLegendWithOwnEyes, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object SootopolisCity_EventScript_ManiacRayquaza : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SootopolisCity.SawLegendWithOwnEyes)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SootopolisCity_Text_CityRegainedCalm, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object SootopolisCity_EventScript_ManPostLegendaries : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SootopolisCity.CityRegainedCalm)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SootopolisCity_Text_PrettyMonCameFromSky, MSGBOX_DEFAULT
+ * closemessage
+ * release
+ * end
+ * ```
+ */
+internal object SootopolisCity_EventScript_KiriRayquaza : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SootopolisCity.PrettyMonCameFromSky)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SootopolisCity_Text_NightSkyFavoriteScenery, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object SootopolisCity_EventScript_Woman1PostLegendaries : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SootopolisCity.NightSkyFavoriteScenery)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox SootopolisCity_Text_ThankYouForHelpAcceptThis, MSGBOX_DEFAULT
+ * giveitem ITEM_HM_WATERFALL
+ * setflag FLAG_RECEIVED_HM_WATERFALL
+ * msgbox SootopolisCity_Text_ExplainWaterfallGoToGym, MSGBOX_DEFAULT
+ * closemessage
+ * call_if_eq VAR_FACING, DIR_NORTH, SootopolisCity_EventScript_WallaceMoveFromGym
+ * call_if_eq VAR_FACING, DIR_EAST, SootopolisCity_EventScript_WallaceMoveFromGym
+ * call_if_eq VAR_FACING, DIR_WEST, SootopolisCity_EventScript_WallaceMoveFromGymWest
+ * release
+ * end
+ * ```
+ */
+internal object SootopolisCity_EventScript_GiveWaterfall : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SootopolisCity_EventScript_GiveWaterfall")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SootopolisCity_Text_DazzledByMentor, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object SootopolisCity_EventScript_GoToGym : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SootopolisCity.DazzledByMentor)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SootopolisCity_Text_GiganticPokemonFight, MSGBOX_DEFAULT
+ * closemessage
+ * applymovement LOCALID_SOOTOPOLIS_WOMAN_1, Common_Movement_FaceOriginalDirection
+ * waitmovement 0
+ * release
+ * end
+ * ```
+ */
+internal object SootopolisCity_EventScript_Woman1Legendaries : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SootopolisCity.GiganticPokemonFight)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * dotimebasedevents
+ * special GetPlayerBigGuyGirlString
+ * goto_if_set FLAG_DAILY_SOOTOPOLIS_RECEIVED_BERRY, SootopolisCity_EventScript_KiriReceivedBerry
+ * msgbox SootopolisCity_Text_NameIsKiriHaveOneOfThese, MSGBOX_DEFAULT
+ * random NUM_KIRI_BERRIES
+ * addvar VAR_RESULT, NUM_KIRI_BERRIES_SKIPPED
+ * addvar VAR_RESULT, FIRST_BERRY_INDEX
+ * giveitem VAR_RESULT
+ * goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+ * setflag FLAG_DAILY_SOOTOPOLIS_RECEIVED_BERRY
+ * msgbox SootopolisCity_Text_GiveYouThisBerryToo, MSGBOX_DEFAULT
+ * random 2
+ * goto_if_eq VAR_RESULT, 0, SootopolisCity_EventScript_GiveFigyBerry
+ * goto_if_eq VAR_RESULT, 1, SootopolisCity_EventScript_GiveIapapaBerry
+ * end
+ * ```
+ */
+internal object SootopolisCity_EventScript_KiriGiveBerry : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SootopolisCity_EventScript_KiriGiveBerry")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SootopolisCity_Text_PhysicallyFitLivingHere, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object SootopolisCity_EventScript_Boy1Normal : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SootopolisCity.PhysicallyFitLivingHere)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SootopolisCity_Text_WonderWhatWorldIsLike, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object SootopolisCity_EventScript_NinjaBoyNormal : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SootopolisCity.WonderWhatWorldIsLike)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SootopolisCity_Text_KnowWhatsNeededToHelpHim, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object SootopolisCity_EventScript_StevenHelpWallace : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SootopolisCity.KnowWhatsNeededToHelpHim)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_SOOTOPOLIS_WALLACE, SootopolisCity_Movement_WallaceMoveFromGymWest
+ * waitmovement 0
+ * copyobjectxytoperm LOCALID_SOOTOPOLIS_WALLACE
+ * setvar VAR_SOOTOPOLIS_WALLACE_STATE, 2
+ * return
+ * ```
+ */
+internal object SootopolisCity_EventScript_WallaceMoveFromGymWest : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SootopolisCity_EventScript_WallaceMoveFromGymWest")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox SootopolisCity_Text_LikeSeasonBornIn, MSGBOX_YESNO
+ * goto_if_eq VAR_RESULT, YES, SootopolisCity_EventScript_KiriLikeSeasonBornIn
+ * msgbox SootopolisCity_Text_OhDoesntMatter, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object SootopolisCity_EventScript_KiriReceivedBerry : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SootopolisCity_EventScript_KiriReceivedBerry")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * giveitem ITEM_FIGY_BERRY
+ * goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+ * msgbox SootopolisCity_Text_WhatKindOfWishInYourName, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object SootopolisCity_EventScript_GiveFigyBerry : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SootopolisCity_EventScript_GiveFigyBerry")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_SOOTOPOLIS_STEVEN, SootopolisCity_Movement_StevenStartWalkToCaveOfOrigin
+ * applymovement LOCALID_PLAYER, SootopolisCity_Movement_PlayerStartWalkToCaveOfOriginWest
+ * waitmovement 0
+ * return
+ * ```
+ */
+internal object SootopolisCity_EventScript_StartWalkToCaveOfOriginWest : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SootopolisCity_EventScript_StartWalkToCaveOfOriginWest")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * giveitem ITEM_IAPAPA_BERRY
+ * goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+ * msgbox SootopolisCity_Text_WhatKindOfWishInYourName, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object SootopolisCity_EventScript_GiveIapapaBerry : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SootopolisCity_EventScript_GiveIapapaBerry")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_SOOTOPOLIS_STEVEN, SootopolisCity_Movement_StevenStartWalkToCaveOfOrigin
+ * applymovement LOCALID_PLAYER, SootopolisCity_Movement_PlayerStartWalkToCaveOfOriginNorth
+ * waitmovement 0
+ * return
+ * ```
+ */
+internal object SootopolisCity_EventScript_StartWalkToCaveOfOriginNorth : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SootopolisCity_EventScript_StartWalkToCaveOfOriginNorth")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_SOOTOPOLIS_WALLACE, SootopolisCity_Movement_WallaceMoveFromGym
+ * waitmovement 0
+ * copyobjectxytoperm LOCALID_SOOTOPOLIS_WALLACE
+ * setvar VAR_SOOTOPOLIS_WALLACE_STATE, 1
+ * return
+ * ```
+ */
+internal object SootopolisCity_EventScript_WallaceMoveFromGym : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SootopolisCity_EventScript_WallaceMoveFromGym")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SootopolisCity_Text_ThenILoveAutumn, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object SootopolisCity_EventScript_KiriLikeSeasonBornIn : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SootopolisCity.ThenILoveAutumn)
+  }
 }
 
 internal val SootopolisCityScripts: Map<String, Script> =
@@ -350,4 +914,58 @@ internal val SootopolisCityScripts: Map<String, Script> =
         "SootopolisCity_EventScript_CitySign" to SootopolisCity_EventScript_CitySign,
         "SootopolisCity_EventScript_MaxieRayquaza" to SootopolisCity_EventScript_MaxieRayquaza,
         "SootopolisCity_EventScript_ArchieRayquaza" to SootopolisCity_EventScript_ArchieRayquaza,
+        "SootopolisCity_EventScript_BlackBeltRayquaza" to
+            SootopolisCity_EventScript_BlackBeltRayquaza,
+        "SootopolisCity_EventScript_Boy1Rayquaza" to SootopolisCity_EventScript_Boy1Rayquaza,
+        "SootopolisCity_EventScript_Woman1Rayquaza" to SootopolisCity_EventScript_Woman1Rayquaza,
+        "SootopolisCity_EventScript_GoToSkyPillar" to SootopolisCity_EventScript_GoToSkyPillar,
+        "SootopolisCity_EventScript_ExpertLegendaries" to
+            SootopolisCity_EventScript_ExpertLegendaries,
+        "SootopolisCity_EventScript_StevenMaxieArchieLeft" to
+            SootopolisCity_EventScript_StevenMaxieArchieLeft,
+        "SootopolisCity_EventScript_Boy2Rayquaza" to SootopolisCity_EventScript_Boy2Rayquaza,
+        "SootopolisCity_EventScript_ExpertPostLegendaries" to
+            SootopolisCity_EventScript_ExpertPostLegendaries,
+        "SootopolisCity_EventScript_StevenHelpedWallace" to
+            SootopolisCity_EventScript_StevenHelpedWallace,
+        "SootopolisCity_EventScript_MaxieArchieLeave" to
+            SootopolisCity_EventScript_MaxieArchieLeave,
+        "SootopolisCity_EventScript_ExpertLeadToCave" to
+            SootopolisCity_EventScript_ExpertLeadToCave,
+        "SootopolisCity_EventScript_Boy1GameClear" to SootopolisCity_EventScript_Boy1GameClear,
+        "SootopolisCity_EventScript_Woman2Rayquaza" to SootopolisCity_EventScript_Woman2Rayquaza,
+        "SootopolisCity_EventScript_GirlRayquaza" to SootopolisCity_EventScript_GirlRayquaza,
+        "SootopolisCity_EventScript_NinjaBoyRayquaza" to
+            SootopolisCity_EventScript_NinjaBoyRayquaza,
+        "SootopolisCity_EventScript_StevenLeadPlayerCaveOfOrigin" to
+            SootopolisCity_EventScript_StevenLeadPlayerCaveOfOrigin,
+        "SootopolisCity_EventScript_ManiacRayquaza" to SootopolisCity_EventScript_ManiacRayquaza,
+        "SootopolisCity_EventScript_ManPostLegendaries" to
+            SootopolisCity_EventScript_ManPostLegendaries,
+        "SootopolisCity_EventScript_KiriRayquaza" to SootopolisCity_EventScript_KiriRayquaza,
+        "SootopolisCity_EventScript_Woman1PostLegendaries" to
+            SootopolisCity_EventScript_Woman1PostLegendaries,
+        "SootopolisCity_EventScript_GiveWaterfall" to SootopolisCity_EventScript_GiveWaterfall,
+        "SootopolisCity_EventScript_GoToGym" to SootopolisCity_EventScript_GoToGym,
+        "SootopolisCity_EventScript_Woman1Legendaries" to
+            SootopolisCity_EventScript_Woman1Legendaries,
+        "SootopolisCity_EventScript_KiriGiveBerry" to SootopolisCity_EventScript_KiriGiveBerry,
+        "SootopolisCity_EventScript_Boy1Normal" to SootopolisCity_EventScript_Boy1Normal,
+        "SootopolisCity_EventScript_NinjaBoyNormal" to SootopolisCity_EventScript_NinjaBoyNormal,
+        "SootopolisCity_EventScript_StevenHelpWallace" to
+            SootopolisCity_EventScript_StevenHelpWallace,
+        "SootopolisCity_EventScript_WallaceMoveFromGymWest" to
+            SootopolisCity_EventScript_WallaceMoveFromGymWest,
+        "SootopolisCity_EventScript_KiriReceivedBerry" to
+            SootopolisCity_EventScript_KiriReceivedBerry,
+        "SootopolisCity_EventScript_GiveFigyBerry" to SootopolisCity_EventScript_GiveFigyBerry,
+        "SootopolisCity_EventScript_StartWalkToCaveOfOriginWest" to
+            SootopolisCity_EventScript_StartWalkToCaveOfOriginWest,
+        "SootopolisCity_EventScript_GiveIapapaBerry" to SootopolisCity_EventScript_GiveIapapaBerry,
+        "SootopolisCity_EventScript_StartWalkToCaveOfOriginNorth" to
+            SootopolisCity_EventScript_StartWalkToCaveOfOriginNorth,
+        "SootopolisCity_EventScript_WallaceMoveFromGym" to
+            SootopolisCity_EventScript_WallaceMoveFromGym,
+        "SootopolisCity_EventScript_KiriLikeSeasonBornIn" to
+            SootopolisCity_EventScript_KiriLikeSeasonBornIn,
     )

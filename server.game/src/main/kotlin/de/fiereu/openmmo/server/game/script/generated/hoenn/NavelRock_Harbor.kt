@@ -1,5 +1,6 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
+import de.fiereu.openmmo.dialog.generated.hoenn.EventTicket
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 
@@ -28,7 +29,22 @@ internal object NavelRock_Harbor_EventScript_Sailor : Script {
   override suspend fun run(ctx: ScriptContext) = TODO("port NavelRock_Harbor_EventScript_Sailor")
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox EventTicket_Text_AsYouLike, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object NavelRock_Harbor_EventScript_AsYouLike : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(EventTicket.AsYouLike)
+  }
+}
+
 internal val NavelRock_HarborScripts: Map<String, Script> =
     mapOf(
         "NavelRock_Harbor_EventScript_Sailor" to NavelRock_Harbor_EventScript_Sailor,
+        "NavelRock_Harbor_EventScript_AsYouLike" to NavelRock_Harbor_EventScript_AsYouLike,
     )

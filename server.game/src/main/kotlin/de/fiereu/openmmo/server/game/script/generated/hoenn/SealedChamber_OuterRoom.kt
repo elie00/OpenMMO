@@ -172,6 +172,19 @@ internal object SealedChamber_OuterRoom_EventScript_BrailleDigHere : Script {
       TODO("port SealedChamber_OuterRoom_EventScript_BrailleDigHere")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox gText_BigHoleInTheWall, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object SealedChamber_OuterRoom_EventScript_HoleInWall : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SealedChamber_OuterRoom_EventScript_HoleInWall")
+}
+
 internal val SealedChamber_OuterRoomScripts: Map<String, Script> =
     mapOf(
         "SealedChamber_OuterRoom_EventScript_BrailleABC" to
@@ -198,4 +211,6 @@ internal val SealedChamber_OuterRoomScripts: Map<String, Script> =
             SealedChamber_OuterRoom_EventScript_InnerRoomEntranceWall,
         "SealedChamber_OuterRoom_EventScript_BrailleDigHere" to
             SealedChamber_OuterRoom_EventScript_BrailleDigHere,
+        "SealedChamber_OuterRoom_EventScript_HoleInWall" to
+            SealedChamber_OuterRoom_EventScript_HoleInWall,
     )

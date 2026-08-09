@@ -1,6 +1,7 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.dialog.generated.hoenn.FallarborTown_Mart
+import de.fiereu.openmmo.dialog.generated.hoenn.MoveTutor
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 
@@ -70,6 +71,59 @@ internal object FallarborTown_Mart_EventScript_MetronomeTutor : Script {
       TODO("port FallarborTown_Mart_EventScript_MetronomeTutor")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox MoveTutor_Text_ThisMoveCanOnlyBeLearnedOnce, MSGBOX_YESNO
+ * return
+ * ```
+ */
+internal object MoveTutor_EventScript_CanOnlyBeLearnedOnce : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port MoveTutor_EventScript_CanOnlyBeLearnedOnce")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MoveTutor_Text_MetronomeTaught, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object MoveTutor_EventScript_MetronomeTaught : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MoveTutor.MetronomeTaught)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MoveTutor_Text_MetronomeDeclined, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object MoveTutor_EventScript_MetronomeDeclined : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MoveTutor.MetronomeDeclined)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * special ChooseMonForMoveTutor
+ * lock
+ * faceplayer
+ * return
+ * ```
+ */
+internal object MoveTutor_EventScript_OpenPartyMenu : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port MoveTutor_EventScript_OpenPartyMenu")
+}
+
 internal val FallarborTown_MartScripts: Map<String, Script> =
     mapOf(
         "FallarborTown_Mart_EventScript_Clerk" to FallarborTown_Mart_EventScript_Clerk,
@@ -78,4 +132,8 @@ internal val FallarborTown_MartScripts: Map<String, Script> =
         "FallarborTown_Mart_EventScript_Skitty" to FallarborTown_Mart_EventScript_Skitty,
         "FallarborTown_Mart_EventScript_MetronomeTutor" to
             FallarborTown_Mart_EventScript_MetronomeTutor,
+        "MoveTutor_EventScript_CanOnlyBeLearnedOnce" to MoveTutor_EventScript_CanOnlyBeLearnedOnce,
+        "MoveTutor_EventScript_MetronomeTaught" to MoveTutor_EventScript_MetronomeTaught,
+        "MoveTutor_EventScript_MetronomeDeclined" to MoveTutor_EventScript_MetronomeDeclined,
+        "MoveTutor_EventScript_OpenPartyMenu" to MoveTutor_EventScript_OpenPartyMenu,
     )

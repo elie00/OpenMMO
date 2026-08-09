@@ -61,6 +61,19 @@ internal object AbandonedShip_Rooms_1F_EventScript_Demetrius : Script {
   }
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch TRAINER_THALIA_1, AbandonedShip_Rooms_1F_Text_ThaliaRematchIntro, AbandonedShip_Rooms_1F_Text_ThaliaRematchDefeat
+ * msgbox AbandonedShip_Rooms_1F_Text_ThaliaPostRematch, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object AbandonedShip_Rooms_1F_EventScript_ThaliaRematch : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port AbandonedShip_Rooms_1F_EventScript_ThaliaRematch")
+}
+
 internal val AbandonedShip_Rooms_1FScripts: Map<String, Script> =
     mapOf(
         "AbandonedShip_Rooms_1F_EventScript_Gentleman" to
@@ -70,4 +83,6 @@ internal val AbandonedShip_Rooms_1FScripts: Map<String, Script> =
         "AbandonedShip_Rooms_1F_EventScript_Thalia" to AbandonedShip_Rooms_1F_EventScript_Thalia,
         "AbandonedShip_Rooms_1F_EventScript_Demetrius" to
             AbandonedShip_Rooms_1F_EventScript_Demetrius,
+        "AbandonedShip_Rooms_1F_EventScript_ThaliaRematch" to
+            AbandonedShip_Rooms_1F_EventScript_ThaliaRematch,
     )

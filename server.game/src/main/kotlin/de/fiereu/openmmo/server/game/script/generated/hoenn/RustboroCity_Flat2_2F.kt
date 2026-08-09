@@ -28,8 +28,24 @@ internal object RustboroCity_Flat2_2F_EventScript_NinjaBoy : Script {
       TODO("port RustboroCity_Flat2_2F_EventScript_NinjaBoy")
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox RustboroCity_Flat2_2F_Text_GoingToWorkAtDevonToo, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object RustboroCity_Flat2_2F_EventScript_GavePremierBall : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(RustboroCity_Flat2_2F.GoingToWorkAtDevonToo)
+  }
+}
+
 internal val RustboroCity_Flat2_2FScripts: Map<String, Script> =
     mapOf(
         "RustboroCity_Flat2_2F_EventScript_OldMan" to RustboroCity_Flat2_2F_EventScript_OldMan,
         "RustboroCity_Flat2_2F_EventScript_NinjaBoy" to RustboroCity_Flat2_2F_EventScript_NinjaBoy,
+        "RustboroCity_Flat2_2F_EventScript_GavePremierBall" to
+            RustboroCity_Flat2_2F_EventScript_GavePremierBall,
     )

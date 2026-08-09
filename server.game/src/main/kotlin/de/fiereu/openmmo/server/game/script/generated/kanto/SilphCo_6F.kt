@@ -188,6 +188,76 @@ internal object SilphCo_6F_EventScript_FloorSign : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(SilphCo_6F.FloorSign)
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SilphCo_6F_Text_BetterGetBackToWork
+ * release
+ * end
+ * ```
+ */
+internal object SilphCo_6F_EventScript_WorkerM3RocketsGone : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SilphCo_6F.BetterGetBackToWork)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SilphCo_6F_Text_ComeWorkForSilphWhenYoureOlder
+ * release
+ * end
+ * ```
+ */
+internal object SilphCo_6F_EventScript_WorkerM2RocketsGone : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SilphCo_6F.ComeWorkForSilphWhenYoureOlder)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SilphCo_6F_Text_WeGotEngaged
+ * release
+ * end
+ * ```
+ */
+internal object SilphCo_6F_EventScript_WorkerM1RocketsGone : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SilphCo_6F.WeGotEngaged)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SilphCo_6F_Text_NeedsMeToLookAfterHim
+ * release
+ * end
+ * ```
+ */
+internal object SilphCo_6F_EventScript_WorkerF1RocketsGone : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SilphCo_6F.NeedsMeToLookAfterHim)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SilphCo_6F_Text_RocketsRanAwayBecauseOfYou
+ * release
+ * end
+ * ```
+ */
+internal object SilphCo_6F_EventScript_WorkerF2RocketsGone : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SilphCo_6F.RocketsRanAwayBecauseOfYou)
+  }
+}
+
 internal val SilphCo_6FScripts: Map<String, Script> =
     mapOf(
         "SilphCo_6F_EventScript_Grunt1" to SilphCo_6F_EventScript_Grunt1,
@@ -202,4 +272,9 @@ internal val SilphCo_6FScripts: Map<String, Script> =
         "SilphCo_6F_EventScript_Grunt2" to SilphCo_6F_EventScript_Grunt2,
         "SilphCo_6F_EventScript_Door" to SilphCo_6F_EventScript_Door,
         "SilphCo_6F_EventScript_FloorSign" to SilphCo_6F_EventScript_FloorSign,
+        "SilphCo_6F_EventScript_WorkerM3RocketsGone" to SilphCo_6F_EventScript_WorkerM3RocketsGone,
+        "SilphCo_6F_EventScript_WorkerM2RocketsGone" to SilphCo_6F_EventScript_WorkerM2RocketsGone,
+        "SilphCo_6F_EventScript_WorkerM1RocketsGone" to SilphCo_6F_EventScript_WorkerM1RocketsGone,
+        "SilphCo_6F_EventScript_WorkerF1RocketsGone" to SilphCo_6F_EventScript_WorkerF1RocketsGone,
+        "SilphCo_6F_EventScript_WorkerF2RocketsGone" to SilphCo_6F_EventScript_WorkerF2RocketsGone,
     )

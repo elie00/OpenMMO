@@ -109,6 +109,30 @@ internal object Route21_North_EventScript_Ian : Script {
   override suspend fun run(ctx: ScriptContext) = TODO("port Route21_North_EventScript_Ian")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch_double TRAINER_SIS_AND_BRO_LIL_IAN, Route21_North_Text_IanRematchIntro, Route21_North_Text_IanDefeat, Route21_North_Text_IanNotEnoughMons
+ * msgbox Route21_North_Text_IanPostBattle, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route21_North_EventScript_IanRematch : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route21_North_EventScript_IanRematch")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch_double TRAINER_SIS_AND_BRO_LIL_IAN, Route21_North_Text_LilRematchIntro, Route21_North_Text_LilDefeat, Route21_North_Text_LilNotEnoughMons
+ * msgbox Route21_North_Text_LilPostBattle, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route21_North_EventScript_LilRematch : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route21_North_EventScript_LilRematch")
+}
+
 internal val Route21_NorthScripts: Map<String, Script> =
     mapOf(
         "Route21_North_EventScript_Ronald" to Route21_North_EventScript_Ronald,
@@ -116,4 +140,6 @@ internal val Route21_NorthScripts: Map<String, Script> =
         "Route21_North_EventScript_Spencer" to Route21_North_EventScript_Spencer,
         "Route21_North_EventScript_Lil" to Route21_North_EventScript_Lil,
         "Route21_North_EventScript_Ian" to Route21_North_EventScript_Ian,
+        "Route21_North_EventScript_IanRematch" to Route21_North_EventScript_IanRematch,
+        "Route21_North_EventScript_LilRematch" to Route21_North_EventScript_LilRematch,
     )

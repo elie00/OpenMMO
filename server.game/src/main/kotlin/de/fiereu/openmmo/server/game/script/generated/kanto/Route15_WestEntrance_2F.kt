@@ -58,6 +58,33 @@ internal object Route15_WestEntrance_2F_EventScript_RightBinoculars : Script {
       ctx.sign(Route15_WestEntrance_2F.SmallIslandOnHorizon)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * buffernumberstring STR_VAR_1, REQUIRED_CAUGHT_MONS
+ * bufferitemname STR_VAR_2, ITEM_EXP_SHARE
+ * return
+ * ```
+ */
+internal object Route15_WestEntrance_2F_EventScript_GetAideRequestInfo : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port Route15_WestEntrance_2F_EventScript_GetAideRequestInfo")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Route15_WestEntrance_2F_Text_ExplainExpShare
+ * release
+ * end
+ * ```
+ */
+internal object Route15_WestEntrance_2F_EventScript_AlreadyGotExpShare : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route15_WestEntrance_2F.ExplainExpShare)
+  }
+}
+
 internal val Route15_WestEntrance_2FScripts: Map<String, Script> =
     mapOf(
         "Route15_WestEntrance_2F_EventScript_Aide" to Route15_WestEntrance_2F_EventScript_Aide,
@@ -65,4 +92,8 @@ internal val Route15_WestEntrance_2FScripts: Map<String, Script> =
             Route15_WestEntrance_2F_EventScript_LeftBinoculars,
         "Route15_WestEntrance_2F_EventScript_RightBinoculars" to
             Route15_WestEntrance_2F_EventScript_RightBinoculars,
+        "Route15_WestEntrance_2F_EventScript_GetAideRequestInfo" to
+            Route15_WestEntrance_2F_EventScript_GetAideRequestInfo,
+        "Route15_WestEntrance_2F_EventScript_AlreadyGotExpShare" to
+            Route15_WestEntrance_2F_EventScript_AlreadyGotExpShare,
     )

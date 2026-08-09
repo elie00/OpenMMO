@@ -6,6 +6,7 @@ import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
+import de.fiereu.openmmo.story.generated.hoenn.HoennVars
 import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
@@ -75,7 +76,7 @@ internal object Route116_EventScript_ItemRepel : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -86,7 +87,10 @@ internal object Route116_EventScript_ItemRepel : Script {
  * ```
  */
 internal object Route116_EventScript_Briney : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route116_EventScript_Briney")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route116.ScoundrelMadeOffWithPeeko)
+    ctx.setVar(HoennVars.VAR_ROUTE116_STATE, 2)
+  }
 }
 
 /**
@@ -179,7 +183,7 @@ internal object Route116_EventScript_Jerry : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -190,7 +194,12 @@ internal object Route116_EventScript_Jerry : Script {
  * ```
  */
 internal object Route116_EventScript_DevonEmployee : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route116_EventScript_DevonEmployee")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(HoennFlags.FLAG_MET_DEVON_EMPLOYEE))
+        return Route116_EventScript_TryGiveRepeatBallAgain.run(ctx)
+    ctx.say(Route116.ThankYouTokenOfAppreciation)
+    return Route116_EventScript_GiveRepeatBall.run(ctx)
+  }
 }
 
 /**
@@ -207,7 +216,7 @@ internal object Route116_EventScript_ItemXSpecial : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -219,7 +228,13 @@ internal object Route116_EventScript_ItemXSpecial : Script {
  * ```
  */
 internal object Route116_EventScript_WandasBoyfriend : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route116_EventScript_WandasBoyfriend")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(HoennFlags.FLAG_RECOVERED_DEVON_GOODS))
+        return Route116_EventScript_BoyfriendGruntLeftTunnel.run(ctx)
+    if (ctx.isFlagSet(HoennFlags.FLAG_DEVON_GOODS_STOLEN))
+        return Route116_EventScript_BoyfriendGruntInTunnel.run(ctx)
+    ctx.say(Route116.WantToDigTunnel)
+  }
 }
 
 /**
@@ -353,6 +368,286 @@ internal object Route116_EventScript_TrainerTipsBagHasPockets : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(Route116.TrainerTipsBagHasPockets)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch TRAINER_KAREN_1, Route116_Text_KarenRematchIntro, Route116_Text_KarenRematchDefeat
+ * msgbox Route116_Text_KarenPostRematch, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route116_EventScript_RematchKaren : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route116_EventScript_RematchKaren")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * goto_if_set FLAG_HAS_MATCH_CALL, Route116_EventScript_RegisterJerry
+ * msgbox Route116_Text_JerryPostBattle, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object Route116_EventScript_TryRegisterJerry : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(HoennFlags.FLAG_HAS_MATCH_CALL))
+        return Route116_EventScript_RegisterJerry.run(ctx)
+    ctx.say(Route116.JerryPostBattle)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * goto_if_set FLAG_HAS_MATCH_CALL, Route116_EventScript_RegisterKaren
+ * msgbox Route116_Text_KarenPostBattle, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object Route116_EventScript_TryRegisterKaren : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(HoennFlags.FLAG_HAS_MATCH_CALL))
+        return Route116_EventScript_RegisterKaren.run(ctx)
+    ctx.say(Route116.KarenPostBattle)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch TRAINER_JERRY_1, Route116_Text_JerryRematchIntro, Route116_Text_JerryRematchDefeat
+ * msgbox Route116_Text_JerryPostRematch, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route116_EventScript_RematchJerry : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route116_EventScript_RematchJerry")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Route116_Text_DiggingTunnelWhenGoonOrderedMeOut, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object Route116_EventScript_BoyfriendGruntInTunnel : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route116.DiggingTunnelWhenGoonOrderedMeOut)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox Route116_Text_CanYouHelpMeFindGlasses, MSGBOX_DEFAULT
+ * msgbox Route116_Text_MayISeeThoseGlasses, MSGBOX_DEFAULT
+ * specialvar VAR_RESULT, FoundBlackGlasses
+ * goto_if_eq VAR_RESULT, TRUE, Route116_EventScript_FoundGlassesOnPlayer
+ * msgbox Route116_Text_NotWhatImLookingFor, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object Route116_EventScript_PlayerHasGlasses : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route116_EventScript_PlayerHasGlasses")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * setflag FLAG_MET_DEVON_EMPLOYEE
+ * giveitem ITEM_REPEAT_BALL
+ * goto_if_eq VAR_RESULT, FALSE, Route116_EventScript_NoRoomForRepeatBall
+ * msgbox Route116_Text_NewBallAvailableAtMart, MSGBOX_DEFAULT
+ * closemessage
+ * call_if_eq VAR_FACING, DIR_NORTH, Route116_EventScript_DevonEmployeeExit
+ * call_if_eq VAR_FACING, DIR_SOUTH, Route116_EventScript_DevonEmployeeExit
+ * call_if_eq VAR_FACING, DIR_WEST, Route116_EventScript_DevonEmployeeExit
+ * call_if_eq VAR_FACING, DIR_EAST, Route116_EventScript_DevonEmployeeExitEast
+ * removeobject VAR_LAST_TALKED
+ * clearflag FLAG_HIDE_RUSTBORO_CITY_DEVON_CORP_3F_EMPLOYEE
+ * setflag FLAG_RECEIVED_REPEAT_BALL
+ * release
+ * end
+ * ```
+ */
+internal object Route116_EventScript_GiveRepeatBall : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route116_EventScript_GiveRepeatBall")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Route116_Text_CantFindGlassesNotHere, MSGBOX_DEFAULT
+ * closemessage
+ * goto Route116_EventScript_GlassesManExit
+ * end
+ * ```
+ */
+internal object Route116_EventScript_FoundGlassesNotOnPlayer : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route116.CantFindGlassesNotHere)
+    return Route116_EventScript_GlassesManExit.run(ctx)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Route116_Text_TokenOfAppreciation, MSGBOX_DEFAULT
+ * goto Route116_EventScript_GiveRepeatBall
+ * end
+ * ```
+ */
+internal object Route116_EventScript_TryGiveRepeatBallAgain : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route116.TokenOfAppreciation)
+    return Route116_EventScript_GiveRepeatBall.run(ctx)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Route116_Text_GoonHightailedItOutOfTunnel, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object Route116_EventScript_BoyfriendGruntLeftTunnel : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route116.GoonHightailedItOutOfTunnel)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Route116_Text_NotWhatImLookingForMaybeTheyArentHere, MSGBOX_DEFAULT
+ * closemessage
+ * goto Route116_EventScript_GlassesManExit
+ * end
+ * ```
+ */
+internal object Route116_EventScript_FoundGlassesOnPlayer : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route116.NotWhatImLookingForMaybeTheyArentHere)
+    return Route116_EventScript_GlassesManExit.run(ctx)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox Route116_Text_JerryRegister1, MSGBOX_DEFAULT
+ * register_matchcall TRAINER_JERRY_1
+ * release
+ * end
+ * ```
+ */
+internal object Route116_EventScript_RegisterJerry : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route116_EventScript_RegisterJerry")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement VAR_LAST_TALKED, Route116_Movement_DevonEmployeeExit
+ * waitmovement 0
+ * return
+ * ```
+ */
+internal object Route116_EventScript_DevonEmployeeExit : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route116_EventScript_DevonEmployeeExit")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement VAR_LAST_TALKED, Route116_Movement_DevonEmployeeExitEast
+ * waitmovement 0
+ * return
+ * ```
+ */
+internal object Route116_EventScript_DevonEmployeeExitEast : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port Route116_EventScript_DevonEmployeeExitEast")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * delay 20
+ * call_if_eq VAR_FACING, DIR_NORTH, Route116_EventScript_GlassesManExitNormal
+ * call_if_eq VAR_FACING, DIR_SOUTH, Route116_EventScript_GlassesManExitNormal
+ * call_if_eq VAR_FACING, DIR_WEST, Route116_EventScript_GlassesManExitNormal
+ * call_if_eq VAR_FACING, DIR_EAST, Route116_EventScript_GlassesManExitEast
+ * removeobject VAR_LAST_TALKED
+ * release
+ * end
+ * ```
+ */
+internal object Route116_EventScript_GlassesManExit : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route116_EventScript_GlassesManExit")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Route116_Text_BagIsJamPacked, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object Route116_EventScript_NoRoomForRepeatBall : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route116.BagIsJamPacked)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox Route116_Text_KarenRegister1, MSGBOX_DEFAULT
+ * register_matchcall TRAINER_KAREN_1
+ * release
+ * end
+ * ```
+ */
+internal object Route116_EventScript_RegisterKaren : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route116_EventScript_RegisterKaren")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement VAR_LAST_TALKED, Route116_Movement_GlassesManExit
+ * waitmovement 0
+ * return
+ * ```
+ */
+internal object Route116_EventScript_GlassesManExitNormal : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port Route116_EventScript_GlassesManExitNormal")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement VAR_LAST_TALKED, Route116_Movement_GlassesManExitEast
+ * waitmovement 0
+ * return
+ * ```
+ */
+internal object Route116_EventScript_GlassesManExitEast : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port Route116_EventScript_GlassesManExitEast")
+}
+
 internal val Route116Scripts: Map<String, Script> =
     mapOf(
         "Route116_EventScript_Joey" to Route116_EventScript_Joey,
@@ -382,4 +677,27 @@ internal val Route116Scripts: Map<String, Script> =
             Route116_EventScript_TrainerTipsBToStopEvolution,
         "Route116_EventScript_TrainerTipsBagHasPockets" to
             Route116_EventScript_TrainerTipsBagHasPockets,
+        "Route116_EventScript_RematchKaren" to Route116_EventScript_RematchKaren,
+        "Route116_EventScript_TryRegisterJerry" to Route116_EventScript_TryRegisterJerry,
+        "Route116_EventScript_TryRegisterKaren" to Route116_EventScript_TryRegisterKaren,
+        "Route116_EventScript_RematchJerry" to Route116_EventScript_RematchJerry,
+        "Route116_EventScript_BoyfriendGruntInTunnel" to
+            Route116_EventScript_BoyfriendGruntInTunnel,
+        "Route116_EventScript_PlayerHasGlasses" to Route116_EventScript_PlayerHasGlasses,
+        "Route116_EventScript_GiveRepeatBall" to Route116_EventScript_GiveRepeatBall,
+        "Route116_EventScript_FoundGlassesNotOnPlayer" to
+            Route116_EventScript_FoundGlassesNotOnPlayer,
+        "Route116_EventScript_TryGiveRepeatBallAgain" to
+            Route116_EventScript_TryGiveRepeatBallAgain,
+        "Route116_EventScript_BoyfriendGruntLeftTunnel" to
+            Route116_EventScript_BoyfriendGruntLeftTunnel,
+        "Route116_EventScript_FoundGlassesOnPlayer" to Route116_EventScript_FoundGlassesOnPlayer,
+        "Route116_EventScript_RegisterJerry" to Route116_EventScript_RegisterJerry,
+        "Route116_EventScript_DevonEmployeeExit" to Route116_EventScript_DevonEmployeeExit,
+        "Route116_EventScript_DevonEmployeeExitEast" to Route116_EventScript_DevonEmployeeExitEast,
+        "Route116_EventScript_GlassesManExit" to Route116_EventScript_GlassesManExit,
+        "Route116_EventScript_NoRoomForRepeatBall" to Route116_EventScript_NoRoomForRepeatBall,
+        "Route116_EventScript_RegisterKaren" to Route116_EventScript_RegisterKaren,
+        "Route116_EventScript_GlassesManExitNormal" to Route116_EventScript_GlassesManExitNormal,
+        "Route116_EventScript_GlassesManExitEast" to Route116_EventScript_GlassesManExitEast,
     )

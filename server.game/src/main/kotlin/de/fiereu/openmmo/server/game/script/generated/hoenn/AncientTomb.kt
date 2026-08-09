@@ -58,9 +58,50 @@ internal object AncientTomb_EventScript_CaveEntranceSide : Script {
       TODO("port AncientTomb_EventScript_CaveEntranceSide")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * setvar VAR_0x8004, SPECIES_REGISTEEL
+ * goto Common_EventScript_LegendaryFlewAway
+ * end
+ * ```
+ */
+internal object AncientTomb_EventScript_RanFromRegisteel : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port AncientTomb_EventScript_RanFromRegisteel")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * setflag FLAG_DEFEATED_REGISTEEL
+ * goto Common_EventScript_RemoveStaticPokemon
+ * end
+ * ```
+ */
+internal object AncientTomb_EventScript_DefeatedRegisteel : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port AncientTomb_EventScript_DefeatedRegisteel")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox gText_BigHoleInTheWall, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object AncientTomb_EventScript_BigHoleInWall : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port AncientTomb_EventScript_BigHoleInWall")
+}
+
 internal val AncientTombScripts: Map<String, Script> =
     mapOf(
         "AncientTomb_EventScript_Registeel" to AncientTomb_EventScript_Registeel,
         "AncientTomb_EventScript_CaveEntranceMiddle" to AncientTomb_EventScript_CaveEntranceMiddle,
         "AncientTomb_EventScript_CaveEntranceSide" to AncientTomb_EventScript_CaveEntranceSide,
+        "AncientTomb_EventScript_RanFromRegisteel" to AncientTomb_EventScript_RanFromRegisteel,
+        "AncientTomb_EventScript_DefeatedRegisteel" to AncientTomb_EventScript_DefeatedRegisteel,
+        "AncientTomb_EventScript_BigHoleInWall" to AncientTomb_EventScript_BigHoleInWall,
     )

@@ -102,6 +102,55 @@ internal object SlateportCity_BattleTentLobby_EventScript_ReadRulesBoard : Scrip
       TODO("port SlateportCity_BattleTentLobby_EventScript_ReadRulesBoard")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox SlateportCity_BattleTentLobby_Text_AwardYouThisPrize, MSGBOX_DEFAULT
+ * slateporttent_giveprize
+ * switch VAR_RESULT
+ * case FALSE, SlateportCity_BattleTentLobby_EventScript_NoRoomForPrize
+ * frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
+ * message BattleFrontier_BattleTowerLobby_Text_ReceivedPrize  @ Odd that it uses Tower's instead of Factory's or its own
+ * waitmessage
+ * playfanfare MUS_OBTAIN_ITEM
+ * waitfanfare
+ * goto SlateportCity_BattleTentLobby_EventScript_EndGivePrize
+ * ```
+ */
+internal object SlateportCity_BattleTentLobby_EventScript_GivePrize : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SlateportCity_BattleTentLobby_EventScript_GivePrize")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SlateportCity_BattleTentLobby_Text_ExplainTorment, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object SlateportCity_BattleTentLobby_EventScript_ReceivedTorment : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SlateportCity_BattleTentLobby.ExplainTorment)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox SlateportCity_BattleTentLobby_Text_LookForwardToNextVisit, MSGBOX_DEFAULT
+ * closemessage
+ * setvar VAR_TEMP_CHALLENGE_STATUS, 255
+ * releaseall
+ * end
+ * ```
+ */
+internal object SlateportCity_BattleTentLobby_EventScript_EndGivePrize : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SlateportCity_BattleTentLobby_EventScript_EndGivePrize")
+}
+
 internal val SlateportCity_BattleTentLobbyScripts: Map<String, Script> =
     mapOf(
         "SlateportCity_BattleTentLobby_EventScript_Attendant" to
@@ -118,4 +167,10 @@ internal val SlateportCity_BattleTentLobbyScripts: Map<String, Script> =
             SlateportCity_BattleTentLobby_EventScript_RulesBoard,
         "SlateportCity_BattleTentLobby_EventScript_ReadRulesBoard" to
             SlateportCity_BattleTentLobby_EventScript_ReadRulesBoard,
+        "SlateportCity_BattleTentLobby_EventScript_GivePrize" to
+            SlateportCity_BattleTentLobby_EventScript_GivePrize,
+        "SlateportCity_BattleTentLobby_EventScript_ReceivedTorment" to
+            SlateportCity_BattleTentLobby_EventScript_ReceivedTorment,
+        "SlateportCity_BattleTentLobby_EventScript_EndGivePrize" to
+            SlateportCity_BattleTentLobby_EventScript_EndGivePrize,
     )

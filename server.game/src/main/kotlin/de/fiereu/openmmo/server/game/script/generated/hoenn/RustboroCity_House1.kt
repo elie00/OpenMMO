@@ -41,8 +41,56 @@ internal object RustboroCity_House1_EventScript_Hiker : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.say(RustboroCity_House1.AllSortsOfPlaces)
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox RustboroCity_House1_Text_YouDontWantToThatsOkay, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object RustboroCity_House1_EventScript_DeclineTrade : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(RustboroCity_House1.YouDontWantToThatsOkay)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * bufferspeciesname STR_VAR_1, VAR_0x8009
+ * msgbox RustboroCity_House1_Text_DoesntLookLikeMonToMe, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object RustboroCity_House1_EventScript_NotRequestedMon : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port RustboroCity_House1_EventScript_NotRequestedMon")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox RustboroCity_House1_Text_AnyPokemonCanBeCute, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object RustboroCity_House1_EventScript_TradeCompleted : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(RustboroCity_House1.AnyPokemonCanBeCute)
+  }
+}
+
 internal val RustboroCity_House1Scripts: Map<String, Script> =
     mapOf(
         "RustboroCity_House1_EventScript_Trader" to RustboroCity_House1_EventScript_Trader,
         "RustboroCity_House1_EventScript_Hiker" to RustboroCity_House1_EventScript_Hiker,
+        "RustboroCity_House1_EventScript_DeclineTrade" to
+            RustboroCity_House1_EventScript_DeclineTrade,
+        "RustboroCity_House1_EventScript_NotRequestedMon" to
+            RustboroCity_House1_EventScript_NotRequestedMon,
+        "RustboroCity_House1_EventScript_TradeCompleted" to
+            RustboroCity_House1_EventScript_TradeCompleted,
     )

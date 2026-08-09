@@ -3,6 +3,7 @@ package de.fiereu.openmmo.server.game.script.generated.kanto
 import de.fiereu.openmmo.dialog.generated.kanto.VermilionCity
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 import de.fiereu.openmmo.story.generated.kanto.KantoVars
 
 internal object VermilionCity_EventScript_Woman : Script {
@@ -74,7 +75,7 @@ internal object VermilionCity_EventScript_FerrySailor : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -85,7 +86,10 @@ internal object VermilionCity_EventScript_FerrySailor : Script {
  * ```
  */
 internal object VermilionCity_EventScript_OaksAide : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port VermilionCity_EventScript_OaksAide")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.setFlag(KantoFlags.FLAG_TALKED_TO_OAKS_AIDE_IN_VERMILION)
+    ctx.say(VermilionCity.Route2AideHasPackageForYou)
+  }
 }
 
 internal object VermilionCity_EventScript_CitySign : Script {
@@ -119,7 +123,7 @@ internal object VermilionCity_EventScript_SnorlaxNotice : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox VermilionCity_Text_SSAnneHasDepartedForYear
  * release
@@ -127,8 +131,9 @@ internal object VermilionCity_EventScript_SnorlaxNotice : Script {
  * ```
  */
 internal object VermilionCity_EventScript_OldMan1SSAnneLeft : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port VermilionCity_EventScript_OldMan1SSAnneLeft")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(VermilionCity.SSAnneHasDepartedForYear)
+  }
 }
 
 /**
@@ -145,6 +150,172 @@ internal object VermilionCity_EventScript_OldMan1SSAnneLeft : Script {
 internal object VermilionCity_EventScript_CheckSeagallopPresent : Script {
   override suspend fun run(ctx: ScriptContext) =
       TODO("port VermilionCity_EventScript_CheckSeagallopPresent")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * goto_if_questlog EventScript_ReleaseEnd
+ * special QuestLog_CutRecording
+ * call VermilionCity_EventScript_CheckHasMysticTicket
+ * goto_if_eq VAR_RESULT, TRUE, VermilionCity_EventScript_HasMysticTicket
+ * call VermilionCity_EventScript_CheckHasAuroraTicket
+ * goto_if_eq VAR_RESULT, TRUE, VermilionCity_EventScript_HasAuroraTicket
+ * setvar VAR_0x8004, SEAGALLOP_VERMILION_CITY
+ * message VermilionCity_Text_BoardSeagallopRainbowPass
+ * waitmessage
+ * goto EventScript_SeviiDestinationsPage1
+ * end
+ * ```
+ */
+internal object VermilionCity_EventScript_ChooseSeagallopDestRainbowPass : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port VermilionCity_EventScript_ChooseSeagallopDestRainbowPass")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * message VermilionCity_Text_BoardSeagallopTriPass
+ * waitmessage
+ * setvar VAR_0x8004, SEAGALLOP_VERMILION_CITY
+ * multichoice 19, 5, MULTICHOICE_SEAGALLOP_123, FALSE
+ * switch VAR_RESULT
+ * case 0, EventScript_SailToOneIsland2
+ * case 1, EventScript_SailToTwoIsland2
+ * case 2, EventScript_SailToThreeIsland2
+ * case 3, EventScript_CancelSail
+ * case 127, EventScript_CancelSail
+ * end
+ * ```
+ */
+internal object VermilionCity_EventScript_ChooseSeagallopDestTriPass : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port VermilionCity_EventScript_ChooseSeagallopDestTriPass")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * goto_if_unset FLAG_ENABLE_SHIP_BIRTH_ISLAND, EventScript_SetResultFalse
+ * checkitem ITEM_AURORA_TICKET
+ * goto_if_eq VAR_RESULT, FALSE, EventScript_SetResultFalse
+ * goto EventScript_SetResultTrue
+ * end
+ * ```
+ */
+internal object VermilionCity_EventScript_CheckHasAuroraTicket : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port VermilionCity_EventScript_CheckHasAuroraTicket")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * goto_if_unset FLAG_ENABLE_SHIP_NAVEL_ROCK, EventScript_SetResultFalse
+ * checkitem ITEM_MYSTIC_TICKET
+ * goto_if_eq VAR_RESULT, FALSE, EventScript_SetResultFalse
+ * goto EventScript_SetResultTrue
+ * end
+ * ```
+ */
+internal object VermilionCity_EventScript_CheckHasMysticTicket : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port VermilionCity_EventScript_CheckHasMysticTicket")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * call_if_unset FLAG_SHOWN_AURORA_TICKET, VermilionCity_EventScript_ShowAuroraTicket
+ * message VermilionCity_Text_BoardSeagallopFerry
+ * waitmessage
+ * multichoice 13, 6, MULTICHOICE_SEVII_BIRTH, FALSE
+ * switch VAR_RESULT
+ * case 0, EventScript_SeviiDestinationsPage1
+ * case 1, EventScript_SailToBirthIsland
+ * case 2, EventScript_CancelSail
+ * case 127, EventScript_CancelSail
+ * end
+ * ```
+ */
+internal object VermilionCity_EventScript_HasAuroraTicket : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port VermilionCity_EventScript_HasAuroraTicket")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * call VermilionCity_EventScript_CheckHasAuroraTicket
+ * goto_if_eq VAR_RESULT, TRUE, VermilionCity_EventScript_HasMysticAndAuroraTickets
+ * call_if_unset FLAG_SHOWN_MYSTIC_TICKET, VermilionCity_EventScript_ShowMysticTicket
+ * message VermilionCity_Text_BoardSeagallopFerry
+ * waitmessage
+ * multichoice 17, 6, MULTICHOICE_SEVII_NAVEL, FALSE
+ * switch VAR_RESULT
+ * case 0, EventScript_SeviiDestinationsPage1
+ * case 1, EventScript_SailToNavelRock
+ * case 2, EventScript_CancelSail
+ * case 127, EventScript_CancelSail
+ * end
+ * ```
+ */
+internal object VermilionCity_EventScript_HasMysticTicket : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port VermilionCity_EventScript_HasMysticTicket")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * setflag FLAG_SHOWN_AURORA_TICKET
+ * msgbox VermilionCity_Text_OhAuroraTicketTakeYouToBirthIsland
+ * return
+ * ```
+ */
+internal object VermilionCity_EventScript_ShowAuroraTicket : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.setFlag(KantoFlags.FLAG_SHOWN_AURORA_TICKET)
+    ctx.say(VermilionCity.OhAuroraTicketTakeYouToBirthIsland)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * setflag FLAG_SHOWN_MYSTIC_TICKET
+ * msgbox VermilionCity_Text_OhMysticTicketTakeYouToNavelRock
+ * return
+ * ```
+ */
+internal object VermilionCity_EventScript_ShowMysticTicket : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.setFlag(KantoFlags.FLAG_SHOWN_MYSTIC_TICKET)
+    ctx.say(VermilionCity.OhMysticTicketTakeYouToNavelRock)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * call_if_unset FLAG_SHOWN_MYSTIC_TICKET, VermilionCity_EventScript_ShowMysticTicket
+ * call_if_unset FLAG_SHOWN_AURORA_TICKET, VermilionCity_EventScript_ShowAuroraTicket
+ * message VermilionCity_Text_BoardSeagallopFerry
+ * waitmessage
+ * multichoice 13, 5, MULTICHOICE_SEVII_NAVEL_BIRTH, FALSE
+ * switch VAR_RESULT
+ * case 0, EventScript_SeviiDestinationsPage1
+ * case 1, EventScript_SailToNavelRock
+ * case 2, EventScript_SailToBirthIsland
+ * case 3, EventScript_CancelSail
+ * case 127, EventScript_CancelSail
+ * end
+ * ```
+ */
+internal object VermilionCity_EventScript_HasMysticAndAuroraTickets : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port VermilionCity_EventScript_HasMysticAndAuroraTickets")
 }
 
 internal val VermilionCityScripts: Map<String, Script> =
@@ -166,4 +337,18 @@ internal val VermilionCityScripts: Map<String, Script> =
             VermilionCity_EventScript_OldMan1SSAnneLeft,
         "VermilionCity_EventScript_CheckSeagallopPresent" to
             VermilionCity_EventScript_CheckSeagallopPresent,
+        "VermilionCity_EventScript_ChooseSeagallopDestRainbowPass" to
+            VermilionCity_EventScript_ChooseSeagallopDestRainbowPass,
+        "VermilionCity_EventScript_ChooseSeagallopDestTriPass" to
+            VermilionCity_EventScript_ChooseSeagallopDestTriPass,
+        "VermilionCity_EventScript_CheckHasAuroraTicket" to
+            VermilionCity_EventScript_CheckHasAuroraTicket,
+        "VermilionCity_EventScript_CheckHasMysticTicket" to
+            VermilionCity_EventScript_CheckHasMysticTicket,
+        "VermilionCity_EventScript_HasAuroraTicket" to VermilionCity_EventScript_HasAuroraTicket,
+        "VermilionCity_EventScript_HasMysticTicket" to VermilionCity_EventScript_HasMysticTicket,
+        "VermilionCity_EventScript_ShowAuroraTicket" to VermilionCity_EventScript_ShowAuroraTicket,
+        "VermilionCity_EventScript_ShowMysticTicket" to VermilionCity_EventScript_ShowMysticTicket,
+        "VermilionCity_EventScript_HasMysticAndAuroraTickets" to
+            VermilionCity_EventScript_HasMysticAndAuroraTickets,
     )

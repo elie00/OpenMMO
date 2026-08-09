@@ -1,5 +1,6 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
+import de.fiereu.openmmo.dialog.generated.hoenn.MoveTutor
 import de.fiereu.openmmo.dialog.generated.hoenn.PacifidlogTown_PokemonCenter_1F
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
@@ -59,6 +60,34 @@ internal object PacifidlogTown_PokemonCenter_1F_EventScript_ExplosionTutor : Scr
       TODO("port PacifidlogTown_PokemonCenter_1F_EventScript_ExplosionTutor")
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MoveTutor_Text_ExplosionTaught, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object MoveTutor_EventScript_ExplosionTaught : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MoveTutor.ExplosionTaught)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MoveTutor_Text_ExplosionDeclined, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object MoveTutor_EventScript_ExplosionDeclined : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MoveTutor.ExplosionDeclined)
+  }
+}
+
 internal val PacifidlogTown_PokemonCenter_1FScripts: Map<String, Script> =
     mapOf(
         "PacifidlogTown_PokemonCenter_1F_EventScript_Nurse" to
@@ -71,4 +100,6 @@ internal val PacifidlogTown_PokemonCenter_1FScripts: Map<String, Script> =
             PacifidlogTown_PokemonCenter_1F_EventScript_Woman,
         "PacifidlogTown_PokemonCenter_1F_EventScript_ExplosionTutor" to
             PacifidlogTown_PokemonCenter_1F_EventScript_ExplosionTutor,
+        "MoveTutor_EventScript_ExplosionTaught" to MoveTutor_EventScript_ExplosionTaught,
+        "MoveTutor_EventScript_ExplosionDeclined" to MoveTutor_EventScript_ExplosionDeclined,
     )

@@ -164,6 +164,26 @@ internal object RusturfTunnel_EventScript_Wanda : Script {
   }
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox RusturfTunnel_Text_ToGetToVerdanturf, MSGBOX_DEFAULT
+ * closemessage
+ * applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
+ * waitmovement 0
+ * release
+ * end
+ * ```
+ */
+internal object RusturfTunnel_EventScript_AlreadySpokenTo : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(RusturfTunnel.ToGetToVerdanturf)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
+}
+
 internal val RusturfTunnelScripts: Map<String, Script> =
     mapOf(
         "RusturfTunnel_EventScript_WandasBoyfriend" to RusturfTunnel_EventScript_WandasBoyfriend,
@@ -173,4 +193,5 @@ internal val RusturfTunnelScripts: Map<String, Script> =
         "RusturfTunnel_EventScript_Peeko" to RusturfTunnel_EventScript_Peeko,
         "RusturfTunnel_EventScript_Mike" to RusturfTunnel_EventScript_Mike,
         "RusturfTunnel_EventScript_Wanda" to RusturfTunnel_EventScript_Wanda,
+        "RusturfTunnel_EventScript_AlreadySpokenTo" to RusturfTunnel_EventScript_AlreadySpokenTo,
     )

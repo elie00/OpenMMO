@@ -30,8 +30,22 @@ internal object LilycoveCity_DepartmentStoreElevator_EventScript_Attendant : Scr
       TODO("port LilycoveCity_DepartmentStoreElevator_EventScript_Attendant")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * special SetDeptStoreFloor
+ * return
+ * ```
+ */
+internal object LilycoveCity_DepartmentStoreElevator_EventScript_SetFloor : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LilycoveCity_DepartmentStoreElevator_EventScript_SetFloor")
+}
+
 internal val LilycoveCity_DepartmentStoreElevatorScripts: Map<String, Script> =
     mapOf(
         "LilycoveCity_DepartmentStoreElevator_EventScript_Attendant" to
             LilycoveCity_DepartmentStoreElevator_EventScript_Attendant,
+        "LilycoveCity_DepartmentStoreElevator_EventScript_SetFloor" to
+            LilycoveCity_DepartmentStoreElevator_EventScript_SetFloor,
     )

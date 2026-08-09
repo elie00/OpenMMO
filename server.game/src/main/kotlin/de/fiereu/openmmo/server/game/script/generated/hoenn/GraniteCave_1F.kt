@@ -1,5 +1,6 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
+import de.fiereu.openmmo.dialog.generated.hoenn.GraniteCave_1F
 import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
@@ -36,8 +37,23 @@ internal object GraniteCave_1F_EventScript_ItemEscapeRope : Script {
   }
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox GraniteCave_1F_Text_ExplainFlash, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object GraniteCave_1F_EventScript_ReceivedFlash : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(GraniteCave_1F.ExplainFlash)
+  }
+}
+
 internal val GraniteCave_1FScripts: Map<String, Script> =
     mapOf(
         "GraniteCave_1F_EventScript_Hiker" to GraniteCave_1F_EventScript_Hiker,
         "GraniteCave_1F_EventScript_ItemEscapeRope" to GraniteCave_1F_EventScript_ItemEscapeRope,
+        "GraniteCave_1F_EventScript_ReceivedFlash" to GraniteCave_1F_EventScript_ReceivedFlash,
     )

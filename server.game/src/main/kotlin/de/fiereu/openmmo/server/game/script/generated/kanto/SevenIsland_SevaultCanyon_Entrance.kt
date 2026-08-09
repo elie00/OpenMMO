@@ -141,6 +141,32 @@ internal object SevenIsland_SevaultCanyon_Entrance_EventScript_RouteSign : Scrip
       ctx.sign(SevenIsland_SevaultCanyon_Entrance.RouteSign)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch_double TRAINER_YOUNG_COUPLE_EVE_JON, SevenIsland_SevaultCanyon_Entrance_Text_JonRematchIntro, SevenIsland_SevaultCanyon_Entrance_Text_JonDefeat, SevenIsland_SevaultCanyon_Entrance_Text_JonNotEnoughMons
+ * msgbox SevenIsland_SevaultCanyon_Entrance_Text_JonPostBattle, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object SevenIsland_SevaultCanyon_Entrance_EventScript_JonRematch : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SevenIsland_SevaultCanyon_Entrance_EventScript_JonRematch")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch_double TRAINER_YOUNG_COUPLE_EVE_JON, SevenIsland_SevaultCanyon_Entrance_Text_EveRematchIntro, SevenIsland_SevaultCanyon_Entrance_Text_EveDefeat, SevenIsland_SevaultCanyon_Entrance_Text_EveNotEnoughMons
+ * msgbox SevenIsland_SevaultCanyon_Entrance_Text_EvePostBattle, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object SevenIsland_SevaultCanyon_Entrance_EventScript_EveRematch : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SevenIsland_SevaultCanyon_Entrance_EventScript_EveRematch")
+}
+
 internal val SevenIsland_SevaultCanyon_EntranceScripts: Map<String, Script> =
     mapOf(
         "SevenIsland_SevaultCanyon_Entrance_EventScript_Miah" to
@@ -157,4 +183,8 @@ internal val SevenIsland_SevaultCanyon_EntranceScripts: Map<String, Script> =
             SevenIsland_SevaultCanyon_Entrance_EventScript_Mason,
         "SevenIsland_SevaultCanyon_Entrance_EventScript_RouteSign" to
             SevenIsland_SevaultCanyon_Entrance_EventScript_RouteSign,
+        "SevenIsland_SevaultCanyon_Entrance_EventScript_JonRematch" to
+            SevenIsland_SevaultCanyon_Entrance_EventScript_JonRematch,
+        "SevenIsland_SevaultCanyon_Entrance_EventScript_EveRematch" to
+            SevenIsland_SevaultCanyon_Entrance_EventScript_EveRematch,
     )

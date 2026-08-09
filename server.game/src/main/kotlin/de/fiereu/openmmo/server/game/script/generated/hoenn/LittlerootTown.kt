@@ -218,6 +218,58 @@ internal object LittlerootTown_EventScript_MaysHouseSign : Script {
       TODO("port LittlerootTown_EventScript_MaysHouseSign")
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox LittlerootTown_Text_ProfBirchsHouse, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object LittlerootTown_EventScript_BirchsHouseSignMale : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LittlerootTown.ProfBirchsHouse)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox LittlerootTown_Text_PlayersHouse, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object LittlerootTown_EventScript_PlayersHouseSignFemale : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LittlerootTown.PlayersHouse)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox LittlerootTown_Text_PlayersHouse, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object LittlerootTown_EventScript_PlayersHouseSignMale : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LittlerootTown.PlayersHouse)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox LittlerootTown_Text_ProfBirchsHouse, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object LittlerootTown_EventScript_BirchsHouseSignFemale : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LittlerootTown.ProfBirchsHouse)
+  }
+}
+
 internal val LittlerootTownScripts: Map<String, Script> =
     mapOf(
         "LittlerootTown_OnTransition" to LittlerootTown_OnTransition,
@@ -252,4 +304,12 @@ internal val LittlerootTownScripts: Map<String, Script> =
         "LittlerootTown_EventScript_BrendansHouseSign" to
             LittlerootTown_EventScript_BrendansHouseSign,
         "LittlerootTown_EventScript_MaysHouseSign" to LittlerootTown_EventScript_MaysHouseSign,
+        "LittlerootTown_EventScript_BirchsHouseSignMale" to
+            LittlerootTown_EventScript_BirchsHouseSignMale,
+        "LittlerootTown_EventScript_PlayersHouseSignFemale" to
+            LittlerootTown_EventScript_PlayersHouseSignFemale,
+        "LittlerootTown_EventScript_PlayersHouseSignMale" to
+            LittlerootTown_EventScript_PlayersHouseSignMale,
+        "LittlerootTown_EventScript_BirchsHouseSignFemale" to
+            LittlerootTown_EventScript_BirchsHouseSignFemale,
     )

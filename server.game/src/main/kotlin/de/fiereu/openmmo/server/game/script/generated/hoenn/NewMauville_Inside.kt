@@ -172,7 +172,7 @@ internal object NewMauville_Inside_EventScript_Generator : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox NewMauville_Inside_Text_GeneratorQuietedDown, MSGBOX_DEFAULT
  * releaseall
@@ -180,8 +180,48 @@ internal object NewMauville_Inside_EventScript_Generator : Script {
  * ```
  */
 internal object NewMauville_Inside_EventScript_GeneratorOff : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(NewMauville_Inside.GeneratorQuietedDown)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * setflag FLAG_DEFEATED_VOLTORB_2_NEW_MAUVILLE
+ * goto Common_EventScript_RemoveStaticPokemon
+ * end
+ * ```
+ */
+internal object NewMauville_Inside_EventScript_DefeatedVoltorb2 : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port NewMauville_Inside_EventScript_GeneratorOff")
+      TODO("port NewMauville_Inside_EventScript_DefeatedVoltorb2")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * setflag FLAG_DEFEATED_VOLTORB_1_NEW_MAUVILLE
+ * goto Common_EventScript_RemoveStaticPokemon
+ * end
+ * ```
+ */
+internal object NewMauville_Inside_EventScript_DefeatedVoltorb1 : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port NewMauville_Inside_EventScript_DefeatedVoltorb1")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * setflag FLAG_DEFEATED_VOLTORB_3_NEW_MAUVILLE
+ * goto Common_EventScript_RemoveStaticPokemon
+ * end
+ * ```
+ */
+internal object NewMauville_Inside_EventScript_DefeatedVoltorb3 : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port NewMauville_Inside_EventScript_DefeatedVoltorb3")
 }
 
 internal val NewMauville_InsideScripts: Map<String, Script> =
@@ -202,4 +242,10 @@ internal val NewMauville_InsideScripts: Map<String, Script> =
         "NewMauville_Inside_EventScript_Generator" to NewMauville_Inside_EventScript_Generator,
         "NewMauville_Inside_EventScript_GeneratorOff" to
             NewMauville_Inside_EventScript_GeneratorOff,
+        "NewMauville_Inside_EventScript_DefeatedVoltorb2" to
+            NewMauville_Inside_EventScript_DefeatedVoltorb2,
+        "NewMauville_Inside_EventScript_DefeatedVoltorb1" to
+            NewMauville_Inside_EventScript_DefeatedVoltorb1,
+        "NewMauville_Inside_EventScript_DefeatedVoltorb3" to
+            NewMauville_Inside_EventScript_DefeatedVoltorb3,
     )

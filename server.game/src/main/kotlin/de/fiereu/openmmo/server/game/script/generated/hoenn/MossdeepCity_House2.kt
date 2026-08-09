@@ -38,9 +38,39 @@ internal object MossdeepCity_House2_EventScript_Wingull : Script {
       TODO("port MossdeepCity_House2_EventScript_Wingull")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_MOSSDEEP_HOUSE_WINGULL, MossdeepCity_House2_Movement_WingullExitNorth
+ * waitmovement 0
+ * return
+ * ```
+ */
+internal object MossdeepCity_House2_EventScript_WingullExitNorth : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port MossdeepCity_House2_EventScript_WingullExitNorth")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_MOSSDEEP_HOUSE_WINGULL, MossdeepCity_House2_Movement_WingullExitEast
+ * waitmovement 0
+ * return
+ * ```
+ */
+internal object MossdeepCity_House2_EventScript_WingullExitWest : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port MossdeepCity_House2_EventScript_WingullExitWest")
+}
+
 internal val MossdeepCity_House2Scripts: Map<String, Script> =
     mapOf(
         "MossdeepCity_House2_EventScript_Man" to MossdeepCity_House2_EventScript_Man,
         "MossdeepCity_House2_EventScript_Twin" to MossdeepCity_House2_EventScript_Twin,
         "MossdeepCity_House2_EventScript_Wingull" to MossdeepCity_House2_EventScript_Wingull,
+        "MossdeepCity_House2_EventScript_WingullExitNorth" to
+            MossdeepCity_House2_EventScript_WingullExitNorth,
+        "MossdeepCity_House2_EventScript_WingullExitWest" to
+            MossdeepCity_House2_EventScript_WingullExitWest,
     )

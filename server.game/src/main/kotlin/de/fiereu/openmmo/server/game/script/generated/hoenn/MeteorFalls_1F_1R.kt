@@ -1,5 +1,6 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
+import de.fiereu.openmmo.dialog.generated.hoenn.MeteorFalls_1F_1R
 import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
@@ -57,7 +58,7 @@ internal object MeteorFalls_1F_1R_EventScript_ItemPPUP : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -69,8 +70,26 @@ internal object MeteorFalls_1F_1R_EventScript_ItemPPUP : Script {
  * ```
  */
 internal object MeteorFalls_1F_1R_EventScript_ProfCozmo : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port MeteorFalls_1F_1R_EventScript_ProfCozmo")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(HoennFlags.FLAG_MET_PROF_COZMO))
+        return MeteorFalls_1F_1R_EventScript_MetCozmo.run(ctx)
+    ctx.setFlag(HoennFlags.FLAG_MET_PROF_COZMO)
+    ctx.say(MeteorFalls_1F_1R.MeetProfCozmo)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MeteorFalls_1F_1R_Text_WhatsTeamMagmaDoingAtMtChimney, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object MeteorFalls_1F_1R_EventScript_MetCozmo : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MeteorFalls_1F_1R.WhatsTeamMagmaDoingAtMtChimney)
+  }
 }
 
 internal val MeteorFalls_1F_1RScripts: Map<String, Script> =
@@ -82,4 +101,5 @@ internal val MeteorFalls_1F_1RScripts: Map<String, Script> =
         "MeteorFalls_1F_1R_EventScript_ItemFullHeal" to MeteorFalls_1F_1R_EventScript_ItemFullHeal,
         "MeteorFalls_1F_1R_EventScript_ItemPPUP" to MeteorFalls_1F_1R_EventScript_ItemPPUP,
         "MeteorFalls_1F_1R_EventScript_ProfCozmo" to MeteorFalls_1F_1R_EventScript_ProfCozmo,
+        "MeteorFalls_1F_1R_EventScript_MetCozmo" to MeteorFalls_1F_1R_EventScript_MetCozmo,
     )

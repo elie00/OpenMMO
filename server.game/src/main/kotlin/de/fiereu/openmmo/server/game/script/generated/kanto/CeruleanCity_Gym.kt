@@ -89,7 +89,7 @@ internal object CeruleanCity_Gym_EventScript_GymStatue : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox CeruleanCity_Gym_Text_GymStatuePlayerWon
  * releaseall
@@ -97,12 +97,13 @@ internal object CeruleanCity_Gym_EventScript_GymStatue : Script {
  * ```
  */
 internal object CeruleanCity_Gym_EventScript_GymStatuePostVictory : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port CeruleanCity_Gym_EventScript_GymStatuePostVictory")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(CeruleanCity_Gym.GymStatuePlayerWon)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox CeruleanCity_Gym_Text_WeMakePrettyGoodTeam
  * release
@@ -110,8 +111,40 @@ internal object CeruleanCity_Gym_EventScript_GymStatuePostVictory : Script {
  * ```
  */
 internal object CeruleanCity_Gym_EventScript_GymGuyPostVictory : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port CeruleanCity_Gym_EventScript_GymGuyPostVictory")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(CeruleanCity_Gym.WeMakePrettyGoodTeam)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox CeruleanCity_Gym_Text_ExplainCascadeBadge
+ * checkitemspace ITEM_TM03
+ * goto_if_eq VAR_RESULT, FALSE, CeruleanCity_Gym_EventScript_NoRoomForTM03
+ * giveitem_msg CeruleanCity_Gym_Text_ReceivedTM03FromMisty, ITEM_TM03
+ * setflag FLAG_GOT_TM03_FROM_MISTY
+ * msgbox CeruleanCity_Gym_Text_ExplainTM03
+ * release
+ * end
+ * ```
+ */
+internal object CeruleanCity_Gym_EventScript_GiveTM03 : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port CeruleanCity_Gym_EventScript_GiveTM03")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox CeruleanCity_Gym_Text_BetterMakeRoomForThis
+ * release
+ * end
+ * ```
+ */
+internal object CeruleanCity_Gym_EventScript_NoRoomForTM03 : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(CeruleanCity_Gym.BetterMakeRoomForThis)
+  }
 }
 
 internal val CeruleanCity_GymScripts: Map<String, Script> =
@@ -125,4 +158,6 @@ internal val CeruleanCity_GymScripts: Map<String, Script> =
             CeruleanCity_Gym_EventScript_GymStatuePostVictory,
         "CeruleanCity_Gym_EventScript_GymGuyPostVictory" to
             CeruleanCity_Gym_EventScript_GymGuyPostVictory,
+        "CeruleanCity_Gym_EventScript_GiveTM03" to CeruleanCity_Gym_EventScript_GiveTM03,
+        "CeruleanCity_Gym_EventScript_NoRoomForTM03" to CeruleanCity_Gym_EventScript_NoRoomForTM03,
     )

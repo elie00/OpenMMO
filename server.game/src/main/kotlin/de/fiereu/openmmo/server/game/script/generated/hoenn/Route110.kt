@@ -488,6 +488,96 @@ internal object Route110_EventScript_CyclingRoadResultsSign : Script {
       TODO("port Route110_EventScript_CyclingRoadResultsSign")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch TRAINER_BENJAMIN_1, Route110_Text_BenjaminRematchIntro, Route110_Text_BenjaminRematchDefeated
+ * msgbox Route110_Text_BenjaminRematchPostBattle, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route110_EventScript_BenjaminRematch : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route110_EventScript_BenjaminRematch")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Route110_Text_AcroBikesDoNotQualify, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object Route110_EventScript_PlayerRidingAcroBike : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route110.AcroBikesDoNotQualify)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch TRAINER_ABIGAIL_1, Route110_Text_AbigailRematchIntro, Route110_Text_AbigailRematchDefeated
+ * msgbox Route110_Text_AbigailRematchPostBattle, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route110_EventScript_AbigailRematch : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route110_EventScript_AbigailRematch")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch TRAINER_ISABEL_1, Route110_Text_IsabelRematchIntro, Route110_Text_IsabelRematchDefeated
+ * msgbox Route110_Text_IsabelRematchPostBattle, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route110_EventScript_IsabelRematch : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route110_EventScript_IsabelRematch")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Route110_Text_ThereIsNoRecord, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object Route110_EventScript_NoRecordSet : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route110.ThereIsNoRecord)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Route110_Text_RatedForNumberOfCollisions, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object Route110_EventScript_PlayerNotRidingBike : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route110.RatedForNumberOfCollisions)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch TRAINER_EDWIN_1, Route110_Text_EdwinRematchIntro, Route110_Text_EdwinRematchDefeated
+ * msgbox Route110_Text_EdwinRematchPostBattle, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route110_EventScript_EdwinRematch : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route110_EventScript_EdwinRematch")
+}
+
 internal val Route110Scripts: Map<String, Script> =
     mapOf(
         "Route110_EventScript_Boy2" to Route110_EventScript_Boy2,
@@ -531,4 +621,11 @@ internal val Route110Scripts: Map<String, Script> =
         "Route110_EventScript_TrickHouseSign" to Route110_EventScript_TrickHouseSign,
         "Route110_EventScript_CyclingRoadResultsSign" to
             Route110_EventScript_CyclingRoadResultsSign,
+        "Route110_EventScript_BenjaminRematch" to Route110_EventScript_BenjaminRematch,
+        "Route110_EventScript_PlayerRidingAcroBike" to Route110_EventScript_PlayerRidingAcroBike,
+        "Route110_EventScript_AbigailRematch" to Route110_EventScript_AbigailRematch,
+        "Route110_EventScript_IsabelRematch" to Route110_EventScript_IsabelRematch,
+        "Route110_EventScript_NoRecordSet" to Route110_EventScript_NoRecordSet,
+        "Route110_EventScript_PlayerNotRidingBike" to Route110_EventScript_PlayerNotRidingBike,
+        "Route110_EventScript_EdwinRematch" to Route110_EventScript_EdwinRematch,
     )

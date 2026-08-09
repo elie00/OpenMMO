@@ -46,9 +46,25 @@ internal object LavaridgeTown_HerbShop_EventScript_ExpertM : Script {
       ctx.say(LavaridgeTown_HerbShop.HerbalMedicineWorksButMonWillDislike)
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox LavaridgeTown_HerbShop_Text_ExplainCharcoal, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object LavaridgeTown_HerbShop_EventScript_ExplainCharcoal : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LavaridgeTown_HerbShop.ExplainCharcoal)
+  }
+}
+
 internal val LavaridgeTown_HerbShopScripts: Map<String, Script> =
     mapOf(
         "LavaridgeTown_HerbShop_EventScript_Clerk" to LavaridgeTown_HerbShop_EventScript_Clerk,
         "LavaridgeTown_HerbShop_EventScript_OldMan" to LavaridgeTown_HerbShop_EventScript_OldMan,
         "LavaridgeTown_HerbShop_EventScript_ExpertM" to LavaridgeTown_HerbShop_EventScript_ExpertM,
+        "LavaridgeTown_HerbShop_EventScript_ExplainCharcoal" to
+            LavaridgeTown_HerbShop_EventScript_ExplainCharcoal,
     )

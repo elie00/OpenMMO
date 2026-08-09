@@ -100,6 +100,18 @@ internal object Route106_EventScript_TrainerTipsSign : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(Route106.TrainerTips)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch TRAINER_ELLIOT_1, Route106_Text_ElliotRematchIntro, Route106_Text_ElliotRematchDefeated
+ * msgbox Route106_Text_ElliotRematchPostBattle, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route106_EventScript_ElliotRematch : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route106_EventScript_ElliotRematch")
+}
+
 internal val Route106Scripts: Map<String, Script> =
     mapOf(
         "Route106_EventScript_Douglas" to Route106_EventScript_Douglas,
@@ -108,4 +120,5 @@ internal val Route106Scripts: Map<String, Script> =
         "Route106_EventScript_Ned" to Route106_EventScript_Ned,
         "Route106_EventScript_ItemProtein" to Route106_EventScript_ItemProtein,
         "Route106_EventScript_TrainerTipsSign" to Route106_EventScript_TrainerTipsSign,
+        "Route106_EventScript_ElliotRematch" to Route106_EventScript_ElliotRematch,
     )

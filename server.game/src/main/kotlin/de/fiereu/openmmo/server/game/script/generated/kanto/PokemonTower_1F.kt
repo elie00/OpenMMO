@@ -37,6 +37,20 @@ internal object PokemonTower_1F_EventScript_BaldingMan : Script {
       ctx.say(PokemonTower_1F.CameToPrayForDepartedClefairy)
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox PokemonTower_1F_Text_ComeToPayRespectsSon
+ * release
+ * end
+ * ```
+ */
+internal object PokemonTower_1F_EventScript_Woman2MalePlayer : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(PokemonTower_1F.ComeToPayRespectsSon)
+  }
+}
+
 internal val PokemonTower_1FScripts: Map<String, Script> =
     mapOf(
         "PokemonTower_1F_EventScript_WorkerF" to PokemonTower_1F_EventScript_WorkerF,
@@ -44,4 +58,6 @@ internal val PokemonTower_1FScripts: Map<String, Script> =
         "PokemonTower_1F_EventScript_Woman1" to PokemonTower_1F_EventScript_Woman1,
         "PokemonTower_1F_EventScript_Woman2" to PokemonTower_1F_EventScript_Woman2,
         "PokemonTower_1F_EventScript_BaldingMan" to PokemonTower_1F_EventScript_BaldingMan,
+        "PokemonTower_1F_EventScript_Woman2MalePlayer" to
+            PokemonTower_1F_EventScript_Woman2MalePlayer,
     )

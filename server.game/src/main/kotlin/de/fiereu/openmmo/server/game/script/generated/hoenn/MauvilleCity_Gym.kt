@@ -172,7 +172,7 @@ internal object MauvilleCity_Gym_EventScript_RightGymStatue : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox MauvilleCity_Gym_Text_GymGuidePostVictory, MSGBOX_DEFAULT
  * release
@@ -180,8 +180,80 @@ internal object MauvilleCity_Gym_EventScript_RightGymStatue : Script {
  * ```
  */
 internal object MauvilleCity_Gym_EventScript_GymGuidePostVictory : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MauvilleCity_Gym.GymGuidePostVictory)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MauvilleCity_Gym_Text_WattsonGoForthAndEndeavor, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object MauvilleCity_Gym_EventScript_CompletedNewMauville : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MauvilleCity_Gym.WattsonGoForthAndEndeavor)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * giveitem ITEM_TM_SHOCK_WAVE
+ * goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+ * msgbox MauvilleCity_Gym_Text_ExplainShockWave, MSGBOX_DEFAULT
+ * setflag FLAG_RECEIVED_TM_SHOCK_WAVE
+ * release
+ * end
+ * ```
+ */
+internal object MauvilleCity_Gym_EventScript_GiveShockWave2 : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port MauvilleCity_Gym_EventScript_GymGuidePostVictory")
+      TODO("port MauvilleCity_Gym_EventScript_GiveShockWave2")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MauvilleCity_Gym_Text_GymStatueCertified, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object MauvilleCity_Gym_EventScript_GymStatueCertified : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MauvilleCity_Gym.GymStatueCertified)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch_double TRAINER_WATTSON_1, MauvilleCity_Gym_Text_WattsonPreRematch, MauvilleCity_Gym_Text_WattsonRematchDefeat, MauvilleCity_Gym_Text_WattsonRematchNeedTwoMons
+ * msgbox MauvilleCity_Gym_Text_WattsonPostRematch, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object MauvilleCity_Gym_EventScript_WattsonRematch : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port MauvilleCity_Gym_EventScript_WattsonRematch")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MauvilleCity_Gym_Text_GymStatue, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object MauvilleCity_Gym_EventScript_GymStatue : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MauvilleCity_Gym.GymStatue)
+  }
 }
 
 internal val MauvilleCity_GymScripts: Map<String, Script> =
@@ -198,4 +270,13 @@ internal val MauvilleCity_GymScripts: Map<String, Script> =
             MauvilleCity_Gym_EventScript_RightGymStatue,
         "MauvilleCity_Gym_EventScript_GymGuidePostVictory" to
             MauvilleCity_Gym_EventScript_GymGuidePostVictory,
+        "MauvilleCity_Gym_EventScript_CompletedNewMauville" to
+            MauvilleCity_Gym_EventScript_CompletedNewMauville,
+        "MauvilleCity_Gym_EventScript_GiveShockWave2" to
+            MauvilleCity_Gym_EventScript_GiveShockWave2,
+        "MauvilleCity_Gym_EventScript_GymStatueCertified" to
+            MauvilleCity_Gym_EventScript_GymStatueCertified,
+        "MauvilleCity_Gym_EventScript_WattsonRematch" to
+            MauvilleCity_Gym_EventScript_WattsonRematch,
+        "MauvilleCity_Gym_EventScript_GymStatue" to MauvilleCity_Gym_EventScript_GymStatue,
     )

@@ -1,5 +1,6 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
+import de.fiereu.openmmo.dialog.generated.hoenn.MauvilleCity_House1
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 
@@ -23,8 +24,24 @@ internal object MauvilleCity_House1_EventScript_RockSmashDude : Script {
       TODO("port MauvilleCity_House1_EventScript_RockSmashDude")
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MauvilleCity_House1_Text_MonCanFlyOutOfSmashedRock, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object MauvilleCity_House1_EventScript_ReceivedRockSmash : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MauvilleCity_House1.MonCanFlyOutOfSmashedRock)
+  }
+}
+
 internal val MauvilleCity_House1Scripts: Map<String, Script> =
     mapOf(
         "MauvilleCity_House1_EventScript_RockSmashDude" to
             MauvilleCity_House1_EventScript_RockSmashDude,
+        "MauvilleCity_House1_EventScript_ReceivedRockSmash" to
+            MauvilleCity_House1_EventScript_ReceivedRockSmash,
     )

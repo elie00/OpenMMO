@@ -44,10 +44,57 @@ internal object Route114_LanettesHouse_EventScript_PC : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(Route114_LanettesHouse.EmailFromBill)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox Route114_LanettesHouse_Text_ResearchNotesPage2, MSGBOX_YESNO
+ * call_if_eq VAR_RESULT, YES, Route114_LanettesHouse_EventScript_NotebookPage3
+ * releaseall
+ * end
+ * ```
+ */
+internal object Route114_LanettesHouse_EventScript_NotebookPage2 : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port Route114_LanettesHouse_EventScript_NotebookPage2")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Route114_LanettesHouse_Text_OrganizeYourBoxes, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object Route114_LanettesHouse_EventScript_OfferAdvice : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route114_LanettesHouse.OrganizeYourBoxes)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Route114_LanettesHouse_Text_ResearchNotesPage3, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object Route114_LanettesHouse_EventScript_NotebookPage3 : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route114_LanettesHouse.ResearchNotesPage3)
+  }
+}
+
 internal val Route114_LanettesHouseScripts: Map<String, Script> =
     mapOf(
         "Route114_LanettesHouse_EventScript_Lanette" to Route114_LanettesHouse_EventScript_Lanette,
         "Route114_LanettesHouse_EventScript_Notebook" to
             Route114_LanettesHouse_EventScript_Notebook,
         "Route114_LanettesHouse_EventScript_PC" to Route114_LanettesHouse_EventScript_PC,
+        "Route114_LanettesHouse_EventScript_NotebookPage2" to
+            Route114_LanettesHouse_EventScript_NotebookPage2,
+        "Route114_LanettesHouse_EventScript_OfferAdvice" to
+            Route114_LanettesHouse_EventScript_OfferAdvice,
+        "Route114_LanettesHouse_EventScript_NotebookPage3" to
+            Route114_LanettesHouse_EventScript_NotebookPage3,
     )

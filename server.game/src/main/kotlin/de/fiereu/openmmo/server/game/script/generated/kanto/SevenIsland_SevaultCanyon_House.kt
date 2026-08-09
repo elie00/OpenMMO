@@ -75,6 +75,48 @@ internal object SevenIsland_SevaultCanyon_House_EventScript_ItemLuckyPunch : Scr
   }
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_CHANSEY_DANCE_MAN, Common_Movement_FacePlayer
+ * waitmovement 0
+ * msgbox SevenIsland_SevaultCanyon_House_Text_ChanseyDanceJoinIn
+ * release
+ * end
+ * ```
+ */
+internal object SevenIsland_SevaultCanyon_House_EventScript_AlreadyDanced : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SevenIsland_SevaultCanyon_House_EventScript_AlreadyDanced")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterDown
+ * waitmovement 0
+ * return
+ * ```
+ */
+internal object SevenIsland_SevaultCanyon_House_EventScript_PlayerFaceDown : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SevenIsland_SevaultCanyon_House_EventScript_PlayerFaceDown")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * textcolor NPC_TEXT_COLOR_MALE
+ * msgbox SevenIsland_SevaultCanyon_House_Text_ComeOnDance
+ * release
+ * end
+ * ```
+ */
+internal object SevenIsland_SevaultCanyon_House_EventScript_DeclineDance : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SevenIsland_SevaultCanyon_House_EventScript_DeclineDance")
+}
+
 internal val SevenIsland_SevaultCanyon_HouseScripts: Map<String, Script> =
     mapOf(
         "SevenIsland_SevaultCanyon_House_EventScript_ChanseyDanceMan" to
@@ -83,4 +125,10 @@ internal val SevenIsland_SevaultCanyon_HouseScripts: Map<String, Script> =
             SevenIsland_SevaultCanyon_House_EventScript_Chansey,
         "SevenIsland_SevaultCanyon_House_EventScript_ItemLuckyPunch" to
             SevenIsland_SevaultCanyon_House_EventScript_ItemLuckyPunch,
+        "SevenIsland_SevaultCanyon_House_EventScript_AlreadyDanced" to
+            SevenIsland_SevaultCanyon_House_EventScript_AlreadyDanced,
+        "SevenIsland_SevaultCanyon_House_EventScript_PlayerFaceDown" to
+            SevenIsland_SevaultCanyon_House_EventScript_PlayerFaceDown,
+        "SevenIsland_SevaultCanyon_House_EventScript_DeclineDance" to
+            SevenIsland_SevaultCanyon_House_EventScript_DeclineDance,
     )

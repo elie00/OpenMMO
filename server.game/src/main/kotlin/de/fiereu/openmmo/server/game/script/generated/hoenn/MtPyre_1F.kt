@@ -30,9 +30,24 @@ internal object MtPyre_1F_EventScript_Man : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.say(MtPyre_1F.RestingPlaceOfZigzagoon)
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MtPyre_1F_Text_ExplainCleanseTag, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object MtPyre_1F_EventScript_ReceivedCleanseTag : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MtPyre_1F.ExplainCleanseTag)
+  }
+}
+
 internal val MtPyre_1FScripts: Map<String, Script> =
     mapOf(
         "MtPyre_1F_EventScript_CleanseTagWoman" to MtPyre_1F_EventScript_CleanseTagWoman,
         "MtPyre_1F_EventScript_PokefanF" to MtPyre_1F_EventScript_PokefanF,
         "MtPyre_1F_EventScript_Man" to MtPyre_1F_EventScript_Man,
+        "MtPyre_1F_EventScript_ReceivedCleanseTag" to MtPyre_1F_EventScript_ReceivedCleanseTag,
     )

@@ -1,5 +1,6 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
+import de.fiereu.openmmo.dialog.generated.hoenn.AbandonedShip_CaptainsOffice
 import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
@@ -38,10 +39,42 @@ internal object AbandonedShip_CaptainsOffice_EventScript_ItemStorageKey : Script
   }
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox AbandonedShip_CaptainsOffice_Text_OhCanYouDeliverScanner, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object AbandonedShip_CaptainsOffice_EventScript_CanYouDeliverScanner : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(AbandonedShip_CaptainsOffice.OhCanYouDeliverScanner)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox AbandonedShip_CaptainsOffice_Text_ThisIsSSCactus, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object AbandonedShip_CaptainsOffice_EventScript_ThisIsSSCactus : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(AbandonedShip_CaptainsOffice.ThisIsSSCactus)
+  }
+}
+
 internal val AbandonedShip_CaptainsOfficeScripts: Map<String, Script> =
     mapOf(
         "AbandonedShip_CaptainsOffice_EventScript_CaptSternAide" to
             AbandonedShip_CaptainsOffice_EventScript_CaptSternAide,
         "AbandonedShip_CaptainsOffice_EventScript_ItemStorageKey" to
             AbandonedShip_CaptainsOffice_EventScript_ItemStorageKey,
+        "AbandonedShip_CaptainsOffice_EventScript_CanYouDeliverScanner" to
+            AbandonedShip_CaptainsOffice_EventScript_CanYouDeliverScanner,
+        "AbandonedShip_CaptainsOffice_EventScript_ThisIsSSCactus" to
+            AbandonedShip_CaptainsOffice_EventScript_ThisIsSSCactus,
     )

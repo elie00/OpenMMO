@@ -9,7 +9,7 @@ import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -19,7 +19,11 @@ import de.fiereu.openmmo.trainer.generated.HoennTrainers
  * ```
  */
 internal object Route109_EventScript_MrBriney : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route109_EventScript_MrBriney")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.isFlagSet(HoennFlags.FLAG_DELIVERED_DEVON_GOODS))
+        return Route109_EventScript_HaveNotDeliveredDevonGood.run(ctx)
+    return Route109_EventScript_DeliveredDevonGoods.run(ctx)
+  }
 }
 
 /**
@@ -383,6 +387,133 @@ internal object Route109_EventScript_TrainerTipsSign : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(Route109.TrainerTipsSign)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * message Route109_Text_BrineyWhereAreWeBound
+ * waitmessage
+ * multichoicedefault 21, 8, MULTI_BRINEY_OFF_DEWFORD, 1, FALSE
+ * switch VAR_RESULT
+ * case 0, Route109_EventScript_SailToDewford
+ * case 1, Route109_EventScript_ChoseNotToSail
+ * case MULTI_B_PRESSED, Route109_EventScript_ChoseNotToSail
+ * end
+ * ```
+ */
+internal object Route109_EventScript_DeliveredDevonGoods : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port Route109_EventScript_DeliveredDevonGoods")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch TRAINER_RICKY_1, Route109_Text_RickyRematchIntro, Route109_Text_RickyRematchDefeated
+ * msgbox Route109_Text_RickyRematchPostBattle, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route109_EventScript_RickyRematch : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route109_EventScript_RickyRematch")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Route109_Text_WereGoingToMakeBigCastle, MSGBOX_DEFAULT
+ * applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
+ * waitmovement 0
+ * release
+ * end
+ * ```
+ */
+internal object Route109_EventScript_AlreadyReceivedSoftSand : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route109.WereGoingToMakeBigCastle)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch TRAINER_LOLA_1, Route109_Text_LolaRematchIntro, Route109_Text_LolaRematchDefeated
+ * msgbox Route109_Text_LolaRematchPostBattle, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route109_EventScript_LolaRematch : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route109_EventScript_LolaRematch")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * message Route109_Text_BrineySailToDewfordQuestion
+ * msgbox Route109_Text_BrineySailToDewfordQuestion, MSGBOX_YESNO
+ * goto_if_eq VAR_RESULT, NO, Route109_EventScript_StayHere
+ * goto Route109_EventScript_SailToDewford
+ * end
+ * ```
+ */
+internal object Route109_EventScript_HaveNotDeliveredDevonGood : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port Route109_EventScript_HaveNotDeliveredDevonGood")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Route109_Text_BrineyDewfordItIs, MSGBOX_DEFAULT
+ * closemessage
+ * goto Route109_EventScript_StartDepartForDewford
+ * end
+ * ```
+ */
+internal object Route109_EventScript_SailToDewford : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route109.BrineyDewfordItIs)
+    return Route109_EventScript_StartDepartForDewford.run(ctx)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Route109_Text_BrineyDeliverDevonGoods, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object Route109_EventScript_StayHere : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route109.BrineyDeliverDevonGoods)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * call EventScript_BackupMrBrineyLocation
+ * setobjectsubpriority LOCALID_ROUTE109_BRINEY, MAP_ROUTE109, 0
+ * setobjectsubpriority LOCALID_PLAYER, MAP_ROUTE109, 0
+ * applymovement LOCALID_ROUTE109_BRINEY, Route109_Movement_BrineyEnterBoat
+ * waitmovement 0
+ * removeobject LOCALID_ROUTE109_BRINEY
+ * switch VAR_FACING
+ * case DIR_SOUTH, Route109_EventScript_EnterBoatSouth
+ * case DIR_WEST, Route109_EventScript_EnterBoatWest
+ * case DIR_EAST, Route109_EventScript_EnterBoatEast
+ * end
+ * ```
+ */
+internal object Route109_EventScript_StartDepartForDewford : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port Route109_EventScript_StartDepartForDewford")
+}
+
 internal val Route109Scripts: Map<String, Script> =
     mapOf(
         "Route109_EventScript_MrBriney" to Route109_EventScript_MrBriney,
@@ -410,4 +541,14 @@ internal val Route109Scripts: Map<String, Script> =
         "Route109_EventScript_Elijah" to Route109_EventScript_Elijah,
         "Route109_EventScript_SeashoreHouseSign" to Route109_EventScript_SeashoreHouseSign,
         "Route109_EventScript_TrainerTipsSign" to Route109_EventScript_TrainerTipsSign,
+        "Route109_EventScript_DeliveredDevonGoods" to Route109_EventScript_DeliveredDevonGoods,
+        "Route109_EventScript_RickyRematch" to Route109_EventScript_RickyRematch,
+        "Route109_EventScript_AlreadyReceivedSoftSand" to
+            Route109_EventScript_AlreadyReceivedSoftSand,
+        "Route109_EventScript_LolaRematch" to Route109_EventScript_LolaRematch,
+        "Route109_EventScript_HaveNotDeliveredDevonGood" to
+            Route109_EventScript_HaveNotDeliveredDevonGood,
+        "Route109_EventScript_SailToDewford" to Route109_EventScript_SailToDewford,
+        "Route109_EventScript_StayHere" to Route109_EventScript_StayHere,
+        "Route109_EventScript_StartDepartForDewford" to Route109_EventScript_StartDepartForDewford,
     )

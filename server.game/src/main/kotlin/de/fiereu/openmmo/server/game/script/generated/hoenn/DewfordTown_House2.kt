@@ -26,8 +26,40 @@ internal object DewfordTown_House2_EventScript_Boy : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.say(DewfordTown_House2.BrawlySoCool)
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox DewfordTown_House2_Text_ExplainSilkScarf, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object DewfordTown_House2_EventScript_ExplainSilkScarf : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(DewfordTown_House2.ExplainSilkScarf)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox DewfordTown_House2_Text_NoRoom, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object DewfordTown_House2_EventScript_NoRoomForScarf : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(DewfordTown_House2.NoRoom)
+  }
+}
+
 internal val DewfordTown_House2Scripts: Map<String, Script> =
     mapOf(
         "DewfordTown_House2_EventScript_Man" to DewfordTown_House2_EventScript_Man,
         "DewfordTown_House2_EventScript_Boy" to DewfordTown_House2_EventScript_Boy,
+        "DewfordTown_House2_EventScript_ExplainSilkScarf" to
+            DewfordTown_House2_EventScript_ExplainSilkScarf,
+        "DewfordTown_House2_EventScript_NoRoomForScarf" to
+            DewfordTown_House2_EventScript_NoRoomForScarf,
     )

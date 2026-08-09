@@ -26,6 +26,10 @@ class TrainerBattlePorter(private val region: String, decompDir: File) {
   private val varNames = defineTable(File(decompDir, "include/constants/vars.h"), "VAR_").keys
   private val mapObjects = MapObjectIndex(decompDir)
   private val subScripts = SubScriptEmitter(ScriptIndex.build(decompDir))
+  private val translator =
+      ScriptTranslator(region, flagNames, varNames) { label ->
+        resolveText(label)?.let { it.import to it.reference }
+      }
   private val trainersObject = "${region.replaceFirstChar { it.uppercase() }}Trainers"
   private val flagsObject = "${region.replaceFirstChar { it.uppercase() }}Flags"
   private val varsObject = "${region.replaceFirstChar { it.uppercase() }}Vars"
@@ -38,19 +42,28 @@ class TrainerBattlePorter(private val region: String, decompDir: File) {
       var skippedText: Int = 0,
       var skippedItem: Int = 0,
       var skippedJump: Int = 0,
+      var translated: Int = 0,
       var emitted: Int = 0,
       var filesChanged: Int = 0,
       var filesRefused: Int = 0,
   )
 
   fun portDirectory(dir: File, write: Boolean, report: Report = Report()): Report {
-    dir.listFiles { f -> f.isFile && f.extension == "kt" }
-        ?.sorted()
-        ?.forEach { portFile(it, write, report) }
+    val files = dir.listFiles { f -> f.isFile && f.extension == "kt" }?.sorted().orEmpty()
+    // Generated scripts are top level objects in one package per region, so a label emitted into
+    // two files is a redeclaration. The set of what exists has to span the region, not the file.
+    val definedInRegion =
+        files.flatMapTo(HashSet()) { f -> DEFINED.findAll(f.readText()).map { it.groupValues[1] } }
+    files.forEach { portFile(it, write, report, definedInRegion) }
     return report
   }
 
-  private fun portFile(file: File, write: Boolean, report: Report) {
+  private fun portFile(
+      file: File,
+      write: Boolean,
+      report: Report,
+      definedInRegion: MutableSet<String>,
+  ) {
     val lines = file.readText().split("\n").toMutableList()
     var stubs = findStubs(lines)
     if (stubs.isEmpty()) return
@@ -61,15 +74,15 @@ class TrainerBattlePorter(private val region: String, decompDir: File) {
     // work to do and the task would not be idempotent.
     var added = 0
     while (true) {
-      val referenced = stubs.mapNotNullTo(HashSet()) { JumpForm.parse(it.coreLines)?.target }
-      val round = subScripts.emitInto(lines, referenced)
+      val referenced = stubs.flatMapTo(HashSet()) { subScripts.jumpTargets(it.coreLines) }
+      val round = subScripts.emitInto(lines, referenced, definedInRegion)
       if (round == 0) break
       added += round
       report.emitted += round
       stubs = findStubs(lines)
     }
 
-    val defined = DEFINED.findAll(lines.joinToString("\n")).mapTo(HashSet()) { it.groupValues[1] }
+    val defined = definedInRegion
     val splices = mutableListOf<Splice>()
     val imports = sortedSetOf<String>()
     for (stub in stubs) {
@@ -86,10 +99,7 @@ class TrainerBattlePorter(private val region: String, decompDir: File) {
             item != null -> renderFindItem(stub, item, imports, report)
             facing != null -> renderFacingDialogue(stub, facing, imports, report)
             jump != null -> renderJump(stub, jump, defined, imports, report)
-            else -> {
-              report.skippedShape++
-              null
-            }
+            else -> renderTranslated(stub, defined, imports, report)
           }
       if (rendered == null) continue
       splices += Splice(stub.from, stub.toExclusive, rendered)
@@ -303,6 +313,22 @@ class TrainerBattlePorter(private val region: String, decompDir: File) {
           }
         }
     return body(stub) { addAll(body) }
+  }
+
+  /** Last resort: walk the body command by command instead of matching a whole shape. */
+  private fun renderTranslated(
+      stub: Stub,
+      defined: Set<String>,
+      imports: MutableSet<String>,
+      report: Report,
+  ): List<String>? {
+    val translated = translator.translate(stub.coreLines, defined, imports)
+    if (translated == null) {
+      report.skippedShape++
+      return null
+    }
+    report.translated++
+    return body(stub) { addAll(translated) }
   }
 
   /** The shared shell: provenance KDoc, object header, and the run body the caller fills in. */

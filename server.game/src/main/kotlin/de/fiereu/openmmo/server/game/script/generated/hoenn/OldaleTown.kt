@@ -139,6 +139,20 @@ internal object OldaleTown_EventScript_TownSign : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(OldaleTown.TownSign)
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox OldaleTown_Text_PotionExplanation, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object OldaleTown_EventScript_ExplainPotion : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(OldaleTown.PotionExplanation)
+  }
+}
+
 internal val OldaleTownScripts: Map<String, Script> =
     mapOf(
         "OldaleTown_OnTransition" to OldaleTown_OnTransition,
@@ -151,4 +165,5 @@ internal val OldaleTownScripts: Map<String, Script> =
         "OldaleTown_EventScript_RivalTrigger2" to OldaleTown_EventScript_RivalTrigger2,
         "OldaleTown_EventScript_RivalTrigger3" to OldaleTown_EventScript_RivalTrigger3,
         "OldaleTown_EventScript_TownSign" to OldaleTown_EventScript_TownSign,
+        "OldaleTown_EventScript_ExplainPotion" to OldaleTown_EventScript_ExplainPotion,
     )

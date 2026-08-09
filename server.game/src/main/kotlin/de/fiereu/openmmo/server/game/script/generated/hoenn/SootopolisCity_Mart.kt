@@ -1,5 +1,6 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
+import de.fiereu.openmmo.dialog.generated.hoenn.SootopolisCity_Mart
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 
@@ -53,9 +54,41 @@ internal object SootopolisCity_Mart_EventScript_Gentleman : Script {
       TODO("port SootopolisCity_Mart_EventScript_Gentleman")
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SootopolisCity_Mart_Text_FullRestoreItemOfDreams, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object SootopolisCity_Mart_EventScript_GentlemanNoLegendaries : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SootopolisCity_Mart.FullRestoreItemOfDreams)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SootopolisCity_Mart_Text_PPUpIsGreat, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object SootopolisCity_Mart_EventScript_FatManNoLegendaries : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SootopolisCity_Mart.PPUpIsGreat)
+  }
+}
+
 internal val SootopolisCity_MartScripts: Map<String, Script> =
     mapOf(
         "SootopolisCity_Mart_EventScript_Clerk" to SootopolisCity_Mart_EventScript_Clerk,
         "SootopolisCity_Mart_EventScript_FatMan" to SootopolisCity_Mart_EventScript_FatMan,
         "SootopolisCity_Mart_EventScript_Gentleman" to SootopolisCity_Mart_EventScript_Gentleman,
+        "SootopolisCity_Mart_EventScript_GentlemanNoLegendaries" to
+            SootopolisCity_Mart_EventScript_GentlemanNoLegendaries,
+        "SootopolisCity_Mart_EventScript_FatManNoLegendaries" to
+            SootopolisCity_Mart_EventScript_FatManNoLegendaries,
     )

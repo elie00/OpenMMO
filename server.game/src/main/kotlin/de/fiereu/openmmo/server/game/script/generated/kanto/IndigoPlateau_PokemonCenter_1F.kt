@@ -24,7 +24,7 @@ internal object IndigoPlateau_PokemonCenter_1F_EventScript_Clerk : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -34,8 +34,9 @@ internal object IndigoPlateau_PokemonCenter_1F_EventScript_Clerk : Script {
  * ```
  */
 internal object IndigoPlateau_PokemonCenter_1F_EventScript_Nurse : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port IndigoPlateau_PokemonCenter_1F_EventScript_Nurse")
+  override suspend fun run(ctx: ScriptContext) {
+    EventScript_PkmnCenterNurse.run(ctx)
+  }
 }
 
 internal object IndigoPlateau_PokemonCenter_1F_EventScript_GymGuy : Script {
@@ -110,6 +111,34 @@ internal object IndigoPlateau_PokemonCenter_1F_EventScript_CooltrainerM : Script
       TODO("port IndigoPlateau_PokemonCenter_1F_EventScript_CooltrainerM")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * goto_if_set FLAG_SYS_CAN_LINK_WITH_RS, IndigoPlateau_PokemonCenter_1F_EventScript_SeviiIslandComplete
+ * msgbox IndigoPlateau_PokemonCenter_1F_Text_LoreleiIsAbsentClosedForTimeBeing
+ * release
+ * end
+ * ```
+ */
+internal object IndigoPlateau_PokemonCenter_1F_EventScript_CheckSeviiIslandComplete : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port IndigoPlateau_PokemonCenter_1F_EventScript_CheckSeviiIslandComplete")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox IndigoPlateau_PokemonCenter_1F_Text_FaceEliteFourGoodLuck
+ * release
+ * end
+ * ```
+ */
+internal object IndigoPlateau_PokemonCenter_1F_EventScript_SeviiIslandComplete : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(IndigoPlateau_PokemonCenter_1F.FaceEliteFourGoodLuck)
+  }
+}
+
 internal val IndigoPlateau_PokemonCenter_1FScripts: Map<String, Script> =
     mapOf(
         "IndigoPlateau_PokemonCenter_1F_EventScript_Clerk" to
@@ -126,4 +155,8 @@ internal val IndigoPlateau_PokemonCenter_1FScripts: Map<String, Script> =
             IndigoPlateau_PokemonCenter_1F_EventScript_PokemonJournal,
         "IndigoPlateau_PokemonCenter_1F_EventScript_CooltrainerM" to
             IndigoPlateau_PokemonCenter_1F_EventScript_CooltrainerM,
+        "IndigoPlateau_PokemonCenter_1F_EventScript_CheckSeviiIslandComplete" to
+            IndigoPlateau_PokemonCenter_1F_EventScript_CheckSeviiIslandComplete,
+        "IndigoPlateau_PokemonCenter_1F_EventScript_SeviiIslandComplete" to
+            IndigoPlateau_PokemonCenter_1F_EventScript_SeviiIslandComplete,
     )

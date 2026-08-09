@@ -1,5 +1,6 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.dialog.generated.kanto.Trade
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 
@@ -29,8 +30,56 @@ internal object UndergroundPath_NorthEntrance_EventScript_Saige : Script {
       TODO("port UndergroundPath_NorthEntrance_EventScript_Saige")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * bufferspeciesname STR_VAR_1, VAR_0x8009
+ * msgbox Trade_Text_ThisIsNoMon
+ * release
+ * end
+ * ```
+ */
+internal object UndergroundPath_NorthEntrance_EventScript_NotRequestedMon : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port UndergroundPath_NorthEntrance_EventScript_NotRequestedMon")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Trade_Text_HowIsMyOldMon
+ * release
+ * end
+ * ```
+ */
+internal object UndergroundPath_NorthEntrance_EventScript_AlreadyTraded : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Trade.HowIsMyOldMon)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Trade_Text_ThatsTooBad
+ * release
+ * end
+ * ```
+ */
+internal object UndergroundPath_NorthEntrance_EventScript_DeclineTrade : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Trade.ThatsTooBad)
+  }
+}
+
 internal val UndergroundPath_NorthEntranceScripts: Map<String, Script> =
     mapOf(
         "UndergroundPath_NorthEntrance_EventScript_Saige" to
             UndergroundPath_NorthEntrance_EventScript_Saige,
+        "UndergroundPath_NorthEntrance_EventScript_NotRequestedMon" to
+            UndergroundPath_NorthEntrance_EventScript_NotRequestedMon,
+        "UndergroundPath_NorthEntrance_EventScript_AlreadyTraded" to
+            UndergroundPath_NorthEntrance_EventScript_AlreadyTraded,
+        "UndergroundPath_NorthEntrance_EventScript_DeclineTrade" to
+            UndergroundPath_NorthEntrance_EventScript_DeclineTrade,
     )

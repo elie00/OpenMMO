@@ -1,6 +1,7 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.dialog.generated.hoenn.LavaridgeTown_House
+import de.fiereu.openmmo.dialog.generated.hoenn.MoveTutor
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 
@@ -51,9 +52,37 @@ internal object LavaridgeTown_House_EventScript_MimicTutor : Script {
       TODO("port LavaridgeTown_House_EventScript_MimicTutor")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox MoveTutor_MimicDeclined, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object MoveTutor_EventScript_MimicDeclined : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port MoveTutor_EventScript_MimicDeclined")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MoveTutor_Text_MimicTaught, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object MoveTutor_EventScript_MimicTaught : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MoveTutor.MimicTaught)
+  }
+}
+
 internal val LavaridgeTown_HouseScripts: Map<String, Script> =
     mapOf(
         "LavaridgeTown_House_EventScript_OldMan" to LavaridgeTown_House_EventScript_OldMan,
         "LavaridgeTown_House_EventScript_Zigzagoon" to LavaridgeTown_House_EventScript_Zigzagoon,
         "LavaridgeTown_House_EventScript_MimicTutor" to LavaridgeTown_House_EventScript_MimicTutor,
+        "MoveTutor_EventScript_MimicDeclined" to MoveTutor_EventScript_MimicDeclined,
+        "MoveTutor_EventScript_MimicTaught" to MoveTutor_EventScript_MimicTaught,
     )

@@ -53,6 +53,33 @@ internal object Route16_NorthEntrance_2F_EventScript_RightBinoculars : Script {
       ctx.sign(Route16_NorthEntrance_2F.LongPathOverWater)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * buffernumberstring STR_VAR_1, REQUIRED_CAUGHT_MONS
+ * bufferitemname STR_VAR_2, ITEM_AMULET_COIN
+ * return
+ * ```
+ */
+internal object Route16_NorthEntrance_2F_EventScript_GetAideRequestInfo : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port Route16_NorthEntrance_2F_EventScript_GetAideRequestInfo")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Route16_NorthEntrance_2F_Text_ExplainAmuletCoin
+ * release
+ * end
+ * ```
+ */
+internal object Route16_NorthEntrance_2F_EventScript_AlreadyGotAmuletCoin : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route16_NorthEntrance_2F.ExplainAmuletCoin)
+  }
+}
+
 internal val Route16_NorthEntrance_2FScripts: Map<String, Script> =
     mapOf(
         "Route16_NorthEntrance_2F_EventScript_LittleBoy" to
@@ -64,4 +91,8 @@ internal val Route16_NorthEntrance_2FScripts: Map<String, Script> =
             Route16_NorthEntrance_2F_EventScript_LeftBinoculars,
         "Route16_NorthEntrance_2F_EventScript_RightBinoculars" to
             Route16_NorthEntrance_2F_EventScript_RightBinoculars,
+        "Route16_NorthEntrance_2F_EventScript_GetAideRequestInfo" to
+            Route16_NorthEntrance_2F_EventScript_GetAideRequestInfo,
+        "Route16_NorthEntrance_2F_EventScript_AlreadyGotAmuletCoin" to
+            Route16_NorthEntrance_2F_EventScript_AlreadyGotAmuletCoin,
     )

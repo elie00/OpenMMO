@@ -352,6 +352,58 @@ internal object Route114_EventScript_LanettesHouseSign : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(Route114.LanettesHouse)
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Route114_Text_FunToThinkAboutBerries, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object Route114_EventScript_ReceivedBerry : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route114.FunToThinkAboutBerries)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch TRAINER_BERNIE_1, Route114_Text_BernieRematchIntro, Route114_Text_BernieRematchDefeat
+ * msgbox Route114_Text_BerniePostRematch, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route114_EventScript_RematchBernie : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route114_EventScript_RematchBernie")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Route114_Text_ExplainRoar, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object Route114_EventScript_ReceivedRoar : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route114.ExplainRoar)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch TRAINER_STEVE_1, Route114_Text_SteveRematchIntro, Route114_Text_SteveRematchDefeat
+ * msgbox Route114_Text_StevePostRematch, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route114_EventScript_RematchSteve : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route114_EventScript_RematchSteve")
+}
+
 internal val Route114Scripts: Map<String, Script> =
     mapOf(
         "Route114_EventScript_Lenny" to Route114_EventScript_Lenny,
@@ -377,4 +429,8 @@ internal val Route114Scripts: Map<String, Script> =
         "Route114_EventScript_FossilManiacsHouseSign" to
             Route114_EventScript_FossilManiacsHouseSign,
         "Route114_EventScript_LanettesHouseSign" to Route114_EventScript_LanettesHouseSign,
+        "Route114_EventScript_ReceivedBerry" to Route114_EventScript_ReceivedBerry,
+        "Route114_EventScript_RematchBernie" to Route114_EventScript_RematchBernie,
+        "Route114_EventScript_ReceivedRoar" to Route114_EventScript_ReceivedRoar,
+        "Route114_EventScript_RematchSteve" to Route114_EventScript_RematchSteve,
     )

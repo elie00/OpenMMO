@@ -87,15 +87,16 @@ internal object SilphCo_2F_EventScript_Connor : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * goto EventScript_ThunderWaveTutor
  * end
  * ```
  */
 internal object SilphCo_2F_EventScript_ThunderWaveTutor : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SilphCo_2F_EventScript_ThunderWaveTutor")
+  override suspend fun run(ctx: ScriptContext) {
+    return EventScript_ThunderWaveTutor.run(ctx)
+  }
 }
 
 /**
@@ -132,6 +133,53 @@ internal object SilphCo_2F_EventScript_FloorSign : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(SilphCo_2F.FloorSign)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * lock
+ * faceplayer
+ * goto_if_set FLAG_TUTOR_THUNDER_WAVE, EventScript_ThunderWaveTaught
+ * msgbox Text_ThunderWaveTeach, MSGBOX_YESNO
+ * goto_if_eq VAR_RESULT, NO, EventScript_ThunderWaveDeclined
+ * call EventScript_CanOnlyBeLearnedOnce
+ * goto_if_eq VAR_RESULT, NO, EventScript_ThunderWaveDeclined
+ * msgbox Text_ThunderWaveWhichMon
+ * setvar VAR_0x8005, MOVETUTOR_THUNDER_WAVE
+ * call EventScript_ChooseMoveTutorMon
+ * goto_if_eq VAR_RESULT, FALSE, EventScript_ThunderWaveDeclined
+ * setflag FLAG_TUTOR_THUNDER_WAVE
+ * goto EventScript_ThunderWaveTaught
+ * end
+ * ```
+ */
+internal object EventScript_ThunderWaveTutor : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_ThunderWaveTutor")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox Text_ThunderWaveTaught
+ * release
+ * end
+ * ```
+ */
+internal object EventScript_ThunderWaveTaught : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_ThunderWaveTaught")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox Text_ThunderWaveDeclined
+ * release
+ * end
+ * ```
+ */
+internal object EventScript_ThunderWaveDeclined : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_ThunderWaveDeclined")
+}
+
 internal val SilphCo_2FScripts: Map<String, Script> =
     mapOf(
         "SilphCo_2F_EventScript_Grunt2" to SilphCo_2F_EventScript_Grunt2,
@@ -142,4 +190,7 @@ internal val SilphCo_2FScripts: Map<String, Script> =
         "SilphCo_2F_EventScript_Door1" to SilphCo_2F_EventScript_Door1,
         "SilphCo_2F_EventScript_Door2" to SilphCo_2F_EventScript_Door2,
         "SilphCo_2F_EventScript_FloorSign" to SilphCo_2F_EventScript_FloorSign,
+        "EventScript_ThunderWaveTutor" to EventScript_ThunderWaveTutor,
+        "EventScript_ThunderWaveTaught" to EventScript_ThunderWaveTaught,
+        "EventScript_ThunderWaveDeclined" to EventScript_ThunderWaveDeclined,
     )

@@ -146,6 +146,32 @@ internal object SixIsland_OutcastIsland_EventScript_ItemPPUp : Script {
   }
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch_double TRAINER_SIS_AND_BRO_AVA_GEB, SixIsland_OutcastIsland_Text_GebRematchIntro, SixIsland_OutcastIsland_Text_GebDefeat, SixIsland_OutcastIsland_Text_GebNotEnoughMons
+ * msgbox SixIsland_OutcastIsland_Text_GebPostBattle, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object SixIsland_OutcastIsland_EventScript_GebRematch : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SixIsland_OutcastIsland_EventScript_GebRematch")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch_double TRAINER_SIS_AND_BRO_AVA_GEB, SixIsland_OutcastIsland_Text_AvaRematchIntro, SixIsland_OutcastIsland_Text_AvaDefeat, SixIsland_OutcastIsland_Text_AvaNotEnoughMons
+ * msgbox SixIsland_OutcastIsland_Text_AvaPostBattle, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object SixIsland_OutcastIsland_EventScript_AvaRematch : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SixIsland_OutcastIsland_EventScript_AvaRematch")
+}
+
 internal val SixIsland_OutcastIslandScripts: Map<String, Script> =
     mapOf(
         "SixIsland_OutcastIsland_EventScript_Rocket" to SixIsland_OutcastIsland_EventScript_Rocket,
@@ -156,4 +182,8 @@ internal val SixIsland_OutcastIslandScripts: Map<String, Script> =
         "SixIsland_OutcastIsland_EventScript_Geb" to SixIsland_OutcastIsland_EventScript_Geb,
         "SixIsland_OutcastIsland_EventScript_ItemPPUp" to
             SixIsland_OutcastIsland_EventScript_ItemPPUp,
+        "SixIsland_OutcastIsland_EventScript_GebRematch" to
+            SixIsland_OutcastIsland_EventScript_GebRematch,
+        "SixIsland_OutcastIsland_EventScript_AvaRematch" to
+            SixIsland_OutcastIsland_EventScript_AvaRematch,
     )

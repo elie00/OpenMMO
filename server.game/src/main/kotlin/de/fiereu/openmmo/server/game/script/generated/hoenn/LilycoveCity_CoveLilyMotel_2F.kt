@@ -64,6 +64,64 @@ internal object LilycoveCity_CoveLilyMotel_2F_EventScript_Scott : Script {
       TODO("port LilycoveCity_CoveLilyMotel_2F_EventScript_Scott")
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox LilycoveCity_CoveLilyMotel_2F_Text_ContestsDoTakeStrategy, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object LilycoveCity_CoveLilyMotel_2F_EventScript_MetScott : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity_CoveLilyMotel_2F.ContestsDoTakeStrategy)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox LilycoveCity_CoveLilyMotel_2F_Text_ShowMeCompletedDex, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object LilycoveCity_CoveLilyMotel_2F_EventScript_ShowMeCompletedDex : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity_CoveLilyMotel_2F.ShowMeCompletedDex)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * message LilycoveCity_CoveLilyMotel_2F_Text_FilledPokedexGiveYouThis
+ * waitmessage
+ * call Common_EventScript_PlayGymBadgeFanfare
+ * special Special_ShowDiploma
+ * release
+ * end
+ * ```
+ */
+internal object LilycoveCity_CoveLilyMotel_2F_EventScript_ShowDiploma : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LilycoveCity_CoveLilyMotel_2F_EventScript_ShowDiploma")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * setflag FLAG_TEMP_2
+ * playfanfare MUS_OBTAIN_ITEM
+ * waitfanfare
+ * goto LilycoveCity_CoveLilyMotel_2F_EventScript_ShowDiploma
+ * end
+ * ```
+ */
+internal object LilycoveCity_CoveLilyMotel_2F_EventScript_AllHoennMonsFanfare : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LilycoveCity_CoveLilyMotel_2F_EventScript_AllHoennMonsFanfare")
+}
+
 internal val LilycoveCity_CoveLilyMotel_2FScripts: Map<String, Script> =
     mapOf(
         "LilycoveCity_CoveLilyMotel_2F_EventScript_GameDesigner" to
@@ -80,4 +138,12 @@ internal val LilycoveCity_CoveLilyMotel_2FScripts: Map<String, Script> =
             LilycoveCity_CoveLilyMotel_2F_EventScript_Woman,
         "LilycoveCity_CoveLilyMotel_2F_EventScript_Scott" to
             LilycoveCity_CoveLilyMotel_2F_EventScript_Scott,
+        "LilycoveCity_CoveLilyMotel_2F_EventScript_MetScott" to
+            LilycoveCity_CoveLilyMotel_2F_EventScript_MetScott,
+        "LilycoveCity_CoveLilyMotel_2F_EventScript_ShowMeCompletedDex" to
+            LilycoveCity_CoveLilyMotel_2F_EventScript_ShowMeCompletedDex,
+        "LilycoveCity_CoveLilyMotel_2F_EventScript_ShowDiploma" to
+            LilycoveCity_CoveLilyMotel_2F_EventScript_ShowDiploma,
+        "LilycoveCity_CoveLilyMotel_2F_EventScript_AllHoennMonsFanfare" to
+            LilycoveCity_CoveLilyMotel_2F_EventScript_AllHoennMonsFanfare,
     )

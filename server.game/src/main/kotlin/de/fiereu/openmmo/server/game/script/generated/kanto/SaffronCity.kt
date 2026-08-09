@@ -146,6 +146,20 @@ internal object SaffronCity_EventScript_TrainerFanClubSign : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(SaffronCity.TrainerFanClubSign)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * textcolor NPC_TEXT_COLOR_NEUTRAL
+ * msgbox SaffronCity_Text_HesTakingASnooze
+ * release
+ * end
+ * ```
+ */
+internal object SaffronCity_EventScript_DoorGuardAsleep : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SaffronCity_EventScript_DoorGuardAsleep")
+}
+
 internal val SaffronCityScripts: Map<String, Script> =
     mapOf(
         "SaffronCity_EventScript_RocketGrunt1" to SaffronCity_EventScript_RocketGrunt1,
@@ -173,4 +187,5 @@ internal val SaffronCityScripts: Map<String, Script> =
         "SaffronCity_EventScript_MrPsychicsHouseSign" to
             SaffronCity_EventScript_MrPsychicsHouseSign,
         "SaffronCity_EventScript_TrainerFanClubSign" to SaffronCity_EventScript_TrainerFanClubSign,
+        "SaffronCity_EventScript_DoorGuardAsleep" to SaffronCity_EventScript_DoorGuardAsleep,
     )

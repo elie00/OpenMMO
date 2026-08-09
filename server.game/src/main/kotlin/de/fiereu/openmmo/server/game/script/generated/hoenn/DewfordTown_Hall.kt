@@ -1,7 +1,9 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
+import de.fiereu.openmmo.dialog.generated.hoenn.DewfordTown_Hall
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennVars
 
 /**
  * Not ported yet. Decomp body:
@@ -104,7 +106,7 @@ internal object DewfordTown_Hall_EventScript_LittleBoy : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lockall
  * setvar VAR_0x8008, 0
@@ -113,12 +115,14 @@ internal object DewfordTown_Hall_EventScript_LittleBoy : Script {
  * ```
  */
 internal object DewfordTown_Hall_EventScript_SchoolKidM : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port DewfordTown_Hall_EventScript_SchoolKidM")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.setVar(HoennVars.VAR_0x8008, 0)
+    return DewfordTown_Hall_EventScript_DoTrendDebate.run(ctx)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lockall
  * setvar VAR_0x8008, 1
@@ -127,7 +131,10 @@ internal object DewfordTown_Hall_EventScript_SchoolKidM : Script {
  * ```
  */
 internal object DewfordTown_Hall_EventScript_PsychicM : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port DewfordTown_Hall_EventScript_PsychicM")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.setVar(HoennVars.VAR_0x8008, 1)
+    return DewfordTown_Hall_EventScript_DoTrendDebate.run(ctx)
+  }
 }
 
 /**
@@ -186,6 +193,84 @@ internal object DewfordTown_Hall_EventScript_Painting : Script {
   override suspend fun run(ctx: ScriptContext) = TODO("port DewfordTown_Hall_EventScript_Painting")
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox DewfordTown_Hall_Text_LoveSludgeBombButTrendInToo, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object DewfordTown_Hall_EventScript_ReceivedSludgeBomb : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(DewfordTown_Hall.LoveSludgeBombButTrendInToo)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox DewfordTown_Hall_Text_GettingBoredOfTrend, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object DewfordTown_Hall_EventScript_GirlBoredOfTrend : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(DewfordTown_Hall.GettingBoredOfTrend)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox DewfordTown_Hall_Text_MyHunchWasRight, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object DewfordTown_Hall_EventScript_ConfirmTrendLink : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(DewfordTown_Hall.MyHunchWasRight)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * call Common_EventScript_BufferTrendyPhrase
+ * special GetDewfordHallPaintingNameIndex
+ * switch VAR_RESULT
+ * case 0, DewfordTown_Hall_EventScript_TrendDebate1
+ * case 1, DewfordTown_Hall_EventScript_TrendDebate1
+ * case 2, DewfordTown_Hall_EventScript_TrendDebate2
+ * case 3, DewfordTown_Hall_EventScript_TrendDebate2
+ * case 4, DewfordTown_Hall_EventScript_TrendDebate3
+ * case 5, DewfordTown_Hall_EventScript_TrendDebate3
+ * case 6, DewfordTown_Hall_EventScript_TrendDebate4
+ * case 7, DewfordTown_Hall_EventScript_TrendDebate5
+ * end
+ * ```
+ */
+internal object DewfordTown_Hall_EventScript_DoTrendDebate : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port DewfordTown_Hall_EventScript_DoTrendDebate")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox DewfordTown_Hall_Text_NotEasyToKeepUp, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object DewfordTown_Hall_EventScript_RejectTrendLink : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(DewfordTown_Hall.NotEasyToKeepUp)
+  }
+}
+
 internal val DewfordTown_HallScripts: Map<String, Script> =
     mapOf(
         "DewfordTown_Hall_EventScript_Girl" to DewfordTown_Hall_EventScript_Girl,
@@ -199,4 +284,13 @@ internal val DewfordTown_HallScripts: Map<String, Script> =
         "DewfordTown_Hall_EventScript_SludgeBombMan" to DewfordTown_Hall_EventScript_SludgeBombMan,
         "DewfordTown_Hall_EventScript_Bookshelf" to DewfordTown_Hall_EventScript_Bookshelf,
         "DewfordTown_Hall_EventScript_Painting" to DewfordTown_Hall_EventScript_Painting,
+        "DewfordTown_Hall_EventScript_ReceivedSludgeBomb" to
+            DewfordTown_Hall_EventScript_ReceivedSludgeBomb,
+        "DewfordTown_Hall_EventScript_GirlBoredOfTrend" to
+            DewfordTown_Hall_EventScript_GirlBoredOfTrend,
+        "DewfordTown_Hall_EventScript_ConfirmTrendLink" to
+            DewfordTown_Hall_EventScript_ConfirmTrendLink,
+        "DewfordTown_Hall_EventScript_DoTrendDebate" to DewfordTown_Hall_EventScript_DoTrendDebate,
+        "DewfordTown_Hall_EventScript_RejectTrendLink" to
+            DewfordTown_Hall_EventScript_RejectTrendLink,
     )

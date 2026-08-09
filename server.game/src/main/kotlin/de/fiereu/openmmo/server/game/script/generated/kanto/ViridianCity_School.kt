@@ -126,6 +126,18 @@ internal object ViridianCity_School_EventScript_ChooseBlackboardTopic : Script {
       TODO("port ViridianCity_School_EventScript_ChooseBlackboardTopic")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * releaseall
+ * end
+ * ```
+ */
+internal object ViridianCity_School_EventScript_StopReadingNotebook : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port ViridianCity_School_EventScript_StopReadingNotebook")
+}
+
 internal val ViridianCity_SchoolScripts: Map<String, Script> =
     mapOf(
         "ViridianCity_School_EventScript_Woman" to ViridianCity_School_EventScript_Woman,
@@ -136,4 +148,6 @@ internal val ViridianCity_SchoolScripts: Map<String, Script> =
             ViridianCity_School_EventScript_PokemonJournal,
         "ViridianCity_School_EventScript_ChooseBlackboardTopic" to
             ViridianCity_School_EventScript_ChooseBlackboardTopic,
+        "ViridianCity_School_EventScript_StopReadingNotebook" to
+            ViridianCity_School_EventScript_StopReadingNotebook,
     )

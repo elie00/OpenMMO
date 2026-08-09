@@ -138,6 +138,86 @@ internal object VermilionCity_PokemonFanClub_EventScript_WorkerFGameClear : Scri
       TODO("port VermilionCity_PokemonFanClub_EventScript_WorkerFGameClear")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox VermilionCity_PokemonFanClub_Text_ChairmansStory
+ * checkitemspace ITEM_BIKE_VOUCHER
+ * goto_if_eq VAR_RESULT, FALSE, VermilionCity_PokemonFanClub_EventScript_NoRoomForBikeVoucher
+ * setflag FLAG_GOT_BIKE_VOUCHER
+ * giveitem_msg VermilionCity_PokemonFanClub_Text_ReceivedBikeVoucherFromChairman, ITEM_BIKE_VOUCHER, 1, MUS_OBTAIN_KEY_ITEM
+ * msgbox VermilionCity_PokemonFanClub_Text_ExplainBikeVoucher
+ * release
+ * end
+ * ```
+ */
+internal object VermilionCity_PokemonFanClub_EventScript_ChairmanStory : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port VermilionCity_PokemonFanClub_EventScript_ChairmanStory")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox VermilionCity_PokemonFanClub_Text_SeelFarMoreAttractive
+ * closemessage
+ * applymovement LOCALID_POKEMON_FAN_CLUB_WOMAN, Common_Movement_FaceOriginalDirection
+ * waitmovement 0
+ * clearflag SPOKE_TO_FAT_MAN_LAST
+ * release
+ * end
+ * ```
+ */
+internal object VermilionCity_PokemonFanClub_EventScript_WomanSpokeToFatMan : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port VermilionCity_PokemonFanClub_EventScript_WomanSpokeToFatMan")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox VermilionCity_PokemonFanClub_Text_PikachuTwiceAsCute
+ * closemessage
+ * applymovement LOCALID_POKEMON_FAN_CLUB_FAT_MAN, Common_Movement_FaceOriginalDirection
+ * waitmovement 0
+ * clearflag SPOKE_TO_WOMAN_LAST
+ * release
+ * end
+ * ```
+ */
+internal object VermilionCity_PokemonFanClub_EventScript_FatManSpokeToWoman : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port VermilionCity_PokemonFanClub_EventScript_FatManSpokeToWoman")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox VermilionCity_PokemonFanClub_Text_DidntComeToSeeAboutMonsAgain
+ * release
+ * end
+ * ```
+ */
+internal object VermilionCity_PokemonFanClub_EventScript_AlreadyHeardStory : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(VermilionCity_PokemonFanClub.DidntComeToSeeAboutMonsAgain)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox VermilionCity_PokemonFanClub_Text_MakeRoomForThis
+ * release
+ * end
+ * ```
+ */
+internal object VermilionCity_PokemonFanClub_EventScript_NoRoomForBikeVoucher : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(VermilionCity_PokemonFanClub.MakeRoomForThis)
+  }
+}
+
 internal val VermilionCity_PokemonFanClubScripts: Map<String, Script> =
     mapOf(
         "VermilionCity_PokemonFanClub_EventScript_Chairman" to
@@ -158,4 +238,14 @@ internal val VermilionCity_PokemonFanClubScripts: Map<String, Script> =
             VermilionCity_PokemonFanClub_EventScript_RulesSign2,
         "VermilionCity_PokemonFanClub_EventScript_WorkerFGameClear" to
             VermilionCity_PokemonFanClub_EventScript_WorkerFGameClear,
+        "VermilionCity_PokemonFanClub_EventScript_ChairmanStory" to
+            VermilionCity_PokemonFanClub_EventScript_ChairmanStory,
+        "VermilionCity_PokemonFanClub_EventScript_WomanSpokeToFatMan" to
+            VermilionCity_PokemonFanClub_EventScript_WomanSpokeToFatMan,
+        "VermilionCity_PokemonFanClub_EventScript_FatManSpokeToWoman" to
+            VermilionCity_PokemonFanClub_EventScript_FatManSpokeToWoman,
+        "VermilionCity_PokemonFanClub_EventScript_AlreadyHeardStory" to
+            VermilionCity_PokemonFanClub_EventScript_AlreadyHeardStory,
+        "VermilionCity_PokemonFanClub_EventScript_NoRoomForBikeVoucher" to
+            VermilionCity_PokemonFanClub_EventScript_NoRoomForBikeVoucher,
     )

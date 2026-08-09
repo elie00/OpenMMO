@@ -100,6 +100,60 @@ internal object FallarborTown_BattleTentLobby_EventScript_ReadRulesBoard : Scrip
       TODO("port FallarborTown_BattleTentLobby_EventScript_ReadRulesBoard")
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * lockall
+ * msgbox FallarborTown_BattleTentLobby_Text_BeatThreeTrainers, MSGBOX_DEFAULT
+ * goto FallarborTown_BattleTentLobby_EventScript_GivePrize
+ * end
+ * ```
+ */
+internal object FallarborTown_BattleTentLobby_EventScript_PrizeWaiting : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(FallarborTown_BattleTentLobby.BeatThreeTrainers)
+    return FallarborTown_BattleTentLobby_EventScript_GivePrize.run(ctx)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox FallarborTown_BattleTentLobby_Text_ScottMakeChallenge, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object FallarborTown_BattleTentLobby_EventScript_ScottAlreadySpokenTo : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(FallarborTown_BattleTentLobby.ScottMakeChallenge)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox FallarborTown_BattleTentLobby_Text_PresentYouWithPrize, MSGBOX_DEFAULT
+ * fallarbortent_giveprize
+ * switch VAR_RESULT
+ * case FALSE, FallarborTown_BattleTentLobby_EventScript_NoRoomForPrize
+ * frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
+ * message FallarborTown_BattleTentLobby_Text_ReceivedPrize
+ * waitmessage
+ * playfanfare MUS_OBTAIN_ITEM
+ * waitfanfare
+ * msgbox FallarborTown_BattleTentLobby_Text_AwaitAnotherChallenge2, MSGBOX_DEFAULT
+ * closemessage
+ * setvar VAR_TEMP_CHALLENGE_STATUS, 255
+ * releaseall
+ * end
+ * ```
+ */
+internal object FallarborTown_BattleTentLobby_EventScript_GivePrize : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port FallarborTown_BattleTentLobby_EventScript_GivePrize")
+}
+
 internal val FallarborTown_BattleTentLobbyScripts: Map<String, Script> =
     mapOf(
         "FallarborTown_BattleTentLobby_EventScript_Attendant" to
@@ -116,4 +170,10 @@ internal val FallarborTown_BattleTentLobbyScripts: Map<String, Script> =
             FallarborTown_BattleTentLobby_EventScript_RulesBoard,
         "FallarborTown_BattleTentLobby_EventScript_ReadRulesBoard" to
             FallarborTown_BattleTentLobby_EventScript_ReadRulesBoard,
+        "FallarborTown_BattleTentLobby_EventScript_PrizeWaiting" to
+            FallarborTown_BattleTentLobby_EventScript_PrizeWaiting,
+        "FallarborTown_BattleTentLobby_EventScript_ScottAlreadySpokenTo" to
+            FallarborTown_BattleTentLobby_EventScript_ScottAlreadySpokenTo,
+        "FallarborTown_BattleTentLobby_EventScript_GivePrize" to
+            FallarborTown_BattleTentLobby_EventScript_GivePrize,
     )

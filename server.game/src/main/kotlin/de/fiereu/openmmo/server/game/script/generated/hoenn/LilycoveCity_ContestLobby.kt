@@ -128,7 +128,7 @@ internal object LilycoveCity_ContestLobby_EventScript_Blender3Girl : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * msgbox BerryBlender_Text_WickedlyFast, MSGBOX_DEFAULT
@@ -137,12 +137,13 @@ internal object LilycoveCity_ContestLobby_EventScript_Blender3Girl : Script {
  * ```
  */
 internal object LilycoveCity_ContestLobby_EventScript_BlendMasterOnlooker2 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LilycoveCity_ContestLobby_EventScript_BlendMasterOnlooker2")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(BerryBlender.WickedlyFast)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * msgbox BerryBlender_Text_WhatAnExpert, MSGBOX_DEFAULT
@@ -151,8 +152,9 @@ internal object LilycoveCity_ContestLobby_EventScript_BlendMasterOnlooker2 : Scr
  * ```
  */
 internal object LilycoveCity_ContestLobby_EventScript_BlendMasterOnlooker3 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LilycoveCity_ContestLobby_EventScript_BlendMasterOnlooker3")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(BerryBlender.WhatAnExpert)
+  }
 }
 
 /**
@@ -207,7 +209,7 @@ internal object LilycoveCity_ContestLobby_EventScript_BlendMasterOnlooker6 : Scr
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * msgbox BerryBlender_Text_WhoaAwesome, MSGBOX_DEFAULT
@@ -216,8 +218,9 @@ internal object LilycoveCity_ContestLobby_EventScript_BlendMasterOnlooker6 : Scr
  * ```
  */
 internal object LilycoveCity_ContestLobby_EventScript_BlendMasterOnlooker1 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LilycoveCity_ContestLobby_EventScript_BlendMasterOnlooker1")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(BerryBlender.WhoaAwesome)
+  }
 }
 
 /**
@@ -454,7 +457,7 @@ internal object LilycoveCity_ContestLobby_EventScript_LinkContestResults : Scrip
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox LilycoveCity_ContestLobby_Text_MakePokeblocksDifferentBerries, MSGBOX_DEFAULT
  * release
@@ -462,8 +465,9 @@ internal object LilycoveCity_ContestLobby_EventScript_LinkContestResults : Scrip
  * ```
  */
 internal object LilycoveCity_ContestLobby_EventScript_LittleGirlHaveCase : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LilycoveCity_ContestLobby_EventScript_LittleGirlHaveCase")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity_ContestLobby.MakePokeblocksDifferentBerries)
+  }
 }
 
 /**
@@ -479,6 +483,305 @@ internal object LilycoveCity_ContestLobby_EventScript_LittleGirlHaveCase : Scrip
 internal object LilycoveCity_ContestLobby_EventScript_FaceOriginalDirection : Script {
   override suspend fun run(ctx: ScriptContext) =
       TODO("port LilycoveCity_ContestLobby_EventScript_FaceOriginalDirection")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * lock
+ * faceplayer
+ * goto_if_ne VAR_CONTEST_PRIZE_PICKUP, 0, LilycoveCity_ContestLobby_EventScript_PickUpPrize
+ * call_if_set FLAG_RECEIVED_POKEBLOCK_CASE, LilycoveCity_ContestLobby_EventScript_ReceptionWelcome
+ * call_if_unset FLAG_RECEIVED_POKEBLOCK_CASE, LilycoveCity_ContestLobby_EventScript_GivePokeblockCase
+ * goto LilycoveCity_ContestLobby_EventScript_AskEnterContest
+ * end
+ * ```
+ */
+internal object LilycoveCity_ContestLobby_EventScript_SpeakToContestReceptionist : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LilycoveCity_ContestLobby_EventScript_SpeakToContestReceptionist")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * switch VAR_CONTEST_RANK
+ * case CONTEST_RANK_NORMAL, LilycoveCity_ContestLobby_EventScript_SetNormalContestType
+ * case CONTEST_RANK_SUPER, LilycoveCity_ContestLobby_EventScript_SetSuperContestType
+ * case CONTEST_RANK_HYPER, LilycoveCity_ContestLobby_EventScript_SetHyperContestType
+ * case CONTEST_RANK_MASTER, LilycoveCity_ContestLobby_EventScript_SetMasterContestType
+ * return
+ * ```
+ */
+internal object LilycoveCity_ContestLobby_EventScript_SetContestType : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LilycoveCity_ContestLobby_EventScript_SetContestType")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * setflag FLAG_HIDE_LILYCOVE_MUSEUM_CURATOR
+ * #ifdef UBFIX
+ * setvar VAR_LILYCOVE_MUSEUM_2F_STATE, 1
+ * #else
+ * copyvar VAR_LILYCOVE_MUSEUM_2F_STATE, 1, warn=FALSE
+ * #endif
+ * additem ITEM_CONTEST_PASS
+ * setvar VAR_0x800B, 8
+ * setvar VAR_CONTEST_RANK, CONTEST_RANK_MASTER
+ * setvar VAR_LILYCOVE_CONTEST_LOBBY_STATE, 1
+ * setflag FLAG_SYS_RIBBON_GET
+ * end
+ * ```
+ */
+internal object LilycoveCity_ContestLobby_EventScript_SetDebug : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LilycoveCity_ContestLobby_EventScript_SetDebug")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * message LilycoveCity_ContestLobby_Text_EnterContest3
+ * waitmessage
+ * multichoice 0, 0, MULTI_ENTERINFO, FALSE
+ * switch VAR_RESULT
+ * case 0, LilycoveCity_ContestLobby_EventScript_TryEnterLinkContest
+ * case 1, LilycoveCity_ContestLobby_EventScript_LinkContestInfo
+ * case 2, LilycoveCity_ContestLobby_EventScript_CancelLinkContest
+ * case MULTI_B_PRESSED, LilycoveCity_ContestLobby_EventScript_CancelLinkContest
+ * end
+ * ```
+ */
+internal object LilycoveCity_ContestLobby_EventScript_AskEnterLinkContest : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LilycoveCity_ContestLobby_EventScript_AskEnterLinkContest")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox LilycoveCity_ContestLobby_Text_LookingForwardToNextContest, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object LilycoveCity_ContestLobby_EventScript_AlreadyInterviewed : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity_ContestLobby.LookingForwardToNextContest)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox LilycoveCity_ContestLobby_Text_PleaseDoShareStoryWithMe, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object LilycoveCity_ContestLobby_EventScript_DeclineInterview : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity_ContestLobby.PleaseDoShareStoryWithMe)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * setflag FLAG_ENTERED_CONTEST
+ * switch VAR_CONTEST_CATEGORY
+ * case CONTEST_CATEGORY_COOL, LilycoveCity_ContestLobby_EventScript_WarpToCoolContestHall
+ * case CONTEST_CATEGORY_BEAUTY, LilycoveCity_ContestLobby_EventScript_WarpToBeautyContestHall
+ * case CONTEST_CATEGORY_CUTE, LilycoveCity_ContestLobby_EventScript_WarpToCuteContestHall
+ * case CONTEST_CATEGORY_SMART, LilycoveCity_ContestLobby_EventScript_WarpToSmartContestHall
+ * case CONTEST_CATEGORY_TOUGH, LilycoveCity_ContestLobby_EventScript_WarpToToughContestHall
+ * return
+ * ```
+ */
+internal object LilycoveCity_ContestLobby_EventScript_WarpToContestHall : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LilycoveCity_ContestLobby_EventScript_WarpToContestHall")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox LilycoveCity_ContestLobby_Text_DescribeContest, MSGBOX_DEFAULT
+ * setvar VAR_0x8004, EASY_CHAT_TYPE_CONTEST_INTERVIEW
+ * copyvar VAR_0x8005, VAR_0x8009
+ * setvar VAR_0x8006, 0
+ * call Common_ShowEasyChatScreen
+ * lock
+ * faceplayer
+ * goto_if_eq VAR_RESULT, 1, LilycoveCity_ContestLobby_EventScript_SubmitResponse
+ * goto_if_eq VAR_RESULT, 0, LilycoveCity_ContestLobby_EventScript_DeclineInterview
+ * end
+ * ```
+ */
+internal object LilycoveCity_ContestLobby_EventScript_AcceptInterview : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LilycoveCity_ContestLobby_EventScript_AcceptInterview")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * lockall
+ * applymovement LOCALID_CONTEST_LOBBY_RECEPTIONIST, LilycoveCity_ContestLobby_Movement_ReceptionistApproachCounter
+ * waitmovement 0
+ * playse SE_BRIDGE_WALK
+ * setmetatile 12, 2, METATILE_Contest_WallShadow, TRUE
+ * setmetatile 12, 3, METATILE_Contest_FloorShadow, TRUE
+ * special DrawWholeMapView
+ * applymovement LOCALID_CONTEST_LOBBY_RECEPTIONIST, LilycoveCity_ContestLobby_Movement_ReceptionistExitCounter
+ * waitmovement 0
+ * playse SE_BRIDGE_WALK
+ * setmetatile 12, 2, METATILE_Contest_CounterFlap_Top, TRUE
+ * setmetatile 12, 3, METATILE_Contest_CounterFlap_Bottom, TRUE
+ * special DrawWholeMapView
+ * delay 20
+ * applymovement LOCALID_CONTEST_LOBBY_RECEPTIONIST, LilycoveCity_ContestLobby_Movement_ReceptionistFacePlayer
+ * waitmovement 0
+ * applymovement LOCALID_PLAYER, LilycoveCity_ContestLobby_Movement_PlayerApproachReceptionist
+ * waitmovement 0
+ * msgbox LilycoveCity_ContestLobby_Text_ComeThroughHere, MSGBOX_DEFAULT
+ * closemessage
+ * applymovement LOCALID_CONTEST_LOBBY_RECEPTIONIST, LilycoveCity_ContestLobby_Movement_ReceptionistWalkToContestHall
+ * applymovement LOCALID_PLAYER, LilycoveCity_ContestLobby_Movement_PlayerWalkToContestHall
+ * waitmovement 0
+ * releaseall
+ * return
+ * ```
+ */
+internal object LilycoveCity_ContestLobby_EventScript_LeadToContestHall : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LilycoveCity_ContestLobby_EventScript_LeadToContestHall")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * checkplayergender
+ * goto_if_eq VAR_RESULT, MALE, LilycoveCity_ContestLobby_EventScript_SetPlayerGfxBrendan
+ * goto_if_eq VAR_RESULT, FEMALE, LilycoveCity_ContestLobby_EventScript_SetPlayerGfxMay
+ * return
+ * ```
+ */
+internal object LilycoveCity_ContestLobby_EventScript_SetPlayerGfx : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LilycoveCity_ContestLobby_EventScript_SetPlayerGfx")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * setvar VAR_OBJ_GFX_ID_3, OBJ_EVENT_GFX_RIVAL_MAY_NORMAL
+ * return
+ * ```
+ */
+internal object LilycoveCity_ContestLobby_EventScript_SetPlayerGfxMay : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LilycoveCity_ContestLobby_EventScript_SetPlayerGfxMay")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox LilycoveCity_ContestLobby_Text_ContestReception, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object LilycoveCity_ContestLobby_EventScript_ReceptionWelcome : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity_ContestLobby.ContestReception)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * message LilycoveCity_ContestLobby_Text_EnterContest1
+ * waitmessage
+ * multichoice 0, 0, MULTI_ENTERINFO, FALSE
+ * switch VAR_RESULT
+ * case 0, LilycoveCity_ContestLobby_EventScript_ChooseContestRank
+ * case 1, LilycoveCity_ContestLobby_EventScript_ContestInfo
+ * case 2, LilycoveCity_ContestLobby_EventScript_CancelEnterContest
+ * case MULTI_B_PRESSED, LilycoveCity_ContestLobby_EventScript_CancelEnterContest
+ * end
+ * ```
+ */
+internal object LilycoveCity_ContestLobby_EventScript_AskEnterContest : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LilycoveCity_ContestLobby_EventScript_AskEnterContest")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox LilycoveCity_ContestLobby_Text_PokemonWonWeHavePrize, MSGBOX_DEFAULT
+ * switch VAR_CONTEST_PRIZE_PICKUP
+ * case 4, LilycoveCity_ContestLobby_EventScript_GiveLuxuryBallAtCounter
+ * end
+ * ```
+ */
+internal object LilycoveCity_ContestLobby_EventScript_PickUpPrize : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LilycoveCity_ContestLobby_EventScript_PickUpPrize")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox LilycoveCity_ContestLobby_Text_ReceptionDontHavePokeblockCase, MSGBOX_DEFAULT
+ * giveitem ITEM_POKEBLOCK_CASE
+ * setflag FLAG_RECEIVED_POKEBLOCK_CASE
+ * msgbox LilycoveCity_ContestLobby_Text_NowThatWeveClearedThatUp, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object LilycoveCity_ContestLobby_EventScript_GivePokeblockCase : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LilycoveCity_ContestLobby_EventScript_GivePokeblockCase")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * setvar VAR_OBJ_GFX_ID_3, OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL
+ * return
+ * ```
+ */
+internal object LilycoveCity_ContestLobby_EventScript_SetPlayerGfxBrendan : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LilycoveCity_ContestLobby_EventScript_SetPlayerGfxBrendan")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * setvar VAR_0x8004, 24
+ * special SetContestCategoryStringVarForInterview
+ * msgbox LilycoveCity_ContestLobby_Text_WhatImageWhenYouHearX, MSGBOX_DEFAULT
+ * setvar VAR_0x8004, EASY_CHAT_TYPE_CONTEST_INTERVIEW
+ * copyvar VAR_0x8005, VAR_0x8009
+ * setvar VAR_0x8006, 1
+ * call Common_ShowEasyChatScreen
+ * lock
+ * faceplayer
+ * goto_if_eq VAR_RESULT, 0, LilycoveCity_ContestLobby_EventScript_DeclineInterview
+ * msgbox LilycoveCity_ContestLobby_Text_ThatsAllForInterview, MSGBOX_DEFAULT
+ * setflag FLAG_TEMP_2
+ * setvar VAR_0x8005, TVSHOW_BRAVO_TRAINER_POKEMON_PROFILE
+ * goto Interview_EventScript_EndInterview
+ * end
+ * ```
+ */
+internal object LilycoveCity_ContestLobby_EventScript_SubmitResponse : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LilycoveCity_ContestLobby_EventScript_SubmitResponse")
 }
 
 internal val LilycoveCity_ContestLobbyScripts: Map<String, Script> =
@@ -548,4 +851,38 @@ internal val LilycoveCity_ContestLobbyScripts: Map<String, Script> =
             LilycoveCity_ContestLobby_EventScript_LittleGirlHaveCase,
         "LilycoveCity_ContestLobby_EventScript_FaceOriginalDirection" to
             LilycoveCity_ContestLobby_EventScript_FaceOriginalDirection,
+        "LilycoveCity_ContestLobby_EventScript_SpeakToContestReceptionist" to
+            LilycoveCity_ContestLobby_EventScript_SpeakToContestReceptionist,
+        "LilycoveCity_ContestLobby_EventScript_SetContestType" to
+            LilycoveCity_ContestLobby_EventScript_SetContestType,
+        "LilycoveCity_ContestLobby_EventScript_SetDebug" to
+            LilycoveCity_ContestLobby_EventScript_SetDebug,
+        "LilycoveCity_ContestLobby_EventScript_AskEnterLinkContest" to
+            LilycoveCity_ContestLobby_EventScript_AskEnterLinkContest,
+        "LilycoveCity_ContestLobby_EventScript_AlreadyInterviewed" to
+            LilycoveCity_ContestLobby_EventScript_AlreadyInterviewed,
+        "LilycoveCity_ContestLobby_EventScript_DeclineInterview" to
+            LilycoveCity_ContestLobby_EventScript_DeclineInterview,
+        "LilycoveCity_ContestLobby_EventScript_WarpToContestHall" to
+            LilycoveCity_ContestLobby_EventScript_WarpToContestHall,
+        "LilycoveCity_ContestLobby_EventScript_AcceptInterview" to
+            LilycoveCity_ContestLobby_EventScript_AcceptInterview,
+        "LilycoveCity_ContestLobby_EventScript_LeadToContestHall" to
+            LilycoveCity_ContestLobby_EventScript_LeadToContestHall,
+        "LilycoveCity_ContestLobby_EventScript_SetPlayerGfx" to
+            LilycoveCity_ContestLobby_EventScript_SetPlayerGfx,
+        "LilycoveCity_ContestLobby_EventScript_SetPlayerGfxMay" to
+            LilycoveCity_ContestLobby_EventScript_SetPlayerGfxMay,
+        "LilycoveCity_ContestLobby_EventScript_ReceptionWelcome" to
+            LilycoveCity_ContestLobby_EventScript_ReceptionWelcome,
+        "LilycoveCity_ContestLobby_EventScript_AskEnterContest" to
+            LilycoveCity_ContestLobby_EventScript_AskEnterContest,
+        "LilycoveCity_ContestLobby_EventScript_PickUpPrize" to
+            LilycoveCity_ContestLobby_EventScript_PickUpPrize,
+        "LilycoveCity_ContestLobby_EventScript_GivePokeblockCase" to
+            LilycoveCity_ContestLobby_EventScript_GivePokeblockCase,
+        "LilycoveCity_ContestLobby_EventScript_SetPlayerGfxBrendan" to
+            LilycoveCity_ContestLobby_EventScript_SetPlayerGfxBrendan,
+        "LilycoveCity_ContestLobby_EventScript_SubmitResponse" to
+            LilycoveCity_ContestLobby_EventScript_SubmitResponse,
     )

@@ -35,10 +35,26 @@ internal object PetalburgCity_Mart_EventScript_Woman : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.say(PetalburgCity_Mart.WeakWillGrowStronger)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * pokemart PetalburgCity_Mart_Pokemart_Expanded
+ * msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object PetalburgCity_Mart_EventScript_ExpandedItems : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port PetalburgCity_Mart_EventScript_ExpandedItems")
+}
+
 internal val PetalburgCity_MartScripts: Map<String, Script> =
     mapOf(
         "PetalburgCity_Mart_EventScript_Clerk" to PetalburgCity_Mart_EventScript_Clerk,
         "PetalburgCity_Mart_EventScript_Man" to PetalburgCity_Mart_EventScript_Man,
         "PetalburgCity_Mart_EventScript_Boy" to PetalburgCity_Mart_EventScript_Boy,
         "PetalburgCity_Mart_EventScript_Woman" to PetalburgCity_Mart_EventScript_Woman,
+        "PetalburgCity_Mart_EventScript_ExpandedItems" to
+            PetalburgCity_Mart_EventScript_ExpandedItems,
     )

@@ -6,6 +6,7 @@ import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
+import de.fiereu.openmmo.story.generated.hoenn.HoennVars
 import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
@@ -82,7 +83,7 @@ internal object Route110_TrickHousePuzzle6_EventScript_ItemGlitterMail : Script 
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lockall
  * goto_if_eq VAR_TRICK_HOUSE_PUZZLE_6_STATE, 0, Route110_TrickHousePuzzle6_EventScript_FoundScroll
@@ -91,8 +92,26 @@ internal object Route110_TrickHousePuzzle6_EventScript_ItemGlitterMail : Script 
  * ```
  */
 internal object Route110_TrickHousePuzzle6_EventScript_Scroll : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port Route110_TrickHousePuzzle6_EventScript_Scroll")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.getVar(HoennVars.VAR_TRICK_HOUSE_PUZZLE_6_STATE) == 0)
+        return Route110_TrickHousePuzzle6_EventScript_FoundScroll.run(ctx)
+    return Route110_TrickHousePuzzle_EventScript_ReadScrollAgain.run(ctx)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * setvar VAR_TRICK_HOUSE_PUZZLE_6_STATE, 1
+ * goto Route110_TrickHousePuzzle_EventScript_FoundScroll
+ * end
+ * ```
+ */
+internal object Route110_TrickHousePuzzle6_EventScript_FoundScroll : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.setVar(HoennVars.VAR_TRICK_HOUSE_PUZZLE_6_STATE, 1)
+    return Route110_TrickHousePuzzle_EventScript_FoundScroll.run(ctx)
+  }
 }
 
 internal val Route110_TrickHousePuzzle6Scripts: Map<String, Script> =
@@ -107,4 +126,6 @@ internal val Route110_TrickHousePuzzle6Scripts: Map<String, Script> =
             Route110_TrickHousePuzzle6_EventScript_ItemGlitterMail,
         "Route110_TrickHousePuzzle6_EventScript_Scroll" to
             Route110_TrickHousePuzzle6_EventScript_Scroll,
+        "Route110_TrickHousePuzzle6_EventScript_FoundScroll" to
+            Route110_TrickHousePuzzle6_EventScript_FoundScroll,
     )

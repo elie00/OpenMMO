@@ -1,5 +1,6 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.dialog.generated.kanto.Route16_House
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 
@@ -40,8 +41,38 @@ internal object Route16_House_EventScript_Fearow : Script {
   override suspend fun run(ctx: ScriptContext) = TODO("port Route16_House_EventScript_Fearow")
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Route16_House_Text_DontHaveAnyRoomForThis
+ * release
+ * end
+ * ```
+ */
+internal object Route16_House_EventScript_NoRoomForHM02 : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route16_House.DontHaveAnyRoomForThis)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Route16_House_Text_ExplainHM02
+ * release
+ * end
+ * ```
+ */
+internal object Route16_House_EventScript_AlreadyGotHM02 : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route16_House.ExplainHM02)
+  }
+}
+
 internal val Route16_HouseScripts: Map<String, Script> =
     mapOf(
         "Route16_House_EventScript_Woman" to Route16_House_EventScript_Woman,
         "Route16_House_EventScript_Fearow" to Route16_House_EventScript_Fearow,
+        "Route16_House_EventScript_NoRoomForHM02" to Route16_House_EventScript_NoRoomForHM02,
+        "Route16_House_EventScript_AlreadyGotHM02" to Route16_House_EventScript_AlreadyGotHM02,
     )

@@ -69,7 +69,7 @@ internal object FortreeCity_EventScript_GymSign : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox FortreeCity_Text_ThisTimeIllBeatWinona, MSGBOX_DEFAULT
  * release
@@ -77,8 +77,46 @@ internal object FortreeCity_EventScript_GymSign : Script {
  * ```
  */
 internal object FortreeCity_EventScript_WomanGymAccessible : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(FortreeCity.ThisTimeIllBeatWinona)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox FortreeCity_Text_UnseeableUseDevonScope, MSGBOX_YESNO
+ * goto_if_eq VAR_RESULT, YES, FortreeCity_EventScript_UseDevonScope
+ * release
+ * end
+ * ```
+ */
+internal object FortreeCity_EventScript_AskUseDevonScope : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port FortreeCity_EventScript_WomanGymAccessible")
+      TODO("port FortreeCity_EventScript_AskUseDevonScope")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox FortreeCity_Text_UsedDevonScopePokemonFled, MSGBOX_DEFAULT
+ * closemessage
+ * applymovement VAR_LAST_TALKED, Movement_KecleonAppears
+ * waitmovement 0
+ * waitse
+ * playmoncry SPECIES_KECLEON, CRY_MODE_ENCOUNTER
+ * delay 40
+ * waitmoncry
+ * applymovement VAR_LAST_TALKED, FortreeCity_Movement_KecleonFlee
+ * waitmovement 0
+ * removeobject VAR_LAST_TALKED
+ * setflag FLAG_KECLEON_FLED_FORTREE
+ * release
+ * end
+ * ```
+ */
+internal object FortreeCity_EventScript_UseDevonScope : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port FortreeCity_EventScript_UseDevonScope")
 }
 
 internal val FortreeCityScripts: Map<String, Script> =
@@ -93,4 +131,6 @@ internal val FortreeCityScripts: Map<String, Script> =
         "FortreeCity_EventScript_CitySign" to FortreeCity_EventScript_CitySign,
         "FortreeCity_EventScript_GymSign" to FortreeCity_EventScript_GymSign,
         "FortreeCity_EventScript_WomanGymAccessible" to FortreeCity_EventScript_WomanGymAccessible,
+        "FortreeCity_EventScript_AskUseDevonScope" to FortreeCity_EventScript_AskUseDevonScope,
+        "FortreeCity_EventScript_UseDevonScope" to FortreeCity_EventScript_UseDevonScope,
     )

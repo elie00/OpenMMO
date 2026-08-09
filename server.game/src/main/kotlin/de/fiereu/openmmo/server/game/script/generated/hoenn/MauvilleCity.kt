@@ -1,6 +1,7 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.dialog.generated.hoenn.MauvilleCity
+import de.fiereu.openmmo.dialog.generated.hoenn.MoveTutor
 import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
@@ -23,7 +24,7 @@ internal object MauvilleCity_EventScript_Woman : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -35,7 +36,12 @@ internal object MauvilleCity_EventScript_Woman : Script {
  * ```
  */
 internal object MauvilleCity_EventScript_SchoolKidM : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MauvilleCity_EventScript_SchoolKidM")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(HoennFlags.FLAG_TV_EXPLAINED))
+        return MauvilleCity_EventScript_TVExplained.run(ctx)
+    ctx.say(MauvilleCity.ExplainTV)
+    ctx.setFlag(HoennFlags.FLAG_TV_EXPLAINED)
+  }
 }
 
 /**
@@ -154,6 +160,182 @@ internal object MauvilleCity_EventScript_GameCornerSign : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(MauvilleCity.GameCornerSign)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_MAUVILLE_WALLY, Common_Movement_FacePlayer
+ * waitmovement 0
+ * msgbox MauvilleCity_Text_WallyPleaseBattleMe, MSGBOX_YESNO
+ * goto MauvilleCity_EventScript_BattleWallyPrompt
+ * end
+ * ```
+ */
+internal object MauvilleCity_EventScript_WallyRequestBattleAgain : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port MauvilleCity_EventScript_WallyRequestBattleAgain")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MauvilleCity_Text_WattsonYoungTakeCharge, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object MauvilleCity_EventScript_ReceivedThunderbolt : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MauvilleCity.WattsonYoungTakeCharge)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * call_if_eq VAR_RESULT, YES, MauvilleCity_EventScript_BattleWally
+ * goto_if_eq VAR_RESULT, NO, MauvilleCity_EventScript_DeclineWallyBattle
+ * closemessage
+ * switch VAR_FACING
+ * case DIR_NORTH, MauvilleCity_EventScript_WallyAndUncleExitNorth
+ * case DIR_EAST, MauvilleCity_EventScript_WallyAndUncleExitEast
+ * end
+ * ```
+ */
+internal object MauvilleCity_EventScript_BattleWallyPrompt : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port MauvilleCity_EventScript_BattleWallyPrompt")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox MauvilleCity_Text_WattsonThanksTakeTM, MSGBOX_DEFAULT
+ * giveitem ITEM_TM_THUNDERBOLT
+ * goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+ * setflag FLAG_GOT_TM_THUNDERBOLT_FROM_WATTSON
+ * msgbox MauvilleCity_Text_WattsonYoungTakeCharge, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object MauvilleCity_EventScript_CompletedNewMauville : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port MauvilleCity_EventScript_CompletedNewMauville")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MauvilleCity_Text_WattsonWontBeChallenge, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object MauvilleCity_EventScript_BegunNewMauville : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MauvilleCity.WattsonWontBeChallenge)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MauvilleCity_Text_BeenCheckingOutTV, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object MauvilleCity_EventScript_TVExplained : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MauvilleCity.BeenCheckingOutTV)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MauvilleCity_Text_UncleCanYouBattleWally, MSGBOX_DEFAULT
+ * closemessage
+ * applymovement LOCALID_MAUVILLE_WALLYS_UNCLE, Common_Movement_FaceOriginalDirection
+ * waitmovement 0
+ * release
+ * end
+ * ```
+ */
+internal object MauvilleCity_EventScript_UncleAskPlayerToBattleWally : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MauvilleCity.UncleCanYouBattleWally)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MoveTutor_Text_RolloutTaught, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object MoveTutor_EventScript_RolloutTaught : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MoveTutor.RolloutTaught)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MoveTutor_Text_RolloutDeclined, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object MoveTutor_EventScript_RolloutDeclined : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MoveTutor.RolloutDeclined)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * setflag FLAG_DECLINED_WALLY_BATTLE_MAUVILLE
+ * msgbox MauvilleCity_Text_WallyMyUncleWontKnowImStrong, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object MauvilleCity_EventScript_DeclineWallyBattle : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.setFlag(HoennFlags.FLAG_DECLINED_WALLY_BATTLE_MAUVILLE)
+    ctx.say(MauvilleCity.WallyMyUncleWontKnowImStrong)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox MauvilleCity_Text_WallyHereICome, MSGBOX_DEFAULT
+ * trainerbattle_no_intro TRAINER_WALLY_MAUVILLE, MauvilleCity_Text_WallyDefeat
+ * applymovement LOCALID_MAUVILLE_WALLY, Common_Movement_WalkInPlaceFasterRight
+ * waitmovement 0
+ * msgbox MauvilleCity_Text_WallyIllGoBackToVerdanturf, MSGBOX_DEFAULT
+ * applymovement LOCALID_MAUVILLE_WALLY, Common_Movement_FacePlayer
+ * waitmovement 0
+ * msgbox MauvilleCity_Text_ThankYouNotEnoughToBattle, MSGBOX_DEFAULT
+ * applymovement LOCALID_MAUVILLE_WALLY, Common_Movement_WalkInPlaceFasterRight
+ * waitmovement 0
+ * msgbox MauvilleCity_Text_UncleNoNeedToBeDown, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object MauvilleCity_EventScript_BattleWally : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port MauvilleCity_EventScript_BattleWally")
+}
+
 internal val MauvilleCityScripts: Map<String, Script> =
     mapOf(
         "MauvilleCity_EventScript_Boy" to MauvilleCity_EventScript_Boy,
@@ -170,4 +352,20 @@ internal val MauvilleCityScripts: Map<String, Script> =
         "MauvilleCity_EventScript_CitySign" to MauvilleCity_EventScript_CitySign,
         "MauvilleCity_EventScript_BikeShopSign" to MauvilleCity_EventScript_BikeShopSign,
         "MauvilleCity_EventScript_GameCornerSign" to MauvilleCity_EventScript_GameCornerSign,
+        "MauvilleCity_EventScript_WallyRequestBattleAgain" to
+            MauvilleCity_EventScript_WallyRequestBattleAgain,
+        "MauvilleCity_EventScript_ReceivedThunderbolt" to
+            MauvilleCity_EventScript_ReceivedThunderbolt,
+        "MauvilleCity_EventScript_BattleWallyPrompt" to MauvilleCity_EventScript_BattleWallyPrompt,
+        "MauvilleCity_EventScript_CompletedNewMauville" to
+            MauvilleCity_EventScript_CompletedNewMauville,
+        "MauvilleCity_EventScript_BegunNewMauville" to MauvilleCity_EventScript_BegunNewMauville,
+        "MauvilleCity_EventScript_TVExplained" to MauvilleCity_EventScript_TVExplained,
+        "MauvilleCity_EventScript_UncleAskPlayerToBattleWally" to
+            MauvilleCity_EventScript_UncleAskPlayerToBattleWally,
+        "MoveTutor_EventScript_RolloutTaught" to MoveTutor_EventScript_RolloutTaught,
+        "MoveTutor_EventScript_RolloutDeclined" to MoveTutor_EventScript_RolloutDeclined,
+        "MauvilleCity_EventScript_DeclineWallyBattle" to
+            MauvilleCity_EventScript_DeclineWallyBattle,
+        "MauvilleCity_EventScript_BattleWally" to MauvilleCity_EventScript_BattleWally,
     )

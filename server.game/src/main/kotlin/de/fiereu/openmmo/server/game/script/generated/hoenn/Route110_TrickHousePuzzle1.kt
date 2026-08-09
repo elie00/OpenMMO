@@ -1,11 +1,13 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
+import de.fiereu.openmmo.dialog.generated.hoenn.Route110_TrickHousePuzzle
 import de.fiereu.openmmo.dialog.generated.hoenn.Route110_TrickHousePuzzle1
 import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
+import de.fiereu.openmmo.story.generated.hoenn.HoennVars
 import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
@@ -82,7 +84,7 @@ internal object Route110_TrickHousePuzzle1_EventScript_ItemOrangeMail : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lockall
  * goto_if_eq VAR_TRICK_HOUSE_PUZZLE_1_STATE, 0, Route110_TrickHousePuzzle1_EventScript_FoundScroll
@@ -91,8 +93,56 @@ internal object Route110_TrickHousePuzzle1_EventScript_ItemOrangeMail : Script {
  * ```
  */
 internal object Route110_TrickHousePuzzle1_EventScript_Scroll : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.getVar(HoennVars.VAR_TRICK_HOUSE_PUZZLE_1_STATE) == 0)
+        return Route110_TrickHousePuzzle1_EventScript_FoundScroll.run(ctx)
+    return Route110_TrickHousePuzzle_EventScript_ReadScrollAgain.run(ctx)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * setvar VAR_TRICK_HOUSE_PUZZLE_1_STATE, 1
+ * goto Route110_TrickHousePuzzle_EventScript_FoundScroll
+ * end
+ * ```
+ */
+internal object Route110_TrickHousePuzzle1_EventScript_FoundScroll : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.setVar(HoennVars.VAR_TRICK_HOUSE_PUZZLE_1_STATE, 1)
+    return Route110_TrickHousePuzzle_EventScript_FoundScroll.run(ctx)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Route110_TrickHousePuzzle_Text_SecretCodeWrittenOnIt, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object Route110_TrickHousePuzzle_EventScript_ReadScrollAgain : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route110_TrickHousePuzzle.SecretCodeWrittenOnIt)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * playfanfare MUS_OBTAIN_ITEM
+ * message Route110_TrickHousePuzzle_Text_FoundAScroll
+ * waitfanfare
+ * msgbox Route110_TrickHousePuzzle_Text_MemorizedSecretCode, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object Route110_TrickHousePuzzle_EventScript_FoundScroll : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port Route110_TrickHousePuzzle1_EventScript_Scroll")
+      TODO("port Route110_TrickHousePuzzle_EventScript_FoundScroll")
 }
 
 internal val Route110_TrickHousePuzzle1Scripts: Map<String, Script> =
@@ -107,4 +157,10 @@ internal val Route110_TrickHousePuzzle1Scripts: Map<String, Script> =
             Route110_TrickHousePuzzle1_EventScript_ItemOrangeMail,
         "Route110_TrickHousePuzzle1_EventScript_Scroll" to
             Route110_TrickHousePuzzle1_EventScript_Scroll,
+        "Route110_TrickHousePuzzle1_EventScript_FoundScroll" to
+            Route110_TrickHousePuzzle1_EventScript_FoundScroll,
+        "Route110_TrickHousePuzzle_EventScript_ReadScrollAgain" to
+            Route110_TrickHousePuzzle_EventScript_ReadScrollAgain,
+        "Route110_TrickHousePuzzle_EventScript_FoundScroll" to
+            Route110_TrickHousePuzzle_EventScript_FoundScroll,
     )

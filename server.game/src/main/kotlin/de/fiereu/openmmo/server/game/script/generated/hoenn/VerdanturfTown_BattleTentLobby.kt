@@ -121,6 +121,74 @@ internal object VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard : Scri
       TODO("port VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard")
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox VerdanturfTown_BattleTentLobby_Text_ScottVisitRegularly, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object VerdanturfTown_BattleTentLobby_EventScript_ScottAlreadySpokenTo : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(VerdanturfTown_BattleTentLobby.ScottVisitRegularly)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * lockall
+ * msgbox VerdanturfTown_BattleTentLobby_Text_AchievedThreeWinStreak, MSGBOX_DEFAULT
+ * goto VerdanturfTown_BattleTentLobby_EventScript_GivePrize
+ * end
+ * ```
+ */
+internal object VerdanturfTown_BattleTentLobby_EventScript_PrizeWaiting : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(VerdanturfTown_BattleTentLobby.AchievedThreeWinStreak)
+    return VerdanturfTown_BattleTentLobby_EventScript_GivePrize.run(ctx)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox VerdanturfTown_BattleTentLobby_Text_AttractionMutual, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object VerdanturfTown_BattleTentLobby_EventScript_ReceivedAttract : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(VerdanturfTown_BattleTentLobby.AttractionMutual)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox VerdanturfTown_BattleTentLobby_Text_PresentYouWithPrize, MSGBOX_DEFAULT
+ * verdanturftent_giveprize
+ * switch VAR_RESULT
+ * case FALSE, VerdanturfTown_BattleTentLobby_EventScript_NoRoomForPrize
+ * frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
+ * message BattleFrontier_BattleDomeLobby_Text_ReceivedPrize  @ Odd that it used Dome's copy instead of Palace's
+ * waitmessage
+ * playfanfare MUS_OBTAIN_ITEM
+ * waitfanfare
+ * msgbox VerdanturfTown_BattleTentLobby_Text_ReturnFortified, MSGBOX_DEFAULT
+ * closemessage
+ * setvar VAR_TEMP_CHALLENGE_STATUS, 255
+ * releaseall
+ * end
+ * ```
+ */
+internal object VerdanturfTown_BattleTentLobby_EventScript_GivePrize : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port VerdanturfTown_BattleTentLobby_EventScript_GivePrize")
+}
+
 internal val VerdanturfTown_BattleTentLobbyScripts: Map<String, Script> =
     mapOf(
         "VerdanturfTown_BattleTentLobby_EventScript_Attendant" to
@@ -139,4 +207,12 @@ internal val VerdanturfTown_BattleTentLobbyScripts: Map<String, Script> =
             VerdanturfTown_BattleTentLobby_EventScript_RulesBoard,
         "VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard" to
             VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard,
+        "VerdanturfTown_BattleTentLobby_EventScript_ScottAlreadySpokenTo" to
+            VerdanturfTown_BattleTentLobby_EventScript_ScottAlreadySpokenTo,
+        "VerdanturfTown_BattleTentLobby_EventScript_PrizeWaiting" to
+            VerdanturfTown_BattleTentLobby_EventScript_PrizeWaiting,
+        "VerdanturfTown_BattleTentLobby_EventScript_ReceivedAttract" to
+            VerdanturfTown_BattleTentLobby_EventScript_ReceivedAttract,
+        "VerdanturfTown_BattleTentLobby_EventScript_GivePrize" to
+            VerdanturfTown_BattleTentLobby_EventScript_GivePrize,
     )

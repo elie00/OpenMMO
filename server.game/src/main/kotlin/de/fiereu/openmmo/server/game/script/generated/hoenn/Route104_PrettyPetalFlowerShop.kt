@@ -84,6 +84,77 @@ internal object Route104_PrettyPetalFlowerShop_EventScript_GiveWailmerPail : Scr
       TODO("port Route104_PrettyPetalFlowerShop_EventScript_GiveWailmerPail")
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Route104_PrettyPetalFlowerShop_Text_FlowersBringHappiness, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object Route104_PrettyPetalFlowerShop_EventScript_DontExplainBerries : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route104_PrettyPetalFlowerShop.FlowersBringHappiness)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * message gText_PlayerWhatCanIDoForYou
+ * waitmessage
+ * pokemartdecoration2 Route104_PrettyPetalFlowerShop_Pokemart_Plants
+ * msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object Route104_PrettyPetalFlowerShop_EventScript_SellDecorations : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port Route104_PrettyPetalFlowerShop_EventScript_SellDecorations")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox Route104_PrettyPetalFlowerShop_Text_LearnAboutBerries, MSGBOX_YESNO
+ * call_if_eq VAR_RESULT, YES, Route104_PrettyPetalFlowerShop_EventScript_ExplainBerries
+ * call_if_eq VAR_RESULT, NO, Route104_PrettyPetalFlowerShop_EventScript_DontExplainBerries
+ * release
+ * end
+ * ```
+ */
+internal object Route104_PrettyPetalFlowerShop_EventScript_AlreadyMet : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port Route104_PrettyPetalFlowerShop_EventScript_AlreadyMet")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Route104_PrettyPetalFlowerShop_Text_BerriesExplanation, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object Route104_PrettyPetalFlowerShop_EventScript_ExplainBerries : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route104_PrettyPetalFlowerShop.BerriesExplanation)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Route104_PrettyPetalFlowerShop_Text_MachineMixesBerries, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object Route104_PrettyPetalFlowerShop_EventScript_AlreadyReceivedBerry : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route104_PrettyPetalFlowerShop.MachineMixesBerries)
+  }
+}
+
 internal val Route104_PrettyPetalFlowerShopScripts: Map<String, Script> =
     mapOf(
         "Route104_PrettyPetalFlowerShop_EventScript_ShopOwner" to
@@ -94,4 +165,14 @@ internal val Route104_PrettyPetalFlowerShopScripts: Map<String, Script> =
             Route104_PrettyPetalFlowerShop_EventScript_RandomBerryGirl,
         "Route104_PrettyPetalFlowerShop_EventScript_GiveWailmerPail" to
             Route104_PrettyPetalFlowerShop_EventScript_GiveWailmerPail,
+        "Route104_PrettyPetalFlowerShop_EventScript_DontExplainBerries" to
+            Route104_PrettyPetalFlowerShop_EventScript_DontExplainBerries,
+        "Route104_PrettyPetalFlowerShop_EventScript_SellDecorations" to
+            Route104_PrettyPetalFlowerShop_EventScript_SellDecorations,
+        "Route104_PrettyPetalFlowerShop_EventScript_AlreadyMet" to
+            Route104_PrettyPetalFlowerShop_EventScript_AlreadyMet,
+        "Route104_PrettyPetalFlowerShop_EventScript_ExplainBerries" to
+            Route104_PrettyPetalFlowerShop_EventScript_ExplainBerries,
+        "Route104_PrettyPetalFlowerShop_EventScript_AlreadyReceivedBerry" to
+            Route104_PrettyPetalFlowerShop_EventScript_AlreadyReceivedBerry,
     )

@@ -1,6 +1,7 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.CeruleanCity_House3
+import de.fiereu.openmmo.dialog.generated.kanto.Trade
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 
@@ -34,8 +35,56 @@ internal object CeruleanCity_House3_EventScript_OldWoman : Script {
       ctx.say(CeruleanCity_House3.PleaseTradeWithMyHusband)
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Trade_Text_HasTradedMonGrownStronger
+ * release
+ * end
+ * ```
+ */
+internal object CeruleanCity_House3_EventScript_AlreadyTraded : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Trade.HasTradedMonGrownStronger)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * bufferspeciesname STR_VAR_1, VAR_0x8009
+ * msgbox Trade_Text_ThisIsntMon
+ * release
+ * end
+ * ```
+ */
+internal object CeruleanCity_House3_EventScript_NotRequestedMon : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port CeruleanCity_House3_EventScript_NotRequestedMon")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Trade_Text_WellIfYouDontWantTo
+ * release
+ * end
+ * ```
+ */
+internal object CeruleanCity_House3_EventScript_DeclineTrade : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Trade.WellIfYouDontWantTo)
+  }
+}
+
 internal val CeruleanCity_House3Scripts: Map<String, Script> =
     mapOf(
         "CeruleanCity_House3_EventScript_Dontae" to CeruleanCity_House3_EventScript_Dontae,
         "CeruleanCity_House3_EventScript_OldWoman" to CeruleanCity_House3_EventScript_OldWoman,
+        "CeruleanCity_House3_EventScript_AlreadyTraded" to
+            CeruleanCity_House3_EventScript_AlreadyTraded,
+        "CeruleanCity_House3_EventScript_NotRequestedMon" to
+            CeruleanCity_House3_EventScript_NotRequestedMon,
+        "CeruleanCity_House3_EventScript_DeclineTrade" to
+            CeruleanCity_House3_EventScript_DeclineTrade,
     )

@@ -1,6 +1,7 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.CinnabarIsland_PokemonLab_Lounge
+import de.fiereu.openmmo.dialog.generated.kanto.Trade
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 
@@ -71,6 +72,90 @@ internal object CinnabarIsland_PokemonLab_Lounge_EventScript_Norma : Script {
       TODO("port CinnabarIsland_PokemonLab_Lounge_EventScript_Norma")
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Trade_Text_WellIfYouDontWantTo
+ * release
+ * end
+ * ```
+ */
+internal object CinnabarIsland_PokemonLab_Lounge_EventScript_CliftonDeclineTrade : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Trade.WellIfYouDontWantTo)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Trade_Text_HasTradedMonGrownStronger
+ * release
+ * end
+ * ```
+ */
+internal object CinnabarIsland_PokemonLab_Lounge_EventScript_CliftonAlreadyTraded : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Trade.HasTradedMonGrownStronger)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * bufferspeciesname STR_VAR_1, VAR_0x8009
+ * msgbox Trade_Text_ThisIsntMon
+ * release
+ * end
+ * ```
+ */
+internal object CinnabarIsland_PokemonLab_Lounge_EventScript_CliftonNotRequestedMon : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port CinnabarIsland_PokemonLab_Lounge_EventScript_CliftonNotRequestedMon")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Trade_Text_ThatsTooBad
+ * release
+ * end
+ * ```
+ */
+internal object CinnabarIsland_PokemonLab_Lounge_EventScript_NormaDeclineTrade : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Trade.ThatsTooBad)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Trade_Text_HowIsMyOldMon
+ * release
+ * end
+ * ```
+ */
+internal object CinnabarIsland_PokemonLab_Lounge_EventScript_NormaAlreadyTraded : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Trade.HowIsMyOldMon)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * bufferspeciesname STR_VAR_1, VAR_0x8009
+ * msgbox Trade_Text_ThisIsNoMon
+ * release
+ * end
+ * ```
+ */
+internal object CinnabarIsland_PokemonLab_Lounge_EventScript_NormaNotRequestedMon : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port CinnabarIsland_PokemonLab_Lounge_EventScript_NormaNotRequestedMon")
+}
+
 internal val CinnabarIsland_PokemonLab_LoungeScripts: Map<String, Script> =
     mapOf(
         "CinnabarIsland_PokemonLab_Lounge_EventScript_Scientist" to
@@ -79,4 +164,16 @@ internal val CinnabarIsland_PokemonLab_LoungeScripts: Map<String, Script> =
             CinnabarIsland_PokemonLab_Lounge_EventScript_Clifton,
         "CinnabarIsland_PokemonLab_Lounge_EventScript_Norma" to
             CinnabarIsland_PokemonLab_Lounge_EventScript_Norma,
+        "CinnabarIsland_PokemonLab_Lounge_EventScript_CliftonDeclineTrade" to
+            CinnabarIsland_PokemonLab_Lounge_EventScript_CliftonDeclineTrade,
+        "CinnabarIsland_PokemonLab_Lounge_EventScript_CliftonAlreadyTraded" to
+            CinnabarIsland_PokemonLab_Lounge_EventScript_CliftonAlreadyTraded,
+        "CinnabarIsland_PokemonLab_Lounge_EventScript_CliftonNotRequestedMon" to
+            CinnabarIsland_PokemonLab_Lounge_EventScript_CliftonNotRequestedMon,
+        "CinnabarIsland_PokemonLab_Lounge_EventScript_NormaDeclineTrade" to
+            CinnabarIsland_PokemonLab_Lounge_EventScript_NormaDeclineTrade,
+        "CinnabarIsland_PokemonLab_Lounge_EventScript_NormaAlreadyTraded" to
+            CinnabarIsland_PokemonLab_Lounge_EventScript_NormaAlreadyTraded,
+        "CinnabarIsland_PokemonLab_Lounge_EventScript_NormaNotRequestedMon" to
+            CinnabarIsland_PokemonLab_Lounge_EventScript_NormaNotRequestedMon,
     )

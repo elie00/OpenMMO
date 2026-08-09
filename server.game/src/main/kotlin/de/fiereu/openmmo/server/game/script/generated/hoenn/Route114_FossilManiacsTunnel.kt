@@ -1,5 +1,6 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
+import de.fiereu.openmmo.dialog.generated.hoenn.Route114_FossilManiacsTunnel
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 
@@ -23,8 +24,40 @@ internal object Route114_FossilManiacsTunnel_EventScript_FossilManiac : Script {
       TODO("port Route114_FossilManiacsTunnel_EventScript_FossilManiac")
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Route114_FossilManiacsTunnel_Text_FossilsAreWonderful, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object Route114_FossilManiacsTunnel_EventScript_PlayerRevivedFossil : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route114_FossilManiacsTunnel.FossilsAreWonderful)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Route114_FossilManiacsTunnel_Text_DevonCorpRevivingFossils, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object Route114_FossilManiacsTunnel_EventScript_PlayerHasFossil : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route114_FossilManiacsTunnel.DevonCorpRevivingFossils)
+  }
+}
+
 internal val Route114_FossilManiacsTunnelScripts: Map<String, Script> =
     mapOf(
         "Route114_FossilManiacsTunnel_EventScript_FossilManiac" to
             Route114_FossilManiacsTunnel_EventScript_FossilManiac,
+        "Route114_FossilManiacsTunnel_EventScript_PlayerRevivedFossil" to
+            Route114_FossilManiacsTunnel_EventScript_PlayerRevivedFossil,
+        "Route114_FossilManiacsTunnel_EventScript_PlayerHasFossil" to
+            Route114_FossilManiacsTunnel_EventScript_PlayerHasFossil,
     )

@@ -234,6 +234,209 @@ internal object MossdeepCity_SpaceCenter_1F_EventScript_ScientistMagma : Script 
       TODO("port MossdeepCity_SpaceCenter_1F_EventScript_ScientistMagma")
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MossdeepCity_SpaceCenter_1F_Text_MagmaWantsToSpoilMyDream, MSGBOX_DEFAULT
+ * closemessage
+ * applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
+ * waitmovement 0
+ * release
+ * end
+ * ```
+ */
+internal object MossdeepCity_SpaceCenter_1F_EventScript_OldManMagma : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MossdeepCity_SpaceCenter_1F.MagmaWantsToSpoilMyDream)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * dotimebasedevents
+ * specialvar VAR_RESULT, GetWeekCount
+ * buffernumberstring STR_VAR_1, VAR_RESULT
+ * call_if_eq VAR_RESULT, 0, MossdeepCity_SpaceCenter_1F_EventScript_NoLaunchesYetMagma
+ * call_if_ge VAR_RESULT, 1, MossdeepCity_SpaceCenter_1F_EventScript_ShowLaunchNumberMagma
+ * closemessage
+ * applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterRight
+ * waitmovement 0
+ * release
+ * end
+ * ```
+ */
+internal object MossdeepCity_SpaceCenter_1F_EventScript_RocketLaunchCounterMagma : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port MossdeepCity_SpaceCenter_1F_EventScript_RocketLaunchCounterMagma")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MossdeepCity_SpaceCenter_1F_Text_RocketsBoggleMyMind, MSGBOX_DEFAULT
+ * closemessage
+ * applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
+ * waitmovement 0
+ * release
+ * end
+ * ```
+ */
+internal object MossdeepCity_SpaceCenter_1F_EventScript_OldManNormal : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MossdeepCity_SpaceCenter_1F.RocketsBoggleMyMind)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MossdeepCity_SpaceCenter_1F_Text_SuccessfulLaunchNumber, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object MossdeepCity_SpaceCenter_1F_EventScript_ShowLaunchNumber : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MossdeepCity_SpaceCenter_1F.SuccessfulLaunchNumber)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * goto_if_set FLAG_RECEIVED_SUN_STONE_MOSSDEEP, MossdeepCity_SpaceCenter_1F_EventScript_GaveSunStoneMagma
+ * msgbox MossdeepCity_SpaceCenter_1F_Text_MagmaCantStealFuelTakeThis, MSGBOX_DEFAULT
+ * giveitem ITEM_SUN_STONE
+ * goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+ * setflag FLAG_RECEIVED_SUN_STONE_MOSSDEEP
+ * msgbox MossdeepCity_SpaceCenter_1F_Text_CantStrollOnBeachWithMagma, MSGBOX_DEFAULT
+ * applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterRight
+ * waitmovement 0
+ * release
+ * end
+ * ```
+ */
+internal object MossdeepCity_SpaceCenter_1F_EventScript_SunStoneManMagma : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port MossdeepCity_SpaceCenter_1F_EventScript_SunStoneManMagma")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MossdeepCity_SpaceCenter_1F_Text_DidPokemonComeFromSpace, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object MossdeepCity_SpaceCenter_1F_EventScript_WomanNormal : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MossdeepCity_SpaceCenter_1F.DidPokemonComeFromSpace)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MossdeepCity_SpaceCenter_1F_Text_Grunt2PostBattle, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object MossdeepCity_SpaceCenter_1F_EventScript_Grunt2Defeated : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MossdeepCity_SpaceCenter_1F.Grunt2PostBattle)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MossdeepCity_SpaceCenter_1F_Text_AquaShouldBeatMagma, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object MossdeepCity_SpaceCenter_1F_EventScript_WomanMagma : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MossdeepCity_SpaceCenter_1F.AquaShouldBeatMagma)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MossdeepCity_SpaceCenter_1F_Text_HoennFamousForMeteorShowers, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object MossdeepCity_SpaceCenter_1F_EventScript_GaveSunStone : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MossdeepCity_SpaceCenter_1F.HoennFamousForMeteorShowers)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MossdeepCity_SpaceCenter_1F_Text_RocketLaunchImminent, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object MossdeepCity_SpaceCenter_1F_EventScript_NoLaunchesYet : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MossdeepCity_SpaceCenter_1F.RocketLaunchImminent)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MossdeepCity_SpaceCenter_1F_Text_HaywireButSuccessfulLaunchNumber, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object MossdeepCity_SpaceCenter_1F_EventScript_ShowLaunchNumberMagma : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MossdeepCity_SpaceCenter_1F.HaywireButSuccessfulLaunchNumber)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox MossdeepCity_SpaceCenter_1F_Text_CantStrollOnBeachWithMagma, MSGBOX_DEFAULT
+ * applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterRight
+ * waitmovement 0
+ * release
+ * end
+ * ```
+ */
+internal object MossdeepCity_SpaceCenter_1F_EventScript_GaveSunStoneMagma : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port MossdeepCity_SpaceCenter_1F_EventScript_GaveSunStoneMagma")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MossdeepCity_SpaceCenter_1F_Text_HaywireButRocketLaunchImminent, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object MossdeepCity_SpaceCenter_1F_EventScript_NoLaunchesYetMagma : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MossdeepCity_SpaceCenter_1F.HaywireButRocketLaunchImminent)
+  }
+}
+
 internal val MossdeepCity_SpaceCenter_1FScripts: Map<String, Script> =
     mapOf(
         "MossdeepCity_SpaceCenter_1F_EventScript_RocketLaunchCounter" to
@@ -260,4 +463,30 @@ internal val MossdeepCity_SpaceCenter_1FScripts: Map<String, Script> =
             MossdeepCity_SpaceCenter_1F_EventScript_Steven,
         "MossdeepCity_SpaceCenter_1F_EventScript_ScientistMagma" to
             MossdeepCity_SpaceCenter_1F_EventScript_ScientistMagma,
+        "MossdeepCity_SpaceCenter_1F_EventScript_OldManMagma" to
+            MossdeepCity_SpaceCenter_1F_EventScript_OldManMagma,
+        "MossdeepCity_SpaceCenter_1F_EventScript_RocketLaunchCounterMagma" to
+            MossdeepCity_SpaceCenter_1F_EventScript_RocketLaunchCounterMagma,
+        "MossdeepCity_SpaceCenter_1F_EventScript_OldManNormal" to
+            MossdeepCity_SpaceCenter_1F_EventScript_OldManNormal,
+        "MossdeepCity_SpaceCenter_1F_EventScript_ShowLaunchNumber" to
+            MossdeepCity_SpaceCenter_1F_EventScript_ShowLaunchNumber,
+        "MossdeepCity_SpaceCenter_1F_EventScript_SunStoneManMagma" to
+            MossdeepCity_SpaceCenter_1F_EventScript_SunStoneManMagma,
+        "MossdeepCity_SpaceCenter_1F_EventScript_WomanNormal" to
+            MossdeepCity_SpaceCenter_1F_EventScript_WomanNormal,
+        "MossdeepCity_SpaceCenter_1F_EventScript_Grunt2Defeated" to
+            MossdeepCity_SpaceCenter_1F_EventScript_Grunt2Defeated,
+        "MossdeepCity_SpaceCenter_1F_EventScript_WomanMagma" to
+            MossdeepCity_SpaceCenter_1F_EventScript_WomanMagma,
+        "MossdeepCity_SpaceCenter_1F_EventScript_GaveSunStone" to
+            MossdeepCity_SpaceCenter_1F_EventScript_GaveSunStone,
+        "MossdeepCity_SpaceCenter_1F_EventScript_NoLaunchesYet" to
+            MossdeepCity_SpaceCenter_1F_EventScript_NoLaunchesYet,
+        "MossdeepCity_SpaceCenter_1F_EventScript_ShowLaunchNumberMagma" to
+            MossdeepCity_SpaceCenter_1F_EventScript_ShowLaunchNumberMagma,
+        "MossdeepCity_SpaceCenter_1F_EventScript_GaveSunStoneMagma" to
+            MossdeepCity_SpaceCenter_1F_EventScript_GaveSunStoneMagma,
+        "MossdeepCity_SpaceCenter_1F_EventScript_NoLaunchesYetMagma" to
+            MossdeepCity_SpaceCenter_1F_EventScript_NoLaunchesYetMagma,
     )

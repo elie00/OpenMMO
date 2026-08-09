@@ -191,7 +191,7 @@ internal object FortreeCity_Gym_EventScript_RightGymStatue : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox FortreeCity_Gym_Text_GymGuidePostVictory, MSGBOX_DEFAULT
  * release
@@ -199,8 +199,66 @@ internal object FortreeCity_Gym_EventScript_RightGymStatue : Script {
  * ```
  */
 internal object FortreeCity_Gym_EventScript_GymGuidePostVictory : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(FortreeCity_Gym.GymGuidePostVictory)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox FortreeCity_Gym_Text_GymStatue, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object FortreeCity_Gym_EventScript_GymStatue : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(FortreeCity_Gym.GymStatue)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch_double TRAINER_WINONA_1, FortreeCity_Gym_Text_WinonaPreRematch, FortreeCity_Gym_Text_WinonaRematchDefeat, FortreeCity_Gym_Text_WinonaRematchNeedTwoMons
+ * msgbox FortreeCity_Gym_Text_WinonaPostRematch, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object FortreeCity_Gym_EventScript_WinonaRematch : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port FortreeCity_Gym_EventScript_GymGuidePostVictory")
+      TODO("port FortreeCity_Gym_EventScript_WinonaRematch")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * giveitem ITEM_TM_AERIAL_ACE
+ * goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+ * msgbox FortreeCity_Gym_Text_ExplainAerialAce, MSGBOX_DEFAULT
+ * setflag FLAG_RECEIVED_TM_AERIAL_ACE
+ * release
+ * end
+ * ```
+ */
+internal object FortreeCity_Gym_EventScript_GiveAerialAce2 : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port FortreeCity_Gym_EventScript_GiveAerialAce2")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox FortreeCity_Gym_Text_GymStatueCertified, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object FortreeCity_Gym_EventScript_GymStatueCertified : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(FortreeCity_Gym.GymStatueCertified)
+  }
 }
 
 internal val FortreeCity_GymScripts: Map<String, Script> =
@@ -217,4 +275,9 @@ internal val FortreeCity_GymScripts: Map<String, Script> =
         "FortreeCity_Gym_EventScript_RightGymStatue" to FortreeCity_Gym_EventScript_RightGymStatue,
         "FortreeCity_Gym_EventScript_GymGuidePostVictory" to
             FortreeCity_Gym_EventScript_GymGuidePostVictory,
+        "FortreeCity_Gym_EventScript_GymStatue" to FortreeCity_Gym_EventScript_GymStatue,
+        "FortreeCity_Gym_EventScript_WinonaRematch" to FortreeCity_Gym_EventScript_WinonaRematch,
+        "FortreeCity_Gym_EventScript_GiveAerialAce2" to FortreeCity_Gym_EventScript_GiveAerialAce2,
+        "FortreeCity_Gym_EventScript_GymStatueCertified" to
+            FortreeCity_Gym_EventScript_GymStatueCertified,
     )

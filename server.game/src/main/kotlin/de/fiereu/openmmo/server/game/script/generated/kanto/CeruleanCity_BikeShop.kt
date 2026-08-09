@@ -53,7 +53,7 @@ internal object CeruleanCity_BikeShop_EventScript_Woman : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox CeruleanCity_BikeShop_Text_WowYourBikeIsCool
  * release
@@ -61,8 +61,41 @@ internal object CeruleanCity_BikeShop_EventScript_Woman : Script {
  * ```
  */
 internal object CeruleanCity_BikeShop_EventScript_YoungsterHaveBike : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(CeruleanCity_BikeShop.WowYourBikeIsCool)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox CeruleanCity_BikeShop_Text_HowDoYouLikeNewBicycle
+ * release
+ * end
+ * ```
+ */
+internal object CeruleanCity_BikeShop_EventScript_AlreadyGotBicycle : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(CeruleanCity_BikeShop.HowDoYouLikeNewBicycle)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox CeruleanCity_BikeShop_Text_OhBikeVoucherHereYouGo
+ * msgreceiveditem CeruleanCity_BikeShop_Text_ExchangedVoucherForBicycle, ITEM_BICYCLE, 1, MUS_OBTAIN_KEY_ITEM
+ * setflag FLAG_GOT_BICYCLE
+ * additem ITEM_BICYCLE
+ * removeitem ITEM_BIKE_VOUCHER
+ * msgbox CeruleanCity_BikeShop_Text_ThankYouComeAgain
+ * release
+ * end
+ * ```
+ */
+internal object CeruleanCity_BikeShop_EventScript_ExchangeBikeVoucher : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port CeruleanCity_BikeShop_EventScript_YoungsterHaveBike")
+      TODO("port CeruleanCity_BikeShop_EventScript_ExchangeBikeVoucher")
 }
 
 internal val CeruleanCity_BikeShopScripts: Map<String, Script> =
@@ -73,4 +106,8 @@ internal val CeruleanCity_BikeShopScripts: Map<String, Script> =
         "CeruleanCity_BikeShop_EventScript_Woman" to CeruleanCity_BikeShop_EventScript_Woman,
         "CeruleanCity_BikeShop_EventScript_YoungsterHaveBike" to
             CeruleanCity_BikeShop_EventScript_YoungsterHaveBike,
+        "CeruleanCity_BikeShop_EventScript_AlreadyGotBicycle" to
+            CeruleanCity_BikeShop_EventScript_AlreadyGotBicycle,
+        "CeruleanCity_BikeShop_EventScript_ExchangeBikeVoucher" to
+            CeruleanCity_BikeShop_EventScript_ExchangeBikeVoucher,
     )

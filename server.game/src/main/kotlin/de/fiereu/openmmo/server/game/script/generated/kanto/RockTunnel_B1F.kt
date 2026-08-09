@@ -218,6 +218,30 @@ internal object RockTunnel_B1F_EventScript_ItemMaxEther : Script {
   }
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox Text_RockSlideTaught
+ * release
+ * end
+ * ```
+ */
+internal object EventScript_RockSlideTaught : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_RockSlideTaught")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox Text_RockSlideDeclined
+ * release
+ * end
+ * ```
+ */
+internal object EventScript_RockSlideDeclined : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_RockSlideDeclined")
+}
+
 internal val RockTunnel_B1FScripts: Map<String, Script> =
     mapOf(
         "RockTunnel_B1F_EventScript_Cooper" to RockTunnel_B1F_EventScript_Cooper,
@@ -231,4 +255,6 @@ internal val RockTunnel_B1FScripts: Map<String, Script> =
         "RockTunnel_B1F_EventScript_RockSlideTutor" to RockTunnel_B1F_EventScript_RockSlideTutor,
         "RockTunnel_B1F_EventScript_ItemRevive" to RockTunnel_B1F_EventScript_ItemRevive,
         "RockTunnel_B1F_EventScript_ItemMaxEther" to RockTunnel_B1F_EventScript_ItemMaxEther,
+        "EventScript_RockSlideTaught" to EventScript_RockSlideTaught,
+        "EventScript_RockSlideDeclined" to EventScript_RockSlideDeclined,
     )

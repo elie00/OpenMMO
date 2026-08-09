@@ -37,8 +37,39 @@ internal object Route2_EastBuilding_EventScript_Rocker : Script {
       ctx.say(Route2_EastBuilding.CanGetThroughRockTunnel)
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Route2_EastBuilding_Text_ExplainHM05
+ * release
+ * end
+ * ```
+ */
+internal object Route2_EastBuilding_EventScript_AlreadyGotHM05 : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route2_EastBuilding.ExplainHM05)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * buffernumberstring STR_VAR_1, REQUIRED_SEEN_MONS
+ * bufferitemname STR_VAR_2, ITEM_HM05
+ * return
+ * ```
+ */
+internal object Route2_EastBuilding_EventScript_GetAideRequestInfo : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port Route2_EastBuilding_EventScript_GetAideRequestInfo")
+}
+
 internal val Route2_EastBuildingScripts: Map<String, Script> =
     mapOf(
         "Route2_EastBuilding_EventScript_Aide" to Route2_EastBuilding_EventScript_Aide,
         "Route2_EastBuilding_EventScript_Rocker" to Route2_EastBuilding_EventScript_Rocker,
+        "Route2_EastBuilding_EventScript_AlreadyGotHM05" to
+            Route2_EastBuilding_EventScript_AlreadyGotHM05,
+        "Route2_EastBuilding_EventScript_GetAideRequestInfo" to
+            Route2_EastBuilding_EventScript_GetAideRequestInfo,
     )

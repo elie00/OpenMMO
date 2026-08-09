@@ -66,7 +66,7 @@ internal object VerdanturfTown_EventScript_RusturfTunnelSign : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox VerdanturfTown_Text_EasyToGetToRustboroNow, MSGBOX_DEFAULT
  * release
@@ -74,8 +74,28 @@ internal object VerdanturfTown_EventScript_RusturfTunnelSign : Script {
  * ```
  */
 internal object VerdanturfTown_EventScript_BoyTunnelOpen : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port VerdanturfTown_EventScript_BoyTunnelOpen")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(VerdanturfTown.EasyToGetToRustboroNow)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox VerdanturfTown_Text_ManDugTunnelForLove, MSGBOX_DEFAULT
+ * applymovement LOCALID_VERDANTURF_TWIN, Common_Movement_FaceOriginalDirection
+ * waitmovement 0
+ * release
+ * end
+ * ```
+ */
+internal object VerdanturfTown_EventScript_TwinTunnelOpen : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(VerdanturfTown.ManDugTunnelForLove)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 internal val VerdanturfTownScripts: Map<String, Script> =
@@ -90,4 +110,5 @@ internal val VerdanturfTownScripts: Map<String, Script> =
         "VerdanturfTown_EventScript_RusturfTunnelSign" to
             VerdanturfTown_EventScript_RusturfTunnelSign,
         "VerdanturfTown_EventScript_BoyTunnelOpen" to VerdanturfTown_EventScript_BoyTunnelOpen,
+        "VerdanturfTown_EventScript_TwinTunnelOpen" to VerdanturfTown_EventScript_TwinTunnelOpen,
     )

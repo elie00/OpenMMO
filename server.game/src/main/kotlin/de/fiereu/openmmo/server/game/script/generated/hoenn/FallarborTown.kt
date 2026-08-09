@@ -62,7 +62,7 @@ internal object FallarborTown_EventScript_MoveTutorSign : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox FallarborTown_Text_RegionKnownForMeteors, MSGBOX_DEFAULT
  * release
@@ -70,8 +70,9 @@ internal object FallarborTown_EventScript_MoveTutorSign : Script {
  * ```
  */
 internal object FallarborTown_EventScript_ExpertMNormal : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port FallarborTown_EventScript_ExpertMNormal")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(FallarborTown.RegionKnownForMeteors)
+  }
 }
 
 internal val FallarborTownScripts: Map<String, Script> =

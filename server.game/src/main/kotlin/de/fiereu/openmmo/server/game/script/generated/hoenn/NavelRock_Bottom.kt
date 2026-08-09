@@ -46,7 +46,36 @@ internal object NavelRock_Bottom_EventScript_Lugia : Script {
   override suspend fun run(ctx: ScriptContext) = TODO("port NavelRock_Bottom_EventScript_Lugia")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * setflag FLAG_DEFEATED_LUGIA
+ * setvar VAR_0x8004, SPECIES_LUGIA
+ * goto Common_EventScript_LegendaryFlewAway
+ * end
+ * ```
+ */
+internal object NavelRock_Bottom_EventScript_DefeatedLugia : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port NavelRock_Bottom_EventScript_DefeatedLugia")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * setvar VAR_0x8004, SPECIES_LUGIA
+ * goto Common_EventScript_LegendaryFlewAway
+ * end
+ * ```
+ */
+internal object NavelRock_Bottom_EventScript_RanFromLugia : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port NavelRock_Bottom_EventScript_RanFromLugia")
+}
+
 internal val NavelRock_BottomScripts: Map<String, Script> =
     mapOf(
         "NavelRock_Bottom_EventScript_Lugia" to NavelRock_Bottom_EventScript_Lugia,
+        "NavelRock_Bottom_EventScript_DefeatedLugia" to NavelRock_Bottom_EventScript_DefeatedLugia,
+        "NavelRock_Bottom_EventScript_RanFromLugia" to NavelRock_Bottom_EventScript_RanFromLugia,
     )

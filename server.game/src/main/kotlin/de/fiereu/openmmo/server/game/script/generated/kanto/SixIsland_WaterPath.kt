@@ -195,6 +195,32 @@ internal object SixIsland_WaterPath_EventScript_RouteSign : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(SixIsland_WaterPath.RouteSign)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch_double TRAINER_TWINS_MIU_MIA, SixIsland_WaterPath_Text_MiuRematchIntro, SixIsland_WaterPath_Text_MiuDefeat, SixIsland_WaterPath_Text_MiuNotEnoughMons
+ * msgbox SixIsland_WaterPath_Text_MiuPostBattle, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object SixIsland_WaterPath_EventScript_MiuRematch : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SixIsland_WaterPath_EventScript_MiuRematch")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch_double TRAINER_TWINS_MIU_MIA, SixIsland_WaterPath_Text_MiaRematchIntro, SixIsland_WaterPath_Text_MiaDefeat, SixIsland_WaterPath_Text_MiaNotEnoughMons
+ * msgbox SixIsland_WaterPath_Text_MiaPostBattle, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object SixIsland_WaterPath_EventScript_MiaRematch : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SixIsland_WaterPath_EventScript_MiaRematch")
+}
+
 internal val SixIsland_WaterPathScripts: Map<String, Script> =
     mapOf(
         "SixIsland_WaterPath_EventScript_Rose" to SixIsland_WaterPath_EventScript_Rose,
@@ -210,4 +236,6 @@ internal val SixIsland_WaterPathScripts: Map<String, Script> =
         "SixIsland_WaterPath_EventScript_HornWantedSign" to
             SixIsland_WaterPath_EventScript_HornWantedSign,
         "SixIsland_WaterPath_EventScript_RouteSign" to SixIsland_WaterPath_EventScript_RouteSign,
+        "SixIsland_WaterPath_EventScript_MiuRematch" to SixIsland_WaterPath_EventScript_MiuRematch,
+        "SixIsland_WaterPath_EventScript_MiaRematch" to SixIsland_WaterPath_EventScript_MiaRematch,
     )

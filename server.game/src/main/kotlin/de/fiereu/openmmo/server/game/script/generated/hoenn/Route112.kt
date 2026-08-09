@@ -196,6 +196,18 @@ internal object Route112_EventScript_RouteSignLavaridge : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(Route112.RouteSignLavaridge)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch TRAINER_TRENT_1, Route112_Text_TrentRematchIntro, Route112_Text_TrentRematchDefeat
+ * msgbox Route112_Text_TrentRematchPostBattle, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route112_EventScript_RematchTrent : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route112_EventScript_RematchTrent")
+}
+
 internal val Route112Scripts: Map<String, Script> =
     mapOf(
         "Route112_EventScript_MagmaGrunts" to Route112_EventScript_MagmaGrunts,
@@ -210,4 +222,5 @@ internal val Route112Scripts: Map<String, Script> =
         "Route112_EventScript_MtChimneySign" to Route112_EventScript_MtChimneySign,
         "Route112_EventScript_MtChimneyCableCarSign" to Route112_EventScript_MtChimneyCableCarSign,
         "Route112_EventScript_RouteSignLavaridge" to Route112_EventScript_RouteSignLavaridge,
+        "Route112_EventScript_RematchTrent" to Route112_EventScript_RematchTrent,
     )

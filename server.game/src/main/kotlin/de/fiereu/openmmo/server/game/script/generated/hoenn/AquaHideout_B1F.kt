@@ -163,6 +163,32 @@ internal object AquaHideout_B1F_EventScript_Grunt7 : Script {
   }
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * setflag FLAG_DEFEATED_ELECTRODE_2_AQUA_HIDEOUT
+ * goto Common_EventScript_RemoveStaticPokemon
+ * end
+ * ```
+ */
+internal object AquaHideout_B1F_EventScript_DefeatedElectrode2 : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port AquaHideout_B1F_EventScript_DefeatedElectrode2")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * setflag FLAG_DEFEATED_ELECTRODE_1_AQUA_HIDEOUT
+ * goto Common_EventScript_RemoveStaticPokemon
+ * end
+ * ```
+ */
+internal object AquaHideout_B1F_EventScript_DefeatedElectrode1 : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port AquaHideout_B1F_EventScript_DefeatedElectrode1")
+}
+
 internal val AquaHideout_B1FScripts: Map<String, Script> =
     mapOf(
         "AquaHideout_B1F_EventScript_Grunt2" to AquaHideout_B1F_EventScript_Grunt2,
@@ -174,4 +200,8 @@ internal val AquaHideout_B1FScripts: Map<String, Script> =
         "AquaHideout_B1F_EventScript_ItemNugget" to AquaHideout_B1F_EventScript_ItemNugget,
         "AquaHideout_B1F_EventScript_Electrode2" to AquaHideout_B1F_EventScript_Electrode2,
         "AquaHideout_B1F_EventScript_Grunt7" to AquaHideout_B1F_EventScript_Grunt7,
+        "AquaHideout_B1F_EventScript_DefeatedElectrode2" to
+            AquaHideout_B1F_EventScript_DefeatedElectrode2,
+        "AquaHideout_B1F_EventScript_DefeatedElectrode1" to
+            AquaHideout_B1F_EventScript_DefeatedElectrode1,
     )

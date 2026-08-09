@@ -72,7 +72,7 @@ internal object PewterCity_Gym_EventScript_GymStatue : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox PewterCity_Gym_Text_GymStatuePlayerWon
  * releaseall
@@ -80,8 +80,98 @@ internal object PewterCity_Gym_EventScript_GymStatue : Script {
  * ```
  */
 internal object PewterCity_Gym_EventScript_GymStatuePostVictory : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port PewterCity_Gym_EventScript_GymStatuePostVictory")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(PewterCity_Gym.GymStatuePlayerWon)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox PewterCity_Gym_Text_TakeThisWithYou
+ * checkitemspace ITEM_TM39
+ * goto_if_eq VAR_RESULT, FALSE, PewterCity_Gym_EventScript_NoRoomForTM39
+ * giveitem_msg PewterCity_Gym_Text_ReceivedTM39FromBrock, ITEM_TM39
+ * setflag FLAG_GOT_TM39_FROM_BROCK
+ * msgbox PewterCity_Gym_Text_ExplainTM39
+ * release
+ * end
+ * ```
+ */
+internal object PewterCity_Gym_EventScript_GiveTM39 : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port PewterCity_Gym_EventScript_GiveTM39")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox PewterCity_Gym_Text_LetsGetHappening
+ * goto PewterCity_Gym_EventScript_GymGuyAdvice
+ * end
+ * ```
+ */
+internal object PewterCity_Gym_EventScript_GymGuyTakeMeToTop : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(PewterCity_Gym.LetsGetHappening)
+    return PewterCity_Gym_EventScript_GymGuyAdvice.run(ctx)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox PewterCity_Gym_Text_YoureChampMaterial
+ * release
+ * end
+ * ```
+ */
+internal object PewterCity_Gym_EventScript_GymGuyPostVictory : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(PewterCity_Gym.YoureChampMaterial)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox PewterCity_Gym_Text_ItsFreeLetsGetHappening
+ * goto PewterCity_Gym_EventScript_GymGuyAdvice
+ * end
+ * ```
+ */
+internal object PewterCity_Gym_EventScript_GymGuyDontTakeMeToTop : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(PewterCity_Gym.ItsFreeLetsGetHappening)
+    return PewterCity_Gym_EventScript_GymGuyAdvice.run(ctx)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox PewterCity_Gym_Text_DontHaveRoomForThis
+ * release
+ * end
+ * ```
+ */
+internal object PewterCity_Gym_EventScript_NoRoomForTM39 : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(PewterCity_Gym.DontHaveRoomForThis)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox PewterCity_Gym_Text_TryDifferentPartyOrders
+ * release
+ * end
+ * ```
+ */
+internal object PewterCity_Gym_EventScript_GymGuyAdvice : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(PewterCity_Gym.TryDifferentPartyOrders)
+  }
 }
 
 internal val PewterCity_GymScripts: Map<String, Script> =
@@ -92,4 +182,13 @@ internal val PewterCity_GymScripts: Map<String, Script> =
         "PewterCity_Gym_EventScript_GymStatue" to PewterCity_Gym_EventScript_GymStatue,
         "PewterCity_Gym_EventScript_GymStatuePostVictory" to
             PewterCity_Gym_EventScript_GymStatuePostVictory,
+        "PewterCity_Gym_EventScript_GiveTM39" to PewterCity_Gym_EventScript_GiveTM39,
+        "PewterCity_Gym_EventScript_GymGuyTakeMeToTop" to
+            PewterCity_Gym_EventScript_GymGuyTakeMeToTop,
+        "PewterCity_Gym_EventScript_GymGuyPostVictory" to
+            PewterCity_Gym_EventScript_GymGuyPostVictory,
+        "PewterCity_Gym_EventScript_GymGuyDontTakeMeToTop" to
+            PewterCity_Gym_EventScript_GymGuyDontTakeMeToTop,
+        "PewterCity_Gym_EventScript_NoRoomForTM39" to PewterCity_Gym_EventScript_NoRoomForTM39,
+        "PewterCity_Gym_EventScript_GymGuyAdvice" to PewterCity_Gym_EventScript_GymGuyAdvice,
     )

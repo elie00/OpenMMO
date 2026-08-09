@@ -231,6 +231,73 @@ internal object Route118_EventScript_RouteSign119 : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(Route118.RouteSign119)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch TRAINER_DALTON_1, Route118_Text_DaltonRematchIntro, Route118_Text_DaltonRematchDefeat
+ * msgbox Route118_Text_DaltonPostRematch, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route118_EventScript_RematchDalton : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route118_EventScript_RematchDalton")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox Route118_Text_IdenticalMindsTakeThis, MSGBOX_DEFAULT
+ * giveitem ITEM_GOOD_ROD
+ * setflag FLAG_RECEIVED_GOOD_ROD
+ * msgbox Route118_Text_TryYourLuckFishing, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object Route118_EventScript_ReceiveGoodRod : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route118_EventScript_ReceiveGoodRod")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch TRAINER_ROSE_1, Route118_Text_RoseRematchIntro, Route118_Text_RoseRematchDefeat
+ * msgbox Route118_Text_RosePostRematch, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route118_EventScript_RematchRose : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route118_EventScript_RematchRose")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Route118_Text_TryCatchingMonWithGoodRod, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object Route118_EventScript_ReceivedGoodRod : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route118.TryCatchingMonWithGoodRod)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Route118_Text_DontYouLikeToFish, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object Route118_EventScript_DeclineGoodRod : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route118.DontYouLikeToFish)
+  }
+}
+
 internal val Route118Scripts: Map<String, Script> =
     mapOf(
         "Route118_EventScript_Perry" to Route118_EventScript_Perry,
@@ -249,4 +316,9 @@ internal val Route118Scripts: Map<String, Script> =
         "Route118_EventScript_Deandre" to Route118_EventScript_Deandre,
         "Route118_EventScript_RouteSignMauville" to Route118_EventScript_RouteSignMauville,
         "Route118_EventScript_RouteSign119" to Route118_EventScript_RouteSign119,
+        "Route118_EventScript_RematchDalton" to Route118_EventScript_RematchDalton,
+        "Route118_EventScript_ReceiveGoodRod" to Route118_EventScript_ReceiveGoodRod,
+        "Route118_EventScript_RematchRose" to Route118_EventScript_RematchRose,
+        "Route118_EventScript_ReceivedGoodRod" to Route118_EventScript_ReceivedGoodRod,
+        "Route118_EventScript_DeclineGoodRod" to Route118_EventScript_DeclineGoodRod,
     )

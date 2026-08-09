@@ -26,8 +26,23 @@ internal object SootopolisCity_House3_EventScript_Girl : Script {
       ctx.say(SootopolisCity_House3.TrainerFanClubWasWild)
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SootopolisCity_House3_Text_YouMustBePrettyStrong, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object SootopolisCity_House3_EventScript_HaveFans : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SootopolisCity_House3.YouMustBePrettyStrong)
+  }
+}
+
 internal val SootopolisCity_House3Scripts: Map<String, Script> =
     mapOf(
         "SootopolisCity_House3_EventScript_Woman" to SootopolisCity_House3_EventScript_Woman,
         "SootopolisCity_House3_EventScript_Girl" to SootopolisCity_House3_EventScript_Girl,
+        "SootopolisCity_House3_EventScript_HaveFans" to SootopolisCity_House3_EventScript_HaveFans,
     )

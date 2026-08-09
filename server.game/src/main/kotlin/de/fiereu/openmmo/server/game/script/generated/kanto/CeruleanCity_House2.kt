@@ -34,7 +34,7 @@ internal object CeruleanCity_House2_EventScript_WallHole : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox CeruleanCity_House2_Text_TeachDiglettDigWithoutTM
  * release
@@ -42,8 +42,9 @@ internal object CeruleanCity_House2_EventScript_WallHole : Script {
  * ```
  */
 internal object CeruleanCity_House2_EventScript_HikerGotTM28 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port CeruleanCity_House2_EventScript_HikerGotTM28")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(CeruleanCity_House2.TeachDiglettDigWithoutTM)
+  }
 }
 
 internal val CeruleanCity_House2Scripts: Map<String, Script> =

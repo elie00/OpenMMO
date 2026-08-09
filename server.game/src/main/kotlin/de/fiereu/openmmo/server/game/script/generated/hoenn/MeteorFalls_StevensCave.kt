@@ -29,7 +29,24 @@ internal object MeteorFalls_StevensCave_EventScript_Steven : Script {
       TODO("port MeteorFalls_StevensCave_EventScript_Steven")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_METEOR_FALLS_STEVEN, Common_Movement_FacePlayer
+ * waitmovement 0
+ * msgbox MeteorFalls_StevensCave_Text_MyPredictionCameTrue, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object MeteorFalls_StevensCave_EventScript_Defeated : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port MeteorFalls_StevensCave_EventScript_Defeated")
+}
+
 internal val MeteorFalls_StevensCaveScripts: Map<String, Script> =
     mapOf(
         "MeteorFalls_StevensCave_EventScript_Steven" to MeteorFalls_StevensCave_EventScript_Steven,
+        "MeteorFalls_StevensCave_EventScript_Defeated" to
+            MeteorFalls_StevensCave_EventScript_Defeated,
     )

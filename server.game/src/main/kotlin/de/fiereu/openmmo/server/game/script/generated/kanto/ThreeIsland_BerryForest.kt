@@ -97,6 +97,19 @@ internal object ThreeIsland_BerryForest_EventScript_WelcomeSign : Script {
       ctx.sign(ThreeIsland_BerryForest.WelcomeToBerryForest)
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox ThreeIsland_BerryForest_Text_BerryPouchIsFull
+ * return
+ * ```
+ */
+internal object ThreeIsland_BerryForest_EventScript_NoRoomForBerry : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(ThreeIsland_BerryForest.BerryPouchIsFull)
+  }
+}
+
 internal val ThreeIsland_BerryForestScripts: Map<String, Script> =
     mapOf(
         "ThreeIsland_BerryForest_EventScript_Lostelle" to
@@ -111,4 +124,6 @@ internal val ThreeIsland_BerryForestScripts: Map<String, Script> =
             ThreeIsland_BerryForest_EventScript_BewareSign,
         "ThreeIsland_BerryForest_EventScript_WelcomeSign" to
             ThreeIsland_BerryForest_EventScript_WelcomeSign,
+        "ThreeIsland_BerryForest_EventScript_NoRoomForBerry" to
+            ThreeIsland_BerryForest_EventScript_NoRoomForBerry,
     )

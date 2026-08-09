@@ -76,10 +76,23 @@ internal object MtPyre_3F_EventScript_Gabrielle : Script {
   override suspend fun run(ctx: ScriptContext) = TODO("port MtPyre_3F_EventScript_Gabrielle")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch TRAINER_GABRIELLE_1, MtPyre_3F_Text_GabrielleRematchIntro, MtPyre_3F_Text_GabrielleRematchDefeat
+ * msgbox MtPyre_3F_Text_GabriellePostRematch, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object MtPyre_3F_EventScript_RematchGabrielle : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port MtPyre_3F_EventScript_RematchGabrielle")
+}
+
 internal val MtPyre_3FScripts: Map<String, Script> =
     mapOf(
         "MtPyre_3F_EventScript_William" to MtPyre_3F_EventScript_William,
         "MtPyre_3F_EventScript_Kayla" to MtPyre_3F_EventScript_Kayla,
         "MtPyre_3F_EventScript_ItemSuperRepel" to MtPyre_3F_EventScript_ItemSuperRepel,
         "MtPyre_3F_EventScript_Gabrielle" to MtPyre_3F_EventScript_Gabrielle,
+        "MtPyre_3F_EventScript_RematchGabrielle" to MtPyre_3F_EventScript_RematchGabrielle,
     )

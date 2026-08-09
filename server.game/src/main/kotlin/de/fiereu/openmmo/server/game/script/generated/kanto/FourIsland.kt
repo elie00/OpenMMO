@@ -109,6 +109,91 @@ internal object FourIsland_EventScript_OldWomanLoreleiLeft : Script {
       TODO("port FourIsland_EventScript_OldWomanLoreleiLeft")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * special GetDaycareMonNicknames
+ * msgbox DayCare_Text_YourMonIsDoingFine
+ * release
+ * end
+ * ```
+ */
+internal object FourIsland_EventScript_CheckOnOneMon : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port FourIsland_EventScript_CheckOnOneMon")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox DayCare_Text_DoYouWantEgg, MSGBOX_YESNO
+ * goto_if_eq VAR_RESULT, YES, FourIsland_EventScript_DaycareAcceptEgg
+ * msgbox DayCare_Text_IWillKeepDoYouWantIt, MSGBOX_YESNO
+ * goto_if_eq VAR_RESULT, YES, FourIsland_EventScript_DaycareAcceptEgg
+ * msgbox DayCare_Text_IllKeepIt
+ * clearflag FLAG_PENDING_DAYCARE_EGG
+ * special RejectEggFromDayCare
+ * release
+ * end
+ * ```
+ */
+internal object FourIsland_EventScript_DaycareEggWaiting : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port FourIsland_EventScript_DaycareEggWaiting")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * special GetDaycareMonNicknames
+ * msgbox DayCare_Text_YourMonsAreDoingFine
+ * special SetDaycareCompatibilityString
+ * special ShowFieldMessageStringVar4
+ * waitmessage
+ * waitbuttonpress
+ * release
+ * end
+ * ```
+ */
+internal object FourIsland_EventScript_CheckOnTwoMons : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port FourIsland_EventScript_CheckOnTwoMons")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * specialvar VAR_RESULT, CalculatePlayerPartyCount
+ * goto_if_ne VAR_RESULT, PARTY_SIZE, FourIsland_EventScript_DaycareReceivedEgg
+ * msgbox DayCare_Text_YouHaveNoRoomForIt
+ * release
+ * end
+ * ```
+ */
+internal object FourIsland_EventScript_DaycareAcceptEgg : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port FourIsland_EventScript_DaycareAcceptEgg")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * textcolor NPC_TEXT_COLOR_NEUTRAL
+ * message DayCare_Text_ReceivedEgg
+ * call EventScript_RestorePrevTextColor
+ * playfanfare MUS_LEVEL_UP
+ * waitfanfare
+ * waitbuttonpress
+ * msgbox DayCare_Text_TakeGoodCareOfIt
+ * special GiveEggFromDaycare
+ * clearflag FLAG_PENDING_DAYCARE_EGG
+ * release
+ * end
+ * ```
+ */
+internal object FourIsland_EventScript_DaycareReceivedEgg : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port FourIsland_EventScript_DaycareReceivedEgg")
+}
+
 internal val FourIslandScripts: Map<String, Script> =
     mapOf(
         "FourIsland_EventScript_DaycareMan" to FourIsland_EventScript_DaycareMan,
@@ -120,4 +205,9 @@ internal val FourIslandScripts: Map<String, Script> =
         "FourIsland_EventScript_IslandSign" to FourIsland_EventScript_IslandSign,
         "FourIsland_EventScript_LoreleisHouseSign" to FourIsland_EventScript_LoreleisHouseSign,
         "FourIsland_EventScript_OldWomanLoreleiLeft" to FourIsland_EventScript_OldWomanLoreleiLeft,
+        "FourIsland_EventScript_CheckOnOneMon" to FourIsland_EventScript_CheckOnOneMon,
+        "FourIsland_EventScript_DaycareEggWaiting" to FourIsland_EventScript_DaycareEggWaiting,
+        "FourIsland_EventScript_CheckOnTwoMons" to FourIsland_EventScript_CheckOnTwoMons,
+        "FourIsland_EventScript_DaycareAcceptEgg" to FourIsland_EventScript_DaycareAcceptEgg,
+        "FourIsland_EventScript_DaycareReceivedEgg" to FourIsland_EventScript_DaycareReceivedEgg,
     )

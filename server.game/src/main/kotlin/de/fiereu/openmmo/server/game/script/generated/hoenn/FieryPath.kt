@@ -51,9 +51,62 @@ internal object FieryPath_EventScript_ItemFireStone : Script {
   }
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * closemessage
+ * releaseall
+ * end
+ * ```
+ */
+internal object EventScript_CancelStrength : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_CancelStrength")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox Text_CantStrength, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object EventScript_CantStrength : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_CantStrength")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox Text_StrengthActivated, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object EventScript_CheckActivatedBoulder : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_CheckActivatedBoulder")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * setflag FLAG_SYS_USE_STRENGTH
+ * msgbox Text_MonUsedStrength, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object EventScript_ActivateStrength : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_ActivateStrength")
+}
+
 internal val FieryPathScripts: Map<String, Script> =
     mapOf(
         "FieryPath_EventScript_ItemTMToxic" to FieryPath_EventScript_ItemTMToxic,
         "EventScript_StrengthBoulder" to EventScript_StrengthBoulder,
         "FieryPath_EventScript_ItemFireStone" to FieryPath_EventScript_ItemFireStone,
+        "EventScript_CancelStrength" to EventScript_CancelStrength,
+        "EventScript_CantStrength" to EventScript_CantStrength,
+        "EventScript_CheckActivatedBoulder" to EventScript_CheckActivatedBoulder,
+        "EventScript_ActivateStrength" to EventScript_ActivateStrength,
     )

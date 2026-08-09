@@ -1,6 +1,7 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.dialog.generated.hoenn.PetalburgCity_PokemonCenter_1F
+import de.fiereu.openmmo.dialog.generated.hoenn.ProfileMan
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 
@@ -61,6 +62,110 @@ internal object PetalburgCity_PokemonCenter_1F_EventScript_Woman : Script {
       TODO("port PetalburgCity_PokemonCenter_1F_EventScript_Woman")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox ProfileMan_Text_MayISeeYourProfile, MSGBOX_DEFAULT
+ * multichoice 17, 6, MULTI_YESNOINFO_2, FALSE
+ * switch VAR_RESULT
+ * case 0, ProfileMan_EventScript_CreateProfile
+ * case 1, ProfileMan_EventScript_DeclineShowProfile
+ * case 2, ProfileMan_EventScript_Info
+ * case MULTI_B_PRESSED, ProfileMan_EventScript_DeclineShowProfile
+ * end
+ * ```
+ */
+internal object ProfileMan_EventScript_AskToSeeProfile : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port ProfileMan_EventScript_AskToSeeProfile")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox ProfileMan_Text_YouHaveWonderfulSmile, MSGBOX_DEFAULT
+ * goto ProfileMan_EventScript_AskToSeeNewProfile
+ * end
+ * ```
+ */
+internal object ProfileMan_EventScript_GivenProfileBefore : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(ProfileMan.YouHaveWonderfulSmile)
+    return ProfileMan_EventScript_AskToSeeNewProfile.run(ctx)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * call_if_eq VAR_STARTER_MON, 0, PetalburgCity_PokemonCenter_1F_EventScript_SayTreeckoType
+ * call_if_eq VAR_STARTER_MON, 1, PetalburgCity_PokemonCenter_1F_EventScript_SayTorchicType
+ * call_if_eq VAR_STARTER_MON, 2, PetalburgCity_PokemonCenter_1F_EventScript_SayMudkipType
+ * release
+ * end
+ * ```
+ */
+internal object PetalburgCity_PokemonCenter_1F_EventScript_SayStarterTypeInfo : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port PetalburgCity_PokemonCenter_1F_EventScript_SayStarterTypeInfo")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox ProfileMan_Text_MayISeeYourNewProfile, MSGBOX_DEFAULT
+ * multichoice 17, 6, MULTI_YESNOINFO_2, FALSE
+ * switch VAR_RESULT
+ * case 0, ProfileMan_EventScript_CreateNewProfile
+ * case 1, ProfileMan_EventScript_DeclineNewProfile
+ * case 2, ProfileMan_EventScript_InfoNewProfile
+ * case MULTI_B_PRESSED, ProfileMan_EventScript_DeclineNewProfile
+ * end
+ * ```
+ */
+internal object ProfileMan_EventScript_AskToSeeNewProfile : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port ProfileMan_EventScript_AskToSeeNewProfile")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox PetalburgCity_PokemonCenter_1F_Text_TorchicIsFireType, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object PetalburgCity_PokemonCenter_1F_EventScript_SayTorchicType : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(PetalburgCity_PokemonCenter_1F.TorchicIsFireType)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox PetalburgCity_PokemonCenter_1F_Text_MudkipIsWaterType, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object PetalburgCity_PokemonCenter_1F_EventScript_SayMudkipType : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(PetalburgCity_PokemonCenter_1F.MudkipIsWaterType)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox PetalburgCity_PokemonCenter_1F_Text_TreeckoIsGrassType, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object PetalburgCity_PokemonCenter_1F_EventScript_SayTreeckoType : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(PetalburgCity_PokemonCenter_1F.TreeckoIsGrassType)
+  }
+}
+
 internal val PetalburgCity_PokemonCenter_1FScripts: Map<String, Script> =
     mapOf(
         "PetalburgCity_PokemonCenter_1F_EventScript_Nurse" to
@@ -72,4 +177,15 @@ internal val PetalburgCity_PokemonCenter_1FScripts: Map<String, Script> =
             PetalburgCity_PokemonCenter_1F_EventScript_Youngster,
         "PetalburgCity_PokemonCenter_1F_EventScript_Woman" to
             PetalburgCity_PokemonCenter_1F_EventScript_Woman,
+        "ProfileMan_EventScript_AskToSeeProfile" to ProfileMan_EventScript_AskToSeeProfile,
+        "ProfileMan_EventScript_GivenProfileBefore" to ProfileMan_EventScript_GivenProfileBefore,
+        "PetalburgCity_PokemonCenter_1F_EventScript_SayStarterTypeInfo" to
+            PetalburgCity_PokemonCenter_1F_EventScript_SayStarterTypeInfo,
+        "ProfileMan_EventScript_AskToSeeNewProfile" to ProfileMan_EventScript_AskToSeeNewProfile,
+        "PetalburgCity_PokemonCenter_1F_EventScript_SayTorchicType" to
+            PetalburgCity_PokemonCenter_1F_EventScript_SayTorchicType,
+        "PetalburgCity_PokemonCenter_1F_EventScript_SayMudkipType" to
+            PetalburgCity_PokemonCenter_1F_EventScript_SayMudkipType,
+        "PetalburgCity_PokemonCenter_1F_EventScript_SayTreeckoType" to
+            PetalburgCity_PokemonCenter_1F_EventScript_SayTreeckoType,
     )

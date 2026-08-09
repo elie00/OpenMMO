@@ -5,7 +5,7 @@ import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -16,8 +16,10 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object BattleFrontier_ReceptionGate_EventScript_Greeter : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port BattleFrontier_ReceptionGate_EventScript_Greeter")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(BattleFrontier_ReceptionGate.WelcomeToBattleFrontier)
+    ctx.say(BattleFrontier_ReceptionGate.EnjoyBattleFrontier)
+  }
 }
 
 /**

@@ -163,7 +163,7 @@ internal object CeladonCity_Gym_EventScript_GymStatue : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox CeladonCity_Gym_Text_GymStatuePlayerWon
  * releaseall
@@ -171,8 +171,40 @@ internal object CeladonCity_Gym_EventScript_GymStatue : Script {
  * ```
  */
 internal object CeladonCity_Gym_EventScript_GymStatuePostVictory : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port CeladonCity_Gym_EventScript_GymStatuePostVictory")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(CeladonCity_Gym.GymStatuePlayerWon)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox CeladonCity_Gym_Text_ExplainRainbowBadgeTakeThis
+ * checkitemspace ITEM_TM19
+ * goto_if_eq VAR_RESULT, FALSE, CeladonCity_Gym_EventScript_NoRoomForTM19
+ * giveitem_msg CeladonCity_Gym_Text_ReceivedTM19FromErika, ITEM_TM19
+ * setflag FLAG_GOT_TM19_FROM_ERIKA
+ * msgbox CeladonCity_Gym_Text_ExplainTM19
+ * release
+ * end
+ * ```
+ */
+internal object CeladonCity_Gym_EventScript_GiveTM19 : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port CeladonCity_Gym_EventScript_GiveTM19")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox CeladonCity_Gym_Text_ShouldMakeRoomForThis
+ * release
+ * end
+ * ```
+ */
+internal object CeladonCity_Gym_EventScript_NoRoomForTM19 : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(CeladonCity_Gym.ShouldMakeRoomForThis)
+  }
 }
 
 internal val CeladonCity_GymScripts: Map<String, Script> =
@@ -188,4 +220,6 @@ internal val CeladonCity_GymScripts: Map<String, Script> =
         "CeladonCity_Gym_EventScript_GymStatue" to CeladonCity_Gym_EventScript_GymStatue,
         "CeladonCity_Gym_EventScript_GymStatuePostVictory" to
             CeladonCity_Gym_EventScript_GymStatuePostVictory,
+        "CeladonCity_Gym_EventScript_GiveTM19" to CeladonCity_Gym_EventScript_GiveTM19,
+        "CeladonCity_Gym_EventScript_NoRoomForTM19" to CeladonCity_Gym_EventScript_NoRoomForTM19,
     )

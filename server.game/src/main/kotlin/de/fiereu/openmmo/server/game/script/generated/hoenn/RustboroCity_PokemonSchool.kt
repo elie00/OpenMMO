@@ -114,6 +114,120 @@ internal object RustboroCity_PokemonSchool_EventScript_ChooseBlackboardTopic : S
       TODO("port RustboroCity_PokemonSchool_EventScript_ChooseBlackboardTopic")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement VAR_LAST_TALKED, RustboroCity_PokemonSchool_Movement_TeacherCheckOnStudentsEast
+ * waitmovement 0
+ * return
+ * ```
+ */
+internal object RustboroCity_PokemonSchool_EventScript_TeacherCheckOnStudentsEast : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port RustboroCity_PokemonSchool_EventScript_TeacherCheckOnStudentsEast")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox RustboroCity_PokemonSchool_Text_StudentTalentLevelUnknown, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object RustboroCity_PokemonSchool_EventScript_ScottWatchStudents : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(RustboroCity_PokemonSchool.StudentTalentLevelUnknown)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * goto_if_set FLAG_BADGE01_GET, RustboroCity_PokemonSchool_EventScript_ScottNoticeBadge
+ * msgbox RustboroCity_PokemonSchool_Text_StudentTalentLevelUnknown, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object RustboroCity_PokemonSchool_EventScript_ScottSpokeAlready : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port RustboroCity_PokemonSchool_EventScript_ScottSpokeAlready")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox RustboroCity_PokemonSchool_Text_ScottMetAlreadyStoneBadge, MSGBOX_DEFAULT
+ * goto RustboroCity_PokemonSchool_EventScript_MetScottAfterBadge
+ * end
+ * ```
+ */
+internal object RustboroCity_PokemonSchool_EventScript_ScottGreetHasBadge : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(RustboroCity_PokemonSchool.ScottMetAlreadyStoneBadge)
+    return RustboroCity_PokemonSchool_EventScript_MetScottAfterBadge.run(ctx)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement VAR_LAST_TALKED, RustboroCity_PokemonSchool_Movement_TeacherCheckOnStudentsWest
+ * waitmovement 0
+ * return
+ * ```
+ */
+internal object RustboroCity_PokemonSchool_EventScript_TeacherCheckOnStudentsWest : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port RustboroCity_PokemonSchool_EventScript_TeacherCheckOnStudentsWest")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox RustboroCity_PokemonSchool_Text_ExplainQuickClaw, MSGBOX_DEFAULT
+ * closemessage
+ * applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterDown
+ * waitmovement 0
+ * release
+ * end
+ * ```
+ */
+internal object RustboroCity_PokemonSchool_EventScript_GaveQuickClaw : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port RustboroCity_PokemonSchool_EventScript_GaveQuickClaw")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * addvar VAR_SCOTT_STATE, 1
+ * setflag FLAG_MET_SCOTT_AFTER_OBTAINING_STONE_BADGE
+ * release
+ * end
+ * ```
+ */
+internal object RustboroCity_PokemonSchool_EventScript_MetScottAfterBadge : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port RustboroCity_PokemonSchool_EventScript_MetScottAfterBadge")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox RustboroCity_PokemonSchool_Text_ScottStoneBadge, MSGBOX_DEFAULT
+ * goto RustboroCity_PokemonSchool_EventScript_MetScottAfterBadge
+ * end
+ * ```
+ */
+internal object RustboroCity_PokemonSchool_EventScript_ScottNoticeBadge : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(RustboroCity_PokemonSchool.ScottStoneBadge)
+    return RustboroCity_PokemonSchool_EventScript_MetScottAfterBadge.run(ctx)
+  }
+}
+
 internal val RustboroCity_PokemonSchoolScripts: Map<String, Script> =
     mapOf(
         "RustboroCity_PokemonSchool_EventScript_GameboyKid1" to
@@ -136,4 +250,20 @@ internal val RustboroCity_PokemonSchoolScripts: Map<String, Script> =
             RustboroCity_PokemonSchool_EventScript_StudentNotebook,
         "RustboroCity_PokemonSchool_EventScript_ChooseBlackboardTopic" to
             RustboroCity_PokemonSchool_EventScript_ChooseBlackboardTopic,
+        "RustboroCity_PokemonSchool_EventScript_TeacherCheckOnStudentsEast" to
+            RustboroCity_PokemonSchool_EventScript_TeacherCheckOnStudentsEast,
+        "RustboroCity_PokemonSchool_EventScript_ScottWatchStudents" to
+            RustboroCity_PokemonSchool_EventScript_ScottWatchStudents,
+        "RustboroCity_PokemonSchool_EventScript_ScottSpokeAlready" to
+            RustboroCity_PokemonSchool_EventScript_ScottSpokeAlready,
+        "RustboroCity_PokemonSchool_EventScript_ScottGreetHasBadge" to
+            RustboroCity_PokemonSchool_EventScript_ScottGreetHasBadge,
+        "RustboroCity_PokemonSchool_EventScript_TeacherCheckOnStudentsWest" to
+            RustboroCity_PokemonSchool_EventScript_TeacherCheckOnStudentsWest,
+        "RustboroCity_PokemonSchool_EventScript_GaveQuickClaw" to
+            RustboroCity_PokemonSchool_EventScript_GaveQuickClaw,
+        "RustboroCity_PokemonSchool_EventScript_MetScottAfterBadge" to
+            RustboroCity_PokemonSchool_EventScript_MetScottAfterBadge,
+        "RustboroCity_PokemonSchool_EventScript_ScottNoticeBadge" to
+            RustboroCity_PokemonSchool_EventScript_ScottNoticeBadge,
     )

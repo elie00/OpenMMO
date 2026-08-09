@@ -224,6 +224,67 @@ internal object Route16_EventScript_CyclingRoadSign : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(Route16.CyclingRoadSign)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch_double TRAINER_YOUNG_COUPLE_LEA_JED, Route16_Text_LeaRematchIntro, Route16_Text_LeaDefeat, Route16_Text_LeaNotEnoughMons
+ * msgbox Route16_Text_LeaPostBattle, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route16_EventScript_LeaRematch : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route16_EventScript_LeaRematch")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch_double TRAINER_YOUNG_COUPLE_LEA_JED, Route16_Text_JedRematchIntro, Route16_Text_JedDefeat, Route16_Text_JedNotEnoughMons
+ * msgbox Route16_Text_JedPostBattle, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route16_EventScript_JedRematch : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route16_EventScript_JedRematch")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox Text_SnorlaxReturnedToMountains
+ * release
+ * end
+ * ```
+ */
+internal object Route16_EventScript_FoughtSnorlax : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route16_EventScript_FoughtSnorlax")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * release
+ * end
+ * ```
+ */
+internal object Route16_EventScript_DontUsePokeFlute : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route16_EventScript_DontUsePokeFlute")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Route16_Text_MonSprawledOutInSlumber
+ * release
+ * end
+ * ```
+ */
+internal object Route16_EventScript_SnorlaxNoPokeFlute : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route16.MonSprawledOutInSlumber)
+  }
+}
+
 internal val Route16Scripts: Map<String, Script> =
     mapOf(
         "Route16_EventScript_Lao" to Route16_EventScript_Lao,
@@ -237,4 +298,9 @@ internal val Route16Scripts: Map<String, Script> =
         "Route16_EventScript_Snorlax" to Route16_EventScript_Snorlax,
         "Route16_EventScript_RouteSign" to Route16_EventScript_RouteSign,
         "Route16_EventScript_CyclingRoadSign" to Route16_EventScript_CyclingRoadSign,
+        "Route16_EventScript_LeaRematch" to Route16_EventScript_LeaRematch,
+        "Route16_EventScript_JedRematch" to Route16_EventScript_JedRematch,
+        "Route16_EventScript_FoughtSnorlax" to Route16_EventScript_FoughtSnorlax,
+        "Route16_EventScript_DontUsePokeFlute" to Route16_EventScript_DontUsePokeFlute,
+        "Route16_EventScript_SnorlaxNoPokeFlute" to Route16_EventScript_SnorlaxNoPokeFlute,
     )

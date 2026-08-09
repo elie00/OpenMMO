@@ -118,6 +118,26 @@ internal object LilycoveCity_House3_EventScript_Man : Script {
   }
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox LilycoveCity_House3_Text_OhAreYouSure, MSGBOX_DEFAULT
+ * closemessage
+ * applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
+ * waitmovement 0
+ * release
+ * end
+ * ```
+ */
+internal object LilycoveCity_House3_EventScript_DeclinePokeblockLearn : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity_House3.OhAreYouSure)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
+}
+
 internal val LilycoveCity_House3Scripts: Map<String, Script> =
     mapOf(
         "LilycoveCity_House3_EventScript_GameBoyKid4" to
@@ -130,4 +150,6 @@ internal val LilycoveCity_House3Scripts: Map<String, Script> =
         "LilycoveCity_House3_EventScript_GameBoyKid1" to
             LilycoveCity_House3_EventScript_GameBoyKid1,
         "LilycoveCity_House3_EventScript_Man" to LilycoveCity_House3_EventScript_Man,
+        "LilycoveCity_House3_EventScript_DeclinePokeblockLearn" to
+            LilycoveCity_House3_EventScript_DeclinePokeblockLearn,
     )

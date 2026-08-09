@@ -313,7 +313,7 @@ internal object VermilionCity_Gym_EventScript_TrashCan15 : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox VermilionCity_Gym_Text_GymGuyPostVictory
  * release
@@ -321,12 +321,13 @@ internal object VermilionCity_Gym_EventScript_TrashCan15 : Script {
  * ```
  */
 internal object VermilionCity_Gym_EventScript_GymGuyPostVictory : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port VermilionCity_Gym_EventScript_GymGuyPostVictory")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(VermilionCity_Gym.GymGuyPostVictory)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox VermilionCity_Gym_Text_GymStatuePlayerWon
  * releaseall
@@ -334,8 +335,193 @@ internal object VermilionCity_Gym_EventScript_GymGuyPostVictory : Script {
  * ```
  */
 internal object VermilionCity_Gym_EventScript_GymStatuePostVictory : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(VermilionCity_Gym.GymStatuePlayerWon)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * goto_if_questlog EventScript_ReleaseEnd
+ * special QuestLog_CutRecording
+ * copyvar SWITCH1_ID, VAR_TEMP_0
+ * copyvar SWITCH2_ID, VAR_TEMP_1
+ * goto_if_set FLAG_FOUND_BOTH_VERMILION_GYM_SWITCHES, VermilionCity_Gym_EventScript_LocksAlreadyOpen
+ * goto_if_set FOUND_FIRST_SWITCH, VermilionCity_Gym_EventScript_TrySwitchTwo
+ * goto_if_eq SWITCH1_ID, TRASH_CAN_ID, VermilionCity_Gym_EventScript_FoundSwitchOne
+ * msgbox VermilionCity_Gym_Text_NopeOnlyTrashHere
+ * releaseall
+ * end
+ * ```
+ */
+internal object VermilionCity_Gym_EventScript_TrashCan : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port VermilionCity_Gym_EventScript_TrashCan")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox VermilionCity_Gym_Text_ExplainThunderBadgeTakeThis
+ * checkitemspace ITEM_TM34
+ * goto_if_eq VAR_RESULT, FALSE, VermilionCity_Gym_EventScript_NoRoomForTM34
+ * giveitem_msg VermilionCity_Gym_Text_ReceivedTM34FromLtSurge, ITEM_TM34
+ * setflag FLAG_GOT_TM34_FROM_SURGE
+ * msgbox VermilionCity_Gym_Text_ExplainTM34
+ * release
+ * end
+ * ```
+ */
+internal object VermilionCity_Gym_EventScript_GiveTM34 : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port VermilionCity_Gym_EventScript_GiveTM34")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox VermilionCity_Gym_Text_MakeRoomInYourBag
+ * release
+ * end
+ * ```
+ */
+internal object VermilionCity_Gym_EventScript_NoRoomForTM34 : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(VermilionCity_Gym.MakeRoomInYourBag)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox VermilionCity_Gym_Text_SwitchUnderTrashFirstLockOpened
+ * playse SE_PIN
+ * waitse
+ * call VermilionCity_Gym_EventScript_SetOneBeamOff
+ * special DrawWholeMapView
+ * setflag FOUND_FIRST_SWITCH
+ * releaseall
+ * end
+ * ```
+ */
+internal object VermilionCity_Gym_EventScript_FoundSwitchOne : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port VermilionCity_Gym_EventScript_GymStatuePostVictory")
+      TODO("port VermilionCity_Gym_EventScript_FoundSwitchOne")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox VermilionCity_Gym_Text_NopeOnlyTrashHere
+ * releaseall
+ * end
+ * ```
+ */
+internal object VermilionCity_Gym_EventScript_LocksAlreadyOpen : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(VermilionCity_Gym.NopeOnlyTrashHere)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * goto_if_eq SWITCH2_ID, TRASH_CAN_ID, VermilionCity_Gym_EventScript_FoundSwitchTwo
+ * msgbox VermilionCity_Gym_Text_OnlyTrashLocksWereReset
+ * clearflag FOUND_FIRST_SWITCH
+ * special SetVermilionTrashCans
+ * copyvar VAR_TEMP_0, SWITCH1_ID
+ * copyvar VAR_TEMP_1, SWITCH2_ID
+ * call VermilionCity_Gym_EventScript_SetBeamsOn
+ * special DrawWholeMapView
+ * releaseall
+ * end
+ * ```
+ */
+internal object VermilionCity_Gym_EventScript_TrySwitchTwo : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port VermilionCity_Gym_EventScript_TrySwitchTwo")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * setmetatile 3, 6, METATILE_VermilionGym_Beam_Node_TopLeft_HalfOn, 1
+ * setmetatile 4, 6, METATILE_VermilionGym_Beam_Node_TopLeft_Edge_HalfOn, 1
+ * setmetatile 5, 6, METATILE_VermilionGym_Beam_MidTop_HalfOn, 1
+ * setmetatile 6, 6, METATILE_VermilionGym_Beam_Node_TopRight_Edge_HalfOn, 1
+ * setmetatile 7, 6, METATILE_VermilionGym_Beam_Node_TopRight_HalfOn, 1
+ * setmetatile 3, 7, METATILE_VermilionGym_Beam_Node_BottomLeft_HalfOn, 1
+ * setmetatile 4, 7, METATILE_VermilionGym_Beam_Node_BottomLeft_Edge_HalfOn, 1
+ * setmetatile 5, 7, METATILE_VermilionGym_Beam_MidBottom_HalfOn, 1
+ * setmetatile 6, 7, METATILE_VermilionGym_Beam_Node_BottomRight_Edge_HalfOn, 1
+ * setmetatile 7, 7, METATILE_VermilionGym_Beam_Node_BottomRight_HalfOn, 1
+ * return
+ * ```
+ */
+internal object VermilionCity_Gym_EventScript_SetOneBeamOff : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port VermilionCity_Gym_EventScript_SetOneBeamOff")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * setmetatile 3, 6, METATILE_VermilionGym_Beam_Node_TopLeft_On, 1
+ * setmetatile 4, 6, METATILE_VermilionGym_Beam_Node_TopLeft_Edge_On, 1
+ * setmetatile 5, 6, METATILE_VermilionGym_Beam_MidTop, 1
+ * setmetatile 6, 6, METATILE_VermilionGym_Beam_Node_TopRight_Edge_On, 1
+ * setmetatile 7, 6, METATILE_VermilionGym_Beam_Node_TopRight_On, 1
+ * setmetatile 3, 7, METATILE_VermilionGym_Beam_Node_BottomLeft_On, 1
+ * setmetatile 4, 7, METATILE_VermilionGym_Beam_Node_BottomLeft_Edge_On, 1
+ * setmetatile 5, 7, METATILE_VermilionGym_Beam_MidBottom, 1
+ * setmetatile 6, 7, METATILE_VermilionGym_Beam_Node_BottomRight_Edge_On, 1
+ * setmetatile 7, 7, METATILE_VermilionGym_Beam_Node_BottomRight_On, 1
+ * return
+ * ```
+ */
+internal object VermilionCity_Gym_EventScript_SetBeamsOn : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port VermilionCity_Gym_EventScript_SetBeamsOn")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox VermilionCity_Gym_Text_SecondLockOpened
+ * closemessage
+ * call VermilionCity_Gym_EventScript_SetBeamsOff
+ * special DrawWholeMapView
+ * playse SE_UNLOCK
+ * waitse
+ * setflag FLAG_FOUND_BOTH_VERMILION_GYM_SWITCHES
+ * releaseall
+ * end
+ * ```
+ */
+internal object VermilionCity_Gym_EventScript_FoundSwitchTwo : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port VermilionCity_Gym_EventScript_FoundSwitchTwo")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * setmetatile 3, 6, METATILE_VermilionGym_Beam_Node_TopLeft_Off, 1
+ * setmetatile 4, 6, METATILE_VermilionGym_Beam_Node_TopLeft_Edge_Off, 0
+ * setmetatile 5, 6, METATILE_VermilionGym_Floor, 0
+ * setmetatile 6, 6, METATILE_VermilionGym_Beam_Node_TopRight_Edge_Off, 0
+ * setmetatile 7, 6, METATILE_VermilionGym_Beam_Node_TopRight_Off, 1
+ * setmetatile 3, 7, METATILE_VermilionGym_Beam_Node_BottomLeft_Off, 1
+ * setmetatile 4, 7, METATILE_VermilionGym_Beam_Node_BottomLeft_Edge_Off, 0
+ * setmetatile 5, 7, METATILE_VermilionGym_Floor, 0
+ * setmetatile 6, 7, METATILE_VermilionGym_Beam_Node_BottomRight_Edge_Off, 0
+ * setmetatile 7, 7, METATILE_VermilionGym_Beam_Node_BottomRight_Off, 1
+ * return
+ * ```
+ */
+internal object VermilionCity_Gym_EventScript_SetBeamsOff : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port VermilionCity_Gym_EventScript_SetBeamsOff")
 }
 
 internal val VermilionCity_GymScripts: Map<String, Script> =
@@ -365,4 +551,19 @@ internal val VermilionCity_GymScripts: Map<String, Script> =
             VermilionCity_Gym_EventScript_GymGuyPostVictory,
         "VermilionCity_Gym_EventScript_GymStatuePostVictory" to
             VermilionCity_Gym_EventScript_GymStatuePostVictory,
+        "VermilionCity_Gym_EventScript_TrashCan" to VermilionCity_Gym_EventScript_TrashCan,
+        "VermilionCity_Gym_EventScript_GiveTM34" to VermilionCity_Gym_EventScript_GiveTM34,
+        "VermilionCity_Gym_EventScript_NoRoomForTM34" to
+            VermilionCity_Gym_EventScript_NoRoomForTM34,
+        "VermilionCity_Gym_EventScript_FoundSwitchOne" to
+            VermilionCity_Gym_EventScript_FoundSwitchOne,
+        "VermilionCity_Gym_EventScript_LocksAlreadyOpen" to
+            VermilionCity_Gym_EventScript_LocksAlreadyOpen,
+        "VermilionCity_Gym_EventScript_TrySwitchTwo" to VermilionCity_Gym_EventScript_TrySwitchTwo,
+        "VermilionCity_Gym_EventScript_SetOneBeamOff" to
+            VermilionCity_Gym_EventScript_SetOneBeamOff,
+        "VermilionCity_Gym_EventScript_SetBeamsOn" to VermilionCity_Gym_EventScript_SetBeamsOn,
+        "VermilionCity_Gym_EventScript_FoundSwitchTwo" to
+            VermilionCity_Gym_EventScript_FoundSwitchTwo,
+        "VermilionCity_Gym_EventScript_SetBeamsOff" to VermilionCity_Gym_EventScript_SetBeamsOff,
     )

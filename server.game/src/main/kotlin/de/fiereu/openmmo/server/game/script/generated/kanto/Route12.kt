@@ -278,6 +278,82 @@ internal object Route12_EventScript_FishingSign : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(Route12.SportfishingArea)
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Route12_Text_MonSprawledOutInSlumber
+ * release
+ * end
+ * ```
+ */
+internal object Route12_EventScript_SnorlaxNoPokeFlute : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route12.MonSprawledOutInSlumber)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch_double TRAINER_YOUNG_COUPLE_GIA_JES, Route12_Text_GiaRematchIntro, Route12_Text_GiaDefeat, Route12_Text_GiaNotEnoughMons
+ * msgbox Route12_Text_GiaPostBattle, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route12_EventScript_GiaRematch : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route12_EventScript_GiaRematch")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch_double TRAINER_YOUNG_COUPLE_GIA_JES, Route12_Text_JesRematchIntro, Route12_Text_JesDefeat, Route12_Text_JesNotEnoughMons
+ * msgbox Route12_Text_JesPostBattle, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route12_EventScript_JesRematch : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route12_EventScript_JesRematch")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox Text_SnorlaxReturnedToMountains
+ * release
+ * end
+ * ```
+ */
+internal object Route12_EventScript_FoughtSnorlax : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route12_EventScript_FoughtSnorlax")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * release
+ * end
+ * ```
+ */
+internal object Route12_EventScript_DontUsePokeFlute : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route12_EventScript_DontUsePokeFlute")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * message Text_PlayedPokeFlute
+ * waitmessage
+ * playfanfare MUS_POKE_FLUTE
+ * waitfanfare
+ * msgbox Text_SnorlaxWokeUp
+ * return
+ * ```
+ */
+internal object EventScript_AwakenSnorlax : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_AwakenSnorlax")
+}
+
 internal val Route12Scripts: Map<String, Script> =
     mapOf(
         "Route12_EventScript_Ned" to Route12_EventScript_Ned,
@@ -294,4 +370,10 @@ internal val Route12Scripts: Map<String, Script> =
         "Route12_EventScript_Jes" to Route12_EventScript_Jes,
         "Route12_EventScript_RouteSign" to Route12_EventScript_RouteSign,
         "Route12_EventScript_FishingSign" to Route12_EventScript_FishingSign,
+        "Route12_EventScript_SnorlaxNoPokeFlute" to Route12_EventScript_SnorlaxNoPokeFlute,
+        "Route12_EventScript_GiaRematch" to Route12_EventScript_GiaRematch,
+        "Route12_EventScript_JesRematch" to Route12_EventScript_JesRematch,
+        "Route12_EventScript_FoughtSnorlax" to Route12_EventScript_FoughtSnorlax,
+        "Route12_EventScript_DontUsePokeFlute" to Route12_EventScript_DontUsePokeFlute,
+        "EventScript_AwakenSnorlax" to EventScript_AwakenSnorlax,
     )

@@ -35,6 +35,60 @@ internal object Route12_NorthEntrance_2F_EventScript_RightBinoculars : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(Route12_NorthEntrance_2F.ItsPokemonTower)
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Route12_NorthEntrance_2F_Text_ExplainTM27
+ * release
+ * end
+ * ```
+ */
+internal object Route12_NorthEntrance_2F_EventScript_ExplainTM27 : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route12_NorthEntrance_2F.ExplainTM27)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Route12_NorthEntrance_2F_Text_TakeTMDontNeedAnymoreMale
+ * return
+ * ```
+ */
+internal object Route12_NorthEntrance_2F_EventScript_TakeTMMale : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route12_NorthEntrance_2F.TakeTMDontNeedAnymoreMale)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Route12_NorthEntrance_2F_Text_DontHaveRoomForThis
+ * release
+ * end
+ * ```
+ */
+internal object Route12_NorthEntrance_2F_EventScript_NoRoomForTM27 : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route12_NorthEntrance_2F.DontHaveRoomForThis)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Route12_NorthEntrance_2F_Text_TakeTMDontNeedAnymoreFemale
+ * return
+ * ```
+ */
+internal object Route12_NorthEntrance_2F_EventScript_TakeTMFemale : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route12_NorthEntrance_2F.TakeTMDontNeedAnymoreFemale)
+  }
+}
+
 internal val Route12_NorthEntrance_2FScripts: Map<String, Script> =
     mapOf(
         "Route12_NorthEntrance_2F_EventScript_Lass" to Route12_NorthEntrance_2F_EventScript_Lass,
@@ -42,4 +96,12 @@ internal val Route12_NorthEntrance_2FScripts: Map<String, Script> =
             Route12_NorthEntrance_2F_EventScript_LeftBinoculars,
         "Route12_NorthEntrance_2F_EventScript_RightBinoculars" to
             Route12_NorthEntrance_2F_EventScript_RightBinoculars,
+        "Route12_NorthEntrance_2F_EventScript_ExplainTM27" to
+            Route12_NorthEntrance_2F_EventScript_ExplainTM27,
+        "Route12_NorthEntrance_2F_EventScript_TakeTMMale" to
+            Route12_NorthEntrance_2F_EventScript_TakeTMMale,
+        "Route12_NorthEntrance_2F_EventScript_NoRoomForTM27" to
+            Route12_NorthEntrance_2F_EventScript_NoRoomForTM27,
+        "Route12_NorthEntrance_2F_EventScript_TakeTMFemale" to
+            Route12_NorthEntrance_2F_EventScript_TakeTMFemale,
     )

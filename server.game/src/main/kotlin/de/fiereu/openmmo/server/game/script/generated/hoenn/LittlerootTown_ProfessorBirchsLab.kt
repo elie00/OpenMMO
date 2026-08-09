@@ -228,6 +228,544 @@ internal object LittlerootTown_ProfessorBirchsLab_EventScript_PC : Script {
       ctx.sign(LittlerootTown_ProfessorBirchsLab.PCUsedForResearch)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * bufferspeciesname STR_VAR_1, SPECIES_CHIKORITA
+ * setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_CHIKORITA
+ * givemon SPECIES_CHIKORITA, 5
+ * goto_if_eq VAR_RESULT, MON_GIVEN_TO_PARTY, LittlerootTown_ProfessorBirchsLab_EventScript_SendChikoritaToParty
+ * goto_if_eq VAR_RESULT, MON_GIVEN_TO_PC, LittlerootTown_ProfessorBirchsLab_EventScript_SendChikoritaToPC
+ * hidemonpic
+ * goto Common_EventScript_NoMoreRoomForPokemon
+ * end
+ * ```
+ */
+internal object LittlerootTown_ProfessorBirchsLab_EventScript_GiveChikorita : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LittlerootTown_ProfessorBirchsLab_EventScript_GiveChikorita")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * hidemonpic
+ * msgbox LittlerootTown_ProfessorBirchsLab_Text_TakeYourTimeAllInvaluable, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object LittlerootTown_ProfessorBirchsLab_EventScript_TakeYourTime : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LittlerootTown_ProfessorBirchsLab_EventScript_TakeYourTime")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * bufferspeciesname STR_VAR_1, SPECIES_TOTODILE
+ * setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_TOTODILE
+ * givemon SPECIES_TOTODILE, 5
+ * goto_if_eq VAR_RESULT, MON_GIVEN_TO_PARTY, LittlerootTown_ProfessorBirchsLab_EventScript_SendTotodileToParty
+ * goto_if_eq VAR_RESULT, MON_GIVEN_TO_PC, LittlerootTown_ProfessorBirchsLab_EventScript_SendTotodileToPC
+ * hidemonpic
+ * goto Common_EventScript_NoMoreRoomForPokemon
+ * end
+ * ```
+ */
+internal object LittlerootTown_ProfessorBirchsLab_EventScript_GiveTotodile : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LittlerootTown_ProfessorBirchsLab_EventScript_GiveTotodile")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * checkplayergender
+ * call_if_eq VAR_RESULT, MALE, LittlerootTown_ProfessorBirchsLab_EventScript_MayTakeBreakFromFieldwork
+ * call_if_eq VAR_RESULT, FEMALE, LittlerootTown_ProfessorBirchsLab_EventScript_BrendanTakeBreakFromFieldwork
+ * release
+ * end
+ * ```
+ */
+internal object LittlerootTown_ProfessorBirchsLab_EventScript_RivalTakeBreakFromFieldwork : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LittlerootTown_ProfessorBirchsLab_EventScript_RivalTakeBreakFromFieldwork")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox LittlerootTown_ProfessorBirchsLab_Text_BetterLeaveOthersAlone, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object LittlerootTown_ProfessorBirchsLab_EventScript_AlreadyChoseJohtoStarter : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LittlerootTown_ProfessorBirchsLab.BetterLeaveOthersAlone)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox LittlerootTown_ProfessorBirchsLab_Text_MayWhereShouldIGoNext, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object LittlerootTown_ProfessorBirchsLab_EventScript_MayWhereShouldIGoNext : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LittlerootTown_ProfessorBirchsLab.MayWhereShouldIGoNext)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox LittlerootTown_ProfessorBirchsLab_Text_BrendanWhereShouldIGoNext, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object LittlerootTown_ProfessorBirchsLab_EventScript_BrendanWhereShouldIGoNext : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LittlerootTown_ProfessorBirchsLab.BrendanWhereShouldIGoNext)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * checkplayergender
+ * call_if_eq VAR_RESULT, MALE, LittlerootTown_ProfessorBirchsLab_EventScript_MayHaveYouGoneToBattleFrontier
+ * call_if_eq VAR_RESULT, FEMALE, LittlerootTown_ProfessorBirchsLab_EventScript_BrendanHaveYouGoneToBattleFrontier
+ * release
+ * end
+ * ```
+ */
+internal object LittlerootTown_ProfessorBirchsLab_EventScript_RivalHaveYouGoneToBattleFrontier :
+    Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LittlerootTown_ProfessorBirchsLab_EventScript_RivalHaveYouGoneToBattleFrontier")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * bufferspeciesname STR_VAR_1, SPECIES_CYNDAQUIL
+ * setvar VAR_TEMP_TRANSFERRED_SPECIES, SPECIES_CYNDAQUIL
+ * givemon SPECIES_CYNDAQUIL, 5
+ * goto_if_eq VAR_RESULT, MON_GIVEN_TO_PARTY, LittlerootTown_ProfessorBirchsLab_EventScript_SendCyndaquilToParty
+ * goto_if_eq VAR_RESULT, MON_GIVEN_TO_PC, LittlerootTown_ProfessorBirchsLab_EventScript_SendCyndaquilToPC
+ * hidemonpic
+ * goto Common_EventScript_NoMoreRoomForPokemon
+ * end
+ * ```
+ */
+internal object LittlerootTown_ProfessorBirchsLab_EventScript_GiveCyndaquil : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LittlerootTown_ProfessorBirchsLab_EventScript_GiveCyndaquil")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * checkplayergender
+ * call_if_eq VAR_RESULT, MALE, LittlerootTown_ProfessorBirchsLab_EventScript_MayWhatNextImStayingHere
+ * call_if_eq VAR_RESULT, FEMALE, LittlerootTown_ProfessorBirchsLab_EventScript_BrendanPreferCollectingSlowly
+ * release
+ * end
+ * ```
+ */
+internal object LittlerootTown_ProfessorBirchsLab_EventScript_RivalFuturePlans : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LittlerootTown_ProfessorBirchsLab_EventScript_RivalFuturePlans")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * call LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedJohtoStarter
+ * removeobject LOCALID_BIRCHS_LAB_TOTODILE_BALL
+ * msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
+ * goto_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_TotodileTransferredToPC
+ * call Common_EventScript_NameReceivedBoxMon
+ * goto LittlerootTown_ProfessorBirchsLab_EventScript_TotodileTransferredToPC
+ * end
+ * ```
+ */
+internal object LittlerootTown_ProfessorBirchsLab_EventScript_SendTotodileToPC : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LittlerootTown_ProfessorBirchsLab_EventScript_SendTotodileToPC")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox LittlerootTown_ProfessorBirchsLab_Text_BrendanHaveYouGoneToBattleFrontier, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object LittlerootTown_ProfessorBirchsLab_EventScript_BrendanHaveYouGoneToBattleFrontier :
+    Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LittlerootTown_ProfessorBirchsLab.BrendanHaveYouGoneToBattleFrontier)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox LittlerootTown_ProfessorBirchsLab_Text_MayTakeBreakFromFieldwork, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object LittlerootTown_ProfessorBirchsLab_EventScript_MayTakeBreakFromFieldwork : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LittlerootTown_ProfessorBirchsLab.MayTakeBreakFromFieldwork)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox LittlerootTown_ProfessorBirchsLab_Text_MayWhatNextImStayingHere, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object LittlerootTown_ProfessorBirchsLab_EventScript_MayWhatNextImStayingHere : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LittlerootTown_ProfessorBirchsLab.MayWhatNextImStayingHere)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * call LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedJohtoStarter
+ * removeobject LOCALID_BIRCHS_LAB_CHIKORITA_BALL
+ * msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
+ * goto_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_ChikoritaTransferredToPC
+ * call Common_EventScript_NameReceivedBoxMon
+ * goto LittlerootTown_ProfessorBirchsLab_EventScript_ChikoritaTransferredToPC
+ * end
+ * ```
+ */
+internal object LittlerootTown_ProfessorBirchsLab_EventScript_SendChikoritaToPC : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LittlerootTown_ProfessorBirchsLab_EventScript_SendChikoritaToPC")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox gText_NoMoreRoomForPokemon, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object Common_EventScript_NoMoreRoomForPokemon : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port Common_EventScript_NoMoreRoomForPokemon")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * call LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedJohtoStarter
+ * removeobject LOCALID_BIRCHS_LAB_CYNDAQUIL_BALL
+ * msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
+ * goto_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedCyndaquil
+ * call Common_EventScript_GetGiftMonPartySlot
+ * call Common_EventScript_NameReceivedPartyMon
+ * goto LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedCyndaquil
+ * end
+ * ```
+ */
+internal object LittlerootTown_ProfessorBirchsLab_EventScript_SendCyndaquilToParty : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LittlerootTown_ProfessorBirchsLab_EventScript_SendCyndaquilToParty")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox LittlerootTown_ProfessorBirchsLab_Text_MayHaveYouGoneToBattleFrontier, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object LittlerootTown_ProfessorBirchsLab_EventScript_MayHaveYouGoneToBattleFrontier :
+    Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LittlerootTown_ProfessorBirchsLab.MayHaveYouGoneToBattleFrontier)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox LittlerootTown_ProfessorBirchsLab_Text_BrendanTakeBreakFromFieldwork, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object LittlerootTown_ProfessorBirchsLab_EventScript_BrendanTakeBreakFromFieldwork :
+    Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LittlerootTown_ProfessorBirchsLab.BrendanTakeBreakFromFieldwork)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * call LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedJohtoStarter
+ * removeobject LOCALID_BIRCHS_LAB_TOTODILE_BALL
+ * msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
+ * goto_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedTotodile
+ * call Common_EventScript_GetGiftMonPartySlot
+ * call Common_EventScript_NameReceivedPartyMon
+ * goto LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedTotodile
+ * end
+ * ```
+ */
+internal object LittlerootTown_ProfessorBirchsLab_EventScript_SendTotodileToParty : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LittlerootTown_ProfessorBirchsLab_EventScript_SendTotodileToParty")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * call LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedJohtoStarter
+ * removeobject LOCALID_BIRCHS_LAB_CHIKORITA_BALL
+ * msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
+ * goto_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedChikorita
+ * call Common_EventScript_GetGiftMonPartySlot
+ * call Common_EventScript_NameReceivedPartyMon
+ * goto LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedChikorita
+ * end
+ * ```
+ */
+internal object LittlerootTown_ProfessorBirchsLab_EventScript_SendChikoritaToParty : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LittlerootTown_ProfessorBirchsLab_EventScript_SendChikoritaToParty")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * call LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedJohtoStarter
+ * removeobject LOCALID_BIRCHS_LAB_CYNDAQUIL_BALL
+ * msgbox gText_NicknameThisPokemon, MSGBOX_YESNO
+ * goto_if_eq VAR_RESULT, NO, LittlerootTown_ProfessorBirchsLab_EventScript_CyndaquilTransferredToPC
+ * call Common_EventScript_NameReceivedBoxMon
+ * goto LittlerootTown_ProfessorBirchsLab_EventScript_CyndaquilTransferredToPC
+ * end
+ * ```
+ */
+internal object LittlerootTown_ProfessorBirchsLab_EventScript_SendCyndaquilToPC : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LittlerootTown_ProfessorBirchsLab_EventScript_SendCyndaquilToPC")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * hidemonpic
+ * msgbox LittlerootTown_ProfessorBirchsLab_Text_GrassyPatchWaiting, MSGBOX_DEFAULT
+ * setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6
+ * releaseall
+ * end
+ * ```
+ */
+internal object LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedTotodile : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedTotodile")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * hidemonpic
+ * msgbox LittlerootTown_ProfessorBirchsLab_Text_GrassyPatchWaiting, MSGBOX_DEFAULT
+ * setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6
+ * releaseall
+ * end
+ * ```
+ */
+internal object LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedChikorita : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedChikorita")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * playfanfare MUS_OBTAIN_ITEM
+ * message LittlerootTown_ProfessorBirchsLab_Text_ReceivedJohtoStarter
+ * waitmessage
+ * waitfanfare
+ * return
+ * ```
+ */
+internal object LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedJohtoStarter : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedJohtoStarter")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * hidemonpic
+ * msgbox LittlerootTown_ProfessorBirchsLab_Text_GrassyPatchWaiting, MSGBOX_DEFAULT
+ * setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 6
+ * releaseall
+ * end
+ * ```
+ */
+internal object LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedCyndaquil : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedCyndaquil")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * call Common_EventScript_TransferredToPC
+ * goto LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedChikorita
+ * end
+ * ```
+ */
+internal object LittlerootTown_ProfessorBirchsLab_EventScript_ChikoritaTransferredToPC : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    Common_EventScript_TransferredToPC.run(ctx)
+    return LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedChikorita.run(ctx)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * call Common_EventScript_TransferredToPC
+ * goto LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedTotodile
+ * end
+ * ```
+ */
+internal object LittlerootTown_ProfessorBirchsLab_EventScript_TotodileTransferredToPC : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    Common_EventScript_TransferredToPC.run(ctx)
+    return LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedTotodile.run(ctx)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * fadescreen FADE_TO_BLACK
+ * special ChangeBoxPokemonNickname
+ * lock
+ * faceplayer
+ * return
+ * ```
+ */
+internal object Common_EventScript_NameReceivedBoxMon : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Common_EventScript_NameReceivedBoxMon")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * call Common_EventScript_TransferredToPC
+ * goto LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedCyndaquil
+ * end
+ * ```
+ */
+internal object LittlerootTown_ProfessorBirchsLab_EventScript_CyndaquilTransferredToPC : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    Common_EventScript_TransferredToPC.run(ctx)
+    return LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedCyndaquil.run(ctx)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * getpartysize
+ * subvar VAR_RESULT, 1
+ * copyvar VAR_0x8004, VAR_RESULT
+ * return
+ * ```
+ */
+internal object Common_EventScript_GetGiftMonPartySlot : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Common_EventScript_GetGiftMonPartySlot")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * bufferboxname STR_VAR_1, VAR_PC_BOX_TO_SEND_MON
+ * bufferspeciesname STR_VAR_2, VAR_TEMP_TRANSFERRED_SPECIES
+ * call_if_unset FLAG_SYS_PC_LANETTE, EventScript_TransferredSomeonesPC
+ * call_if_set FLAG_SYS_PC_LANETTE, EventScript_TransferredLanettesPC
+ * return
+ * ```
+ */
+internal object Common_EventScript_TransferredToPC : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Common_EventScript_TransferredToPC")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * specialvar VAR_RESULT, ShouldShowBoxWasFullMessage
+ * goto_if_eq VAR_RESULT, TRUE, EventScript_LanettesPCBoxFull
+ * msgbox gText_PkmnTransferredLanettesPC, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object EventScript_TransferredLanettesPC : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_TransferredLanettesPC")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * specialvar VAR_RESULT, ShouldShowBoxWasFullMessage
+ * goto_if_eq VAR_RESULT, TRUE, EventScript_SomeonesPCBoxFull
+ * msgbox gText_PkmnTransferredSomeonesPC, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object EventScript_TransferredSomeonesPC : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_TransferredSomeonesPC")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * specialvar VAR_RESULT, GetPCBoxToSendMon
+ * bufferboxname STR_VAR_3, VAR_RESULT
+ * msgbox gText_PkmnTransferredLanettesPCBoxFull, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object EventScript_LanettesPCBoxFull : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_LanettesPCBoxFull")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * specialvar VAR_RESULT, GetPCBoxToSendMon
+ * bufferboxname STR_VAR_3, VAR_RESULT
+ * msgbox gText_PkmnTransferredSomeonesPCBoxFull, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object EventScript_SomeonesPCBoxFull : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_SomeonesPCBoxFull")
+}
+
 internal val LittlerootTown_ProfessorBirchsLabScripts: Map<String, Script> =
     mapOf(
         "LittlerootTown_ProfessorBirchsLab_OnTransition" to
@@ -256,4 +794,68 @@ internal val LittlerootTown_ProfessorBirchsLabScripts: Map<String, Script> =
             LittlerootTown_ProfessorBirchsLab_EventScript_Bookshelf,
         "LittlerootTown_ProfessorBirchsLab_EventScript_PC" to
             LittlerootTown_ProfessorBirchsLab_EventScript_PC,
+        "LittlerootTown_ProfessorBirchsLab_EventScript_GiveChikorita" to
+            LittlerootTown_ProfessorBirchsLab_EventScript_GiveChikorita,
+        "LittlerootTown_ProfessorBirchsLab_EventScript_TakeYourTime" to
+            LittlerootTown_ProfessorBirchsLab_EventScript_TakeYourTime,
+        "LittlerootTown_ProfessorBirchsLab_EventScript_GiveTotodile" to
+            LittlerootTown_ProfessorBirchsLab_EventScript_GiveTotodile,
+        "LittlerootTown_ProfessorBirchsLab_EventScript_RivalTakeBreakFromFieldwork" to
+            LittlerootTown_ProfessorBirchsLab_EventScript_RivalTakeBreakFromFieldwork,
+        "LittlerootTown_ProfessorBirchsLab_EventScript_AlreadyChoseJohtoStarter" to
+            LittlerootTown_ProfessorBirchsLab_EventScript_AlreadyChoseJohtoStarter,
+        "LittlerootTown_ProfessorBirchsLab_EventScript_MayWhereShouldIGoNext" to
+            LittlerootTown_ProfessorBirchsLab_EventScript_MayWhereShouldIGoNext,
+        "LittlerootTown_ProfessorBirchsLab_EventScript_BrendanWhereShouldIGoNext" to
+            LittlerootTown_ProfessorBirchsLab_EventScript_BrendanWhereShouldIGoNext,
+        "LittlerootTown_ProfessorBirchsLab_EventScript_RivalHaveYouGoneToBattleFrontier" to
+            LittlerootTown_ProfessorBirchsLab_EventScript_RivalHaveYouGoneToBattleFrontier,
+        "LittlerootTown_ProfessorBirchsLab_EventScript_GiveCyndaquil" to
+            LittlerootTown_ProfessorBirchsLab_EventScript_GiveCyndaquil,
+        "LittlerootTown_ProfessorBirchsLab_EventScript_RivalFuturePlans" to
+            LittlerootTown_ProfessorBirchsLab_EventScript_RivalFuturePlans,
+        "LittlerootTown_ProfessorBirchsLab_EventScript_SendTotodileToPC" to
+            LittlerootTown_ProfessorBirchsLab_EventScript_SendTotodileToPC,
+        "LittlerootTown_ProfessorBirchsLab_EventScript_BrendanHaveYouGoneToBattleFrontier" to
+            LittlerootTown_ProfessorBirchsLab_EventScript_BrendanHaveYouGoneToBattleFrontier,
+        "LittlerootTown_ProfessorBirchsLab_EventScript_MayTakeBreakFromFieldwork" to
+            LittlerootTown_ProfessorBirchsLab_EventScript_MayTakeBreakFromFieldwork,
+        "LittlerootTown_ProfessorBirchsLab_EventScript_MayWhatNextImStayingHere" to
+            LittlerootTown_ProfessorBirchsLab_EventScript_MayWhatNextImStayingHere,
+        "LittlerootTown_ProfessorBirchsLab_EventScript_SendChikoritaToPC" to
+            LittlerootTown_ProfessorBirchsLab_EventScript_SendChikoritaToPC,
+        "Common_EventScript_NoMoreRoomForPokemon" to Common_EventScript_NoMoreRoomForPokemon,
+        "LittlerootTown_ProfessorBirchsLab_EventScript_SendCyndaquilToParty" to
+            LittlerootTown_ProfessorBirchsLab_EventScript_SendCyndaquilToParty,
+        "LittlerootTown_ProfessorBirchsLab_EventScript_MayHaveYouGoneToBattleFrontier" to
+            LittlerootTown_ProfessorBirchsLab_EventScript_MayHaveYouGoneToBattleFrontier,
+        "LittlerootTown_ProfessorBirchsLab_EventScript_BrendanTakeBreakFromFieldwork" to
+            LittlerootTown_ProfessorBirchsLab_EventScript_BrendanTakeBreakFromFieldwork,
+        "LittlerootTown_ProfessorBirchsLab_EventScript_SendTotodileToParty" to
+            LittlerootTown_ProfessorBirchsLab_EventScript_SendTotodileToParty,
+        "LittlerootTown_ProfessorBirchsLab_EventScript_SendChikoritaToParty" to
+            LittlerootTown_ProfessorBirchsLab_EventScript_SendChikoritaToParty,
+        "LittlerootTown_ProfessorBirchsLab_EventScript_SendCyndaquilToPC" to
+            LittlerootTown_ProfessorBirchsLab_EventScript_SendCyndaquilToPC,
+        "LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedTotodile" to
+            LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedTotodile,
+        "LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedChikorita" to
+            LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedChikorita,
+        "LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedJohtoStarter" to
+            LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedJohtoStarter,
+        "LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedCyndaquil" to
+            LittlerootTown_ProfessorBirchsLab_EventScript_ReceivedCyndaquil,
+        "LittlerootTown_ProfessorBirchsLab_EventScript_ChikoritaTransferredToPC" to
+            LittlerootTown_ProfessorBirchsLab_EventScript_ChikoritaTransferredToPC,
+        "LittlerootTown_ProfessorBirchsLab_EventScript_TotodileTransferredToPC" to
+            LittlerootTown_ProfessorBirchsLab_EventScript_TotodileTransferredToPC,
+        "Common_EventScript_NameReceivedBoxMon" to Common_EventScript_NameReceivedBoxMon,
+        "LittlerootTown_ProfessorBirchsLab_EventScript_CyndaquilTransferredToPC" to
+            LittlerootTown_ProfessorBirchsLab_EventScript_CyndaquilTransferredToPC,
+        "Common_EventScript_GetGiftMonPartySlot" to Common_EventScript_GetGiftMonPartySlot,
+        "Common_EventScript_TransferredToPC" to Common_EventScript_TransferredToPC,
+        "EventScript_TransferredLanettesPC" to EventScript_TransferredLanettesPC,
+        "EventScript_TransferredSomeonesPC" to EventScript_TransferredSomeonesPC,
+        "EventScript_LanettesPCBoxFull" to EventScript_LanettesPCBoxFull,
+        "EventScript_SomeonesPCBoxFull" to EventScript_SomeonesPCBoxFull,
     )

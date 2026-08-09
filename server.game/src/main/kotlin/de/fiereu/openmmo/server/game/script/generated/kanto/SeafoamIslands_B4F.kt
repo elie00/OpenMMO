@@ -62,6 +62,34 @@ internal object SeafoamIslands_B4F_EventScript_BoulderHintSign : Script {
       ctx.sign(SeafoamIslands_B4F.BouldersMightChangeWaterFlow)
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * setflag FLAG_FOUGHT_ARTICUNO
+ * goto EventScript_RemoveStaticMon
+ * end
+ * ```
+ */
+internal object SeafoamIslands_B4F_EventScript_DefeatedArticuno : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.setFlag(KantoFlags.FLAG_FOUGHT_ARTICUNO)
+    return EventScript_RemoveStaticMon.run(ctx)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * setvar VAR_0x8004, SPECIES_ARTICUNO
+ * goto EventScript_MonFlewAway
+ * end
+ * ```
+ */
+internal object SeafoamIslands_B4F_EventScript_RanFromArticuno : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SeafoamIslands_B4F_EventScript_RanFromArticuno")
+}
+
 internal val SeafoamIslands_B4FScripts: Map<String, Script> =
     mapOf(
         "SeafoamIslands_B4F_EventScript_Articuno" to SeafoamIslands_B4F_EventScript_Articuno,
@@ -71,4 +99,8 @@ internal val SeafoamIslands_B4FScripts: Map<String, Script> =
             SeafoamIslands_B4F_EventScript_FastCurrentSign,
         "SeafoamIslands_B4F_EventScript_BoulderHintSign" to
             SeafoamIslands_B4F_EventScript_BoulderHintSign,
+        "SeafoamIslands_B4F_EventScript_DefeatedArticuno" to
+            SeafoamIslands_B4F_EventScript_DefeatedArticuno,
+        "SeafoamIslands_B4F_EventScript_RanFromArticuno" to
+            SeafoamIslands_B4F_EventScript_RanFromArticuno,
     )

@@ -95,6 +95,189 @@ internal object LilycoveCity_DepartmentStore_1F_EventScript_FloorNamesSign : Scr
       ctx.sign(LilycoveCity_DepartmentStore_1F.FloorNamesSign)
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox LilycoveCity_DepartmentStore_1F_Text_PleaseVisitAgain2, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object LilycoveCity_DepartmentStore_1F_EventScript_PleaseVisitAgain2 : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity_DepartmentStore_1F.PleaseVisitAgain2)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox LilycoveCity_DepartmentStore_1F_Text_ComeBackTomorrow, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object LilycoveCity_DepartmentStore_1F_EventScript_ComeBackTomorrow : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity_DepartmentStore_1F.ComeBackTomorrow)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox LilycoveCity_DepartmentStore_1F_Text_PleaseVisitAgain, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object LilycoveCity_DepartmentStore_1F_EventScript_PleaseVisitAgain : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity_DepartmentStore_1F.PleaseVisitAgain)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox LilycoveCity_DepartmentStore_1F_Text_ThreeDigitsMatched, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object LilycoveCity_DepartmentStore_1F_EventScript_ThreeDigitMatch : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity_DepartmentStore_1F.ThreeDigitsMatched)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox LilycoveCity_DepartmentStore_1F_Text_TicketMatchesPCMon, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object LilycoveCity_DepartmentStore_1F_EventScript_TicketMatchPCMon : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity_DepartmentStore_1F.TicketMatchesPCMon)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox LilycoveCity_DepartmentStore_1F_Text_PrizeWeveBeenHolding, MSGBOX_DEFAULT
+ * giveitem VAR_POKELOT_PRIZE_ITEM
+ * goto_if_eq VAR_RESULT, FALSE, LilycoveCity_DepartmentStore_1F_EventScript_NoRoomForPrize
+ * copyvar VAR_0x8004, VAR_POKELOT_PRIZE_PLACE
+ * copyvar VAR_0x8005, VAR_POKELOT_PRIZE_ITEM
+ * special TryPutLotteryWinnerReportOnAir
+ * setvar VAR_POKELOT_PRIZE_ITEM, ITEM_NONE
+ * setvar VAR_POKELOT_PRIZE_PLACE, 0
+ * release
+ * end
+ * ```
+ */
+internal object LilycoveCity_DepartmentStore_1F_EventScript_GivePrizeFromEarlier : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LilycoveCity_DepartmentStore_1F_EventScript_GivePrizeFromEarlier")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox LilycoveCity_DepartmentStore_1F_Text_TwoDigitsMatched, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object LilycoveCity_DepartmentStore_1F_EventScript_TwoDigitMatch : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity_DepartmentStore_1F.TwoDigitsMatched)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox LilycoveCity_DepartmentStore_1F_Text_AllFiveDigitsMatched, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object LilycoveCity_DepartmentStore_1F_EventScript_FullMatch : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity_DepartmentStore_1F.AllFiveDigitsMatched)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox LilycoveCity_DepartmentStore_1F_Text_NoNumbersMatched, MSGBOX_DEFAULT
+ * goto LilycoveCity_DepartmentStore_1F_EventScript_PleaseVisitAgain2
+ * end
+ * ```
+ */
+internal object LilycoveCity_DepartmentStore_1F_EventScript_NoMatch : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity_DepartmentStore_1F.NoNumbersMatched)
+    return LilycoveCity_DepartmentStore_1F_EventScript_PleaseVisitAgain2.run(ctx)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox LilycoveCity_DepartmentStore_1F_Text_TicketMatchesPartyMon, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object LilycoveCity_DepartmentStore_1F_EventScript_TicketMatchPartyMon : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity_DepartmentStore_1F.TicketMatchesPartyMon)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox LilycoveCity_DepartmentStore_1F_Text_FourDigitsMatched, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object LilycoveCity_DepartmentStore_1F_EventScript_FourDigitMatch : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity_DepartmentStore_1F.FourDigitsMatched)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * copyvar VAR_POKELOT_PRIZE_PLACE, VAR_0x8004
+ * copyvar VAR_POKELOT_PRIZE_ITEM, VAR_0x8005
+ * goto LilycoveCity_DepartmentStore_1F_EventScript_NoRoomForPrize
+ * end
+ * ```
+ */
+internal object LilycoveCity_DepartmentStore_1F_EventScript_RecordPrizeNoRoom : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LilycoveCity_DepartmentStore_1F_EventScript_RecordPrizeNoRoom")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox LilycoveCity_DepartmentStore_1F_Text_NoRoomForThis, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object LilycoveCity_DepartmentStore_1F_EventScript_NoRoomForPrize : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity_DepartmentStore_1F.NoRoomForThis)
+  }
+}
+
 internal val LilycoveCity_DepartmentStore_1FScripts: Map<String, Script> =
     mapOf(
         "LilycoveCity_DepartmentStore_1F_EventScript_Greeter" to
@@ -111,4 +294,30 @@ internal val LilycoveCity_DepartmentStore_1FScripts: Map<String, Script> =
             LilycoveCity_DepartmentStore_1F_EventScript_Azumarill,
         "LilycoveCity_DepartmentStore_1F_EventScript_FloorNamesSign" to
             LilycoveCity_DepartmentStore_1F_EventScript_FloorNamesSign,
+        "LilycoveCity_DepartmentStore_1F_EventScript_PleaseVisitAgain2" to
+            LilycoveCity_DepartmentStore_1F_EventScript_PleaseVisitAgain2,
+        "LilycoveCity_DepartmentStore_1F_EventScript_ComeBackTomorrow" to
+            LilycoveCity_DepartmentStore_1F_EventScript_ComeBackTomorrow,
+        "LilycoveCity_DepartmentStore_1F_EventScript_PleaseVisitAgain" to
+            LilycoveCity_DepartmentStore_1F_EventScript_PleaseVisitAgain,
+        "LilycoveCity_DepartmentStore_1F_EventScript_ThreeDigitMatch" to
+            LilycoveCity_DepartmentStore_1F_EventScript_ThreeDigitMatch,
+        "LilycoveCity_DepartmentStore_1F_EventScript_TicketMatchPCMon" to
+            LilycoveCity_DepartmentStore_1F_EventScript_TicketMatchPCMon,
+        "LilycoveCity_DepartmentStore_1F_EventScript_GivePrizeFromEarlier" to
+            LilycoveCity_DepartmentStore_1F_EventScript_GivePrizeFromEarlier,
+        "LilycoveCity_DepartmentStore_1F_EventScript_TwoDigitMatch" to
+            LilycoveCity_DepartmentStore_1F_EventScript_TwoDigitMatch,
+        "LilycoveCity_DepartmentStore_1F_EventScript_FullMatch" to
+            LilycoveCity_DepartmentStore_1F_EventScript_FullMatch,
+        "LilycoveCity_DepartmentStore_1F_EventScript_NoMatch" to
+            LilycoveCity_DepartmentStore_1F_EventScript_NoMatch,
+        "LilycoveCity_DepartmentStore_1F_EventScript_TicketMatchPartyMon" to
+            LilycoveCity_DepartmentStore_1F_EventScript_TicketMatchPartyMon,
+        "LilycoveCity_DepartmentStore_1F_EventScript_FourDigitMatch" to
+            LilycoveCity_DepartmentStore_1F_EventScript_FourDigitMatch,
+        "LilycoveCity_DepartmentStore_1F_EventScript_RecordPrizeNoRoom" to
+            LilycoveCity_DepartmentStore_1F_EventScript_RecordPrizeNoRoom,
+        "LilycoveCity_DepartmentStore_1F_EventScript_NoRoomForPrize" to
+            LilycoveCity_DepartmentStore_1F_EventScript_NoRoomForPrize,
     )

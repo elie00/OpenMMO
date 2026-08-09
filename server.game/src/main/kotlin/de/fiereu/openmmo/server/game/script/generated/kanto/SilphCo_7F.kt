@@ -228,6 +228,134 @@ internal object SilphCo_7F_EventScript_FloorSign : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(SilphCo_7F.FloorSign)
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SilphCo_7F_Text_RocketBossWentToBoardroom
+ * release
+ * end
+ * ```
+ */
+internal object SilphCo_7F_EventScript_AlreadyGotLapras : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SilphCo_7F.RocketBossWentToBoardroom)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * textcolor NPC_TEXT_COLOR_NEUTRAL
+ * playfanfare MUS_LEVEL_UP
+ * message SilphCo_7F_Text_ObtainedLaprasFromEmployee
+ * waitmessage
+ * waitfanfare
+ * bufferspeciesname STR_VAR_1, SPECIES_LAPRAS
+ * msgbox Text_GiveNicknameToThisMon, MSGBOX_YESNO
+ * goto_if_eq VAR_RESULT, NO, SilphCo_7F_EventScript_EndReceiveLapras
+ * call EventScript_GetGiftMonPartySlot
+ * call EventScript_ChangePokemonNickname
+ * goto SilphCo_7F_EventScript_EndReceiveLapras
+ * end
+ * ```
+ */
+internal object SilphCo_7F_EventScript_ReceiveLaprasParty : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SilphCo_7F_EventScript_ReceiveLaprasParty")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SilphCo_7F_Text_ThankYouSoMuch
+ * release
+ * end
+ * ```
+ */
+internal object SilphCo_7F_EventScript_WorkerFRocketsGone : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SilphCo_7F.ThankYouSoMuch)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SilphCo_7F_Text_WowYouChasedOffTeamRocket
+ * release
+ * end
+ * ```
+ */
+internal object SilphCo_7F_EventScript_WorkerM2RocketsGone : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SilphCo_7F.WowYouChasedOffTeamRocket)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SilphCo_7F_Text_CanceledMasterBallProject
+ * release
+ * end
+ * ```
+ */
+internal object SilphCo_7F_EventScript_WorkerM1RocketsGone : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SilphCo_7F.CanceledMasterBallProject)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * textcolor NPC_TEXT_COLOR_NEUTRAL
+ * playfanfare MUS_LEVEL_UP
+ * message SilphCo_7F_Text_ObtainedLaprasFromEmployee
+ * waitmessage
+ * waitfanfare
+ * bufferspeciesname STR_VAR_1, SPECIES_LAPRAS
+ * msgbox Text_GiveNicknameToThisMon, MSGBOX_YESNO
+ * goto_if_eq VAR_RESULT, NO, SilphCo_7F_EventScript_LaprasTransferredToPC
+ * call EventScript_NameReceivedBoxMon
+ * goto SilphCo_7F_EventScript_LaprasTransferredToPC
+ * end
+ * ```
+ */
+internal object SilphCo_7F_EventScript_ReceiveLaprasPC : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port SilphCo_7F_EventScript_ReceiveLaprasPC")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * textcolor NPC_TEXT_COLOR_MALE
+ * msgbox SilphCo_7F_Text_ExplainLapras
+ * setflag FLAG_GOT_LAPRAS_FROM_SILPH
+ * release
+ * end
+ * ```
+ */
+internal object SilphCo_7F_EventScript_EndReceiveLapras : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SilphCo_7F_EventScript_EndReceiveLapras")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * call EventScript_TransferredToPC
+ * goto SilphCo_7F_EventScript_EndReceiveLapras
+ * end
+ * ```
+ */
+internal object SilphCo_7F_EventScript_LaprasTransferredToPC : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    EventScript_TransferredToPC.run(ctx)
+    return SilphCo_7F_EventScript_EndReceiveLapras.run(ctx)
+  }
+}
+
 internal val SilphCo_7FScripts: Map<String, Script> =
     mapOf(
         "SilphCo_7F_EventScript_LaprasGuy" to SilphCo_7F_EventScript_LaprasGuy,
@@ -244,4 +372,13 @@ internal val SilphCo_7FScripts: Map<String, Script> =
         "SilphCo_7F_EventScript_Door2" to SilphCo_7F_EventScript_Door2,
         "SilphCo_7F_EventScript_Door3" to SilphCo_7F_EventScript_Door3,
         "SilphCo_7F_EventScript_FloorSign" to SilphCo_7F_EventScript_FloorSign,
+        "SilphCo_7F_EventScript_AlreadyGotLapras" to SilphCo_7F_EventScript_AlreadyGotLapras,
+        "SilphCo_7F_EventScript_ReceiveLaprasParty" to SilphCo_7F_EventScript_ReceiveLaprasParty,
+        "SilphCo_7F_EventScript_WorkerFRocketsGone" to SilphCo_7F_EventScript_WorkerFRocketsGone,
+        "SilphCo_7F_EventScript_WorkerM2RocketsGone" to SilphCo_7F_EventScript_WorkerM2RocketsGone,
+        "SilphCo_7F_EventScript_WorkerM1RocketsGone" to SilphCo_7F_EventScript_WorkerM1RocketsGone,
+        "SilphCo_7F_EventScript_ReceiveLaprasPC" to SilphCo_7F_EventScript_ReceiveLaprasPC,
+        "SilphCo_7F_EventScript_EndReceiveLapras" to SilphCo_7F_EventScript_EndReceiveLapras,
+        "SilphCo_7F_EventScript_LaprasTransferredToPC" to
+            SilphCo_7F_EventScript_LaprasTransferredToPC,
     )

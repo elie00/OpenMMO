@@ -5,7 +5,7 @@ import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -15,8 +15,9 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object CinnabarIsland_PokemonCenter_1F_EventScript_Nurse : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port CinnabarIsland_PokemonCenter_1F_EventScript_Nurse")
+  override suspend fun run(ctx: ScriptContext) {
+    EventScript_PkmnCenterNurse.run(ctx)
+  }
 }
 
 internal object CinnabarIsland_PokemonCenter_1F_EventScript_CooltrainerF : Script {
@@ -82,6 +83,62 @@ internal object CinnabarIsland_PokemonCenter_1F_EventScript_Bill : Script {
       TODO("port CinnabarIsland_PokemonCenter_1F_EventScript_Bill")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_CINNABAR_POKEMON_CENTER_BILL, CinnabarIsland_PokemonCenter_1F_Movement_BillExitEast
+ * applymovement LOCALID_PLAYER, CinnabarIsland_PokemonCenter_1F_Movement_PlayerExitEast
+ * waitmovement 0
+ * return
+ * ```
+ */
+internal object CinnabarIsland_PokemonCenter_1F_EventScript_ExitWithBillEast : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port CinnabarIsland_PokemonCenter_1F_EventScript_ExitWithBillEast")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox CinnabarIsland_PokemonCenter_1F_Text_OhNotDoneYet
+ * release
+ * end
+ * ```
+ */
+internal object CinnabarIsland_PokemonCenter_1F_EventScript_NotReadyToSail : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(CinnabarIsland_PokemonCenter_1F.OhNotDoneYet)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_CINNABAR_POKEMON_CENTER_BILL, CinnabarIsland_PokemonCenter_1F_Movement_BillExit
+ * applymovement LOCALID_PLAYER, CinnabarIsland_PokemonCenter_1F_Movement_PlayerExitSouth
+ * waitmovement 0
+ * return
+ * ```
+ */
+internal object CinnabarIsland_PokemonCenter_1F_EventScript_ExitWithBillSouth : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port CinnabarIsland_PokemonCenter_1F_EventScript_ExitWithBillSouth")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_CINNABAR_POKEMON_CENTER_BILL, CinnabarIsland_PokemonCenter_1F_Movement_BillExit
+ * applymovement LOCALID_PLAYER, CinnabarIsland_PokemonCenter_1F_Movement_PlayerExitWest
+ * waitmovement 0
+ * return
+ * ```
+ */
+internal object CinnabarIsland_PokemonCenter_1F_EventScript_ExitWithBillWest : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port CinnabarIsland_PokemonCenter_1F_EventScript_ExitWithBillWest")
+}
+
 internal val CinnabarIsland_PokemonCenter_1FScripts: Map<String, Script> =
     mapOf(
         "CinnabarIsland_PokemonCenter_1F_EventScript_Nurse" to
@@ -96,4 +153,12 @@ internal val CinnabarIsland_PokemonCenter_1FScripts: Map<String, Script> =
             CinnabarIsland_PokemonCenter_1F_EventScript_PokemonJournalMrFuji,
         "CinnabarIsland_PokemonCenter_1F_EventScript_Bill" to
             CinnabarIsland_PokemonCenter_1F_EventScript_Bill,
+        "CinnabarIsland_PokemonCenter_1F_EventScript_ExitWithBillEast" to
+            CinnabarIsland_PokemonCenter_1F_EventScript_ExitWithBillEast,
+        "CinnabarIsland_PokemonCenter_1F_EventScript_NotReadyToSail" to
+            CinnabarIsland_PokemonCenter_1F_EventScript_NotReadyToSail,
+        "CinnabarIsland_PokemonCenter_1F_EventScript_ExitWithBillSouth" to
+            CinnabarIsland_PokemonCenter_1F_EventScript_ExitWithBillSouth,
+        "CinnabarIsland_PokemonCenter_1F_EventScript_ExitWithBillWest" to
+            CinnabarIsland_PokemonCenter_1F_EventScript_ExitWithBillWest,
     )

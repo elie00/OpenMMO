@@ -178,6 +178,91 @@ internal object BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_TalkToPot
       TODO("port BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_TalkToPotentialPartner")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * frontier_set FRONTIER_DATA_RECORD_DISABLED, TRUE
+ * goto BattleFrontier_BattleTower_EventScript_WarpToLobbyLost
+ * end
+ * ```
+ */
+internal object BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_QuitChallenge : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_QuitChallenge")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * frontier_set FRONTIER_DATA_CHALLENGE_STATUS, CHALLENGE_STATUS_LOST
+ * tower_set TOWER_DATA_LVL_MODE
+ * setvar VAR_0x8004, FANCOUNTER_USED_BATTLE_TOWER
+ * special Script_TryGainNewFanFromCounter
+ * goto BattleFrontier_BattleTowerBattleRoom_EventScript_WarpToLobby
+ * ```
+ */
+internal object BattleFrontier_BattleTower_EventScript_WarpToLobbyLost : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port BattleFrontier_BattleTower_EventScript_WarpToLobbyLost")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * copyvar VAR_RESULT, VAR_FRONTIER_BATTLE_MODE
+ * goto_if_eq VAR_RESULT, FRONTIER_MODE_DOUBLES, BattleFrontier_BattleTowerBattleRoom_EventScript_WarpToLobbyDoubles
+ * goto_if_eq VAR_RESULT, FRONTIER_MODE_MULTIS, BattleFrontier_BattleTowerBattleRoom_EventScript_WarpToLobbyMultis
+ * goto_if_eq VAR_RESULT, FRONTIER_MODE_LINK_MULTIS, BattleFrontier_BattleTowerBattleRoom_EventScript_WarpToLobbyLinkMultis
+ * warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_LOBBY, 6, 6
+ * waitstate
+ * end
+ * ```
+ */
+internal object BattleFrontier_BattleTowerBattleRoom_EventScript_WarpToLobby : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port BattleFrontier_BattleTowerBattleRoom_EventScript_WarpToLobby")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * tower_closelink
+ * warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_LOBBY, 18, 6
+ * waitstate
+ * end
+ * ```
+ */
+internal object BattleFrontier_BattleTowerBattleRoom_EventScript_WarpToLobbyLinkMultis : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port BattleFrontier_BattleTowerBattleRoom_EventScript_WarpToLobbyLinkMultis")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_LOBBY, 10, 6
+ * waitstate
+ * end
+ * ```
+ */
+internal object BattleFrontier_BattleTowerBattleRoom_EventScript_WarpToLobbyDoubles : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port BattleFrontier_BattleTowerBattleRoom_EventScript_WarpToLobbyDoubles")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_LOBBY, 14, 6
+ * waitstate
+ * end
+ * ```
+ */
+internal object BattleFrontier_BattleTowerBattleRoom_EventScript_WarpToLobbyMultis : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port BattleFrontier_BattleTowerBattleRoom_EventScript_WarpToLobbyMultis")
+}
+
 internal val BattleFrontier_BattleTowerMultiPartnerRoomScripts: Map<String, Script> =
     mapOf(
         "BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_Attendant" to
@@ -200,4 +285,16 @@ internal val BattleFrontier_BattleTowerMultiPartnerRoomScripts: Map<String, Scri
             BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_Partner8,
         "BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_TalkToPotentialPartner" to
             BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_TalkToPotentialPartner,
+        "BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_QuitChallenge" to
+            BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_QuitChallenge,
+        "BattleFrontier_BattleTower_EventScript_WarpToLobbyLost" to
+            BattleFrontier_BattleTower_EventScript_WarpToLobbyLost,
+        "BattleFrontier_BattleTowerBattleRoom_EventScript_WarpToLobby" to
+            BattleFrontier_BattleTowerBattleRoom_EventScript_WarpToLobby,
+        "BattleFrontier_BattleTowerBattleRoom_EventScript_WarpToLobbyLinkMultis" to
+            BattleFrontier_BattleTowerBattleRoom_EventScript_WarpToLobbyLinkMultis,
+        "BattleFrontier_BattleTowerBattleRoom_EventScript_WarpToLobbyDoubles" to
+            BattleFrontier_BattleTowerBattleRoom_EventScript_WarpToLobbyDoubles,
+        "BattleFrontier_BattleTowerBattleRoom_EventScript_WarpToLobbyMultis" to
+            BattleFrontier_BattleTowerBattleRoom_EventScript_WarpToLobbyMultis,
     )

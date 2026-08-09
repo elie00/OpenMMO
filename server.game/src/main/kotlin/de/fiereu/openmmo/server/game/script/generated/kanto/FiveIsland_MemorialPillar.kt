@@ -140,6 +140,120 @@ internal object FiveIsland_MemorialPillar_EventScript_Memorial : Script {
       TODO("port FiveIsland_MemorialPillar_EventScript_Memorial")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox FiveIsland_MemorialPillar_Text_LeaveAnotherLemonadeOffering, MSGBOX_YESNO
+ * goto_if_eq VAR_RESULT, YES, FiveIsland_MemorialPillar_EventScript_PlaceLemonade
+ * releaseall
+ * end
+ * ```
+ */
+internal object FiveIsland_MemorialPillar_EventScript_AskPlaceLemonade : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port FiveIsland_MemorialPillar_EventScript_AskPlaceLemonade")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox FiveIsland_MemorialPillar_Text_StillHaveThingAsMyThanks
+ * giveitem ITEM_TM42
+ * goto_if_eq VAR_RESULT, FALSE, FiveIsland_MemorialPillar_EventScript_NoRoomForTM42
+ * call FiveIsland_MemorialPillar_EventScript_ReceivedTM42
+ * release
+ * end
+ * ```
+ */
+internal object FiveIsland_MemorialPillar_EventScript_ReturnedForTM42 : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port FiveIsland_MemorialPillar_EventScript_ReturnedForTM42")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox FiveIsland_MemorialPillar_Text_ScrubScrubTectonix
+ * release
+ * end
+ * ```
+ */
+internal object FiveIsland_MemorialPillar_EventScript_AlreadyGotTM42 : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(FiveIsland_MemorialPillar.ScrubScrubTectonix)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox FiveIsland_MemorialPillar_Text_HereLiesTectonix
+ * releaseall
+ * end
+ * ```
+ */
+internal object FiveIsland_MemorialPillar_EventScript_MemorialLemonadeAlreadyPlaced : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(FiveIsland_MemorialPillar.HereLiesTectonix)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * removeitem ITEM_LEMONADE
+ * msgbox FiveIsland_MemorialPillar_Text_PlacedCanOfLemonade
+ * closemessage
+ * applymovement LOCALID_MEMORIAL_MAN, Common_Movement_WalkInPlaceFasterRight
+ * waitmovement 0
+ * delay 45
+ * applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
+ * waitmovement 0
+ * textcolor NPC_TEXT_COLOR_MALE
+ * msgbox FiveIsland_MemorialPillar_Text_ThankYouPleaseTakeThis
+ * giveitem ITEM_TM42
+ * goto_if_eq VAR_RESULT, FALSE, FiveIsland_MemorialPillar_EventScript_NoRoomForTM42
+ * call FiveIsland_MemorialPillar_EventScript_ReceivedTM42
+ * releaseall
+ * end
+ * ```
+ */
+internal object FiveIsland_MemorialPillar_EventScript_PlaceLemonade : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port FiveIsland_MemorialPillar_EventScript_PlaceLemonade")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * setflag FLAG_NO_ROOM_FOR_TM42_AT_MEMORIAL_PILLAR
+ * msgbox FiveIsland_MemorialPillar_Text_DontHaveRoomForIt
+ * releaseall
+ * end
+ * ```
+ */
+internal object FiveIsland_MemorialPillar_EventScript_NoRoomForTM42 : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.setFlag(KantoFlags.FLAG_NO_ROOM_FOR_TM42_AT_MEMORIAL_PILLAR)
+    ctx.say(FiveIsland_MemorialPillar.DontHaveRoomForIt)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox FiveIsland_MemorialPillar_Text_BeGoodToYourMonsToo
+ * applymovement LOCALID_MEMORIAL_MAN, Common_Movement_WalkInPlaceFasterUp
+ * waitmovement 0
+ * setflag FLAG_GOT_TM42_AT_MEMORIAL_PILLAR
+ * return
+ * ```
+ */
+internal object FiveIsland_MemorialPillar_EventScript_ReceivedTM42 : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port FiveIsland_MemorialPillar_EventScript_ReceivedTM42")
+}
+
 internal val FiveIsland_MemorialPillarScripts: Map<String, Script> =
     mapOf(
         "FiveIsland_MemorialPillar_EventScript_MemorialMan" to
@@ -152,4 +266,18 @@ internal val FiveIsland_MemorialPillarScripts: Map<String, Script> =
             FiveIsland_MemorialPillar_EventScript_ItemMetalCoat,
         "FiveIsland_MemorialPillar_EventScript_Memorial" to
             FiveIsland_MemorialPillar_EventScript_Memorial,
+        "FiveIsland_MemorialPillar_EventScript_AskPlaceLemonade" to
+            FiveIsland_MemorialPillar_EventScript_AskPlaceLemonade,
+        "FiveIsland_MemorialPillar_EventScript_ReturnedForTM42" to
+            FiveIsland_MemorialPillar_EventScript_ReturnedForTM42,
+        "FiveIsland_MemorialPillar_EventScript_AlreadyGotTM42" to
+            FiveIsland_MemorialPillar_EventScript_AlreadyGotTM42,
+        "FiveIsland_MemorialPillar_EventScript_MemorialLemonadeAlreadyPlaced" to
+            FiveIsland_MemorialPillar_EventScript_MemorialLemonadeAlreadyPlaced,
+        "FiveIsland_MemorialPillar_EventScript_PlaceLemonade" to
+            FiveIsland_MemorialPillar_EventScript_PlaceLemonade,
+        "FiveIsland_MemorialPillar_EventScript_NoRoomForTM42" to
+            FiveIsland_MemorialPillar_EventScript_NoRoomForTM42,
+        "FiveIsland_MemorialPillar_EventScript_ReceivedTM42" to
+            FiveIsland_MemorialPillar_EventScript_ReceivedTM42,
     )

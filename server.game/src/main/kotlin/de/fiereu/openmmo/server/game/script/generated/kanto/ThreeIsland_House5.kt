@@ -25,7 +25,7 @@ internal object ThreeIsland_House5_EventScript_LittleGirl : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox ThreeIsland_House5_Text_IllGoPlayWithLostelle
  * release
@@ -33,8 +33,9 @@ internal object ThreeIsland_House5_EventScript_LittleGirl : Script {
  * ```
  */
 internal object ThreeIsland_House5_EventScript_LittleGirlLostelleFound : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port ThreeIsland_House5_EventScript_LittleGirlLostelleFound")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(ThreeIsland_House5.IllGoPlayWithLostelle)
+  }
 }
 
 internal val ThreeIsland_House5Scripts: Map<String, Script> =

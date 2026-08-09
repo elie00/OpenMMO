@@ -64,9 +64,72 @@ internal object CeruleanCave_B1F_EventScript_Mewtwo : Script {
   override suspend fun run(ctx: ScriptContext) = TODO("port CeruleanCave_B1F_EventScript_Mewtwo")
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * setflag FLAG_FOUGHT_MEWTWO
+ * goto EventScript_RemoveStaticMon
+ * end
+ * ```
+ */
+internal object CeruleanCave_B1F_EventScript_DefeatedMewtwo : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.setFlag(KantoFlags.FLAG_FOUGHT_MEWTWO)
+    return EventScript_RemoveStaticMon.run(ctx)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * setvar VAR_0x8004, SPECIES_MEWTWO
+ * goto EventScript_MonFlewAway
+ * end
+ * ```
+ */
+internal object CeruleanCave_B1F_EventScript_RanFromMewtwo : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port CeruleanCave_B1F_EventScript_RanFromMewtwo")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * fadescreen FADE_TO_BLACK
+ * removeobject VAR_LAST_TALKED
+ * fadescreen FADE_FROM_BLACK
+ * release
+ * end
+ * ```
+ */
+internal object EventScript_RemoveStaticMon : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_RemoveStaticMon")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * fadescreen FADE_TO_BLACK
+ * removeobject VAR_LAST_TALKED
+ * fadescreen FADE_FROM_BLACK
+ * bufferspeciesname STR_VAR_1, VAR_0x8004
+ * msgbox Text_MonFlewAway
+ * release
+ * end
+ * ```
+ */
+internal object EventScript_MonFlewAway : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_MonFlewAway")
+}
+
 internal val CeruleanCave_B1FScripts: Map<String, Script> =
     mapOf(
         "CeruleanCave_B1F_EventScript_ItemUltraBall" to CeruleanCave_B1F_EventScript_ItemUltraBall,
         "CeruleanCave_B1F_EventScript_ItemMaxRevive" to CeruleanCave_B1F_EventScript_ItemMaxRevive,
         "CeruleanCave_B1F_EventScript_Mewtwo" to CeruleanCave_B1F_EventScript_Mewtwo,
+        "CeruleanCave_B1F_EventScript_DefeatedMewtwo" to
+            CeruleanCave_B1F_EventScript_DefeatedMewtwo,
+        "CeruleanCave_B1F_EventScript_RanFromMewtwo" to CeruleanCave_B1F_EventScript_RanFromMewtwo,
+        "EventScript_RemoveStaticMon" to EventScript_RemoveStaticMon,
+        "EventScript_MonFlewAway" to EventScript_MonFlewAway,
     )

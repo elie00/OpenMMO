@@ -65,6 +65,97 @@ internal object FuchsiaCity_WardensHouse_EventScript_DisplaySign1 : Script {
       ctx.sign(FuchsiaCity_WardensHouse.MonPhotosFossilsOnDisplay)
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox FuchsiaCity_WardensHouse_Text_ExplainStrength
+ * release
+ * end
+ * ```
+ */
+internal object FuchsiaCity_WardensHouse_EventScript_ExplainStrength : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(FuchsiaCity_WardensHouse.ExplainStrength)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox FuchsiaCity_WardensHouse_Text_AhHowheeHoHoo
+ * return
+ * ```
+ */
+internal object FuchsiaCity_WardensHouse_EventScript_WardenYes : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(FuchsiaCity_WardensHouse.AhHowheeHoHoo)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox FuchsiaCity_WardensHouse_Text_HeOhayHeHaHoo
+ * return
+ * ```
+ */
+internal object FuchsiaCity_WardensHouse_EventScript_WardenNo : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(FuchsiaCity_WardensHouse.HeOhayHeHaHoo)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * textcolor NPC_TEXT_COLOR_NEUTRAL
+ * playfanfare MUS_OBTAIN_TMHM
+ * message FuchsiaCity_WardensHouse_Text_GaveGoldTeethToWarden
+ * waitmessage
+ * waitfanfare
+ * msgbox FuchsiaCity_WardensHouse_Text_WardenPoppedInHisTeeth
+ * call EventScript_RestorePrevTextColor
+ * checkplayergender
+ * call_if_eq VAR_RESULT, MALE, FuchsiaCity_WardensHouse_EventScript_WardenThanksMale
+ * call_if_eq VAR_RESULT, FEMALE, FuchsiaCity_WardensHouse_EventScript_WardenThanksFemale
+ * giveitem_msg FuchsiaCity_WardensHouse_Text_ReceivedHM04FromWarden, ITEM_HM04
+ * setflag FLAG_GOT_HM04
+ * removeitem ITEM_GOLD_TEETH
+ * release
+ * end
+ * ```
+ */
+internal object FuchsiaCity_WardensHouse_EventScript_GiveGoldTeeth : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port FuchsiaCity_WardensHouse_EventScript_GiveGoldTeeth")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox FuchsiaCity_WardensHouse_Text_ThanksLassieGiveYouSomething
+ * return
+ * ```
+ */
+internal object FuchsiaCity_WardensHouse_EventScript_WardenThanksFemale : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(FuchsiaCity_WardensHouse.ThanksLassieGiveYouSomething)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox FuchsiaCity_WardensHouse_Text_ThanksSonGiveYouSomething
+ * return
+ * ```
+ */
+internal object FuchsiaCity_WardensHouse_EventScript_WardenThanksMale : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(FuchsiaCity_WardensHouse.ThanksSonGiveYouSomething)
+  }
+}
+
 internal val FuchsiaCity_WardensHouseScripts: Map<String, Script> =
     mapOf(
         "FuchsiaCity_WardensHouse_EventScript_Warden" to
@@ -77,4 +168,16 @@ internal val FuchsiaCity_WardensHouseScripts: Map<String, Script> =
             FuchsiaCity_WardensHouse_EventScript_DisplaySign2,
         "FuchsiaCity_WardensHouse_EventScript_DisplaySign1" to
             FuchsiaCity_WardensHouse_EventScript_DisplaySign1,
+        "FuchsiaCity_WardensHouse_EventScript_ExplainStrength" to
+            FuchsiaCity_WardensHouse_EventScript_ExplainStrength,
+        "FuchsiaCity_WardensHouse_EventScript_WardenYes" to
+            FuchsiaCity_WardensHouse_EventScript_WardenYes,
+        "FuchsiaCity_WardensHouse_EventScript_WardenNo" to
+            FuchsiaCity_WardensHouse_EventScript_WardenNo,
+        "FuchsiaCity_WardensHouse_EventScript_GiveGoldTeeth" to
+            FuchsiaCity_WardensHouse_EventScript_GiveGoldTeeth,
+        "FuchsiaCity_WardensHouse_EventScript_WardenThanksFemale" to
+            FuchsiaCity_WardensHouse_EventScript_WardenThanksFemale,
+        "FuchsiaCity_WardensHouse_EventScript_WardenThanksMale" to
+            FuchsiaCity_WardensHouse_EventScript_WardenThanksMale,
     )

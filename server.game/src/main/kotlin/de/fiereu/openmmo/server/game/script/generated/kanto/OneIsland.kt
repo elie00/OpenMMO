@@ -32,10 +32,40 @@ internal object OneIsland_EventScript_PokemonNetCenterSign : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(OneIsland.PokemonNetCenterSign)
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox OneIsland_Text_HavePCLinkageWithKanto
+ * release
+ * end
+ * ```
+ */
+internal object OneIsland_EventScript_OldManLinkKanto : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(OneIsland.HavePCLinkageWithKanto)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox OneIsland_Text_HavePCLinkageWithHoenn
+ * release
+ * end
+ * ```
+ */
+internal object OneIsland_EventScript_OldManLinkHoenn : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(OneIsland.HavePCLinkageWithHoenn)
+  }
+}
+
 internal val OneIslandScripts: Map<String, Script> =
     mapOf(
         "OneIsland_EventScript_OldMan" to OneIsland_EventScript_OldMan,
         "OneIsland_EventScript_BaldingMan" to OneIsland_EventScript_BaldingMan,
         "OneIsland_EventScript_IslandSign" to OneIsland_EventScript_IslandSign,
         "OneIsland_EventScript_PokemonNetCenterSign" to OneIsland_EventScript_PokemonNetCenterSign,
+        "OneIsland_EventScript_OldManLinkKanto" to OneIsland_EventScript_OldManLinkKanto,
+        "OneIsland_EventScript_OldManLinkHoenn" to OneIsland_EventScript_OldManLinkHoenn,
     )

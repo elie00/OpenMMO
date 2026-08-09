@@ -40,7 +40,98 @@ internal object FarawayIsland_Interior_EventScript_Mew : Script {
   override suspend fun run(ctx: ScriptContext) = TODO("port FarawayIsland_Interior_EventScript_Mew")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_FARAWAY_ISLAND_MEW, FarawayIsland_Interior_Movement_MewFloatUpSouth
+ * waitmovement 0
+ * return
+ * ```
+ */
+internal object FarawayIsland_Interior_EventScript_FoundMewSouth : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port FarawayIsland_Interior_EventScript_FoundMewSouth")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_FARAWAY_ISLAND_MEW, FarawayIsland_Interior_Movement_MewFloatUpWest
+ * waitmovement 0
+ * return
+ * ```
+ */
+internal object FarawayIsland_Interior_EventScript_FoundMewWest : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port FarawayIsland_Interior_EventScript_FoundMewWest")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_FARAWAY_ISLAND_MEW, FarawayIsland_Interior_Movement_MewFloatUpEast
+ * waitmovement 0
+ * return
+ * ```
+ */
+internal object FarawayIsland_Interior_EventScript_FoundMewEast : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port FarawayIsland_Interior_EventScript_FoundMewEast")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_FARAWAY_ISLAND_MEW, FarawayIsland_Interior_Movement_MewFloatUpNorth
+ * waitmovement 0
+ * return
+ * ```
+ */
+internal object FarawayIsland_Interior_EventScript_FoundMewNorth : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port FarawayIsland_Interior_EventScript_FoundMewNorth")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * setflag FLAG_DEFEATED_MEW
+ * setvar VAR_0x8004, SPECIES_MEW
+ * goto Common_EventScript_LegendaryFlewAway
+ * end
+ * ```
+ */
+internal object FarawayIsland_Interior_EventScript_MewDefeated : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port FarawayIsland_Interior_EventScript_MewDefeated")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * setvar VAR_0x8004, SPECIES_MEW
+ * goto Common_EventScript_LegendaryFlewAway
+ * end
+ * ```
+ */
+internal object FarawayIsland_Interior_EventScript_PlayerOrMewRan : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port FarawayIsland_Interior_EventScript_PlayerOrMewRan")
+}
+
 internal val FarawayIsland_InteriorScripts: Map<String, Script> =
     mapOf(
         "FarawayIsland_Interior_EventScript_Mew" to FarawayIsland_Interior_EventScript_Mew,
+        "FarawayIsland_Interior_EventScript_FoundMewSouth" to
+            FarawayIsland_Interior_EventScript_FoundMewSouth,
+        "FarawayIsland_Interior_EventScript_FoundMewWest" to
+            FarawayIsland_Interior_EventScript_FoundMewWest,
+        "FarawayIsland_Interior_EventScript_FoundMewEast" to
+            FarawayIsland_Interior_EventScript_FoundMewEast,
+        "FarawayIsland_Interior_EventScript_FoundMewNorth" to
+            FarawayIsland_Interior_EventScript_FoundMewNorth,
+        "FarawayIsland_Interior_EventScript_MewDefeated" to
+            FarawayIsland_Interior_EventScript_MewDefeated,
+        "FarawayIsland_Interior_EventScript_PlayerOrMewRan" to
+            FarawayIsland_Interior_EventScript_PlayerOrMewRan,
     )

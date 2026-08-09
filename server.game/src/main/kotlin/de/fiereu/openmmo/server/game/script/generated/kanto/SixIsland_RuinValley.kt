@@ -210,6 +210,34 @@ internal object SixIsland_RuinValley_EventScript_DottedHoleDoor : Script {
       TODO("port SixIsland_RuinValley_EventScript_DottedHoleDoor")
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SixIsland_RuinValley_Text_LeftDoorAlone
+ * releaseall
+ * end
+ * ```
+ */
+internal object SixIsland_RuinValley_EventScript_IgnoreDottedHoleDoor : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SixIsland_RuinValley.LeftDoorAlone)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SixIsland_RuinValley_Text_DoorIsOpen
+ * releaseall
+ * end
+ * ```
+ */
+internal object SixIsland_RuinValley_EventScript_DottedHoleDoorOpen : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SixIsland_RuinValley.DoorIsOpen)
+  }
+}
+
 internal val SixIsland_RuinValleyScripts: Map<String, Script> =
     mapOf(
         "SixIsland_RuinValley_EventScript_Scientist" to SixIsland_RuinValley_EventScript_Scientist,
@@ -225,4 +253,8 @@ internal val SixIsland_RuinValleyScripts: Map<String, Script> =
             SixIsland_RuinValley_EventScript_ItemSunStone,
         "SixIsland_RuinValley_EventScript_DottedHoleDoor" to
             SixIsland_RuinValley_EventScript_DottedHoleDoor,
+        "SixIsland_RuinValley_EventScript_IgnoreDottedHoleDoor" to
+            SixIsland_RuinValley_EventScript_IgnoreDottedHoleDoor,
+        "SixIsland_RuinValley_EventScript_DottedHoleDoorOpen" to
+            SixIsland_RuinValley_EventScript_DottedHoleDoorOpen,
     )

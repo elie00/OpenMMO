@@ -5,7 +5,7 @@ import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -15,12 +15,13 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object MossdeepCity_GameCorner_1F_EventScript_OldMan : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port MossdeepCity_GameCorner_1F_EventScript_OldMan")
+  override suspend fun run(ctx: ScriptContext) {
+    return MossdeepCity_GameCorner_1F_EventScript_OldMan2.run(ctx)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -30,8 +31,9 @@ internal object MossdeepCity_GameCorner_1F_EventScript_OldMan : Script {
  * ```
  */
 internal object MossdeepCity_GameCorner_1F_EventScript_InfoMan : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port MossdeepCity_GameCorner_1F_EventScript_InfoMan")
+  override suspend fun run(ctx: ScriptContext) {
+    return MossdeepCity_GameCorner_1F_EventScript_InfoMan2.run(ctx)
+  }
 }
 
 internal object RS_MysteryEventsHouse_EventScript_Door : Script {
@@ -66,6 +68,67 @@ internal object MossdeepCity_GameCorner_1F_EventScript_PokemonJumpRecords : Scri
       TODO("port MossdeepCity_GameCorner_1F_EventScript_PokemonJumpRecords")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * lock
+ * faceplayer
+ * message MossdeepCity_GameCorner_1F_Text_WelcomeCanYouWait
+ * waitmessage
+ * specialvar VAR_RESULT, IsWirelessAdapterConnected
+ * goto_if_eq VAR_RESULT, FALSE, MossdeepCity_GameCorner_1F_EventScript_AdapterNotConnected
+ * delay 60
+ * message MossdeepCity_GameCorner_1F_Text_PlayWhichGame
+ * waitmessage
+ * multichoice 0, 0, MULTI_WIRELESS_MINIGAME, FALSE
+ * switch VAR_RESULT
+ * case 0, MossdeepCity_GameCorner_1F_EventScript_PlayPokemonJump
+ * case 1, MossdeepCity_GameCorner_1F_EventScript_PlayDodrioBerryPicking
+ * case 2, MossdeepCity_GameCorner_1F_EventScript_AbortMinigame
+ * case MULTI_B_PRESSED, MossdeepCity_GameCorner_1F_EventScript_AbortMinigame
+ * end
+ * ```
+ */
+internal object MossdeepCity_GameCorner_1F_EventScript_OldMan2 : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port MossdeepCity_GameCorner_1F_EventScript_OldMan2")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * lock
+ * faceplayer
+ * message MossdeepCity_GameCorner_1F_Text_DescribeWhichGame
+ * waitmessage
+ * multichoice 0, 0, MULTI_WIRELESS_MINIGAME, FALSE
+ * switch VAR_RESULT
+ * case 0, MossdeepCity_GameCorner_1F_EventScript_PokemonJumpInfo
+ * case 1, MossdeepCity_GameCorner_1F_EventScript_DodrioBerryPickingInfo
+ * case 2, MossdeepCity_GameCorner_1F_EventScript_MinigameInfoExit
+ * case MULTI_B_PRESSED, MossdeepCity_GameCorner_1F_EventScript_MinigameInfoExit
+ * end
+ * ```
+ */
+internal object MossdeepCity_GameCorner_1F_EventScript_InfoMan2 : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port MossdeepCity_GameCorner_1F_EventScript_InfoMan2")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * delay 60
+ * msgbox MossdeepCity_GameCorner_1F_Text_AdapterNotConnected, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object MossdeepCity_GameCorner_1F_EventScript_AdapterNotConnected : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port MossdeepCity_GameCorner_1F_EventScript_AdapterNotConnected")
+}
+
 internal val MossdeepCity_GameCorner_1FScripts: Map<String, Script> =
     mapOf(
         "MossdeepCity_GameCorner_1F_EventScript_OldMan" to
@@ -77,4 +140,10 @@ internal val MossdeepCity_GameCorner_1FScripts: Map<String, Script> =
             MossdeepCity_GameCorner_1F_EventScript_DodrioBerryPickingRecords,
         "MossdeepCity_GameCorner_1F_EventScript_PokemonJumpRecords" to
             MossdeepCity_GameCorner_1F_EventScript_PokemonJumpRecords,
+        "MossdeepCity_GameCorner_1F_EventScript_OldMan2" to
+            MossdeepCity_GameCorner_1F_EventScript_OldMan2,
+        "MossdeepCity_GameCorner_1F_EventScript_InfoMan2" to
+            MossdeepCity_GameCorner_1F_EventScript_InfoMan2,
+        "MossdeepCity_GameCorner_1F_EventScript_AdapterNotConnected" to
+            MossdeepCity_GameCorner_1F_EventScript_AdapterNotConnected,
     )

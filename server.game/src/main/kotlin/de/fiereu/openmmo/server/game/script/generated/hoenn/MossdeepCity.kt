@@ -1,6 +1,7 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.dialog.generated.hoenn.MossdeepCity
+import de.fiereu.openmmo.dialog.generated.hoenn.MoveTutor
 import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
@@ -178,7 +179,7 @@ internal object MossdeepCity_EventScript_WhiteRock : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox MossdeepCity_Text_FeelReliefOnLand, MSGBOX_DEFAULT
  * release
@@ -186,12 +187,13 @@ internal object MossdeepCity_EventScript_WhiteRock : Script {
  * ```
  */
 internal object MossdeepCity_EventScript_SailorMagmaGone : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port MossdeepCity_EventScript_SailorMagmaGone")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MossdeepCity.FeelReliefOnLand)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox MossdeepCity_Text_SpaceCenterLaunchingRockets, MSGBOX_DEFAULT
  * release
@@ -199,8 +201,92 @@ internal object MossdeepCity_EventScript_SailorMagmaGone : Script {
  * ```
  */
 internal object MossdeepCity_EventScript_PokefanFMagmaGone : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MossdeepCity.SpaceCenterLaunchingRockets)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_PLAYER, MossdeepCity_Movement_PlayerWatchScottExit
+ * applymovement LOCALID_MOSSDEEP_SCOTT, MossdeepCity_Movement_ScottExitEast
+ * waitmovement 0
+ * return
+ * ```
+ */
+internal object MossdeepCity_EventScript_ScottExitEast : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port MossdeepCity_EventScript_ScottExitEast")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_PLAYER, MossdeepCity_Movement_PlayerWatchScottExit
+ * applymovement LOCALID_MOSSDEEP_SCOTT, MossdeepCity_Movement_ScottExitNorth
+ * waitmovement 0
+ * return
+ * ```
+ */
+internal object MossdeepCity_EventScript_ScottExitNorth : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port MossdeepCity_EventScript_PokefanFMagmaGone")
+      TODO("port MossdeepCity_EventScript_ScottExitNorth")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MossdeepCity_Text_StevensHouseOverThere, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object MossdeepCity_EventScript_ReceivedKingsRock : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MossdeepCity.StevensHouseOverThere)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MoveTutor_Text_DynamicPunchDeclined, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object MoveTutor_EventScript_DynamicPunchDeclined : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MoveTutor.DynamicPunchDeclined)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MossdeepCity_Text_WhatToDoWithWeirdRock, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object MossdeepCity_EventScript_DeclineKingsRock : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MossdeepCity.WhatToDoWithWeirdRock)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MoveTutor_Text_DynamicPunchTaught, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object MoveTutor_EventScript_DynamicPunchTaught : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MoveTutor.DynamicPunchTaught)
+  }
 }
 
 internal val MossdeepCityScripts: Map<String, Script> =
@@ -223,4 +309,10 @@ internal val MossdeepCityScripts: Map<String, Script> =
         "MossdeepCity_EventScript_WhiteRock" to MossdeepCity_EventScript_WhiteRock,
         "MossdeepCity_EventScript_SailorMagmaGone" to MossdeepCity_EventScript_SailorMagmaGone,
         "MossdeepCity_EventScript_PokefanFMagmaGone" to MossdeepCity_EventScript_PokefanFMagmaGone,
+        "MossdeepCity_EventScript_ScottExitEast" to MossdeepCity_EventScript_ScottExitEast,
+        "MossdeepCity_EventScript_ScottExitNorth" to MossdeepCity_EventScript_ScottExitNorth,
+        "MossdeepCity_EventScript_ReceivedKingsRock" to MossdeepCity_EventScript_ReceivedKingsRock,
+        "MoveTutor_EventScript_DynamicPunchDeclined" to MoveTutor_EventScript_DynamicPunchDeclined,
+        "MossdeepCity_EventScript_DeclineKingsRock" to MossdeepCity_EventScript_DeclineKingsRock,
+        "MoveTutor_EventScript_DynamicPunchTaught" to MoveTutor_EventScript_DynamicPunchTaught,
     )

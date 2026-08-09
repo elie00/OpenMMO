@@ -120,6 +120,149 @@ internal object MossdeepCity_SpaceCenter_2F_EventScript_Maxie : Script {
       ctx.say(MossdeepCity_SpaceCenter_2F.MaxieDontInterfere)
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MossdeepCity_SpaceCenter_2F_Text_MagmaCantGetAwayWithThis, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object MossdeepCity_SpaceCenter_2F_EventScript_GentlemanMagma : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MossdeepCity_SpaceCenter_2F.MagmaCantGetAwayWithThis)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MossdeepCity_SpaceCenter_2F_Text_WishOrdinaryPeopleCouldGoIntoSpace, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object MossdeepCity_SpaceCenter_2F_EventScript_RichBoyNormal : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MossdeepCity_SpaceCenter_2F.WishOrdinaryPeopleCouldGoIntoSpace)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MossdeepCity_SpaceCenter_2F_Text_MossdeepIdealForRockets, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object MossdeepCity_SpaceCenter_2F_EventScript_ScientistNormal : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MossdeepCity_SpaceCenter_2F.MossdeepIdealForRockets)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
+ * waitmovement 0
+ * msgbox MossdeepCity_SpaceCenter_2F_Text_StevenAreYouReadyToBattle, MSGBOX_YESNO
+ * goto_if_eq VAR_RESULT, YES, MossdeepCity_SpaceCenter_2F_EventScript_ChoosePartyForMultiBattle
+ * msgbox MossdeepCity_SpaceCenter_2F_Text_StevenHurryGetReadyQuickly, MSGBOX_DEFAULT
+ * closemessage
+ * applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterDown
+ * waitmovement 0
+ * releaseall
+ * end
+ * ```
+ */
+internal object MossdeepCity_SpaceCenter_2F_EventScript_ReadyForBattlePrompt : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port MossdeepCity_SpaceCenter_2F_EventScript_ReadyForBattlePrompt")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MossdeepCity_SpaceCenter_2F_Text_DoesMagmaWantToGoToSpace, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object MossdeepCity_SpaceCenter_2F_EventScript_RichBoyMagma : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MossdeepCity_SpaceCenter_2F.DoesMagmaWantToGoToSpace)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MossdeepCity_SpaceCenter_2F_Text_WouldveLikedToBeAstronaut, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object MossdeepCity_SpaceCenter_2F_EventScript_GentlemanNormal : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MossdeepCity_SpaceCenter_2F.WouldveLikedToBeAstronaut)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MossdeepCity_SpaceCenter_2F_Text_WhyWouldMagmaStealRocketFuel, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object MossdeepCity_SpaceCenter_2F_EventScript_ScientistMagma : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MossdeepCity_SpaceCenter_2F.WhyWouldMagmaStealRocketFuel)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterDown
+ * waitmovement 0
+ * special SavePlayerParty
+ * fadescreen FADE_TO_BLACK
+ * special ChooseHalfPartyForBattle
+ * goto_if_ne VAR_RESULT, 0, MossdeepCity_SpaceCenter_2F_EventScript_DoStevenMultiBattle
+ * special LoadPlayerParty
+ * goto MossdeepCity_SpaceCenter_2F_EventScript_ReadyForBattlePrompt
+ * ```
+ */
+internal object MossdeepCity_SpaceCenter_2F_EventScript_ChoosePartyForMultiBattle : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port MossdeepCity_SpaceCenter_2F_EventScript_ChoosePartyForMultiBattle")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * special ReducePlayerPartyToSelectedMons
+ * frontier_set FRONTIER_DATA_SELECTED_MON_ORDER
+ * setvar VAR_0x8004, SPECIAL_BATTLE_STEVEN
+ * setvar VAR_0x8005, 0
+ * special DoSpecialTrainerBattle
+ * frontier_saveparty
+ * special LoadPlayerParty
+ * switch VAR_RESULT
+ * case 1, MossdeepCity_SpaceCenter_2F_EventScript_DefeatedMaxieTabitha
+ * fadescreen FADE_TO_BLACK
+ * special SetCB2WhiteOut
+ * ```
+ */
+internal object MossdeepCity_SpaceCenter_2F_EventScript_DoStevenMultiBattle : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port MossdeepCity_SpaceCenter_2F_EventScript_DoStevenMultiBattle")
+}
+
 internal val MossdeepCity_SpaceCenter_2FScripts: Map<String, Script> =
     mapOf(
         "MossdeepCity_SpaceCenter_2F_EventScript_RichBoy" to
@@ -140,4 +283,22 @@ internal val MossdeepCity_SpaceCenter_2FScripts: Map<String, Script> =
             MossdeepCity_SpaceCenter_2F_EventScript_Tabitha,
         "MossdeepCity_SpaceCenter_2F_EventScript_Maxie" to
             MossdeepCity_SpaceCenter_2F_EventScript_Maxie,
+        "MossdeepCity_SpaceCenter_2F_EventScript_GentlemanMagma" to
+            MossdeepCity_SpaceCenter_2F_EventScript_GentlemanMagma,
+        "MossdeepCity_SpaceCenter_2F_EventScript_RichBoyNormal" to
+            MossdeepCity_SpaceCenter_2F_EventScript_RichBoyNormal,
+        "MossdeepCity_SpaceCenter_2F_EventScript_ScientistNormal" to
+            MossdeepCity_SpaceCenter_2F_EventScript_ScientistNormal,
+        "MossdeepCity_SpaceCenter_2F_EventScript_ReadyForBattlePrompt" to
+            MossdeepCity_SpaceCenter_2F_EventScript_ReadyForBattlePrompt,
+        "MossdeepCity_SpaceCenter_2F_EventScript_RichBoyMagma" to
+            MossdeepCity_SpaceCenter_2F_EventScript_RichBoyMagma,
+        "MossdeepCity_SpaceCenter_2F_EventScript_GentlemanNormal" to
+            MossdeepCity_SpaceCenter_2F_EventScript_GentlemanNormal,
+        "MossdeepCity_SpaceCenter_2F_EventScript_ScientistMagma" to
+            MossdeepCity_SpaceCenter_2F_EventScript_ScientistMagma,
+        "MossdeepCity_SpaceCenter_2F_EventScript_ChoosePartyForMultiBattle" to
+            MossdeepCity_SpaceCenter_2F_EventScript_ChoosePartyForMultiBattle,
+        "MossdeepCity_SpaceCenter_2F_EventScript_DoStevenMultiBattle" to
+            MossdeepCity_SpaceCenter_2F_EventScript_DoStevenMultiBattle,
     )

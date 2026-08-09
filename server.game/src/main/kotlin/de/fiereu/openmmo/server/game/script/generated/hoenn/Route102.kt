@@ -134,6 +134,48 @@ internal object Route102_EventScript_RouteSignOldale : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(Route102.RouteSignOldale)
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * goto_if_set FLAG_HAS_MATCH_CALL, Route102_EventScript_CalvinRegister
+ * msgbox Route102_Text_CalvinPostBattle, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object Route102_EventScript_CalvinTryRegister : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(HoennFlags.FLAG_HAS_MATCH_CALL))
+        return Route102_EventScript_CalvinRegister.run(ctx)
+    ctx.say(Route102.CalvinPostBattle)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch TRAINER_CALVIN_1, Route102_Text_CalvinRematchIntro, Route102_Text_CalvinRematchDefeated
+ * msgbox Route102_Text_CalvinRematchPostBattle, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route102_EventScript_CalvinRematch : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route102_EventScript_CalvinRematch")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox Route102_Text_CalvinRegister, MSGBOX_DEFAULT
+ * register_matchcall TRAINER_CALVIN_1
+ * release
+ * end
+ * ```
+ */
+internal object Route102_EventScript_CalvinRegister : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route102_EventScript_CalvinRegister")
+}
+
 internal val Route102Scripts: Map<String, Script> =
     mapOf(
         "Route102_EventScript_LittleBoy" to Route102_EventScript_LittleBoy,
@@ -146,4 +188,7 @@ internal val Route102Scripts: Map<String, Script> =
         "Route102_EventScript_Allen" to Route102_EventScript_Allen,
         "Route102_EventScript_RouteSignPetalburg" to Route102_EventScript_RouteSignPetalburg,
         "Route102_EventScript_RouteSignOldale" to Route102_EventScript_RouteSignOldale,
+        "Route102_EventScript_CalvinTryRegister" to Route102_EventScript_CalvinTryRegister,
+        "Route102_EventScript_CalvinRematch" to Route102_EventScript_CalvinRematch,
+        "Route102_EventScript_CalvinRegister" to Route102_EventScript_CalvinRegister,
     )

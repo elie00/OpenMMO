@@ -141,7 +141,7 @@ internal object DewfordTown_Gym_EventScript_RightGymStatue : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox DewfordTown_Gym_Text_GymGuidePostVictory, MSGBOX_DEFAULT
  * release
@@ -149,8 +149,50 @@ internal object DewfordTown_Gym_EventScript_RightGymStatue : Script {
  * ```
  */
 internal object DewfordTown_Gym_EventScript_GymGuidePostVictory : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(DewfordTown_Gym.GymGuidePostVictory)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox DewfordTown_Gym_Text_GymStatueCertified, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object DewfordTown_Gym_EventScript_GymStatueCertified : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(DewfordTown_Gym.GymStatueCertified)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox DewfordTown_Gym_Text_GymStatue, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object DewfordTown_Gym_EventScript_GymStatue : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(DewfordTown_Gym.GymStatue)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch_double TRAINER_BRAWLY_1, DewfordTown_Gym_Text_BrawlyPreRematch, DewfordTown_Gym_Text_BrawlyRematchDefeat, DewfordTown_Gym_Text_BrawlyRematchNeedTwoMons
+ * msgbox DewfordTown_Gym_Text_BrawlyPostRematch, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object DewfordTown_Gym_EventScript_BrawlyRematch : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port DewfordTown_Gym_EventScript_GymGuidePostVictory")
+      TODO("port DewfordTown_Gym_EventScript_BrawlyRematch")
 }
 
 internal val DewfordTown_GymScripts: Map<String, Script> =
@@ -167,4 +209,8 @@ internal val DewfordTown_GymScripts: Map<String, Script> =
         "DewfordTown_Gym_EventScript_RightGymStatue" to DewfordTown_Gym_EventScript_RightGymStatue,
         "DewfordTown_Gym_EventScript_GymGuidePostVictory" to
             DewfordTown_Gym_EventScript_GymGuidePostVictory,
+        "DewfordTown_Gym_EventScript_GymStatueCertified" to
+            DewfordTown_Gym_EventScript_GymStatueCertified,
+        "DewfordTown_Gym_EventScript_GymStatue" to DewfordTown_Gym_EventScript_GymStatue,
+        "DewfordTown_Gym_EventScript_BrawlyRematch" to DewfordTown_Gym_EventScript_BrawlyRematch,
     )

@@ -123,7 +123,7 @@ internal object LavenderTown_VolunteerPokemonHouse_EventScript_Bookshelf : Scrip
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox LavenderTown_VolunteerPokemonHouse_Text_MrFujiWasPrayingForCubonesMother
  * release
@@ -131,8 +131,37 @@ internal object LavenderTown_VolunteerPokemonHouse_EventScript_Bookshelf : Scrip
  * ```
  */
 internal object LavenderTown_VolunteerPokemonHouse_EventScript_YoungsterFujiBack : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LavenderTown_VolunteerPokemonHouse_EventScript_YoungsterFujiBack")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LavenderTown_VolunteerPokemonHouse.MrFujiWasPrayingForCubonesMother)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox LavenderTown_VolunteerPokemonHouse_Text_HasPokeFluteHelpedYou
+ * release
+ * end
+ * ```
+ */
+internal object LavenderTown_VolunteerPokemonHouse_EventScript_AlreadyHavePokeFlute : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LavenderTown_VolunteerPokemonHouse.HasPokeFluteHelpedYou)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox LavenderTown_VolunteerPokemonHouse_Text_MustMakeRoomForThis
+ * release
+ * end
+ * ```
+ */
+internal object LavenderTown_VolunteerPokemonHouse_EventScript_NoRoomForPokeFlute : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LavenderTown_VolunteerPokemonHouse.MustMakeRoomForThis)
+  }
 }
 
 internal val LavenderTown_VolunteerPokemonHouseScripts: Map<String, Script> =
@@ -155,4 +184,8 @@ internal val LavenderTown_VolunteerPokemonHouseScripts: Map<String, Script> =
             LavenderTown_VolunteerPokemonHouse_EventScript_Bookshelf,
         "LavenderTown_VolunteerPokemonHouse_EventScript_YoungsterFujiBack" to
             LavenderTown_VolunteerPokemonHouse_EventScript_YoungsterFujiBack,
+        "LavenderTown_VolunteerPokemonHouse_EventScript_AlreadyHavePokeFlute" to
+            LavenderTown_VolunteerPokemonHouse_EventScript_AlreadyHavePokeFlute,
+        "LavenderTown_VolunteerPokemonHouse_EventScript_NoRoomForPokeFlute" to
+            LavenderTown_VolunteerPokemonHouse_EventScript_NoRoomForPokeFlute,
     )

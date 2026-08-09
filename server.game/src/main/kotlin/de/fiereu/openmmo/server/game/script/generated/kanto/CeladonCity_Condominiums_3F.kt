@@ -55,6 +55,37 @@ internal object CeladonCity_Condominiums_3F_EventScript_Computer3 : Script {
       ctx.sign(CeladonCity_Condominiums_3F.ItsScriptBetterNotLookAtEnding)
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * goto CeladonCity_Condominiums_3F_EventScript_ShowDiploma
+ * end
+ * ```
+ */
+internal object CeladonCity_Condominiums_3F_EventScript_CompletedPokedex : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    return CeladonCity_Condominiums_3F_EventScript_ShowDiploma.run(ctx)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * message CeladonCity_Condominiums_3F_Text_CompletedPokedexCongratulations
+ * waitmessage
+ * delay 60
+ * goto_if_questlog EventScript_ReleaseEnd
+ * special ShowDiploma
+ * waitstate
+ * release
+ * end
+ * ```
+ */
+internal object CeladonCity_Condominiums_3F_EventScript_ShowDiploma : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port CeladonCity_Condominiums_3F_EventScript_ShowDiploma")
+}
+
 internal val CeladonCity_Condominiums_3FScripts: Map<String, Script> =
     mapOf(
         "CeladonCity_Condominiums_3F_EventScript_Programmer" to
@@ -73,4 +104,8 @@ internal val CeladonCity_Condominiums_3FScripts: Map<String, Script> =
             CeladonCity_Condominiums_3F_EventScript_Computer2,
         "CeladonCity_Condominiums_3F_EventScript_Computer3" to
             CeladonCity_Condominiums_3F_EventScript_Computer3,
+        "CeladonCity_Condominiums_3F_EventScript_CompletedPokedex" to
+            CeladonCity_Condominiums_3F_EventScript_CompletedPokedex,
+        "CeladonCity_Condominiums_3F_EventScript_ShowDiploma" to
+            CeladonCity_Condominiums_3F_EventScript_ShowDiploma,
     )

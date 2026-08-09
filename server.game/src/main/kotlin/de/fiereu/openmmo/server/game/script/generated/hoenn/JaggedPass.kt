@@ -139,6 +139,47 @@ internal object JaggedPass_EventScript_Julio : Script {
   }
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_MAGMA_HIDEOUT_GUARD, Common_Movement_FacePlayer
+ * waitmovement 0
+ * msgbox JaggedPass_Text_GoWhereverYouWant, MSGBOX_DEFAULT
+ * closemessage
+ * applymovement LOCALID_MAGMA_HIDEOUT_GUARD, Common_Movement_FaceOriginalDirection
+ * waitmovement 0
+ * releaseall
+ * end
+ * ```
+ */
+internal object JaggedPass_EventScript_GuardDefeated : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port JaggedPass_EventScript_GuardDefeated")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch TRAINER_ETHAN_1, JaggedPass_Text_EthanRematchIntro, JaggedPass_Text_EthanRematchDefeat
+ * msgbox JaggedPass_Text_EthanPostRematch, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object JaggedPass_EventScript_EthanRematch : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port JaggedPass_EventScript_EthanRematch")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch TRAINER_DIANA_1, JaggedPass_Text_DianaRematchIntro, JaggedPass_Text_DianaRematchDefeat
+ * msgbox JaggedPass_Text_DianaPostRematch, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object JaggedPass_EventScript_DianaRematch : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port JaggedPass_EventScript_DianaRematch")
+}
+
 internal val JaggedPassScripts: Map<String, Script> =
     mapOf(
         "JaggedPass_EventScript_Eric" to JaggedPass_EventScript_Eric,
@@ -148,4 +189,7 @@ internal val JaggedPassScripts: Map<String, Script> =
         "JaggedPass_EventScript_MagmaHideoutGuard" to JaggedPass_EventScript_MagmaHideoutGuard,
         "JaggedPass_EventScript_Autumn" to JaggedPass_EventScript_Autumn,
         "JaggedPass_EventScript_Julio" to JaggedPass_EventScript_Julio,
+        "JaggedPass_EventScript_GuardDefeated" to JaggedPass_EventScript_GuardDefeated,
+        "JaggedPass_EventScript_EthanRematch" to JaggedPass_EventScript_EthanRematch,
+        "JaggedPass_EventScript_DianaRematch" to JaggedPass_EventScript_DianaRematch,
     )

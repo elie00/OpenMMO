@@ -282,6 +282,42 @@ internal object Route115_EventScript_MeteorFallsSign : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(Route115.MeteorFallsSign)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch TRAINER_NOB_1, Route115_Text_NobRematchIntro, Route115_Text_NobRematchDefeat
+ * msgbox Route115_Text_NobPostRematch, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route115_EventScript_RematchNob : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route115_EventScript_RematchNob")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch TRAINER_CYNDY_1, Route115_Text_CyndyRematchIntro, Route115_Text_CyndyRematchDefeat
+ * msgbox Route115_Text_CyndyPostRematch, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route115_EventScript_RematchCyndy : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route115_EventScript_RematchCyndy")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch TRAINER_TIMOTHY_1, Route115_Text_TimothyRematchIntro, Route115_Text_TimothyRematchDefeat
+ * msgbox Route115_Text_TimothyPostRematch, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route115_EventScript_RematchTimothy : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route115_EventScript_RematchTimothy")
+}
+
 internal val Route115Scripts: Map<String, Script> =
     mapOf(
         "Route115_EventScript_Woman" to Route115_EventScript_Woman,
@@ -303,4 +339,7 @@ internal val Route115Scripts: Map<String, Script> =
         "Route115_EventScript_ItemHealPowder" to Route115_EventScript_ItemHealPowder,
         "Route115_EventScript_RouteSignRustboro" to Route115_EventScript_RouteSignRustboro,
         "Route115_EventScript_MeteorFallsSign" to Route115_EventScript_MeteorFallsSign,
+        "Route115_EventScript_RematchNob" to Route115_EventScript_RematchNob,
+        "Route115_EventScript_RematchCyndy" to Route115_EventScript_RematchCyndy,
+        "Route115_EventScript_RematchTimothy" to Route115_EventScript_RematchTimothy,
     )

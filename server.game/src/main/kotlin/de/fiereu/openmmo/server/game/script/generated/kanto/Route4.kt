@@ -119,6 +119,54 @@ internal object Route4_EventScript_RouteSign : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(Route4.RouteSign)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox Text_MegaKickDeclined
+ * release
+ * end
+ * ```
+ */
+internal object EventScript_MegaKickDeclined : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_MegaKickDeclined")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox Text_MegaPunchTaught
+ * release
+ * end
+ * ```
+ */
+internal object EventScript_MegaPunchTaught : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_MegaPunchTaught")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox Text_MegaPunchDeclined
+ * release
+ * end
+ * ```
+ */
+internal object EventScript_MegaPunchDeclined : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_MegaPunchDeclined")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox Text_MegaKickTaught
+ * release
+ * end
+ * ```
+ */
+internal object EventScript_MegaKickTaught : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_MegaKickTaught")
+}
+
 internal val Route4Scripts: Map<String, Script> =
     mapOf(
         "Route4_EventScript_Woman" to Route4_EventScript_Woman,
@@ -129,4 +177,8 @@ internal val Route4Scripts: Map<String, Script> =
         "Route4_EventScript_MegaKickTutor" to Route4_EventScript_MegaKickTutor,
         "Route4_EventScript_MtMoonSign" to Route4_EventScript_MtMoonSign,
         "Route4_EventScript_RouteSign" to Route4_EventScript_RouteSign,
+        "EventScript_MegaKickDeclined" to EventScript_MegaKickDeclined,
+        "EventScript_MegaPunchTaught" to EventScript_MegaPunchTaught,
+        "EventScript_MegaPunchDeclined" to EventScript_MegaPunchDeclined,
+        "EventScript_MegaKickTaught" to EventScript_MegaKickTaught,
     )

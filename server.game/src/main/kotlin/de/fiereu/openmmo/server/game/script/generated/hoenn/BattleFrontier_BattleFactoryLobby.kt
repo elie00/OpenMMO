@@ -124,6 +124,80 @@ internal object BattleFrontier_BattleFactoryLobby_EventScript_ReadRulesBoard : S
       TODO("port BattleFrontier_BattleFactoryLobby_EventScript_ReadRulesBoard")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * special SavePlayerParty
+ * call_if_eq VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES, BattleFrontier_BattleFactoryLobby_EventScript_WelcomeForSingleBattle
+ * call_if_eq VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES, BattleFrontier_BattleFactoryLobby_EventScript_WelcomeForDoubleBattle
+ * call_if_eq VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES, BattleFrontier_BattleFactoryLobby_EventScript_TakeSinglesChallenge
+ * call_if_eq VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES, BattleFrontier_BattleFactoryLobby_EventScript_TakeDoublesChallenge
+ * waitmessage
+ * multichoice 17, 6, MULTI_CHALLENGEINFO, FALSE
+ * switch VAR_RESULT
+ * case 0, BattleFrontier_BattleFactoryLobby_EventScript_TryEnterChallenge
+ * case 1, BattleFrontier_BattleFactoryLobby_EventScript_ExplainChallenge
+ * case 2, BattleFrontier_BattleFactoryLobby_EventScript_CancelChallenge
+ * case MULTI_B_PRESSED, BattleFrontier_BattleFactoryLobby_EventScript_CancelChallenge
+ * ```
+ */
+internal object BattleFrontier_BattleFactoryLobby_EventScript_Attendant : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port BattleFrontier_BattleFactoryLobby_EventScript_Attendant")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox BattleFrontier_BattleFactoryLobby_Text_WelcomeForDoubleBattle, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object BattleFrontier_BattleFactoryLobby_EventScript_WelcomeForDoubleBattle : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(BattleFrontier_BattleFactoryLobby.WelcomeForDoubleBattle)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * message BattleFrontier_BattleFactoryLobby_Text_TakeSinglesChallenge
+ * return
+ * ```
+ */
+internal object BattleFrontier_BattleFactoryLobby_EventScript_TakeSinglesChallenge : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(BattleFrontier_BattleFactoryLobby.TakeSinglesChallenge)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * message BattleFrontier_BattleFactoryLobby_Text_TakeDoublesChallenge
+ * return
+ * ```
+ */
+internal object BattleFrontier_BattleFactoryLobby_EventScript_TakeDoublesChallenge : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(BattleFrontier_BattleFactoryLobby.TakeDoublesChallenge)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox BattleFrontier_BattleFactoryLobby_Text_WelcomeForSingleBattle, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object BattleFrontier_BattleFactoryLobby_EventScript_WelcomeForSingleBattle : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(BattleFrontier_BattleFactoryLobby.WelcomeForSingleBattle)
+  }
+}
+
 internal val BattleFrontier_BattleFactoryLobbyScripts: Map<String, Script> =
     mapOf(
         "BattleFrontier_BattleFactoryLobby_EventScript_SinglesAttendant" to
@@ -146,4 +220,14 @@ internal val BattleFrontier_BattleFactoryLobbyScripts: Map<String, Script> =
             BattleFrontier_BattleFactoryLobby_EventScript_RulesBoard,
         "BattleFrontier_BattleFactoryLobby_EventScript_ReadRulesBoard" to
             BattleFrontier_BattleFactoryLobby_EventScript_ReadRulesBoard,
+        "BattleFrontier_BattleFactoryLobby_EventScript_Attendant" to
+            BattleFrontier_BattleFactoryLobby_EventScript_Attendant,
+        "BattleFrontier_BattleFactoryLobby_EventScript_WelcomeForDoubleBattle" to
+            BattleFrontier_BattleFactoryLobby_EventScript_WelcomeForDoubleBattle,
+        "BattleFrontier_BattleFactoryLobby_EventScript_TakeSinglesChallenge" to
+            BattleFrontier_BattleFactoryLobby_EventScript_TakeSinglesChallenge,
+        "BattleFrontier_BattleFactoryLobby_EventScript_TakeDoublesChallenge" to
+            BattleFrontier_BattleFactoryLobby_EventScript_TakeDoublesChallenge,
+        "BattleFrontier_BattleFactoryLobby_EventScript_WelcomeForSingleBattle" to
+            BattleFrontier_BattleFactoryLobby_EventScript_WelcomeForSingleBattle,
     )

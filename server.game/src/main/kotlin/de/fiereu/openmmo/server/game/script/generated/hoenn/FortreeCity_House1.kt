@@ -61,9 +61,57 @@ internal object FortreeCity_House1_EventScript_ExpertF : Script {
       ctx.say(FortreeCity_House1.TradingMemoriesWithOthers)
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox FortreeCity_House1_Text_GoingToMakeVolbeatStrong, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object FortreeCity_House1_EventScript_TradeCompleted : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(FortreeCity_House1.GoingToMakeVolbeatStrong)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox FortreeCity_House1_Text_YouWontTradeMe, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object FortreeCity_House1_EventScript_DeclineTrade : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(FortreeCity_House1.YouWontTradeMe)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * bufferspeciesname STR_VAR_1, VAR_0x8009
+ * msgbox FortreeCity_House1_Text_ThisIsntAMon, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object FortreeCity_House1_EventScript_NotRequestedMon : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port FortreeCity_House1_EventScript_NotRequestedMon")
+}
+
 internal val FortreeCity_House1Scripts: Map<String, Script> =
     mapOf(
         "FortreeCity_House1_EventScript_Trader" to FortreeCity_House1_EventScript_Trader,
         "FortreeCity_House1_EventScript_Zigzagoon" to FortreeCity_House1_EventScript_Zigzagoon,
         "FortreeCity_House1_EventScript_ExpertF" to FortreeCity_House1_EventScript_ExpertF,
+        "FortreeCity_House1_EventScript_TradeCompleted" to
+            FortreeCity_House1_EventScript_TradeCompleted,
+        "FortreeCity_House1_EventScript_DeclineTrade" to
+            FortreeCity_House1_EventScript_DeclineTrade,
+        "FortreeCity_House1_EventScript_NotRequestedMon" to
+            FortreeCity_House1_EventScript_NotRequestedMon,
     )

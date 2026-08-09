@@ -64,6 +64,48 @@ internal object LavaridgeTown_EventScript_TownSign : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(LavaridgeTown.TownSign)
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox LavaridgeTown_Text_AsYouWishThen, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object LavaridgeTown_EventScript_DeclineEgg : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LavaridgeTown.AsYouWishThen)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox LavaridgeTown_Text_NoRoomForThisEgg, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object LavaridgeTown_EventScript_NoRoomForEgg : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LavaridgeTown.NoRoomForThisEgg)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox LavaridgeTown_Text_EverySoOftenEggFoundAtDayCare, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object LavaridgeTown_EventScript_ReceivedEgg : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LavaridgeTown.EverySoOftenEggFoundAtDayCare)
+  }
+}
+
 internal val LavaridgeTownScripts: Map<String, Script> =
     mapOf(
         "LavaridgeTown_EventScript_ExpertF" to LavaridgeTown_EventScript_ExpertF,
@@ -78,4 +120,7 @@ internal val LavaridgeTownScripts: Map<String, Script> =
         "LavaridgeTown_EventScript_HerbShopSign" to LavaridgeTown_EventScript_HerbShopSign,
         "LavaridgeTown_EventScript_GymSign" to LavaridgeTown_EventScript_GymSign,
         "LavaridgeTown_EventScript_TownSign" to LavaridgeTown_EventScript_TownSign,
+        "LavaridgeTown_EventScript_DeclineEgg" to LavaridgeTown_EventScript_DeclineEgg,
+        "LavaridgeTown_EventScript_NoRoomForEgg" to LavaridgeTown_EventScript_NoRoomForEgg,
+        "LavaridgeTown_EventScript_ReceivedEgg" to LavaridgeTown_EventScript_ReceivedEgg,
     )

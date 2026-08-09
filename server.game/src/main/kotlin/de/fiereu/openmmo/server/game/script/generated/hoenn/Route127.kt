@@ -202,6 +202,18 @@ internal object Route127_EventScript_ItemRareCandy : Script {
   }
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch TRAINER_KOJI_1, Route127_Text_KojiRematchIntro, Route127_Text_KojiRematchDefeat
+ * msgbox Route127_Text_KojiPostRematch, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route127_EventScript_RematchKoji : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route127_EventScript_RematchKoji")
+}
+
 internal val Route127Scripts: Map<String, Script> =
     mapOf(
         "Route127_EventScript_Camden" to Route127_EventScript_Camden,
@@ -215,4 +227,5 @@ internal val Route127Scripts: Map<String, Script> =
         "Route127_EventScript_Koji" to Route127_EventScript_Koji,
         "Route127_EventScript_Athena" to Route127_EventScript_Athena,
         "Route127_EventScript_ItemRareCandy" to Route127_EventScript_ItemRareCandy,
+        "Route127_EventScript_RematchKoji" to Route127_EventScript_RematchKoji,
     )

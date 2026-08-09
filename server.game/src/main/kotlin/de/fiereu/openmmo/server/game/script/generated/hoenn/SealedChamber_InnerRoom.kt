@@ -121,6 +121,18 @@ internal object SealedChamber_InnerRoom_EventScript_BrailleStoryPart6 : Script {
       TODO("port SealedChamber_InnerRoom_EventScript_BrailleStoryPart6")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * releaseall
+ * end
+ * ```
+ */
+internal object SealedChamber_InnerRoom_EventScript_NoEffect : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SealedChamber_InnerRoom_EventScript_NoEffect")
+}
+
 internal val SealedChamber_InnerRoomScripts: Map<String, Script> =
     mapOf(
         "SealedChamber_InnerRoom_EventScript_BrailleBackWall" to
@@ -137,4 +149,6 @@ internal val SealedChamber_InnerRoomScripts: Map<String, Script> =
             SealedChamber_InnerRoom_EventScript_BrailleStoryPart5,
         "SealedChamber_InnerRoom_EventScript_BrailleStoryPart6" to
             SealedChamber_InnerRoom_EventScript_BrailleStoryPart6,
+        "SealedChamber_InnerRoom_EventScript_NoEffect" to
+            SealedChamber_InnerRoom_EventScript_NoEffect,
     )

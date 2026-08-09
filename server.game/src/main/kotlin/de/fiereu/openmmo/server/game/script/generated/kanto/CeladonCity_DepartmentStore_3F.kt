@@ -5,15 +5,16 @@ import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * goto EventScript_CounterTutor
  * end
  * ```
  */
 internal object CeladonCity_DepartmentStore_3F_EventScript_CounterTutor : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port CeladonCity_DepartmentStore_3F_EventScript_CounterTutor")
+  override suspend fun run(ctx: ScriptContext) {
+    return EventScript_CounterTutor.run(ctx)
+  }
 }
 
 internal object CeladonCity_DepartmentStore_3F_EventScript_GBAKid1 : Script {
@@ -67,6 +68,53 @@ internal object CeladonCity_DepartmentStore_3F_EventScript_Poster : Script {
       ctx.sign(CeladonCity_DepartmentStore_3F.RedGreenBothArePokemon)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * lock
+ * faceplayer
+ * goto_if_set FLAG_TUTOR_COUNTER, EventScript_CounterTaught
+ * msgbox Text_CounterTeach, MSGBOX_YESNO
+ * goto_if_eq VAR_RESULT, NO, EventScript_CounterDeclined
+ * call EventScript_CanOnlyBeLearnedOnce
+ * goto_if_eq VAR_RESULT, NO, EventScript_CounterDeclined
+ * msgbox Text_CounterWhichMon
+ * setvar VAR_0x8005, MOVETUTOR_COUNTER
+ * call EventScript_ChooseMoveTutorMon
+ * goto_if_eq VAR_RESULT, FALSE, EventScript_CounterDeclined
+ * setflag FLAG_TUTOR_COUNTER
+ * goto EventScript_CounterTaught
+ * end
+ * ```
+ */
+internal object EventScript_CounterTutor : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_CounterTutor")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox Text_CounterDeclined
+ * release
+ * end
+ * ```
+ */
+internal object EventScript_CounterDeclined : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_CounterDeclined")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox Text_CounterTaught
+ * release
+ * end
+ * ```
+ */
+internal object EventScript_CounterTaught : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_CounterTaught")
+}
+
 internal val CeladonCity_DepartmentStore_3FScripts: Map<String, Script> =
     mapOf(
         "CeladonCity_DepartmentStore_3F_EventScript_CounterTutor" to
@@ -93,4 +141,7 @@ internal val CeladonCity_DepartmentStore_3FScripts: Map<String, Script> =
             CeladonCity_DepartmentStore_3F_EventScript_SuperNES,
         "CeladonCity_DepartmentStore_3F_EventScript_Poster" to
             CeladonCity_DepartmentStore_3F_EventScript_Poster,
+        "EventScript_CounterTutor" to EventScript_CounterTutor,
+        "EventScript_CounterDeclined" to EventScript_CounterDeclined,
+        "EventScript_CounterTaught" to EventScript_CounterTaught,
     )

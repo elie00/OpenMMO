@@ -1,5 +1,7 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
+import de.fiereu.openmmo.dialog.generated.hoenn.ShoalCave
+import de.fiereu.openmmo.dialog.generated.hoenn.ShoalCave_LowTideLowerRoom
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 
@@ -41,10 +43,42 @@ internal object ShoalCave_LowTideLowerRoom_EventScript_ShoalSalt4 : Script {
       TODO("port ShoalCave_LowTideLowerRoom_EventScript_ShoalSalt4")
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox ShoalCave_LowTideLowerRoom_Text_EverythingStartsWithFocus, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object ShoalCave_LowTideLowerRoom_EventScript_ReceivedFocusBand : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(ShoalCave_LowTideLowerRoom.EverythingStartsWithFocus)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox ShoalCave_Text_WasShoalSaltNowNothing, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object ShoalCave_LowTideLowerRoom_EventScript_ReceivedShoalSalt : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(ShoalCave.WasShoalSaltNowNothing)
+  }
+}
+
 internal val ShoalCave_LowTideLowerRoomScripts: Map<String, Script> =
     mapOf(
         "ShoalCave_LowTideLowerRoom_EventScript_BlackBelt" to
             ShoalCave_LowTideLowerRoom_EventScript_BlackBelt,
         "ShoalCave_LowTideLowerRoom_EventScript_ShoalSalt4" to
             ShoalCave_LowTideLowerRoom_EventScript_ShoalSalt4,
+        "ShoalCave_LowTideLowerRoom_EventScript_ReceivedFocusBand" to
+            ShoalCave_LowTideLowerRoom_EventScript_ReceivedFocusBand,
+        "ShoalCave_LowTideLowerRoom_EventScript_ReceivedShoalSalt" to
+            ShoalCave_LowTideLowerRoom_EventScript_ReceivedShoalSalt,
     )

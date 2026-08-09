@@ -130,6 +130,66 @@ internal object LilycoveCity_LilycoveMuseum_1F_EventScript_PokeBallSculpture : S
       ctx.sign(LilycoveCity_LilycoveMuseum_1F.BigPokeBallCarvedFromStone)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox LilycoveCity_LilycoveMuseum_1F_Text_HaveYouAnInterestInPaintings, MSGBOX_YESNO
+ * goto_if_eq VAR_RESULT, NO, LilycoveCity_LilycoveMuseum_1F_EventScript_NotInterested
+ * goto_if_eq VAR_RESULT, YES, LilycoveCity_LilycoveMuseum_1F_EventScript_InterestedInPaintings
+ * end
+ * ```
+ */
+internal object LilycoveCity_LilycoveMuseum_1F_EventScript_SawPaintings : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LilycoveCity_LilycoveMuseum_1F_EventScript_SawPaintings")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox LilycoveCity_LilycoveMuseum_1F_Text_NotDisturbYouTakeYourTime, MSGBOX_NPC
+ * end
+ * ```
+ */
+internal object LilycoveCity_LilycoveMuseum_1F_EventScript_NotYet : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity_LilycoveMuseum_1F.NotDisturbYouTakeYourTime)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox LilycoveCity_LilycoveMuseum_1F_Text_ExcellentCanYouComeWithMe, MSGBOX_SIGN
+ * applymovement LOCALID_MUSEUM_1F_CURATOR, LilycoveCity_LilycoveMuseum_1F_Movement_CuratorEnterStairs
+ * waitmovement 0
+ * removeobject LOCALID_MUSEUM_1F_CURATOR
+ * switch VAR_FACING
+ * case DIR_NORTH, LilycoveCity_LilycoveMuseum_1F_EventScript_FollowCuratorNorth
+ * case DIR_WEST, LilycoveCity_LilycoveMuseum_1F_EventScript_FollowCuratorWest
+ * case DIR_EAST, LilycoveCity_LilycoveMuseum_1F_EventScript_FollowCuratorEast
+ * end
+ * ```
+ */
+internal object LilycoveCity_LilycoveMuseum_1F_EventScript_InterestedInPaintings : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LilycoveCity_LilycoveMuseum_1F_EventScript_InterestedInPaintings")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox LilycoveCity_LilycoveMuseum_1F_Text_HonoredYoudVisitInSpiteOfThat, MSGBOX_SIGN
+ * releaseall
+ * end
+ * ```
+ */
+internal object LilycoveCity_LilycoveMuseum_1F_EventScript_NotInterested : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.sign(LilycoveCity_LilycoveMuseum_1F.HonoredYoudVisitInSpiteOfThat)
+  }
+}
+
 internal val LilycoveCity_LilycoveMuseum_1FScripts: Map<String, Script> =
     mapOf(
         "LilycoveCity_LilycoveMuseum_1F_EventScript_Greeter" to
@@ -170,4 +230,12 @@ internal val LilycoveCity_LilycoveMuseum_1FScripts: Map<String, Script> =
             LilycoveCity_LilycoveMuseum_1F_EventScript_LegendaryPokemonPainting,
         "LilycoveCity_LilycoveMuseum_1F_EventScript_PokeBallSculpture" to
             LilycoveCity_LilycoveMuseum_1F_EventScript_PokeBallSculpture,
+        "LilycoveCity_LilycoveMuseum_1F_EventScript_SawPaintings" to
+            LilycoveCity_LilycoveMuseum_1F_EventScript_SawPaintings,
+        "LilycoveCity_LilycoveMuseum_1F_EventScript_NotYet" to
+            LilycoveCity_LilycoveMuseum_1F_EventScript_NotYet,
+        "LilycoveCity_LilycoveMuseum_1F_EventScript_InterestedInPaintings" to
+            LilycoveCity_LilycoveMuseum_1F_EventScript_InterestedInPaintings,
+        "LilycoveCity_LilycoveMuseum_1F_EventScript_NotInterested" to
+            LilycoveCity_LilycoveMuseum_1F_EventScript_NotInterested,
     )

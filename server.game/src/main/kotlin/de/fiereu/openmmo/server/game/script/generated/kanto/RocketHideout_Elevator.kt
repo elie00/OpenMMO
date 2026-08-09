@@ -1,5 +1,6 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.dialog.generated.kanto.RocketHideout_Elevator
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 
@@ -28,8 +29,23 @@ internal object RocketHideout_Elevator_EventScript_FloorSelect : Script {
       TODO("port RocketHideout_Elevator_EventScript_FloorSelect")
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox RocketHideout_Elevator_Text_AppearsToNeedAKey
+ * releaseall
+ * end
+ * ```
+ */
+internal object RocketHideout_Elevator_EventScript_NeedKey : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(RocketHideout_Elevator.AppearsToNeedAKey)
+  }
+}
+
 internal val RocketHideout_ElevatorScripts: Map<String, Script> =
     mapOf(
         "RocketHideout_Elevator_EventScript_FloorSelect" to
             RocketHideout_Elevator_EventScript_FloorSelect,
+        "RocketHideout_Elevator_EventScript_NeedKey" to RocketHideout_Elevator_EventScript_NeedKey,
     )

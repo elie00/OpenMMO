@@ -58,9 +58,50 @@ internal object DesertRuins_EventScript_CaveEntranceSide : Script {
       TODO("port DesertRuins_EventScript_CaveEntranceSide")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * setflag FLAG_DEFEATED_REGIROCK
+ * goto Common_EventScript_RemoveStaticPokemon
+ * end
+ * ```
+ */
+internal object DesertRuins_EventScript_DefeatedRegirock : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port DesertRuins_EventScript_DefeatedRegirock")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * setvar VAR_0x8004, SPECIES_REGIROCK
+ * goto Common_EventScript_LegendaryFlewAway
+ * end
+ * ```
+ */
+internal object DesertRuins_EventScript_RanFromRegirock : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port DesertRuins_EventScript_RanFromRegirock")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox gText_BigHoleInTheWall, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object DesertRuins_EventScript_BigHoleInWall : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port DesertRuins_EventScript_BigHoleInWall")
+}
+
 internal val DesertRuinsScripts: Map<String, Script> =
     mapOf(
         "DesertRuins_EventScript_Regirock" to DesertRuins_EventScript_Regirock,
         "DesertRuins_EventScript_CaveEntranceMiddle" to DesertRuins_EventScript_CaveEntranceMiddle,
         "DesertRuins_EventScript_CaveEntranceSide" to DesertRuins_EventScript_CaveEntranceSide,
+        "DesertRuins_EventScript_DefeatedRegirock" to DesertRuins_EventScript_DefeatedRegirock,
+        "DesertRuins_EventScript_RanFromRegirock" to DesertRuins_EventScript_RanFromRegirock,
+        "DesertRuins_EventScript_BigHoleInWall" to DesertRuins_EventScript_BigHoleInWall,
     )

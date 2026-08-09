@@ -5,7 +5,7 @@ import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -15,7 +15,9 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object TrainerTower_Lobby_EventScript_Nurse : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port TrainerTower_Lobby_EventScript_Nurse")
+  override suspend fun run(ctx: ScriptContext) {
+    EventScript_PkmnCenterNurse.run(ctx)
+  }
 }
 
 /**
@@ -80,6 +82,32 @@ internal object TrainerTower_Lobby_EventScript_ShowRecords : Script {
       TODO("port TrainerTower_Lobby_EventScript_ShowRecords")
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox TrainerTower_Lobby_Text_ThanksForCompeting
+ * release
+ * end
+ * ```
+ */
+internal object TrainerTower_Lobby_EventScript_ThanksForCompeting : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(TrainerTower_Lobby.ThanksForCompeting)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * release
+ * end
+ * ```
+ */
+internal object TrainerTower_Lobby_EventScript_ReceptionistEnd : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port TrainerTower_Lobby_EventScript_ReceptionistEnd")
+}
+
 internal val TrainerTower_LobbyScripts: Map<String, Script> =
     mapOf(
         "TrainerTower_Lobby_EventScript_Nurse" to TrainerTower_Lobby_EventScript_Nurse,
@@ -90,4 +118,8 @@ internal val TrainerTower_LobbyScripts: Map<String, Script> =
             TrainerTower_Lobby_EventScript_CooltrainerF,
         "TrainerTower_Lobby_EventScript_BaldingMan" to TrainerTower_Lobby_EventScript_BaldingMan,
         "TrainerTower_Lobby_EventScript_ShowRecords" to TrainerTower_Lobby_EventScript_ShowRecords,
+        "TrainerTower_Lobby_EventScript_ThanksForCompeting" to
+            TrainerTower_Lobby_EventScript_ThanksForCompeting,
+        "TrainerTower_Lobby_EventScript_ReceptionistEnd" to
+            TrainerTower_Lobby_EventScript_ReceptionistEnd,
     )

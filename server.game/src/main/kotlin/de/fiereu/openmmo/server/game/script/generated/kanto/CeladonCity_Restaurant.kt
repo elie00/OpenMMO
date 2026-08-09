@@ -41,6 +41,34 @@ internal object CeladonCity_Restaurant_EventScript_WorkerM : Script {
       ctx.say(CeladonCity_Restaurant.PsstBasementUnderGameCorner)
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox CeladonCity_Restaurant_Text_MakeRoomForThis
+ * release
+ * end
+ * ```
+ */
+internal object CeladonCity_Restaurant_EventScript_NoRoomForCoinCase : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(CeladonCity_Restaurant.MakeRoomForThis)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox CeladonCity_Restaurant_Text_ThoughtIdWinItBack
+ * release
+ * end
+ * ```
+ */
+internal object CeladonCity_Restaurant_EventScript_AlreadyGotCoinCase : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(CeladonCity_Restaurant.ThoughtIdWinItBack)
+  }
+}
+
 internal val CeladonCity_RestaurantScripts: Map<String, Script> =
     mapOf(
         "CeladonCity_Restaurant_EventScript_Chef" to CeladonCity_Restaurant_EventScript_Chef,
@@ -49,4 +77,8 @@ internal val CeladonCity_RestaurantScripts: Map<String, Script> =
         "CeladonCity_Restaurant_EventScript_CoinCaseMan" to
             CeladonCity_Restaurant_EventScript_CoinCaseMan,
         "CeladonCity_Restaurant_EventScript_WorkerM" to CeladonCity_Restaurant_EventScript_WorkerM,
+        "CeladonCity_Restaurant_EventScript_NoRoomForCoinCase" to
+            CeladonCity_Restaurant_EventScript_NoRoomForCoinCase,
+        "CeladonCity_Restaurant_EventScript_AlreadyGotCoinCase" to
+            CeladonCity_Restaurant_EventScript_AlreadyGotCoinCase,
     )

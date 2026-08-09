@@ -71,6 +71,64 @@ internal object EverGrandeCity_PokemonLeague_1F_EventScript_DoorGuard : Script {
       TODO("port EverGrandeCity_PokemonLeague_1F_EventScript_DoorGuard")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement VAR_LAST_TALKED, Common_Movement_FacePlayer
+ * waitmovement 0
+ * msgbox EverGrandeCity_PokemonLeague_1F_Text_GoForth, MSGBOX_DEFAULT
+ * closemessage
+ * applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
+ * waitmovement 0
+ * releaseall
+ * end
+ * ```
+ */
+internal object EverGrandeCity_PokemonLeague_1F_EventScript_GoForth : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port EverGrandeCity_PokemonLeague_1F_EventScript_GoForth")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_PLAYER, EverGrandeCity_PokemonLeague_1F_Movement_MoveToFrontFromRight
+ * waitmovement 0
+ * return
+ * ```
+ */
+internal object EverGrandeCity_PokemonLeague_1F_EventScript_PlayerMoveToFrontFromRight : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port EverGrandeCity_PokemonLeague_1F_EventScript_PlayerMoveToFrontFromRight")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * playse SE_FAILURE
+ * msgbox EverGrandeCity_PokemonLeague_1F_Text_HaventObtainedAllBadges, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object EverGrandeCity_PokemonLeague_1F_EventScript_NotAllBadges : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port EverGrandeCity_PokemonLeague_1F_EventScript_NotAllBadges")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_PLAYER, EverGrandeCity_PokemonLeague_1F_Movement_MoveToFrontFromLeft
+ * waitmovement 0
+ * return
+ * ```
+ */
+internal object EverGrandeCity_PokemonLeague_1F_EventScript_PlayerMoveToFrontFromLeft : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port EverGrandeCity_PokemonLeague_1F_EventScript_PlayerMoveToFrontFromLeft")
+}
+
 internal val EverGrandeCity_PokemonLeague_1FScripts: Map<String, Script> =
     mapOf(
         "EverGrandeCity_PokemonLeague_1F_EventScript_Nurse" to
@@ -79,4 +137,12 @@ internal val EverGrandeCity_PokemonLeague_1FScripts: Map<String, Script> =
             EverGrandeCity_PokemonLeague_1F_EventScript_Clerk,
         "EverGrandeCity_PokemonLeague_1F_EventScript_DoorGuard" to
             EverGrandeCity_PokemonLeague_1F_EventScript_DoorGuard,
+        "EverGrandeCity_PokemonLeague_1F_EventScript_GoForth" to
+            EverGrandeCity_PokemonLeague_1F_EventScript_GoForth,
+        "EverGrandeCity_PokemonLeague_1F_EventScript_PlayerMoveToFrontFromRight" to
+            EverGrandeCity_PokemonLeague_1F_EventScript_PlayerMoveToFrontFromRight,
+        "EverGrandeCity_PokemonLeague_1F_EventScript_NotAllBadges" to
+            EverGrandeCity_PokemonLeague_1F_EventScript_NotAllBadges,
+        "EverGrandeCity_PokemonLeague_1F_EventScript_PlayerMoveToFrontFromLeft" to
+            EverGrandeCity_PokemonLeague_1F_EventScript_PlayerMoveToFrontFromLeft,
     )

@@ -303,6 +303,30 @@ internal object Route15_EventScript_RouteSign : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(Route15.RouteSign)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch_double TRAINER_CRUSH_KIN_RON_MYA, Route15_Text_RonRematchIntro, Route15_Text_RonDefeat, Route15_Text_RonNotEnoughMons
+ * msgbox Route15_Text_RonPostBattle, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route15_EventScript_RonRematch : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route15_EventScript_RonRematch")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch_double TRAINER_CRUSH_KIN_RON_MYA, Route15_Text_MyaRematchIntro, Route15_Text_MyaDefeat, Route15_Text_MyaNotEnoughMons
+ * msgbox Route15_Text_MyaPostBattle, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route15_EventScript_MyaRematch : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route15_EventScript_MyaRematch")
+}
+
 internal val Route15Scripts: Map<String, Script> =
     mapOf(
         "Route15_EventScript_Yazmin" to Route15_EventScript_Yazmin,
@@ -319,4 +343,6 @@ internal val Route15Scripts: Map<String, Script> =
         "Route15_EventScript_Ron" to Route15_EventScript_Ron,
         "Route15_EventScript_Mya" to Route15_EventScript_Mya,
         "Route15_EventScript_RouteSign" to Route15_EventScript_RouteSign,
+        "Route15_EventScript_RonRematch" to Route15_EventScript_RonRematch,
+        "Route15_EventScript_MyaRematch" to Route15_EventScript_MyaRematch,
     )

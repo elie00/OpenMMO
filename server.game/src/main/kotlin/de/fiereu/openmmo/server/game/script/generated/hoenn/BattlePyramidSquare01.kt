@@ -33,8 +33,19 @@ internal object BattlePyramid_FindItemBall : Script {
   override suspend fun run(ctx: ScriptContext) = TODO("port BattlePyramid_FindItemBall")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * end
+ * ```
+ */
+internal object BattlePyramid_FindItemBallEnd : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port BattlePyramid_FindItemBallEnd")
+}
+
 internal val BattlePyramidSquare01Scripts: Map<String, Script> =
     mapOf(
         "BattlePyramid_TrainerBattle" to BattlePyramid_TrainerBattle,
         "BattlePyramid_FindItemBall" to BattlePyramid_FindItemBall,
+        "BattlePyramid_FindItemBallEnd" to BattlePyramid_FindItemBallEnd,
     )

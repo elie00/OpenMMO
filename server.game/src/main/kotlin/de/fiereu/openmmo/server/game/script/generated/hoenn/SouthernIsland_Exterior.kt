@@ -1,5 +1,7 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
+import de.fiereu.openmmo.dialog.generated.hoenn.EventTicket
+import de.fiereu.openmmo.dialog.generated.hoenn.SouthernIsland_Exterior
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 
@@ -30,19 +32,36 @@ internal object SouthernIsland_Exterior_EventScript_Sailor : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox SouthernIsland_Exterior_Text_Sign, MSGBOX_SIGN
  * end
  * ```
  */
 internal object SouthernIsland_Exterior_EventScript_Sign : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SouthernIsland_Exterior_EventScript_Sign")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.sign(SouthernIsland_Exterior.Sign)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox EventTicket_Text_AsYouLike, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object SouthernIsland_Exterior_EventScript_AsYouLike : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(EventTicket.AsYouLike)
+  }
 }
 
 internal val SouthernIsland_ExteriorScripts: Map<String, Script> =
     mapOf(
         "SouthernIsland_Exterior_EventScript_Sailor" to SouthernIsland_Exterior_EventScript_Sailor,
         "SouthernIsland_Exterior_EventScript_Sign" to SouthernIsland_Exterior_EventScript_Sign,
+        "SouthernIsland_Exterior_EventScript_AsYouLike" to
+            SouthernIsland_Exterior_EventScript_AsYouLike,
     )

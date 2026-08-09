@@ -42,7 +42,7 @@ internal object LavenderTown_House1_EventScript_Cubone : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox LavenderTown_House1_Text_GhostOfPokemonTowerIsGone
  * release
@@ -50,8 +50,9 @@ internal object LavenderTown_House1_EventScript_Cubone : Script {
  * ```
  */
 internal object LavenderTown_House1_EventScript_CooltrainerFGhostGone : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LavenderTown_House1_EventScript_CooltrainerFGhostGone")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LavenderTown_House1.GhostOfPokemonTowerIsGone)
+  }
 }
 
 internal val LavenderTown_House1Scripts: Map<String, Script> =

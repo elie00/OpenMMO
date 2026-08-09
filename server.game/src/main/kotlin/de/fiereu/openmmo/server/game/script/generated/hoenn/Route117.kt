@@ -247,6 +247,190 @@ internal object Route117_EventScript_DayCareSign : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(Route117.DayCareSign)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * special GetDaycareMonNicknames
+ * msgbox Route117_Text_YourMonIsDoingFine, MSGBOX_DEFAULT
+ * setvar VAR_0x8004, 0
+ * call Route117_EventScript_CheckMonReceivedMail
+ * release
+ * end
+ * ```
+ */
+internal object Route117_EventScript_CheckOnOneMon : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route117_EventScript_CheckOnOneMon")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * special GetDaycareMonNicknames
+ * msgbox Route117_Text_YourMonsAreDoingFine, MSGBOX_DEFAULT
+ * special SetDaycareCompatibilityString
+ * special ShowFieldMessageStringVar4
+ * waitmessage
+ * waitbuttonpress
+ * setvar VAR_0x8004, 0
+ * call Route117_EventScript_CheckMonReceivedMail
+ * setvar VAR_0x8004, 1
+ * call Route117_EventScript_CheckMonReceivedMail
+ * release
+ * end
+ * ```
+ */
+internal object Route117_EventScript_CheckOnTwoMons : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route117_EventScript_CheckOnTwoMons")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch TRAINER_DYLAN_1, Route117_Text_DylanRematchIntro, Route117_Text_DylanRematchDefeat
+ * msgbox Route117_Text_DylanPostRematch, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route117_EventScript_RematchDylan : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route117_EventScript_RematchDylan")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch TRAINER_ISAAC_1, Route117_Text_IsaacRematchIntro, Route117_Text_IsaacRematchDefeat
+ * msgbox Route117_Text_IsaacPostRematch, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route117_EventScript_RematchIsaac : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route117_EventScript_RematchIsaac")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch_double TRAINER_ANNA_AND_MEG_1, Route117_Text_AnnaRematchIntro, Route117_Text_AnnaRematchDefeat, Route117_Text_AnnaRematchNotEnoughMons
+ * msgbox Route117_Text_AnnaPostRematch, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route117_EventScript_RematchAnna : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route117_EventScript_RematchAnna")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch TRAINER_LYDIA_1, Route117_Text_LydiaRematchIntro, Route117_Text_LydiaRematchDefeat
+ * msgbox Route117_Text_LydiaPostRematch, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route117_EventScript_RematchLydia : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route117_EventScript_RematchLydia")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch_double TRAINER_ANNA_AND_MEG_1, Route117_Text_MegRematchIntro, Route117_Text_MegRematchDefeat, Route117_Text_MegRematchNotEnoughMons
+ * msgbox Route117_Text_MegPostRematch, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route117_EventScript_RematchMeg : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route117_EventScript_RematchMeg")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox Route117_Text_DoYouWantEgg, MSGBOX_YESNO
+ * goto_if_eq VAR_RESULT, YES, Route117_EventScript_DaycareAcceptEgg
+ * msgbox Route117_Text_IWillKeepDoYouWantIt, MSGBOX_YESNO
+ * goto_if_eq VAR_RESULT, YES, Route117_EventScript_DaycareAcceptEgg
+ * msgbox Route117_Text_IllKeepIt, MSGBOX_DEFAULT
+ * clearflag FLAG_PENDING_DAYCARE_EGG
+ * special RejectEggFromDayCare
+ * release
+ * end
+ * ```
+ */
+internal object Route117_EventScript_DaycareEggWaiting : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route117_EventScript_DaycareEggWaiting")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch TRAINER_MARIA_1, Route117_Text_MariaRematchIntro, Route117_Text_MariaRematchDefeat
+ * msgbox Route117_Text_MariaPostRematch, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route117_EventScript_RematchMaria : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route117_EventScript_RematchMaria")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * specialvar VAR_RESULT, CalculatePlayerPartyCount
+ * goto_if_ne VAR_RESULT, PARTY_SIZE, Route117_EventScript_DaycareReceiveEgg
+ * msgbox Route117_Text_YouHaveNoRoomForIt, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object Route117_EventScript_DaycareAcceptEgg : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route117_EventScript_DaycareAcceptEgg")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * specialvar VAR_RESULT, CheckDaycareMonReceivedMail
+ * call_if_eq VAR_RESULT, 1, Route117_EventScript_MonReceivedMail
+ * return
+ * ```
+ */
+internal object Route117_EventScript_CheckMonReceivedMail : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port Route117_EventScript_CheckMonReceivedMail")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * message Route117_Text_ReceivedEgg
+ * playfanfare MUS_LEVEL_UP
+ * waitfanfare
+ * waitbuttonpress
+ * msgbox Route117_Text_TakeGoodCareOfIt, MSGBOX_DEFAULT
+ * special GiveEggFromDaycare
+ * clearflag FLAG_PENDING_DAYCARE_EGG
+ * release
+ * end
+ * ```
+ */
+internal object Route117_EventScript_DaycareReceiveEgg : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route117_EventScript_DaycareReceiveEgg")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Route117_Text_FriendlyWithOtherTrainersMon, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object Route117_EventScript_MonReceivedMail : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route117.FriendlyWithOtherTrainersMon)
+  }
+}
+
 internal val Route117Scripts: Map<String, Script> =
     mapOf(
         "Route117_EventScript_Woman" to Route117_EventScript_Woman,
@@ -268,4 +452,17 @@ internal val Route117Scripts: Map<String, Script> =
         "Route117_EventScript_RouteSignVerdanturf" to Route117_EventScript_RouteSignVerdanturf,
         "Route117_EventScript_RouteSignMauville" to Route117_EventScript_RouteSignMauville,
         "Route117_EventScript_DayCareSign" to Route117_EventScript_DayCareSign,
+        "Route117_EventScript_CheckOnOneMon" to Route117_EventScript_CheckOnOneMon,
+        "Route117_EventScript_CheckOnTwoMons" to Route117_EventScript_CheckOnTwoMons,
+        "Route117_EventScript_RematchDylan" to Route117_EventScript_RematchDylan,
+        "Route117_EventScript_RematchIsaac" to Route117_EventScript_RematchIsaac,
+        "Route117_EventScript_RematchAnna" to Route117_EventScript_RematchAnna,
+        "Route117_EventScript_RematchLydia" to Route117_EventScript_RematchLydia,
+        "Route117_EventScript_RematchMeg" to Route117_EventScript_RematchMeg,
+        "Route117_EventScript_DaycareEggWaiting" to Route117_EventScript_DaycareEggWaiting,
+        "Route117_EventScript_RematchMaria" to Route117_EventScript_RematchMaria,
+        "Route117_EventScript_DaycareAcceptEgg" to Route117_EventScript_DaycareAcceptEgg,
+        "Route117_EventScript_CheckMonReceivedMail" to Route117_EventScript_CheckMonReceivedMail,
+        "Route117_EventScript_DaycareReceiveEgg" to Route117_EventScript_DaycareReceiveEgg,
+        "Route117_EventScript_MonReceivedMail" to Route117_EventScript_MonReceivedMail,
     )

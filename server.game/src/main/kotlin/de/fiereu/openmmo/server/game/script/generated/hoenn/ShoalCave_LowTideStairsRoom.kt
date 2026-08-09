@@ -1,5 +1,6 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
+import de.fiereu.openmmo.dialog.generated.hoenn.ShoalCave
 import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
@@ -37,10 +38,26 @@ internal object ShoalCave_LowTideStairsRoom_EventScript_ShoalSalt3 : Script {
       TODO("port ShoalCave_LowTideStairsRoom_EventScript_ShoalSalt3")
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox ShoalCave_Text_WasShoalSaltNowNothing, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object ShoalCave_LowTideStairsRoom_EventScript_ReceivedShoalSalt : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(ShoalCave.WasShoalSaltNowNothing)
+  }
+}
+
 internal val ShoalCave_LowTideStairsRoomScripts: Map<String, Script> =
     mapOf(
         "ShoalCave_LowTideStairsRoom_EventScript_ItemIceHeal" to
             ShoalCave_LowTideStairsRoom_EventScript_ItemIceHeal,
         "ShoalCave_LowTideStairsRoom_EventScript_ShoalSalt3" to
             ShoalCave_LowTideStairsRoom_EventScript_ShoalSalt3,
+        "ShoalCave_LowTideStairsRoom_EventScript_ReceivedShoalSalt" to
+            ShoalCave_LowTideStairsRoom_EventScript_ReceivedShoalSalt,
     )

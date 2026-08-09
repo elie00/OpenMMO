@@ -167,6 +167,32 @@ internal object ThreeIsland_BondBridge_EventScript_BondBridgeSign : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(ThreeIsland_BondBridge.BondBridgeSign)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch_double TRAINER_TWINS_JOY_MEG, ThreeIsland_BondBridge_Text_MegRematchIntro, ThreeIsland_BondBridge_Text_MegDefeat, ThreeIsland_BondBridge_Text_MegNotEnoughMons
+ * msgbox ThreeIsland_BondBridge_Text_MegPostBattle, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object ThreeIsland_BondBridge_EventScript_MegRematch : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port ThreeIsland_BondBridge_EventScript_MegRematch")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch_double TRAINER_TWINS_JOY_MEG, ThreeIsland_BondBridge_Text_JoyRematchIntro, ThreeIsland_BondBridge_Text_JoyDefeat, ThreeIsland_BondBridge_Text_JoyNotEnoughMons
+ * msgbox ThreeIsland_BondBridge_Text_JoyPostBattle, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object ThreeIsland_BondBridge_EventScript_JoyRematch : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port ThreeIsland_BondBridge_EventScript_JoyRematch")
+}
+
 internal val ThreeIsland_BondBridgeScripts: Map<String, Script> =
     mapOf(
         "ThreeIsland_BondBridge_EventScript_Nikki" to ThreeIsland_BondBridge_EventScript_Nikki,
@@ -180,4 +206,8 @@ internal val ThreeIsland_BondBridgeScripts: Map<String, Script> =
             ThreeIsland_BondBridge_EventScript_BerryForestSign,
         "ThreeIsland_BondBridge_EventScript_BondBridgeSign" to
             ThreeIsland_BondBridge_EventScript_BondBridgeSign,
+        "ThreeIsland_BondBridge_EventScript_MegRematch" to
+            ThreeIsland_BondBridge_EventScript_MegRematch,
+        "ThreeIsland_BondBridge_EventScript_JoyRematch" to
+            ThreeIsland_BondBridge_EventScript_JoyRematch,
     )

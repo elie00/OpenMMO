@@ -1,5 +1,6 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.dialog.generated.kanto.PokemonMansion
 import de.fiereu.openmmo.dialog.generated.kanto.PokemonMansion_1F
 import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
@@ -104,6 +105,57 @@ internal object PokemonMansion_1F_EventScript_Statue : Script {
   override suspend fun run(ctx: ScriptContext) = TODO("port PokemonMansion_1F_EventScript_Statue")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox PokemonMansion_Text_PressSecretSwitch, MSGBOX_YESNO
+ * goto_if_eq VAR_RESULT, NO, PokemonMansion_EventScript_DontPressSwitch
+ * msgbox PokemonMansion_Text_WhoWouldnt
+ * goto_if_set FLAG_POKEMON_MANSION_SWITCH_STATE, PokemonMansion_EventScript_ResetSwitch
+ * setflag FLAG_POKEMON_MANSION_SWITCH_STATE
+ * switch VAR_0x8004
+ * case 0, PokemonMansion_EventScript_PressSwitch_1F
+ * case 1, PokemonMansion_EventScript_PressSwitch_2F
+ * case 2, PokemonMansion_EventScript_PressSwitch_3F
+ * case 3, PokemonMansion_EventScript_PressSwitch_B1F
+ * end
+ * ```
+ */
+internal object PokemonMansion_EventScript_SecretSwitch : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port PokemonMansion_EventScript_SecretSwitch")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * clearflag FLAG_POKEMON_MANSION_SWITCH_STATE
+ * switch VAR_0x8004
+ * case 0, PokemonMansion_EventScript_ResetSwitch_1F
+ * case 1, PokemonMansion_EventScript_ResetSwitch_2F
+ * case 2, PokemonMansion_EventScript_ResetSwitch_3F
+ * case 3, PokemonMansion_EventScript_ResetSwitch_B1F
+ * end
+ * ```
+ */
+internal object PokemonMansion_EventScript_ResetSwitch : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port PokemonMansion_EventScript_ResetSwitch")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox PokemonMansion_Text_NotQuiteYet
+ * releaseall
+ * end
+ * ```
+ */
+internal object PokemonMansion_EventScript_DontPressSwitch : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(PokemonMansion.NotQuiteYet)
+  }
+}
+
 internal val PokemonMansion_1FScripts: Map<String, Script> =
     mapOf(
         "PokemonMansion_1F_EventScript_Ted" to PokemonMansion_1F_EventScript_Ted,
@@ -113,4 +165,7 @@ internal val PokemonMansion_1FScripts: Map<String, Script> =
         "PokemonMansion_1F_EventScript_ItemProtein" to PokemonMansion_1F_EventScript_ItemProtein,
         "PokemonMansion_1F_EventScript_Johnson" to PokemonMansion_1F_EventScript_Johnson,
         "PokemonMansion_1F_EventScript_Statue" to PokemonMansion_1F_EventScript_Statue,
+        "PokemonMansion_EventScript_SecretSwitch" to PokemonMansion_EventScript_SecretSwitch,
+        "PokemonMansion_EventScript_ResetSwitch" to PokemonMansion_EventScript_ResetSwitch,
+        "PokemonMansion_EventScript_DontPressSwitch" to PokemonMansion_EventScript_DontPressSwitch,
     )

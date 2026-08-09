@@ -48,9 +48,52 @@ internal object MeteorFalls_1F_2R_EventScript_Jay : Script {
   override suspend fun run(ctx: ScriptContext) = TODO("port MeteorFalls_1F_2R_EventScript_Jay")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch TRAINER_NICOLAS_1, MeteorFalls_1F_2R_Text_NicolasRematchIntro, MeteorFalls_1F_2R_Text_NicolasRematchDefeat
+ * msgbox MeteorFalls_1F_2R_Text_NicolasPostRematch, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object MeteorFalls_1F_2R_EventScript_RematchNicolas : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port MeteorFalls_1F_2R_EventScript_RematchNicolas")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch_double TRAINER_JOHN_AND_JAY_1, MeteorFalls_1F_2R_Text_JohnRematchIntro, MeteorFalls_1F_2R_Text_JohnRematchDefeat, MeteorFalls_1F_2R_Text_JohnRematchNotEnoughMons
+ * msgbox MeteorFalls_1F_2R_Text_JohnPostRematch, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object MeteorFalls_1F_2R_EventScript_RematchJohn : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port MeteorFalls_1F_2R_EventScript_RematchJohn")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch_double TRAINER_JOHN_AND_JAY_1, MeteorFalls_1F_2R_Text_JayRematchIntro, MeteorFalls_1F_2R_Text_JayRematchDefeat, MeteorFalls_1F_2R_Text_JayRematchNotEnoughMons
+ * msgbox MeteorFalls_1F_2R_Text_JayPostRematch, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object MeteorFalls_1F_2R_EventScript_RematchJay : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port MeteorFalls_1F_2R_EventScript_RematchJay")
+}
+
 internal val MeteorFalls_1F_2RScripts: Map<String, Script> =
     mapOf(
         "MeteorFalls_1F_2R_EventScript_Nicolas" to MeteorFalls_1F_2R_EventScript_Nicolas,
         "MeteorFalls_1F_2R_EventScript_John" to MeteorFalls_1F_2R_EventScript_John,
         "MeteorFalls_1F_2R_EventScript_Jay" to MeteorFalls_1F_2R_EventScript_Jay,
+        "MeteorFalls_1F_2R_EventScript_RematchNicolas" to
+            MeteorFalls_1F_2R_EventScript_RematchNicolas,
+        "MeteorFalls_1F_2R_EventScript_RematchJohn" to MeteorFalls_1F_2R_EventScript_RematchJohn,
+        "MeteorFalls_1F_2R_EventScript_RematchJay" to MeteorFalls_1F_2R_EventScript_RematchJay,
     )

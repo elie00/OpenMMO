@@ -1,11 +1,12 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.dialog.generated.kanto.Aide
 import de.fiereu.openmmo.dialog.generated.kanto.Route10_PokemonCenter_1F
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -15,8 +16,9 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object Route10_PokemonCenter_1F_EventScript_Nurse : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port Route10_PokemonCenter_1F_EventScript_Nurse")
+  override suspend fun run(ctx: ScriptContext) {
+    EventScript_PkmnCenterNurse.run(ctx)
+  }
 }
 
 internal object Route10_PokemonCenter_1F_EventScript_Gentleman : Script {
@@ -63,6 +65,75 @@ internal object Route10_PokemonCenter_1F_EventScript_Aide : Script {
       TODO("port Route10_PokemonCenter_1F_EventScript_Aide")
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Aide_Text_DontHaveAnyRoomForItem
+ * release
+ * end
+ * ```
+ */
+internal object Aide_EventScript_NoRoomForItem : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Aide.DontHaveAnyRoomForItem)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * buffernumberstring STR_VAR_1, REQUIRED_OWNED_MONS
+ * bufferitemname STR_VAR_2, ITEM_EVERSTONE
+ * return
+ * ```
+ */
+internal object Route10_PokemonCenter_1F_EventScript_GetAideRequestInfo : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port Route10_PokemonCenter_1F_EventScript_GetAideRequestInfo")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Aide_Text_GetEnoughMonsComeBackForItem
+ * release
+ * end
+ * ```
+ */
+internal object Aide_EventScript_DeclineCheckMons : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Aide.GetEnoughMonsComeBackForItem)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Aide_Text_HaventCaughtEnoughMonsForItem
+ * release
+ * end
+ * ```
+ */
+internal object Aide_EventScript_HaventCaughtEnough : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Aide.HaventCaughtEnoughMonsForItem)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox Route10_PokemonCenter_1F_Text_ExplainEverstone
+ * release
+ * end
+ * ```
+ */
+internal object Route10_PokemonCenter_1F_EventScript_AlreadyGotEverstone : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route10_PokemonCenter_1F.ExplainEverstone)
+  }
+}
+
 internal val Route10_PokemonCenter_1FScripts: Map<String, Script> =
     mapOf(
         "Route10_PokemonCenter_1F_EventScript_Nurse" to Route10_PokemonCenter_1F_EventScript_Nurse,
@@ -73,4 +144,11 @@ internal val Route10_PokemonCenter_1FScripts: Map<String, Script> =
         "Route10_PokemonCenter_1F_EventScript_Youngster" to
             Route10_PokemonCenter_1F_EventScript_Youngster,
         "Route10_PokemonCenter_1F_EventScript_Aide" to Route10_PokemonCenter_1F_EventScript_Aide,
+        "Aide_EventScript_NoRoomForItem" to Aide_EventScript_NoRoomForItem,
+        "Route10_PokemonCenter_1F_EventScript_GetAideRequestInfo" to
+            Route10_PokemonCenter_1F_EventScript_GetAideRequestInfo,
+        "Aide_EventScript_DeclineCheckMons" to Aide_EventScript_DeclineCheckMons,
+        "Aide_EventScript_HaventCaughtEnough" to Aide_EventScript_HaventCaughtEnough,
+        "Route10_PokemonCenter_1F_EventScript_AlreadyGotEverstone" to
+            Route10_PokemonCenter_1F_EventScript_AlreadyGotEverstone,
     )

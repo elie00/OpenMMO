@@ -54,7 +54,7 @@ internal object BattleFrontier_OutsideWest_EventScript_Gentleman : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * goto BattleFrontier_OutsideWest_EventScript_FactoryChallengersTalk
@@ -62,12 +62,13 @@ internal object BattleFrontier_OutsideWest_EventScript_Gentleman : Script {
  * ```
  */
 internal object BattleFrontier_OutsideWest_EventScript_Maniac1 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port BattleFrontier_OutsideWest_EventScript_Maniac1")
+  override suspend fun run(ctx: ScriptContext) {
+    return BattleFrontier_OutsideWest_EventScript_FactoryChallengersTalk.run(ctx)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * goto BattleFrontier_OutsideWest_EventScript_FactoryChallengersTalk
@@ -75,8 +76,9 @@ internal object BattleFrontier_OutsideWest_EventScript_Maniac1 : Script {
  * ```
  */
 internal object BattleFrontier_OutsideWest_EventScript_Maniac2 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port BattleFrontier_OutsideWest_EventScript_Maniac2")
+  override suspend fun run(ctx: ScriptContext) {
+    return BattleFrontier_OutsideWest_EventScript_FactoryChallengersTalk.run(ctx)
+  }
 }
 
 internal object BattleFrontier_OutsideWest_EventScript_Man2 : Script {
@@ -245,6 +247,164 @@ internal object Common_EventScript_ShowPokemartSign : Script {
   override suspend fun run(ctx: ScriptContext) = TODO("port Common_EventScript_ShowPokemartSign")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_FRONTIER_CAMPER, Common_Movement_WalkInPlaceFasterUp
+ * waitmovement 0
+ * return
+ * ```
+ */
+internal object BattleFrontier_OutsideWest_EventScript_CamperFaceFactory : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port BattleFrontier_OutsideWest_EventScript_CamperFaceFactory")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * return
+ * ```
+ */
+internal object BattleFrontier_OutsideWest_EventScript_CamperAlreadyFacingFactory : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port BattleFrontier_OutsideWest_EventScript_CamperAlreadyFacingFactory")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_FRONTIER_MANIAC_1, Common_Movement_WalkInPlaceFasterRight
+ * waitmovement 0
+ * msgbox BattleFrontier_OutsideWest_Text_SureWeCanChallengeWithNoMons, MSGBOX_DEFAULT
+ * applymovement LOCALID_FRONTIER_MANIAC_2, Common_Movement_WalkInPlaceFasterLeft
+ * waitmovement 0
+ * msgbox BattleFrontier_OutsideWest_Text_BigGuySaidIllLendYouMons, MSGBOX_DEFAULT
+ * closemessage
+ * delay 25
+ * applymovement LOCALID_FRONTIER_MANIAC_1, Common_Movement_WalkInPlaceFasterUp
+ * applymovement LOCALID_FRONTIER_MANIAC_2, Common_Movement_WalkInPlaceFasterUp
+ * waitmovement 0
+ * release
+ * end
+ * ```
+ */
+internal object BattleFrontier_OutsideWest_EventScript_FactoryChallengersTalk : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port BattleFrontier_OutsideWest_EventScript_FactoryChallengersTalk")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_FRONTIER_GIRL, BattleFrontier_OutsideWest_Movement_GirlShudderWest
+ * waitmovement 0
+ * return
+ * ```
+ */
+internal object BattleFrontier_OutsideWest_EventScript_GirlShudderWest : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port BattleFrontier_OutsideWest_EventScript_GirlShudderWest")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_FRONTIER_GIRL, BattleFrontier_OutsideWest_Movement_GirlShudderEast
+ * waitmovement 0
+ * return
+ * ```
+ */
+internal object BattleFrontier_OutsideWest_EventScript_GirlShudderEast : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port BattleFrontier_OutsideWest_EventScript_GirlShudderEast")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_FRONTIER_GIRL, BattleFrontier_OutsideWest_Movement_GirlShudderNorth
+ * waitmovement 0
+ * return
+ * ```
+ */
+internal object BattleFrontier_OutsideWest_EventScript_GirlShudderNorth : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port BattleFrontier_OutsideWest_EventScript_GirlShudderNorth")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_FRONTIER_GIRL, BattleFrontier_OutsideWest_Movement_GirlShudderSouth
+ * waitmovement 0
+ * return
+ * ```
+ */
+internal object BattleFrontier_OutsideWest_EventScript_GirlShudderSouth : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port BattleFrontier_OutsideWest_EventScript_GirlShudderSouth")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox BattleFrontier_OutsideWest_Text_WonIllTakePikeChallenge, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object BattleFrontier_OutsideWest_EventScript_WomanWonRockPaperScissors : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(BattleFrontier_OutsideWest.WonIllTakePikeChallenge)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox BattleFrontier_OutsideWest_Text_LostIllPutOffPikeChallenge, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object BattleFrontier_OutsideWest_EventScript_WomanLostRockPaperScissors : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(BattleFrontier_OutsideWest.LostIllPutOffPikeChallenge)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox BattleFrontier_OutsideWest_Text_MustHaveTicketToBoard, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object BattleFrontier_OutsideWest_EventScript_NoSSTicket : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(BattleFrontier_OutsideWest.MustHaveTicketToBoard)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * multichoicedefault 18, 6, MULTI_SSTIDAL_BATTLE_FRONTIER, 2, FALSE
+ * switch VAR_RESULT
+ * case 0, BattleFrontier_OutsideWest_EventScript_FerryToSlateport
+ * case 1, BattleFrontier_OutsideWest_EventScript_FerryToLilycove
+ * case 2, BattleFrontier_OutsideWest_EventScript_CancelFerrySelect
+ * case MULTI_B_PRESSED, BattleFrontier_OutsideWest_EventScript_CancelFerrySelect
+ * end
+ * ```
+ */
+internal object BattleFrontier_OutsideWest_EventScript_ChooseFerryDestination : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port BattleFrontier_OutsideWest_EventScript_ChooseFerryDestination")
+}
+
 internal val BattleFrontier_OutsideWestScripts: Map<String, Script> =
     mapOf(
         "BattleFrontier_OutsideWest_EventScript_Boy1" to
@@ -300,4 +460,26 @@ internal val BattleFrontier_OutsideWestScripts: Map<String, Script> =
         "BattleFrontier_OutsideWest_EventScript_BattleFactorySign" to
             BattleFrontier_OutsideWest_EventScript_BattleFactorySign,
         "Common_EventScript_ShowPokemartSign" to Common_EventScript_ShowPokemartSign,
+        "BattleFrontier_OutsideWest_EventScript_CamperFaceFactory" to
+            BattleFrontier_OutsideWest_EventScript_CamperFaceFactory,
+        "BattleFrontier_OutsideWest_EventScript_CamperAlreadyFacingFactory" to
+            BattleFrontier_OutsideWest_EventScript_CamperAlreadyFacingFactory,
+        "BattleFrontier_OutsideWest_EventScript_FactoryChallengersTalk" to
+            BattleFrontier_OutsideWest_EventScript_FactoryChallengersTalk,
+        "BattleFrontier_OutsideWest_EventScript_GirlShudderWest" to
+            BattleFrontier_OutsideWest_EventScript_GirlShudderWest,
+        "BattleFrontier_OutsideWest_EventScript_GirlShudderEast" to
+            BattleFrontier_OutsideWest_EventScript_GirlShudderEast,
+        "BattleFrontier_OutsideWest_EventScript_GirlShudderNorth" to
+            BattleFrontier_OutsideWest_EventScript_GirlShudderNorth,
+        "BattleFrontier_OutsideWest_EventScript_GirlShudderSouth" to
+            BattleFrontier_OutsideWest_EventScript_GirlShudderSouth,
+        "BattleFrontier_OutsideWest_EventScript_WomanWonRockPaperScissors" to
+            BattleFrontier_OutsideWest_EventScript_WomanWonRockPaperScissors,
+        "BattleFrontier_OutsideWest_EventScript_WomanLostRockPaperScissors" to
+            BattleFrontier_OutsideWest_EventScript_WomanLostRockPaperScissors,
+        "BattleFrontier_OutsideWest_EventScript_NoSSTicket" to
+            BattleFrontier_OutsideWest_EventScript_NoSSTicket,
+        "BattleFrontier_OutsideWest_EventScript_ChooseFerryDestination" to
+            BattleFrontier_OutsideWest_EventScript_ChooseFerryDestination,
     )

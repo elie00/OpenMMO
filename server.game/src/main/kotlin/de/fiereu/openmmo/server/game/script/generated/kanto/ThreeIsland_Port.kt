@@ -28,9 +28,41 @@ internal object ThreeIsland_Port_EventScript_Biker2 : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.say(ThreeIsland_Port.ForkOverMoney)
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox ThreeIsland_Port_Text_EverythingTurnedOutForBest
+ * release
+ * end
+ * ```
+ */
+internal object ThreeIsland_Port_EventScript_WomanLostelleFound : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(ThreeIsland_Port.EverythingTurnedOutForBest)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox ThreeIsland_Port_Text_ThankGoodnessBikersGone
+ * release
+ * end
+ * ```
+ */
+internal object ThreeIsland_Port_EventScript_WomanBikersGone : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(ThreeIsland_Port.ThankGoodnessBikersGone)
+  }
+}
+
 internal val ThreeIsland_PortScripts: Map<String, Script> =
     mapOf(
         "ThreeIsland_Port_EventScript_Woman" to ThreeIsland_Port_EventScript_Woman,
         "ThreeIsland_Port_EventScript_Biker1" to ThreeIsland_Port_EventScript_Biker1,
         "ThreeIsland_Port_EventScript_Biker2" to ThreeIsland_Port_EventScript_Biker2,
+        "ThreeIsland_Port_EventScript_WomanLostelleFound" to
+            ThreeIsland_Port_EventScript_WomanLostelleFound,
+        "ThreeIsland_Port_EventScript_WomanBikersGone" to
+            ThreeIsland_Port_EventScript_WomanBikersGone,
     )

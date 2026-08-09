@@ -151,7 +151,7 @@ private const val LITTLEROOT_INDOOR_BANK = 51
 private const val BIRCH_LAB_MAP = 4
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -160,8 +160,12 @@ private const val BIRCH_LAB_MAP = 4
  * ```
  */
 internal object ProfBirch_EventScript_RatePokedexOrRegister : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port ProfBirch_EventScript_RatePokedexOrRegister")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.isFlagSet(HoennFlags.FLAG_HAS_MATCH_CALL))
+        return ProfBirch_EventScript_AskRatePokedex.run(ctx)
+    if (!ctx.isFlagSet(HoennFlags.FLAG_ENABLE_PROF_BIRCH_MATCH_CALL))
+        return EventScript_RegisterProfBirch.run(ctx)
+  }
 }
 
 internal object Route101_EventScript_Boy : Script {
@@ -170,6 +174,95 @@ internal object Route101_EventScript_Boy : Script {
 
 internal object Route101_EventScript_RouteSign : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(Route101.RouteSign)
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox gBirchDexRatingText_AreYouCurious, MSGBOX_YESNO
+ * goto_if_eq VAR_RESULT, NO, ProfBirch_EventScript_DeclineRating
+ * call ProfBirch_EventScript_RatePokedex
+ * release
+ * end
+ * ```
+ */
+internal object ProfBirch_EventScript_AskRatePokedex : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port ProfBirch_EventScript_AskRatePokedex")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox MatchCall_Text_BirchRegisterCall, MSGBOX_DEFAULT
+ * closemessage
+ * delay 30
+ * playfanfare MUS_REGISTER_MATCH_CALL
+ * msgbox MatchCall_Text_RegisteredBirch, MSGBOX_DEFAULT
+ * waitfanfare
+ * closemessage
+ * delay 30
+ * setflag FLAG_ENABLE_PROF_BIRCH_MATCH_CALL
+ * setvar VAR_REGISTER_BIRCH_STATE, 2
+ * release
+ * end
+ * ```
+ */
+internal object EventScript_RegisterProfBirch : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_RegisterProfBirch")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * setvar VAR_0x8004, 0
+ * specialvar VAR_RESULT, ScriptGetPokedexInfo
+ * copyvar VAR_0x8008, VAR_0x8005
+ * copyvar VAR_0x8009, VAR_0x8006
+ * copyvar VAR_0x800A, VAR_RESULT
+ * buffernumberstring STR_VAR_1, VAR_0x8008  @ Num Hoenn seen
+ * buffernumberstring STR_VAR_2, VAR_0x8009  @ Num Hoenn caught
+ * msgbox gBirchDexRatingText_SoYouveSeenAndCaught, MSGBOX_DEFAULT
+ * call ProfBirch_EventScript_ShowRatingMessage
+ * goto_if_eq VAR_0x800A, 0, Common_EventScript_NopReturn  @ National dex not enabled
+ * setvar VAR_0x8004, 1
+ * specialvar VAR_RESULT, ScriptGetPokedexInfo
+ * copyvar VAR_0x8008, VAR_0x8005
+ * copyvar VAR_0x8009, VAR_0x8006
+ * buffernumberstring STR_VAR_1, VAR_0x8008  @ Num National seen
+ * buffernumberstring STR_VAR_2, VAR_0x8009  @ Num National caught
+ * msgbox gBirchDexRatingText_OnANationwideBasis, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object ProfBirch_EventScript_RatePokedex : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port ProfBirch_EventScript_RatePokedex")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox gBirchDexRatingText_Cancel, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object ProfBirch_EventScript_DeclineRating : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port ProfBirch_EventScript_DeclineRating")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * copyvar VAR_0x8004, VAR_0x8009
+ * special ShowPokedexRatingMessage
+ * waitmessage
+ * waitbuttonpress
+ * return
+ * ```
+ */
+internal object ProfBirch_EventScript_ShowRatingMessage : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port ProfBirch_EventScript_ShowRatingMessage")
 }
 
 internal val Route101Scripts: Map<String, Script> =
@@ -186,4 +279,9 @@ internal val Route101Scripts: Map<String, Script> =
             ProfBirch_EventScript_RatePokedexOrRegister,
         "Route101_EventScript_Boy" to Route101_EventScript_Boy,
         "Route101_EventScript_RouteSign" to Route101_EventScript_RouteSign,
+        "ProfBirch_EventScript_AskRatePokedex" to ProfBirch_EventScript_AskRatePokedex,
+        "EventScript_RegisterProfBirch" to EventScript_RegisterProfBirch,
+        "ProfBirch_EventScript_RatePokedex" to ProfBirch_EventScript_RatePokedex,
+        "ProfBirch_EventScript_DeclineRating" to ProfBirch_EventScript_DeclineRating,
+        "ProfBirch_EventScript_ShowRatingMessage" to ProfBirch_EventScript_ShowRatingMessage,
     )

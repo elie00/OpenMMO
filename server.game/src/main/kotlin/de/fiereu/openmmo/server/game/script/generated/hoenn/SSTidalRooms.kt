@@ -165,6 +165,36 @@ internal object SSTidalRooms_EventScript_Bed : Script {
   override suspend fun run(ctx: ScriptContext) = TODO("port SSTidalRooms_EventScript_Bed")
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SSTidalRooms_Text_ExplainSnatch, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object SSTidalRooms_EventScript_ExplainSnatch : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SSTidalRooms.ExplainSnatch)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * switch VAR_SS_TIDAL_STATE
+ * case SS_TIDAL_DEPART_SLATEPORT, SSTidalRooms_EventScript_ArrivedInLilycove
+ * case SS_TIDAL_HALFWAY_LILYCOVE, SSTidalRooms_EventScript_ArrivedInLilycove
+ * case SS_TIDAL_DEPART_LILYCOVE, SSTidalRooms_EventScript_HalfwayToSlateport
+ * case SS_TIDAL_HALFWAY_SLATEPORT, SSTidalRooms_EventScript_ArrivedInSlateport
+ * return
+ * ```
+ */
+internal object SSTidalRooms_EventScript_ProgessCruiseAfterBed : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SSTidalRooms_EventScript_ProgessCruiseAfterBed")
+}
+
 internal val SSTidalRoomsScripts: Map<String, Script> =
     mapOf(
         "SSTidalRooms_EventScript_Colton" to SSTidalRooms_EventScript_Colton,
@@ -176,4 +206,7 @@ internal val SSTidalRoomsScripts: Map<String, Script> =
         "SSTidalRooms_EventScript_Naomi" to SSTidalRooms_EventScript_Naomi,
         "SSTidalRooms_EventScript_SnatchGiver" to SSTidalRooms_EventScript_SnatchGiver,
         "SSTidalRooms_EventScript_Bed" to SSTidalRooms_EventScript_Bed,
+        "SSTidalRooms_EventScript_ExplainSnatch" to SSTidalRooms_EventScript_ExplainSnatch,
+        "SSTidalRooms_EventScript_ProgessCruiseAfterBed" to
+            SSTidalRooms_EventScript_ProgessCruiseAfterBed,
     )

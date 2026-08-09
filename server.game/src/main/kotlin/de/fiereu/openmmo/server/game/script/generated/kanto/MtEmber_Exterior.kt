@@ -165,6 +165,112 @@ internal object MtEmber_Exterior_EventScript_ItemDireHit : Script {
   }
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox Text_ExplosionDeclined
+ * release
+ * end
+ * ```
+ */
+internal object EventScript_ExplosionDeclined : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_ExplosionDeclined")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MtEmber_Exterior_Text_Grunt1PostBattle
+ * release
+ * end
+ * ```
+ */
+internal object MtEmber_Exterior_EventScript_Grunt1Defeated : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MtEmber_Exterior.Grunt1PostBattle)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * playbgm MUS_ENCOUNTER_ROCKET, 0
+ * msgbox MtEmber_Exterior_Text_Grunt2Intro
+ * trainerbattle_no_intro TRAINER_TEAM_ROCKET_GRUNT_44, MtEmber_Exterior_Text_Grunt2Defeat
+ * msgbox MtEmber_Exterior_Text_Grunt2PostBattle
+ * goto_if_defeated TRAINER_TEAM_ROCKET_GRUNT_43, MtEmber_Exterior_EventScript_DefeatedBothGrunts
+ * release
+ * end
+ * ```
+ */
+internal object MtEmber_Exterior_EventScript_BattleGrunt2 : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port MtEmber_Exterior_EventScript_BattleGrunt2")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_MT_EMBER_GRUNT1, Common_Movement_FacePlayer
+ * waitmovement 0
+ * playbgm MUS_ENCOUNTER_ROCKET, 0
+ * msgbox MtEmber_Exterior_Text_Grunt1Intro
+ * trainerbattle_no_intro TRAINER_TEAM_ROCKET_GRUNT_43, MtEmber_Exterior_Text_Grunt1Defeat
+ * msgbox MtEmber_Exterior_Text_Grunt1PostBattle
+ * goto_if_defeated TRAINER_TEAM_ROCKET_GRUNT_44, MtEmber_Exterior_EventScript_DefeatedBothGrunts
+ * release
+ * end
+ * ```
+ */
+internal object MtEmber_Exterior_EventScript_BattleGrunt1 : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port MtEmber_Exterior_EventScript_BattleGrunt1")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MtEmber_Exterior_Text_Grunt2PostBattle
+ * release
+ * end
+ * ```
+ */
+internal object MtEmber_Exterior_EventScript_DefeatedGrunt2 : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MtEmber_Exterior.Grunt2PostBattle)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox Text_ExplosionTaught
+ * release
+ * end
+ * ```
+ */
+internal object EventScript_ExplosionTaught : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_ExplosionTaught")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox MtEmber_Exterior_Text_WellRegroupDontStepInsideThere
+ * closemessage
+ * fadescreen FADE_TO_BLACK
+ * removeobject LOCALID_MT_EMBER_GRUNT1
+ * removeobject LOCALID_MT_EMBER_GRUNT2
+ * fadescreen FADE_FROM_BLACK
+ * release
+ * end
+ * ```
+ */
+internal object MtEmber_Exterior_EventScript_DefeatedBothGrunts : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port MtEmber_Exterior_EventScript_DefeatedBothGrunts")
+}
+
 internal val MtEmber_ExteriorScripts: Map<String, Script> =
     mapOf(
         "MtEmber_Exterior_EventScript_ExplosionTutor" to
@@ -177,4 +283,14 @@ internal val MtEmber_ExteriorScripts: Map<String, Script> =
         "MtEmber_Exterior_EventScript_ItemUltraBall" to MtEmber_Exterior_EventScript_ItemUltraBall,
         "MtEmber_Exterior_EventScript_ItemFireStone" to MtEmber_Exterior_EventScript_ItemFireStone,
         "MtEmber_Exterior_EventScript_ItemDireHit" to MtEmber_Exterior_EventScript_ItemDireHit,
+        "EventScript_ExplosionDeclined" to EventScript_ExplosionDeclined,
+        "MtEmber_Exterior_EventScript_Grunt1Defeated" to
+            MtEmber_Exterior_EventScript_Grunt1Defeated,
+        "MtEmber_Exterior_EventScript_BattleGrunt2" to MtEmber_Exterior_EventScript_BattleGrunt2,
+        "MtEmber_Exterior_EventScript_BattleGrunt1" to MtEmber_Exterior_EventScript_BattleGrunt1,
+        "MtEmber_Exterior_EventScript_DefeatedGrunt2" to
+            MtEmber_Exterior_EventScript_DefeatedGrunt2,
+        "EventScript_ExplosionTaught" to EventScript_ExplosionTaught,
+        "MtEmber_Exterior_EventScript_DefeatedBothGrunts" to
+            MtEmber_Exterior_EventScript_DefeatedBothGrunts,
     )

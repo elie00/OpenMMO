@@ -313,6 +313,30 @@ internal object Route8_EventScript_UndergroundPathSign : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(Route8.UndergroundPathSign)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch_double TRAINER_TWINS_ELI_ANNE, Route8_Text_EliRematchIntro, Route8_Text_EliDefeat, Route8_Text_EliNotEnoughMons
+ * msgbox Route8_Text_EliPostBattle, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route8_EventScript_EliRematch : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route8_EventScript_EliRematch")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch_double TRAINER_TWINS_ELI_ANNE, Route8_Text_AnneRematchIntro, Route8_Text_AnneDefeat, Route8_Text_AnneNotEnoughMons
+ * msgbox Route8_Text_AnnePostBattle, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route8_EventScript_AnneRematch : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route8_EventScript_AnneRematch")
+}
+
 internal val Route8Scripts: Map<String, Script> =
     mapOf(
         "Route8_EventScript_Julia" to Route8_EventScript_Julia,
@@ -329,4 +353,6 @@ internal val Route8Scripts: Map<String, Script> =
         "Route8_EventScript_Ricardo" to Route8_EventScript_Ricardo,
         "Route8_EventScript_Jaren" to Route8_EventScript_Jaren,
         "Route8_EventScript_UndergroundPathSign" to Route8_EventScript_UndergroundPathSign,
+        "Route8_EventScript_EliRematch" to Route8_EventScript_EliRematch,
+        "Route8_EventScript_AnneRematch" to Route8_EventScript_AnneRematch,
     )

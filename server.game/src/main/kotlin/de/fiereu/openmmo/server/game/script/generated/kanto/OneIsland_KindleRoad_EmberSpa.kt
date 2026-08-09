@@ -59,6 +59,20 @@ internal object OneIsland_KindleRoad_EmberSpa_EventScript_BaldingMan2 : Script {
       ctx.say(OneIsland_KindleRoad_EmberSpa.HotSpringIsTherapeutic)
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox OneIsland_KindleRoad_EmberSpa_Text_ExplainHM06
+ * release
+ * end
+ * ```
+ */
+internal object OneIsland_KindleRoad_EmberSpa_EventScript_AlreadyGotHM06 : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(OneIsland_KindleRoad_EmberSpa.ExplainHM06)
+  }
+}
+
 internal val OneIsland_KindleRoad_EmberSpaScripts: Map<String, Script> =
     mapOf(
         "OneIsland_KindleRoad_EmberSpa_EventScript_OldMan" to
@@ -73,4 +87,6 @@ internal val OneIsland_KindleRoad_EmberSpaScripts: Map<String, Script> =
             OneIsland_KindleRoad_EmberSpa_EventScript_RockSmashMan,
         "OneIsland_KindleRoad_EmberSpa_EventScript_BaldingMan2" to
             OneIsland_KindleRoad_EmberSpa_EventScript_BaldingMan2,
+        "OneIsland_KindleRoad_EmberSpa_EventScript_AlreadyGotHM06" to
+            OneIsland_KindleRoad_EmberSpa_EventScript_AlreadyGotHM06,
     )

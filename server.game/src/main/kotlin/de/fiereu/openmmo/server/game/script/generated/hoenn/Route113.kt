@@ -265,6 +265,30 @@ internal object Route113_EventScript_GlassWorkshopSign : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(Route113.GlassWorkshopSign)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch TRAINER_LAO_1, Route113_Text_LaoRematchIntro, Route113_Text_LaoRematchDefeat
+ * msgbox Route113_Text_LaoPostRematch, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route113_EventScript_RematchLao : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route113_EventScript_RematchLao")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch TRAINER_MADELINE_1, Route113_Text_MadelineRematchIntro, Route113_Text_MadelineRematchDefeat
+ * msgbox Route113_Text_MadelinePostRematch, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route113_EventScript_RematchMadeline : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route113_EventScript_RematchMadeline")
+}
+
 internal val Route113Scripts: Map<String, Script> =
     mapOf(
         "Route113_EventScript_NinjaBoy" to Route113_EventScript_NinjaBoy,
@@ -288,4 +312,6 @@ internal val Route113Scripts: Map<String, Script> =
         "Route113_EventScript_TrainerTipsRegisterKeyItems" to
             Route113_EventScript_TrainerTipsRegisterKeyItems,
         "Route113_EventScript_GlassWorkshopSign" to Route113_EventScript_GlassWorkshopSign,
+        "Route113_EventScript_RematchLao" to Route113_EventScript_RematchLao,
+        "Route113_EventScript_RematchMadeline" to Route113_EventScript_RematchMadeline,
     )

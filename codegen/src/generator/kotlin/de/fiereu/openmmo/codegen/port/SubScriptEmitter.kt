@@ -20,10 +20,15 @@ class SubScriptEmitter(private val scripts: ScriptIndex) {
    * Appends the objects [referenced] names that [lines] does not already define. Returns how many
    * were added; the list is edited in place.
    */
-  fun emitInto(lines: MutableList<String>, referenced: Set<String>): Int {
-    // ktfmt wraps a long declaration onto two lines, so match the joined text: a line by line
-    // regex misses those and the emitter would append an object the file already has.
-    val defined = OBJECT.findAll(lines.joinToString("\n")).mapTo(HashSet()) { it.groupValues[1] }
+  fun emitInto(
+      lines: MutableList<String>,
+      referenced: Set<String>,
+      definedInRegion: MutableSet<String>,
+  ): Int {
+    // What already exists anywhere in the region, not just in this file: generated scripts are top
+    // level objects in one package per region, so emitting a label a sibling file already declares
+    // is a redeclaration and the region stops compiling.
+    val defined = definedInRegion
     val mapEnd = lines.indexOfLast { it == "    )" }
     val mapStart = lines.indexOfFirst { MAP_HEADER.containsMatchIn(it) }
     if (mapEnd < 0 || mapStart < 0 || mapEnd < mapStart) return 0
@@ -36,6 +41,7 @@ class SubScriptEmitter(private val scripts: ScriptIndex) {
         (referenced - defined).filterTo(LinkedHashSet()) { scripts.commandsFor(it) != null }
     if (missing.isEmpty()) return 0
 
+    definedInRegion += missing
     val objects = missing.flatMap { renderStub(it, scripts.commandsFor(it).orEmpty()) }
     val entries = missing.map { "        \"$it\" to $it," }
     // Map entries first: inserting the objects above would move the map's own line numbers.

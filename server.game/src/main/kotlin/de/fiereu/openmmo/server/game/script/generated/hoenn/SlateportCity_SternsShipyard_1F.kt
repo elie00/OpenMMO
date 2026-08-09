@@ -45,6 +45,69 @@ internal object SlateportCity_SternsShipyard_1F_EventScript_Briney : Script {
       ctx.say(SlateportCity_SternsShipyard_1F.DecidedToHelpDock)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_DOCK, Common_Movement_FacePlayer
+ * waitmovement 0
+ * msgbox SlateportCity_SternsShipyard_1F_Text_BrineyJoinedUs, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object SlateportCity_SternsShipyard_1F_EventScript_BrineyJoined : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SlateportCity_SternsShipyard_1F_EventScript_BrineyJoined")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_DOCK, Common_Movement_FacePlayer
+ * waitmovement 0
+ * msgbox SlateportCity_SternsShipyard_1F_Text_CouldYouFindStern, MSGBOX_DEFAULT
+ * closemessage
+ * applymovement LOCALID_DOCK, Common_Movement_FaceOriginalDirection
+ * waitmovement 0
+ * releaseall
+ * end
+ * ```
+ */
+internal object SlateportCity_SternsShipyard_1F_EventScript_GoFindStern : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SlateportCity_SternsShipyard_1F_EventScript_GoFindStern")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_DOCK, Common_Movement_FacePlayer
+ * waitmovement 0
+ * msgbox SlateportCity_SternsShipyard_1F_Text_FerryIsReady, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object SlateportCity_SternsShipyard_1F_EventScript_FerryReady : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SlateportCity_SternsShipyard_1F_EventScript_FerryReady")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * applymovement LOCALID_DOCK, Common_Movement_FacePlayer
+ * waitmovement 0
+ * msgbox SlateportCity_SternsShipyard_1F_Text_CouldUseAdviceFromVeteran, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object SlateportCity_SternsShipyard_1F_EventScript_NeedVeteran : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SlateportCity_SternsShipyard_1F_EventScript_NeedVeteran")
+}
+
 internal val SlateportCity_SternsShipyard_1FScripts: Map<String, Script> =
     mapOf(
         "SlateportCity_SternsShipyard_1F_EventScript_Dock" to
@@ -55,4 +118,12 @@ internal val SlateportCity_SternsShipyard_1FScripts: Map<String, Script> =
             SlateportCity_SternsShipyard_1F_EventScript_Scientist2,
         "SlateportCity_SternsShipyard_1F_EventScript_Briney" to
             SlateportCity_SternsShipyard_1F_EventScript_Briney,
+        "SlateportCity_SternsShipyard_1F_EventScript_BrineyJoined" to
+            SlateportCity_SternsShipyard_1F_EventScript_BrineyJoined,
+        "SlateportCity_SternsShipyard_1F_EventScript_GoFindStern" to
+            SlateportCity_SternsShipyard_1F_EventScript_GoFindStern,
+        "SlateportCity_SternsShipyard_1F_EventScript_FerryReady" to
+            SlateportCity_SternsShipyard_1F_EventScript_FerryReady,
+        "SlateportCity_SternsShipyard_1F_EventScript_NeedVeteran" to
+            SlateportCity_SternsShipyard_1F_EventScript_NeedVeteran,
     )

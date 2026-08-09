@@ -184,6 +184,30 @@ internal object VictoryRoad_2F_EventScript_DoubleEdgeTutor : Script {
       TODO("port VictoryRoad_2F_EventScript_DoubleEdgeTutor")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox Text_DoubleEdgeDeclined
+ * release
+ * end
+ * ```
+ */
+internal object EventScript_DoubleEdgeDeclined : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_DoubleEdgeDeclined")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox Text_DoubleEdgeTaught
+ * release
+ * end
+ * ```
+ */
+internal object EventScript_DoubleEdgeTaught : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port EventScript_DoubleEdgeTaught")
+}
+
 internal val VictoryRoad_2FScripts: Map<String, Script> =
     mapOf(
         "VictoryRoad_2F_EventScript_Dawson" to VictoryRoad_2F_EventScript_Dawson,
@@ -196,4 +220,6 @@ internal val VictoryRoad_2FScripts: Map<String, Script> =
         "VictoryRoad_2F_EventScript_ItemFullHeal" to VictoryRoad_2F_EventScript_ItemFullHeal,
         "VictoryRoad_2F_EventScript_ItemTM37" to VictoryRoad_2F_EventScript_ItemTM37,
         "VictoryRoad_2F_EventScript_DoubleEdgeTutor" to VictoryRoad_2F_EventScript_DoubleEdgeTutor,
+        "EventScript_DoubleEdgeDeclined" to EventScript_DoubleEdgeDeclined,
+        "EventScript_DoubleEdgeTaught" to EventScript_DoubleEdgeTaught,
     )

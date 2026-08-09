@@ -62,6 +62,45 @@ internal object SSAnne_Kitchen_EventScript_ItemGreatBall : Script {
   }
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SSAnne_Kitchen_Text_PrimeBeefsteak
+ * return
+ * ```
+ */
+internal object SSAnne_Kitchen_EventScript_PrimeBeefsteak : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SSAnne_Kitchen.PrimeBeefsteak)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SSAnne_Kitchen_Text_EelsAuBarbecue
+ * return
+ * ```
+ */
+internal object SSAnne_Kitchen_EventScript_EelsAuBarbecue : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SSAnne_Kitchen.EelsAuBarbecue)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SSAnne_Kitchen_Text_SalmonDuSalad
+ * return
+ * ```
+ */
+internal object SSAnne_Kitchen_EventScript_SalmonDuSalad : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SSAnne_Kitchen.SalmonDuSalad)
+  }
+}
+
 internal val SSAnne_KitchenScripts: Map<String, Script> =
     mapOf(
         "SSAnne_Kitchen_EventScript_Chef1" to SSAnne_Kitchen_EventScript_Chef1,
@@ -72,4 +111,7 @@ internal val SSAnne_KitchenScripts: Map<String, Script> =
         "SSAnne_Kitchen_EventScript_Chef6" to SSAnne_Kitchen_EventScript_Chef6,
         "SSAnne_Kitchen_EventScript_Chef7" to SSAnne_Kitchen_EventScript_Chef7,
         "SSAnne_Kitchen_EventScript_ItemGreatBall" to SSAnne_Kitchen_EventScript_ItemGreatBall,
+        "SSAnne_Kitchen_EventScript_PrimeBeefsteak" to SSAnne_Kitchen_EventScript_PrimeBeefsteak,
+        "SSAnne_Kitchen_EventScript_EelsAuBarbecue" to SSAnne_Kitchen_EventScript_EelsAuBarbecue,
+        "SSAnne_Kitchen_EventScript_SalmonDuSalad" to SSAnne_Kitchen_EventScript_SalmonDuSalad,
     )

@@ -6,7 +6,7 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
 import de.fiereu.openmmo.story.generated.kanto.KantoVars
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -16,8 +16,9 @@ import de.fiereu.openmmo.story.generated.kanto.KantoVars
  * ```
  */
 internal object SaffronCity_PokemonCenter_1F_EventScript_Nurse : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SaffronCity_PokemonCenter_1F_EventScript_Nurse")
+  override suspend fun run(ctx: ScriptContext) {
+    EventScript_PkmnCenterNurse.run(ctx)
+  }
 }
 
 internal object SaffronCity_PokemonCenter_1F_EventScript_Gentleman : Script {
@@ -67,7 +68,7 @@ internal object SaffronCity_PokemonCenter_1F_EventScript_PokemonJournalSabrina :
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox SaffronCity_PokemonCenter_1F_Text_TeamRocketTookOff
  * release
@@ -75,8 +76,9 @@ internal object SaffronCity_PokemonCenter_1F_EventScript_PokemonJournalSabrina :
  * ```
  */
 internal object SaffronCity_PokemonCenter_1F_EventScript_YoungsterRocketsGone : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SaffronCity_PokemonCenter_1F_EventScript_YoungsterRocketsGone")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SaffronCity_PokemonCenter_1F.TeamRocketTookOff)
+  }
 }
 
 internal val SaffronCity_PokemonCenter_1FScripts: Map<String, Script> =

@@ -1,5 +1,6 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
+import de.fiereu.openmmo.dialog.generated.hoenn.MossdeepCity_House4
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 
@@ -54,7 +55,7 @@ internal object MossdeepCity_House4_EventScript_Skitty : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox MossdeepCity_House4_Text_BrotherLikesToVisitBasesAndBattle, MSGBOX_DEFAULT
  * release
@@ -62,8 +63,23 @@ internal object MossdeepCity_House4_EventScript_Skitty : Script {
  * ```
  */
 internal object MossdeepCity_House4_EventScript_CanBattleAtSecretBases : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port MossdeepCity_House4_EventScript_CanBattleAtSecretBases")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MossdeepCity_House4.BrotherLikesToVisitBasesAndBattle)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MossdeepCity_House4_Text_MakeSecretBase, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object MossdeepCity_House4_EventScript_NoSecretBase : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MossdeepCity_House4.MakeSecretBase)
+  }
 }
 
 internal val MossdeepCity_House4Scripts: Map<String, Script> =
@@ -73,4 +89,6 @@ internal val MossdeepCity_House4Scripts: Map<String, Script> =
         "MossdeepCity_House4_EventScript_Skitty" to MossdeepCity_House4_EventScript_Skitty,
         "MossdeepCity_House4_EventScript_CanBattleAtSecretBases" to
             MossdeepCity_House4_EventScript_CanBattleAtSecretBases,
+        "MossdeepCity_House4_EventScript_NoSecretBase" to
+            MossdeepCity_House4_EventScript_NoSecretBase,
     )

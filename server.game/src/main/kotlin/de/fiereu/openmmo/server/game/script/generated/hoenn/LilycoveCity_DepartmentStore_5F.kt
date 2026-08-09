@@ -103,6 +103,37 @@ internal object LilycoveCity_DepartmentStore_5F_EventScript_Woman : Script {
       TODO("port LilycoveCity_DepartmentStore_5F_EventScript_Woman")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox LilycoveCity_DepartmentStore_5F_Text_ClosedRooftopForWeather, MSGBOX_DEFAULT
+ * closemessage
+ * applymovement LOCALID_DEPARTMENT_STORE_STAIRS_WOMAN, Common_Movement_WalkInPlaceFasterUp
+ * waitmovement 0
+ * releaseall
+ * end
+ * ```
+ */
+internal object LilycoveCity_DepartmentStore_5F_EventScript_WomanLegendaryWeather : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port LilycoveCity_DepartmentStore_5F_EventScript_WomanLegendaryWeather")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox LilycoveCity_DepartmentStore_5F_Text_SellManyCuteMatsHere, MSGBOX_DEFAULT
+ * closemessage
+ * releaseall
+ * end
+ * ```
+ */
+internal object LilycoveCity_DepartmentStore_5F_EventScript_WomanNormal : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity_DepartmentStore_5F.SellManyCuteMatsHere)
+  }
+}
+
 internal val LilycoveCity_DepartmentStore_5FScripts: Map<String, Script> =
     mapOf(
         "LilycoveCity_DepartmentStore_5F_EventScript_LittleGirl" to
@@ -119,4 +150,8 @@ internal val LilycoveCity_DepartmentStore_5FScripts: Map<String, Script> =
             LilycoveCity_DepartmentStore_5F_EventScript_ClerkFarRight,
         "LilycoveCity_DepartmentStore_5F_EventScript_Woman" to
             LilycoveCity_DepartmentStore_5F_EventScript_Woman,
+        "LilycoveCity_DepartmentStore_5F_EventScript_WomanLegendaryWeather" to
+            LilycoveCity_DepartmentStore_5F_EventScript_WomanLegendaryWeather,
+        "LilycoveCity_DepartmentStore_5F_EventScript_WomanNormal" to
+            LilycoveCity_DepartmentStore_5F_EventScript_WomanNormal,
     )

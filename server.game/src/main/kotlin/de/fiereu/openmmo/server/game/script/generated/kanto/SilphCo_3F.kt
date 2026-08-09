@@ -110,6 +110,20 @@ internal object SilphCo_3F_EventScript_FloorSign : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(SilphCo_3F.FloorSign)
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox SilphCo_3F_Text_YouAndYourMonsSavedUs
+ * release
+ * end
+ * ```
+ */
+internal object SilphCo_3F_EventScript_WorkerMRocketsGone : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SilphCo_3F.YouAndYourMonsSavedUs)
+  }
+}
+
 internal val SilphCo_3FScripts: Map<String, Script> =
     mapOf(
         "SilphCo_3F_EventScript_Grunt" to SilphCo_3F_EventScript_Grunt,
@@ -119,4 +133,5 @@ internal val SilphCo_3FScripts: Map<String, Script> =
         "SilphCo_3F_EventScript_Door1" to SilphCo_3F_EventScript_Door1,
         "SilphCo_3F_EventScript_Door2" to SilphCo_3F_EventScript_Door2,
         "SilphCo_3F_EventScript_FloorSign" to SilphCo_3F_EventScript_FloorSign,
+        "SilphCo_3F_EventScript_WorkerMRocketsGone" to SilphCo_3F_EventScript_WorkerMRocketsGone,
     )

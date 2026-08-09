@@ -218,6 +218,64 @@ internal object MtMoon_B2F_EventScript_ItemAntidote : Script {
   }
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MtMoon_B2F_Text_WellEachTakeAFossil
+ * release
+ * end
+ * ```
+ */
+internal object MtMoon_B2F_EventScript_MiguelGoPickFossil : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MtMoon_B2F.WellEachTakeAFossil)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * textcolor NPC_TEXT_COLOR_MALE
+ * message MtMoon_B2F_Text_MiguelIntro
+ * waitmessage
+ * playbgm MUS_ENCOUNTER_GYM_LEADER, 0
+ * waitbuttonpress
+ * setvar VAR_LAST_TALKED, LOCALID_MIGUEL
+ * trainerbattle_no_intro TRAINER_SUPER_NERD_MIGUEL, MtMoon_B2F_Text_MiguelDefeat
+ * setvar VAR_MAP_SCENE_MT_MOON_B2F, 1
+ * msgbox MtMoon_B2F_Text_WellEachTakeAFossil
+ * return
+ * ```
+ */
+internal object MtMoon_B2F_EventScript_BattleMiguel : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port MtMoon_B2F_EventScript_BattleMiguel")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MtMoon_B2F_Text_LabOnCinnabarRegeneratesFossils
+ * release
+ * end
+ * ```
+ */
+internal object MtMoon_B2F_EventScript_MiguelFossilPicked : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MtMoon_B2F.LabOnCinnabarRegeneratesFossils)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * release
+ * end
+ * ```
+ */
+internal object MtMoon_B2F_EventScript_DontTakeFossil : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port MtMoon_B2F_EventScript_DontTakeFossil")
+}
+
 internal val MtMoon_B2FScripts: Map<String, Script> =
     mapOf(
         "MtMoon_B2F_EventScript_DomeFossil" to MtMoon_B2F_EventScript_DomeFossil,
@@ -231,4 +289,8 @@ internal val MtMoon_B2FScripts: Map<String, Script> =
         "MtMoon_B2F_EventScript_ItemTM46" to MtMoon_B2F_EventScript_ItemTM46,
         "MtMoon_B2F_EventScript_ItemRevive" to MtMoon_B2F_EventScript_ItemRevive,
         "MtMoon_B2F_EventScript_ItemAntidote" to MtMoon_B2F_EventScript_ItemAntidote,
+        "MtMoon_B2F_EventScript_MiguelGoPickFossil" to MtMoon_B2F_EventScript_MiguelGoPickFossil,
+        "MtMoon_B2F_EventScript_BattleMiguel" to MtMoon_B2F_EventScript_BattleMiguel,
+        "MtMoon_B2F_EventScript_MiguelFossilPicked" to MtMoon_B2F_EventScript_MiguelFossilPicked,
+        "MtMoon_B2F_EventScript_DontTakeFossil" to MtMoon_B2F_EventScript_DontTakeFossil,
     )

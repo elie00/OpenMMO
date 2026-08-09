@@ -125,6 +125,18 @@ internal object Route107_EventScript_Camron : Script {
   }
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * trainerbattle_rematch TRAINER_TONY_1, Route107_Text_TonyRematchIntro, Route107_Text_TonyRematchDefeated
+ * msgbox Route107_Text_TonyRematchPostBattle, MSGBOX_AUTOCLOSE
+ * end
+ * ```
+ */
+internal object Route107_EventScript_TonyRematch : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port Route107_EventScript_TonyRematch")
+}
+
 internal val Route107Scripts: Map<String, Script> =
     mapOf(
         "Route107_EventScript_Darrin" to Route107_EventScript_Darrin,
@@ -134,4 +146,5 @@ internal val Route107Scripts: Map<String, Script> =
         "Route107_EventScript_Lisa" to Route107_EventScript_Lisa,
         "Route107_EventScript_Ray" to Route107_EventScript_Ray,
         "Route107_EventScript_Camron" to Route107_EventScript_Camron,
+        "Route107_EventScript_TonyRematch" to Route107_EventScript_TonyRematch,
     )

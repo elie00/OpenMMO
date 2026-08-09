@@ -159,6 +159,63 @@ internal object PowerPlant_EventScript_Electrode1 : Script {
   override suspend fun run(ctx: ScriptContext) = TODO("port PowerPlant_EventScript_Electrode1")
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * setflag FLAG_FOUGHT_POWER_PLANT_ELECTRODE_2
+ * goto EventScript_RemoveStaticMon
+ * end
+ * ```
+ */
+internal object PowerPlant_EventScript_FoughtElectrode2 : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.setFlag(KantoFlags.FLAG_FOUGHT_POWER_PLANT_ELECTRODE_2)
+    return EventScript_RemoveStaticMon.run(ctx)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * setflag FLAG_FOUGHT_POWER_PLANT_ELECTRODE_1
+ * goto EventScript_RemoveStaticMon
+ * end
+ * ```
+ */
+internal object PowerPlant_EventScript_FoughtElectrode1 : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.setFlag(KantoFlags.FLAG_FOUGHT_POWER_PLANT_ELECTRODE_1)
+    return EventScript_RemoveStaticMon.run(ctx)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * setvar VAR_0x8004, SPECIES_ZAPDOS
+ * goto EventScript_MonFlewAway
+ * end
+ * ```
+ */
+internal object PowerPlant_EventScript_RanFromZapdos : Script {
+  override suspend fun run(ctx: ScriptContext) = TODO("port PowerPlant_EventScript_RanFromZapdos")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * setflag FLAG_FOUGHT_ZAPDOS
+ * goto EventScript_RemoveStaticMon
+ * end
+ * ```
+ */
+internal object PowerPlant_EventScript_DefeatedZapdos : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.setFlag(KantoFlags.FLAG_FOUGHT_ZAPDOS)
+    return EventScript_RemoveStaticMon.run(ctx)
+  }
+}
+
 internal val PowerPlantScripts: Map<String, Script> =
     mapOf(
         "PowerPlant_EventScript_ItemMaxPotion" to PowerPlant_EventScript_ItemMaxPotion,
@@ -169,4 +226,8 @@ internal val PowerPlantScripts: Map<String, Script> =
         "PowerPlant_EventScript_Zapdos" to PowerPlant_EventScript_Zapdos,
         "PowerPlant_EventScript_Electrode2" to PowerPlant_EventScript_Electrode2,
         "PowerPlant_EventScript_Electrode1" to PowerPlant_EventScript_Electrode1,
+        "PowerPlant_EventScript_FoughtElectrode2" to PowerPlant_EventScript_FoughtElectrode2,
+        "PowerPlant_EventScript_FoughtElectrode1" to PowerPlant_EventScript_FoughtElectrode1,
+        "PowerPlant_EventScript_RanFromZapdos" to PowerPlant_EventScript_RanFromZapdos,
+        "PowerPlant_EventScript_DefeatedZapdos" to PowerPlant_EventScript_DefeatedZapdos,
     )

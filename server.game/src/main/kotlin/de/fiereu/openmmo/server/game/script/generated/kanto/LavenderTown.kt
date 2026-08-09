@@ -44,6 +44,20 @@ internal object LavenderTown_EventScript_VolunteerHouseSign : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(LavenderTown.VolunteerPokemonHouse)
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox LavenderTown_Text_SoThereAreBelievers
+ * release
+ * end
+ * ```
+ */
+internal object LavenderTown_EventScript_LittleGirlBelieve : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LavenderTown.SoThereAreBelievers)
+  }
+}
+
 internal val LavenderTownScripts: Map<String, Script> =
     mapOf(
         "LavenderTown_EventScript_LittleGirl" to LavenderTown_EventScript_LittleGirl,
@@ -54,4 +68,5 @@ internal val LavenderTownScripts: Map<String, Script> =
         "LavenderTown_EventScript_PokemonTowerSign" to LavenderTown_EventScript_PokemonTowerSign,
         "LavenderTown_EventScript_VolunteerHouseSign" to
             LavenderTown_EventScript_VolunteerHouseSign,
+        "LavenderTown_EventScript_LittleGirlBelieve" to LavenderTown_EventScript_LittleGirlBelieve,
     )

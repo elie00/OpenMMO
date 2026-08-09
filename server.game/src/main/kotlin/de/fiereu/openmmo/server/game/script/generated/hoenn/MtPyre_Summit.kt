@@ -4,6 +4,7 @@ import de.fiereu.openmmo.dialog.generated.hoenn.MtPyre_Summit
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
@@ -120,6 +121,104 @@ internal object MtPyre_Summit_EventScript_Grunt4 : Script {
   }
 }
 
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MtPyre_Summit_Text_GroudonKyogreTale, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object MtPyre_Summit_EventScript_OldManTale : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MtPyre_Summit.GroudonKyogreTale)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MtPyre_Summit_Text_ThoseTwoMenReturnedOrbs, MSGBOX_DEFAULT
+ * setflag FLAG_RETURNED_RED_OR_BLUE_ORB
+ * release
+ * end
+ * ```
+ */
+internal object MtPyre_Summit_EventScript_OldLadyOrbsReturned : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MtPyre_Summit.ThoseTwoMenReturnedOrbs)
+    ctx.setFlag(HoennFlags.FLAG_RETURNED_RED_OR_BLUE_ORB)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox MtPyre_Summit_Text_HearTheNewLegendOfHoenn, MSGBOX_YESNO
+ * call_if_eq VAR_RESULT, YES, MtPyre_Summit_EventScript_OldManNewTale
+ * call_if_eq VAR_RESULT, NO, MtPyre_Summit_EventScript_DeclineOldManTale
+ * release
+ * end
+ * ```
+ */
+internal object MtPyre_Summit_EventScript_OldManAfterRayquaza : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port MtPyre_Summit_EventScript_OldManAfterRayquaza")
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MtPyre_Summit_Text_SuperAncientPokemonTaughtUs, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object MtPyre_Summit_EventScript_OldLadyAfterOrbsReturned : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MtPyre_Summit.SuperAncientPokemonTaughtUs)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MtPyre_Summit_Text_GroudonKyogreAwakened, MSGBOX_DEFAULT
+ * release
+ * end
+ * ```
+ */
+internal object MtPyre_Summit_EventScript_OldLadyLegendariesAwake : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MtPyre_Summit.GroudonKyogreAwakened)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MtPyre_Summit_Text_WellThatTooIsFine, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object MtPyre_Summit_EventScript_DeclineOldManTale : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MtPyre_Summit.WellThatTooIsFine)
+  }
+}
+
+/**
+ * Ported from the decomp:
+ * ```
+ * msgbox MtPyre_Summit_Text_HoennTrioTale, MSGBOX_DEFAULT
+ * return
+ * ```
+ */
+internal object MtPyre_Summit_EventScript_OldManNewTale : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MtPyre_Summit.HoennTrioTale)
+  }
+}
+
 internal val MtPyre_SummitScripts: Map<String, Script> =
     mapOf(
         "MtPyre_Summit_EventScript_OldMan" to MtPyre_Summit_EventScript_OldMan,
@@ -128,4 +227,16 @@ internal val MtPyre_SummitScripts: Map<String, Script> =
         "MtPyre_Summit_EventScript_Grunt2" to MtPyre_Summit_EventScript_Grunt2,
         "MtPyre_Summit_EventScript_Grunt3" to MtPyre_Summit_EventScript_Grunt3,
         "MtPyre_Summit_EventScript_Grunt4" to MtPyre_Summit_EventScript_Grunt4,
+        "MtPyre_Summit_EventScript_OldManTale" to MtPyre_Summit_EventScript_OldManTale,
+        "MtPyre_Summit_EventScript_OldLadyOrbsReturned" to
+            MtPyre_Summit_EventScript_OldLadyOrbsReturned,
+        "MtPyre_Summit_EventScript_OldManAfterRayquaza" to
+            MtPyre_Summit_EventScript_OldManAfterRayquaza,
+        "MtPyre_Summit_EventScript_OldLadyAfterOrbsReturned" to
+            MtPyre_Summit_EventScript_OldLadyAfterOrbsReturned,
+        "MtPyre_Summit_EventScript_OldLadyLegendariesAwake" to
+            MtPyre_Summit_EventScript_OldLadyLegendariesAwake,
+        "MtPyre_Summit_EventScript_DeclineOldManTale" to
+            MtPyre_Summit_EventScript_DeclineOldManTale,
+        "MtPyre_Summit_EventScript_OldManNewTale" to MtPyre_Summit_EventScript_OldManNewTale,
     )
