@@ -1,6 +1,10 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.dialog.generated.hoenn.BattleFrontier_ScottsHouse
+import de.fiereu.openmmo.server.game.script.MovementStep.FACE_DOWN
+import de.fiereu.openmmo.server.game.script.MovementStep.FACE_LEFT
+import de.fiereu.openmmo.server.game.script.MovementStep.FACE_RIGHT
+import de.fiereu.openmmo.server.game.script.MovementStep.FACE_UP
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
@@ -208,7 +212,7 @@ internal object BattleFrontier_ScottsHouse_EventScript_BerryPocketFull : Script 
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * applymovement LOCALID_SCOTTS_HOUSE_SCOTT, Common_Movement_WalkInPlaceFasterDown
  * waitmovement 0
@@ -216,8 +220,9 @@ internal object BattleFrontier_ScottsHouse_EventScript_BerryPocketFull : Script 
  * ```
  */
 internal object BattleFrontier_ScottsHouse_EventScript_ScottFaceAwaySouth : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port BattleFrontier_ScottsHouse_EventScript_ScottFaceAwaySouth")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.moveNpc(0, FACE_DOWN)
+  }
 }
 
 /**
@@ -235,7 +240,7 @@ internal object BattleFrontier_ScottsHouse_EventScript_Give2BattlePoints : Scrip
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * applymovement LOCALID_SCOTTS_HOUSE_SCOTT, Common_Movement_WalkInPlaceFasterLeft
  * waitmovement 0
@@ -243,8 +248,9 @@ internal object BattleFrontier_ScottsHouse_EventScript_Give2BattlePoints : Scrip
  * ```
  */
 internal object BattleFrontier_ScottsHouse_EventScript_ScottFaceAwayWest : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port BattleFrontier_ScottsHouse_EventScript_ScottFaceAwayWest")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.moveNpc(0, FACE_LEFT)
+  }
 }
 
 /**
@@ -264,7 +270,7 @@ internal object BattleFrontier_ScottsHouse_EventScript_RandomComment : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * applymovement LOCALID_SCOTTS_HOUSE_SCOTT, Common_Movement_WalkInPlaceFasterRight
  * waitmovement 0
@@ -272,8 +278,9 @@ internal object BattleFrontier_ScottsHouse_EventScript_RandomComment : Script {
  * ```
  */
 internal object BattleFrontier_ScottsHouse_EventScript_ScottFaceAwayEast : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port BattleFrontier_ScottsHouse_EventScript_ScottFaceAwayEast")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.moveNpc(0, FACE_RIGHT)
+  }
 }
 
 /**
@@ -291,7 +298,7 @@ internal object BattleFrontier_ScottsHouse_EventScript_Give4BattlePoints : Scrip
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * applymovement LOCALID_SCOTTS_HOUSE_SCOTT, Common_Movement_WalkInPlaceFasterUp
  * waitmovement 0
@@ -299,8 +306,9 @@ internal object BattleFrontier_ScottsHouse_EventScript_Give4BattlePoints : Scrip
  * ```
  */
 internal object BattleFrontier_ScottsHouse_EventScript_ScottFaceAwayNorth : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port BattleFrontier_ScottsHouse_EventScript_ScottFaceAwayNorth")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.moveNpc(0, FACE_UP)
+  }
 }
 
 /**

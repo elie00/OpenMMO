@@ -3,6 +3,7 @@ package de.fiereu.openmmo.server.game.script.generated.kanto
 import de.fiereu.openmmo.dialog.generated.kanto.FiveIsland_MemorialPillar
 import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
+import de.fiereu.openmmo.server.game.script.MovementStep.FACE_UP
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 import de.fiereu.openmmo.story.generated.kanto.KantoFlags
@@ -240,7 +241,7 @@ internal object FiveIsland_MemorialPillar_EventScript_NoRoomForTM42 : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox FiveIsland_MemorialPillar_Text_BeGoodToYourMonsToo
  * applymovement LOCALID_MEMORIAL_MAN, Common_Movement_WalkInPlaceFasterUp
@@ -250,8 +251,11 @@ internal object FiveIsland_MemorialPillar_EventScript_NoRoomForTM42 : Script {
  * ```
  */
 internal object FiveIsland_MemorialPillar_EventScript_ReceivedTM42 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port FiveIsland_MemorialPillar_EventScript_ReceivedTM42")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(FiveIsland_MemorialPillar.BeGoodToYourMonsToo)
+    ctx.moveNpc(0, FACE_UP)
+    ctx.setFlag(KantoFlags.FLAG_GOT_TM42_AT_MEMORIAL_PILLAR)
+  }
 }
 
 internal val FiveIsland_MemorialPillarScripts: Map<String, Script> =

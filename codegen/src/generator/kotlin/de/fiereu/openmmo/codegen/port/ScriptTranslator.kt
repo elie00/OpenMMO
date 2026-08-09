@@ -16,6 +16,7 @@ class ScriptTranslator(
     private val flagNames: Set<String>,
     private val varNames: Set<String>,
     private val movements: MovementTemplates,
+    private val mapObjects: MapObjectIndex,
     private val resolveText: (String) -> Pair<String, String>?,
 ) {
   private val flagsObject = "${region.replaceFirstChar { it.uppercase() }}Flags"
@@ -82,17 +83,25 @@ class ScriptTranslator(
   }
 
   /**
-   * Only the player is moved. An npc target is a decomp local id symbol that would have to be
-   * resolved against the map, and VAR_LAST_TALKED is resolved at runtime by the source engine,
-   * neither of which this can do yet.
+   * The player moves through moveSelf, a named object event through moveNpc once its `local_id`
+   * symbol is resolved to the index the runtime knows it by. VAR_LAST_TALKED is refused: the source
+   * engine fills it in at runtime from whoever was talked to, which is not a compile time fact.
    */
   private fun movement(rest: String, imports: MutableSet<String>): List<String>? {
     val target = rest.substringBefore(',').trim()
-    if (target != "LOCALID_PLAYER") return null
     val steps = movements.stepsOf(rest.substringAfter(',', "").trim()) ?: return null
     if (steps.isEmpty()) return null
+    val call =
+        when {
+          target == "LOCALID_PLAYER" -> "ctx.moveSelf(${steps.joinToString(", ")})"
+          target.startsWith("LOCALID_") -> {
+            val localId = mapObjects.localId(target) ?: return null
+            "ctx.moveNpc($localId, ${steps.joinToString(", ")})"
+          }
+          else -> return null
+        }
     steps.mapTo(imports) { "de.fiereu.openmmo.server.game.script.MovementStep.$it" }
-    return listOf("    ctx.moveSelf(${steps.joinToString(", ")})")
+    return listOf("    $call")
   }
 
   private fun flag(name: String, imports: MutableSet<String>): String? {

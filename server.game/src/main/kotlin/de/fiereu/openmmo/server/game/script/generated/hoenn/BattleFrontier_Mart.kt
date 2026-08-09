@@ -1,6 +1,7 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.dialog.generated.hoenn.BattleFrontier_Mart
+import de.fiereu.openmmo.server.game.script.MovementStep.FACE_DOWN
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 
@@ -22,7 +23,7 @@ internal object BattleFrontier_Mart_EventScript_Clerk : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * applymovement LOCALID_FRONTIER_MART_OLD_WOMAN, Common_Movement_FaceDown
@@ -33,8 +34,10 @@ internal object BattleFrontier_Mart_EventScript_Clerk : Script {
  * ```
  */
 internal object BattleFrontier_Mart_EventScript_OldWoman : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port BattleFrontier_Mart_EventScript_OldWoman")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.moveNpc(1, FACE_DOWN)
+    ctx.say(BattleFrontier_Mart.ProteinMakeNiceGift)
+  }
 }
 
 internal object BattleFrontier_Mart_EventScript_OldMan : Script {

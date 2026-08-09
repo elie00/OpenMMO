@@ -1,6 +1,7 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.PewterCity
+import de.fiereu.openmmo.server.game.script.MovementStep.FACE_DOWN
 import de.fiereu.openmmo.server.game.script.MovementStep.FACE_UP
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
@@ -340,7 +341,7 @@ internal object PewterCity_EventScript_AideApproachPlayer1 : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * applymovement LOCALID_PEWTER_AIDE, Common_Movement_WalkInPlaceFasterDown
  * waitmovement 0
@@ -348,8 +349,9 @@ internal object PewterCity_EventScript_AideApproachPlayer1 : Script {
  * ```
  */
 internal object PewterCity_EventScript_AideNoticePlayer : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port PewterCity_EventScript_AideNoticePlayer")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.moveNpc(6, FACE_DOWN)
+  }
 }
 
 /**

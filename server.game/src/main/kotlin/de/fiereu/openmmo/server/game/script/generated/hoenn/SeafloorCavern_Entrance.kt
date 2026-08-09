@@ -1,5 +1,8 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
+import de.fiereu.openmmo.server.game.script.MovementStep.FACE_DOWN
+import de.fiereu.openmmo.server.game.script.MovementStep.FACE_LEFT
+import de.fiereu.openmmo.server.game.script.MovementStep.FACE_RIGHT
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 
@@ -35,7 +38,7 @@ internal object SeafloorCavern_Entrance_EventScript_Grunt : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * applymovement LOCALID_SEAFLOOR_CAVERN_ENTRANCE_GRUNT, Common_Movement_WalkInPlaceFasterLeft
  * waitmovement 0
@@ -43,8 +46,9 @@ internal object SeafloorCavern_Entrance_EventScript_Grunt : Script {
  * ```
  */
 internal object SeafloorCavern_Entrance_EventScript_GruntFacePlayerEast : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SeafloorCavern_Entrance_EventScript_GruntFacePlayerEast")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.moveNpc(0, FACE_LEFT)
+  }
 }
 
 /**
@@ -67,7 +71,7 @@ internal object SeafloorCavern_Entrance_EventScript_GruntSpeechShort : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * applymovement LOCALID_SEAFLOOR_CAVERN_ENTRANCE_GRUNT, Common_Movement_WalkInPlaceFasterRight
  * waitmovement 0
@@ -75,12 +79,13 @@ internal object SeafloorCavern_Entrance_EventScript_GruntSpeechShort : Script {
  * ```
  */
 internal object SeafloorCavern_Entrance_EventScript_GruntFacePlayerWest : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SeafloorCavern_Entrance_EventScript_GruntFacePlayerWest")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.moveNpc(0, FACE_RIGHT)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * applymovement LOCALID_SEAFLOOR_CAVERN_ENTRANCE_GRUNT, Common_Movement_WalkInPlaceFasterDown
  * waitmovement 0
@@ -88,8 +93,9 @@ internal object SeafloorCavern_Entrance_EventScript_GruntFacePlayerWest : Script
  * ```
  */
 internal object SeafloorCavern_Entrance_EventScript_GruntFacePlayerNorth : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SeafloorCavern_Entrance_EventScript_GruntFacePlayerNorth")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.moveNpc(0, FACE_DOWN)
+  }
 }
 
 internal val SeafloorCavern_EntranceScripts: Map<String, Script> =

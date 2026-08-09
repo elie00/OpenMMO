@@ -1,6 +1,7 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.dialog.generated.hoenn.LilycoveCity_DepartmentStore_5F
+import de.fiereu.openmmo.server.game.script.MovementStep.FACE_UP
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 
@@ -104,7 +105,7 @@ internal object LilycoveCity_DepartmentStore_5F_EventScript_Woman : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * msgbox LilycoveCity_DepartmentStore_5F_Text_ClosedRooftopForWeather, MSGBOX_DEFAULT
  * closemessage
@@ -115,8 +116,10 @@ internal object LilycoveCity_DepartmentStore_5F_EventScript_Woman : Script {
  * ```
  */
 internal object LilycoveCity_DepartmentStore_5F_EventScript_WomanLegendaryWeather : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LilycoveCity_DepartmentStore_5F_EventScript_WomanLegendaryWeather")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity_DepartmentStore_5F.ClosedRooftopForWeather)
+    ctx.moveNpc(6, FACE_UP)
+  }
 }
 
 /**

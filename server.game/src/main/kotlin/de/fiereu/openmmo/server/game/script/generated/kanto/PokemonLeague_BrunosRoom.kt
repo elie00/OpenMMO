@@ -1,6 +1,9 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.PokemonLeague_BrunosRoom
+import de.fiereu.openmmo.server.game.script.MovementStep.FACE_DOWN
+import de.fiereu.openmmo.server.game.script.MovementStep.FACE_LEFT
+import de.fiereu.openmmo.server.game.script.MovementStep.FACE_RIGHT
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 
@@ -118,7 +121,7 @@ internal object PokemonLeague_BrunosRoom_EventScript_Battle : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * applymovement LOCALID_BRUNO, Common_Movement_WalkInPlaceFasterRight
  * waitmovement 0
@@ -126,12 +129,13 @@ internal object PokemonLeague_BrunosRoom_EventScript_Battle : Script {
  * ```
  */
 internal object PokemonLeague_BrunosRoom_EventScript_BrunoLookAwayRight : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port PokemonLeague_BrunosRoom_EventScript_BrunoLookAwayRight")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.moveNpc(0, FACE_RIGHT)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * applymovement LOCALID_BRUNO, Common_Movement_WalkInPlaceFasterDown
  * waitmovement 0
@@ -139,12 +143,13 @@ internal object PokemonLeague_BrunosRoom_EventScript_BrunoLookAwayRight : Script
  * ```
  */
 internal object PokemonLeague_BrunosRoom_EventScript_BrunoLookAwayDown : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port PokemonLeague_BrunosRoom_EventScript_BrunoLookAwayDown")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.moveNpc(0, FACE_DOWN)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * applymovement LOCALID_BRUNO, Common_Movement_WalkInPlaceFasterLeft
  * waitmovement 0
@@ -152,8 +157,9 @@ internal object PokemonLeague_BrunosRoom_EventScript_BrunoLookAwayDown : Script 
  * ```
  */
 internal object PokemonLeague_BrunosRoom_EventScript_BrunoLookAwayLeft : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port PokemonLeague_BrunosRoom_EventScript_BrunoLookAwayLeft")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.moveNpc(0, FACE_LEFT)
+  }
 }
 
 internal val PokemonLeague_BrunosRoomScripts: Map<String, Script> =

@@ -1,6 +1,7 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.ViridianCity_School
+import de.fiereu.openmmo.server.game.script.MovementStep.FACE_UP
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 
@@ -27,7 +28,7 @@ internal object ViridianCity_School_EventScript_Woman : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -40,7 +41,10 @@ internal object ViridianCity_School_EventScript_Woman : Script {
  * ```
  */
 internal object ViridianCity_School_EventScript_Lass : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port ViridianCity_School_EventScript_Lass")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(ViridianCity_School.TryingToMemorizeNotes)
+    ctx.moveNpc(1, FACE_UP)
+  }
 }
 
 /**

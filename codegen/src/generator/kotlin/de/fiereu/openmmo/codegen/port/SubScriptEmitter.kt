@@ -28,7 +28,7 @@ class SubScriptEmitter(private val scripts: ScriptIndex) {
     // What already exists anywhere in the region, not just in this file: generated scripts are top
     // level objects in one package per region, so emitting a label a sibling file already declares
     // is a redeclaration and the region stops compiling.
-    val defined = definedInRegion
+    val defined: Set<String> = definedInRegion
     val mapEnd = lines.indexOfLast { it == "    )" }
     val mapStart = lines.indexOfFirst { MAP_HEADER.containsMatchIn(it) }
     if (mapEnd < 0 || mapStart < 0 || mapEnd < mapStart) return 0

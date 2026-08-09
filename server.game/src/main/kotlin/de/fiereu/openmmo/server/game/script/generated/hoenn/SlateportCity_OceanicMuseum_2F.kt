@@ -180,7 +180,7 @@ internal object SlateportCity_OceanicMuseum_2F_EventScript_PressureExperiment : 
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * applymovement LOCALID_OCEANIC_MUSEUM_2F_CAPT_STERN, Common_Movement_WalkInPlaceFasterLeft
  * waitmovement 0
@@ -188,8 +188,9 @@ internal object SlateportCity_OceanicMuseum_2F_EventScript_PressureExperiment : 
  * ```
  */
 internal object SlateportCity_OceanicMuseum_2F_EventScript_SternFaceGrunts : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SlateportCity_OceanicMuseum_2F_EventScript_SternFaceGrunts")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.moveNpc(0, FACE_LEFT)
+  }
 }
 
 /**

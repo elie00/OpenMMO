@@ -17,6 +17,8 @@ data class MapObject(val localId: Int, val hideFlag: String)
  */
 class MapObjectIndex(decompDir: File) {
 
+  private val byLocalId = mutableMapOf<String, Int>()
+
   private val byScript: Map<String, MapObject> = buildMap {
     val json = Json { ignoreUnknownKeys = true }
     File(decompDir, "data/maps").listFiles()?.sorted()?.forEach { mapDir ->
@@ -29,6 +31,10 @@ class MapObjectIndex(decompDir: File) {
               .getOrNull() ?: return@forEach
       events.forEachIndexed { idx, element ->
         val event = element.jsonObject
+        event["local_id"]?.jsonPrimitive?.contentOrNull()?.let { symbol ->
+          val previous = byLocalId.put(symbol, idx)
+          if (previous != null && previous != idx) byLocalId[symbol] = AMBIGUOUS_ID
+        }
         val script = event["script"]?.jsonPrimitive?.contentOrNull() ?: return@forEachIndexed
         val flag = event["flag"]?.jsonPrimitive?.contentOrNull() ?: return@forEachIndexed
         if (flag == "0") return@forEachIndexed
@@ -41,8 +47,16 @@ class MapObjectIndex(decompDir: File) {
   /** The object event carrying [script], or null when there is none or more than one. */
   fun forScript(script: String): MapObject? = byScript[script]?.takeIf { it != AMBIGUOUS }
 
+  /**
+   * The index an object event's `local_id` symbol stands for, which is what the runtime calls a
+   * npc's local id. Null when the symbol is unknown, or when two maps give it different indices: a
+   * script names it without naming its map, so an ambiguous symbol cannot be resolved safely.
+   */
+  fun localId(symbol: String): Int? = byLocalId[symbol]?.takeIf { it != AMBIGUOUS_ID }
+
   private companion object {
     val AMBIGUOUS = MapObject(-1, "")
+    const val AMBIGUOUS_ID = -1
   }
 }
 

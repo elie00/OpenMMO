@@ -1,6 +1,7 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.dialog.generated.hoenn.BattleFrontier_OutsideWest
+import de.fiereu.openmmo.server.game.script.MovementStep.FACE_UP
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 
@@ -248,7 +249,7 @@ internal object Common_EventScript_ShowPokemartSign : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * applymovement LOCALID_FRONTIER_CAMPER, Common_Movement_WalkInPlaceFasterUp
  * waitmovement 0
@@ -256,8 +257,9 @@ internal object Common_EventScript_ShowPokemartSign : Script {
  * ```
  */
 internal object BattleFrontier_OutsideWest_EventScript_CamperFaceFactory : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port BattleFrontier_OutsideWest_EventScript_CamperFaceFactory")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.moveNpc(13, FACE_UP)
+  }
 }
 
 /**

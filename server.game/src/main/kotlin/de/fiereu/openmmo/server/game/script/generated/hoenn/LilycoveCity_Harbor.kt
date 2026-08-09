@@ -2,6 +2,8 @@ package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.dialog.generated.hoenn.EventTicket
 import de.fiereu.openmmo.dialog.generated.hoenn.LilycoveCity_Harbor
+import de.fiereu.openmmo.server.game.script.MovementStep.FACE_DOWN
+import de.fiereu.openmmo.server.game.script.MovementStep.FACE_LEFT
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
@@ -355,7 +357,7 @@ internal object LilycoveCity_Harbor_EventScript_SetFirstTimeShowingMysticTicket 
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * applymovement LOCALID_LILYCOVE_HARBOR_BRINEY, Common_Movement_WalkInPlaceFasterLeft
  * waitmovement 0
@@ -363,8 +365,9 @@ internal object LilycoveCity_Harbor_EventScript_SetFirstTimeShowingMysticTicket 
  * ```
  */
 internal object LilycoveCity_Harbor_EventScript_BrineyFacePlayerEast : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LilycoveCity_Harbor_EventScript_BrineyFacePlayerEast")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.moveNpc(4, FACE_LEFT)
+  }
 }
 
 /**
@@ -384,7 +387,7 @@ internal object LilycoveCity_Harbor_EventScript_GoToSouthernIslandFirstTime : Sc
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * applymovement LOCALID_LILYCOVE_HARBOR_BRINEY, Common_Movement_WalkInPlaceFasterLeft
  * waitmovement 0
@@ -392,8 +395,9 @@ internal object LilycoveCity_Harbor_EventScript_GoToSouthernIslandFirstTime : Sc
  * ```
  */
 internal object LilycoveCity_Harbor_EventScript_BrineyFaceSailorNorth : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LilycoveCity_Harbor_EventScript_BrineyFaceSailorNorth")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.moveNpc(4, FACE_LEFT)
+  }
 }
 
 /**
@@ -516,7 +520,7 @@ internal object LilycoveCity_Harbor_EventScript_MoveSailorOutOfWayNorth : Script
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * applymovement LOCALID_LILYCOVE_HARBOR_BRINEY, Common_Movement_WalkInPlaceFasterDown
  * waitmovement 0
@@ -524,8 +528,9 @@ internal object LilycoveCity_Harbor_EventScript_MoveSailorOutOfWayNorth : Script
  * ```
  */
 internal object LilycoveCity_Harbor_EventScript_BrineyFacePlayerNorth : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LilycoveCity_Harbor_EventScript_BrineyFacePlayerNorth")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.moveNpc(4, FACE_DOWN)
+  }
 }
 
 /**
@@ -541,7 +546,7 @@ internal object LilycoveCity_Harbor_EventScript_SetFirstTimeShowingAuroraTicket 
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * applymovement LOCALID_LILYCOVE_HARBOR_BRINEY, Common_Movement_WalkInPlaceFasterDown
  * waitmovement 0
@@ -549,8 +554,9 @@ internal object LilycoveCity_Harbor_EventScript_SetFirstTimeShowingAuroraTicket 
  * ```
  */
 internal object LilycoveCity_Harbor_EventScript_BrineyFaceSailorEast : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LilycoveCity_Harbor_EventScript_BrineyFaceSailorEast")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.moveNpc(4, FACE_DOWN)
+  }
 }
 
 /**

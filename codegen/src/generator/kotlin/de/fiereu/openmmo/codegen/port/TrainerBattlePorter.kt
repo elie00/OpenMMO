@@ -27,7 +27,8 @@ class TrainerBattlePorter(private val region: String, decompDir: File) {
   private val mapObjects = MapObjectIndex(decompDir)
   private val subScripts = SubScriptEmitter(ScriptIndex.build(decompDir))
   private val translator =
-      ScriptTranslator(region, flagNames, varNames, MovementTemplates(decompDir)) { label ->
+      ScriptTranslator(region, flagNames, varNames, MovementTemplates(decompDir), mapObjects) {
+          label ->
         resolveText(label)?.let { it.import to it.reference }
       }
   private val trainersObject = "${region.replaceFirstChar { it.uppercase() }}Trainers"
@@ -82,7 +83,7 @@ class TrainerBattlePorter(private val region: String, decompDir: File) {
       stubs = findStubs(lines)
     }
 
-    val defined = definedInRegion
+    val defined: Set<String> = definedInRegion
     val splices = mutableListOf<Splice>()
     val imports = sortedSetOf<String>()
     for (stub in stubs) {
