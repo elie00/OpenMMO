@@ -16,6 +16,9 @@ class FakeCharacterRepository : CharacterRepository {
 
   override suspend fun loadById(id: Long): StoredCharacter? = saved[id]
 
+  override suspend fun loadByName(name: String): StoredCharacter? =
+      saved.values.firstOrNull { it.info.name.equals(name, ignoreCase = true) }
+
   override suspend fun insertAggregate(stored: StoredCharacter) {
     saved[stored.info.id] = stored
   }

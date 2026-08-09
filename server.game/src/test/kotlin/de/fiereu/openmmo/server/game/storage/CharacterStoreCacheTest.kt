@@ -67,6 +67,49 @@ class CharacterStoreCacheTest :
         }
       }
 
+      test("refuses to take more money than the character has, without touching it") {
+        runTest {
+          val repo = FakeCharacterRepository()
+          val store = CharacterStore(repo, EntityIdService(), backgroundScope)
+          val id = store.createCharacter(1, "Ash", CharacterGender.MALE, Region.KANTO).info.id
+          val startingMoney = store.getCharacter(id)!!.info.money
+          store.addMoney(id, -(startingMoney - 100))
+          store.flushAll()
+          val savesBefore = repo.saveCount
+
+          store.addMoney(id, -101) shouldBe false
+
+          store.getCharacter(id)!!.info.money shouldBe 100
+          // Nothing was marked dirty either, so the refusal costs no write.
+          store.flushAll()
+          repo.saveCount shouldBe savesBefore
+        }
+      }
+
+      test("a gain saturates at the wallet cap instead of wrapping negative") {
+        runTest {
+          val repo = FakeCharacterRepository()
+          val store = CharacterStore(repo, EntityIdService(), backgroundScope)
+          val id = store.createCharacter(1, "Ash", CharacterGender.MALE, Region.KANTO).info.id
+
+          store.addMoney(id, Int.MAX_VALUE) shouldBe true
+
+          store.getCharacter(id)!!.info.money shouldBe MAX_MONEY
+          // Already at the cap: still a success, but nothing changes.
+          store.addMoney(id, 1) shouldBe true
+          store.getCharacter(id)!!.info.money shouldBe MAX_MONEY
+        }
+      }
+
+      test("an unknown character cannot be charged") {
+        runTest {
+          val store = CharacterStore(FakeCharacterRepository(), EntityIdService(), backgroundScope)
+
+          store.addMoney(9999, -1) shouldBe false
+          store.addMoney(9999, 1) shouldBe false
+        }
+      }
+
       test("reads come from memory, not the repository") {
         runTest {
           val repo = FakeCharacterRepository()

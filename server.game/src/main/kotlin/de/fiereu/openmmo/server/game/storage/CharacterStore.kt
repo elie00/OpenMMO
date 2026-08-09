@@ -23,6 +23,9 @@ import kotlinx.coroutines.launch
 private val log = KotlinLogging.logger {}
 
 private val FLUSH_TICK = 5.seconds
+
+/** The wallet cap the source game uses, so a balance can never be shown with more digits. */
+const val MAX_MONEY = 999_999
 private val FLUSH_DEBOUNCE = 10.seconds
 
 data class StoredCharacter(
@@ -141,6 +144,16 @@ constructor(
     return loaded
   }
 
+  /** Finds a character by display name, including offline characters. */
+  suspend fun findCharacterByName(name: String): StoredCharacter? {
+    characters.values
+        .firstOrNull { it.info.name.equals(name, ignoreCase = true) }
+        ?.let {
+          return it
+        }
+    return repository.loadByName(name)
+  }
+
   /** Permanently delete an owned character and evict every cached reference to it. */
   suspend fun deleteCharacter(userId: Int, characterId: Long): Boolean {
     if (!repository.deleteById(userId, characterId)) return false
@@ -193,11 +206,23 @@ constructor(
     markDirty(characterId)
   }
 
-  fun addMoney(characterId: Long, amount: Int) {
-    val stored = characters[characterId] ?: return
-    val newInfo = stored.info.copy(money = stored.info.money + amount)
-    characters[characterId] = stored.copy(info = newInfo)
+  /**
+   * Add money, or take it with a negative [amount]. Mirrors [addItem]: false when the balance would
+   * go negative, and nothing is changed, so a caller cannot check the balance and spend it in two
+   * steps. Gains saturate at [MAX_MONEY] the way the source game's wallet does.
+   *
+   * The sum is taken as a Long because an Int one silently wraps to a negative balance once a
+   * character is rich enough, which is the same duplication bug as a missing floor.
+   */
+  fun addMoney(characterId: Long, amount: Int): Boolean {
+    val stored = characters[characterId] ?: return false
+    val updated = stored.info.money.toLong() + amount
+    if (updated < 0) return false
+    val clamped = updated.coerceAtMost(MAX_MONEY.toLong()).toInt()
+    if (clamped == stored.info.money) return true
+    characters[characterId] = stored.copy(info = stored.info.copy(money = clamped))
     markDirty(characterId)
+    return true
   }
 
   /** Add (or remove with a negative amount) one persisted bag stack. */
