@@ -198,8 +198,9 @@ internal object LittlerootTown_EventScript_BirchsLabSign : Script {
  * ```
  */
 internal object LittlerootTown_EventScript_BrendansHouseSign : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LittlerootTown_EventScript_BrendansHouseSign")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(if (ctx.isFemale) LittlerootTown.ProfBirchsHouse else LittlerootTown.PlayersHouse)
+  }
 }
 
 /**
@@ -214,8 +215,9 @@ internal object LittlerootTown_EventScript_BrendansHouseSign : Script {
  * ```
  */
 internal object LittlerootTown_EventScript_MaysHouseSign : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LittlerootTown_EventScript_MaysHouseSign")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(if (ctx.isFemale) LittlerootTown.PlayersHouse else LittlerootTown.ProfBirchsHouse)
+  }
 }
 
 /**

@@ -3,6 +3,7 @@ package de.fiereu.openmmo.server.game.script.generated.hoenn
 import de.fiereu.openmmo.common.enums.Direction
 import de.fiereu.openmmo.dialog.generated.hoenn.PlayersHouse_1F
 import de.fiereu.openmmo.dialog.generated.hoenn.RivalsHouse_1F
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.MovementStep.FACE_LEFT
 import de.fiereu.openmmo.server.game.script.MovementStep.FACE_RIGHT
 import de.fiereu.openmmo.server.game.script.MovementStep.WALK_UP
@@ -108,7 +109,21 @@ private suspend fun watchPetalburgReport(ctx: ScriptContext, female: Boolean) {
  * ```
  */
 internal object PlayersHouse_1F_EventScript_Mom : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PlayersHouse_1F_EventScript_Mom")
+  override suspend fun run(ctx: ScriptContext) {
+    val finishedHouseStory =
+        ctx.getVar(HoennVars.VAR_LITTLEROOT_HOUSES_STATE_MAY) == 4 ||
+            ctx.getVar(HoennVars.VAR_LITTLEROOT_HOUSES_STATE_BRENDAN) == 4
+    when {
+      finishedHouseStory -> PlayersHouse_1F_EventScript_DontPushYourselfTooHard.run(ctx)
+      ctx.isFlagSet(HoennFlags.FLAG_HAS_MATCH_CALL) ->
+          PlayersHouse_1F_EventScript_TryRegisterMom.run(ctx)
+      ctx.isFlagSet(HoennFlags.FLAG_RESCUED_BIRCH) ->
+          PlayersHouse_1F_EventScript_MomHealsParty.run(ctx)
+      ctx.getVar(HoennVars.VAR_LITTLEROOT_INTRO_STATE) == 7 ->
+          PlayersHouse_1F_EventScript_DidYouMeetProfBirch.run(ctx)
+      else -> ctx.say(PlayersHouse_1F.IsntItNiceInHere)
+    }
+  }
 }
 
 /**
@@ -125,7 +140,7 @@ internal object PlayersHouse_1F_EventScript_Mom : Script {
  * ```
  */
 internal object PlayersHouse_1F_EventScript_Vigoroth2 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PlayersHouse_1F_EventScript_Vigoroth2")
+  override suspend fun run(ctx: ScriptContext) = ctx.say(PlayersHouse_1F.Vigoroth2)
 }
 
 /**
@@ -142,7 +157,7 @@ internal object PlayersHouse_1F_EventScript_Vigoroth2 : Script {
  * ```
  */
 internal object PlayersHouse_1F_EventScript_Vigoroth1 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PlayersHouse_1F_EventScript_Vigoroth1")
+  override suspend fun run(ctx: ScriptContext) = ctx.say(PlayersHouse_1F.Vigoroth1)
 }
 
 /**
@@ -160,7 +175,17 @@ internal object PlayersHouse_1F_EventScript_Vigoroth1 : Script {
  * ```
  */
 internal object RivalsHouse_1F_EventScript_RivalMom : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port RivalsHouse_1F_EventScript_RivalMom")
+  override suspend fun run(ctx: ScriptContext) {
+    when {
+      ctx.isFlagSet(HoennFlags.FLAG_DEFEATED_RIVAL_ROUTE103) ->
+          RivalsHouse_1F_EventScript_GoHomeEverySoOften.run(ctx)
+      ctx.isFlagSet(HoennFlags.FLAG_SYS_POKEMON_GET) ->
+          RivalsHouse_1F_EventScript_RivalIsOnRoute103.run(ctx)
+      ctx.getVar(HoennVars.VAR_LITTLEROOT_RIVAL_STATE) == 3 ->
+          RivalsHouse_1F_EventScript_RivalTooBusy.run(ctx)
+      else -> ctx.say(RivalsHouse_1F.LikeChildLikeFather)
+    }
+  }
 }
 
 /**
@@ -175,8 +200,7 @@ internal object RivalsHouse_1F_EventScript_RivalMom : Script {
  * ```
  */
 internal object RivalsHouse_1F_EventScript_RivalSibling : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port RivalsHouse_1F_EventScript_RivalSibling")
+  override suspend fun run(ctx: ScriptContext) = ctx.say(RivalsHouse_1F.DoYouHavePokemon)
 }
 
 /**
@@ -282,8 +306,15 @@ internal object RivalsHouse_1F_EventScript_GoHomeEverySoOften : Script {
  * ```
  */
 internal object PlayersHouse_1F_EventScript_TryRegisterMom : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port PlayersHouse_1F_EventScript_TryRegisterMom")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(HoennFlags.FLAG_ENABLE_MOM_MATCH_CALL)) {
+      PlayersHouse_1F_EventScript_CheckGiveAmuletCoin.run(ctx)
+      return
+    }
+    ctx.say(PlayersHouse_1F.IsThatAPokenav)
+    ctx.say(PlayersHouse_1F.RegisteredMom)
+    ctx.setFlag(HoennFlags.FLAG_ENABLE_MOM_MATCH_CALL)
+  }
 }
 
 /**
@@ -308,8 +339,13 @@ internal object RivalsHouse_1F_EventScript_RivalIsOnRoute103 : Script {
  * ```
  */
 internal object PlayersHouse_1F_EventScript_CheckGiveAmuletCoin : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port PlayersHouse_1F_EventScript_CheckGiveAmuletCoin")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(HoennFlags.FLAG_BADGE05_GET)) {
+      PlayersHouse_1F_EventScript_TryGiveAmuletCoin.run(ctx)
+    } else {
+      PlayersHouse_1F_EventScript_MomHealsParty.run(ctx)
+    }
+  }
 }
 
 /**
@@ -324,7 +360,10 @@ internal object PlayersHouse_1F_EventScript_CheckGiveAmuletCoin : Script {
  * ```
  */
 internal object PlayersHouse_1F_EventScript_HealParty : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PlayersHouse_1F_EventScript_HealParty")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.healParty()
+    ctx.say(PlayersHouse_1F.TakeCareHoney)
+  }
 }
 
 /**
@@ -341,8 +380,17 @@ internal object PlayersHouse_1F_EventScript_HealParty : Script {
  * ```
  */
 internal object PlayersHouse_1F_EventScript_TryGiveAmuletCoin : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port PlayersHouse_1F_EventScript_TryGiveAmuletCoin")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(HoennFlags.FLAG_RECEIVED_AMULET_COIN)) {
+      PlayersHouse_1F_EventScript_MomHealsParty.run(ctx)
+      return
+    }
+    ctx.say(PlayersHouse_1F.GotDadsBadgeHeresSomethingFromMom)
+    if (ctx.giveItem(Items.AMULET_COIN)) {
+      ctx.say(PlayersHouse_1F.DontPushYourselfTooHard)
+      ctx.setFlag(HoennFlags.FLAG_RECEIVED_AMULET_COIN)
+    }
+  }
 }
 
 internal val LittlerootTown_BrendansHouse_1FScripts: Map<String, Script> =

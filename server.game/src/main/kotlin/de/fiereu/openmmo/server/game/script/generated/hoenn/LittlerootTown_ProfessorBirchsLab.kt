@@ -147,8 +147,21 @@ internal object LittlerootTown_ProfessorBirchsLab_EventScript_Birch : Script {
  * ```
  */
 internal object LittlerootTown_ProfessorBirchsLab_EventScript_Rival : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LittlerootTown_ProfessorBirchsLab_EventScript_Rival")
+  override suspend fun run(ctx: ScriptContext) {
+    when (ctx.getVar(HoennVars.VAR_DEX_UPGRADE_JOHTO_STARTER_STATE)) {
+      5 -> LittlerootTown_ProfessorBirchsLab_EventScript_RivalFuturePlans.run(ctx)
+      in 6..Int.MAX_VALUE ->
+          LittlerootTown_ProfessorBirchsLab_EventScript_RivalHaveYouGoneToBattleFrontier.run(ctx)
+      in 2..Int.MAX_VALUE ->
+          LittlerootTown_ProfessorBirchsLab_EventScript_RivalTakeBreakFromFieldwork.run(ctx)
+      else ->
+          if (ctx.isFemale) {
+            LittlerootTown_ProfessorBirchsLab_EventScript_BrendanWhereShouldIGoNext.run(ctx)
+          } else {
+            LittlerootTown_ProfessorBirchsLab_EventScript_MayWhereShouldIGoNext.run(ctx)
+          }
+    }
+  }
 }
 
 /**
@@ -289,8 +302,13 @@ internal object LittlerootTown_ProfessorBirchsLab_EventScript_GiveTotodile : Scr
  * ```
  */
 internal object LittlerootTown_ProfessorBirchsLab_EventScript_RivalTakeBreakFromFieldwork : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LittlerootTown_ProfessorBirchsLab_EventScript_RivalTakeBreakFromFieldwork")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFemale) {
+      LittlerootTown_ProfessorBirchsLab_EventScript_BrendanTakeBreakFromFieldwork.run(ctx)
+    } else {
+      LittlerootTown_ProfessorBirchsLab_EventScript_MayTakeBreakFromFieldwork.run(ctx)
+    }
+  }
 }
 
 /**
@@ -345,8 +363,13 @@ internal object LittlerootTown_ProfessorBirchsLab_EventScript_BrendanWhereShould
  */
 internal object LittlerootTown_ProfessorBirchsLab_EventScript_RivalHaveYouGoneToBattleFrontier :
     Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LittlerootTown_ProfessorBirchsLab_EventScript_RivalHaveYouGoneToBattleFrontier")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFemale) {
+      LittlerootTown_ProfessorBirchsLab_EventScript_BrendanHaveYouGoneToBattleFrontier.run(ctx)
+    } else {
+      LittlerootTown_ProfessorBirchsLab_EventScript_MayHaveYouGoneToBattleFrontier.run(ctx)
+    }
+  }
 }
 
 /**
@@ -378,8 +401,13 @@ internal object LittlerootTown_ProfessorBirchsLab_EventScript_GiveCyndaquil : Sc
  * ```
  */
 internal object LittlerootTown_ProfessorBirchsLab_EventScript_RivalFuturePlans : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LittlerootTown_ProfessorBirchsLab_EventScript_RivalFuturePlans")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFemale) {
+      ctx.say(LittlerootTown_ProfessorBirchsLab.BrendanPreferCollectingSlowly)
+    } else {
+      LittlerootTown_ProfessorBirchsLab_EventScript_MayWhatNextImStayingHere.run(ctx)
+    }
+  }
 }
 
 /**
