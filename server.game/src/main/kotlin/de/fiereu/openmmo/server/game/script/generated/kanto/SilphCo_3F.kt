@@ -1,9 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.SilphCo_3F
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
@@ -62,14 +64,16 @@ internal object SilphCo_3F_EventScript_Jose : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_HYPER_POTION
  * end
  * ```
  */
 internal object SilphCo_3F_EventScript_ItemHyperPotion : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SilphCo_3F_EventScript_ItemHyperPotion")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.HYPER_POTION, KantoFlags.FLAG_HIDE_SILPH_CO_3F_HYPER_POTION, 3)
+  }
 }
 
 /**

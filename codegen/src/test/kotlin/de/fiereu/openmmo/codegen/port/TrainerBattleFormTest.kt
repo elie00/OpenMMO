@@ -57,4 +57,14 @@ class TrainerBattleFormTest :
         TrainerBattleForm.parse(canonical + "release") shouldBe null
         TrainerBattleForm.parse(emptyList()) shouldBe null
       }
+
+      test("reads a bare finditem and refuses every richer form") {
+        FindItemForm.parse(listOf("finditem ITEM_PP_UP", "end"))?.item shouldBe "ITEM_PP_UP"
+
+        // The quantity form and the hidden item form both branch on bag space.
+        FindItemForm.parse(listOf("finditem ITEM_NUGGET, 5", "end")) shouldBe null
+        FindItemForm.parse(listOf("finditem ITEM_PP_UP", "setflag FLAG_X", "end")) shouldBe null
+        FindItemForm.parse(listOf("finditem ITEM_PP_UP")) shouldBe null
+        FindItemForm.parse(listOf("finditem gSpecialVar_0x8000", "end")) shouldBe null
+      }
     })

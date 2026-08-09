@@ -1,9 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.SixIsland_OutcastIsland
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
@@ -102,15 +104,16 @@ internal object SixIsland_OutcastIsland_EventScript_Geb : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_PP_UP
  * end
  * ```
  */
 internal object SixIsland_OutcastIsland_EventScript_ItemPPUp : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SixIsland_OutcastIsland_EventScript_ItemPPUp")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.PP_UP, KantoFlags.FLAG_HIDE_SIX_ISLAND_OUTCAST_ISLAND_PP_UP, 6)
+  }
 }
 
 internal val SixIsland_OutcastIslandScripts: Map<String, Script> =

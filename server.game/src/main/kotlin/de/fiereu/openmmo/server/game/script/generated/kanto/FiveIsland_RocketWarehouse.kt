@@ -1,9 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.FiveIsland_RocketWarehouse
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
@@ -107,51 +109,55 @@ internal object FiveIsland_RocketWarehouse_EventScript_Gideon : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_BIG_PEARL
  * end
  * ```
  */
 internal object FiveIsland_RocketWarehouse_EventScript_ItemBigPearl : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port FiveIsland_RocketWarehouse_EventScript_ItemBigPearl")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.BIG_PEARL, KantoFlags.FLAG_HIDE_FIVE_ISLAND_ROCKET_WAREHOUSE_BIG_PEARL, 6)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_TM36
  * end
  * ```
  */
 internal object FiveIsland_RocketWarehouse_EventScript_ItemTM36 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port FiveIsland_RocketWarehouse_EventScript_ItemTM36")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.TM36, KantoFlags.FLAG_HIDE_FIVE_ISLAND_ROCKET_WAREHOUSE_TM36, 7)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_PEARL
  * end
  * ```
  */
 internal object FiveIsland_RocketWarehouse_EventScript_ItemPearl : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port FiveIsland_RocketWarehouse_EventScript_ItemPearl")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.PEARL, KantoFlags.FLAG_HIDE_FIVE_ISLAND_ROCKET_WAREHOUSE_PEARL, 8)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_UP_GRADE
  * end
  * ```
  */
 internal object FiveIsland_RocketWarehouse_EventScript_ItemUpGrade : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port FiveIsland_RocketWarehouse_EventScript_ItemUpGrade")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.UP_GRADE, KantoFlags.FLAG_HIDE_FIVE_ISLAND_ROCKET_WAREHOUSE_UP_GRADE, 9)
+  }
 }
 
 /**

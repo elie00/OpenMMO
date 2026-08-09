@@ -1,21 +1,24 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.PokemonMansion_B1F
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_TM22
  * end
  * ```
  */
 internal object PokemonMansion_B1F_EventScript_ItemTM22 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port PokemonMansion_B1F_EventScript_ItemTM22")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.TM22, KantoFlags.FLAG_HIDE_POKEMON_MANSION_B1F_TM22, 0)
+  }
 }
 
 /**
@@ -59,39 +62,42 @@ internal object PokemonMansion_B1F_EventScript_Ivan : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_TM14
  * end
  * ```
  */
 internal object PokemonMansion_B1F_EventScript_ItemTM14 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port PokemonMansion_B1F_EventScript_ItemTM14")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.TM14, KantoFlags.FLAG_HIDE_POKEMON_MANSION_B1F_TM14, 3)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_FULL_RESTORE
  * end
  * ```
  */
 internal object PokemonMansion_B1F_EventScript_ItemFullRestore : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port PokemonMansion_B1F_EventScript_ItemFullRestore")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.FULL_RESTORE, KantoFlags.FLAG_HIDE_POKEMON_MANSION_B1F_FULL_RESTORE, 4)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_SECRET_KEY
  * end
  * ```
  */
 internal object PokemonMansion_B1F_EventScript_ItemSecretKey : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port PokemonMansion_B1F_EventScript_ItemSecretKey")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.SECRET_KEY, KantoFlags.FLAG_HIDE_POKEMON_MANSION_B1F_SECRET_KEY, 5)
+  }
 }
 
 internal object PokemonMansion_B1F_EventScript_DiarySep1st : Script {

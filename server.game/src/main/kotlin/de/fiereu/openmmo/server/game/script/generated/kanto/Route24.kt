@@ -1,7 +1,9 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 
 /**
  * Not ported yet. Decomp body:
@@ -106,14 +108,16 @@ internal object Route24_EventScript_Shane : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_TM45
  * end
  * ```
  */
 internal object Route24_EventScript_ItemTM45 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route24_EventScript_ItemTM45")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.TM45, KantoFlags.FLAG_HIDE_ROUTE24_TM45, 7)
+  }
 }
 
 internal val Route24Scripts: Map<String, Script> =

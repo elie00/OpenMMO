@@ -1,9 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.RockTunnel_B1F
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
@@ -191,26 +193,29 @@ internal object RockTunnel_B1F_EventScript_RockSlideTutor : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_REVIVE
  * end
  * ```
  */
 internal object RockTunnel_B1F_EventScript_ItemRevive : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port RockTunnel_B1F_EventScript_ItemRevive")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.REVIVE, KantoFlags.FLAG_HIDE_ROCK_TUNNEL_B1F_REVIVE, 9)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_MAX_ETHER
  * end
  * ```
  */
 internal object RockTunnel_B1F_EventScript_ItemMaxEther : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port RockTunnel_B1F_EventScript_ItemMaxEther")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.MAX_ETHER, KantoFlags.FLAG_HIDE_ROCK_TUNNEL_B1F_MAX_ETHER, 10)
+  }
 }
 
 internal val RockTunnel_B1FScripts: Map<String, Script> =

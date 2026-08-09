@@ -1,8 +1,10 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.Route11
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 
 /**
  * Not ported yet. Decomp body:
@@ -145,36 +147,42 @@ internal object Route11_EventScript_Bernie : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_X_DEFEND
  * end
  * ```
  */
 internal object Route11_EventScript_ItemXDefend : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route11_EventScript_ItemXDefend")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.X_DEFEND, KantoFlags.FLAG_HIDE_ROUTE11_X_DEFEND, 10)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_GREAT_BALL
  * end
  * ```
  */
 internal object Route11_EventScript_ItemGreatBall : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route11_EventScript_ItemGreatBall")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.GREAT_BALL, KantoFlags.FLAG_HIDE_ROUTE11_GREAT_BALL, 11)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_AWAKENING
  * end
  * ```
  */
 internal object Route11_EventScript_ItemAwakening : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route11_EventScript_ItemAwakening")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.AWAKENING, KantoFlags.FLAG_HIDE_ROUTE11_AWAKENING, 12)
+  }
 }
 
 internal object Route11_EventScript_DiglettsCaveSign : Script {

@@ -93,37 +93,42 @@ internal object EventScript_CutTree : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_GREAT_BALL
  * end
  * ```
  */
 internal object PetalburgWoods_EventScript_ItemGreatBall : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port PetalburgWoods_EventScript_ItemGreatBall")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.GREAT_BALL, HoennFlags.FLAG_ITEM_PETALBURG_WOODS_GREAT_BALL, 4)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_X_ATTACK
  * end
  * ```
  */
 internal object PetalburgWoods_EventScript_ItemXAttack : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PetalburgWoods_EventScript_ItemXAttack")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.X_ATTACK, HoennFlags.FLAG_ITEM_PETALBURG_WOODS_X_ATTACK, 5)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_ETHER
  * end
  * ```
  */
 internal object PetalburgWoods_EventScript_ItemEther : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PetalburgWoods_EventScript_ItemEther")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.ETHER, HoennFlags.FLAG_ITEM_PETALBURG_WOODS_ETHER, 6)
+  }
 }
 
 internal object PetalburgWoods_EventScript_Boy1 : Script {
@@ -173,15 +178,16 @@ internal object PetalburgWoods_EventScript_Boy2 : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_PARALYZE_HEAL
  * end
  * ```
  */
 internal object PetalburgWoods_EventScript_ItemParalyzeHeal : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port PetalburgWoods_EventScript_ItemParalyzeHeal")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.PARALYZE_HEAL, HoennFlags.FLAG_ITEM_PETALBURG_WOODS_PARALYZE_HEAL, 11)
+  }
 }
 
 /**

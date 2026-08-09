@@ -1,8 +1,10 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.Route12
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 
 /**
  * Not ported yet. Decomp body:
@@ -136,25 +138,29 @@ internal object Route12_EventScript_Andrew : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_TM48
  * end
  * ```
  */
 internal object Route12_EventScript_ItemTM48 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route12_EventScript_ItemTM48")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.TM48, KantoFlags.FLAG_HIDE_ROUTE12_TM48, 9)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_IRON
  * end
  * ```
  */
 internal object Route12_EventScript_ItemIron : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route12_EventScript_ItemIron")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.IRON, KantoFlags.FLAG_HIDE_ROUTE12_IRON, 10)
+  }
 }
 
 /**

@@ -1,9 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.dialog.generated.hoenn.MagmaHideout_2F_2R
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
@@ -47,15 +49,16 @@ internal object MagmaHideout_2F_2R_EventScript_Grunt7 : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_MAX_ELIXIR
  * end
  * ```
  */
 internal object MagmaHideout_2F_2R_EventScript_ItemMaxElixir : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port MagmaHideout_2F_2R_EventScript_ItemMaxElixir")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.MAX_ELIXIR, HoennFlags.FLAG_ITEM_MAGMA_HIDEOUT_2F_2R_MAX_ELIXIR, 2)
+  }
 }
 
 /**
@@ -99,15 +102,16 @@ internal object MagmaHideout_2F_2R_EventScript_Grunt15 : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_FULL_RESTORE
  * end
  * ```
  */
 internal object MagmaHideout_2F_2R_EventScript_ItemFullRestore : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port MagmaHideout_2F_2R_EventScript_ItemFullRestore")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.FULL_RESTORE, HoennFlags.FLAG_ITEM_MAGMA_HIDEOUT_2F_2R_FULL_RESTORE, 5)
+  }
 }
 
 internal val MagmaHideout_2F_2RScripts: Map<String, Script> =

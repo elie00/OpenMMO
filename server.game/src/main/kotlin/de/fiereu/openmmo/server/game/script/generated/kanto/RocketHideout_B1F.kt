@@ -1,9 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.RocketHideout_B1F
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
@@ -99,27 +101,29 @@ internal object RocketHideout_B1F_EventScript_Grunt5 : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_ESCAPE_ROPE
  * end
  * ```
  */
 internal object RocketHideout_B1F_EventScript_ItemEscapeRope : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port RocketHideout_B1F_EventScript_ItemEscapeRope")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.ESCAPE_ROPE, KantoFlags.FLAG_HIDE_ROCKET_HIDEOUT_B1F_ESCAPE_ROPE, 5)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_HYPER_POTION
  * end
  * ```
  */
 internal object RocketHideout_B1F_EventScript_ItemHyperPotion : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port RocketHideout_B1F_EventScript_ItemHyperPotion")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.HYPER_POTION, KantoFlags.FLAG_HIDE_ROCKET_HIDEOUT_B1F_HYPER_POTION, 6)
+  }
 }
 
 internal val RocketHideout_B1FScripts: Map<String, Script> =

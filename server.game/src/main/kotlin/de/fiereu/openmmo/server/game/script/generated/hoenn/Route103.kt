@@ -1,6 +1,7 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.dialog.generated.hoenn.Route103
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.MovementStep.FACE_DOWN
 import de.fiereu.openmmo.server.game.script.MovementStep.WALK_DOWN
@@ -147,14 +148,16 @@ internal object Route103_EventScript_Miguel : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_GUARD_SPEC
  * end
  * ```
  */
 internal object Route103_EventScript_ItemGuardSpec : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route103_EventScript_ItemGuardSpec")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.GUARD_SPEC, HoennFlags.FLAG_ITEM_ROUTE_103_GUARD_SPEC, 12)
+  }
 }
 
 /**
@@ -238,14 +241,16 @@ internal object Route103_EventScript_Pete : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_PP_UP
  * end
  * ```
  */
 internal object Route103_EventScript_ItemPPUp : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route103_EventScript_ItemPPUp")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.PP_UP, HoennFlags.FLAG_ITEM_ROUTE_103_PP_UP, 19)
+  }
 }
 
 internal object Route103_EventScript_RouteSign : Script {

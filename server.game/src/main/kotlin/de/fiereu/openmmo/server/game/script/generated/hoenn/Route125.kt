@@ -1,9 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.dialog.generated.hoenn.Route125
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
@@ -166,14 +168,16 @@ internal object Route125_EventScript_Auron : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_BIG_PEARL
  * end
  * ```
  */
 internal object Route125_EventScript_ItemBigPearl : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route125_EventScript_ItemBigPearl")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.BIG_PEARL, HoennFlags.FLAG_ITEM_ROUTE_125_BIG_PEARL, 9)
+  }
 }
 
 internal val Route125Scripts: Map<String, Script> =

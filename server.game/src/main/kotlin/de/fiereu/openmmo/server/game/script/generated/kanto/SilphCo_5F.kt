@@ -1,9 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.SilphCo_5F
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
@@ -102,36 +104,42 @@ internal object SilphCo_5F_EventScript_Grunt1 : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_PROTEIN
  * end
  * ```
  */
 internal object SilphCo_5F_EventScript_ItemProtein : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SilphCo_5F_EventScript_ItemProtein")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.PROTEIN, KantoFlags.FLAG_HIDE_SILPH_CO_5F_PROTEIN, 5)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_TM01
  * end
  * ```
  */
 internal object SilphCo_5F_EventScript_ItemTM01 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SilphCo_5F_EventScript_ItemTM01")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.TM01, KantoFlags.FLAG_HIDE_SILPH_CO_5F_TM01, 6)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_CARD_KEY
  * end
  * ```
  */
 internal object SilphCo_5F_EventScript_ItemCardKey : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SilphCo_5F_EventScript_ItemCardKey")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.CARD_KEY, KantoFlags.FLAG_HIDE_SILPH_CO_5F_CARD_KEY, 7)
+  }
 }
 
 /**

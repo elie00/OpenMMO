@@ -1,9 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.MtMoon_1F
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
@@ -147,69 +149,81 @@ internal object MtMoon_1F_EventScript_Marcos : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_PARALYZE_HEAL
  * end
  * ```
  */
 internal object MtMoon_1F_EventScript_ItemParalyzeHeal : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtMoon_1F_EventScript_ItemParalyzeHeal")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.PARALYZE_HEAL, KantoFlags.FLAG_HIDE_MT_MOON_1F_PARALYZE_HEAL, 7)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_TM09
  * end
  * ```
  */
 internal object MtMoon_1F_EventScript_ItemTM09 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtMoon_1F_EventScript_ItemTM09")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.TM09, KantoFlags.FLAG_HIDE_MT_MOON_1F_TM09, 8)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_POTION
  * end
  * ```
  */
 internal object MtMoon_1F_EventScript_ItemPotion : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtMoon_1F_EventScript_ItemPotion")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.POTION, KantoFlags.FLAG_HIDE_MT_MOON_1F_POTION, 9)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_RARE_CANDY
  * end
  * ```
  */
 internal object MtMoon_1F_EventScript_ItemRareCandy : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtMoon_1F_EventScript_ItemRareCandy")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.RARE_CANDY, KantoFlags.FLAG_HIDE_MT_MOON_1F_RARE_CANDY, 10)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_ESCAPE_ROPE
  * end
  * ```
  */
 internal object MtMoon_1F_EventScript_ItemEscapeRope : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtMoon_1F_EventScript_ItemEscapeRope")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.ESCAPE_ROPE, KantoFlags.FLAG_HIDE_MT_MOON_1F_ESCAPE_ROPE, 11)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_MOON_STONE
  * end
  * ```
  */
 internal object MtMoon_1F_EventScript_ItemMoonStone : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtMoon_1F_EventScript_ItemMoonStone")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.MOON_STONE, KantoFlags.FLAG_HIDE_MT_MOON_1F_MOON_STONE, 12)
+  }
 }
 
 /**

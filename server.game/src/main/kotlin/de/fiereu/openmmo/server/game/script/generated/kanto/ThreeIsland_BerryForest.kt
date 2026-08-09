@@ -1,8 +1,10 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.ThreeIsland_BerryForest
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 
 /**
  * Not ported yet. Decomp body:
@@ -47,39 +49,42 @@ internal object ThreeIsland_BerryForest_EventScript_Lostelle : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_MAX_ETHER
  * end
  * ```
  */
 internal object ThreeIsland_BerryForest_EventScript_ItemMaxEther : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port ThreeIsland_BerryForest_EventScript_ItemMaxEther")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.MAX_ETHER, KantoFlags.FLAG_HIDE_THREE_ISLAND_BERRY_FOREST_MAX_ETHER, 11)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_FULL_HEAL
  * end
  * ```
  */
 internal object ThreeIsland_BerryForest_EventScript_ItemFullHeal : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port ThreeIsland_BerryForest_EventScript_ItemFullHeal")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.FULL_HEAL, KantoFlags.FLAG_HIDE_THREE_ISLAND_BERRY_FOREST_FULL_HEAL, 12)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_MAX_ELIXIR
  * end
  * ```
  */
 internal object ThreeIsland_BerryForest_EventScript_ItemMaxElixir : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port ThreeIsland_BerryForest_EventScript_ItemMaxElixir")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.MAX_ELIXIR, KantoFlags.FLAG_HIDE_THREE_ISLAND_BERRY_FOREST_MAX_ELIXIR, 13)
+  }
 }
 
 internal object ThreeIsland_BerryForest_EventScript_BewareSign : Script {

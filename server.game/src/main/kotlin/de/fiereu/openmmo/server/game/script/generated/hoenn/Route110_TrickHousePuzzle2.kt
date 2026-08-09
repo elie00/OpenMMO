@@ -1,9 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.dialog.generated.hoenn.Route110_TrickHousePuzzle2
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
@@ -67,27 +69,29 @@ internal object Route110_TrickHousePuzzle2_EventScript_Georgia : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_WAVE_MAIL
  * end
  * ```
  */
 internal object Route110_TrickHousePuzzle2_EventScript_ItemWaveMail : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port Route110_TrickHousePuzzle2_EventScript_ItemWaveMail")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.WAVE_MAIL, HoennFlags.FLAG_ITEM_TRICK_HOUSE_PUZZLE_2_WAVE_MAIL, 3)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_HARBOR_MAIL
  * end
  * ```
  */
 internal object Route110_TrickHousePuzzle2_EventScript_ItemHarborMail : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port Route110_TrickHousePuzzle2_EventScript_ItemHarborMail")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.HARBOR_MAIL, HoennFlags.FLAG_ITEM_TRICK_HOUSE_PUZZLE_2_HARBOR_MAIL, 4)
+  }
 }
 
 /**

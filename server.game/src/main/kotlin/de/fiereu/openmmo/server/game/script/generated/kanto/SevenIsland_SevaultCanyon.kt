@@ -1,8 +1,10 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.SevenIsland_SevaultCanyon
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 
 /**
  * Not ported yet. Decomp body:
@@ -125,39 +127,42 @@ internal object SevenIsland_SevaultCanyon_EventScript_Nya : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_KINGS_ROCK
  * end
  * ```
  */
 internal object SevenIsland_SevaultCanyon_EventScript_ItemKingsRock : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SevenIsland_SevaultCanyon_EventScript_ItemKingsRock")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.KINGS_ROCK, KantoFlags.FLAG_HIDE_SEVEN_ISLAND_SEVAULT_CANYON_KINGS_ROCK, 16)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_MAX_ELIXIR
  * end
  * ```
  */
 internal object SevenIsland_SevaultCanyon_EventScript_ItemMaxElixir : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SevenIsland_SevaultCanyon_EventScript_ItemMaxElixir")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.MAX_ELIXIR, KantoFlags.FLAG_HIDE_SEVEN_ISLAND_SEVAULT_CANYON_MAX_ELIXIR, 17)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_NUGGET
  * end
  * ```
  */
 internal object SevenIsland_SevaultCanyon_EventScript_ItemNugget : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SevenIsland_SevaultCanyon_EventScript_ItemNugget")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.NUGGET, KantoFlags.FLAG_HIDE_SEVEN_ISLAND_SEVAULT_CANYON_NUGGET, 18)
+  }
 }
 
 /**

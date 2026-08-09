@@ -1,9 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.dialog.generated.hoenn.Route113
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 internal object Route113_EventScript_NinjaBoy : Script {
@@ -70,25 +72,29 @@ internal object Route113_EventScript_Madeline : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_MAX_ETHER
  * end
  * ```
  */
 internal object Route113_EventScript_ItemMaxEther : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route113_EventScript_ItemMaxEther")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.MAX_ETHER, HoennFlags.FLAG_ITEM_ROUTE_113_MAX_ETHER, 5)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_SUPER_REPEL
  * end
  * ```
  */
 internal object Route113_EventScript_ItemSuperRepel : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route113_EventScript_ItemSuperRepel")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.SUPER_REPEL, HoennFlags.FLAG_ITEM_ROUTE_113_SUPER_REPEL, 6)
+  }
 }
 
 /**
@@ -151,14 +157,16 @@ internal object Route113_EventScript_Tia : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_HYPER_POTION
  * end
  * ```
  */
 internal object Route113_EventScript_ItemHyperPotion : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route113_EventScript_ItemHyperPotion")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.HYPER_POTION, HoennFlags.FLAG_ITEM_ROUTE_113_HYPER_POTION, 11)
+  }
 }
 
 /**

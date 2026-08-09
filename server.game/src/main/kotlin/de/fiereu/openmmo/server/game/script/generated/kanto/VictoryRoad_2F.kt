@@ -1,9 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.VictoryRoad_2F
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
@@ -107,49 +109,55 @@ internal object VictoryRoad_2F_EventScript_Gregory : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_GUARD_SPEC
  * end
  * ```
  */
 internal object VictoryRoad_2F_EventScript_ItemGuardSpec : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port VictoryRoad_2F_EventScript_ItemGuardSpec")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.GUARD_SPEC, KantoFlags.FLAG_HIDE_VICTORY_ROAD_2F_GUARD_SPEC, 5)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_TM07
  * end
  * ```
  */
 internal object VictoryRoad_2F_EventScript_ItemTM07 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port VictoryRoad_2F_EventScript_ItemTM07")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.TM07, KantoFlags.FLAG_HIDE_VICTORY_ROAD_2F_TM07, 6)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_FULL_HEAL
  * end
  * ```
  */
 internal object VictoryRoad_2F_EventScript_ItemFullHeal : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port VictoryRoad_2F_EventScript_ItemFullHeal")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.FULL_HEAL, KantoFlags.FLAG_HIDE_VICTORY_ROAD_2F_FULL_HEAL, 7)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_TM37
  * end
  * ```
  */
 internal object VictoryRoad_2F_EventScript_ItemTM37 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port VictoryRoad_2F_EventScript_ItemTM37")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.TM37, KantoFlags.FLAG_HIDE_VICTORY_ROAD_2F_TM37, 8)
+  }
 }
 
 /**

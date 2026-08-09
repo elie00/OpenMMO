@@ -1,8 +1,10 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.Route9
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 
 /**
  * Not ported yet. Decomp body:
@@ -131,25 +133,29 @@ internal object Route9_EventScript_Drew : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_TM40
  * end
  * ```
  */
 internal object Route9_EventScript_ItemTM40 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route9_EventScript_ItemTM40")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.TM40, KantoFlags.FLAG_HIDE_ROUTE9_TM40, 10)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_BURN_HEAL
  * end
  * ```
  */
 internal object Route9_EventScript_ItemBurnHeal : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route9_EventScript_ItemBurnHeal")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.BURN_HEAL, KantoFlags.FLAG_HIDE_ROUTE9_BURN_HEAL, 11)
+  }
 }
 
 internal object Route9_EventScript_RouteSign : Script {

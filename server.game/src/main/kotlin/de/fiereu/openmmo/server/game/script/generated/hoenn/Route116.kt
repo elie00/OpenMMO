@@ -1,9 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.dialog.generated.hoenn.Route116
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
@@ -47,25 +49,29 @@ internal object Route116_EventScript_Jose : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_ETHER
  * end
  * ```
  */
 internal object Route116_EventScript_ItemEther : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route116_EventScript_ItemEther")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.ETHER, HoennFlags.FLAG_ITEM_ROUTE_116_ETHER, 6)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_REPEL
  * end
  * ```
  */
 internal object Route116_EventScript_ItemRepel : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route116_EventScript_ItemRepel")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.REPEL, HoennFlags.FLAG_ITEM_ROUTE_116_REPEL, 7)
+  }
 }
 
 /**
@@ -104,14 +110,16 @@ internal object Route116_EventScript_Clark : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_HP_UP
  * end
  * ```
  */
 internal object Route116_EventScript_ItemHPUp : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route116_EventScript_ItemHPUp")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.HP_UP, HoennFlags.FLAG_ITEM_ROUTE_116_HP_UP, 14)
+  }
 }
 
 /**
@@ -186,14 +194,16 @@ internal object Route116_EventScript_DevonEmployee : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_X_SPECIAL
  * end
  * ```
  */
 internal object Route116_EventScript_ItemXSpecial : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route116_EventScript_ItemXSpecial")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.X_SPECIAL, HoennFlags.FLAG_ITEM_ROUTE_116_X_SPECIAL, 19)
+  }
 }
 
 /**
@@ -271,14 +281,16 @@ internal object Route116_EventScript_Dawson : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_POTION
  * end
  * ```
  */
 internal object Route116_EventScript_ItemPotion : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route116_EventScript_ItemPotion")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.POTION, HoennFlags.FLAG_ITEM_ROUTE_116_POTION, 24)
+  }
 }
 
 /**

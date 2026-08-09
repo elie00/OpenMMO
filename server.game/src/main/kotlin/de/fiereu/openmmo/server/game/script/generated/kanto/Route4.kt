@@ -1,8 +1,10 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.Route4
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 
 internal object Route4_EventScript_Woman : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.say(Route4.TrippedOverGeodude)
@@ -23,14 +25,16 @@ internal object Route4_EventScript_Crissy : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_TM05
  * end
  * ```
  */
 internal object Route4_EventScript_ItemTM05 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route4_EventScript_ItemTM05")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.TM05, KantoFlags.FLAG_HIDE_ROUTE4_TM05, 2)
+  }
 }
 
 /**

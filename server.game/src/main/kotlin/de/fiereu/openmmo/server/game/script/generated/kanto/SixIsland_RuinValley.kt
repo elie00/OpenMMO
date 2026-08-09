@@ -1,7 +1,9 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 
 /**
  * Not ported yet. Decomp body:
@@ -96,39 +98,42 @@ internal object SixIsland_RuinValley_EventScript_Hector : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_HP_UP
  * end
  * ```
  */
 internal object SixIsland_RuinValley_EventScript_ItemHPUp : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SixIsland_RuinValley_EventScript_ItemHPUp")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.HP_UP, KantoFlags.FLAG_HIDE_SIX_ISLAND_RUIN_VALLEY_HP_UP, 14)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_FULL_RESTORE
  * end
  * ```
  */
 internal object SixIsland_RuinValley_EventScript_ItemFullRestore : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SixIsland_RuinValley_EventScript_ItemFullRestore")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.FULL_RESTORE, KantoFlags.FLAG_HIDE_SIX_ISLAND_RUIN_VALLEY_FULL_RESTORE, 15)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_SUN_STONE
  * end
  * ```
  */
 internal object SixIsland_RuinValley_EventScript_ItemSunStone : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SixIsland_RuinValley_EventScript_ItemSunStone")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.SUN_STONE, KantoFlags.FLAG_HIDE_SIX_ISLAND_RUIN_VALLEY_SUN_STONE, 16)
+  }
 }
 
 /**

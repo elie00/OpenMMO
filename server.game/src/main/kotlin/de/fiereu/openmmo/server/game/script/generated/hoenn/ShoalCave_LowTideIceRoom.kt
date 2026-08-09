@@ -1,7 +1,9 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 
 /**
  * Not ported yet. Decomp body:
@@ -16,15 +18,16 @@ internal object ShoalCave_LowTideIceRoom_EventScript_ItemTMHail : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_NEVER_MELT_ICE
  * end
  * ```
  */
 internal object ShoalCave_LowTideIceRoom_EventScript_ItemNeverMeltIce : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port ShoalCave_LowTideIceRoom_EventScript_ItemNeverMeltIce")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.NEVER_MELT_ICE, HoennFlags.FLAG_ITEM_SHOAL_CAVE_ICE_ROOM_NEVER_MELT_ICE, 1)
+  }
 }
 
 internal val ShoalCave_LowTideIceRoomScripts: Map<String, Script> =

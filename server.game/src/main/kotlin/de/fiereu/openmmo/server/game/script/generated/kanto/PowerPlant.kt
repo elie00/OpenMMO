@@ -1,62 +1,73 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_MAX_POTION
  * end
  * ```
  */
 internal object PowerPlant_EventScript_ItemMaxPotion : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PowerPlant_EventScript_ItemMaxPotion")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.MAX_POTION, KantoFlags.FLAG_HIDE_POWER_PLANT_MAX_POTION, 0)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_TM17
  * end
  * ```
  */
 internal object PowerPlant_EventScript_ItemTM17 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PowerPlant_EventScript_ItemTM17")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.TM17, KantoFlags.FLAG_HIDE_POWER_PLANT_TM17, 1)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_TM25
  * end
  * ```
  */
 internal object PowerPlant_EventScript_ItemTM25 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PowerPlant_EventScript_ItemTM25")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.TM25, KantoFlags.FLAG_HIDE_POWER_PLANT_TM25, 2)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_THUNDER_STONE
  * end
  * ```
  */
 internal object PowerPlant_EventScript_ItemThunderStone : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port PowerPlant_EventScript_ItemThunderStone")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.THUNDER_STONE, KantoFlags.FLAG_HIDE_POWER_PLANT_THUNDER_STONE, 3)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_ELIXIR
  * end
  * ```
  */
 internal object PowerPlant_EventScript_ItemElixir : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PowerPlant_EventScript_ItemElixir")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.ELIXIR, KantoFlags.FLAG_HIDE_POWER_PLANT_ELIXIR, 4)
+  }
 }
 
 /**

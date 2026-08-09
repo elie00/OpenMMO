@@ -1,9 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.dialog.generated.hoenn.Route124
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
@@ -102,36 +104,42 @@ internal object Route124_EventScript_Chad : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_RED_SHARD
  * end
  * ```
  */
 internal object Route124_EventScript_ItemRedShard : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route124_EventScript_ItemRedShard")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.RED_SHARD, HoennFlags.FLAG_ITEM_ROUTE_124_RED_SHARD, 5)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_BLUE_SHARD
  * end
  * ```
  */
 internal object Route124_EventScript_ItemBlueShard : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route124_EventScript_ItemBlueShard")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.BLUE_SHARD, HoennFlags.FLAG_ITEM_ROUTE_124_BLUE_SHARD, 6)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_YELLOW_SHARD
  * end
  * ```
  */
 internal object Route124_EventScript_ItemYellowShard : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route124_EventScript_ItemYellowShard")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.YELLOW_SHARD, HoennFlags.FLAG_ITEM_ROUTE_124_YELLOW_SHARD, 7)
+  }
 }
 
 /**

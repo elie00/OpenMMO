@@ -1,66 +1,73 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_ULTRA_BALL
  * end
  * ```
  */
 internal object NewMauville_Inside_EventScript_ItemUltraBall : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port NewMauville_Inside_EventScript_ItemUltraBall")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.ULTRA_BALL, HoennFlags.FLAG_ITEM_NEW_MAUVILLE_ULTRA_BALL, 0)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_ESCAPE_ROPE
  * end
  * ```
  */
 internal object NewMauville_Inside_EventScript_ItemEscapeRope : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port NewMauville_Inside_EventScript_ItemEscapeRope")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.ESCAPE_ROPE, HoennFlags.FLAG_ITEM_NEW_MAUVILLE_ESCAPE_ROPE, 1)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_THUNDER_STONE
  * end
  * ```
  */
 internal object NewMauville_Inside_EventScript_ItemThunderStone : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port NewMauville_Inside_EventScript_ItemThunderStone")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.THUNDER_STONE, HoennFlags.FLAG_ITEM_NEW_MAUVILLE_THUNDER_STONE, 2)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_FULL_HEAL
  * end
  * ```
  */
 internal object NewMauville_Inside_EventScript_ItemFullHeal : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port NewMauville_Inside_EventScript_ItemFullHeal")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.FULL_HEAL, HoennFlags.FLAG_ITEM_NEW_MAUVILLE_FULL_HEAL, 3)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_PARALYZE_HEAL
  * end
  * ```
  */
 internal object NewMauville_Inside_EventScript_ItemParalyzeHeal : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port NewMauville_Inside_EventScript_ItemParalyzeHeal")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.PARALYZE_HEAL, HoennFlags.FLAG_ITEM_NEW_MAUVILLE_PARALYZE_HEAL, 4)
+  }
 }
 
 /**

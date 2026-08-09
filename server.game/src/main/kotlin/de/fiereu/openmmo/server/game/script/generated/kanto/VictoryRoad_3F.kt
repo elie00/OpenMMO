@@ -1,9 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.VictoryRoad_3F
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
@@ -87,26 +89,29 @@ internal object VictoryRoad_3F_EventScript_Caroline : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_MAX_REVIVE
  * end
  * ```
  */
 internal object VictoryRoad_3F_EventScript_ItemMaxRevive : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port VictoryRoad_3F_EventScript_ItemMaxRevive")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.MAX_REVIVE, KantoFlags.FLAG_HIDE_VICTORY_ROAD_3F_MAX_REVIVE, 4)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_TM50
  * end
  * ```
  */
 internal object VictoryRoad_3F_EventScript_ItemTM50 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port VictoryRoad_3F_EventScript_ItemTM50")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.TM50, KantoFlags.FLAG_HIDE_VICTORY_ROAD_3F_TM50, 5)
+  }
 }
 
 /**

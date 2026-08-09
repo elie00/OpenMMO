@@ -1,9 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.dialog.generated.hoenn.AbandonedShip_Rooms2_1F
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
@@ -39,15 +41,16 @@ internal object AbandonedShip_Rooms2_1F_EventScript_Kira : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_REVIVE
  * end
  * ```
  */
 internal object AbandonedShip_Rooms2_1F_EventScript_ItemRevive : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port AbandonedShip_Rooms2_1F_EventScript_ItemRevive")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.REVIVE, HoennFlags.FLAG_ITEM_ABANDONED_SHIP_ROOMS_2_1F_REVIVE, 2)
+  }
 }
 
 /**

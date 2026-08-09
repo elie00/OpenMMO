@@ -1,8 +1,10 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.dialog.generated.hoenn.LilycoveCity
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 
 /**
  * Not ported yet. Decomp body:
@@ -106,14 +108,16 @@ internal object LilycoveCity_EventScript_WailmerTrainerGrunt : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_MAX_REPEL
  * end
  * ```
  */
 internal object LilycoveCity_EventScript_ItemMaxRepel : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port LilycoveCity_EventScript_ItemMaxRepel")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.MAX_REPEL, HoennFlags.FLAG_ITEM_LILYCOVE_CITY_MAX_REPEL, 10)
+  }
 }
 
 internal object LilycoveCity_EventScript_AquaGrunt4 : Script {

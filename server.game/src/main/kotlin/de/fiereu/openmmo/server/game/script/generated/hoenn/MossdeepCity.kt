@@ -1,8 +1,10 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.dialog.generated.hoenn.MossdeepCity
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 
 /**
  * Not ported yet. Decomp body:
@@ -47,14 +49,16 @@ internal object MossdeepCity_EventScript_Girl : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_NET_BALL
  * end
  * ```
  */
 internal object MossdeepCity_EventScript_ItemNetBall : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MossdeepCity_EventScript_ItemNetBall")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.NET_BALL, HoennFlags.FLAG_ITEM_MOSSDEEP_CITY_NET_BALL, 5)
+  }
 }
 
 /**

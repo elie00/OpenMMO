@@ -1,9 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.dialog.generated.hoenn.Route126
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
@@ -87,14 +89,16 @@ internal object Route126_EventScript_Brenda : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_GREEN_SHARD
  * end
  * ```
  */
 internal object Route126_EventScript_ItemGreenShard : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route126_EventScript_ItemGreenShard")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.GREEN_SHARD, HoennFlags.FLAG_ITEM_ROUTE_126_GREEN_SHARD, 4)
+  }
 }
 
 /**

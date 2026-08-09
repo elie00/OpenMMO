@@ -1,9 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.dialog.generated.hoenn.Route119
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
@@ -237,69 +239,81 @@ internal object Route119_EventScript_Phil : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_SUPER_REPEL
  * end
  * ```
  */
 internal object Route119_EventScript_ItemSuperRepel : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route119_EventScript_ItemSuperRepel")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.SUPER_REPEL, HoennFlags.FLAG_ITEM_ROUTE_119_SUPER_REPEL, 16)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_ZINC
  * end
  * ```
  */
 internal object Route119_EventScript_ItemZinc : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route119_EventScript_ItemZinc")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.ZINC, HoennFlags.FLAG_ITEM_ROUTE_119_ZINC, 17)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_ELIXIR
  * end
  * ```
  */
 internal object Route119_EventScript_ItemElixir : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route119_EventScript_ItemElixir")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.ELIXIR, HoennFlags.FLAG_ITEM_ROUTE_119_ELIXIR_1, 18)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_LEAF_STONE
  * end
  * ```
  */
 internal object Route119_EventScript_ItemLeafStone : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route119_EventScript_ItemLeafStone")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.LEAF_STONE, HoennFlags.FLAG_ITEM_ROUTE_119_LEAF_STONE, 19)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_RARE_CANDY
  * end
  * ```
  */
 internal object Route119_EventScript_ItemRareCandy : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route119_EventScript_ItemRareCandy")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.RARE_CANDY, HoennFlags.FLAG_ITEM_ROUTE_119_RARE_CANDY, 20)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_HYPER_POTION
  * end
  * ```
  */
 internal object Route119_EventScript_ItemHyperPotion : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route119_EventScript_ItemHyperPotion")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.HYPER_POTION, HoennFlags.FLAG_ITEM_ROUTE_119_HYPER_POTION_1, 21)
+  }
 }
 
 /**
@@ -345,14 +359,16 @@ internal object Route119_EventScript_CyclingTriathleteM : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_HYPER_POTION
  * end
  * ```
  */
 internal object Route119_EventScript_ItemHyperPotion2 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route119_EventScript_ItemHyperPotion2")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.HYPER_POTION, HoennFlags.FLAG_ITEM_ROUTE_119_HYPER_POTION_2, 31)
+  }
 }
 
 internal object Route119_EventScript_Boy2 : Script {
@@ -488,25 +504,29 @@ internal object Route119_EventScript_Fabian : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_NUGGET
  * end
  * ```
  */
 internal object Route119_EventScript_ItemNugget : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route119_EventScript_ItemNugget")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.NUGGET, HoennFlags.FLAG_ITEM_ROUTE_119_NUGGET, 40)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_ELIXIR
  * end
  * ```
  */
 internal object Route119_EventScript_ItemElixir2 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route119_EventScript_ItemElixir2")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.ELIXIR, HoennFlags.FLAG_ITEM_ROUTE_119_ELIXIR_2, 41)
+  }
 }
 
 internal object Route119_EventScript_WeatherInstituteSign : Script {

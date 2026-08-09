@@ -1,8 +1,10 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.FuchsiaCity_WardensHouse
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 
 /**
  * Not ported yet. Decomp body:
@@ -24,15 +26,16 @@ internal object FuchsiaCity_WardensHouse_EventScript_Warden : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_RARE_CANDY
  * end
  * ```
  */
 internal object FuchsiaCity_WardensHouse_EventScript_ItemRareCandy : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port FuchsiaCity_WardensHouse_EventScript_ItemRareCandy")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.RARE_CANDY, KantoFlags.FLAG_HIDE_FUCHSIA_CITY_WARDENS_HOUSE_RARE_CANDY, 2)
+  }
 }
 
 /**

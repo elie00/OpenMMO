@@ -1,9 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.dialog.generated.hoenn.RusturfTunnel
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
@@ -27,25 +29,29 @@ internal object RusturfTunnel_EventScript_WandasBoyfriend : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_POKE_BALL
  * end
  * ```
  */
 internal object RusturfTunnel_EventScript_ItemPokeBall : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port RusturfTunnel_EventScript_ItemPokeBall")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.POKE_BALL, HoennFlags.FLAG_ITEM_RUSTURF_TUNNEL_POKE_BALL, 2)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_MAX_ETHER
  * end
  * ```
  */
 internal object RusturfTunnel_EventScript_ItemMaxEther : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port RusturfTunnel_EventScript_ItemMaxEther")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.MAX_ETHER, HoennFlags.FLAG_ITEM_RUSTURF_TUNNEL_MAX_ETHER, 3)
+  }
 }
 
 /**

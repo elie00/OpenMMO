@@ -1,7 +1,9 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 
 /**
  * Not ported yet. Decomp body:
@@ -60,15 +62,17 @@ internal object SevenIsland_SevaultCanyon_House_EventScript_Chansey : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_LUCKY_PUNCH
  * end
  * ```
  */
 internal object SevenIsland_SevaultCanyon_House_EventScript_ItemLuckyPunch : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SevenIsland_SevaultCanyon_House_EventScript_ItemLuckyPunch")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(
+        Items.LUCKY_PUNCH, KantoFlags.FLAG_HIDE_SEVEN_ISLAND_SEVAULT_CANYON_HOUSE_LUCKY_PUNCH, 2)
+  }
 }
 
 internal val SevenIsland_SevaultCanyon_HouseScripts: Map<String, Script> =

@@ -1,8 +1,10 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.dialog.generated.hoenn.MauvilleCity
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 
 internal object MauvilleCity_EventScript_Boy : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.say(MauvilleCity.NurseHurtMonBackToHealth)
@@ -101,14 +103,16 @@ internal object MauvilleCity_EventScript_Wattson : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_X_SPEED
  * end
  * ```
  */
 internal object MauvilleCity_EventScript_ItemXSpeed : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MauvilleCity_EventScript_ItemXSpeed")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.X_SPEED, HoennFlags.FLAG_ITEM_MAUVILLE_CITY_X_SPEED, 8)
+  }
 }
 
 /**

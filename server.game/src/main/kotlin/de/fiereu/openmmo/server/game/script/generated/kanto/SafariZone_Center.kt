@@ -1,19 +1,22 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.SafariZone_Center
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_NUGGET
  * end
  * ```
  */
 internal object SafariZone_Center_EventScript_ItemNugget : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SafariZone_Center_EventScript_ItemNugget")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.NUGGET, KantoFlags.FLAG_HIDE_SAFARI_ZONE_CENTER_NUGGET, 0)
+  }
 }
 
 internal object SafariZone_Center_EventScript_RestHouseSign : Script {

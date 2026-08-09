@@ -1,9 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.PokemonTower_4F
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
@@ -67,38 +69,42 @@ internal object PokemonTower_4F_EventScript_Paula : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_ELIXIR
  * end
  * ```
  */
 internal object PokemonTower_4F_EventScript_ItemElixir : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PokemonTower_4F_EventScript_ItemElixir")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.ELIXIR, KantoFlags.FLAG_HIDE_POKEMON_TOWER_4F_ELIXIR, 3)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_AWAKENING
  * end
  * ```
  */
 internal object PokemonTower_4F_EventScript_ItemAwakening : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port PokemonTower_4F_EventScript_ItemAwakening")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.AWAKENING, KantoFlags.FLAG_HIDE_POKEMON_TOWER_4F_AWAKENING, 4)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_GREAT_BALL
  * end
  * ```
  */
 internal object PokemonTower_4F_EventScript_ItemGreatBall : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port PokemonTower_4F_EventScript_ItemGreatBall")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.GREAT_BALL, KantoFlags.FLAG_HIDE_POKEMON_TOWER_4F_GREAT_BALL, 5)
+  }
 }
 
 internal val PokemonTower_4FScripts: Map<String, Script> =

@@ -1,18 +1,21 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_MAX_POTION
  * end
  * ```
  */
 internal object MtPyre_Exterior_EventScript_ItemMaxPotion : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port MtPyre_Exterior_EventScript_ItemMaxPotion")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.MAX_POTION, HoennFlags.FLAG_ITEM_MT_PYRE_EXTERIOR_MAX_POTION, 0)
+  }
 }
 
 /**

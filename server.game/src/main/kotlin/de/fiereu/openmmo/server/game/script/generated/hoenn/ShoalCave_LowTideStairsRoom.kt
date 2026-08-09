@@ -1,18 +1,21 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_ICE_HEAL
  * end
  * ```
  */
 internal object ShoalCave_LowTideStairsRoom_EventScript_ItemIceHeal : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port ShoalCave_LowTideStairsRoom_EventScript_ItemIceHeal")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.ICE_HEAL, HoennFlags.FLAG_ITEM_SHOAL_CAVE_STAIRS_ROOM_ICE_HEAL, 0)
+  }
 }
 
 /**

@@ -1,9 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.dialog.generated.hoenn.AquaHideout_B2F
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
@@ -32,15 +34,16 @@ internal object AquaHideout_B2F_EventScript_Grunt4 : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_NEST_BALL
  * end
  * ```
  */
 internal object AquaHideout_B2F_EventScript_ItemNestBall : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port AquaHideout_B2F_EventScript_ItemNestBall")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.NEST_BALL, HoennFlags.FLAG_ITEM_AQUA_HIDEOUT_B2F_NEST_BALL, 2)
+  }
 }
 
 /**

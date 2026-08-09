@@ -1,9 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.dialog.generated.hoenn.Route115
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 internal object Route115_EventScript_Woman : Script {
@@ -97,14 +99,16 @@ internal object Route115_EventScript_Hector : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_SUPER_POTION
  * end
  * ```
  */
 internal object Route115_EventScript_ItemSuperPotion : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route115_EventScript_ItemSuperPotion")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.SUPER_POTION, HoennFlags.FLAG_ITEM_ROUTE_115_SUPER_POTION, 9)
+  }
 }
 
 /**
@@ -119,25 +123,29 @@ internal object Route115_EventScript_ItemTMFocusPunch : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_IRON
  * end
  * ```
  */
 internal object Route115_EventScript_ItemIron : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route115_EventScript_ItemIron")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.IRON, HoennFlags.FLAG_ITEM_ROUTE_115_IRON, 11)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_GREAT_BALL
  * end
  * ```
  */
 internal object Route115_EventScript_ItemGreatBall : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route115_EventScript_ItemGreatBall")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.GREAT_BALL, HoennFlags.FLAG_ITEM_ROUTE_115_GREAT_BALL, 15)
+  }
 }
 
 /**
@@ -241,25 +249,29 @@ internal object Route115_EventScript_Marlene : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_PP_UP
  * end
  * ```
  */
 internal object Route115_EventScript_ItemPPUp : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route115_EventScript_ItemPPUp")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.PP_UP, HoennFlags.FLAG_ITEM_ROUTE_115_PP_UP, 21)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_HEAL_POWDER
  * end
  * ```
  */
 internal object Route115_EventScript_ItemHealPowder : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route115_EventScript_ItemHealPowder")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.HEAL_POWDER, HoennFlags.FLAG_ITEM_ROUTE_115_HEAL_POWDER, 22)
+  }
 }
 
 internal object Route115_EventScript_RouteSignRustboro : Script {

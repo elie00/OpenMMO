@@ -1,7 +1,9 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 
 /**
  * Not ported yet. Decomp body:
@@ -37,14 +39,16 @@ internal object EventScript_StrengthBoulder : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_FIRE_STONE
  * end
  * ```
  */
 internal object FieryPath_EventScript_ItemFireStone : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port FieryPath_EventScript_ItemFireStone")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.FIRE_STONE, HoennFlags.FLAG_ITEM_FIERY_PATH_FIRE_STONE, 7)
+  }
 }
 
 internal val FieryPathScripts: Map<String, Script> =

@@ -1,8 +1,10 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.SSAnne_Kitchen
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 
 internal object SSAnne_Kitchen_EventScript_Chef1 : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.say(SSAnne_Kitchen.BusyOutOfTheWay)
@@ -48,15 +50,16 @@ internal object SSAnne_Kitchen_EventScript_Chef7 : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_GREAT_BALL
  * end
  * ```
  */
 internal object SSAnne_Kitchen_EventScript_ItemGreatBall : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SSAnne_Kitchen_EventScript_ItemGreatBall")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.GREAT_BALL, KantoFlags.FLAG_HIDE_SSANNE_KITCHEN_GREAT_BALL, 7)
+  }
 }
 
 internal val SSAnne_KitchenScripts: Map<String, Script> =

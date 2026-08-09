@@ -1,9 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.SSAnne_B1F_Room2
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
@@ -27,14 +29,16 @@ internal object SSAnne_B1F_Room2_EventScript_Huey : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_TM44
  * end
  * ```
  */
 internal object SSAnne_B1F_Room2_EventScript_ItemTM44 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SSAnne_B1F_Room2_EventScript_ItemTM44")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.TM44, KantoFlags.FLAG_HIDE_SSANNE_B1F_ROOM2_TM44, 1)
+  }
 }
 
 internal val SSAnne_B1F_Room2Scripts: Map<String, Script> =

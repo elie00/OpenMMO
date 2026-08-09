@@ -1,9 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.PokemonTower_6F
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
@@ -67,27 +69,29 @@ internal object PokemonTower_6F_EventScript_Emilia : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_RARE_CANDY
  * end
  * ```
  */
 internal object PokemonTower_6F_EventScript_ItemRareCandy : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port PokemonTower_6F_EventScript_ItemRareCandy")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.RARE_CANDY, KantoFlags.FLAG_HIDE_POKEMON_TOWER_6F_RARE_CANDY, 3)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_X_ACCURACY
  * end
  * ```
  */
 internal object PokemonTower_6F_EventScript_ItemXAccuracy : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port PokemonTower_6F_EventScript_ItemXAccuracy")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.X_ACCURACY, KantoFlags.FLAG_HIDE_POKEMON_TOWER_6F_X_ACCURACY, 4)
+  }
 }
 
 internal val PokemonTower_6FScripts: Map<String, Script> =

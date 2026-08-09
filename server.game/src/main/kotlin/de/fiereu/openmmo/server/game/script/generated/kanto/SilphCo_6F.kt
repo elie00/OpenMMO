@@ -1,9 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.SilphCo_6F
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
@@ -122,25 +124,29 @@ internal object SilphCo_6F_EventScript_Taylor : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_HP_UP
  * end
  * ```
  */
 internal object SilphCo_6F_EventScript_ItemHPUp : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SilphCo_6F_EventScript_ItemHPUp")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.HP_UP, KantoFlags.FLAG_HIDE_SILPH_CO_6F_HP_UP, 7)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_X_SPECIAL
  * end
  * ```
  */
 internal object SilphCo_6F_EventScript_ItemXSpecial : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SilphCo_6F_EventScript_ItemXSpecial")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.X_SPECIAL, KantoFlags.FLAG_HIDE_SILPH_CO_6F_X_SPECIAL, 8)
+  }
 }
 
 /**

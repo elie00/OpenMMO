@@ -1,9 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.dialog.generated.hoenn.Route114
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
@@ -102,25 +104,29 @@ internal object Route114_EventScript_Steve : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_RARE_CANDY
  * end
  * ```
  */
 internal object Route114_EventScript_ItemRareCandy : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route114_EventScript_ItemRareCandy")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.RARE_CANDY, HoennFlags.FLAG_ITEM_ROUTE_114_RARE_CANDY, 8)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_PROTEIN
  * end
  * ```
  */
 internal object Route114_EventScript_ItemProtein : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route114_EventScript_ItemProtein")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.PROTEIN, HoennFlags.FLAG_ITEM_ROUTE_114_PROTEIN, 9)
+  }
 }
 
 /**
@@ -302,14 +308,16 @@ internal object Route114_EventScript_Angelina : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_ENERGY_POWDER
  * end
  * ```
  */
 internal object Route114_EventScript_ItemEnergyPowder : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route114_EventScript_ItemEnergyPowder")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.ENERGY_POWDER, HoennFlags.FLAG_ITEM_ROUTE_114_ENERGY_POWDER, 25)
+  }
 }
 
 /**

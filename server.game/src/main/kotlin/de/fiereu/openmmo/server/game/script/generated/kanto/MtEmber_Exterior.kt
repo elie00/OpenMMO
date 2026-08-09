@@ -1,9 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.MtEmber_Exterior
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
@@ -125,39 +127,42 @@ internal object MtEmber_Exterior_EventScript_Beth : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_ULTRA_BALL
  * end
  * ```
  */
 internal object MtEmber_Exterior_EventScript_ItemUltraBall : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port MtEmber_Exterior_EventScript_ItemUltraBall")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.ULTRA_BALL, KantoFlags.FLAG_HIDE_MT_EMBER_EXTERIOR_ULTRA_BALL, 17)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_FIRE_STONE
  * end
  * ```
  */
 internal object MtEmber_Exterior_EventScript_ItemFireStone : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port MtEmber_Exterior_EventScript_ItemFireStone")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.FIRE_STONE, KantoFlags.FLAG_HIDE_MT_EMBER_EXTERIOR_FIRE_STONE, 18)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_DIRE_HIT
  * end
  * ```
  */
 internal object MtEmber_Exterior_EventScript_ItemDireHit : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port MtEmber_Exterior_EventScript_ItemDireHit")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.DIRE_HIT, KantoFlags.FLAG_HIDE_MT_EMBER_EXTERIOR_DIRE_HIT, 19)
+  }
 }
 
 internal val MtEmber_ExteriorScripts: Map<String, Script> =

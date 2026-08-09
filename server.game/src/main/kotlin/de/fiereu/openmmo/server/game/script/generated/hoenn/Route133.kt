@@ -1,9 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.dialog.generated.hoenn.Route133
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
@@ -67,25 +69,29 @@ internal object Route133_EventScript_Debra : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_BIG_PEARL
  * end
  * ```
  */
 internal object Route133_EventScript_ItemBigPearl : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route133_EventScript_ItemBigPearl")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.BIG_PEARL, HoennFlags.FLAG_ITEM_ROUTE_133_BIG_PEARL, 3)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_STAR_PIECE
  * end
  * ```
  */
 internal object Route133_EventScript_ItemStarPiece : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route133_EventScript_ItemStarPiece")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.STAR_PIECE, HoennFlags.FLAG_ITEM_ROUTE_133_STAR_PIECE, 4)
+  }
 }
 
 /**
@@ -169,14 +175,16 @@ internal object Route133_EventScript_Conor : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_MAX_REVIVE
  * end
  * ```
  */
 internal object Route133_EventScript_ItemMaxRevive : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route133_EventScript_ItemMaxRevive")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.MAX_REVIVE, HoennFlags.FLAG_ITEM_ROUTE_133_MAX_REVIVE, 9)
+  }
 }
 
 internal val Route133Scripts: Map<String, Script> =

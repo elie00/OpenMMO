@@ -1,9 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.PokemonMansion_1F
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
@@ -27,39 +29,42 @@ internal object PokemonMansion_1F_EventScript_Ted : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_CARBOS
  * end
  * ```
  */
 internal object PokemonMansion_1F_EventScript_ItemCarbos : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port PokemonMansion_1F_EventScript_ItemCarbos")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.CARBOS, KantoFlags.FLAG_HIDE_POKEMON_MANSION_1F_CARBOS, 1)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_ESCAPE_ROPE
  * end
  * ```
  */
 internal object PokemonMansion_1F_EventScript_ItemEscapeRope : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port PokemonMansion_1F_EventScript_ItemEscapeRope")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.ESCAPE_ROPE, KantoFlags.FLAG_HIDE_POKEMON_MANSION_1F_ESCAPE_ROPE, 2)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_PROTEIN
  * end
  * ```
  */
 internal object PokemonMansion_1F_EventScript_ItemProtein : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port PokemonMansion_1F_EventScript_ItemProtein")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.PROTEIN, KantoFlags.FLAG_HIDE_POKEMON_MANSION_1F_PROTEIN, 3)
+  }
 }
 
 /**

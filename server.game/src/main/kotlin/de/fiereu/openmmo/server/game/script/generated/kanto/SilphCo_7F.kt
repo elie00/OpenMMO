@@ -1,9 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.SilphCo_7F
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
@@ -152,25 +154,29 @@ internal object SilphCo_7F_EventScript_Joshua : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_CALCIUM
  * end
  * ```
  */
 internal object SilphCo_7F_EventScript_ItemCalcium : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SilphCo_7F_EventScript_ItemCalcium")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.CALCIUM, KantoFlags.FLAG_HIDE_SILPH_CO_7F_CALCIUM, 9)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_TM08
  * end
  * ```
  */
 internal object SilphCo_7F_EventScript_ItemTM08 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SilphCo_7F_EventScript_ItemTM08")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.TM08, KantoFlags.FLAG_HIDE_SILPH_CO_7F_TM08, 10)
+  }
 }
 
 /**

@@ -1,9 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.ViridianForest
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 internal object ViridianForest_EventScript_Youngster : Script {
@@ -75,38 +77,42 @@ internal object ViridianForest_EventScript_Sammy : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_POKE_BALL
  * end
  * ```
  */
 internal object ViridianForest_EventScript_ItemPokeBall : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port ViridianForest_EventScript_ItemPokeBall")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.POKE_BALL, KantoFlags.FLAG_HIDE_VIRIDIAN_FOREST_POKE_BALL, 5)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_ANTIDOTE
  * end
  * ```
  */
 internal object ViridianForest_EventScript_ItemAntidote : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port ViridianForest_EventScript_ItemAntidote")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.ANTIDOTE, KantoFlags.FLAG_HIDE_VIRIDIAN_FOREST_ANTIDOTE, 6)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_POTION
  * end
  * ```
  */
 internal object ViridianForest_EventScript_ItemPotion : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port ViridianForest_EventScript_ItemPotion")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.POTION, KantoFlags.FLAG_HIDE_VIRIDIAN_FOREST_POTION, 7)
+  }
 }
 
 /**
@@ -150,14 +156,16 @@ internal object ViridianForest_EventScript_Charlie : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_POTION
  * end
  * ```
  */
 internal object ViridianForest_EventScript_ItemPotion2 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port ViridianForest_EventScript_ItemPotion2")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.POTION, KantoFlags.FLAG_HIDE_VIRIDIAN_FOREST_POTION_2, 10)
+  }
 }
 
 internal object ViridianForest_EventScript_TrainerTips1 : Script {

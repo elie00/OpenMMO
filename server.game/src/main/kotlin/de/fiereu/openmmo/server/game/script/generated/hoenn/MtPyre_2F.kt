@@ -1,9 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.dialog.generated.hoenn.MtPyre_2F
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
@@ -27,14 +29,16 @@ internal object MtPyre_2F_EventScript_Mark : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_ULTRA_BALL
  * end
  * ```
  */
 internal object MtPyre_2F_EventScript_ItemUltraBall : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtPyre_2F_EventScript_ItemUltraBall")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.ULTRA_BALL, HoennFlags.FLAG_ITEM_MT_PYRE_2F_ULTRA_BALL, 1)
+  }
 }
 
 internal object MtPyre_2F_EventScript_Woman : Script {

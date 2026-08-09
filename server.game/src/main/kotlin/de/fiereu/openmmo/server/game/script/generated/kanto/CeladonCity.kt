@@ -1,8 +1,10 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.CeladonCity
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 
 internal object CeladonCity_EventScript_RocketGrunt1 : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.say(CeladonCity.KeepOutOfTeamRocketsWay)
@@ -82,14 +84,16 @@ internal object CeladonCity_EventScript_Boy : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_ETHER
  * end
  * ```
  */
 internal object CeladonCity_EventScript_ItemEther : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port CeladonCity_EventScript_ItemEther")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.ETHER, KantoFlags.FLAG_HIDE_CELADON_CITY_ETHER, 13)
+  }
 }
 
 internal object CeladonCity_EventScript_SilphCoScientist : Script {

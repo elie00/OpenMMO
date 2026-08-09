@@ -20,7 +20,11 @@ class TrainerBattlePorter(private val region: String, decompDir: File) {
   private val trainerIds = defineTable(File(decompDir, "include/constants/opponents.h"), "TRAINER_")
   private val registeredIds = TrainerParser(decompDir).parseAll().mapTo(HashSet()) { it.id }
   private val textLabels = TextParser(decompDir).parseAll().mapTo(HashSet()) { it.label }
+  private val itemIds = defineTable(File(decompDir, "include/constants/items.h"), "ITEM_")
+  private val flagNames = defineTable(File(decompDir, "include/constants/flags.h"), "FLAG_").keys
+  private val mapObjects = MapObjectIndex(decompDir)
   private val trainersObject = "${region.replaceFirstChar { it.uppercase() }}Trainers"
+  private val flagsObject = "${region.replaceFirstChar { it.uppercase() }}Flags"
 
   /** Counts of what happened, so a run can report what it declined instead of failing silently. */
   data class Report(
@@ -28,6 +32,7 @@ class TrainerBattlePorter(private val region: String, decompDir: File) {
       var skippedShape: Int = 0,
       var skippedTrainer: Int = 0,
       var skippedText: Int = 0,
+      var skippedItem: Int = 0,
       var filesChanged: Int = 0,
       var filesRefused: Int = 0,
   )
@@ -47,26 +52,19 @@ class TrainerBattlePorter(private val region: String, decompDir: File) {
     val splices = mutableListOf<Splice>()
     val imports = sortedSetOf<String>()
     for (stub in stubs) {
-      val form = TrainerBattleForm.parse(stub.decompLines)
-      if (form == null) {
-        report.skippedShape++
-        continue
-      }
-      val trainerId = trainerIds[form.trainer]
-      if (trainerId == null || trainerId !in registeredIds) {
-        report.skippedTrainer++
-        continue
-      }
-      val refs = form.textLabels.map(::resolveText)
-      if (refs.any { it == null }) {
-        report.skippedText++
-        continue
-      }
-      @Suppress("UNCHECKED_CAST") val resolved = refs as List<TextRef>
-      splices += Splice(stub.from, stub.toExclusive, render(stub, form, resolved))
-      resolved.mapTo(imports) { it.import }
-      imports += "de.fiereu.openmmo.server.game.battle.BattleResult"
-      imports += "de.fiereu.openmmo.trainer.generated.$trainersObject"
+      val battle = TrainerBattleForm.parse(stub.decompLines)
+      val item = if (battle == null) FindItemForm.parse(stub.decompLines) else null
+      val rendered =
+          when {
+            battle != null -> renderTrainerBattle(stub, battle, imports, report)
+            item != null -> renderFindItem(stub, item, imports, report)
+            else -> {
+              report.skippedShape++
+              null
+            }
+          }
+      if (rendered == null) continue
+      splices += Splice(stub.from, stub.toExclusive, rendered)
       report.ported++
     }
     if (splices.isEmpty()) return
@@ -106,17 +104,28 @@ class TrainerBattlePorter(private val region: String, decompDir: File) {
     return TextRef("de.fiereu.openmmo.dialog.generated.$region.$className", "$className.$entry")
   }
 
-  private fun render(stub: Stub, form: TrainerBattleForm, texts: List<TextRef>): List<String> {
+  private fun renderTrainerBattle(
+      stub: Stub,
+      form: TrainerBattleForm,
+      imports: MutableSet<String>,
+      report: Report,
+  ): List<String>? {
+    val trainerId = trainerIds[form.trainer]
+    if (trainerId == null || trainerId !in registeredIds) {
+      report.skippedTrainer++
+      return null
+    }
+    val refs = form.textLabels.map(::resolveText)
+    if (refs.any { it == null }) {
+      report.skippedText++
+      return null
+    }
+    @Suppress("UNCHECKED_CAST") val texts = refs as List<TextRef>
     val (intro, defeat, post) = texts
-    return buildList {
-      add("/**")
-      add(" * Ported from the decomp:")
-      add(" * ```")
-      stub.decompLines.forEach { add(" * $it") }
-      add(" * ```")
-      add(" */")
-      add("internal object ${stub.label} : Script {")
-      add("  override suspend fun run(ctx: ScriptContext) {")
+    texts.mapTo(imports) { it.import }
+    imports += "de.fiereu.openmmo.server.game.battle.BattleResult"
+    imports += "de.fiereu.openmmo.trainer.generated.$trainersObject"
+    return body(stub) {
       add("    val trainerId = $trainersObject.${form.trainer}")
       add("    if (ctx.hasBeatenTrainer(trainerId)) {")
       add("      return ctx.say(${post.reference})")
@@ -124,9 +133,47 @@ class TrainerBattlePorter(private val region: String, decompDir: File) {
       add("    ctx.say(${intro.reference})")
       add("    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return")
       add("    ctx.say(${defeat.reference})")
-      add("  }")
-      add("}")
     }
+  }
+
+  private fun renderFindItem(
+      stub: Stub,
+      form: FindItemForm,
+      imports: MutableSet<String>,
+      report: Report,
+  ): List<String>? {
+    val item = form.item.removePrefix("ITEM_")
+    if (form.item !in itemIds) {
+      report.skippedItem++
+      return null
+    }
+    // Without the object event there is no hide flag, and picking the item up would leave the ball
+    // on the map for the player to take again on every reload.
+    val obj = mapObjects.forScript(stub.label)
+    if (obj == null || obj.hideFlag !in flagNames) {
+      report.skippedItem++
+      return null
+    }
+    imports += "de.fiereu.openmmo.items.generated.Items"
+    imports += "de.fiereu.openmmo.story.generated.$region.$flagsObject"
+    return body(stub) {
+      add("    ctx.findItem(Items.$item, $flagsObject.${obj.hideFlag}, ${obj.localId})")
+    }
+  }
+
+  /** The shared shell: provenance KDoc, object header, and the run body the caller fills in. */
+  private fun body(stub: Stub, lines: MutableList<String>.() -> Unit): List<String> = buildList {
+    add("/**")
+    add(" * Ported from the decomp:")
+    add(FENCE)
+    stub.decompLines.forEach { add(" * $it") }
+    add(FENCE)
+    add(" */")
+    add("internal object ${stub.label} : Script {")
+    add("  override suspend fun run(ctx: ScriptContext) {")
+    lines()
+    add("  }")
+    add("}")
   }
 
   /**
@@ -135,26 +182,26 @@ class TrainerBattlePorter(private val region: String, decompDir: File) {
    * because either case would make an inserted reference mean something else.
    */
   private fun canInsertImports(lines: List<String>, required: Set<String>): Boolean {
-    val first = lines.indexOfFirst { it.startsWith("import ") }
+    val first = lines.indexOfFirst { it.startsWith(IMPORT) }
     if (first < 0) return false
-    val last = lines.indexOfLast { it.startsWith("import ") }
+    val last = lines.indexOfLast { it.startsWith(IMPORT) }
     val existing = lines.subList(first, last + 1)
-    if (existing.any { !it.startsWith("import ") }) return false
+    if (existing.any { !it.startsWith(IMPORT) }) return false
 
     val bySimpleName = existing.associateBy { it.substringAfterLast('.') }
     return required.none { import ->
       val clash = bySimpleName[import.substringAfterLast('.')]
-      clash != null && clash != "import $import"
+      clash != null && clash != IMPORT + import
     }
   }
 
   /** Merges [required] into the import block, keeping it sorted the way ktfmt wants it. */
   private fun insertImports(lines: MutableList<String>, required: Set<String>): Boolean {
     if (!canInsertImports(lines, required)) return false
-    val first = lines.indexOfFirst { it.startsWith("import ") }
-    val last = lines.indexOfLast { it.startsWith("import ") }
+    val first = lines.indexOfFirst { it.startsWith(IMPORT) }
+    val last = lines.indexOfLast { it.startsWith(IMPORT) }
     val existing = lines.subList(first, last + 1)
-    val merged = (existing.toSet() + required.map { "import $it" }).sorted()
+    val merged = (existing.toSet() + required.map { IMPORT + it }).sorted()
     if (merged != existing.toList()) {
       existing.clear()
       existing.addAll(merged)
@@ -192,9 +239,9 @@ class TrainerBattlePorter(private val region: String, decompDir: File) {
   private fun stubAt(lines: List<String>, start: Int): Stub? {
     if (lines.getOrNull(start) != "/**") return null
     if (lines.getOrNull(start + 1) != " * Not ported yet. Decomp body:") return null
-    if (lines.getOrNull(start + 2) != " * ```") return null
+    if (lines.getOrNull(start + 2) != FENCE) return null
     var end = start + 3
-    while (end < lines.size && lines[end] != " * ```") end++
+    while (end < lines.size && lines[end] != FENCE) end++
     if (end >= lines.size || lines.getOrNull(end + 1) != " */") return null
 
     val objLine = end + 2
@@ -224,11 +271,29 @@ class TrainerBattlePorter(private val region: String, decompDir: File) {
   }
 
   private companion object {
+    const val FENCE = " * ```"
+    const val IMPORT = "import "
     val OBJECT = Regex("""^internal object (\w+) : Script \{$""")
     val BODY_INLINE =
         Regex("""^ {2}override suspend fun run\(ctx: ScriptContext\) = TODO\("port (\w+)"\)$""")
     const val BODY_WRAPPED_HEAD = "  override suspend fun run(ctx: ScriptContext) ="
     val BODY_WRAPPED_TAIL = Regex("""^ {6}TODO\("port (\w+)"\)$""")
+  }
+}
+
+/** An item lying on the map, picked up by walking into it. */
+data class FindItemForm(val item: String) {
+  companion object {
+    private val FIND = Regex("""^finditem (ITEM_[A-Z0-9_]+)$""")
+
+    /**
+     * Only the bare two line body. The quantity taking form and anything with extra commands are
+     * left alone, because those decide bag-full messages and follow up state this cannot model.
+     */
+    fun parse(decompLines: List<String>): FindItemForm? {
+      if (decompLines.size != 2 || decompLines[1] != "end") return null
+      return FIND.matchEntire(decompLines[0])?.let { FindItemForm(it.groupValues[1]) }
+    }
   }
 }
 

@@ -1,9 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.dialog.generated.hoenn.Route111
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
@@ -233,25 +235,29 @@ internal object GabbyAndTy_EventScript_TyBattle6 : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_STARDUST
  * end
  * ```
  */
 internal object Route111_EventScript_ItemStardust : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route111_EventScript_ItemStardust")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.STARDUST, HoennFlags.FLAG_ITEM_ROUTE_111_STARDUST, 24)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_HP_UP
  * end
  * ```
  */
 internal object Route111_EventScript_ItemHPUp : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route111_EventScript_ItemHPUp")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.HP_UP, HoennFlags.FLAG_ITEM_ROUTE_111_HP_UP, 25)
+  }
 }
 
 /**
@@ -505,14 +511,16 @@ internal object Route111_EventScript_Branden : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_ELIXIR
  * end
  * ```
  */
 internal object Route111_EventScript_ItemElixir : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route111_EventScript_ItemElixir")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.ELIXIR, HoennFlags.FLAG_ITEM_ROUTE_111_ELIXIR, 41)
+  }
 }
 
 /**

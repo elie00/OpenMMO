@@ -141,6 +141,21 @@ internal constructor(
   /** Take an item back out of the bag, the decomp removeitem. False when the bag lacks it. */
   fun takeItem(itemId: Int, quantity: Int = 1): Boolean = giveItem(itemId, -quantity)
 
+  /**
+   * Pick up an item lying on the map, the decomp finditem. [hideFlag] is the object event's own
+   * hide flag, which is what stops the ball coming back when the map is loaded again, and [localId]
+   * is that object event's index so it also leaves the screen right now.
+   *
+   * The flag is only set once the item is actually in the bag: a full bag has to leave the ball
+   * where it is, or the item is destroyed.
+   */
+  fun findItem(itemId: Int, hideFlag: String, localId: Int): Boolean {
+    if (!giveItem(itemId)) return false
+    setFlag(hideFlag)
+    removeNpc(localId)
+    return true
+  }
+
   /** Run a non-catchable, non-escapable story battle and wait for its result. */
   suspend fun battle(dexId: Int, level: Int, vararg moveIds: Int): BattleResult =
       checkNotNull(battles) { "Battle service is unavailable" }

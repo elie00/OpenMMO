@@ -1,9 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.dialog.generated.hoenn.Route110
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 internal object Route110_EventScript_Boy2 : Script {
@@ -180,25 +182,29 @@ internal object Route110_EventScript_Dale : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_DIRE_HIT
  * end
  * ```
  */
 internal object Route110_EventScript_ItemDireHit : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route110_EventScript_ItemDireHit")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.DIRE_HIT, HoennFlags.FLAG_ITEM_ROUTE_110_DIRE_HIT, 18)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_RARE_CANDY
  * end
  * ```
  */
 internal object Route110_EventScript_ItemRareCandy : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route110_EventScript_ItemRareCandy")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.RARE_CANDY, HoennFlags.FLAG_ITEM_ROUTE_110_RARE_CANDY, 19)
+  }
 }
 
 /**
@@ -398,14 +404,16 @@ internal object Route110_EventScript_Joseph : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_ELIXIR
  * end
  * ```
  */
 internal object Route110_EventScript_ItemElixir : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route110_EventScript_ItemElixir")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.ELIXIR, HoennFlags.FLAG_ITEM_ROUTE_110_ELIXIR, 34)
+  }
 }
 
 internal object Route110_EventScript_VandalizedSign : Script {

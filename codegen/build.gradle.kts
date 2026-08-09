@@ -13,6 +13,9 @@ dependencies {
   "generatorImplementation"(libs.jte)
   "generatorImplementation"(libs.kotlinx.serialization.json)
   testImplementation(sourceSets["generator"].output)
+  // The generator source set's own dependencies do not come with its output, and the porter reads
+  // the decomp map json at construction time.
+  testImplementation(libs.kotlinx.serialization.json)
   testImplementation(libs.bundles.kotest)
 }
 

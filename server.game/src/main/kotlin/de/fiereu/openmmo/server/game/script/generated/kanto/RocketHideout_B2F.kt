@@ -1,9 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.RocketHideout_B2F
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
@@ -27,50 +29,55 @@ internal object RocketHideout_B2F_EventScript_Grunt : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_X_SPEED
  * end
  * ```
  */
 internal object RocketHideout_B2F_EventScript_ItemXSpeed : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port RocketHideout_B2F_EventScript_ItemXSpeed")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.X_SPEED, KantoFlags.FLAG_HIDE_ROCKET_HIDEOUT_B2F_X_SPEED, 1)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_MOON_STONE
  * end
  * ```
  */
 internal object RocketHideout_B2F_EventScript_ItemMoonStone : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port RocketHideout_B2F_EventScript_ItemMoonStone")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.MOON_STONE, KantoFlags.FLAG_HIDE_ROCKET_HIDEOUT_B2F_MOON_STONE, 2)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_TM12
  * end
  * ```
  */
 internal object RocketHideout_B2F_EventScript_ItemTM12 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port RocketHideout_B2F_EventScript_ItemTM12")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.TM12, KantoFlags.FLAG_HIDE_ROCKET_HIDEOUT_B2F_TM12, 3)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_SUPER_POTION
  * end
  * ```
  */
 internal object RocketHideout_B2F_EventScript_ItemSuperPotion : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port RocketHideout_B2F_EventScript_ItemSuperPotion")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.SUPER_POTION, KantoFlags.FLAG_HIDE_ROCKET_HIDEOUT_B2F_SUPER_POTION, 4)
+  }
 }
 
 internal val RocketHideout_B2FScripts: Map<String, Script> =

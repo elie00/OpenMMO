@@ -1,9 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.dialog.generated.hoenn.AquaHideout_B1F
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
@@ -31,15 +33,16 @@ internal object AquaHideout_B1F_EventScript_Grunt3 : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_MAX_ELIXIR
  * end
  * ```
  */
 internal object AquaHideout_B1F_EventScript_ItemMaxElixir : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port AquaHideout_B1F_EventScript_ItemMaxElixir")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.MAX_ELIXIR, HoennFlags.FLAG_ITEM_AQUA_HIDEOUT_B1F_MAX_ELIXIR, 2)
+  }
 }
 
 /**
@@ -63,15 +66,16 @@ internal object AquaHideout_B1F_EventScript_Grunt5 : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_MASTER_BALL
  * end
  * ```
  */
 internal object AquaHideout_B1F_EventScript_ItemMasterBall : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port AquaHideout_B1F_EventScript_ItemMasterBall")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.MASTER_BALL, HoennFlags.FLAG_ITEM_AQUA_HIDEOUT_B1F_MASTER_BALL, 4)
+  }
 }
 
 /**
@@ -101,14 +105,16 @@ internal object AquaHideout_B1F_EventScript_Electrode1 : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_NUGGET
  * end
  * ```
  */
 internal object AquaHideout_B1F_EventScript_ItemNugget : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port AquaHideout_B1F_EventScript_ItemNugget")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.NUGGET, HoennFlags.FLAG_ITEM_AQUA_HIDEOUT_B1F_NUGGET, 6)
+  }
 }
 
 /**

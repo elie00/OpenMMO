@@ -1,7 +1,9 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 
 /**
  * Not ported yet. Decomp body:
@@ -16,38 +18,42 @@ internal object MeteorFalls_1F_1R_EventScript_ItemTMIronTail : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_MOON_STONE
  * end
  * ```
  */
 internal object MeteorFalls_1F_1R_EventScript_ItemMoonStone : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port MeteorFalls_1F_1R_EventScript_ItemMoonStone")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.MOON_STONE, HoennFlags.FLAG_ITEM_METEOR_FALLS_1F_1R_MOON_STONE, 1)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_FULL_HEAL
  * end
  * ```
  */
 internal object MeteorFalls_1F_1R_EventScript_ItemFullHeal : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port MeteorFalls_1F_1R_EventScript_ItemFullHeal")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.FULL_HEAL, HoennFlags.FLAG_ITEM_METEOR_FALLS_1F_1R_FULL_HEAL, 2)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_PP_UP
  * end
  * ```
  */
 internal object MeteorFalls_1F_1R_EventScript_ItemPPUP : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MeteorFalls_1F_1R_EventScript_ItemPPUP")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.PP_UP, HoennFlags.FLAG_ITEM_METEOR_FALLS_1F_1R_PP_UP, 3)
+  }
 }
 
 /**

@@ -1,9 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.dialog.generated.hoenn.Route117
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 internal object Route117_EventScript_Woman : Script {
@@ -79,25 +81,29 @@ internal object Route117_EventScript_Isaac : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_GREAT_BALL
  * end
  * ```
  */
 internal object Route117_EventScript_ItemGreatBall : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route117_EventScript_ItemGreatBall")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.GREAT_BALL, HoennFlags.FLAG_ITEM_ROUTE_117_GREAT_BALL, 13)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_REVIVE
  * end
  * ```
  */
 internal object Route117_EventScript_ItemRevive : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route117_EventScript_ItemRevive")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.REVIVE, HoennFlags.FLAG_ITEM_ROUTE_117_REVIVE, 15)
+  }
 }
 
 /**

@@ -1,8 +1,10 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.ThreeIsland
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 
 /**
  * Not ported yet. Decomp body:
@@ -50,14 +52,16 @@ internal object ThreeIsland_EventScript_Biker : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_ZINC
  * end
  * ```
  */
 internal object ThreeIsland_EventScript_ItemZinc : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port ThreeIsland_EventScript_ItemZinc")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.ZINC, KantoFlags.FLAG_HIDE_THREE_ISLAND_ZINC, 9)
+  }
 }
 
 internal object ThreeIsland_EventScript_Woman : Script {

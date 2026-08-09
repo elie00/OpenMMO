@@ -1,7 +1,9 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 
 /**
  * Not ported yet. Decomp body:
@@ -23,15 +25,17 @@ internal object AbandonedShip_CaptainsOffice_EventScript_CaptSternAide : Script 
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_STORAGE_KEY
  * end
  * ```
  */
 internal object AbandonedShip_CaptainsOffice_EventScript_ItemStorageKey : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port AbandonedShip_CaptainsOffice_EventScript_ItemStorageKey")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(
+        Items.STORAGE_KEY, HoennFlags.FLAG_ITEM_ABANDONED_SHIP_CAPTAINS_OFFICE_STORAGE_KEY, 1)
+  }
 }
 
 internal val AbandonedShip_CaptainsOfficeScripts: Map<String, Script> =

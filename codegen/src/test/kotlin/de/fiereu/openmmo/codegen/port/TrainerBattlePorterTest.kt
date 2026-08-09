@@ -150,6 +150,58 @@ class TrainerBattlePorterTest :
         file.readText() shouldBe before
       }
 
+      test("ports a map item to the pickup verb with its own hide flag and local id") {
+        val (dir, file) =
+            stubFile(
+                """
+                |/**
+                | * Not ported yet. Decomp body:
+                | * ```
+                | * finditem ITEM_PP_UP
+                | * end
+                | * ```
+                | */
+                |internal object CeruleanCave_2F_EventScript_ItemPPUp : Script {
+                |  override suspend fun run(ctx: ScriptContext) =
+                |      TODO("port CeruleanCave_2F_EventScript_ItemPPUp")
+                |}"""
+                    .trimMargin())
+
+        val report = TrainerBattlePorter("kanto", decomp).portDirectory(File(dir, "kanto"), true)
+
+        report.ported shouldBe 1
+        val text = file.readText()
+        // The flag is the object event's own, which is what NpcService checks before spawning it.
+        text shouldContain "ctx.findItem(Items.PP_UP, KantoFlags.FLAG_HIDE_CERULEAN_CAVE_2F_PP_UP, "
+        text shouldContain "import de.fiereu.openmmo.items.generated.Items"
+        text shouldContain "import de.fiereu.openmmo.story.generated.kanto.KantoFlags"
+      }
+
+      test("leaves an item script that belongs to no object event") {
+        val (dir, file) =
+            stubFile(
+                """
+                |/**
+                | * Not ported yet. Decomp body:
+                | * ```
+                | * finditem ITEM_PP_UP
+                | * end
+                | * ```
+                | */
+                |internal object Nowhere_EventScript_ItemGhost : Script {
+                |  override suspend fun run(ctx: ScriptContext) =
+                |      TODO("port Nowhere_EventScript_ItemGhost")
+                |}"""
+                    .trimMargin())
+        val before = file.readText()
+
+        val report = TrainerBattlePorter("kanto", decomp).portDirectory(File(dir, "kanto"), true)
+
+        report.ported shouldBe 0
+        report.skippedItem shouldBe 1
+        file.readText() shouldBe before
+      }
+
       test("check mode reports without writing") {
         val (dir, file) = stubFile(canonicalStub)
         val before = file.readText()

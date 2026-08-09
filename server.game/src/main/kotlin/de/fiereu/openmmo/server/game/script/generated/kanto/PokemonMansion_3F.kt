@@ -1,9 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.PokemonMansion_1F
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
@@ -47,26 +49,29 @@ internal object PokemonMansion_3F_EventScript_Braydon : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_MAX_POTION
  * end
  * ```
  */
 internal object PokemonMansion_3F_EventScript_ItemMaxPotion : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port PokemonMansion_3F_EventScript_ItemMaxPotion")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.MAX_POTION, KantoFlags.FLAG_HIDE_POKEMON_MANSION_3F_MAX_POTION, 2)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_IRON
  * end
  * ```
  */
 internal object PokemonMansion_3F_EventScript_ItemIron : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PokemonMansion_3F_EventScript_ItemIron")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.IRON, KantoFlags.FLAG_HIDE_POKEMON_MANSION_3F_IRON, 3)
+  }
 }
 
 internal object PokemonMansion_3F_EventScript_DiaryFeb6th : Script {

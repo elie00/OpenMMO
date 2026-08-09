@@ -1,9 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.RocketHideout_B3F
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
@@ -47,38 +49,42 @@ internal object RocketHideout_B3F_EventScript_Grunt1 : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_RARE_CANDY
  * end
  * ```
  */
 internal object RocketHideout_B3F_EventScript_ItemRareCandy : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port RocketHideout_B3F_EventScript_ItemRareCandy")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.RARE_CANDY, KantoFlags.FLAG_HIDE_ROCKET_HIDEOUT_B3F_RARE_CANDY, 2)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_TM21
  * end
  * ```
  */
 internal object RocketHideout_B3F_EventScript_ItemTM21 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port RocketHideout_B3F_EventScript_ItemTM21")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.TM21, KantoFlags.FLAG_HIDE_ROCKET_HIDEOUT_B3F_TM21, 3)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_BLACK_GLASSES
  * end
  * ```
  */
 internal object RocketHideout_B3F_EventScript_ItemBlackGlasses : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port RocketHideout_B3F_EventScript_ItemBlackGlasses")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.BLACK_GLASSES, KantoFlags.FLAG_HIDE_ROCKET_HIDEOUT_B3F_BLACK_GLASSES, 4)
+  }
 }
 
 internal val RocketHideout_B3FScripts: Map<String, Script> =

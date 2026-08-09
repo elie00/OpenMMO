@@ -1,9 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.dialog.generated.hoenn.VictoryRoad_1F
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
@@ -71,26 +73,29 @@ internal object VictoryRoad_1F_EventScript_EntranceWally : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_MAX_ELIXIR
  * end
  * ```
  */
 internal object VictoryRoad_1F_EventScript_ItemMaxElixir : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port VictoryRoad_1F_EventScript_ItemMaxElixir")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.MAX_ELIXIR, HoennFlags.FLAG_ITEM_VICTORY_ROAD_1F_MAX_ELIXIR, 4)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_PP_UP
  * end
  * ```
  */
 internal object VictoryRoad_1F_EventScript_ItemPPUp : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port VictoryRoad_1F_EventScript_ItemPPUp")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.PP_UP, HoennFlags.FLAG_ITEM_VICTORY_ROAD_1F_PP_UP, 5)
+  }
 }
 
 /**

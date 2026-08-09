@@ -1,9 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.dialog.generated.hoenn.Route127
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
@@ -47,25 +49,29 @@ internal object Route127_EventScript_Donny : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_ZINC
  * end
  * ```
  */
 internal object Route127_EventScript_ItemZinc : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route127_EventScript_ItemZinc")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.ZINC, HoennFlags.FLAG_ITEM_ROUTE_127_ZINC, 2)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_CARBOS
  * end
  * ```
  */
 internal object Route127_EventScript_ItemCarbos : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route127_EventScript_ItemCarbos")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.CARBOS, HoennFlags.FLAG_ITEM_ROUTE_127_CARBOS, 3)
+  }
 }
 
 /**
@@ -184,14 +190,16 @@ internal object Route127_EventScript_Athena : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_RARE_CANDY
  * end
  * ```
  */
 internal object Route127_EventScript_ItemRareCandy : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route127_EventScript_ItemRareCandy")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.RARE_CANDY, HoennFlags.FLAG_ITEM_ROUTE_127_RARE_CANDY, 10)
+  }
 }
 
 internal val Route127Scripts: Map<String, Script> =

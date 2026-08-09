@@ -1,9 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.dialog.generated.hoenn.Route123
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
@@ -47,14 +49,16 @@ internal object Route123_EventScript_Braxton : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_CALCIUM
  * end
  * ```
  */
 internal object Route123_EventScript_ItemCalcium : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route123_EventScript_ItemCalcium")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.CALCIUM, HoennFlags.FLAG_ITEM_ROUTE_123_CALCIUM, 20)
+  }
 }
 
 /**
@@ -174,25 +178,29 @@ internal object Route123_EventScript_Kindra : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_ULTRA_BALL
  * end
  * ```
  */
 internal object Route123_EventScript_ItemUltraBall : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route123_EventScript_ItemUltraBall")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.ULTRA_BALL, HoennFlags.FLAG_ITEM_ROUTE_123_ULTRA_BALL, 31)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_ELIXIR
  * end
  * ```
  */
 internal object Route123_EventScript_ItemElixir : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route123_EventScript_ItemElixir")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.ELIXIR, HoennFlags.FLAG_ITEM_ROUTE_123_ELIXIR, 32)
+  }
 }
 
 /**
@@ -311,14 +319,16 @@ internal object Route123_EventScript_Frederick : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_PP_UP
  * end
  * ```
  */
 internal object Route123_EventScript_ItemPPUp : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route123_EventScript_ItemPPUp")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.PP_UP, HoennFlags.FLAG_ITEM_ROUTE_123_PP_UP, 39)
+  }
 }
 
 /**
@@ -362,14 +372,16 @@ internal object Route123_EventScript_Davis : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_REVIVAL_HERB
  * end
  * ```
  */
 internal object Route123_EventScript_ItemRevivalHerb : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route123_EventScript_ItemRevivalHerb")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.REVIVAL_HERB, HoennFlags.FLAG_ITEM_ROUTE_123_REVIVAL_HERB, 42)
+  }
 }
 
 internal object Route123_EventScript_RouteSignMtPyre : Script {

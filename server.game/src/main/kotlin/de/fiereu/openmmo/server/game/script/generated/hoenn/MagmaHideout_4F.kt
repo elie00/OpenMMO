@@ -1,9 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.dialog.generated.hoenn.MagmaHideout_4F
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
@@ -165,15 +167,16 @@ internal object MagmaHideout_4F_EventScript_Maxie : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_MAX_REVIVE
  * end
  * ```
  */
 internal object MagmaHideout_4F_EventScript_ItemMaxRevive : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port MagmaHideout_4F_EventScript_ItemMaxRevive")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.MAX_REVIVE, HoennFlags.FLAG_ITEM_MAGMA_HIDEOUT_4F_MAX_REVIVE, 7)
+  }
 }
 
 internal val MagmaHideout_4FScripts: Map<String, Script> =

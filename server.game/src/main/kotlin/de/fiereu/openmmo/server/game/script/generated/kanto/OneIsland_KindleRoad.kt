@@ -1,8 +1,10 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.OneIsland_KindleRoad
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 
 /**
  * Not ported yet. Decomp body:
@@ -191,39 +193,42 @@ internal object OneIsland_KindleRoad_EventScript_Kia : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_ETHER
  * end
  * ```
  */
 internal object OneIsland_KindleRoad_EventScript_ItemEther : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port OneIsland_KindleRoad_EventScript_ItemEther")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.ETHER, KantoFlags.FLAG_HIDE_ONE_ISLAND_KINDLE_ROAD_ETHER, 26)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_MAX_REPEL
  * end
  * ```
  */
 internal object OneIsland_KindleRoad_EventScript_ItemMaxRepel : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port OneIsland_KindleRoad_EventScript_ItemMaxRepel")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.MAX_REPEL, KantoFlags.FLAG_HIDE_ONE_ISLAND_KINDLE_ROAD_MAX_REPEL, 27)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_CARBOS
  * end
  * ```
  */
 internal object OneIsland_KindleRoad_EventScript_ItemCarbos : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port OneIsland_KindleRoad_EventScript_ItemCarbos")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.CARBOS, KantoFlags.FLAG_HIDE_ONE_ISLAND_KINDLE_ROAD_CARBOS, 28)
+  }
 }
 
 internal object OneIsland_KindleRoad_EventScript_EmberSpaSign : Script {

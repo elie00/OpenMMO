@@ -1,8 +1,10 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.SixIsland_WaterPath
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 
 /**
  * Not ported yet. Decomp body:
@@ -103,27 +105,29 @@ internal object SixIsland_WaterPath_EventScript_Earl : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_ELIXIR
  * end
  * ```
  */
 internal object SixIsland_WaterPath_EventScript_ItemElixir : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SixIsland_WaterPath_EventScript_ItemElixir")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.ELIXIR, KantoFlags.FLAG_HIDE_SIX_ISLAND_WATER_PATH_ELIXIR, 7)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_DRAGON_SCALE
  * end
  * ```
  */
 internal object SixIsland_WaterPath_EventScript_ItemDragonScale : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SixIsland_WaterPath_EventScript_ItemDragonScale")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.DRAGON_SCALE, KantoFlags.FLAG_HIDE_SIX_ISLAND_WATER_PATH_DRAGON_SCALE, 8)
+  }
 }
 
 internal object SixIsland_WaterPath_EventScript_HornWantedSign : Script {

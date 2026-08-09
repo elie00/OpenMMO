@@ -1,9 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.dialog.generated.hoenn.Route134
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
@@ -187,25 +189,29 @@ internal object Route134_EventScript_Hudson : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_CARBOS
  * end
  * ```
  */
 internal object Route134_EventScript_ItemCarbos : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route134_EventScript_ItemCarbos")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.CARBOS, HoennFlags.FLAG_ITEM_ROUTE_134_CARBOS, 9)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_STAR_PIECE
  * end
  * ```
  */
 internal object Route134_EventScript_ItemStarPiece : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route134_EventScript_ItemStarPiece")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.STAR_PIECE, HoennFlags.FLAG_ITEM_ROUTE_134_STAR_PIECE, 10)
+  }
 }
 
 internal val Route134Scripts: Map<String, Script> =

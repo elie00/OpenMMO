@@ -1,7 +1,9 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 
 /**
  * Not ported yet. Decomp body:
@@ -103,38 +105,42 @@ internal object RocketHideout_B4F_EventScript_Grunt2 : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_TM49
  * end
  * ```
  */
 internal object RocketHideout_B4F_EventScript_ItemTM49 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port RocketHideout_B4F_EventScript_ItemTM49")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.TM49, KantoFlags.FLAG_HIDE_ROCKET_HIDEOUT_B4F_TM49, 6)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_MAX_ETHER
  * end
  * ```
  */
 internal object RocketHideout_B4F_EventScript_ItemMaxEther : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port RocketHideout_B4F_EventScript_ItemMaxEther")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.MAX_ETHER, KantoFlags.FLAG_HIDE_ROCKET_HIDEOUT_B4F_MAX_ETHER, 7)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_CALCIUM
  * end
  * ```
  */
 internal object RocketHideout_B4F_EventScript_ItemCalcium : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port RocketHideout_B4F_EventScript_ItemCalcium")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.CALCIUM, KantoFlags.FLAG_HIDE_ROCKET_HIDEOUT_B4F_CALCIUM, 8)
+  }
 }
 
 internal val RocketHideout_B4FScripts: Map<String, Script> =

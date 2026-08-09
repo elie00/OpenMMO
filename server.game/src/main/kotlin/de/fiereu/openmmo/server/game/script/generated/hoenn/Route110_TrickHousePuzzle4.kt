@@ -1,9 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.dialog.generated.hoenn.Route110_TrickHousePuzzle4
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
@@ -67,15 +69,16 @@ internal object Route110_TrickHousePuzzle4_EventScript_Yuji : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_MECH_MAIL
  * end
  * ```
  */
 internal object Route110_TrickHousePuzzle4_EventScript_ItemMechMail : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port Route110_TrickHousePuzzle4_EventScript_ItemMechMail")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.MECH_MAIL, HoennFlags.FLAG_ITEM_TRICK_HOUSE_PUZZLE_4_MECH_MAIL, 3)
+  }
 }
 
 /**

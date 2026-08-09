@@ -2,9 +2,11 @@ package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.dialog.generated.hoenn.Kecleon
 import de.fiereu.openmmo.dialog.generated.hoenn.Route120
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
@@ -98,14 +100,16 @@ internal object Route120_EventScript_Jeffrey : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_NUGGET
  * end
  * ```
  */
 internal object Route120_EventScript_ItemNugget : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route120_EventScript_ItemNugget")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.NUGGET, HoennFlags.FLAG_ITEM_ROUTE_120_NUGGET, 15)
+  }
 }
 
 /**
@@ -135,14 +139,16 @@ internal object GabbyAndTy_EventScript_GabbyBattle3 : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_FULL_HEAL
  * end
  * ```
  */
 internal object Route120_EventScript_ItemFullHeal : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route120_EventScript_ItemFullHeal")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.FULL_HEAL, HoennFlags.FLAG_ITEM_ROUTE_120_FULL_HEAL, 21)
+  }
 }
 
 /**
@@ -255,25 +261,29 @@ internal object Route120_EventScript_Angelica : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_NEST_BALL
  * end
  * ```
  */
 internal object Route120_EventScript_ItemNestBall : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route120_EventScript_ItemNestBall")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.NEST_BALL, HoennFlags.FLAG_ITEM_ROUTE_120_NEST_BALL, 27)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_HYPER_POTION
  * end
  * ```
  */
 internal object Route120_EventScript_ItemHyperPotion : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route120_EventScript_ItemHyperPotion")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.HYPER_POTION, HoennFlags.FLAG_ITEM_ROUTE_120_HYPER_POTION, 28)
+  }
 }
 
 internal object Route120_EventScript_BridgeKecleon : Script {
@@ -447,14 +457,16 @@ internal object Route120_EventScript_Leonel : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_REVIVE
  * end
  * ```
  */
 internal object Route120_EventScript_ItemRevive : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route120_EventScript_ItemRevive")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.REVIVE, HoennFlags.FLAG_ITEM_ROUTE_120_REVIVE, 43)
+  }
 }
 
 internal object Route120_EventScript_RouteSignFortree : Script {

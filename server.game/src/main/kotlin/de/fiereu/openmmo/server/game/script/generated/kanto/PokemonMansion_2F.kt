@@ -1,9 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.PokemonMansion_1F
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
@@ -27,37 +29,42 @@ internal object PokemonMansion_2F_EventScript_Arnie : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_CALCIUM
  * end
  * ```
  */
 internal object PokemonMansion_2F_EventScript_ItemCalcium : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port PokemonMansion_2F_EventScript_ItemCalcium")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.CALCIUM, KantoFlags.FLAG_HIDE_POKEMON_MANSION_2F_CALCIUM, 1)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_ZINC
  * end
  * ```
  */
 internal object PokemonMansion_2F_EventScript_ItemZinc : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PokemonMansion_2F_EventScript_ItemZinc")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.ZINC, KantoFlags.FLAG_HIDE_POKEMON_MANSION_2F_ZINC, 2)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_HP_UP
  * end
  * ```
  */
 internal object PokemonMansion_2F_EventScript_ItemHPUp : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PokemonMansion_2F_EventScript_ItemHPUp")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.HP_UP, KantoFlags.FLAG_HIDE_POKEMON_MANSION_2F_HP_UP, 3)
+  }
 }
 
 /**

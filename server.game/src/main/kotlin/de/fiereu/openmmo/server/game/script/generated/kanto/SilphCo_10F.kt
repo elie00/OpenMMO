@@ -1,9 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.SilphCo_10F
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
@@ -62,36 +64,42 @@ internal object SilphCo_10F_EventScript_Grunt : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_CARBOS
  * end
  * ```
  */
 internal object SilphCo_10F_EventScript_ItemCarbos : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SilphCo_10F_EventScript_ItemCarbos")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.CARBOS, KantoFlags.FLAG_HIDE_SILPH_CO_10F_CARBOS, 3)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_ULTRA_BALL
  * end
  * ```
  */
 internal object SilphCo_10F_EventScript_ItemUltraBall : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SilphCo_10F_EventScript_ItemUltraBall")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.ULTRA_BALL, KantoFlags.FLAG_HIDE_SILPH_CO_10F_ULTRA_BALL, 4)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_RARE_CANDY
  * end
  * ```
  */
 internal object SilphCo_10F_EventScript_ItemRareCandy : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SilphCo_10F_EventScript_ItemRareCandy")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.RARE_CANDY, KantoFlags.FLAG_HIDE_SILPH_CO_10F_RARE_CANDY, 5)
+  }
 }
 
 /**

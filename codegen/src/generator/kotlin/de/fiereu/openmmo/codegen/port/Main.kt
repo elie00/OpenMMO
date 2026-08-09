@@ -35,6 +35,7 @@ fun main(args: Array<String>) {
         "[port] $region: ported ${report.ported} in ${report.filesChanged} files " +
             "(skipped ${report.skippedShape} unsupported shapes, " +
             "${report.skippedTrainer} unknown trainers, ${report.skippedText} unknown texts, " +
+            "${report.skippedItem} unresolvable items, " +
             "refused ${report.filesRefused} files)")
   }
   if (check && changed > 0) {

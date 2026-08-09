@@ -1,8 +1,10 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.TwoIsland
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 
 /**
  * Not ported yet. Decomp body:
@@ -50,14 +52,16 @@ internal object TwoIsland_EventScript_PokeManiac : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_REVIVE
  * end
  * ```
  */
 internal object TwoIsland_EventScript_ItemRevive : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port TwoIsland_EventScript_ItemRevive")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.REVIVE, KantoFlags.FLAG_HIDE_TWO_ISLAND_REVIVE, 6)
+  }
 }
 
 internal object TwoIsland_EventScript_LittleBoy : Script {

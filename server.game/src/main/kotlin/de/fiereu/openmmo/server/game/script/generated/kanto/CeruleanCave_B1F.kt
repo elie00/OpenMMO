@@ -1,30 +1,34 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_ULTRA_BALL
  * end
  * ```
  */
 internal object CeruleanCave_B1F_EventScript_ItemUltraBall : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port CeruleanCave_B1F_EventScript_ItemUltraBall")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.ULTRA_BALL, KantoFlags.FLAG_HIDE_CERULEAN_CAVE_B1F_ULTRA_BALL, 0)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_MAX_REVIVE
  * end
  * ```
  */
 internal object CeruleanCave_B1F_EventScript_ItemMaxRevive : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port CeruleanCave_B1F_EventScript_ItemMaxRevive")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.MAX_REVIVE, KantoFlags.FLAG_HIDE_CERULEAN_CAVE_B1F_MAX_REVIVE, 1)
+  }
 }
 
 /**

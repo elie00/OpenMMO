@@ -1,9 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.dialog.generated.hoenn.JaggedPass
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
@@ -42,14 +44,16 @@ internal object JaggedPass_EventScript_Ethan : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_BURN_HEAL
  * end
  * ```
  */
 internal object JaggedPass_EventScript_ItemBurnHeal : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port JaggedPass_EventScript_ItemBurnHeal")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.BURN_HEAL, HoennFlags.FLAG_ITEM_JAGGED_PASS_BURN_HEAL, 2)
+  }
 }
 
 /**

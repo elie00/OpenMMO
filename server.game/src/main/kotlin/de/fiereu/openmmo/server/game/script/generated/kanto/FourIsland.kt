@@ -1,8 +1,10 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.FourIsland
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 
 /**
  * Not ported yet. Decomp body:
@@ -41,25 +43,29 @@ internal object FourIsland_EventScript_OldWoman : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_STAR_PIECE
  * end
  * ```
  */
 internal object FourIsland_EventScript_ItemStarPiece : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port FourIsland_EventScript_ItemStarPiece")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.STAR_PIECE, KantoFlags.FLAG_HIDE_FOUR_ISLAND_STAR_PIECE, 7)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_STARDUST
  * end
  * ```
  */
 internal object FourIsland_EventScript_ItemStardust : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port FourIsland_EventScript_ItemStardust")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.STARDUST, KantoFlags.FLAG_HIDE_FOUR_ISLAND_STARDUST, 8)
+  }
 }
 
 internal object FourIsland_EventScript_FatMan : Script {

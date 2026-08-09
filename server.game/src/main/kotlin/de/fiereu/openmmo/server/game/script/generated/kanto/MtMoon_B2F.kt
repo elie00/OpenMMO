@@ -1,9 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.MtMoon_B2F
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
@@ -165,47 +167,55 @@ internal object MtMoon_B2F_EventScript_Grunt2 : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_STAR_PIECE
  * end
  * ```
  */
 internal object MtMoon_B2F_EventScript_ItemStarPiece : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtMoon_B2F_EventScript_ItemStarPiece")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.STAR_PIECE, KantoFlags.FLAG_HIDE_MT_MOON_B2F_STAR_PIECE, 7)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_TM46
  * end
  * ```
  */
 internal object MtMoon_B2F_EventScript_ItemTM46 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtMoon_B2F_EventScript_ItemTM46")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.TM46, KantoFlags.FLAG_HIDE_MT_MOON_B2F_TM46, 8)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_REVIVE
  * end
  * ```
  */
 internal object MtMoon_B2F_EventScript_ItemRevive : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtMoon_B2F_EventScript_ItemRevive")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.REVIVE, KantoFlags.FLAG_HIDE_MT_MOON_B2F_REVIVE, 9)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_ANTIDOTE
  * end
  * ```
  */
 internal object MtMoon_B2F_EventScript_ItemAntidote : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtMoon_B2F_EventScript_ItemAntidote")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.ANTIDOTE, KantoFlags.FLAG_HIDE_MT_MOON_B2F_ANTIDOTE, 10)
+  }
 }
 
 internal val MtMoon_B2FScripts: Map<String, Script> =

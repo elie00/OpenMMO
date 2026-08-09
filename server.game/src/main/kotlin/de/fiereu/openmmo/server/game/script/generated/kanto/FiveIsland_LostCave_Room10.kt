@@ -1,18 +1,21 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_SILK_SCARF
  * end
  * ```
  */
 internal object FiveIsland_LostCave_Room10_EventScript_ItemSilkScarf : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port FiveIsland_LostCave_Room10_EventScript_ItemSilkScarf")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.SILK_SCARF, KantoFlags.FLAG_HIDE_FIVE_ISLAND_LOST_CAVE_ROOM10_SILK_SCARF, 1)
+  }
 }
 
 internal val FiveIsland_LostCave_Room10Scripts: Map<String, Script> =

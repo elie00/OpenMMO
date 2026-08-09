@@ -1,54 +1,61 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.SafariZone_West
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_GOLD_TEETH
  * end
  * ```
  */
 internal object SafariZone_West_EventScript_ItemGoldTeeth : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SafariZone_West_EventScript_ItemGoldTeeth")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.GOLD_TEETH, KantoFlags.FLAG_HIDE_SAFARI_ZONE_WEST_GOLD_TEETH, 0)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_TM32
  * end
  * ```
  */
 internal object SafariZone_West_EventScript_ItemTM32 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SafariZone_West_EventScript_ItemTM32")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.TM32, KantoFlags.FLAG_HIDE_SAFARI_ZONE_WEST_TM32, 1)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_MAX_POTION
  * end
  * ```
  */
 internal object SafariZone_West_EventScript_ItemMaxPotion : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SafariZone_West_EventScript_ItemMaxPotion")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.MAX_POTION, KantoFlags.FLAG_HIDE_SAFARI_ZONE_WEST_MAX_POTION, 2)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_MAX_REVIVE
  * end
  * ```
  */
 internal object SafariZone_West_EventScript_ItemMaxRevive : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SafariZone_West_EventScript_ItemMaxRevive")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.MAX_REVIVE, KantoFlags.FLAG_HIDE_SAFARI_ZONE_WEST_MAX_REVIVE, 3)
+  }
 }
 
 internal object SafariZone_West_EventScript_LostTeethNotice : Script {

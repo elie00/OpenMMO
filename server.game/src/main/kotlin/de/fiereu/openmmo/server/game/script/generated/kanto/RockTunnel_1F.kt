@@ -1,9 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.RockTunnel_1F
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
@@ -147,37 +149,42 @@ internal object RockTunnel_1F_EventScript_Ashton : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_REPEL
  * end
  * ```
  */
 internal object RockTunnel_1F_EventScript_ItemRepel : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port RockTunnel_1F_EventScript_ItemRepel")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.REPEL, KantoFlags.FLAG_HIDE_ROCK_TUNNEL_1F_REPEL, 7)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_PEARL
  * end
  * ```
  */
 internal object RockTunnel_1F_EventScript_ItemPearl : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port RockTunnel_1F_EventScript_ItemPearl")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.PEARL, KantoFlags.FLAG_HIDE_ROCK_TUNNEL_1F_PEARL, 8)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_ESCAPE_ROPE
  * end
  * ```
  */
 internal object RockTunnel_1F_EventScript_ItemEscapeRope : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port RockTunnel_1F_EventScript_ItemEscapeRope")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.ESCAPE_ROPE, KantoFlags.FLAG_HIDE_ROCK_TUNNEL_1F_ESCAPE_ROPE, 9)
+  }
 }
 
 internal object RockTunnel_1F_EventScript_RouteSign : Script {

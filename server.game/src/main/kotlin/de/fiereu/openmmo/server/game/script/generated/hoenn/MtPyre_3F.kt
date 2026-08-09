@@ -1,9 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.dialog.generated.hoenn.MtPyre_3F
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
@@ -47,14 +49,16 @@ internal object MtPyre_3F_EventScript_Kayla : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * finditem ITEM_SUPER_REPEL
  * end
  * ```
  */
 internal object MtPyre_3F_EventScript_ItemSuperRepel : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtPyre_3F_EventScript_ItemSuperRepel")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.findItem(Items.SUPER_REPEL, HoennFlags.FLAG_ITEM_MT_PYRE_3F_SUPER_REPEL, 2)
+  }
 }
 
 /**
