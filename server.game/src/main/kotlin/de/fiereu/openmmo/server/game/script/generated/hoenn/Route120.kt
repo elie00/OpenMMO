@@ -4,6 +4,7 @@ import de.fiereu.openmmo.dialog.generated.hoenn.Kecleon
 import de.fiereu.openmmo.dialog.generated.hoenn.Route120
 import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.battle.BattleResult
+import de.fiereu.openmmo.server.game.script.MovementStep.FACE_LEFT
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
@@ -642,7 +643,7 @@ internal object Route120_EventScript_RemoveBridgeKecleonPostBattle : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
  * waitmovement 0
@@ -650,8 +651,9 @@ internal object Route120_EventScript_RemoveBridgeKecleonPostBattle : Script {
  * ```
  */
 internal object Route120_EventScript_PlayerApproachKecleonNorth : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port Route120_EventScript_PlayerApproachKecleonNorth")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.moveSelf(FACE_LEFT)
+  }
 }
 
 /**

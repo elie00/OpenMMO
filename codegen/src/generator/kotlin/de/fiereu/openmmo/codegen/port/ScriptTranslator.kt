@@ -15,6 +15,7 @@ class ScriptTranslator(
     private val region: String,
     private val flagNames: Set<String>,
     private val varNames: Set<String>,
+    private val movements: MovementTemplates,
     private val resolveText: (String) -> Pair<String, String>?,
 ) {
   private val flagsObject = "${region.replaceFirstChar { it.uppercase() }}Flags"
@@ -61,6 +62,9 @@ class ScriptTranslator(
       "goto_if_unset" -> flagBranch(command, rest, defined, imports)
       "goto_if_eq",
       "goto_if_ne" -> varBranch(command, rest, defined, imports)
+      "applymovement" -> movement(rest, imports)
+      // moveSelf already waits for the path to finish, so the decomp's wait line has no body.
+      "waitmovement" -> if (rest.trim() == "0") emptyList() else null
       else -> null
     }
   }
@@ -75,6 +79,20 @@ class ScriptTranslator(
     // with, which is what ctx.say already does.
     val verb = if (type == "MSGBOX_SIGN") "sign" else "say"
     return listOf("    ctx.$verb($reference)")
+  }
+
+  /**
+   * Only the player is moved. An npc target is a decomp local id symbol that would have to be
+   * resolved against the map, and VAR_LAST_TALKED is resolved at runtime by the source engine,
+   * neither of which this can do yet.
+   */
+  private fun movement(rest: String, imports: MutableSet<String>): List<String>? {
+    val target = rest.substringBefore(',').trim()
+    if (target != "LOCALID_PLAYER") return null
+    val steps = movements.stepsOf(rest.substringAfter(',', "").trim()) ?: return null
+    if (steps.isEmpty()) return null
+    steps.mapTo(imports) { "de.fiereu.openmmo.server.game.script.MovementStep.$it" }
+    return listOf("    ctx.moveSelf(${steps.joinToString(", ")})")
   }
 
   private fun flag(name: String, imports: MutableSet<String>): String? {

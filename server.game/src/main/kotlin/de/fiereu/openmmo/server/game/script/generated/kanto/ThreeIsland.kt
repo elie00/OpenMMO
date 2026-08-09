@@ -2,6 +2,9 @@ package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.ThreeIsland
 import de.fiereu.openmmo.items.generated.Items
+import de.fiereu.openmmo.server.game.script.MovementStep.FACE_LEFT
+import de.fiereu.openmmo.server.game.script.MovementStep.FACE_RIGHT
+import de.fiereu.openmmo.server.game.script.MovementStep.FACE_UP
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 import de.fiereu.openmmo.story.generated.kanto.KantoFlags
@@ -185,7 +188,7 @@ internal object ThreeIsland_EventScript_AntiBiker2BikersGone : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterRight
  * waitmovement 0
@@ -193,8 +196,9 @@ internal object ThreeIsland_EventScript_AntiBiker2BikersGone : Script {
  * ```
  */
 internal object ThreeIsland_EventScript_PlayerFaceRight : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port ThreeIsland_EventScript_PlayerFaceRight")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.moveSelf(FACE_RIGHT)
+  }
 }
 
 /**
@@ -240,7 +244,7 @@ internal object ThreeIsland_EventScript_PlayerFaceAntiBiker : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
  * waitmovement 0
@@ -248,11 +252,13 @@ internal object ThreeIsland_EventScript_PlayerFaceAntiBiker : Script {
  * ```
  */
 internal object ThreeIsland_EventScript_PlayerFaceLeft : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port ThreeIsland_EventScript_PlayerFaceLeft")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.moveSelf(FACE_LEFT)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp
  * waitmovement 0
@@ -260,7 +266,9 @@ internal object ThreeIsland_EventScript_PlayerFaceLeft : Script {
  * ```
  */
 internal object ThreeIsland_EventScript_PlayerFaceUp : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port ThreeIsland_EventScript_PlayerFaceUp")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.moveSelf(FACE_UP)
+  }
 }
 
 internal val ThreeIslandScripts: Map<String, Script> =

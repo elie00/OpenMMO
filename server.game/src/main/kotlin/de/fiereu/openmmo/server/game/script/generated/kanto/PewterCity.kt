@@ -1,6 +1,7 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.PewterCity
+import de.fiereu.openmmo.server.game.script.MovementStep.FACE_UP
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 
@@ -324,7 +325,7 @@ internal object PewterCity_EventScript_AideApproachPlayer2 : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * closemessage
  * applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterUp
@@ -333,8 +334,9 @@ internal object PewterCity_EventScript_AideApproachPlayer2 : Script {
  * ```
  */
 internal object PewterCity_EventScript_AideApproachPlayer1 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port PewterCity_EventScript_AideApproachPlayer1")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.moveSelf(FACE_UP)
+  }
 }
 
 /**

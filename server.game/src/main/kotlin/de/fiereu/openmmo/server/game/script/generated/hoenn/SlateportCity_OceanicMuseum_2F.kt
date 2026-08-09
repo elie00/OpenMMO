@@ -1,6 +1,7 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
 import de.fiereu.openmmo.dialog.generated.hoenn.SlateportCity_OceanicMuseum_2F
+import de.fiereu.openmmo.server.game.script.MovementStep.FACE_LEFT
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 import de.fiereu.openmmo.story.generated.hoenn.HoennVars
@@ -231,7 +232,7 @@ internal object SlateportCity_OceanicMuseum_2F_EventScript_ReadyRegisterBirch : 
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
  * waitmovement 0
@@ -239,8 +240,9 @@ internal object SlateportCity_OceanicMuseum_2F_EventScript_ReadyRegisterBirch : 
  * ```
  */
 internal object SlateportCity_OceanicMuseum_2F_EventScript_PlayerFaceGrunts : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SlateportCity_OceanicMuseum_2F_EventScript_PlayerFaceGrunts")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.moveSelf(FACE_LEFT)
+  }
 }
 
 internal val SlateportCity_OceanicMuseum_2FScripts: Map<String, Script> =

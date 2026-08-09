@@ -27,7 +27,7 @@ class TrainerBattlePorter(private val region: String, decompDir: File) {
   private val mapObjects = MapObjectIndex(decompDir)
   private val subScripts = SubScriptEmitter(ScriptIndex.build(decompDir))
   private val translator =
-      ScriptTranslator(region, flagNames, varNames) { label ->
+      ScriptTranslator(region, flagNames, varNames, MovementTemplates(decompDir)) { label ->
         resolveText(label)?.let { it.import to it.reference }
       }
   private val trainersObject = "${region.replaceFirstChar { it.uppercase() }}Trainers"

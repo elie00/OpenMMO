@@ -1,5 +1,7 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.server.game.script.MovementStep.FACE_DOWN
+import de.fiereu.openmmo.server.game.script.MovementStep.FACE_LEFT
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 
@@ -110,7 +112,7 @@ internal object SixIsland_DottedHole_SapphireRoom_EventScript_ThiefLookAtSapphir
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterDown
  * waitmovement 0
@@ -118,8 +120,9 @@ internal object SixIsland_DottedHole_SapphireRoom_EventScript_ThiefLookAtSapphir
  * ```
  */
 internal object SixIsland_DottedHole_SapphireRoom_EventScript_PlayerFaceThiefDown2 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SixIsland_DottedHole_SapphireRoom_EventScript_PlayerFaceThiefDown2")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.moveSelf(FACE_DOWN)
+  }
 }
 
 /**
@@ -150,7 +153,7 @@ internal object SixIsland_DottedHole_SapphireRoom_EventScript_ThiefExitWest : Sc
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterDown
  * waitmovement 0
@@ -158,8 +161,9 @@ internal object SixIsland_DottedHole_SapphireRoom_EventScript_ThiefExitWest : Sc
  * ```
  */
 internal object SixIsland_DottedHole_SapphireRoom_EventScript_PlayerFaceThiefDown : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SixIsland_DottedHole_SapphireRoom_EventScript_PlayerFaceThiefDown")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.moveSelf(FACE_DOWN)
+  }
 }
 
 /**
@@ -263,7 +267,7 @@ internal object SixIsland_DottedHole_SapphireRoom_EventScript_ThiefGetSapphireWe
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
  * waitmovement 0
@@ -271,12 +275,13 @@ internal object SixIsland_DottedHole_SapphireRoom_EventScript_ThiefGetSapphireWe
  * ```
  */
 internal object SixIsland_DottedHole_SapphireRoom_EventScript_PlayerFaceThiefLeft2 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SixIsland_DottedHole_SapphireRoom_EventScript_PlayerFaceThiefLeft2")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.moveSelf(FACE_LEFT)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
  * waitmovement 0
@@ -284,8 +289,9 @@ internal object SixIsland_DottedHole_SapphireRoom_EventScript_PlayerFaceThiefLef
  * ```
  */
 internal object SixIsland_DottedHole_SapphireRoom_EventScript_PlayerFaceThiefLeft : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SixIsland_DottedHole_SapphireRoom_EventScript_PlayerFaceThiefLeft")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.moveSelf(FACE_LEFT)
+  }
 }
 
 /**
