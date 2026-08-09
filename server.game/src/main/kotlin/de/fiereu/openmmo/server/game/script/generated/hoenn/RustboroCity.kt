@@ -71,7 +71,7 @@ internal object RustboroCity_EventScript_Man1 : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -83,11 +83,16 @@ internal object RustboroCity_EventScript_Man1 : Script {
  * ```
  */
 internal object RustboroCity_EventScript_LittleBoy : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port RustboroCity_EventScript_LittleBoy")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(RustboroCity.PokemonCanChangeLookFromExp)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -99,7 +104,12 @@ internal object RustboroCity_EventScript_LittleBoy : Script {
  * ```
  */
 internal object RustboroCity_EventScript_LittleGirl : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port RustboroCity_EventScript_LittleGirl")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(RustboroCity.PokemonChangeShape)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 /**

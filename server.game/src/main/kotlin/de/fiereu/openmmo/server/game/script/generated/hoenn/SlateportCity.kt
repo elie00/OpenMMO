@@ -62,7 +62,7 @@ internal object SlateportCity_EventScript_Woman1 : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -75,7 +75,12 @@ internal object SlateportCity_EventScript_Woman1 : Script {
  * ```
  */
 internal object SlateportCity_EventScript_AquaGrunt1 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SlateportCity_EventScript_AquaGrunt1")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SlateportCity.QuitPushing)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 /**
@@ -232,7 +237,7 @@ internal object SlateportCity_EventScript_Woman2 : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -245,11 +250,16 @@ internal object SlateportCity_EventScript_Woman2 : Script {
  * ```
  */
 internal object SlateportCity_EventScript_AquaGrunt2 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SlateportCity_EventScript_AquaGrunt2")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SlateportCity.AquaHasPolicy)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -262,7 +272,12 @@ internal object SlateportCity_EventScript_AquaGrunt2 : Script {
  * ```
  */
 internal object SlateportCity_EventScript_AquaGrunt3 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SlateportCity_EventScript_AquaGrunt3")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SlateportCity.BossIsBrilliant)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 /**
@@ -366,7 +381,7 @@ internal object SlateportCity_EventScript_EnergyGuru : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -379,11 +394,16 @@ internal object SlateportCity_EventScript_EnergyGuru : Script {
  * ```
  */
 internal object SlateportCity_EventScript_AquaGrunt4 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SlateportCity_EventScript_AquaGrunt4")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SlateportCity.WhatsNewSchemeIWonder)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -396,11 +416,16 @@ internal object SlateportCity_EventScript_AquaGrunt4 : Script {
  * ```
  */
 internal object SlateportCity_EventScript_AquaGrunt5 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SlateportCity_EventScript_AquaGrunt5")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SlateportCity.ShouldTakeItAll)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -413,11 +438,16 @@ internal object SlateportCity_EventScript_AquaGrunt5 : Script {
  * ```
  */
 internal object SlateportCity_EventScript_AquaGrunt6 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SlateportCity_EventScript_AquaGrunt6")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SlateportCity.DontButtIn)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -430,11 +460,16 @@ internal object SlateportCity_EventScript_AquaGrunt6 : Script {
  * ```
  */
 internal object SlateportCity_EventScript_AquaGrunt7 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SlateportCity_EventScript_AquaGrunt7")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SlateportCity.RemindsMeOfLongLineForGames)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -447,7 +482,12 @@ internal object SlateportCity_EventScript_AquaGrunt7 : Script {
  * ```
  */
 internal object SlateportCity_EventScript_AquaGrunt8 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SlateportCity_EventScript_AquaGrunt8")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SlateportCity.WhyAreWeLiningUp)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 /**
@@ -495,7 +535,7 @@ internal object SlateportCity_EventScript_AquaGrunt10 : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -508,7 +548,12 @@ internal object SlateportCity_EventScript_AquaGrunt10 : Script {
  * ```
  */
 internal object SlateportCity_EventScript_AquaGrunt11 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SlateportCity_EventScript_AquaGrunt11")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SlateportCity.HotSpringsAfterOperation)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 /**

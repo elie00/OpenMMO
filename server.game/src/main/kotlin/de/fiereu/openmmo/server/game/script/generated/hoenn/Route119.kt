@@ -317,7 +317,7 @@ internal object Route119_EventScript_ItemHyperPotion : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -330,11 +330,16 @@ internal object Route119_EventScript_ItemHyperPotion : Script {
  * ```
  */
 internal object Route119_EventScript_BridgeAquaGrunt1 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route119_EventScript_BridgeAquaGrunt1")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route119.StayAwayFromWeatherInstitute)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -347,7 +352,12 @@ internal object Route119_EventScript_BridgeAquaGrunt1 : Script {
  * ```
  */
 internal object Route119_EventScript_BridgeAquaGrunt2 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route119_EventScript_BridgeAquaGrunt2")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route119.DontGoNearWeatherInstitute)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 internal object Route119_EventScript_Boy1 : Script {

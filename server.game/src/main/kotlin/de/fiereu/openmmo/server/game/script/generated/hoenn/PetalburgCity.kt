@@ -29,7 +29,7 @@ internal object PetalburgCity_EventScript_WallysMom : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -42,7 +42,12 @@ internal object PetalburgCity_EventScript_WallysMom : Script {
  * ```
  */
 internal object PetalburgCity_EventScript_Boy : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PetalburgCity_EventScript_Boy")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(PetalburgCity.WaterReflection)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 internal object PetalburgCity_EventScript_Gentleman : Script {

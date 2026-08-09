@@ -195,7 +195,7 @@ internal object MossdeepCity_SpaceCenter_1F_EventScript_MagmaNote : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -207,8 +207,12 @@ internal object MossdeepCity_SpaceCenter_1F_EventScript_MagmaNote : Script {
  * ```
  */
 internal object MossdeepCity_SpaceCenter_1F_EventScript_Steven : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port MossdeepCity_SpaceCenter_1F_EventScript_Steven")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MossdeepCity_SpaceCenter_1F.StevenMagmaCantBeAllowedToTakeFuel)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 internal val MossdeepCity_SpaceCenter_1FScripts: Map<String, Script> =

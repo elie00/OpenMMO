@@ -143,7 +143,7 @@ internal object RusturfTunnel_EventScript_Mike : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -156,7 +156,12 @@ internal object RusturfTunnel_EventScript_Mike : Script {
  * ```
  */
 internal object RusturfTunnel_EventScript_Wanda : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port RusturfTunnel_EventScript_Wanda")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(RusturfTunnel.BoyfriendOnOtherSideOfRock)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 internal val RusturfTunnelScripts: Map<String, Script> =

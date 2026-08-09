@@ -20,7 +20,7 @@ internal object LilycoveCity_ContestHall_EventScript_Girl : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -33,12 +33,16 @@ internal object LilycoveCity_ContestHall_EventScript_Girl : Script {
  * ```
  */
 internal object LilycoveCity_ContestHall_EventScript_SmartContestMC : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LilycoveCity_ContestHall_EventScript_SmartContestMC")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity_ContestHall.GiveItBestSmartAppeal)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -51,12 +55,16 @@ internal object LilycoveCity_ContestHall_EventScript_SmartContestMC : Script {
  * ```
  */
 internal object LilycoveCity_ContestHall_EventScript_SmartContestJudge : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LilycoveCity_ContestHall_EventScript_SmartContestJudge")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity_ContestHall.AreYouEnjoyingThisContest)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -69,12 +77,16 @@ internal object LilycoveCity_ContestHall_EventScript_SmartContestJudge : Script 
  * ```
  */
 internal object LilycoveCity_ContestHall_EventScript_SmartContestant1 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LilycoveCity_ContestHall_EventScript_SmartContestant1")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity_ContestHall.EnteredWrongContest)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -87,12 +99,16 @@ internal object LilycoveCity_ContestHall_EventScript_SmartContestant1 : Script {
  * ```
  */
 internal object LilycoveCity_ContestHall_EventScript_SmartContestant2 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LilycoveCity_ContestHall_EventScript_SmartContestant2")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity_ContestHall.RaisedMonToBeSmart)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -105,12 +121,16 @@ internal object LilycoveCity_ContestHall_EventScript_SmartContestant2 : Script {
  * ```
  */
 internal object LilycoveCity_ContestHall_EventScript_SmartContestant3 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LilycoveCity_ContestHall_EventScript_SmartContestant3")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity_ContestHall.IfMonPullsSmartMoveNext)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -123,8 +143,12 @@ internal object LilycoveCity_ContestHall_EventScript_SmartContestant3 : Script {
  * ```
  */
 internal object LilycoveCity_ContestHall_EventScript_SmartContestant4 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LilycoveCity_ContestHall_EventScript_SmartContestant4")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity_ContestHall.DontAppreciateCuteLeechLife)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 internal object LilycoveCity_ContestHall_EventScript_SmartContestAudience1 : Script {
@@ -133,7 +157,7 @@ internal object LilycoveCity_ContestHall_EventScript_SmartContestAudience1 : Scr
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -146,12 +170,16 @@ internal object LilycoveCity_ContestHall_EventScript_SmartContestAudience1 : Scr
  * ```
  */
 internal object LilycoveCity_ContestHall_EventScript_SmartContestAudience4 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LilycoveCity_ContestHall_EventScript_SmartContestAudience4")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity_ContestHall.StillLoveSmartnessContests)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -164,12 +192,16 @@ internal object LilycoveCity_ContestHall_EventScript_SmartContestAudience4 : Scr
  * ```
  */
 internal object LilycoveCity_ContestHall_EventScript_SmartContestAudience2 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LilycoveCity_ContestHall_EventScript_SmartContestAudience2")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity_ContestHall.AllSeemToUseDifferentMoves)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -182,12 +214,16 @@ internal object LilycoveCity_ContestHall_EventScript_SmartContestAudience2 : Scr
  * ```
  */
 internal object LilycoveCity_ContestHall_EventScript_BeautyContestMC : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LilycoveCity_ContestHall_EventScript_BeautyContestMC")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity_ContestHall.AreYouEnteringBeautyContest)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -200,12 +236,16 @@ internal object LilycoveCity_ContestHall_EventScript_BeautyContestMC : Script {
  * ```
  */
 internal object LilycoveCity_ContestHall_EventScript_BeautyContestJudge : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LilycoveCity_ContestHall_EventScript_BeautyContestJudge")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity_ContestHall.EveryPokemonPristineBeauty)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -218,12 +258,16 @@ internal object LilycoveCity_ContestHall_EventScript_BeautyContestJudge : Script
  * ```
  */
 internal object LilycoveCity_ContestHall_EventScript_BeautyContestant1 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LilycoveCity_ContestHall_EventScript_BeautyContestant1")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity_ContestHall.EyesWillBeGluedToMyBeauty)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -236,12 +280,16 @@ internal object LilycoveCity_ContestHall_EventScript_BeautyContestant1 : Script 
  * ```
  */
 internal object LilycoveCity_ContestHall_EventScript_BeautyContestant2 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LilycoveCity_ContestHall_EventScript_BeautyContestant2")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity_ContestHall.OverdidGrooming)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -254,12 +302,16 @@ internal object LilycoveCity_ContestHall_EventScript_BeautyContestant2 : Script 
  * ```
  */
 internal object LilycoveCity_ContestHall_EventScript_BeautyContestant3 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LilycoveCity_ContestHall_EventScript_BeautyContestant3")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity_ContestHall.JudgeWontSeeAuroraBeam)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -272,12 +324,16 @@ internal object LilycoveCity_ContestHall_EventScript_BeautyContestant3 : Script 
  * ```
  */
 internal object LilycoveCity_ContestHall_EventScript_BeautyContestant4 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LilycoveCity_ContestHall_EventScript_BeautyContestant4")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity_ContestHall.PokemonLooksLikeYoungerMe)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -290,12 +346,16 @@ internal object LilycoveCity_ContestHall_EventScript_BeautyContestant4 : Script 
  * ```
  */
 internal object LilycoveCity_ContestHall_EventScript_BeautyContestAudience1 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LilycoveCity_ContestHall_EventScript_BeautyContestAudience1")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity_ContestHall.WinBeautyContestMakesMeHappy)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -308,12 +368,16 @@ internal object LilycoveCity_ContestHall_EventScript_BeautyContestAudience1 : Sc
  * ```
  */
 internal object LilycoveCity_ContestHall_EventScript_BeautyContestAudience3 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LilycoveCity_ContestHall_EventScript_BeautyContestAudience3")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity_ContestHall.CantWinOnBeautyAlone)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -326,12 +390,16 @@ internal object LilycoveCity_ContestHall_EventScript_BeautyContestAudience3 : Sc
  * ```
  */
 internal object LilycoveCity_ContestHall_EventScript_BeautyContestAudience2 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LilycoveCity_ContestHall_EventScript_BeautyContestAudience2")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity_ContestHall.GanderAtAllThosePrettyPokemon)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -344,12 +412,16 @@ internal object LilycoveCity_ContestHall_EventScript_BeautyContestAudience2 : Sc
  * ```
  */
 internal object LilycoveCity_ContestHall_EventScript_SmartContestAudience3 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LilycoveCity_ContestHall_EventScript_SmartContestAudience3")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity_ContestHall.PokemonSmarterThanTrainers)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -362,12 +434,16 @@ internal object LilycoveCity_ContestHall_EventScript_SmartContestAudience3 : Scr
  * ```
  */
 internal object LilycoveCity_ContestHall_EventScript_CuteContestMC : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LilycoveCity_ContestHall_EventScript_CuteContestMC")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity_ContestHall.InTheMiddleOfContest)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -380,12 +456,16 @@ internal object LilycoveCity_ContestHall_EventScript_CuteContestMC : Script {
  * ```
  */
 internal object LilycoveCity_ContestHall_EventScript_CuteContestJudge : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LilycoveCity_ContestHall_EventScript_CuteContestJudge")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity_ContestHall.SuchCharmingCuteAppeals)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -398,12 +478,16 @@ internal object LilycoveCity_ContestHall_EventScript_CuteContestJudge : Script {
  * ```
  */
 internal object LilycoveCity_ContestHall_EventScript_CuteContestant1 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LilycoveCity_ContestHall_EventScript_CuteContestant1")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity_ContestHall.MyAzurillWasDistracted)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -416,12 +500,16 @@ internal object LilycoveCity_ContestHall_EventScript_CuteContestant1 : Script {
  * ```
  */
 internal object LilycoveCity_ContestHall_EventScript_CuteContestant2 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LilycoveCity_ContestHall_EventScript_CuteContestant2")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity_ContestHall.NeverWonBattleButContest)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -434,12 +522,16 @@ internal object LilycoveCity_ContestHall_EventScript_CuteContestant2 : Script {
  * ```
  */
 internal object LilycoveCity_ContestHall_EventScript_CuteContestant3 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LilycoveCity_ContestHall_EventScript_CuteContestant3")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity_ContestHall.PetalDanceIsMarvel)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -452,8 +544,12 @@ internal object LilycoveCity_ContestHall_EventScript_CuteContestant3 : Script {
  * ```
  */
 internal object LilycoveCity_ContestHall_EventScript_CuteContestant4 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LilycoveCity_ContestHall_EventScript_CuteContestant4")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity_ContestHall.MyMonAppealSoMuchCuter)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 /**
@@ -478,7 +574,7 @@ internal object LilycoveCity_ContestHall_EventScript_CuteContestAudience1 : Scri
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -491,12 +587,16 @@ internal object LilycoveCity_ContestHall_EventScript_CuteContestAudience1 : Scri
  * ```
  */
 internal object LilycoveCity_ContestHall_EventScript_CuteContestAudience3 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LilycoveCity_ContestHall_EventScript_CuteContestAudience3")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity_ContestHall.ThatGirlThereIsCutest)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -509,8 +609,12 @@ internal object LilycoveCity_ContestHall_EventScript_CuteContestAudience3 : Scri
  * ```
  */
 internal object LilycoveCity_ContestHall_EventScript_CuteContestAudience2 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LilycoveCity_ContestHall_EventScript_CuteContestAudience2")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity_ContestHall.WantCuteMonOfMyOwn)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 internal object LilycoveCity_ContestHall_EventScript_Sailor : Script {

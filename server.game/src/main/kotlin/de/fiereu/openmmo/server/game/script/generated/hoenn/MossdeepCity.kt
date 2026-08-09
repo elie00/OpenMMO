@@ -62,7 +62,7 @@ internal object MossdeepCity_EventScript_ItemNetBall : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -74,7 +74,12 @@ internal object MossdeepCity_EventScript_ItemNetBall : Script {
  * ```
  */
 internal object MossdeepCity_EventScript_Man : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MossdeepCity_EventScript_Man")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MossdeepCity.SurfExhilarating)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 internal object MossdeepCity_EventScript_Woman : Script {

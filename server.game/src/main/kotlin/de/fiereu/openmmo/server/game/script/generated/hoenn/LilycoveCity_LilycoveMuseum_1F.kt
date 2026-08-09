@@ -54,7 +54,7 @@ internal object LilycoveCity_LilycoveMuseum_1F_EventScript_Woman2 : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -67,8 +67,12 @@ internal object LilycoveCity_LilycoveMuseum_1F_EventScript_Woman2 : Script {
  * ```
  */
 internal object LilycoveCity_LilycoveMuseum_1F_EventScript_Artist2 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port LilycoveCity_LilycoveMuseum_1F_EventScript_Artist2")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity_LilycoveMuseum_1F.AimToSeeGreatPaintings)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 internal object LilycoveCity_LilycoveMuseum_1F_EventScript_FatMan : Script {

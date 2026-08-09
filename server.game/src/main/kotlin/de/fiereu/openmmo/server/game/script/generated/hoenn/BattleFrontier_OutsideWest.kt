@@ -196,7 +196,7 @@ internal object BattleFrontier_OutsideWest_EventScript_OldMan : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -209,8 +209,12 @@ internal object BattleFrontier_OutsideWest_EventScript_OldMan : Script {
  * ```
  */
 internal object BattleFrontier_OutsideWest_EventScript_Man4 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port BattleFrontier_OutsideWest_EventScript_Man4")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(BattleFrontier_OutsideWest.FansOverThereUsedToBeTrainers)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 internal object BattleFrontier_OutsideWest_EventScript_PokefanF : Script {

@@ -11,7 +11,7 @@ internal object CeladonCity_EventScript_RocketGrunt1 : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -24,7 +24,12 @@ internal object CeladonCity_EventScript_RocketGrunt1 : Script {
  * ```
  */
 internal object CeladonCity_EventScript_FatMan : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port CeladonCity_EventScript_FatMan")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(CeladonCity.MyTrustedPalPoliwrath)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 /**

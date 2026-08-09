@@ -225,7 +225,7 @@ internal object Route110_EventScript_ChallengeGuy : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -237,11 +237,16 @@ internal object Route110_EventScript_ChallengeGuy : Script {
  * ```
  */
 internal object Route110_EventScript_AquaGrunt1 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route110_EventScript_AquaGrunt1")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route110.WeCantTalkAboutAquaActivities)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -253,11 +258,16 @@ internal object Route110_EventScript_AquaGrunt1 : Script {
  * ```
  */
 internal object Route110_EventScript_AquaGrunt2 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route110_EventScript_AquaGrunt2")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route110.KickUpARuckus)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -269,11 +279,16 @@ internal object Route110_EventScript_AquaGrunt2 : Script {
  * ```
  */
 internal object Route110_EventScript_AquaGrunt3 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route110_EventScript_AquaGrunt3")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route110.MyFirstJobInAqua)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -285,7 +300,12 @@ internal object Route110_EventScript_AquaGrunt3 : Script {
  * ```
  */
 internal object Route110_EventScript_AquaGrunt4 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route110_EventScript_AquaGrunt4")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route110.AquaActionsBringSmiles)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 /**

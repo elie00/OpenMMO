@@ -96,6 +96,27 @@ class TrainerBattleFormTest :
         TrainerBattleForm.parse(emptyList()) shouldBe null
       }
 
+      test("reads a message followed by the npc turning back, and nothing else") {
+        FacingDialogueForm.parse(
+                listOf(
+                    "msgbox ViridianCity_School_Text_ReadBlackboardCarefully",
+                    "applymovement LOCALID_SCHOOL_WOMAN, Common_Movement_FaceOriginalDirection",
+                    "waitmovement 0"))
+            ?.textLabel shouldBe "ViridianCity_School_Text_ReadBlackboardCarefully"
+
+        // Any other movement template is a real cutscene step, not a cosmetic turn back.
+        FacingDialogueForm.parse(
+            listOf(
+                "msgbox A_Text_X",
+                "applymovement LOCALID_A, Common_Movement_WalkInPlaceFasterUp",
+                "waitmovement 0")) shouldBe null
+
+        FacingDialogueForm.parse(
+            listOf(
+                "msgbox A_Text_X",
+                "applymovement LOCALID_A, Common_Movement_FaceOriginalDirection")) shouldBe null
+      }
+
       test("reads a bare finditem and refuses every richer form") {
         FindItemForm.parse(listOf("finditem ITEM_PP_UP", "end"))?.item shouldBe "ITEM_PP_UP"
 

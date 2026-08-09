@@ -210,7 +210,7 @@ internal object Route109_EventScript_Carter : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -223,7 +223,12 @@ internal object Route109_EventScript_Carter : Script {
  * ```
  */
 internal object Route109_EventScript_SandCastleBoy : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route109_EventScript_SandCastleBoy")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(Route109.SandCastleTakingLongTime)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 /**

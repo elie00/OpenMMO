@@ -95,7 +95,7 @@ internal object MossdeepCity_SpaceCenter_2F_EventScript_Grunt7 : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -107,8 +107,12 @@ internal object MossdeepCity_SpaceCenter_2F_EventScript_Grunt7 : Script {
  * ```
  */
 internal object MossdeepCity_SpaceCenter_2F_EventScript_Tabitha : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port MossdeepCity_SpaceCenter_2F_EventScript_Tabitha")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(MossdeepCity_SpaceCenter_2F.WellTakeCareOfYou)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 internal object MossdeepCity_SpaceCenter_2F_EventScript_Maxie : Script {

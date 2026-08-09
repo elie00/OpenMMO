@@ -6,7 +6,7 @@ import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -19,7 +19,12 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object CeruleanCity_EventScript_Policeman : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port CeruleanCity_EventScript_Policeman")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(CeruleanCity.PeopleHereWereRobbed)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 /**
@@ -110,7 +115,7 @@ internal object CeruleanCity_EventScript_Youngster : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -123,7 +128,12 @@ internal object CeruleanCity_EventScript_Youngster : Script {
  * ```
  */
 internal object CeruleanCity_EventScript_Woman : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port CeruleanCity_EventScript_Woman")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(CeruleanCity.WantBrightRedBicycle)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 internal object CeruleanCity_EventScript_CeruleanCaveGuard : Script {

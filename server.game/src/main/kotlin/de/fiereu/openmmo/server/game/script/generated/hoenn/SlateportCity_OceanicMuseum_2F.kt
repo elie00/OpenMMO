@@ -107,7 +107,7 @@ internal object SlateportCity_OceanicMuseum_2F_EventScript_MuseumPatron2 : Scrip
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -120,8 +120,12 @@ internal object SlateportCity_OceanicMuseum_2F_EventScript_MuseumPatron2 : Scrip
  * ```
  */
 internal object SlateportCity_OceanicMuseum_2F_EventScript_MuseumPatron3 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SlateportCity_OceanicMuseum_2F_EventScript_MuseumPatron3")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(SlateportCity_OceanicMuseum_2F.WantToRideSubmarine)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 internal object SlateportCity_OceanicMuseum_2F_EventScript_WaterQualitySample1 : Script {

@@ -54,10 +54,13 @@ class TrainerBattlePorter(private val region: String, decompDir: File) {
     for (stub in stubs) {
       val battle = TrainerBattleForm.parse(stub.decompLines)
       val item = if (battle == null) FindItemForm.parse(stub.decompLines) else null
+      val facing =
+          if (battle == null && item == null) FacingDialogueForm.parse(stub.coreLines) else null
       val rendered =
           when {
             battle != null -> renderTrainerBattle(stub, battle, imports, report)
             item != null -> renderFindItem(stub, item, imports, report)
+            facing != null -> renderFacingDialogue(stub, facing, imports, report)
             else -> {
               report.skippedShape++
               null
@@ -166,6 +169,26 @@ class TrainerBattlePorter(private val region: String, decompDir: File) {
     }
   }
 
+  private fun renderFacingDialogue(
+      stub: Stub,
+      form: FacingDialogueForm,
+      imports: MutableSet<String>,
+      report: Report,
+  ): List<String>? {
+    val text = resolveText(form.textLabel)
+    if (text == null) {
+      report.skippedText++
+      return null
+    }
+    imports += text.import
+    return body(stub) {
+      add("    ctx.say(${text.reference})")
+      add("    // TODO Turn the npc back to the way it was facing")
+      add("    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb")
+      add("    //  for an object event's original facing, so it keeps looking at the player.")
+    }
+  }
+
   /** The shared shell: provenance KDoc, object header, and the run body the caller fills in. */
   private fun body(stub: Stub, lines: MutableList<String>.() -> Unit): List<String> = buildList {
     add("/**")
@@ -221,7 +244,11 @@ class TrainerBattlePorter(private val region: String, decompDir: File) {
       val from: Int,
       val toExclusive: Int,
       val decompLines: List<String>,
-  )
+  ) {
+    /** The decomp body without the commands the runtime already handles. */
+    val coreLines: List<String>
+      get() = decompLines.filter { it.substringBefore(' ') !in FRAMING_COMMANDS }
+  }
 
   /**
    * Finds every block that is both a "not ported yet" KDoc and a `TODO("port X")` body. Requiring
@@ -276,6 +303,19 @@ class TrainerBattlePorter(private val region: String, decompDir: File) {
   }
 
   private companion object {
+    val FRAMING_COMMANDS =
+        setOf(
+            "lock",
+            "lockall",
+            "faceplayer",
+            "release",
+            "releaseall",
+            "closemessage",
+            "waitmessage",
+            "waitbuttonpress",
+            "end",
+            "return",
+        )
     const val FENCE = " * ```"
     const val IMPORT = "import "
     val OBJECT = Regex("""^internal object (\w+) : Script \{$""")
@@ -283,6 +323,28 @@ class TrainerBattlePorter(private val region: String, decompDir: File) {
         Regex("""^ {2}override suspend fun run\(ctx: ScriptContext\) = TODO\("port (\w+)"\)$""")
     const val BODY_WRAPPED_HEAD = "  override suspend fun run(ctx: ScriptContext) ="
     val BODY_WRAPPED_TAIL = Regex("""^ {6}TODO\("port (\w+)"\)$""")
+  }
+}
+
+/**
+ * One message, then the npc turning back to the way it was facing.
+ *
+ * The turn is dropped: there is no verb for an object event's original facing, and the npc simply
+ * stays looking at the player. That is cosmetic, and the alternative is a script that does nothing
+ * at all, so the guide's rule applies: port what you can and name what you left.
+ */
+data class FacingDialogueForm(val textLabel: String) {
+  companion object {
+    private val MESSAGE = Regex("""^msgbox ([A-Za-z0-9_]+)(?:, (MSGBOX_[A-Z_]+))?$""")
+    private val TURN_BACK =
+        Regex("""^applymovement ([A-Za-z0-9_]+), Common_Movement_FaceOriginalDirection$""")
+
+    fun parse(core: List<String>): FacingDialogueForm? {
+      if (core.size != 3 || core[2] != "waitmovement 0") return null
+      val message = MESSAGE.matchEntire(core[0]) ?: return null
+      TURN_BACK.matchEntire(core[1]) ?: return null
+      return FacingDialogueForm(message.groupValues[1])
+    }
   }
 }
 

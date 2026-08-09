@@ -1,5 +1,6 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
+import de.fiereu.openmmo.dialog.generated.hoenn.LilycoveCity_House3
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 
@@ -96,7 +97,7 @@ internal object LilycoveCity_House3_EventScript_GameBoyKid1 : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -109,7 +110,12 @@ internal object LilycoveCity_House3_EventScript_GameBoyKid1 : Script {
  * ```
  */
 internal object LilycoveCity_House3_EventScript_Man : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port LilycoveCity_House3_EventScript_Man")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(LilycoveCity_House3.HappyToHaveQuadruplets)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 internal val LilycoveCity_House3Scripts: Map<String, Script> =

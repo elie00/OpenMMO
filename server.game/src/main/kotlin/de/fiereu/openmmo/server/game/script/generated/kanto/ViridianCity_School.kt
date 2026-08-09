@@ -1,10 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.dialog.generated.kanto.ViridianCity_School
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -17,7 +18,12 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object ViridianCity_School_EventScript_Woman : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port ViridianCity_School_EventScript_Woman")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(ViridianCity_School.ReadBlackboardCarefully)
+    // TODO Turn the npc back to the way it was facing
+    //  The decomp applies Common_Movement_FaceOriginalDirection here. There is no verb
+    //  for an object event's original facing, so it keeps looking at the player.
+  }
 }
 
 /**
