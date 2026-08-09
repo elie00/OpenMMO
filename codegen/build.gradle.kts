@@ -129,8 +129,8 @@ tasks.register<JavaExec>("generateScriptStubs") {
 
 // Ports the trainer battle stubs in place. Run by hand with `gradlew :codegen:portTrainerBattles`.
 // Unlike generateScriptStubs this never deletes a package: it only replaces TODO("port ...") blocks
-// whose decomp body it recognises exactly, so it is safe to run over hand edited sources. Pass
-// `--args=--check` to assert a run would change nothing.
+// whose decomp body it recognises exactly, so it is safe to run over hand edited sources. Add
+// `-PportCheck` to assert a run would change nothing instead of writing.
 tasks.register<JavaExec>("portTrainerBattles") {
   group = "codegen"
   description = "Port the recognised trainer battle stubs (manual, not part of the build)"
@@ -145,4 +145,5 @@ tasks.register<JavaExec>("portTrainerBattles") {
       "hoenn|${sourceDecompDir.asFile.absolutePath}",
       "kanto|${fireredDir.asFile.absolutePath}",
   )
+  if (project.hasProperty("portCheck")) args("--check")
 }
