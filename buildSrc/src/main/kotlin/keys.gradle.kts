@@ -15,7 +15,7 @@ tasks.register<Copy>("copyPrivateKeyChat") {
   group = "openmmo"
   description = "Copy chat keys from \":keys\" to the current projects resources directory"
   from(project(":keys").tasks.getByName("generateChat").outputs.files) {
-    include("*.public.pem")
+    include("*.private.pem")
   }
   into(project.layout.projectDirectory.dir(KEYS_RESOURCE_LOCATION))
 }

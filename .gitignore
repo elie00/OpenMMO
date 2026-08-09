@@ -47,3 +47,8 @@ bin/
 .env.*
 !.env.example
 docker-compose.override.yml
+
+# Database migrations are source code. Keep them visible even when a developer's
+# global gitignore excludes SQL files.
+!server.game/src/main/resources/db/migration/*.sql
+!server.login/src/main/resources/db/migration/*.sql
