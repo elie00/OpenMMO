@@ -3,6 +3,7 @@ package de.fiereu.openmmo.server.game.script.generated.kanto
 import de.fiereu.openmmo.dialog.generated.kanto.SaffronCity_PokemonCenter_1F
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoVars
 
 /**
  * Not ported yet. Decomp body:
@@ -30,7 +31,7 @@ internal object SaffronCity_PokemonCenter_1F_EventScript_Woman : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -41,8 +42,11 @@ internal object SaffronCity_PokemonCenter_1F_EventScript_Woman : Script {
  * ```
  */
 internal object SaffronCity_PokemonCenter_1F_EventScript_Youngster : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SaffronCity_PokemonCenter_1F_EventScript_Youngster")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.getVar(KantoVars.VAR_MAP_SCENE_SILPH_CO_11F) == 1)
+        return SaffronCity_PokemonCenter_1F_EventScript_YoungsterRocketsGone.run(ctx)
+    ctx.say(SaffronCity_PokemonCenter_1F.GreatIfEliteFourCameBeatRockets)
+  }
 }
 
 /**
@@ -62,6 +66,19 @@ internal object SaffronCity_PokemonCenter_1F_EventScript_PokemonJournalSabrina :
       TODO("port SaffronCity_PokemonCenter_1F_EventScript_PokemonJournalSabrina")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox SaffronCity_PokemonCenter_1F_Text_TeamRocketTookOff
+ * release
+ * end
+ * ```
+ */
+internal object SaffronCity_PokemonCenter_1F_EventScript_YoungsterRocketsGone : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SaffronCity_PokemonCenter_1F_EventScript_YoungsterRocketsGone")
+}
+
 internal val SaffronCity_PokemonCenter_1FScripts: Map<String, Script> =
     mapOf(
         "SaffronCity_PokemonCenter_1F_EventScript_Nurse" to
@@ -74,4 +91,6 @@ internal val SaffronCity_PokemonCenter_1FScripts: Map<String, Script> =
             SaffronCity_PokemonCenter_1F_EventScript_Youngster,
         "SaffronCity_PokemonCenter_1F_EventScript_PokemonJournalSabrina" to
             SaffronCity_PokemonCenter_1F_EventScript_PokemonJournalSabrina,
+        "SaffronCity_PokemonCenter_1F_EventScript_YoungsterRocketsGone" to
+            SaffronCity_PokemonCenter_1F_EventScript_YoungsterRocketsGone,
     )

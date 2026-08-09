@@ -236,6 +236,8 @@ class TrainerBattlePorter(private val region: String, decompDir: File) {
         when (form) {
           is JumpForm.BranchOnFlag -> resolveText(form.textLabel)
           is JumpForm.MessageThenJump -> resolveText(form.textLabel)
+          is JumpForm.BranchOnVar -> resolveText(form.textLabel)
+          is JumpForm.CallAndMessage -> resolveText(form.textLabel)
           is JumpForm.SetVarThenJump -> null
         }
     val body =
@@ -273,6 +275,31 @@ class TrainerBattlePorter(private val region: String, decompDir: File) {
             }
             imports += text.import
             listOf("    ctx.say(${text.reference})", "    return ${form.target}.run(ctx)")
+          }
+          is JumpForm.BranchOnVar -> {
+            if (form.varName !in varNames || text == null) {
+              report.skippedJump++
+              return null
+            }
+            imports += "de.fiereu.openmmo.story.generated.$region.$varsObject"
+            imports += text.import
+            val op = if (form.negated) "!=" else "=="
+            listOf(
+                "    if (ctx.getVar($varsObject.${form.varName}) $op ${form.value})" +
+                    " return ${form.target}.run(ctx)",
+                "    ctx.say(${text.reference})",
+            )
+          }
+          is JumpForm.CallAndMessage -> {
+            if (text == null) {
+              report.skippedJump++
+              return null
+            }
+            imports += text.import
+            // call comes back, so this is a plain call and the message still runs.
+            if (form.callFirst)
+                listOf("    ${form.target}.run(ctx)", "    ctx.say(${text.reference})")
+            else listOf("    ctx.say(${text.reference})", "    ${form.target}.run(ctx)")
           }
         }
     return body(stub) { addAll(body) }
@@ -542,11 +569,30 @@ sealed interface JumpForm {
   /** A message then `goto Label`. */
   data class MessageThenJump(val textLabel: String, override val target: String) : JumpForm
 
+  /** `goto_if_eq VAR, n, Label` (or `goto_if_ne`) then a message for the other branch. */
+  data class BranchOnVar(
+      val varName: String,
+      val value: String,
+      override val target: String,
+      val textLabel: String,
+      val negated: Boolean,
+  ) : JumpForm
+
+  /** `call Label` then a message, or a message then `call Label`. The call comes back. */
+  data class CallAndMessage(
+      override val target: String,
+      val textLabel: String,
+      val callFirst: Boolean,
+  ) : JumpForm
+
   companion object {
     private val SETVAR = Regex("""^setvar (VAR_[A-Z0-9_]+), (-?\d+|[A-Z][A-Z0-9_]*)$""")
     private val GOTO = Regex("""^goto ([A-Za-z]\w*)$""")
     private val GOTO_IF_FLAG = Regex("""^goto_if_(set|unset) (FLAG_[A-Z0-9_]+), ([A-Za-z]\w*)$""")
     private val MESSAGE = Regex("""^msgbox ([A-Za-z0-9_]+)(?:, (MSGBOX_[A-Z_]+))?$""")
+    private val GOTO_IF_VAR =
+        Regex("""^goto_if_(eq|ne) (VAR_[A-Z0-9_]+), (-?\d+), ([A-Za-z]\w*)$""")
+    private val CALL = Regex("""^call ([A-Za-z]\w*)$""")
 
     fun parse(core: List<String>): JumpForm? {
       if (core.size != 2) return null
@@ -563,9 +609,27 @@ sealed interface JumpForm {
             negated = branch.groupValues[1] == "unset",
         )
       }
+      GOTO_IF_VAR.matchEntire(core[0])?.let { branch ->
+        val message = MESSAGE.matchEntire(core[1]) ?: return null
+        return BranchOnVar(
+            branch.groupValues[2],
+            branch.groupValues[3],
+            branch.groupValues[4],
+            message.groupValues[1],
+            negated = branch.groupValues[1] == "ne",
+        )
+      }
+      CALL.matchEntire(core[0])?.let { call ->
+        val message = MESSAGE.matchEntire(core[1]) ?: return null
+        return CallAndMessage(call.groupValues[1], message.groupValues[1], callFirst = true)
+      }
       MESSAGE.matchEntire(core[0])?.let { message ->
-        val jump = GOTO.matchEntire(core[1]) ?: return null
-        return MessageThenJump(message.groupValues[1], jump.groupValues[1])
+        GOTO.matchEntire(core[1])?.let {
+          return MessageThenJump(message.groupValues[1], it.groupValues[1])
+        }
+        CALL.matchEntire(core[1])?.let {
+          return CallAndMessage(it.groupValues[1], message.groupValues[1], callFirst = false)
+        }
       }
       return null
     }

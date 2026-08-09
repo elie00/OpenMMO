@@ -1,9 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.hoenn
 
+import de.fiereu.openmmo.dialog.generated.hoenn.NewMauville_Inside
 import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
+import de.fiereu.openmmo.story.generated.hoenn.HoennVars
 
 /**
  * Ported from the decomp:
@@ -152,7 +154,7 @@ internal object NewMauville_Inside_EventScript_Voltorb3 : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lockall
  * goto_if_eq VAR_NEW_MAUVILLE_STATE, 2, NewMauville_Inside_EventScript_GeneratorOff
@@ -162,8 +164,24 @@ internal object NewMauville_Inside_EventScript_Voltorb3 : Script {
  * ```
  */
 internal object NewMauville_Inside_EventScript_Generator : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.getVar(HoennVars.VAR_NEW_MAUVILLE_STATE) == 2)
+        return NewMauville_Inside_EventScript_GeneratorOff.run(ctx)
+    ctx.say(NewMauville_Inside.GeneratorRadiatingHeat)
+  }
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox NewMauville_Inside_Text_GeneratorQuietedDown, MSGBOX_DEFAULT
+ * releaseall
+ * end
+ * ```
+ */
+internal object NewMauville_Inside_EventScript_GeneratorOff : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port NewMauville_Inside_EventScript_Generator")
+      TODO("port NewMauville_Inside_EventScript_GeneratorOff")
 }
 
 internal val NewMauville_InsideScripts: Map<String, Script> =
@@ -182,4 +200,6 @@ internal val NewMauville_InsideScripts: Map<String, Script> =
         "NewMauville_Inside_EventScript_Voltorb2" to NewMauville_Inside_EventScript_Voltorb2,
         "NewMauville_Inside_EventScript_Voltorb3" to NewMauville_Inside_EventScript_Voltorb3,
         "NewMauville_Inside_EventScript_Generator" to NewMauville_Inside_EventScript_Generator,
+        "NewMauville_Inside_EventScript_GeneratorOff" to
+            NewMauville_Inside_EventScript_GeneratorOff,
     )

@@ -4,9 +4,10 @@ import de.fiereu.openmmo.dialog.generated.hoenn.SlateportCity
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
+import de.fiereu.openmmo.story.generated.hoenn.HoennVars
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * goto_if_eq VAR_SLATEPORT_CITY_STATE, 1, SlateportCity_EventScript_FatManSternInterview
  * msgbox SlateportCity_Text_BushedHikingFromMauville, MSGBOX_NPC
@@ -14,7 +15,11 @@ import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
  * ```
  */
 internal object SlateportCity_EventScript_FatMan : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SlateportCity_EventScript_FatMan")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.getVar(HoennVars.VAR_SLATEPORT_CITY_STATE) == 1)
+        return SlateportCity_EventScript_FatManSternInterview.run(ctx)
+    ctx.say(SlateportCity.BushedHikingFromMauville)
+  }
 }
 
 /**
@@ -674,6 +679,18 @@ internal object SlateportCity_EventScript_Woman1AquaGone : Script {
       TODO("port SlateportCity_EventScript_Woman1AquaGone")
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox SlateportCity_Text_AmIOnTV, MSGBOX_SIGN
+ * end
+ * ```
+ */
+internal object SlateportCity_EventScript_FatManSternInterview : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SlateportCity_EventScript_FatManSternInterview")
+}
+
 internal val SlateportCityScripts: Map<String, Script> =
     mapOf(
         "SlateportCity_EventScript_FatMan" to SlateportCity_EventScript_FatMan,
@@ -728,4 +745,6 @@ internal val SlateportCityScripts: Map<String, Script> =
         "SlateportCity_EventScript_HarborSignFerryComplete" to
             SlateportCity_EventScript_HarborSignFerryComplete,
         "SlateportCity_EventScript_Woman1AquaGone" to SlateportCity_EventScript_Woman1AquaGone,
+        "SlateportCity_EventScript_FatManSternInterview" to
+            SlateportCity_EventScript_FatManSternInterview,
     )

@@ -3,13 +3,14 @@ package de.fiereu.openmmo.server.game.script.generated.kanto
 import de.fiereu.openmmo.dialog.generated.kanto.VermilionCity
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoVars
 
 internal object VermilionCity_EventScript_Woman : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.say(VermilionCity.GrimerMultipliesInSludge)
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -20,7 +21,11 @@ internal object VermilionCity_EventScript_Woman : Script {
  * ```
  */
 internal object VermilionCity_EventScript_OldMan1 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port VermilionCity_EventScript_OldMan1")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.getVar(KantoVars.VAR_MAP_SCENE_VERMILION_CITY) == 3)
+        return VermilionCity_EventScript_OldMan1SSAnneLeft.run(ctx)
+    ctx.say(VermilionCity.DidYouSeeSSAnneInHarbor)
+  }
 }
 
 internal object VermilionCity_EventScript_OldMan2 : Script {
@@ -50,7 +55,7 @@ internal object VermilionCity_EventScript_Sailor : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -61,7 +66,11 @@ internal object VermilionCity_EventScript_Sailor : Script {
  * ```
  */
 internal object VermilionCity_EventScript_FerrySailor : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port VermilionCity_EventScript_FerrySailor")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.getVar(KantoVars.VAR_MAP_SCENE_VERMILION_CITY) == 3)
+        return VermilionCity_EventScript_CheckSeagallopPresent.run(ctx)
+    ctx.say(VermilionCity.WelcomeToTheSSAnne)
+  }
 }
 
 /**
@@ -109,6 +118,35 @@ internal object VermilionCity_EventScript_SnorlaxNotice : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(VermilionCity.SnorlaxBlockingRoute12)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox VermilionCity_Text_SSAnneHasDepartedForYear
+ * release
+ * end
+ * ```
+ */
+internal object VermilionCity_EventScript_OldMan1SSAnneLeft : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port VermilionCity_EventScript_OldMan1SSAnneLeft")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * setvar VAR_0x8004, SEAGALLOP_VERMILION_CITY
+ * goto_if_ge VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 5, VermilionCity_EventScript_ChooseSeagallopDestRainbowPass
+ * goto_if_ge VAR_MAP_SCENE_ONE_ISLAND_POKEMON_CENTER_1F, 1, VermilionCity_EventScript_ChooseSeagallopDestTriPass
+ * msgbox VermilionCity_Text_TheShipSetSail
+ * release
+ * end
+ * ```
+ */
+internal object VermilionCity_EventScript_CheckSeagallopPresent : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port VermilionCity_EventScript_CheckSeagallopPresent")
+}
+
 internal val VermilionCityScripts: Map<String, Script> =
     mapOf(
         "VermilionCity_EventScript_Woman" to VermilionCity_EventScript_Woman,
@@ -124,4 +162,8 @@ internal val VermilionCityScripts: Map<String, Script> =
         "VermilionCity_EventScript_GymSign" to VermilionCity_EventScript_GymSign,
         "VermilionCity_EventScript_HarborSign" to VermilionCity_EventScript_HarborSign,
         "VermilionCity_EventScript_SnorlaxNotice" to VermilionCity_EventScript_SnorlaxNotice,
+        "VermilionCity_EventScript_OldMan1SSAnneLeft" to
+            VermilionCity_EventScript_OldMan1SSAnneLeft,
+        "VermilionCity_EventScript_CheckSeagallopPresent" to
+            VermilionCity_EventScript_CheckSeagallopPresent,
     )

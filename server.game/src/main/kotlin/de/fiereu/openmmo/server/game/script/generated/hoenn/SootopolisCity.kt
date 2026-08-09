@@ -3,6 +3,7 @@ package de.fiereu.openmmo.server.game.script.generated.hoenn
 import de.fiereu.openmmo.dialog.generated.hoenn.SootopolisCity
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennVars
 
 /**
  * Not ported yet. Decomp body:
@@ -235,7 +236,7 @@ internal object SootopolisCity_EventScript_Boy2 : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lockall
  * goto_if_eq VAR_SOOTOPOLIS_CITY_STATE, 5, SootopolisCity_EventScript_MaxieRayquaza
@@ -246,11 +247,15 @@ internal object SootopolisCity_EventScript_Boy2 : Script {
  * ```
  */
 internal object SootopolisCity_EventScript_Maxie : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SootopolisCity_EventScript_Maxie")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.getVar(HoennVars.VAR_SOOTOPOLIS_CITY_STATE) == 5)
+        return SootopolisCity_EventScript_MaxieRayquaza.run(ctx)
+    ctx.say(SootopolisCity.GroudonPleaseStop)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lockall
  * goto_if_eq VAR_SOOTOPOLIS_CITY_STATE, 5, SootopolisCity_EventScript_ArchieRayquaza
@@ -261,7 +266,11 @@ internal object SootopolisCity_EventScript_Maxie : Script {
  * ```
  */
 internal object SootopolisCity_EventScript_Archie : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SootopolisCity_EventScript_Archie")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.getVar(HoennVars.VAR_SOOTOPOLIS_CITY_STATE) == 5)
+        return SootopolisCity_EventScript_ArchieRayquaza.run(ctx)
+    ctx.say(SootopolisCity.KyogreCalmDown)
+  }
 }
 
 /**
@@ -289,6 +298,36 @@ internal object SootopolisCity_EventScript_CitySign : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(SootopolisCity.CitySign)
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox SootopolisCity_Text_AfterAllOurScheming, MSGBOX_DEFAULT
+ * setflag FLAG_MET_MAXIE_SOOTOPOLIS
+ * goto_if_set FLAG_MET_ARCHIE_SOOTOPOLIS, SootopolisCity_EventScript_MaxieArchieLeave
+ * releaseall
+ * end
+ * ```
+ */
+internal object SootopolisCity_EventScript_MaxieRayquaza : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SootopolisCity_EventScript_MaxieRayquaza")
+}
+
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox SootopolisCity_Text_TryingMeaninglessToPokemon, MSGBOX_DEFAULT
+ * setflag FLAG_MET_ARCHIE_SOOTOPOLIS
+ * goto_if_set FLAG_MET_MAXIE_SOOTOPOLIS, SootopolisCity_EventScript_MaxieArchieLeave
+ * releaseall
+ * end
+ * ```
+ */
+internal object SootopolisCity_EventScript_ArchieRayquaza : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port SootopolisCity_EventScript_ArchieRayquaza")
+}
+
 internal val SootopolisCityScripts: Map<String, Script> =
     mapOf(
         "SootopolisCity_EventScript_CaveOfOriginExpert" to
@@ -309,4 +348,6 @@ internal val SootopolisCityScripts: Map<String, Script> =
         "SootopolisCity_EventScript_Wallace" to SootopolisCity_EventScript_Wallace,
         "SootopolisCity_EventScript_GymSign" to SootopolisCity_EventScript_GymSign,
         "SootopolisCity_EventScript_CitySign" to SootopolisCity_EventScript_CitySign,
+        "SootopolisCity_EventScript_MaxieRayquaza" to SootopolisCity_EventScript_MaxieRayquaza,
+        "SootopolisCity_EventScript_ArchieRayquaza" to SootopolisCity_EventScript_ArchieRayquaza,
     )

@@ -4,6 +4,7 @@ import de.fiereu.openmmo.dialog.generated.hoenn.MossdeepCity_SpaceCenter_1F
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.hoenn.HoennVars
 import de.fiereu.openmmo.trainer.generated.HoennTrainers
 
 /**
@@ -30,7 +31,7 @@ internal object MossdeepCity_SpaceCenter_1F_EventScript_RocketLaunchCounter : Sc
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * lock
  * faceplayer
@@ -41,8 +42,11 @@ internal object MossdeepCity_SpaceCenter_1F_EventScript_RocketLaunchCounter : Sc
  * ```
  */
 internal object MossdeepCity_SpaceCenter_1F_EventScript_Scientist : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port MossdeepCity_SpaceCenter_1F_EventScript_Scientist")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.getVar(HoennVars.VAR_MOSSDEEP_CITY_STATE) == 2)
+        return MossdeepCity_SpaceCenter_1F_EventScript_ScientistMagma.run(ctx)
+    ctx.say(MossdeepCity_SpaceCenter_1F.RocketLaunchDemandsPerfection)
+  }
 }
 
 /**
@@ -215,6 +219,21 @@ internal object MossdeepCity_SpaceCenter_1F_EventScript_Steven : Script {
   }
 }
 
+/**
+ * Not ported yet. Decomp body:
+ * ```
+ * msgbox MossdeepCity_SpaceCenter_1F_Text_MagmaHaveSightsOnSpaceCenter, MSGBOX_DEFAULT
+ * applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterRight
+ * waitmovement 0
+ * release
+ * end
+ * ```
+ */
+internal object MossdeepCity_SpaceCenter_1F_EventScript_ScientistMagma : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      TODO("port MossdeepCity_SpaceCenter_1F_EventScript_ScientistMagma")
+}
+
 internal val MossdeepCity_SpaceCenter_1FScripts: Map<String, Script> =
     mapOf(
         "MossdeepCity_SpaceCenter_1F_EventScript_RocketLaunchCounter" to
@@ -239,4 +258,6 @@ internal val MossdeepCity_SpaceCenter_1FScripts: Map<String, Script> =
             MossdeepCity_SpaceCenter_1F_EventScript_MagmaNote,
         "MossdeepCity_SpaceCenter_1F_EventScript_Steven" to
             MossdeepCity_SpaceCenter_1F_EventScript_Steven,
+        "MossdeepCity_SpaceCenter_1F_EventScript_ScientistMagma" to
+            MossdeepCity_SpaceCenter_1F_EventScript_ScientistMagma,
     )
