@@ -1,7 +1,10 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.dialog.generated.kanto.FiveIsland_WaterLabyrinth
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
  * Not ported yet. Decomp body:
@@ -26,7 +29,7 @@ internal object FiveIsland_WaterLabyrinth_EventScript_EggGentleman : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_PKMN_BREEDER_ALIZE, FiveIsland_WaterLabyrinth_Text_AlizeIntro, FiveIsland_WaterLabyrinth_Text_AlizeDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -36,8 +39,18 @@ internal object FiveIsland_WaterLabyrinth_EventScript_EggGentleman : Script {
  * ```
  */
 internal object FiveIsland_WaterLabyrinth_EventScript_Alize : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port FiveIsland_WaterLabyrinth_EventScript_Alize")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_PKMN_BREEDER_ALIZE
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (FiveIsland_WaterLabyrinth_EventScript_AlizeRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(FiveIsland_WaterLabyrinth.AlizePostBattle)
+    }
+    ctx.say(FiveIsland_WaterLabyrinth.AlizeIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(FiveIsland_WaterLabyrinth.AlizeDefeat)
+  }
 }
 
 internal val FiveIsland_WaterLabyrinthScripts: Map<String, Script> =

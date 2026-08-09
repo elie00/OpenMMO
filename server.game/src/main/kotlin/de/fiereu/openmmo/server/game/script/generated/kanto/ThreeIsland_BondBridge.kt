@@ -1,11 +1,13 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.ThreeIsland_BondBridge
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_AROMA_LADY_NIKKI, ThreeIsland_BondBridge_Text_NikkiIntro, ThreeIsland_BondBridge_Text_NikkiDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -15,12 +17,22 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object ThreeIsland_BondBridge_EventScript_Nikki : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port ThreeIsland_BondBridge_EventScript_Nikki")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_AROMA_LADY_NIKKI
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (ThreeIsland_BondBridge_EventScript_NikkiRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(ThreeIsland_BondBridge.NikkiPostBattle)
+    }
+    ctx.say(ThreeIsland_BondBridge.NikkiIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(ThreeIsland_BondBridge.NikkiDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_AROMA_LADY_VIOLET, ThreeIsland_BondBridge_Text_VioletIntro, ThreeIsland_BondBridge_Text_VioletDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -30,12 +42,22 @@ internal object ThreeIsland_BondBridge_EventScript_Nikki : Script {
  * ```
  */
 internal object ThreeIsland_BondBridge_EventScript_Violet : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port ThreeIsland_BondBridge_EventScript_Violet")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_AROMA_LADY_VIOLET
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (ThreeIsland_BondBridge_EventScript_VioletRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(ThreeIsland_BondBridge.VioletPostBattle)
+    }
+    ctx.say(ThreeIsland_BondBridge.VioletIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(ThreeIsland_BondBridge.VioletDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_TUBER_AMIRA, ThreeIsland_BondBridge_Text_AmiraIntro, ThreeIsland_BondBridge_Text_AmiraDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -45,12 +67,22 @@ internal object ThreeIsland_BondBridge_EventScript_Violet : Script {
  * ```
  */
 internal object ThreeIsland_BondBridge_EventScript_Amira : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port ThreeIsland_BondBridge_EventScript_Amira")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_TUBER_AMIRA
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (ThreeIsland_BondBridge_EventScript_AmiraRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(ThreeIsland_BondBridge.AmiraPostBattle)
+    }
+    ctx.say(ThreeIsland_BondBridge.AmiraIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(ThreeIsland_BondBridge.AmiraDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_TUBER_ALEXIS, ThreeIsland_BondBridge_Text_AlexisIntro, ThreeIsland_BondBridge_Text_AlexisDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -60,12 +92,22 @@ internal object ThreeIsland_BondBridge_EventScript_Amira : Script {
  * ```
  */
 internal object ThreeIsland_BondBridge_EventScript_Alexis : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port ThreeIsland_BondBridge_EventScript_Alexis")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_TUBER_ALEXIS
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (ThreeIsland_BondBridge_EventScript_AlexisRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(ThreeIsland_BondBridge.AlexisPostBattle)
+    }
+    ctx.say(ThreeIsland_BondBridge.AlexisIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(ThreeIsland_BondBridge.AlexisDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_SWIMMER_FEMALE_TISHA, ThreeIsland_BondBridge_Text_TishaIntro, ThreeIsland_BondBridge_Text_TishaDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -75,8 +117,18 @@ internal object ThreeIsland_BondBridge_EventScript_Alexis : Script {
  * ```
  */
 internal object ThreeIsland_BondBridge_EventScript_Tisha : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port ThreeIsland_BondBridge_EventScript_Tisha")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_SWIMMER_FEMALE_TISHA
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (ThreeIsland_BondBridge_EventScript_TishaRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(ThreeIsland_BondBridge.TishaPostBattle)
+    }
+    ctx.say(ThreeIsland_BondBridge.TishaIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(ThreeIsland_BondBridge.TishaDefeat)
+  }
 }
 
 /**

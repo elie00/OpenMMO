@@ -2,16 +2,18 @@ package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.Route4
 import de.fiereu.openmmo.items.generated.Items
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 import de.fiereu.openmmo.story.generated.kanto.KantoFlags
+import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 internal object Route4_EventScript_Woman : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.say(Route4.TrippedOverGeodude)
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_LASS_CRISSY, Route4_Text_CrissyIntro, Route4_Text_CrissyDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -21,7 +23,18 @@ internal object Route4_EventScript_Woman : Script {
  * ```
  */
 internal object Route4_EventScript_Crissy : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route4_EventScript_Crissy")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_LASS_CRISSY
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (Route4_EventScript_CrissyRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(Route4.CrissyPostBattle)
+    }
+    ctx.say(Route4.CrissyIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route4.CrissyDefeat)
+  }
 }
 
 /**

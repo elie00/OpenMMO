@@ -7,8 +7,8 @@ import de.fiereu.openmmo.codegen.trainer.TrainerParser
 import java.io.File
 
 /**
- * Ports the one decomp shape that maps cleanly onto the runtime we have: a single trainer battle
- * followed by one autoclose message.
+ * Ports the decomp shapes that map cleanly onto the runtime we have: a single trainer battle
+ * followed by one message, and an item lying on the map.
  *
  * This is deliberately not the stub generator. That one deletes a region package and re-emits it,
  * which destroys hand written ports. This one only ever replaces `TODO("port X")` blocks whose
@@ -128,6 +128,11 @@ class TrainerBattlePorter(private val region: String, decompDir: File) {
     return body(stub) {
       add("    val trainerId = $trainersObject.${form.trainer}")
       add("    if (ctx.hasBeatenTrainer(trainerId)) {")
+      form.skippedRematch?.let {
+        add("      // TODO Offer the rematch ($it)")
+        add("      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and")
+        add("      //  no VS Seeker, so this takes the branch a fresh save takes.")
+      }
       add("      return ctx.say(${post.reference})")
       add("    }")
       add("    ctx.say(${intro.reference})")
@@ -302,24 +307,59 @@ data class TrainerBattleForm(
     val trainer: String,
     /** Intro, defeat, and post battle labels, in that order. */
     val textLabels: List<String>,
+    /** The rematch script this skips, when the decomp offered one. */
+    val skippedRematch: String? = null,
 ) {
   companion object {
+    /** Commands that only frame a script; the runtime already does what they do. */
+    private val FRAMING =
+        setOf(
+            "lock",
+            "lockall",
+            "faceplayer",
+            "release",
+            "releaseall",
+            "closemessage",
+            "waitmessage",
+            "waitbuttonpress",
+            "end",
+            "return",
+        )
     private val SINGLE =
         Regex("""^trainerbattle_single (TRAINER_[A-Z0-9_]+), ([A-Za-z0-9_]+), ([A-Za-z0-9_]+)$""")
-    private val AUTOCLOSE = Regex("""^msgbox ([A-Za-z0-9_]+), MSGBOX_AUTOCLOSE$""")
+    // Both types wait for the player here. Autoclose closes the box itself in the source game,
+    // which the runtime has no verb for, and the guide already maps every other type onto ctx.say.
+    private val MESSAGE = Regex("""^msgbox ([A-Za-z0-9_]+), (MSGBOX_AUTOCLOSE|MSGBOX_DEFAULT)$""")
+    private const val REMATCH_CHECK = "specialvar VAR_RESULT, ShouldTryRematchBattle"
+    private val REMATCH_JUMP = Regex("""^goto_if_eq VAR_RESULT, TRUE, ([A-Za-z0-9_]+)$""")
 
     /**
-     * Matches only the exact three line body. Anything else, a fourth argument, a rematch check, a
-     * double battle, an extra command, is left to a human: a wrong port silently rewrites game
-     * content, while a skipped one costs nothing.
+     * Matches a single trainer battle followed by one message, with or without the rematch check in
+     * between. Anything else, a fourth argument, a double battle, any other command, is left to a
+     * human: a wrong port silently rewrites game content, a skipped one costs nothing.
+     *
+     * The rematch branch is dropped on purpose. It asks `ShouldTryRematchBattle`, which the server
+     * has no model for and which is false on a save without the VS Seeker, so taking the other
+     * branch is what a fresh game does.
      */
     fun parse(decompLines: List<String>): TrainerBattleForm? {
-      if (decompLines.size != 3 || decompLines[2] != "end") return null
-      val battle = SINGLE.matchEntire(decompLines[0]) ?: return null
-      val message = AUTOCLOSE.matchEntire(decompLines[1]) ?: return null
+      val core = decompLines.filter { it.substringBefore(' ') !in FRAMING }
+      val battle = SINGLE.matchEntire(core.firstOrNull() ?: return null) ?: return null
+      val (rest, rematch) =
+          when (core.size) {
+            2 -> core.drop(1) to null
+            4 -> {
+              if (core[1] != REMATCH_CHECK) return null
+              val jump = REMATCH_JUMP.matchEntire(core[2]) ?: return null
+              core.drop(3) to jump.groupValues[1]
+            }
+            else -> return null
+          }
+      val message = MESSAGE.matchEntire(rest.single()) ?: return null
       return TrainerBattleForm(
           battle.groupValues[1],
           listOf(battle.groupValues[2], battle.groupValues[3], message.groupValues[1]),
+          rematch,
       )
     }
   }

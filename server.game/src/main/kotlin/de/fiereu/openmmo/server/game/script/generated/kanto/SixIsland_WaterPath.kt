@@ -2,12 +2,14 @@ package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.SixIsland_WaterPath
 import de.fiereu.openmmo.items.generated.Items
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 import de.fiereu.openmmo.story.generated.kanto.KantoFlags
+import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_AROMA_LADY_ROSE, SixIsland_WaterPath_Text_RoseIntro, SixIsland_WaterPath_Text_RoseDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -17,11 +19,22 @@ import de.fiereu.openmmo.story.generated.kanto.KantoFlags
  * ```
  */
 internal object SixIsland_WaterPath_EventScript_Rose : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SixIsland_WaterPath_EventScript_Rose")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_AROMA_LADY_ROSE
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (SixIsland_WaterPath_EventScript_RoseRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(SixIsland_WaterPath.RosePostBattle)
+    }
+    ctx.say(SixIsland_WaterPath.RoseIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(SixIsland_WaterPath.RoseDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_JUGGLER_EDWARD, SixIsland_WaterPath_Text_EdwardIntro, SixIsland_WaterPath_Text_EdwardDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -31,11 +44,22 @@ internal object SixIsland_WaterPath_EventScript_Rose : Script {
  * ```
  */
 internal object SixIsland_WaterPath_EventScript_Edward : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SixIsland_WaterPath_EventScript_Edward")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_JUGGLER_EDWARD
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (SixIsland_WaterPath_EventScript_EdwardRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(SixIsland_WaterPath.EdwardPostBattle)
+    }
+    ctx.say(SixIsland_WaterPath.EdwardIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(SixIsland_WaterPath.EdwardDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_SWIMMER_MALE_SAMIR, SixIsland_WaterPath_Text_SamirIntro, SixIsland_WaterPath_Text_SamirDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -45,11 +69,22 @@ internal object SixIsland_WaterPath_EventScript_Edward : Script {
  * ```
  */
 internal object SixIsland_WaterPath_EventScript_Samir : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SixIsland_WaterPath_EventScript_Samir")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_SWIMMER_MALE_SAMIR
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (SixIsland_WaterPath_EventScript_SamirRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(SixIsland_WaterPath.SamirPostBattle)
+    }
+    ctx.say(SixIsland_WaterPath.SamirIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(SixIsland_WaterPath.SamirDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_SWIMMER_FEMALE_DENISE, SixIsland_WaterPath_Text_DeniseIntro, SixIsland_WaterPath_Text_DeniseDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -59,7 +94,18 @@ internal object SixIsland_WaterPath_EventScript_Samir : Script {
  * ```
  */
 internal object SixIsland_WaterPath_EventScript_Denise : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SixIsland_WaterPath_EventScript_Denise")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_SWIMMER_FEMALE_DENISE
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (SixIsland_WaterPath_EventScript_DeniseRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(SixIsland_WaterPath.DenisePostBattle)
+    }
+    ctx.say(SixIsland_WaterPath.DeniseIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(SixIsland_WaterPath.DeniseDefeat)
+  }
 }
 
 /**
@@ -91,7 +137,7 @@ internal object SixIsland_WaterPath_EventScript_Mia : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_HIKER_EARL, SixIsland_WaterPath_Text_EarlIntro, SixIsland_WaterPath_Text_EarlDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -101,7 +147,18 @@ internal object SixIsland_WaterPath_EventScript_Mia : Script {
  * ```
  */
 internal object SixIsland_WaterPath_EventScript_Earl : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SixIsland_WaterPath_EventScript_Earl")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_HIKER_EARL
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (SixIsland_WaterPath_EventScript_EarlRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(SixIsland_WaterPath.EarlPostBattle)
+    }
+    ctx.say(SixIsland_WaterPath.EarlIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(SixIsland_WaterPath.EarlDefeat)
+  }
 }
 
 /**

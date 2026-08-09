@@ -1,9 +1,12 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.dialog.generated.kanto.SixIsland_RuinValley
 import de.fiereu.openmmo.items.generated.Items
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 import de.fiereu.openmmo.story.generated.kanto.KantoFlags
+import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
  * Not ported yet. Decomp body:
@@ -25,7 +28,7 @@ internal object SixIsland_RuinValley_EventScript_Scientist : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_RUIN_MANIAC_STANLY, SixIsland_RuinValley_Text_StanlyIntro, SixIsland_RuinValley_Text_StanlyDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -35,12 +38,22 @@ internal object SixIsland_RuinValley_EventScript_Scientist : Script {
  * ```
  */
 internal object SixIsland_RuinValley_EventScript_Stanly : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SixIsland_RuinValley_EventScript_Stanly")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_RUIN_MANIAC_STANLY
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (SixIsland_RuinValley_EventScript_StanlyRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(SixIsland_RuinValley.StanlyPostBattle)
+    }
+    ctx.say(SixIsland_RuinValley.StanlyIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(SixIsland_RuinValley.StanlyDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_RUIN_MANIAC_FOSTER, SixIsland_RuinValley_Text_FosterIntro, SixIsland_RuinValley_Text_FosterDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -50,12 +63,22 @@ internal object SixIsland_RuinValley_EventScript_Stanly : Script {
  * ```
  */
 internal object SixIsland_RuinValley_EventScript_Foster : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SixIsland_RuinValley_EventScript_Foster")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_RUIN_MANIAC_FOSTER
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (SixIsland_RuinValley_EventScript_FosterRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(SixIsland_RuinValley.FosterPostBattle)
+    }
+    ctx.say(SixIsland_RuinValley.FosterIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(SixIsland_RuinValley.FosterDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_RUIN_MANIAC_LARRY, SixIsland_RuinValley_Text_LarryIntro, SixIsland_RuinValley_Text_LarryDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -65,11 +88,22 @@ internal object SixIsland_RuinValley_EventScript_Foster : Script {
  * ```
  */
 internal object SixIsland_RuinValley_EventScript_Larry : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SixIsland_RuinValley_EventScript_Larry")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_RUIN_MANIAC_LARRY
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (SixIsland_RuinValley_EventScript_LarryRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(SixIsland_RuinValley.LarryPostBattle)
+    }
+    ctx.say(SixIsland_RuinValley.LarryIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(SixIsland_RuinValley.LarryDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_HIKER_DARYL, SixIsland_RuinValley_Text_DarylIntro, SixIsland_RuinValley_Text_DarylDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -79,11 +113,22 @@ internal object SixIsland_RuinValley_EventScript_Larry : Script {
  * ```
  */
 internal object SixIsland_RuinValley_EventScript_Daryl : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SixIsland_RuinValley_EventScript_Daryl")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_HIKER_DARYL
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (SixIsland_RuinValley_EventScript_DarylRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(SixIsland_RuinValley.DarylPostBattle)
+    }
+    ctx.say(SixIsland_RuinValley.DarylIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(SixIsland_RuinValley.DarylDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_POKEMANIAC_HECTOR, SixIsland_RuinValley_Text_HectorIntro, SixIsland_RuinValley_Text_HectorDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -93,8 +138,18 @@ internal object SixIsland_RuinValley_EventScript_Daryl : Script {
  * ```
  */
 internal object SixIsland_RuinValley_EventScript_Hector : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SixIsland_RuinValley_EventScript_Hector")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_POKEMANIAC_HECTOR
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (SixIsland_RuinValley_EventScript_HectorRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(SixIsland_RuinValley.HectorPostBattle)
+    }
+    ctx.say(SixIsland_RuinValley.HectorIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(SixIsland_RuinValley.HectorDefeat)
+  }
 }
 
 /**

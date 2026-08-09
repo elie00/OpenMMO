@@ -1,10 +1,13 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.dialog.generated.kanto.Route21_North
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_FISHERMAN_RONALD, Route21_North_Text_RonaldIntro, Route21_North_Text_RonaldDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -14,11 +17,22 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object Route21_North_EventScript_Ronald : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route21_North_EventScript_Ronald")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_FISHERMAN_RONALD
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (Route21_North_EventScript_RonaldRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(Route21_North.RonaldPostBattle)
+    }
+    ctx.say(Route21_North.RonaldIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route21_North.RonaldDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_FISHERMAN_WADE, Route21_North_Text_WadeIntro, Route21_North_Text_WadeDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -28,11 +42,22 @@ internal object Route21_North_EventScript_Ronald : Script {
  * ```
  */
 internal object Route21_North_EventScript_Wade : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route21_North_EventScript_Wade")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_FISHERMAN_WADE
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (Route21_North_EventScript_WadeRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(Route21_North.WadePostBattle)
+    }
+    ctx.say(Route21_North.WadeIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route21_North.WadeDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_SWIMMER_MALE_SPENCER, Route21_North_Text_SpencerIntro, Route21_North_Text_SpencerDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -42,7 +67,18 @@ internal object Route21_North_EventScript_Wade : Script {
  * ```
  */
 internal object Route21_North_EventScript_Spencer : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route21_North_EventScript_Spencer")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_SWIMMER_MALE_SPENCER
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (Route21_North_EventScript_SpencerRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(Route21_North.SpencerPostBattle)
+    }
+    ctx.say(Route21_North.SpencerIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route21_North.SpencerDefeat)
+  }
 }
 
 /**

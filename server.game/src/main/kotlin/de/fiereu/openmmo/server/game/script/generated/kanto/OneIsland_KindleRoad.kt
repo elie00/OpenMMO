@@ -2,12 +2,14 @@ package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.OneIsland_KindleRoad
 import de.fiereu.openmmo.items.generated.Items
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 import de.fiereu.openmmo.story.generated.kanto.KantoFlags
+import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_SWIMMER_FEMALE_MARIA, OneIsland_KindleRoad_Text_MariaIntro, OneIsland_KindleRoad_Text_MariaDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -17,11 +19,22 @@ import de.fiereu.openmmo.story.generated.kanto.KantoFlags
  * ```
  */
 internal object OneIsland_KindleRoad_EventScript_Maria : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port OneIsland_KindleRoad_EventScript_Maria")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_SWIMMER_FEMALE_MARIA
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (OneIsland_KindleRoad_EventScript_MariaRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(OneIsland_KindleRoad.MariaPostBattle)
+    }
+    ctx.say(OneIsland_KindleRoad.MariaIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(OneIsland_KindleRoad.MariaDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_SWIMMER_FEMALE_ABIGAIL, OneIsland_KindleRoad_Text_AbigailIntro, OneIsland_KindleRoad_Text_AbigailDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -31,12 +44,22 @@ internal object OneIsland_KindleRoad_EventScript_Maria : Script {
  * ```
  */
 internal object OneIsland_KindleRoad_EventScript_Abigail : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port OneIsland_KindleRoad_EventScript_Abigail")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_SWIMMER_FEMALE_ABIGAIL
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (OneIsland_KindleRoad_EventScript_AbigailRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(OneIsland_KindleRoad.AbigailPostBattle)
+    }
+    ctx.say(OneIsland_KindleRoad.AbigailIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(OneIsland_KindleRoad.AbigailDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_SWIMMER_MALE_FINN, OneIsland_KindleRoad_Text_FinnIntro, OneIsland_KindleRoad_Text_FinnDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -46,11 +69,22 @@ internal object OneIsland_KindleRoad_EventScript_Abigail : Script {
  * ```
  */
 internal object OneIsland_KindleRoad_EventScript_Finn : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port OneIsland_KindleRoad_EventScript_Finn")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_SWIMMER_MALE_FINN
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (OneIsland_KindleRoad_EventScript_FinnRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(OneIsland_KindleRoad.FinnPostBattle)
+    }
+    ctx.say(OneIsland_KindleRoad.FinnIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(OneIsland_KindleRoad.FinnDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_SWIMMER_MALE_GARRETT, OneIsland_KindleRoad_Text_GarrettIntro, OneIsland_KindleRoad_Text_GarrettDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -60,12 +94,22 @@ internal object OneIsland_KindleRoad_EventScript_Finn : Script {
  * ```
  */
 internal object OneIsland_KindleRoad_EventScript_Garrett : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port OneIsland_KindleRoad_EventScript_Garrett")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_SWIMMER_MALE_GARRETT
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (OneIsland_KindleRoad_EventScript_GarrettRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(OneIsland_KindleRoad.GarrettPostBattle)
+    }
+    ctx.say(OneIsland_KindleRoad.GarrettIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(OneIsland_KindleRoad.GarrettDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_FISHERMAN_TOMMY, OneIsland_KindleRoad_Text_TommyIntro, OneIsland_KindleRoad_Text_TommyDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -75,11 +119,22 @@ internal object OneIsland_KindleRoad_EventScript_Garrett : Script {
  * ```
  */
 internal object OneIsland_KindleRoad_EventScript_Tommy : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port OneIsland_KindleRoad_EventScript_Tommy")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_FISHERMAN_TOMMY
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (OneIsland_KindleRoad_EventScript_TommyRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(OneIsland_KindleRoad.TommyPostBattle)
+    }
+    ctx.say(OneIsland_KindleRoad.TommyIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(OneIsland_KindleRoad.TommyDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_CRUSH_GIRL_SHARON, OneIsland_KindleRoad_Text_SharonIntro, OneIsland_KindleRoad_Text_SharonDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -89,12 +144,22 @@ internal object OneIsland_KindleRoad_EventScript_Tommy : Script {
  * ```
  */
 internal object OneIsland_KindleRoad_EventScript_Sharon : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port OneIsland_KindleRoad_EventScript_Sharon")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_CRUSH_GIRL_SHARON
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (OneIsland_KindleRoad_EventScript_SharonRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(OneIsland_KindleRoad.SharonPostBattle)
+    }
+    ctx.say(OneIsland_KindleRoad.SharonIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(OneIsland_KindleRoad.SharonDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_CRUSH_GIRL_TANYA, OneIsland_KindleRoad_Text_TanyaIntro, OneIsland_KindleRoad_Text_TanyaDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -104,11 +169,22 @@ internal object OneIsland_KindleRoad_EventScript_Sharon : Script {
  * ```
  */
 internal object OneIsland_KindleRoad_EventScript_Tanya : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port OneIsland_KindleRoad_EventScript_Tanya")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_CRUSH_GIRL_TANYA
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (OneIsland_KindleRoad_EventScript_TanyaRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(OneIsland_KindleRoad.TanyaPostBattle)
+    }
+    ctx.say(OneIsland_KindleRoad.TanyaIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(OneIsland_KindleRoad.TanyaDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_BLACK_BELT_SHEA, OneIsland_KindleRoad_Text_SheaIntro, OneIsland_KindleRoad_Text_SheaDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -118,11 +194,22 @@ internal object OneIsland_KindleRoad_EventScript_Tanya : Script {
  * ```
  */
 internal object OneIsland_KindleRoad_EventScript_Shea : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port OneIsland_KindleRoad_EventScript_Shea")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_BLACK_BELT_SHEA
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (OneIsland_KindleRoad_EventScript_SheaRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(OneIsland_KindleRoad.SheaPostBattle)
+    }
+    ctx.say(OneIsland_KindleRoad.SheaIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(OneIsland_KindleRoad.SheaDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_BLACK_BELT_HUGH, OneIsland_KindleRoad_Text_HughIntro, OneIsland_KindleRoad_Text_HughDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -132,11 +219,22 @@ internal object OneIsland_KindleRoad_EventScript_Shea : Script {
  * ```
  */
 internal object OneIsland_KindleRoad_EventScript_Hugh : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port OneIsland_KindleRoad_EventScript_Hugh")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_BLACK_BELT_HUGH
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (OneIsland_KindleRoad_EventScript_HughRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(OneIsland_KindleRoad.HughPostBattle)
+    }
+    ctx.say(OneIsland_KindleRoad.HughIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(OneIsland_KindleRoad.HughDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_CAMPER_BRYCE, OneIsland_KindleRoad_Text_BryceIntro, OneIsland_KindleRoad_Text_BryceDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -146,11 +244,22 @@ internal object OneIsland_KindleRoad_EventScript_Hugh : Script {
  * ```
  */
 internal object OneIsland_KindleRoad_EventScript_Bryce : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port OneIsland_KindleRoad_EventScript_Bryce")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_CAMPER_BRYCE
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (OneIsland_KindleRoad_EventScript_BryceRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(OneIsland_KindleRoad.BrycePostBattle)
+    }
+    ctx.say(OneIsland_KindleRoad.BryceIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(OneIsland_KindleRoad.BryceDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_PICNICKER_CLAIRE, OneIsland_KindleRoad_Text_ClaireIntro, OneIsland_KindleRoad_Text_ClaireDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -160,8 +269,18 @@ internal object OneIsland_KindleRoad_EventScript_Bryce : Script {
  * ```
  */
 internal object OneIsland_KindleRoad_EventScript_Claire : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port OneIsland_KindleRoad_EventScript_Claire")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_PICNICKER_CLAIRE
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (OneIsland_KindleRoad_EventScript_ClaireRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(OneIsland_KindleRoad.ClairePostBattle)
+    }
+    ctx.say(OneIsland_KindleRoad.ClaireIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(OneIsland_KindleRoad.ClaireDefeat)
+  }
 }
 
 /**

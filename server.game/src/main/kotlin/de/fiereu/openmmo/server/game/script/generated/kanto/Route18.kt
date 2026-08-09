@@ -1,11 +1,13 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.Route18
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_BIRD_KEEPER_JACOB, Route18_Text_JacobIntro, Route18_Text_JacobDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -15,11 +17,22 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object Route18_EventScript_Jacob : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route18_EventScript_Jacob")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_BIRD_KEEPER_JACOB
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (Route18_EventScript_JacobRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(Route18.JacobPostBattle)
+    }
+    ctx.say(Route18.JacobIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route18.JacobDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_BIRD_KEEPER_RAMIRO, Route18_Text_RamiroIntro, Route18_Text_RamiroDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -29,11 +42,22 @@ internal object Route18_EventScript_Jacob : Script {
  * ```
  */
 internal object Route18_EventScript_Ramiro : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route18_EventScript_Ramiro")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_BIRD_KEEPER_RAMIRO
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (Route18_EventScript_RamiroRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(Route18.RamiroPostBattle)
+    }
+    ctx.say(Route18.RamiroIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route18.RamiroDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_BIRD_KEEPER_WILTON, Route18_Text_WiltonIntro, Route18_Text_WiltonDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -43,7 +67,18 @@ internal object Route18_EventScript_Ramiro : Script {
  * ```
  */
 internal object Route18_EventScript_Wilton : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route18_EventScript_Wilton")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_BIRD_KEEPER_WILTON
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (Route18_EventScript_WiltonRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(Route18.WiltonPostBattle)
+    }
+    ctx.say(Route18.WiltonIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route18.WiltonDefeat)
+  }
 }
 
 internal object Route18_EventScript_CyclingRoadSign : Script {

@@ -1,10 +1,13 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.dialog.generated.kanto.SevenIsland_TanobyRuins
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_RUIN_MANIAC_BRANDON, SevenIsland_TanobyRuins_Text_BrandonIntro, SevenIsland_TanobyRuins_Text_BrandonDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -14,12 +17,22 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object SevenIsland_TanobyRuins_EventScript_Brandon : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SevenIsland_TanobyRuins_EventScript_Brandon")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_RUIN_MANIAC_BRANDON
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (SevenIsland_TanobyRuins_EventScript_BrandonRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(SevenIsland_TanobyRuins.BrandonPostBattle)
+    }
+    ctx.say(SevenIsland_TanobyRuins.BrandonIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(SevenIsland_TanobyRuins.BrandonDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_RUIN_MANIAC_BENJAMIN, SevenIsland_TanobyRuins_Text_BenjaminIntro, SevenIsland_TanobyRuins_Text_BenjaminDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -29,12 +42,22 @@ internal object SevenIsland_TanobyRuins_EventScript_Brandon : Script {
  * ```
  */
 internal object SevenIsland_TanobyRuins_EventScript_Benjamin : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SevenIsland_TanobyRuins_EventScript_Benjamin")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_RUIN_MANIAC_BENJAMIN
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (SevenIsland_TanobyRuins_EventScript_BenjaminRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(SevenIsland_TanobyRuins.BenjaminPostBattle)
+    }
+    ctx.say(SevenIsland_TanobyRuins.BenjaminIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(SevenIsland_TanobyRuins.BenjaminDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_PAINTER_EDNA, SevenIsland_TanobyRuins_Text_EdnaIntro, SevenIsland_TanobyRuins_Text_EdnaDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -44,12 +67,22 @@ internal object SevenIsland_TanobyRuins_EventScript_Benjamin : Script {
  * ```
  */
 internal object SevenIsland_TanobyRuins_EventScript_Edna : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SevenIsland_TanobyRuins_EventScript_Edna")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_PAINTER_EDNA
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (SevenIsland_TanobyRuins_EventScript_EdnaRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(SevenIsland_TanobyRuins.EdnaPostBattle)
+    }
+    ctx.say(SevenIsland_TanobyRuins.EdnaIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(SevenIsland_TanobyRuins.EdnaDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_GENTLEMAN_CLIFFORD, SevenIsland_TanobyRuins_Text_CliffordIntro, SevenIsland_TanobyRuins_Text_CliffordDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -59,8 +92,18 @@ internal object SevenIsland_TanobyRuins_EventScript_Edna : Script {
  * ```
  */
 internal object SevenIsland_TanobyRuins_EventScript_Clifford : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SevenIsland_TanobyRuins_EventScript_Clifford")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_GENTLEMAN_CLIFFORD
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (SevenIsland_TanobyRuins_EventScript_CliffordRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(SevenIsland_TanobyRuins.CliffordPostBattle)
+    }
+    ctx.say(SevenIsland_TanobyRuins.CliffordIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(SevenIsland_TanobyRuins.CliffordDefeat)
+  }
 }
 
 internal val SevenIsland_TanobyRuinsScripts: Map<String, Script> =

@@ -1,11 +1,13 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.SevenIsland_TrainerTower
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_PSYCHIC_DARIO, SevenIsland_TrainerTower_Text_DarioIntro, SevenIsland_TrainerTower_Text_DarioDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -15,12 +17,22 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object SevenIsland_TrainerTower_EventScript_Dario : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SevenIsland_TrainerTower_EventScript_Dario")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_PSYCHIC_DARIO
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (SevenIsland_TrainerTower_EventScript_DarioRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(SevenIsland_TrainerTower.DarioPostBattle)
+    }
+    ctx.say(SevenIsland_TrainerTower.DarioIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(SevenIsland_TrainerTower.DarioDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_PSYCHIC_RODETTE, SevenIsland_TrainerTower_Text_RodetteIntro, SevenIsland_TrainerTower_Text_RodetteDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -30,8 +42,18 @@ internal object SevenIsland_TrainerTower_EventScript_Dario : Script {
  * ```
  */
 internal object SevenIsland_TrainerTower_EventScript_Rodette : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SevenIsland_TrainerTower_EventScript_Rodette")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_PSYCHIC_RODETTE
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (SevenIsland_TrainerTower_EventScript_RodetteRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(SevenIsland_TrainerTower.RodettePostBattle)
+    }
+    ctx.say(SevenIsland_TrainerTower.RodetteIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(SevenIsland_TrainerTower.RodetteDefeat)
+  }
 }
 
 internal object SevenIsland_TrainerTower_EventScript_TrainerTowerSign : Script {

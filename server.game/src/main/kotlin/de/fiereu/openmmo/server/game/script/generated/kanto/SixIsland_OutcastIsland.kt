@@ -29,7 +29,7 @@ internal object SixIsland_OutcastIsland_EventScript_Rocket : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_FISHERMAN_TYLOR, SixIsland_OutcastIsland_Text_TylorIntro, SixIsland_OutcastIsland_Text_TylorDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -39,12 +39,22 @@ internal object SixIsland_OutcastIsland_EventScript_Rocket : Script {
  * ```
  */
 internal object SixIsland_OutcastIsland_EventScript_Tylor : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SixIsland_OutcastIsland_EventScript_Tylor")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_FISHERMAN_TYLOR
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (SixIsland_OutcastIsland_EventScript_TylorRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(SixIsland_OutcastIsland.TylorPostBattle)
+    }
+    ctx.say(SixIsland_OutcastIsland.TylorIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(SixIsland_OutcastIsland.TylorDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_SWIMMER_MALE_MYMO, SixIsland_OutcastIsland_Text_MymoIntro, SixIsland_OutcastIsland_Text_MymoDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -54,12 +64,22 @@ internal object SixIsland_OutcastIsland_EventScript_Tylor : Script {
  * ```
  */
 internal object SixIsland_OutcastIsland_EventScript_Mymo : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SixIsland_OutcastIsland_EventScript_Mymo")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_SWIMMER_MALE_MYMO
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (SixIsland_OutcastIsland_EventScript_MymoRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(SixIsland_OutcastIsland.MymoPostBattle)
+    }
+    ctx.say(SixIsland_OutcastIsland.MymoIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(SixIsland_OutcastIsland.MymoDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_SWIMMER_FEMALE_NICOLE, SixIsland_OutcastIsland_Text_NicoleIntro, SixIsland_OutcastIsland_Text_NicoleDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -69,8 +89,18 @@ internal object SixIsland_OutcastIsland_EventScript_Mymo : Script {
  * ```
  */
 internal object SixIsland_OutcastIsland_EventScript_Nicole : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SixIsland_OutcastIsland_EventScript_Nicole")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_SWIMMER_FEMALE_NICOLE
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (SixIsland_OutcastIsland_EventScript_NicoleRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(SixIsland_OutcastIsland.NicolePostBattle)
+    }
+    ctx.say(SixIsland_OutcastIsland.NicoleIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(SixIsland_OutcastIsland.NicoleDefeat)
+  }
 }
 
 /**

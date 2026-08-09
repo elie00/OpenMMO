@@ -1,11 +1,13 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.Route16
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_BIKER_LAO, Route16_Text_LaoIntro, Route16_Text_LaoDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -15,11 +17,22 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object Route16_EventScript_Lao : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route16_EventScript_Lao")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_BIKER_LAO
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (Route16_EventScript_LaoRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(Route16.LaoPostBattle)
+    }
+    ctx.say(Route16.LaoIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route16.LaoDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_CUE_BALL_KOJI, Route16_Text_KojiIntro, Route16_Text_KojiDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -29,11 +42,22 @@ internal object Route16_EventScript_Lao : Script {
  * ```
  */
 internal object Route16_EventScript_Koji : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route16_EventScript_Koji")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_CUE_BALL_KOJI
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (Route16_EventScript_KojiRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(Route16.KojiPostBattle)
+    }
+    ctx.say(Route16.KojiIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route16.KojiDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_CUE_BALL_LUKE, Route16_Text_LukeIntro, Route16_Text_LukeDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -43,11 +67,22 @@ internal object Route16_EventScript_Koji : Script {
  * ```
  */
 internal object Route16_EventScript_Luke : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route16_EventScript_Luke")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_CUE_BALL_LUKE
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (Route16_EventScript_LukeRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(Route16.LukePostBattle)
+    }
+    ctx.say(Route16.LukeIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route16.LukeDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_BIKER_RUBEN, Route16_Text_RubenIntro, Route16_Text_RubenDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -57,11 +92,22 @@ internal object Route16_EventScript_Luke : Script {
  * ```
  */
 internal object Route16_EventScript_Ruben : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route16_EventScript_Ruben")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_BIKER_RUBEN
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (Route16_EventScript_RubenRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(Route16.RubenPostBattle)
+    }
+    ctx.say(Route16.RubenIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route16.RubenDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_BIKER_HIDEO, Route16_Text_HideoIntro, Route16_Text_HideoDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -71,11 +117,22 @@ internal object Route16_EventScript_Ruben : Script {
  * ```
  */
 internal object Route16_EventScript_Hideo : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route16_EventScript_Hideo")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_BIKER_HIDEO
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (Route16_EventScript_HideoRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(Route16.HideoPostBattle)
+    }
+    ctx.say(Route16.HideoIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route16.HideoDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_CUE_BALL_CAMRON, Route16_Text_CamronIntro, Route16_Text_CamronDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -85,7 +142,18 @@ internal object Route16_EventScript_Hideo : Script {
  * ```
  */
 internal object Route16_EventScript_Camron : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route16_EventScript_Camron")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_CUE_BALL_CAMRON
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (Route16_EventScript_CamronRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(Route16.CamronPostBattle)
+    }
+    ctx.say(Route16.CamronIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route16.CamronDefeat)
+  }
 }
 
 /**

@@ -21,6 +21,44 @@ class TrainerBattleFormTest :
             listOf("Route3_Text_KayIntro", "Route3_Text_KayDefeat", "Route3_Text_KayPostBattle")
       }
 
+      test("accepts the rematch shape and records the branch it drops") {
+        val form =
+            TrainerBattleForm.parse(
+                    canonical.take(1) +
+                        listOf(
+                            "specialvar VAR_RESULT, ShouldTryRematchBattle",
+                            "goto_if_eq VAR_RESULT, TRUE, Route3_EventScript_KayRematch",
+                            "msgbox Route3_Text_KayPostBattle, MSGBOX_AUTOCLOSE",
+                            "end"))
+                .shouldNotBeNull()
+
+        form.trainer shouldBe "TRAINER_LASS_KAY"
+        form.skippedRematch shouldBe "Route3_EventScript_KayRematch"
+      }
+
+      test("ignores framing and takes the non autoclose message type too") {
+        val form =
+            TrainerBattleForm.parse(
+                    listOf("lock", "faceplayer") +
+                        canonical.take(1) +
+                        listOf(
+                            "msgbox Route3_Text_KayPostBattle, MSGBOX_DEFAULT", "release", "end"))
+                .shouldNotBeNull()
+
+        form.textLabels.last() shouldBe "Route3_Text_KayPostBattle"
+        form.skippedRematch shouldBe null
+      }
+
+      test("refuses a rematch check it does not recognise") {
+        TrainerBattleForm.parse(
+            canonical.take(1) +
+                listOf(
+                    "specialvar VAR_RESULT, SomeOtherSpecial",
+                    "goto_if_eq VAR_RESULT, TRUE, Route3_EventScript_Other",
+                    "msgbox Route3_Text_KayPostBattle, MSGBOX_AUTOCLOSE",
+                    "end")) shouldBe null
+      }
+
       test("refuses everything outside the exact three line shape") {
         // A fourth argument is a continuation script whose body would be dropped on the floor.
         TrainerBattleForm.parse(
@@ -39,7 +77,7 @@ class TrainerBattleFormTest :
             listOf("trainerbattle_no_intro TRAINER_A, A_Text_D", "msgbox A_Text_P", "end")) shouldBe
             null
 
-        // A rematch check means the script has a second path this porter does not model.
+        // The rematch check is only accepted as the exact three command sequence.
         TrainerBattleForm.parse(
             canonical.take(1) +
                 listOf(
@@ -47,14 +85,14 @@ class TrainerBattleFormTest :
                     "msgbox Route3_Text_KayPostBattle, MSGBOX_AUTOCLOSE",
                     "end")) shouldBe null
 
-        // Any message type other than autoclose has different exit semantics.
+        // A battle with no message at all, and a message type that is neither of the two known.
+        TrainerBattleForm.parse(canonical.take(1) + listOf("end")) shouldBe null
         TrainerBattleForm.parse(
             canonical.take(1) +
-                listOf("msgbox Route3_Text_KayPostBattle, MSGBOX_DEFAULT", "end")) shouldBe null
+                listOf("msgbox Route3_Text_KayPostBattle, MSGBOX_YESNO", "end")) shouldBe null
 
-        TrainerBattleForm.parse(canonical.take(1) + listOf("end")) shouldBe null
-        TrainerBattleForm.parse(canonical.dropLast(1)) shouldBe null
-        TrainerBattleForm.parse(canonical + "release") shouldBe null
+        // Any command that is neither framing nor part of the shape.
+        TrainerBattleForm.parse(canonical + "setflag FLAG_X") shouldBe null
         TrainerBattleForm.parse(emptyList()) shouldBe null
       }
 

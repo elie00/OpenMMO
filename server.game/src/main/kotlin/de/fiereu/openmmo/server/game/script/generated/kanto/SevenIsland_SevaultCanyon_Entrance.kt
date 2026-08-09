@@ -1,11 +1,13 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.SevenIsland_SevaultCanyon_Entrance
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_AROMA_LADY_MIAH, SevenIsland_SevaultCanyon_Entrance_Text_MiahIntro, SevenIsland_SevaultCanyon_Entrance_Text_MiahDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -15,8 +17,18 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object SevenIsland_SevaultCanyon_Entrance_EventScript_Miah : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SevenIsland_SevaultCanyon_Entrance_EventScript_Miah")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_AROMA_LADY_MIAH
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (SevenIsland_SevaultCanyon_Entrance_EventScript_MiahRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(SevenIsland_SevaultCanyon_Entrance.MiahPostBattle)
+    }
+    ctx.say(SevenIsland_SevaultCanyon_Entrance.MiahIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(SevenIsland_SevaultCanyon_Entrance.MiahDefeat)
+  }
 }
 
 /**
@@ -50,7 +62,7 @@ internal object SevenIsland_SevaultCanyon_Entrance_EventScript_Jon : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_PKMN_RANGER_NICOLAS, SevenIsland_SevaultCanyon_Entrance_Text_NicolasIntro, SevenIsland_SevaultCanyon_Entrance_Text_NicolasDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -60,12 +72,22 @@ internal object SevenIsland_SevaultCanyon_Entrance_EventScript_Jon : Script {
  * ```
  */
 internal object SevenIsland_SevaultCanyon_Entrance_EventScript_Nicolas : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SevenIsland_SevaultCanyon_Entrance_EventScript_Nicolas")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_PKMN_RANGER_NICOLAS
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (SevenIsland_SevaultCanyon_Entrance_EventScript_NicolasRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(SevenIsland_SevaultCanyon_Entrance.NicolasPostBattle)
+    }
+    ctx.say(SevenIsland_SevaultCanyon_Entrance.NicolasIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(SevenIsland_SevaultCanyon_Entrance.NicolasDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_PKMN_RANGER_MADELINE, SevenIsland_SevaultCanyon_Entrance_Text_MadelineIntro, SevenIsland_SevaultCanyon_Entrance_Text_MadelineDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -75,12 +97,22 @@ internal object SevenIsland_SevaultCanyon_Entrance_EventScript_Nicolas : Script 
  * ```
  */
 internal object SevenIsland_SevaultCanyon_Entrance_EventScript_Madeline : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SevenIsland_SevaultCanyon_Entrance_EventScript_Madeline")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_PKMN_RANGER_MADELINE
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (SevenIsland_SevaultCanyon_Entrance_EventScript_MadelineRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(SevenIsland_SevaultCanyon_Entrance.MadelinePostBattle)
+    }
+    ctx.say(SevenIsland_SevaultCanyon_Entrance.MadelineIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(SevenIsland_SevaultCanyon_Entrance.MadelineDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_JUGGLER_MASON, SevenIsland_SevaultCanyon_Entrance_Text_MasonIntro, SevenIsland_SevaultCanyon_Entrance_Text_MasonDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -90,8 +122,18 @@ internal object SevenIsland_SevaultCanyon_Entrance_EventScript_Madeline : Script
  * ```
  */
 internal object SevenIsland_SevaultCanyon_Entrance_EventScript_Mason : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SevenIsland_SevaultCanyon_Entrance_EventScript_Mason")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_JUGGLER_MASON
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (SevenIsland_SevaultCanyon_Entrance_EventScript_MasonRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(SevenIsland_SevaultCanyon_Entrance.MasonPostBattle)
+    }
+    ctx.say(SevenIsland_SevaultCanyon_Entrance.MasonIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(SevenIsland_SevaultCanyon_Entrance.MasonDefeat)
+  }
 }
 
 internal object SevenIsland_SevaultCanyon_Entrance_EventScript_RouteSign : Script {

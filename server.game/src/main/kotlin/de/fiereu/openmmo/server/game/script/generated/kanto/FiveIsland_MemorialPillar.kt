@@ -1,9 +1,12 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.dialog.generated.kanto.FiveIsland_MemorialPillar
 import de.fiereu.openmmo.items.generated.Items
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 import de.fiereu.openmmo.story.generated.kanto.KantoFlags
+import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
  * Not ported yet. Decomp body:
@@ -30,7 +33,7 @@ internal object FiveIsland_MemorialPillar_EventScript_MemorialMan : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_BIRD_KEEPER_MILO, FiveIsland_MemorialPillar_Text_MiloIntro, FiveIsland_MemorialPillar_Text_MiloDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -40,12 +43,22 @@ internal object FiveIsland_MemorialPillar_EventScript_MemorialMan : Script {
  * ```
  */
 internal object FiveIsland_MemorialPillar_EventScript_Milo : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port FiveIsland_MemorialPillar_EventScript_Milo")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_BIRD_KEEPER_MILO
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (FiveIsland_MemorialPillar_EventScript_MiloRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(FiveIsland_MemorialPillar.MiloPostBattle)
+    }
+    ctx.say(FiveIsland_MemorialPillar.MiloIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(FiveIsland_MemorialPillar.MiloDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_BIRD_KEEPER_CHAZ, FiveIsland_MemorialPillar_Text_ChazIntro, FiveIsland_MemorialPillar_Text_ChazDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -55,12 +68,22 @@ internal object FiveIsland_MemorialPillar_EventScript_Milo : Script {
  * ```
  */
 internal object FiveIsland_MemorialPillar_EventScript_Chaz : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port FiveIsland_MemorialPillar_EventScript_Chaz")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_BIRD_KEEPER_CHAZ
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (FiveIsland_MemorialPillar_EventScript_ChazRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(FiveIsland_MemorialPillar.ChazPostBattle)
+    }
+    ctx.say(FiveIsland_MemorialPillar.ChazIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(FiveIsland_MemorialPillar.ChazDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_BIRD_KEEPER_HAROLD, FiveIsland_MemorialPillar_Text_HaroldIntro, FiveIsland_MemorialPillar_Text_HaroldDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -70,8 +93,18 @@ internal object FiveIsland_MemorialPillar_EventScript_Chaz : Script {
  * ```
  */
 internal object FiveIsland_MemorialPillar_EventScript_Harold : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port FiveIsland_MemorialPillar_EventScript_Harold")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_BIRD_KEEPER_HAROLD
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (FiveIsland_MemorialPillar_EventScript_HaroldRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(FiveIsland_MemorialPillar.HaroldPostBattle)
+    }
+    ctx.say(FiveIsland_MemorialPillar.HaroldIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(FiveIsland_MemorialPillar.HaroldDefeat)
+  }
 }
 
 /**

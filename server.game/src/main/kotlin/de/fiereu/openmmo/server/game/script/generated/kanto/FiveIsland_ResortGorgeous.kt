@@ -1,11 +1,13 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.FiveIsland_ResortGorgeous
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_PAINTER_DAISY, FiveIsland_ResortGorgeous_Text_DaisyIntro, FiveIsland_ResortGorgeous_Text_DaisyDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -15,12 +17,22 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object FiveIsland_ResortGorgeous_EventScript_Daisy : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port FiveIsland_ResortGorgeous_EventScript_Daisy")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_PAINTER_DAISY
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (FiveIsland_ResortGorgeous_EventScript_DaisyRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(FiveIsland_ResortGorgeous.DaisyPostBattle)
+    }
+    ctx.say(FiveIsland_ResortGorgeous.DaisyIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(FiveIsland_ResortGorgeous.DaisyDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_PAINTER_CELINA, FiveIsland_ResortGorgeous_Text_CelinaIntro, FiveIsland_ResortGorgeous_Text_CelinaDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -30,12 +42,22 @@ internal object FiveIsland_ResortGorgeous_EventScript_Daisy : Script {
  * ```
  */
 internal object FiveIsland_ResortGorgeous_EventScript_Celina : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port FiveIsland_ResortGorgeous_EventScript_Celina")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_PAINTER_CELINA
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (FiveIsland_ResortGorgeous_EventScript_CelinaRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(FiveIsland_ResortGorgeous.CelinaPostBattle)
+    }
+    ctx.say(FiveIsland_ResortGorgeous.CelinaIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(FiveIsland_ResortGorgeous.CelinaDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_PAINTER_RAYNA, FiveIsland_ResortGorgeous_Text_RaynaIntro, FiveIsland_ResortGorgeous_Text_RaynaDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -45,12 +67,22 @@ internal object FiveIsland_ResortGorgeous_EventScript_Celina : Script {
  * ```
  */
 internal object FiveIsland_ResortGorgeous_EventScript_Rayna : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port FiveIsland_ResortGorgeous_EventScript_Rayna")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_PAINTER_RAYNA
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (FiveIsland_ResortGorgeous_EventScript_RaynaRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(FiveIsland_ResortGorgeous.RaynaPostBattle)
+    }
+    ctx.say(FiveIsland_ResortGorgeous.RaynaIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(FiveIsland_ResortGorgeous.RaynaDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_LADY_JACKI, FiveIsland_ResortGorgeous_Text_JackiIntro, FiveIsland_ResortGorgeous_Text_JackiDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -60,12 +92,22 @@ internal object FiveIsland_ResortGorgeous_EventScript_Rayna : Script {
  * ```
  */
 internal object FiveIsland_ResortGorgeous_EventScript_Jacki : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port FiveIsland_ResortGorgeous_EventScript_Jacki")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_LADY_JACKI
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (FiveIsland_ResortGorgeous_EventScript_JackiRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(FiveIsland_ResortGorgeous.JackiPostBattle)
+    }
+    ctx.say(FiveIsland_ResortGorgeous.JackiIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(FiveIsland_ResortGorgeous.JackiDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_LADY_GILLIAN, FiveIsland_ResortGorgeous_Text_GillianIntro, FiveIsland_ResortGorgeous_Text_GillianDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -75,12 +117,22 @@ internal object FiveIsland_ResortGorgeous_EventScript_Jacki : Script {
  * ```
  */
 internal object FiveIsland_ResortGorgeous_EventScript_Gillian : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port FiveIsland_ResortGorgeous_EventScript_Gillian")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_LADY_GILLIAN
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (FiveIsland_ResortGorgeous_EventScript_GillianRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(FiveIsland_ResortGorgeous.GillianPostBattle)
+    }
+    ctx.say(FiveIsland_ResortGorgeous.GillianIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(FiveIsland_ResortGorgeous.GillianDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_YOUNGSTER_DESTIN, FiveIsland_ResortGorgeous_Text_DestinIntro, FiveIsland_ResortGorgeous_Text_DestinDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -90,12 +142,22 @@ internal object FiveIsland_ResortGorgeous_EventScript_Gillian : Script {
  * ```
  */
 internal object FiveIsland_ResortGorgeous_EventScript_Destin : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port FiveIsland_ResortGorgeous_EventScript_Destin")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_YOUNGSTER_DESTIN
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (FiveIsland_ResortGorgeous_EventScript_DestinRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(FiveIsland_ResortGorgeous.DestinPostBattle)
+    }
+    ctx.say(FiveIsland_ResortGorgeous.DestinIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(FiveIsland_ResortGorgeous.DestinDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_SWIMMER_MALE_TOBY, FiveIsland_ResortGorgeous_Text_TobyIntro, FiveIsland_ResortGorgeous_Text_TobyDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -105,8 +167,18 @@ internal object FiveIsland_ResortGorgeous_EventScript_Destin : Script {
  * ```
  */
 internal object FiveIsland_ResortGorgeous_EventScript_Toby : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port FiveIsland_ResortGorgeous_EventScript_Toby")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_SWIMMER_MALE_TOBY
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (FiveIsland_ResortGorgeous_EventScript_TobyRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(FiveIsland_ResortGorgeous.TobyPostBattle)
+    }
+    ctx.say(FiveIsland_ResortGorgeous.TobyIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(FiveIsland_ResortGorgeous.TobyDefeat)
+  }
 }
 
 internal object FiveIsland_ResortGorgeous_EventScript_SelphysHouseSign : Script {

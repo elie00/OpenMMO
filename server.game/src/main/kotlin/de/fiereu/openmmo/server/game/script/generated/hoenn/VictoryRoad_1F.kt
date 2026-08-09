@@ -99,7 +99,7 @@ internal object VictoryRoad_1F_EventScript_ItemPPUp : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_WALLY_VR_2, VictoryRoad_1F_Text_WallyIntro, VictoryRoad_1F_Text_WallyDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -109,7 +109,18 @@ internal object VictoryRoad_1F_EventScript_ItemPPUp : Script {
  * ```
  */
 internal object VictoryRoad_1F_EventScript_ExitWally : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port VictoryRoad_1F_EventScript_ExitWally")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = HoennTrainers.TRAINER_WALLY_VR_2
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (VictoryRoad_1F_EventScript_RematchWally)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(VictoryRoad_1F.WallyPostBattle)
+    }
+    ctx.say(VictoryRoad_1F.WallyIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(VictoryRoad_1F.WallyDefeat)
+  }
 }
 
 /**

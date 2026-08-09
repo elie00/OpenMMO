@@ -1,11 +1,13 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.Route10
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.KantoTrainers
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_PICNICKER_CAROL, Route10_Text_CarolIntro, Route10_Text_CarolDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -15,11 +17,22 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
  * ```
  */
 internal object Route10_EventScript_Carol : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route10_EventScript_Carol")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_PICNICKER_CAROL
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (Route10_EventScript_CarolRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(Route10.CarolPostBattle)
+    }
+    ctx.say(Route10.CarolIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route10.CarolDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_HIKER_CLARK, Route10_Text_ClarkIntro, Route10_Text_ClarkDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -29,11 +42,22 @@ internal object Route10_EventScript_Carol : Script {
  * ```
  */
 internal object Route10_EventScript_Clark : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route10_EventScript_Clark")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_HIKER_CLARK
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (Route10_EventScript_ClarkRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(Route10.ClarkPostBattle)
+    }
+    ctx.say(Route10.ClarkIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route10.ClarkDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_POKEMANIAC_HERMAN, Route10_Text_HermanIntro, Route10_Text_HermanDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -43,11 +67,22 @@ internal object Route10_EventScript_Clark : Script {
  * ```
  */
 internal object Route10_EventScript_Herman : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route10_EventScript_Herman")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_POKEMANIAC_HERMAN
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (Route10_EventScript_HermanRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(Route10.HermanPostBattle)
+    }
+    ctx.say(Route10.HermanIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route10.HermanDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_HIKER_TRENT, Route10_Text_TrentIntro, Route10_Text_TrentDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -57,11 +92,22 @@ internal object Route10_EventScript_Herman : Script {
  * ```
  */
 internal object Route10_EventScript_Trent : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route10_EventScript_Trent")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_HIKER_TRENT
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (Route10_EventScript_TrentRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(Route10.TrentPostBattle)
+    }
+    ctx.say(Route10.TrentIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route10.TrentDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_POKEMANIAC_MARK, Route10_Text_MarkIntro, Route10_Text_MarkDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -71,11 +117,22 @@ internal object Route10_EventScript_Trent : Script {
  * ```
  */
 internal object Route10_EventScript_Mark : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route10_EventScript_Mark")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_POKEMANIAC_MARK
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (Route10_EventScript_MarkRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(Route10.MarkPostBattle)
+    }
+    ctx.say(Route10.MarkIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route10.MarkDefeat)
+  }
 }
 
 /**
- * Not ported yet. Decomp body:
+ * Ported from the decomp:
  * ```
  * trainerbattle_single TRAINER_PICNICKER_HEIDI, Route10_Text_HeidiIntro, Route10_Text_HeidiDefeat
  * specialvar VAR_RESULT, ShouldTryRematchBattle
@@ -85,7 +142,18 @@ internal object Route10_EventScript_Mark : Script {
  * ```
  */
 internal object Route10_EventScript_Heidi : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route10_EventScript_Heidi")
+  override suspend fun run(ctx: ScriptContext) {
+    val trainerId = KantoTrainers.TRAINER_PICNICKER_HEIDI
+    if (ctx.hasBeatenTrainer(trainerId)) {
+      // TODO Offer the rematch (Route10_EventScript_HeidiRematch)
+      //  The decomp asks ShouldTryRematchBattle here. There is no rematch model and
+      //  no VS Seeker, so this takes the branch a fresh save takes.
+      return ctx.say(Route10.HeidiPostBattle)
+    }
+    ctx.say(Route10.HeidiIntro)
+    if (ctx.trainerBattle(trainerId) != BattleResult.VICTORY) return
+    ctx.say(Route10.HeidiDefeat)
+  }
 }
 
 internal object Route10_EventScript_SouthRockTunnelSign : Script {
