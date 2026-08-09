@@ -1,8 +1,10 @@
 package de.fiereu.openmmo.server.login.config
 
+import de.fiereu.openmmo.common.config.ServerEnvironment
 import java.time.Duration
 
 data class LoginServerConfig(
+    val environment: ServerEnvironment = ServerEnvironment.DEVELOPMENT,
     val host: String,
     val port: Int,
     val checksumSize: Int,
@@ -15,6 +17,7 @@ data class LoginServerConfig(
 ) {
   override fun equals(other: Any?): Boolean =
       other is LoginServerConfig &&
+          environment == other.environment &&
           host == other.host &&
           port == other.port &&
           checksumSize == other.checksumSize &&
@@ -26,7 +29,8 @@ data class LoginServerConfig(
           db == other.db
 
   override fun hashCode(): Int {
-    var h = host.hashCode()
+    var h = environment.hashCode()
+    h = h * 31 + host.hashCode()
     h = h * 31 + port
     h = h * 31 + checksumSize
     h = h * 31 + rootKeyResource.hashCode()
