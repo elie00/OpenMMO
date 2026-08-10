@@ -38,6 +38,8 @@ private const val EXECUTABLE_PROPERTY = "openmmo.executable"
 private const val WORKING_DIR_PROPERTY = "openmmo.workingDir"
 private const val OUTPUT_PROPERTY = "openmmo.output"
 
+private const val FEED_PREFIX = "Feed"
+
 private const val TRUSTSTORE_NAME = "openmmo-truststore.p12"
 
 object Launcher {
@@ -78,11 +80,19 @@ object Launcher {
     val results = patcher.apply(bytes)
     results.forEach { (patch, count) -> log { "${patch.name}: replaced $count occurrences" } }
     val missed = results.filterValues { it == 0 }.keys
-    if (missed.isNotEmpty()) {
+    val required = missed.filterNot { it.optional }
+    if (required.isNotEmpty()) {
       error(
-          "No match for ${missed.joinToString { it.name }}. " +
+          "No match for ${required.joinToString { it.name }}. " +
               "The client probably changed the patched strings.")
     }
+    missed.filter { it.optional }.forEach { log { "${it.name}: not in this binary, skipped" } }
+    // Every feed patch missing means the client would still fetch the real feed and update itself
+    // out from under us, so the group as a whole still has to land even though each one is
+    // optional.
+    val feedPatched =
+        results.any { (patch, count) -> patch.name.startsWith(FEED_PREFIX) && count > 0 }
+    check(feedPatched) { "No feed string matched, the client would keep using the real feed." }
 
     output.parent?.let(Files::createDirectories)
     Files.write(output, bytes)
@@ -125,11 +135,19 @@ object Launcher {
               Loopback.literal(POKEMMO_LOGINSERVER.length)),
       ) +
           POKEMMO_PUBKEYS_FEED.mapIndexed { index, key ->
-            ClientPatcher.Patch("FeedPubKeyPatch$index", key, loadPublicKey("/feed.public.pem"))
+            ClientPatcher.Patch(
+                "${FEED_PREFIX}PubKeyPatch$index",
+                key,
+                loadPublicKey("/feed.public.pem"),
+                optional = true)
           } +
           POKEMMO_FEED_HOSTS.map { host ->
             val origin = "https://$host"
-            ClientPatcher.Patch("FeedPatch$host", origin, Loopback.origin(feedPort, origin.length))
+            ClientPatcher.Patch(
+                "${FEED_PREFIX}Patch$host",
+                origin,
+                Loopback.origin(feedPort, origin.length),
+                optional = true)
           }
 
   /**

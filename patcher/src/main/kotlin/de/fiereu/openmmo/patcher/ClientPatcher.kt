@@ -8,7 +8,19 @@ package de.fiereu.openmmo.patcher
  */
 class ClientPatcher(private val patches: List<Patch>) {
 
-  data class Patch(val name: String, val original: String, val replacement: String) {
+  /**
+   * [optional] marks a string the client may legitimately not carry. The feed keys and mirrors are
+   * alternatives the client tries in turn, and macOS splits them between the launcher and the game
+   * binary, so demanding every one of them would refuse a client that patches perfectly well. A
+   * game key or the login server host is never optional: missing one silently leaves the client
+   * talking to the real servers.
+   */
+  data class Patch(
+      val name: String,
+      val original: String,
+      val replacement: String,
+      val optional: Boolean = false,
+  ) {
     init {
       require(original.length == replacement.length) {
         "$name: replacement is ${replacement.length} chars but the original is ${original.length}"
