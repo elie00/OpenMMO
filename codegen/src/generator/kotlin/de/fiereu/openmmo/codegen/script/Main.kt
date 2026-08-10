@@ -19,9 +19,10 @@ fun main(args: Array<String>) {
   val assigned = mutableSetOf<String>()
   val mapValues = mutableListOf<String>()
   for (spec in args.drop(2)) {
-    val (region, gameCode, decomp) = spec.split("|")
+    val (region, gameCodes, decomp) = spec.split("|")
     mapValues +=
-        ScriptGenerator(region, outputDir).generate(File(decomp), romsDir, gameCode, assigned)
+        ScriptGenerator(region, outputDir)
+            .generate(File(decomp), romsDir, gameCodes.split(","), assigned)
   }
 
   writeRegistry(outputDir, mapValues)

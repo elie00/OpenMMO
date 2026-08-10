@@ -1,5 +1,7 @@
 package de.fiereu.openmmo.codegen.script
 
+import de.fiereu.openmmo.codegen.dialog.RomIndex
+import de.fiereu.openmmo.codegen.dialog.TextOffsetSources
 import java.io.File
 
 /**
@@ -18,12 +20,15 @@ class ScriptGenerator(
   fun generate(
       decompDir: File,
       romsDir: File,
-      gameCode: String,
+      gameCodes: List<String>,
       assigned: MutableSet<String>,
   ): List<String> {
     val scripts = ScriptIndex.build(decompDir)
     val events = MapEventIndex.build(decompDir)
-    val dialogRefs = DialogRefIndex.build(decompDir, romsDir, gameCode)
+    val rom = RomIndex.find(romsDir, gameCodes)
+    val dialogRefs =
+        DialogRefIndex.build(
+            decompDir, rom?.let { TextOffsetSources.create(it.gameCode, decompDir, it.index) })
 
     val packageDir = File(outputDir, basePackage.replace('.', '/'))
     if (packageDir.exists()) packageDir.deleteRecursively()

@@ -18,7 +18,7 @@ private fun regionMode(region: String): Int {
 
 fun main(args: Array<String>) {
   require(args.size >= 5) {
-    "Usage: <output-dir> <templates-dir> <class-cache-dir> <roms-dir> <region|gameCode|decomp>... got ${args.toList()}"
+    "Usage: <output-dir> <templates-dir> <class-cache-dir> <roms-dir> <region|gameCodes|decomp>... got ${args.toList()}"
   }
   val outputDir = File(args[0])
   val templatesDir = File(args[1])
@@ -26,14 +26,15 @@ fun main(args: Array<String>) {
   val romsDir = File(args[3])
 
   for (spec in args.drop(4)) {
-    val (region, gameCode, decomp) = spec.split("|")
-    generateRegion(region, gameCode, File(decomp), romsDir, outputDir, templatesDir, classCacheDir)
+    val (region, gameCodes, decomp) = spec.split("|")
+    generateRegion(
+        region, gameCodes.split(","), File(decomp), romsDir, outputDir, templatesDir, classCacheDir)
   }
 }
 
 private fun generateRegion(
     region: String,
-    gameCode: String,
+    gameCodes: List<String>,
     decompDir: File,
     romsDir: File,
     outputDir: File,
@@ -41,7 +42,7 @@ private fun generateRegion(
     classCacheDir: File,
 ) {
   val renderer = DialogRenderer(region, templatesDir, outputDir, classCacheDir)
-  val rom = RomIndex.find(romsDir, gameCode)
+  val rom = RomIndex.find(romsDir, gameCodes)
 
   val texts = TextParser(decompDir).parseAll()
   println("[dialog] $region: parsed ${texts.size} text labels from $decompDir")
@@ -51,32 +52,50 @@ private fun generateRegion(
   // label with a placeholder textId so the build works, just without real dialog ids.
   if (rom == null) {
     println(
-        "[dialog] no $gameCode ROM found in $romsDir, generating $region labels without textIds")
+        "[dialog] no ${gameCodes.joinToString("/")} ROM found in $romsDir, generating $region labels without textIds")
     renderer.render(texts.map { DialogLine(it.label, 0, RenderUtil.preview(it.content)) })
     return
   }
 
-  val charmap = Charmap.load(File(decompDir, "charmap.txt"))
+  val source = TextOffsetSources.create(rom.gameCode, decompDir, rom.index)
   val mode = regionMode(region)
 
-  var unencodable = 0
-  var notFound = 0
+  val resolved = texts.map { it to source.offsetOf(it) }
+  val kept = if (source.keepsUnresolved) resolved else resolved.filter { it.second >= 0 }
   val lines =
-      texts.mapNotNull { t ->
-        val bytes = charmap.encode(t.content)
-        if (bytes == null) {
-          unencodable++
-          return@mapNotNull null
-        }
-        val offset = rom.offsetOf(bytes)
-        if (offset < 0) {
-          notFound++
-          return@mapNotNull null
-        }
-        DialogLine(t.label, mode or offset, RenderUtil.preview(t.content))
-      }
+      kept
+          // A location can hold two labels with the same entry name and the renderer keeps the
+          // first, so the resolved ones go first and a real id always wins over a zero.
+          .sortedBy { if (it.second >= 0) 0 else 1 }
+          .map { (text, offset) ->
+            DialogLine(
+                text.label,
+                if (offset >= 0) mode or offset else 0,
+                RenderUtil.preview(text.content))
+          }
 
   println(
-      "[dialog] $region: resolved ${lines.size} lines (skipped $unencodable unencodable, $notFound not in ROM)")
+      "[dialog] $region: ${rom.gameCode} ROM, resolved ${resolved.count { it.second >= 0 }} of ${texts.size} lines")
+  report(region, source, resolved)
   renderer.render(lines)
+}
+
+/** Says what could not be resolved and where it lives, so a zero textId is never a silent one. */
+private fun report(
+    region: String,
+    source: TextOffsetSource,
+    resolved: List<Pair<DecompText, Int>>,
+) {
+  if (source is ScriptNavTextSource) println("[dialog] $region: navigation ${source.stats}")
+  if (!source.keepsUnresolved) return
+  val unresolved = resolved.filter { it.second < 0 }
+  if (unresolved.isEmpty()) return
+  println("[dialog] $region: ${unresolved.size} labels left at textId 0, they are unreachable")
+  unresolved
+      .groupingBy { RenderUtil.location(it.first.label) }
+      .eachCount()
+      .entries
+      .sortedByDescending { it.value }
+      .take(10)
+      .forEach { println("[dialog]   ${it.value} in ${it.key}") }
 }

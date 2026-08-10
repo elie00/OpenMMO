@@ -97,8 +97,11 @@ jteCodegen {
     inputDirs.from(sourceDecompDir)
     extraArgs.set(listOf(sourceDecompDir.asFile.absolutePath))
   }
-  // Dialog ids are ROM offsets, so the generator reads a ROM from the roms folder,
-  // picking it by its GBA header game code. Each region is "package|gameCode|decompDir".
+  // Dialog ids are ROM offsets, so the generator reads a ROM from the roms folder, picking it by
+  // its GBA header game code. Each region is "package|gameCodes|decompDir", and the codes are
+  // tried in order. Kanto accepts the French ROM too: its texts are found by navigating the maps
+  // rather than by searching for the decomp's English bytes. BPRE stays first so a machine holding
+  // both keeps the English ids, since a French id only renders French on a French client.
   register("dialog") {
     mainClass.set("de.fiereu.openmmo.codegen.dialog.Main")
     val fireredDir = rootProject.layout.projectDirectory.dir("decomp/pokefirered")
@@ -107,7 +110,7 @@ jteCodegen {
         listOf(
             romsDir.asFile.absolutePath,
             "hoenn|BPEE|${sourceDecompDir.asFile.absolutePath}",
-            "kanto|BPRE|${fireredDir.asFile.absolutePath}",
+            "kanto|BPRE,BPRF|${fireredDir.asFile.absolutePath}",
         ))
   }
 }
@@ -126,7 +129,7 @@ tasks.register<JavaExec>("generateScriptStubs") {
       serverGameSrc.asFile.absolutePath,
       romsDir.asFile.absolutePath,
       "hoenn|BPEE|${sourceDecompDir.asFile.absolutePath}",
-      "kanto|BPRE|${fireredDir.asFile.absolutePath}",
+      "kanto|BPRE,BPRF|${fireredDir.asFile.absolutePath}",
   )
 }
 

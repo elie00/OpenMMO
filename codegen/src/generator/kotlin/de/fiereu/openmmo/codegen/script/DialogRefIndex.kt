@@ -1,26 +1,24 @@
 package de.fiereu.openmmo.codegen.script
 
-import de.fiereu.openmmo.codegen.dialog.Charmap
 import de.fiereu.openmmo.codegen.dialog.RenderUtil
-import de.fiereu.openmmo.codegen.dialog.RomIndex
+import de.fiereu.openmmo.codegen.dialog.TextOffsetSource
 import de.fiereu.openmmo.codegen.dialog.TextParser
 import java.io.File
 
 /**
  * Maps a decomp text label to the generated dialog enum entry it became, mirroring the dialog
- * generator so a script can reference the same entry. Only labels that resolved to a real ROM
- * offset are present, and only the first label to claim an entry name in a location, since the
- * dialog enum keeps one entry per name.
+ * generator so a script can reference the same entry. It takes the same [TextOffsetSource] the
+ * dialog generator runs on and applies its keep and ordering rules, so the two cannot drift: only
+ * the first label to claim an entry name in a location gets it, since the enum keeps one per name.
  */
 object DialogRefIndex {
-  fun build(decompDir: File, romsDir: File, gameCode: String): Map<String, DialogRef> {
-    val rom = RomIndex.find(romsDir, gameCode) ?: return emptyMap()
-    val charmap = Charmap.load(File(decompDir, "charmap.txt"))
+  fun build(decompDir: File, source: TextOffsetSource?): Map<String, DialogRef> {
+    if (source == null) return emptyMap()
+    val located = TextParser(decompDir).parseAll().map { it.label to source.offsetOf(it) }
     val resolved =
-        TextParser(decompDir).parseAll().mapNotNull { text ->
-          val bytes = charmap.encode(text.content) ?: return@mapNotNull null
-          if (rom.offsetOf(bytes) < 0) null else text.label
-        }
+        (if (source.keepsUnresolved) located else located.filter { it.second >= 0 })
+            .sortedBy { if (it.second >= 0) 0 else 1 }
+            .map { it.first }
 
     val refs = HashMap<String, DialogRef>()
     resolved
