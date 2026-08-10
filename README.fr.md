@@ -56,6 +56,22 @@ git**, ce projet ne distribue aucune ROM.
 Sans elles, la compilation réussit malgré tout mais chaque identifiant de
 dialogue vaut `0` : la CI passe, mais le client affiche les mauvais textes.
 
+Kanto accepte aussi la ROM Rouge Feu française (`BPRF`). Ses textes n'ont aucun
+octet en commun avec la décompilation anglaise : plutôt que d'y chercher des
+octets encodés, le générateur parcourt la ROM comme le fait le jeu, de la table
+des groupes de cartes aux évènements de chaque carte, au script que déclenche un
+évènement, puis aux pointeurs de texte que ce script affiche. En appariant ce
+parcours avec le même parcours dans la décompilation, un label anglais devient un
+décalage français. Environ 800 labels ne sont atteints que depuis le code C et
+jamais depuis un script : ils gardent l'identifiant `0` et sont listés en fin de
+génération.
+
+`BPRE` est essayée en premier, donc une machine possédant les deux ROMs conserve
+les identifiants anglais. Ne placez la ROM française seule dans `roms/` que si
+c'est bien ce que vous voulez : **un identifiant de dialogue est résolu contre la
+ROM du joueur**, donc des identifiants issus de `BPRF` s'affichent en français sur
+un client français et en charabia sur un client anglais.
+
 ## Configuration
 
 Toute la configuration locale et les secrets résident dans un fichier `.env` à la

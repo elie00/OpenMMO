@@ -52,6 +52,19 @@ The folder is **gitignored**, this project ships no ROMs.
 Without them the build still succeeds and every dialog id is `0`, so CI passes but
 the client shows the wrong text.
 
+Kanto also accepts the French FireRed ROM (`BPRF`). Its text shares nothing with
+the English decomp, so instead of searching for encoded bytes the generator walks
+the ROM the way the game does, from the map group table to each map's events, to
+the script an event runs, to the text pointers that script shows. Pairing that
+walk with the same walk over the decomp turns an English label into a French
+offset. About 800 labels are only reached from C code and never from a script;
+they keep a `0` id and are listed at the end of generation.
+
+`BPRE` is tried first, so a machine holding both ROMs keeps the English ids. Only
+put the French ROM alone in `roms/` if that is what you want: **a dialog id is
+resolved against the player's own ROM**, so ids built from `BPRF` read as French
+on a French client and as garbage on an English one.
+
 ## Configuration
 
 All local configuration and secrets live in a `.env` file at the repository
