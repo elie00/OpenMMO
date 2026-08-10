@@ -90,6 +90,7 @@ object Launcher {
       log { "Could not mark $output as executable" }
     }
     log { "Wrote patched client to $output" }
+    resign(output)
 
     val trustStore =
         FeedTls.writeTrustStore(
@@ -130,6 +131,31 @@ object Launcher {
             val origin = "https://$host"
             ClientPatcher.Patch("FeedPatch$host", origin, Loopback.origin(feedPort, origin.length))
           }
+
+  /**
+   * Re-signs a patched binary on macOS, where the kernel checks the signature of every executable
+   * and rejects one whose bytes no longer match it. Editing a single byte invalidates the existing
+   * signature, so an unsigned patched client is killed at exec with SIGKILL rather than reporting
+   * anything useful. An ad-hoc signature is enough, the kernel only needs the digests to agree.
+   *
+   * Nothing to do on the other platforms, which do not check.
+   */
+  private fun resign(binary: Path) {
+    if (!System.getProperty("os.name").startsWith("Mac", ignoreCase = true)) return
+    val result =
+        runCatching {
+              ProcessBuilder("codesign", "--force", "--sign", "-", binary.toString())
+                  .redirectErrorStream(true)
+                  .start()
+                  .let { it.inputStream.bufferedReader().readText() to it.waitFor() }
+            }
+            .getOrElse {
+              error("Could not run codesign on $binary, the patched client will not start: $it")
+            }
+    val (out, code) = result
+    check(code == 0) { "codesign failed on $binary with code $code: ${out.trim()}" }
+    log { "Re-signed $binary" }
+  }
 
   private fun readRevision(workingDir: Path): Long =
       runCatching { Files.readString(workingDir.resolve("revision.txt")).trim().toLong() }
