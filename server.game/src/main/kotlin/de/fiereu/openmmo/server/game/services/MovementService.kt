@@ -12,6 +12,8 @@ import de.fiereu.openmmo.net.game.packets.GbaEntityMovePacket
 import de.fiereu.openmmo.net.game.packets.MapData
 import de.fiereu.openmmo.net.game.packets.MovementPacket
 import de.fiereu.openmmo.server.game.session.PLAYER_STATE
+import de.fiereu.openmmo.server.game.session.PlayerState
+import de.fiereu.openmmo.server.game.session.openedTileKey
 import de.fiereu.openmmo.server.game.storage.CharacterStore
 import io.github.oshai.kotlinlogging.KotlinLogging
 import javax.inject.Inject
@@ -173,7 +175,7 @@ constructor(
       return
     }
 
-    if (!isWalkable(currentMap, toX, toY)) {
+    if (!isWalkable(currentMap, toX, toY) && !state.hasOpened(currentMap, toX, toY)) {
       log.debug { "WALL: char=$charId blocked at ($toX, $toY)" }
       sendPositionReset(ctx, charId, currentMap, fromX, fromY, msg.direction)
       return
@@ -263,6 +265,13 @@ constructor(
     val tile = map.tileAt(x, y) ?: return true
     return !tile.blocksMovement()
   }
+
+  /** True when a script opened this tile for this player, for example a gym barrier it unlocked. */
+  private fun PlayerState.hasOpened(map: MapDef, x: Int, y: Int): Boolean =
+      x in 0 until map.width &&
+          y in 0 until map.height &&
+          openedTiles.contains(
+              openedTileKey(map.regionId.toInt(), map.bankId.toInt(), map.mapId.toInt(), x, y))
 
   private fun edgeTransition(
       ctx: SessionContext,

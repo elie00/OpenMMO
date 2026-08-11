@@ -31,8 +31,20 @@ data class PlayerState(
     @field:Volatile var scriptOwnsMapEntry: Boolean = false,
     /** Maps the client already holds. A warp sends deleteCache, which empties this. */
     val loadedMaps: MutableSet<Int> = ConcurrentHashMap.newKeySet(),
+    /**
+     * Tiles a script has made walkable for this player, the decomp's `setmetatile` with an
+     * impassable of 0. Keyed by [openedTileKey], so they only apply on the map that opened them and
+     * a player who never solved the puzzle still walks into the wall.
+     */
+    val openedTiles: MutableSet<Long> = ConcurrentHashMap.newKeySet(),
 )
 
 /** Packs a map address into one key for [PlayerState.loadedMaps]. */
 fun mapCacheKey(regionId: Int, bankId: Int, mapId: Int): Int =
     (regionId shl 16) or (bankId shl 8) or mapId
+
+/** Packs a tile on one map into a key for [PlayerState.openedTiles]. */
+fun openedTileKey(regionId: Int, bankId: Int, mapId: Int, x: Int, y: Int): Long =
+    (mapCacheKey(regionId, bankId, mapId).toLong() shl 32) or
+        ((x.toLong() and 0xFFFF) shl 16) or
+        (y.toLong() and 0xFFFF)

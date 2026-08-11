@@ -6,6 +6,7 @@ import de.fiereu.openmmo.common.dialog.DialogLine
 import de.fiereu.openmmo.common.enums.Direction
 import de.fiereu.openmmo.common.enums.Region
 import de.fiereu.openmmo.maps.MapManager
+import de.fiereu.openmmo.net.game.packets.MapTileAttributeSetPacket
 import de.fiereu.openmmo.net.game.packets.dialog.TextPokemonSpeciesArg
 import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.services.BattleService
@@ -19,6 +20,7 @@ import de.fiereu.openmmo.server.game.services.StoryClientState
 import de.fiereu.openmmo.server.game.services.StoryPlayerService
 import de.fiereu.openmmo.server.game.services.StoryService
 import de.fiereu.openmmo.server.game.session.PlayerState
+import de.fiereu.openmmo.server.game.session.openedTileKey
 import de.fiereu.openmmo.server.game.storage.CharacterStore
 
 /** What a [Script] uses to talk to the player it interacted with and read or write story state. */
@@ -268,6 +270,23 @@ internal constructor(
     RespawnPoint.vars(regionId, bankId, mapId, x, y).forEach { (key, value) -> setVar(key, value) }
   }
 
+  /**
+   * The walkable half of the decomp's `setmetatile`: let this player through [x], [y] on the map
+   * they are standing on, and tell the client so its own collision agrees. The tile keeps its
+   * graphics, since no packet carries a new metatile id, so an opened gym barrier is still drawn
+   * closed.
+   */
+  fun openTile(x: Int, y: Int) {
+    state.openedTiles.add(openedTileKey(state.regionId, state.bankId, state.mapId, x, y))
+    session.send(
+        MapTileAttributeSetPacket(
+            blockX = x.toByte(),
+            blockY = y.toByte(),
+            blockZ = state.elevation.toByte(),
+            attribute = WALKABLE_TILE,
+        ))
+  }
+
   /** Set where a MAP_DYNAMIC warp sends this player (the decomp setdynamicwarp). */
   fun setDynamicWarp(regionId: Int, bankId: Int, mapId: Int, x: Int, y: Int, facing: Direction) =
       movement.setDynamicWarp(
@@ -312,6 +331,12 @@ internal constructor(
     const val NPC = 4
     const val FEMALE: Byte = 1
     const val STORY_PLAYER_UNAVAILABLE = "Story player service is unavailable"
+
+    /**
+     * The tile attribute byte for "nothing blocks this square". [de.fiereu.openmmo.common.Tile2D]
+     * reads the low two bits of the same field as the collision, so zero is walkable.
+     */
+    const val WALKABLE_TILE: Byte = 0
 
     /** Region namespaced like the generated story keys, since ids repeat across the two games. */
     fun trainerFlag(region: Region, trainerId: Int) =

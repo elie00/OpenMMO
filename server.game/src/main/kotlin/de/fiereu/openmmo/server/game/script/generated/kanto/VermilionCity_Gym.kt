@@ -19,12 +19,25 @@ private const val FOUND_FIRST_SWITCH = KantoFlags.FLAG_TEMP_1
 private const val TRASH_CANS = 15
 private const val CANS_PER_ROW = 5
 
+/**
+ * The barrier tiles between the door and Lt. Surge. The decomp swaps their metatiles for floor;
+ * only the walkable half of that is portable, so they open but stay drawn.
+ */
+private val BARRIER_TILES = (3..7).flatMap { x -> listOf(x to 6, x to 7) }
+
 internal object VermilionCity_Gym_OnTransition : Script {
   override suspend fun run(ctx: ScriptContext) {
-    if (ctx.isFlagSet(KantoFlags.FLAG_FOUND_BOTH_VERMILION_GYM_SWITCHES)) return
+    // OnLoad in the decomp: an already opened barrier is open again on the way back in.
+    if (ctx.isFlagSet(KantoFlags.FLAG_FOUND_BOTH_VERMILION_GYM_SWITCHES)) {
+      return openBarrier(ctx)
+    }
     ctx.clearFlag(FOUND_FIRST_SWITCH)
     hideSwitches(ctx)
   }
+}
+
+private fun openBarrier(ctx: ScriptContext) {
+  BARRIER_TILES.forEach { (x, y) -> ctx.openTile(x, y) }
 }
 
 /**
@@ -44,12 +57,11 @@ private fun hideSwitches(ctx: ScriptContext) {
 }
 
 /**
- * One of the fifteen cans. The first switch opens half the barrier, the second opens the rest, and
+ * One of the fifteen cans. The first switch half opens the barrier, the second opens the rest, and
  * a wrong second guess resets both and hides them somewhere else.
  *
- * TODO Open the barrier itself The decomp follows each switch with setmetatile and
- * DrawWholeMapView, which swap the beam tiles for floor. Map tiles are static here and the server
- * walks the player against them, so the flags move but the barrier does not.
+ * The decomp's half open state swaps in another set of beam tiles that still block the way, so only
+ * the second switch opens anything here.
  */
 private suspend fun searchTrashCan(ctx: ScriptContext, canId: Int) {
   if (ctx.isFlagSet(KantoFlags.FLAG_FOUND_BOTH_VERMILION_GYM_SWITCHES)) {
@@ -69,6 +81,7 @@ private suspend fun searchTrashCan(ctx: ScriptContext, canId: Int) {
   }
   ctx.sign(VermilionCity_Gym.SecondLockOpened)
   ctx.setFlag(KantoFlags.FLAG_FOUND_BOTH_VERMILION_GYM_SWITCHES)
+  openBarrier(ctx)
 }
 
 internal object VermilionCity_Gym_EventScript_LtSurge : Script {

@@ -3,6 +3,7 @@ package de.fiereu.openmmo.server.game.script
 import de.fiereu.openmmo.common.enums.CharacterGender
 import de.fiereu.openmmo.common.enums.Region
 import de.fiereu.openmmo.maps.MapManager
+import de.fiereu.openmmo.net.game.packets.MapTileAttributeSetPacket
 import de.fiereu.openmmo.server.game.script.generated.kanto.VAR_SWITCH_1
 import de.fiereu.openmmo.server.game.script.generated.kanto.VAR_SWITCH_2
 import de.fiereu.openmmo.server.game.script.generated.kanto.VermilionCity_GymScripts
@@ -13,12 +14,14 @@ import de.fiereu.openmmo.server.game.services.ScriptMovementService
 import de.fiereu.openmmo.server.game.services.StoryService
 import de.fiereu.openmmo.server.game.session.PENDING_DIALOG
 import de.fiereu.openmmo.server.game.session.PLAYER_STATE
+import de.fiereu.openmmo.server.game.session.openedTileKey
 import de.fiereu.openmmo.server.game.storage.CharacterStore
 import de.fiereu.openmmo.server.game.storage.EntityIdService
 import de.fiereu.openmmo.server.game.testsupport.FakeCharacterRepository
 import de.fiereu.openmmo.server.game.testsupport.FakeSession
 import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 import io.kotest.core.spec.style.FunSpec
+import io.kotest.matchers.collections.shouldBeEmpty
 import io.kotest.matchers.collections.shouldContain
 import io.kotest.matchers.ints.shouldBeInRange
 import io.kotest.matchers.shouldBe
@@ -121,6 +124,35 @@ class VermilionGymPuzzleTest :
           val opened = ctx.getVar(VAR_SWITCH_1)
           VermilionCity_Gym_OnTransition.run(ctx)
           ctx.getVar(VAR_SWITCH_1) shouldBe opened
+        }
+      }
+
+      test("the barrier only opens for the player who solved it") {
+        runTest {
+          val store = CharacterStore(FakeCharacterRepository(), EntityIdService(), backgroundScope)
+          val (session, ctx) = context(store)
+          val state = session.attributes[PLAYER_STATE]!!
+          val barrier = openedTileKey(KANTO, GYM_BANK, GYM_MAP, 5, 6)
+          VermilionCity_Gym_OnTransition.run(ctx)
+
+          // The two rows in front of Lt. Surge are collision 1 on the generated map.
+          state.openedTiles.shouldBeEmpty()
+
+          search(session, ctx, ctx.getVar(VAR_SWITCH_1))
+          // Half open in the source game is still a wall.
+          state.openedTiles.shouldBeEmpty()
+
+          search(session, ctx, ctx.getVar(VAR_SWITCH_2))
+
+          state.openedTiles shouldContain barrier
+          state.openedTiles.size shouldBe 10
+          // The client is told, so its own collision agrees with the server's.
+          session.sent.filterIsInstance<MapTileAttributeSetPacket>().size shouldBe 10
+
+          // A second player walking in has their own puzzle and their own wall.
+          val (otherSession, other) = context(store)
+          VermilionCity_Gym_OnTransition.run(other)
+          otherSession.attributes[PLAYER_STATE]!!.openedTiles.shouldBeEmpty()
         }
       }
     })
