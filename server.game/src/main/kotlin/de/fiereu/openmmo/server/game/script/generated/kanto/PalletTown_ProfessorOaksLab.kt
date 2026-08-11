@@ -48,7 +48,7 @@ private const val EXIT_X_RIGHT = 7
  * One of the three balls on Oak's table. [starterNumber] is what VAR_STARTER_MON ends up holding,
  * and the rival always takes the starter that beats the player's.
  */
-private enum class Starter(
+internal enum class Starter(
     val starterNumber: Int,
     val localId: Int,
     val species: Int,

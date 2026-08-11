@@ -15,6 +15,7 @@ import de.fiereu.openmmo.server.game.script.generated.kanto.PalletTown_OnTransit
 import de.fiereu.openmmo.server.game.script.generated.kanto.PalletTown_ProfessorOaksLab_OnTransition
 import de.fiereu.openmmo.server.game.script.generated.kanto.PalletTown_RivalsHouse_OnTransition
 import de.fiereu.openmmo.server.game.script.generated.kanto.PewterCity_Gym_EventScript_DefeatedBrock
+import de.fiereu.openmmo.server.game.script.generated.kanto.Starter
 import de.fiereu.openmmo.server.game.script.generated.kanto.ViridianCity_OnTransition
 import de.fiereu.openmmo.server.game.services.DialogService
 import de.fiereu.openmmo.server.game.services.NpcService
@@ -210,5 +211,13 @@ class KantoStoryScriptTest :
           RespawnPoint.of(store.getCharacter(charId)!!.storyVars) shouldBe
               DynamicWarp(KANTO.toByte(), 3, 3, 22, 20, Direction.DOWN)
         }
+      }
+      test("the rival always holds the starter that beats the player's") {
+        // Every rival fight in the region picks its trainer from this, so an inversion here would
+        // quietly hand the player the easy matchup for the whole game.
+        Starter.byStarterNumber(0)?.rival shouldBe Starter.CHARMANDER_BALL
+        Starter.byStarterNumber(1)?.rival shouldBe Starter.BULBASAUR_BALL
+        Starter.byStarterNumber(2)?.rival shouldBe Starter.SQUIRTLE_BALL
+        Starter.byStarterNumber(3) shouldBe null
       }
     })
