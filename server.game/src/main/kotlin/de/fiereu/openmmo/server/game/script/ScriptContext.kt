@@ -171,6 +171,21 @@ internal constructor(
   }
 
   /**
+   * A `trainerbattle_single` whose script goes straight on to the trainer's post battle box, which
+   * is most of them. The source game only falls through to that box when the trainer was already
+   * beaten, so [postBattle] is what a later talk shows and never follows the win.
+   */
+  suspend fun trainerBattle(
+      trainerId: Int,
+      intro: DialogLine,
+      defeat: DialogLine,
+      postBattle: DialogLine,
+  ) {
+    if (hasBeatenTrainer(trainerId)) return say(postBattle)
+    trainerBattle(trainerId, intro, defeat)
+  }
+
+  /**
    * True once the player has beaten this decomp trainer. The source game keeps one flag per trainer
    * in a block that flags.h leaves unnamed, so the key is stored server side only and never reaches
    * the client's flag table.

@@ -1,172 +1,140 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.MtMoon_1F
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
+import de.fiereu.openmmo.trainer.generated.KantoTrainerIds
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_LASS_IRIS, MtMoon_1F_Text_IrisIntro, MtMoon_1F_Text_IrisDefeat
- * msgbox MtMoon_1F_Text_IrisPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
+// Decomp local ids of this map's item balls.
+private const val LOCALID_PARALYZEHEAL_BALL = 7
+private const val LOCALID_TM09_BALL = 8
+private const val LOCALID_POTION_BALL = 9
+private const val LOCALID_RARECANDY_BALL = 10
+private const val LOCALID_ESCAPEROPE_BALL = 11
+private const val LOCALID_MOONSTONE_BALL = 12
+
 internal object MtMoon_1F_EventScript_Iris : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtMoon_1F_EventScript_Iris")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_LASS_IRIS,
+          MtMoon_1F.IrisIntro,
+          MtMoon_1F.IrisDefeat,
+          MtMoon_1F.IrisPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_BUG_CATCHER_ROBBY, MtMoon_1F_Text_RobbyIntro, MtMoon_1F_Text_RobbyDefeat
- * msgbox MtMoon_1F_Text_RobbyPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object MtMoon_1F_EventScript_Robby : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtMoon_1F_EventScript_Robby")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_BUG_CATCHER_ROBBY,
+          MtMoon_1F.RobbyIntro,
+          MtMoon_1F.RobbyDefeat,
+          MtMoon_1F.RobbyPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_SUPER_NERD_JOVAN, MtMoon_1F_Text_JovanIntro, MtMoon_1F_Text_JovanDefeat
- * msgbox MtMoon_1F_Text_JovanPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object MtMoon_1F_EventScript_Jovan : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtMoon_1F_EventScript_Jovan")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_SUPER_NERD_JOVAN,
+          MtMoon_1F.JovanIntro,
+          MtMoon_1F.JovanDefeat,
+          MtMoon_1F.JovanPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_LASS_MIRIAM, MtMoon_1F_Text_MiriamIntro, MtMoon_1F_Text_MiriamDefeat
- * msgbox MtMoon_1F_Text_MiriamPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object MtMoon_1F_EventScript_Miriam : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtMoon_1F_EventScript_Miriam")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_LASS_MIRIAM,
+          MtMoon_1F.MiriamIntro,
+          MtMoon_1F.MiriamDefeat,
+          MtMoon_1F.MiriamPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_BUG_CATCHER_KENT, MtMoon_1F_Text_KentIntro, MtMoon_1F_Text_KentDefeat
- * msgbox MtMoon_1F_Text_KentPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object MtMoon_1F_EventScript_Kent : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtMoon_1F_EventScript_Kent")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_BUG_CATCHER_KENT,
+          MtMoon_1F.KentIntro,
+          MtMoon_1F.KentDefeat,
+          MtMoon_1F.KentPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_YOUNGSTER_JOSH, MtMoon_1F_Text_JoshIntro, MtMoon_1F_Text_JoshDefeat
- * msgbox MtMoon_1F_Text_JoshPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object MtMoon_1F_EventScript_Josh : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtMoon_1F_EventScript_Josh")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_YOUNGSTER_JOSH,
+          MtMoon_1F.JoshIntro,
+          MtMoon_1F.JoshDefeat,
+          MtMoon_1F.JoshPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_HIKER_MARCOS, MtMoon_1F_Text_MarcosIntro, MtMoon_1F_Text_MarcosDefeat
- * msgbox MtMoon_1F_Text_MarcosPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object MtMoon_1F_EventScript_Marcos : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtMoon_1F_EventScript_Marcos")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_HIKER_MARCOS,
+          MtMoon_1F.MarcosIntro,
+          MtMoon_1F.MarcosDefeat,
+          MtMoon_1F.MarcosPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_PARALYZE_HEAL
- * end
- * ```
- */
 internal object MtMoon_1F_EventScript_ItemParalyzeHeal : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtMoon_1F_EventScript_ItemParalyzeHeal")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.PARALYZE_HEAL)) return
+    ctx.removeNpc(LOCALID_PARALYZEHEAL_BALL)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_MT_MOON_1F_PARALYZE_HEAL)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_TM09
- * end
- * ```
- */
 internal object MtMoon_1F_EventScript_ItemTM09 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtMoon_1F_EventScript_ItemTM09")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.TM09)) return
+    ctx.removeNpc(LOCALID_TM09_BALL)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_MT_MOON_1F_TM09)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_POTION
- * end
- * ```
- */
 internal object MtMoon_1F_EventScript_ItemPotion : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtMoon_1F_EventScript_ItemPotion")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.POTION)) return
+    ctx.removeNpc(LOCALID_POTION_BALL)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_MT_MOON_1F_POTION)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_RARE_CANDY
- * end
- * ```
- */
 internal object MtMoon_1F_EventScript_ItemRareCandy : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtMoon_1F_EventScript_ItemRareCandy")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.RARE_CANDY)) return
+    ctx.removeNpc(LOCALID_RARECANDY_BALL)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_MT_MOON_1F_RARE_CANDY)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_ESCAPE_ROPE
- * end
- * ```
- */
 internal object MtMoon_1F_EventScript_ItemEscapeRope : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtMoon_1F_EventScript_ItemEscapeRope")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.ESCAPE_ROPE)) return
+    ctx.removeNpc(LOCALID_ESCAPEROPE_BALL)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_MT_MOON_1F_ESCAPE_ROPE)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_MOON_STONE
- * end
- * ```
- */
 internal object MtMoon_1F_EventScript_ItemMoonStone : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtMoon_1F_EventScript_ItemMoonStone")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.MOON_STONE)) return
+    ctx.removeNpc(LOCALID_MOONSTONE_BALL)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_MT_MOON_1F_MOON_STONE)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lock
- * faceplayer
- * famechecker FAMECHECKER_BROCK, 4
- * msgbox MtMoon_1F_Text_BrockHelpsExcavateFossils
- * release
- * end
- * ```
- */
 internal object MtMoon_1F_EventScript_BaldingMan : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtMoon_1F_EventScript_BaldingMan")
+  override suspend fun run(ctx: ScriptContext) = ctx.say(MtMoon_1F.BrockHelpsExcavateFossils)
 }
 
 internal object MtMoon_1F_EventScript_ZubatSign : Script {

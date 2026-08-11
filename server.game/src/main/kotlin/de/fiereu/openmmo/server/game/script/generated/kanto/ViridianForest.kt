@@ -21,42 +21,33 @@ internal object ViridianForest_EventScript_Boy : Script {
 }
 
 internal object ViridianForest_EventScript_Rick : Script {
-  override suspend fun run(ctx: ScriptContext) {
-    if (ctx.hasBeatenTrainer(KantoTrainerIds.TRAINER_BUG_CATCHER_RICK)) {
-      return ctx.say(ViridianForest.RickPostBattle)
-    }
-    ctx.trainerBattle(
-        KantoTrainerIds.TRAINER_BUG_CATCHER_RICK,
-        ViridianForest.RickIntro,
-        ViridianForest.RickDefeat,
-    )
-  }
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_BUG_CATCHER_RICK,
+          ViridianForest.RickIntro,
+          ViridianForest.RickDefeat,
+          ViridianForest.RickPostBattle,
+      )
 }
 
 internal object ViridianForest_EventScript_Doug : Script {
-  override suspend fun run(ctx: ScriptContext) {
-    if (ctx.hasBeatenTrainer(KantoTrainerIds.TRAINER_BUG_CATCHER_DOUG)) {
-      return ctx.say(ViridianForest.DougPostBattle)
-    }
-    ctx.trainerBattle(
-        KantoTrainerIds.TRAINER_BUG_CATCHER_DOUG,
-        ViridianForest.DougIntro,
-        ViridianForest.DougDefeat,
-    )
-  }
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_BUG_CATCHER_DOUG,
+          ViridianForest.DougIntro,
+          ViridianForest.DougDefeat,
+          ViridianForest.DougPostBattle,
+      )
 }
 
 internal object ViridianForest_EventScript_Sammy : Script {
-  override suspend fun run(ctx: ScriptContext) {
-    if (ctx.hasBeatenTrainer(KantoTrainerIds.TRAINER_BUG_CATCHER_SAMMY)) {
-      return ctx.say(ViridianForest.SammyPostBattle)
-    }
-    ctx.trainerBattle(
-        KantoTrainerIds.TRAINER_BUG_CATCHER_SAMMY,
-        ViridianForest.SammyIntro,
-        ViridianForest.SammyDefeat,
-    )
-  }
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_BUG_CATCHER_SAMMY,
+          ViridianForest.SammyIntro,
+          ViridianForest.SammyDefeat,
+          ViridianForest.SammyPostBattle,
+      )
 }
 
 internal object ViridianForest_EventScript_ItemPokeBall : Script {
@@ -84,29 +75,23 @@ internal object ViridianForest_EventScript_ItemPotion : Script {
 }
 
 internal object ViridianForest_EventScript_Anthony : Script {
-  override suspend fun run(ctx: ScriptContext) {
-    if (ctx.hasBeatenTrainer(KantoTrainerIds.TRAINER_BUG_CATCHER_ANTHONY)) {
-      return ctx.say(ViridianForest.AnthonyPostBattle)
-    }
-    ctx.trainerBattle(
-        KantoTrainerIds.TRAINER_BUG_CATCHER_ANTHONY,
-        ViridianForest.AnthonyIntro,
-        ViridianForest.AnthonyDefeat,
-    )
-  }
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_BUG_CATCHER_ANTHONY,
+          ViridianForest.AnthonyIntro,
+          ViridianForest.AnthonyDefeat,
+          ViridianForest.AnthonyPostBattle,
+      )
 }
 
 internal object ViridianForest_EventScript_Charlie : Script {
-  override suspend fun run(ctx: ScriptContext) {
-    if (ctx.hasBeatenTrainer(KantoTrainerIds.TRAINER_BUG_CATCHER_CHARLIE)) {
-      return ctx.say(ViridianForest.CharliePostBattle)
-    }
-    ctx.trainerBattle(
-        KantoTrainerIds.TRAINER_BUG_CATCHER_CHARLIE,
-        ViridianForest.CharlieIntro,
-        ViridianForest.CharlieDefeat,
-    )
-  }
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_BUG_CATCHER_CHARLIE,
+          ViridianForest.CharlieIntro,
+          ViridianForest.CharlieDefeat,
+          ViridianForest.CharliePostBattle,
+      )
 }
 
 internal object ViridianForest_EventScript_ItemPotion2 : Script {

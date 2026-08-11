@@ -3,121 +3,94 @@ package de.fiereu.openmmo.server.game.script.generated.kanto
 import de.fiereu.openmmo.dialog.generated.kanto.Route3
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.KantoTrainerIds
+
+// Every trainer here asks ShouldTryRematchBattle before its post battle line. Rematches are armed
+// by the Vs Seeker, which has no equivalent, so the special always answers FALSE and each script
+// takes the branch a fresh save takes.
 
 internal object Route3_EventScript_Youngster : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.say(Route3.TunnelFromCeruleanTiring)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_LASS_ROBIN, Route3_Text_RobinIntro, Route3_Text_RobinDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, Route3_EventScript_RobinRematch
- * msgbox Route3_Text_RobinPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object Route3_EventScript_Robin : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route3_EventScript_Robin")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_LASS_ROBIN,
+          Route3.RobinIntro,
+          Route3.RobinDefeat,
+          Route3.RobinPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_BUG_CATCHER_JAMES, Route3_Text_JamesIntro, Route3_Text_JamesDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, Route3_EventScript_JamesRematch
- * msgbox Route3_Text_JamesPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object Route3_EventScript_James : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route3_EventScript_James")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_BUG_CATCHER_JAMES,
+          Route3.JamesIntro,
+          Route3.JamesDefeat,
+          Route3.JamesPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_LASS_SALLY, Route3_Text_SallyIntro, Route3_Text_SallyDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, Route3_EventScript_SallyRematch
- * msgbox Route3_Text_SallyPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object Route3_EventScript_Sally : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route3_EventScript_Sally")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_LASS_SALLY,
+          Route3.SallyIntro,
+          Route3.SallyDefeat,
+          Route3.SallyPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_BUG_CATCHER_GREG, Route3_Text_GregIntro, Route3_Text_GregDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, Route3_EventScript_GregRematch
- * msgbox Route3_Text_GregPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object Route3_EventScript_Greg : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route3_EventScript_Greg")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_BUG_CATCHER_GREG,
+          Route3.GregIntro,
+          Route3.GregDefeat,
+          Route3.GregPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_YOUNGSTER_CALVIN, Route3_Text_CalvinIntro, Route3_Text_CalvinDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, Route3_EventScript_CalvinRematch
- * msgbox Route3_Text_CalvinPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object Route3_EventScript_Calvin : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route3_EventScript_Calvin")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_YOUNGSTER_CALVIN,
+          Route3.CalvinIntro,
+          Route3.CalvinDefeat,
+          Route3.CalvinPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_LASS_JANICE, Route3_Text_JaniceIntro, Route3_Text_JaniceDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, Route3_EventScript_JaniceRematch
- * msgbox Route3_Text_JanicePostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object Route3_EventScript_Janice : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route3_EventScript_Janice")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_LASS_JANICE,
+          Route3.JaniceIntro,
+          Route3.JaniceDefeat,
+          Route3.JanicePostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_BUG_CATCHER_COLTON, Route3_Text_ColtonIntro, Route3_Text_ColtonDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, Route3_EventScript_ColtonRematch
- * msgbox Route3_Text_ColtonPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object Route3_EventScript_Colton : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route3_EventScript_Colton")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_BUG_CATCHER_COLTON,
+          Route3.ColtonIntro,
+          Route3.ColtonDefeat,
+          Route3.ColtonPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_YOUNGSTER_BEN, Route3_Text_BenIntro, Route3_Text_BenDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, Route3_EventScript_BenRematch
- * msgbox Route3_Text_BenPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object Route3_EventScript_Ben : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route3_EventScript_Ben")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_YOUNGSTER_BEN,
+          Route3.BenIntro,
+          Route3.BenDefeat,
+          Route3.BenPostBattle,
+      )
 }
 
 internal object Route3_EventScript_RouteSign : Script {

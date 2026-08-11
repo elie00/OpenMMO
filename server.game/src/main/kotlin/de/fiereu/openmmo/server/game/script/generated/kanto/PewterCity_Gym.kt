@@ -52,16 +52,13 @@ internal object PewterCity_Gym_EventScript_GiveTM39 : Script {
 }
 
 internal object PewterCity_Gym_EventScript_Liam : Script {
-  override suspend fun run(ctx: ScriptContext) {
-    if (ctx.hasBeatenTrainer(KantoTrainerIds.TRAINER_CAMPER_LIAM)) {
-      return ctx.say(PewterCity_Gym.LiamPostBattle)
-    }
-    ctx.trainerBattle(
-        KantoTrainerIds.TRAINER_CAMPER_LIAM,
-        PewterCity_Gym.LiamIntro,
-        PewterCity_Gym.LiamDefeat,
-    )
-  }
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_CAMPER_LIAM,
+          PewterCity_Gym.LiamIntro,
+          PewterCity_Gym.LiamDefeat,
+          PewterCity_Gym.LiamPostBattle,
+      )
 }
 
 internal object PewterCity_Gym_EventScript_GymGuy : Script {

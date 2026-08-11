@@ -1,176 +1,176 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.common.dialog.DialogLine
+import de.fiereu.openmmo.dialog.generated.kanto.MtMoon_B2F
+import de.fiereu.openmmo.items.generated.Items
+import de.fiereu.openmmo.server.game.battle.BattleResult
+import de.fiereu.openmmo.server.game.script.MovementStep
+import de.fiereu.openmmo.server.game.script.MovementStep.WALK_RIGHT
+import de.fiereu.openmmo.server.game.script.MovementStep.WALK_UP
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
+import de.fiereu.openmmo.story.generated.kanto.KantoVars
+import de.fiereu.openmmo.trainer.generated.KantoTrainerIds
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lock
- * faceplayer
- * msgbox MtMoon_B2F_Text_YouWantDomeFossil, MSGBOX_YESNO
- * goto_if_eq VAR_RESULT, NO, MtMoon_B2F_EventScript_DontTakeFossil
- * removeobject LOCALID_DOME_FOSSIL
- * giveitem_msg MtMoon_B2F_Text_ObtainedDomeFossil, ITEM_DOME_FOSSIL, 1, MUS_OBTAIN_KEY_ITEM
- * closemessage
- * special QuestLog_CutRecording
- * delay 10
- * applymovement LOCALID_MIGUEL, MtMoon_B2F_Movement_MiguelToHelixFossil
- * waitmovement 0
- * copyobjectxytoperm LOCALID_MIGUEL
- * textcolor NPC_TEXT_COLOR_MALE
- * playfanfare MUS_OBTAIN_KEY_ITEM
- * message MtMoon_B2F_Text_ThenThisFossilIsMine
- * waitmessage
- * waitfanfare
- * removeobject LOCALID_HELIX_FOSSIL
- * setflag FLAG_GOT_DOME_FOSSIL
- * setflag FLAG_GOT_FOSSIL_FROM_MT_MOON
- * release
- * end
- * ```
- */
+// Decomp local ids of this map's object events.
+private const val LOCALID_DOME_FOSSIL = 0
+private const val LOCALID_HELIX_FOSSIL = 1
+private const val LOCALID_MIGUEL = 2
+private const val LOCALID_STAR_PIECE_BALL = 7
+private const val LOCALID_TM46_BALL = 8
+private const val LOCALID_REVIVE_BALL = 9
+private const val LOCALID_ANTIDOTE_BALL = 10
+
 internal object MtMoon_B2F_EventScript_DomeFossil : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtMoon_B2F_EventScript_DomeFossil")
+  override suspend fun run(ctx: ScriptContext) =
+      takeFossil(
+          ctx,
+          question = MtMoon_B2F.YouWantDomeFossil,
+          obtained = MtMoon_B2F.ObtainedDomeFossil,
+          itemId = Items.DOME_FOSSIL,
+          takenBall = LOCALID_DOME_FOSSIL,
+          gotFlag = KantoFlags.FLAG_GOT_DOME_FOSSIL,
+          // Miguel steps over to the fossil the player left and keeps it.
+          miguelSteps = listOf(WALK_RIGHT, WALK_UP, WALK_UP, WALK_UP),
+          miguelX = 14,
+          miguelY = 8,
+          leftBall = LOCALID_HELIX_FOSSIL,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lock
- * faceplayer
- * msgbox MtMoon_B2F_Text_YouWantHelixFossil, MSGBOX_YESNO
- * goto_if_eq VAR_RESULT, NO, MtMoon_B2F_EventScript_DontTakeFossil
- * removeobject LOCALID_HELIX_FOSSIL
- * giveitem_msg MtMoon_B2F_Text_ObtainedHelixFossil, ITEM_HELIX_FOSSIL, 1, MUS_OBTAIN_KEY_ITEM
- * closemessage
- * special QuestLog_CutRecording
- * delay 10
- * applymovement LOCALID_MIGUEL, MtMoon_B2F_Movement_MiguelToDomeFossil
- * waitmovement 0
- * copyobjectxytoperm LOCALID_MIGUEL
- * textcolor NPC_TEXT_COLOR_MALE
- * playfanfare MUS_OBTAIN_KEY_ITEM
- * message MtMoon_B2F_Text_ThenThisFossilIsMine
- * waitmessage
- * waitfanfare
- * removeobject LOCALID_DOME_FOSSIL
- * setflag FLAG_GOT_HELIX_FOSSIL
- * setflag FLAG_GOT_FOSSIL_FROM_MT_MOON
- * release
- * end
- * ```
- */
 internal object MtMoon_B2F_EventScript_HelixFossil : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtMoon_B2F_EventScript_HelixFossil")
+  override suspend fun run(ctx: ScriptContext) =
+      takeFossil(
+          ctx,
+          question = MtMoon_B2F.YouWantHelixFossil,
+          obtained = MtMoon_B2F.ObtainedHelixFossil,
+          itemId = Items.HELIX_FOSSIL,
+          takenBall = LOCALID_HELIX_FOSSIL,
+          gotFlag = KantoFlags.FLAG_GOT_HELIX_FOSSIL,
+          miguelSteps = listOf(WALK_UP, WALK_UP, WALK_UP),
+          miguelX = 13,
+          miguelY = 8,
+          leftBall = LOCALID_DOME_FOSSIL,
+      )
 }
 
 /**
- * Not ported yet. Decomp body:
- * ```
- * lock
- * faceplayer
- * goto_if_set FLAG_GOT_FOSSIL_FROM_MT_MOON, MtMoon_B2F_EventScript_MiguelFossilPicked
- * goto_if_defeated TRAINER_SUPER_NERD_MIGUEL, MtMoon_B2F_EventScript_MiguelGoPickFossil
- * call MtMoon_B2F_EventScript_BattleMiguel
- * release
- * end
- * ```
+ * One of the two fossils, which is the same scene either way: the player takes one, Miguel walks to
+ * the other and claims it, and both stop being pickable.
  */
+private suspend fun takeFossil(
+    ctx: ScriptContext,
+    question: DialogLine,
+    obtained: DialogLine,
+    itemId: Int,
+    takenBall: Int,
+    gotFlag: String,
+    miguelSteps: List<MovementStep>,
+    miguelX: Int,
+    miguelY: Int,
+    leftBall: Int,
+) {
+  if (!ctx.askYesNo(question)) return
+  if (!ctx.giveItem(itemId)) return
+  ctx.removeNpc(takenBall)
+  ctx.say(obtained)
+  ctx.moveNpc(LOCALID_MIGUEL, *miguelSteps.toTypedArray())
+  // copyobjectxytoperm: he stays by that fossil for good, not just for this visit.
+  ctx.repositionNpc(LOCALID_MIGUEL, miguelX, miguelY)
+  ctx.sayNpc(LOCALID_MIGUEL, MtMoon_B2F.ThenThisFossilIsMine)
+  ctx.removeNpc(leftBall)
+  ctx.setFlag(gotFlag)
+  ctx.setFlag(KantoFlags.FLAG_GOT_FOSSIL_FROM_MT_MOON)
+}
+
 internal object MtMoon_B2F_EventScript_Miguel : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtMoon_B2F_EventScript_Miguel")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(KantoFlags.FLAG_GOT_FOSSIL_FROM_MT_MOON)) {
+      return ctx.say(MtMoon_B2F.LabOnCinnabarRegeneratesFossils)
+    }
+    if (ctx.hasBeatenTrainer(KantoTrainerIds.TRAINER_SUPER_NERD_MIGUEL)) {
+      return ctx.say(MtMoon_B2F.WellEachTakeAFossil)
+    }
+    // trainerbattle_no_intro: the intro box is shown by the script, not by the battle.
+    ctx.say(MtMoon_B2F.MiguelIntro)
+    if (ctx.trainerBattle(KantoTrainerIds.TRAINER_SUPER_NERD_MIGUEL) != BattleResult.VICTORY) return
+    ctx.say(MtMoon_B2F.MiguelDefeat)
+    ctx.setVar(KantoVars.VAR_MAP_SCENE_MT_MOON_B2F, 1)
+    ctx.say(MtMoon_B2F.WellEachTakeAFossil)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_4, MtMoon_B2F_Text_Grunt4Intro, MtMoon_B2F_Text_Grunt4Defeat
- * msgbox MtMoon_B2F_Text_Grunt4PostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object MtMoon_B2F_EventScript_Grunt4 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtMoon_B2F_EventScript_Grunt4")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_TEAM_ROCKET_GRUNT_4,
+          MtMoon_B2F.Grunt4Intro,
+          MtMoon_B2F.Grunt4Defeat,
+          MtMoon_B2F.Grunt4PostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT, MtMoon_B2F_Text_Grunt1Intro, MtMoon_B2F_Text_Grunt1Defeat
- * msgbox MtMoon_B2F_Text_Grunt1PostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object MtMoon_B2F_EventScript_Grunt1 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtMoon_B2F_EventScript_Grunt1")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_TEAM_ROCKET_GRUNT,
+          MtMoon_B2F.Grunt1Intro,
+          MtMoon_B2F.Grunt1Defeat,
+          MtMoon_B2F.Grunt1PostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_3, MtMoon_B2F_Text_Grunt3Intro, MtMoon_B2F_Text_Grunt3Defeat
- * msgbox MtMoon_B2F_Text_Grunt3PostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object MtMoon_B2F_EventScript_Grunt3 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtMoon_B2F_EventScript_Grunt3")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_TEAM_ROCKET_GRUNT_3,
+          MtMoon_B2F.Grunt3Intro,
+          MtMoon_B2F.Grunt3Defeat,
+          MtMoon_B2F.Grunt3PostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_2, MtMoon_B2F_Text_Grunt2Intro, MtMoon_B2F_Text_Grunt2Defeat
- * msgbox MtMoon_B2F_Text_Grunt2PostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object MtMoon_B2F_EventScript_Grunt2 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtMoon_B2F_EventScript_Grunt2")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_TEAM_ROCKET_GRUNT_2,
+          MtMoon_B2F.Grunt2Intro,
+          MtMoon_B2F.Grunt2Defeat,
+          MtMoon_B2F.Grunt2PostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_STAR_PIECE
- * end
- * ```
- */
 internal object MtMoon_B2F_EventScript_ItemStarPiece : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtMoon_B2F_EventScript_ItemStarPiece")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.STAR_PIECE)) return
+    ctx.removeNpc(LOCALID_STAR_PIECE_BALL)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_MT_MOON_B2F_STAR_PIECE)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_TM46
- * end
- * ```
- */
 internal object MtMoon_B2F_EventScript_ItemTM46 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtMoon_B2F_EventScript_ItemTM46")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.TM46)) return
+    ctx.removeNpc(LOCALID_TM46_BALL)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_MT_MOON_B2F_TM46)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_REVIVE
- * end
- * ```
- */
 internal object MtMoon_B2F_EventScript_ItemRevive : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtMoon_B2F_EventScript_ItemRevive")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.REVIVE)) return
+    ctx.removeNpc(LOCALID_REVIVE_BALL)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_MT_MOON_B2F_REVIVE)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_ANTIDOTE
- * end
- * ```
- */
 internal object MtMoon_B2F_EventScript_ItemAntidote : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtMoon_B2F_EventScript_ItemAntidote")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.ANTIDOTE)) return
+    ctx.removeNpc(LOCALID_ANTIDOTE_BALL)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_MT_MOON_B2F_ANTIDOTE)
+  }
 }
 
 internal val MtMoon_B2FScripts: Map<String, Script> =
