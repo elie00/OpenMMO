@@ -1,97 +1,83 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.common.dialog.DialogLine
+import de.fiereu.openmmo.dialog.generated.kanto.Misc
 import de.fiereu.openmmo.dialog.generated.kanto.Route4
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
+import de.fiereu.openmmo.trainer.generated.KantoTrainerIds
+
+private const val LOCALID_TM05_BALL = 2
 
 internal object Route4_EventScript_Woman : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.say(Route4.TrippedOverGeodude)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_LASS_CRISSY, Route4_Text_CrissyIntro, Route4_Text_CrissyDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, Route4_EventScript_CrissyRematch
- * msgbox Route4_Text_CrissyPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
+/** Crissy asks ShouldTryRematchBattle first, which only the Vs Seeker can answer TRUE. */
 internal object Route4_EventScript_Crissy : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route4_EventScript_Crissy")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_LASS_CRISSY,
+          Route4.CrissyIntro,
+          Route4.CrissyDefeat,
+          Route4.CrissyPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_TM05
- * end
- * ```
- */
 internal object Route4_EventScript_ItemTM05 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route4_EventScript_ItemTM05")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.TM05)) return
+    ctx.removeNpc(LOCALID_TM05_BALL)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_ROUTE4_TM05)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lock
- * faceplayer
- * famechecker FAMECHECKER_BROCK, 3
- * msgbox Route4_Text_PeopleLikeAndRespectBrock
- * release
- * end
- * ```
- */
 internal object Route4_EventScript_Boy : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route4_EventScript_Boy")
+  override suspend fun run(ctx: ScriptContext) = ctx.say(Route4.PeopleLikeAndRespectBrock)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lock
- * faceplayer
- * goto_if_set FLAG_TUTOR_MEGA_PUNCH, EventScript_MegaPunchTaught
- * msgbox Text_MegaPunchTeach, MSGBOX_YESNO
- * goto_if_eq VAR_RESULT, NO, EventScript_MegaPunchDeclined
- * call EventScript_CanOnlyBeLearnedOnce
- * goto_if_eq VAR_RESULT, NO, EventScript_MegaPunchDeclined
- * msgbox Text_MegaPunchWhichMon
- * setvar VAR_0x8005, MOVETUTOR_MEGA_PUNCH
- * call EventScript_ChooseMoveTutorMon
- * goto_if_eq VAR_RESULT, FALSE, EventScript_MegaPunchDeclined
- * setflag FLAG_TUTOR_MEGA_PUNCH
- * goto EventScript_MegaPunchTaught
- * end
- * ```
- */
 internal object Route4_EventScript_MegaPunchTutor : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route4_EventScript_MegaPunchTutor")
+  override suspend fun run(ctx: ScriptContext) =
+      moveTutor(
+          ctx,
+          KantoFlags.FLAG_TUTOR_MEGA_PUNCH,
+          Misc.Text_MegaPunchTeach,
+          Misc.Text_MegaPunchDeclined,
+          Misc.Text_MegaPunchTaught,
+      )
+}
+
+internal object Route4_EventScript_MegaKickTutor : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      moveTutor(
+          ctx,
+          KantoFlags.FLAG_TUTOR_MEGA_KICK,
+          Misc.Text_MegaKickTeach,
+          Misc.Text_MegaKickDeclined,
+          Misc.Text_MegaKickTaught,
+      )
 }
 
 /**
- * Not ported yet. Decomp body:
- * ```
- * lock
- * faceplayer
- * goto_if_set FLAG_TUTOR_MEGA_KICK, EventScript_MegaKickTaught
- * msgbox Text_MegaKickTeach, MSGBOX_YESNO
- * goto_if_eq VAR_RESULT, NO, EventScript_MegaKickDeclined
- * call EventScript_CanOnlyBeLearnedOnce
- * goto_if_eq VAR_RESULT, NO, EventScript_MegaKickDeclined
- * msgbox Text_MegaKickWhichMon
- * setvar VAR_0x8005, MOVETUTOR_MEGA_KICK
- * call EventScript_ChooseMoveTutorMon
- * goto_if_eq VAR_RESULT, FALSE, EventScript_MegaKickDeclined
- * setflag FLAG_TUTOR_MEGA_KICK
- * goto EventScript_MegaKickTaught
- * end
- * ```
+ * A one shot move tutor. The offer and both refusals are here, teaching is not.
+ *
+ * TODO Teach the tutor move The decomp calls EventScript_ChooseMoveTutorMon, a party picker that
+ * writes the move onto the chosen monster. There is no party menu or move writing verb, so the
+ * offer ends in the decline line rather than setting FLAG_TUTOR_* on a move the player never got,
+ * and it comes back once there is a way to take it.
  */
-internal object Route4_EventScript_MegaKickTutor : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route4_EventScript_MegaKickTutor")
+private suspend fun moveTutor(
+    ctx: ScriptContext,
+    taughtFlag: String,
+    offer: DialogLine,
+    declined: DialogLine,
+    taught: DialogLine,
+) {
+  if (ctx.isFlagSet(taughtFlag)) return ctx.say(taught)
+  ctx.askYesNo(offer)
+  ctx.say(declined)
 }
 
 internal object Route4_EventScript_MtMoonSign : Script {
