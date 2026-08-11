@@ -2,6 +2,7 @@ package de.fiereu.openmmo.server.game.services
 
 import de.fiereu.openmmo.common.enums.CharacterGender
 import de.fiereu.openmmo.common.enums.Region
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.moves.MoveRegistry
 import de.fiereu.openmmo.net.game.packets.LocalCharacterDeltaPacket
 import de.fiereu.openmmo.pokemon.LearnsetRegistry
@@ -46,6 +47,20 @@ class StoryPlayerMoneyTest :
           player.money(state) shouldBe before - 500
           session.sent.filterIsInstance<LocalCharacterDeltaPacket>().single().money shouldBe
               before - 500
+        }
+      }
+
+      test("the bag reports what it holds") {
+        runTest {
+          val store = CharacterStore(FakeCharacterRepository(), EntityIdService(), backgroundScope)
+          val id = store.createCharacter(1, "Red", CharacterGender.MALE, Region.KANTO).info.id
+          val session = FakeSession(characterId = id)
+          val state = session.attributes[PLAYER_STATE]!!
+          val player = service(store)
+
+          player.itemCount(state, Items.SILPH_SCOPE) shouldBe 0
+          player.giveItem(session, state, Items.SILPH_SCOPE, 1)
+          player.itemCount(state, Items.SILPH_SCOPE) shouldBe 1
         }
       }
 

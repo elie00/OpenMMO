@@ -144,6 +144,10 @@ internal constructor(
   /** Take an item back out of the bag, the decomp removeitem. False when the bag lacks it. */
   fun takeItem(itemId: Int, quantity: Int = 1): Boolean = giveItem(itemId, -quantity)
 
+  /** The decomp checkitem: true when the bag holds at least one of [itemId]. */
+  fun hasItem(itemId: Int): Boolean =
+      checkNotNull(player) { STORY_PLAYER_UNAVAILABLE }.itemCount(state, itemId) > 0
+
   /** What the player is carrying, the decomp checkmoney. */
   val money: Int
     get() = checkNotNull(player) { STORY_PLAYER_UNAVAILABLE }.money(state)

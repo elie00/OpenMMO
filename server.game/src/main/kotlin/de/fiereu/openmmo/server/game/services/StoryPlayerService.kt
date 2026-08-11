@@ -99,6 +99,10 @@ constructor(
     return true
   }
 
+  /** How many of [itemId] the bag holds, the decomp's checkitem. */
+  fun itemCount(state: PlayerState, itemId: Int): Int =
+      state.characterId?.let { characters.getCharacter(it)?.items?.get(itemId) } ?: 0
+
   /** What the player is carrying, the decomp's checkmoney. */
   fun money(state: PlayerState): Int =
       state.characterId?.let { characters.getCharacter(it)?.info?.money } ?: 0

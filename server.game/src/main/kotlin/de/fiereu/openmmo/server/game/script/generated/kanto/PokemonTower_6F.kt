@@ -17,12 +17,16 @@ private const val GHOST_LEVEL = 30
  * The ghost blocking the stairs, which the map's coord events trigger from either tile in front of
  * it while VAR_MAP_SCENE_POKEMON_TOWER_6F is 0.
  *
- * The decomp's StartMarowakBattle is a wild battle that cannot be caught or fled, which is what
- * [ScriptContext.battle] runs. Losing shoves the player back up the stairs.
+ * StartMarowakBattle only unveils the Marowak when the bag holds the Silph Scope; without it the
+ * battle is unwinnable and the player is shoved back up the stairs either way. That is the whole
+ * reason the tower waits on the Rocket hideout, so the check is the fight here.
  */
 internal object PokemonTower_6F_EventScript_MarowakGhost : Script {
   override suspend fun run(ctx: ScriptContext) {
     ctx.sign(PokemonTower_6F.BeGoneIntruders)
+    if (!ctx.hasItem(Items.SILPH_SCOPE)) {
+      return ctx.moveSelf(MovementStep.WALK_UP)
+    }
     if (ctx.battle(MAROWAK, GHOST_LEVEL) != BattleResult.VICTORY) {
       return ctx.moveSelf(MovementStep.WALK_UP)
     }
