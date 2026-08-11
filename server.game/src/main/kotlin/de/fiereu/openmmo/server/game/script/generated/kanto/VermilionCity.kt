@@ -1,6 +1,7 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.VermilionCity
+import de.fiereu.openmmo.server.game.script.MovementStep
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 import de.fiereu.openmmo.story.generated.kanto.KantoFlags
@@ -75,8 +76,50 @@ internal object VermilionCity_EventScript_SnorlaxNotice : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(VermilionCity.SnorlaxBlockingRoute12)
 }
 
+/**
+ * The pier's ticket check, which the map's coord events fire from either tile at the top of it. The
+ * sailor turns a ticketless player around, so the S.S. Anne cannot be boarded early.
+ */
+internal object VermilionCity_EventScript_CheckTicket : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.getVar(KantoVars.VAR_MAP_SCENE_VERMILION_CITY) == SS_ANNE_GONE) {
+      ctx.say(VermilionCity.TheShipSetSail)
+      return walkUpPier(ctx)
+    }
+    ctx.say(VermilionCity.DoYouHaveATicket)
+    if (!ctx.isFlagSet(KantoFlags.FLAG_GOT_SS_TICKET)) {
+      ctx.say(VermilionCity.DontHaveNeededSSTicket)
+      return walkUpPier(ctx)
+    }
+    ctx.say(VermilionCity.FlashedSSTicket)
+    ctx.setVar(KantoVars.VAR_VERMILION_CITY_TICKET_CHECK_TRIGGER, 1)
+  }
+}
+
+internal object VermilionCity_EventScript_CheckTicketLeft : Script {
+  override suspend fun run(ctx: ScriptContext) = VermilionCity_EventScript_CheckTicket.run(ctx)
+}
+
+internal object VermilionCity_EventScript_CheckTicketRight : Script {
+  override suspend fun run(ctx: ScriptContext) = VermilionCity_EventScript_CheckTicket.run(ctx)
+}
+
+/** Walking back off the pier arms the check again. */
+internal object VermilionCity_EventScript_ExitedTicketCheck : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.setVar(KantoVars.VAR_VERMILION_CITY_TICKET_CHECK_TRIGGER, 0)
+}
+
+/** The sailor sends the player back up the pier rather than letting them past. */
+private suspend fun walkUpPier(ctx: ScriptContext) = ctx.moveSelf(MovementStep.WALK_UP)
+
 internal val VermilionCityScripts: Map<String, Script> =
     mapOf(
+        "VermilionCity_EventScript_CheckTicket" to VermilionCity_EventScript_CheckTicket,
+        "VermilionCity_EventScript_CheckTicketLeft" to VermilionCity_EventScript_CheckTicketLeft,
+        "VermilionCity_EventScript_CheckTicketRight" to VermilionCity_EventScript_CheckTicketRight,
+        "VermilionCity_EventScript_ExitedTicketCheck" to
+            VermilionCity_EventScript_ExitedTicketCheck,
         "VermilionCity_EventScript_Woman" to VermilionCity_EventScript_Woman,
         "VermilionCity_EventScript_OldMan1" to VermilionCity_EventScript_OldMan1,
         "VermilionCity_EventScript_OldMan2" to VermilionCity_EventScript_OldMan2,

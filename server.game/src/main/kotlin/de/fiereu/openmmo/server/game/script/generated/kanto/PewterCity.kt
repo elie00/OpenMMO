@@ -98,8 +98,57 @@ internal object PewterCity_EventScript_CitySign : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(PewterCity.CitySign)
 }
 
+// The guides call out to a player walking by, which the map's coord events fire. The decomp picks
+// the escort path from which trigger fired; the escorts are not ported, so all of them lead to the
+// same lines the guide gives when talked to.
+
+internal object PewterCity_EventScript_GymGuideTrigger : Script {
+  override suspend fun run(ctx: ScriptContext) = PewterCity_EventScript_GymGuide.run(ctx)
+}
+
+internal object PewterCity_EventScript_GymGuideTriggerTop : Script {
+  override suspend fun run(ctx: ScriptContext) = PewterCity_EventScript_GymGuideTrigger.run(ctx)
+}
+
+internal object PewterCity_EventScript_GymGuideTriggerMid : Script {
+  override suspend fun run(ctx: ScriptContext) = PewterCity_EventScript_GymGuideTrigger.run(ctx)
+}
+
+internal object PewterCity_EventScript_GymGuideTriggerBottom : Script {
+  override suspend fun run(ctx: ScriptContext) = PewterCity_EventScript_GymGuideTrigger.run(ctx)
+}
+
+internal object PewterCity_EventScript_GymGuideTriggerRight : Script {
+  override suspend fun run(ctx: ScriptContext) = PewterCity_EventScript_GymGuideTrigger.run(ctx)
+}
+
+internal object PewterCity_EventScript_RunningShoesAideTriggerTop : Script {
+  override suspend fun run(ctx: ScriptContext) = PewterCity_EventScript_RunningShoesAide.run(ctx)
+}
+
+internal object PewterCity_EventScript_RunningShoesAideTriggerMid : Script {
+  override suspend fun run(ctx: ScriptContext) = PewterCity_EventScript_RunningShoesAide.run(ctx)
+}
+
+internal object PewterCity_EventScript_RunningShoesAideTriggerBottom : Script {
+  override suspend fun run(ctx: ScriptContext) = PewterCity_EventScript_RunningShoesAide.run(ctx)
+}
+
 internal val PewterCityScripts: Map<String, Script> =
     mapOf(
+        "PewterCity_EventScript_GymGuideTrigger" to PewterCity_EventScript_GymGuideTrigger,
+        "PewterCity_EventScript_GymGuideTriggerTop" to PewterCity_EventScript_GymGuideTriggerTop,
+        "PewterCity_EventScript_GymGuideTriggerMid" to PewterCity_EventScript_GymGuideTriggerMid,
+        "PewterCity_EventScript_GymGuideTriggerBottom" to
+            PewterCity_EventScript_GymGuideTriggerBottom,
+        "PewterCity_EventScript_GymGuideTriggerRight" to
+            PewterCity_EventScript_GymGuideTriggerRight,
+        "PewterCity_EventScript_RunningShoesAideTriggerTop" to
+            PewterCity_EventScript_RunningShoesAideTriggerTop,
+        "PewterCity_EventScript_RunningShoesAideTriggerMid" to
+            PewterCity_EventScript_RunningShoesAideTriggerMid,
+        "PewterCity_EventScript_RunningShoesAideTriggerBottom" to
+            PewterCity_EventScript_RunningShoesAideTriggerBottom,
         "PewterCity_OnTransition" to PewterCity_OnTransition,
         "PewterCity_EventScript_Lass" to PewterCity_EventScript_Lass,
         "PewterCity_EventScript_MuseumGuide" to PewterCity_EventScript_MuseumGuide,

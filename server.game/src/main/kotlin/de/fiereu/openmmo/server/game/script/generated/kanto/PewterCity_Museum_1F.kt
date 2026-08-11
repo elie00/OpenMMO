@@ -1,8 +1,12 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.PewterCity_Museum_1F
+import de.fiereu.openmmo.server.game.script.MovementStep
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoVars
+
+private const val TICKET_PRICE = 50
 
 /**
  * Not ported yet. Decomp body:
@@ -135,8 +139,49 @@ internal object PewterCity_Museum_1F_EventScript_PokemonJournalBrock : Script {
       TODO("port PewterCity_Museum_1F_EventScript_PokemonJournalBrock")
 }
 
+/**
+ * The ticket desk, which the map's coord events fire from each tile inside the door. A visitor who
+ * will not pay is walked back out.
+ */
+internal object PewterCity_Museum_1F_EventScript_EntranceTrigger : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.askYesNo(PewterCity_Museum_1F.Its50YForChildsTicket)) {
+      ctx.say(PewterCity_Museum_1F.ComeAgain)
+      return ctx.moveSelf(MovementStep.WALK_DOWN)
+    }
+    if (!ctx.payMoney(TICKET_PRICE)) {
+      return ctx.say(PewterCity_Museum_1F.DontHaveEnoughMoney)
+    }
+    ctx.say(PewterCity_Museum_1F.Right50YThankYou)
+    ctx.setVar(KantoVars.VAR_MAP_SCENE_PEWTER_CITY_MUSEUM_1F, 1)
+  }
+}
+
+internal object PewterCity_Museum_1F_EventScript_EntranceTriggerLeft : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      PewterCity_Museum_1F_EventScript_EntranceTrigger.run(ctx)
+}
+
+internal object PewterCity_Museum_1F_EventScript_EntranceTriggerMid : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      PewterCity_Museum_1F_EventScript_EntranceTrigger.run(ctx)
+}
+
+internal object PewterCity_Museum_1F_EventScript_EntranceTriggerRight : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      PewterCity_Museum_1F_EventScript_EntranceTrigger.run(ctx)
+}
+
 internal val PewterCity_Museum_1FScripts: Map<String, Script> =
     mapOf(
+        "PewterCity_Museum_1F_EventScript_EntranceTrigger" to
+            PewterCity_Museum_1F_EventScript_EntranceTrigger,
+        "PewterCity_Museum_1F_EventScript_EntranceTriggerLeft" to
+            PewterCity_Museum_1F_EventScript_EntranceTriggerLeft,
+        "PewterCity_Museum_1F_EventScript_EntranceTriggerMid" to
+            PewterCity_Museum_1F_EventScript_EntranceTriggerMid,
+        "PewterCity_Museum_1F_EventScript_EntranceTriggerRight" to
+            PewterCity_Museum_1F_EventScript_EntranceTriggerRight,
         "PewterCity_Museum_1F_EventScript_Scientist1" to
             PewterCity_Museum_1F_EventScript_Scientist1,
         "PewterCity_Museum_1F_EventScript_OldMan" to PewterCity_Museum_1F_EventScript_OldMan,

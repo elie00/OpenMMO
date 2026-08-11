@@ -173,8 +173,14 @@ internal object MtMoon_B2F_EventScript_ItemAntidote : Script {
   }
 }
 
+/** Walking into his line of sight, which the map's coord event fires. */
+internal object MtMoon_B2F_EventScript_MiguelTrigger : Script {
+  override suspend fun run(ctx: ScriptContext) = MtMoon_B2F_EventScript_Miguel.run(ctx)
+}
+
 internal val MtMoon_B2FScripts: Map<String, Script> =
     mapOf(
+        "MtMoon_B2F_EventScript_MiguelTrigger" to MtMoon_B2F_EventScript_MiguelTrigger,
         "MtMoon_B2F_EventScript_DomeFossil" to MtMoon_B2F_EventScript_DomeFossil,
         "MtMoon_B2F_EventScript_HelixFossil" to MtMoon_B2F_EventScript_HelixFossil,
         "MtMoon_B2F_EventScript_Miguel" to MtMoon_B2F_EventScript_Miguel,

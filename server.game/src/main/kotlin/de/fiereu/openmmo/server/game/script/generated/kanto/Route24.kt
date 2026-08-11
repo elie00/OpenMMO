@@ -104,8 +104,24 @@ internal object Route24_EventScript_ItemTM45 : Script {
   }
 }
 
+/** The recruiter blocks the top of the bridge, which the map's two coord events fire. */
+internal object Route24_EventScript_RocketTrigger : Script {
+  override suspend fun run(ctx: ScriptContext) = Route24_EventScript_Rocket.run(ctx)
+}
+
+internal object Route24_EventScript_RocketTriggerLeft : Script {
+  override suspend fun run(ctx: ScriptContext) = Route24_EventScript_RocketTrigger.run(ctx)
+}
+
+internal object Route24_EventScript_RocketTriggerRight : Script {
+  override suspend fun run(ctx: ScriptContext) = Route24_EventScript_RocketTrigger.run(ctx)
+}
+
 internal val Route24Scripts: Map<String, Script> =
     mapOf(
+        "Route24_EventScript_RocketTrigger" to Route24_EventScript_RocketTrigger,
+        "Route24_EventScript_RocketTriggerLeft" to Route24_EventScript_RocketTriggerLeft,
+        "Route24_EventScript_RocketTriggerRight" to Route24_EventScript_RocketTriggerRight,
         "Route24_EventScript_Rocket" to Route24_EventScript_Rocket,
         "Route24_EventScript_Ethan" to Route24_EventScript_Ethan,
         "Route24_EventScript_Reli" to Route24_EventScript_Reli,

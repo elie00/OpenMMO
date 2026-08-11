@@ -5,6 +5,7 @@ import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 import de.fiereu.openmmo.story.generated.kanto.KantoFlags
+import de.fiereu.openmmo.story.generated.kanto.KantoVars
 import de.fiereu.openmmo.trainer.generated.KantoTrainerIds
 
 internal object PokemonTower_5F_EventScript_Ruth : Script {
@@ -67,8 +68,27 @@ internal object PokemonTower_5F_EventScript_ItemCleanseTag : Script {
   }
 }
 
+/**
+ * The purified square by the stairs, which heals the party once per visit. The decomp guards it
+ * with a temp var so it only fires on the way in, and clears that on the way out.
+ */
+internal object PokemonTower_5F_EventScript_PurifiedZone : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.healParty()
+    ctx.sign(PokemonTower_5F.PurifiedZoneMonsFullyHealed)
+    ctx.setVar(KantoVars.VAR_TEMP_1, 1)
+  }
+}
+
+internal object PokemonTower_5F_EventScript_ExitPurifiedZone : Script {
+  override suspend fun run(ctx: ScriptContext) = ctx.setVar(KantoVars.VAR_TEMP_1, 0)
+}
+
 internal val PokemonTower_5FScripts: Map<String, Script> =
     mapOf(
+        "PokemonTower_5F_EventScript_PurifiedZone" to PokemonTower_5F_EventScript_PurifiedZone,
+        "PokemonTower_5F_EventScript_ExitPurifiedZone" to
+            PokemonTower_5F_EventScript_ExitPurifiedZone,
         "PokemonTower_5F_EventScript_Ruth" to PokemonTower_5F_EventScript_Ruth,
         "PokemonTower_5F_EventScript_Tammy" to PokemonTower_5F_EventScript_Tammy,
         "PokemonTower_5F_EventScript_Karina" to PokemonTower_5F_EventScript_Karina,
