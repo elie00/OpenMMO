@@ -1,155 +1,116 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.Route9
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
+import de.fiereu.openmmo.trainer.generated.KantoTrainerIds
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_PICNICKER_ALICIA, Route9_Text_AliciaIntro, Route9_Text_AliciaDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, Route9_EventScript_AliciaRematch
- * msgbox Route9_Text_AliciaPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object Route9_EventScript_Alicia : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route9_EventScript_Alicia")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_PICNICKER_ALICIA,
+          Route9.AliciaIntro,
+          Route9.AliciaDefeat,
+          Route9.AliciaPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_HIKER_JEREMY, Route9_Text_JeremyIntro, Route9_Text_JeremyDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, Route9_EventScript_JeremyRematch
- * msgbox Route9_Text_JeremyPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object Route9_EventScript_Jeremy : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route9_EventScript_Jeremy")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_HIKER_JEREMY,
+          Route9.JeremyIntro,
+          Route9.JeremyDefeat,
+          Route9.JeremyPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_HIKER_ALAN, Route9_Text_AlanIntro, Route9_Text_AlanDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, Route9_EventScript_AlanRematch
- * msgbox Route9_Text_AlanPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object Route9_EventScript_Alan : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route9_EventScript_Alan")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_HIKER_ALAN,
+          Route9.AlanIntro,
+          Route9.AlanDefeat,
+          Route9.AlanPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_CAMPER_CHRIS, Route9_Text_ChrisIntro, Route9_Text_ChrisDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, Route9_EventScript_ChrisRematch
- * msgbox Route9_Text_ChrisPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object Route9_EventScript_Chris : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route9_EventScript_Chris")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_CAMPER_CHRIS,
+          Route9.ChrisIntro,
+          Route9.ChrisDefeat,
+          Route9.ChrisPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_BUG_CATCHER_BRENT, Route9_Text_BrentIntro, Route9_Text_BrentDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, Route9_EventScript_BrentRematch
- * msgbox Route9_Text_BrentPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object Route9_EventScript_Brent : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route9_EventScript_Brent")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_BUG_CATCHER_BRENT,
+          Route9.BrentIntro,
+          Route9.BrentDefeat,
+          Route9.BrentPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_BUG_CATCHER_CONNER, Route9_Text_ConnerIntro, Route9_Text_ConnerDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, Route9_EventScript_ConnerRematch
- * msgbox Route9_Text_ConnerPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object Route9_EventScript_Conner : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route9_EventScript_Conner")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_BUG_CATCHER_CONNER,
+          Route9.ConnerIntro,
+          Route9.ConnerDefeat,
+          Route9.ConnerPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_HIKER_BRICE, Route9_Text_BriceIntro, Route9_Text_BriceDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, Route9_EventScript_BriceRematch
- * msgbox Route9_Text_BricePostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object Route9_EventScript_Brice : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route9_EventScript_Brice")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_HIKER_BRICE,
+          Route9.BriceIntro,
+          Route9.BriceDefeat,
+          Route9.BricePostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_PICNICKER_CAITLIN, Route9_Text_CaitlinIntro, Route9_Text_CaitlinDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, Route9_EventScript_CaitlinRematch
- * msgbox Route9_Text_CaitlinPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object Route9_EventScript_Caitlin : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route9_EventScript_Caitlin")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_PICNICKER_CAITLIN,
+          Route9.CaitlinIntro,
+          Route9.CaitlinDefeat,
+          Route9.CaitlinPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_CAMPER_DREW, Route9_Text_DrewIntro, Route9_Text_DrewDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, Route9_EventScript_DrewRematch
- * msgbox Route9_Text_DrewPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object Route9_EventScript_Drew : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route9_EventScript_Drew")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_CAMPER_DREW,
+          Route9.DrewIntro,
+          Route9.DrewDefeat,
+          Route9.DrewPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_TM40
- * end
- * ```
- */
 internal object Route9_EventScript_ItemTM40 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route9_EventScript_ItemTM40")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.TM40)) return
+    ctx.removeNpc(10)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_ROUTE9_TM40)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_BURN_HEAL
- * end
- * ```
- */
 internal object Route9_EventScript_ItemBurnHeal : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route9_EventScript_ItemBurnHeal")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.BURN_HEAL)) return
+    ctx.removeNpc(11)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_ROUTE9_BURN_HEAL)
+  }
 }
 
 internal object Route9_EventScript_RouteSign : Script {

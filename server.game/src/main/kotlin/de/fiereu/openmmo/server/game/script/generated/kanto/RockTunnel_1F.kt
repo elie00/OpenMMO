@@ -1,125 +1,104 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.RockTunnel_1F
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
+import de.fiereu.openmmo.trainer.generated.KantoTrainerIds
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_PICNICKER_DANA, RockTunnel_1F_Text_DanaIntro, RockTunnel_1F_Text_DanaDefeat
- * msgbox RockTunnel_1F_Text_DanaPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object RockTunnel_1F_EventScript_Dana : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port RockTunnel_1F_EventScript_Dana")
-}
-
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_PICNICKER_ARIANA, RockTunnel_1F_Text_ArianaIntro, RockTunnel_1F_Text_ArianaDefeat
- * msgbox RockTunnel_1F_Text_ArianaPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
-internal object RockTunnel_1F_EventScript_Ariana : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port RockTunnel_1F_EventScript_Ariana")
-}
-
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_PICNICKER_LEAH, RockTunnel_1F_Text_LeahIntro, RockTunnel_1F_Text_LeahDefeat
- * msgbox RockTunnel_1F_Text_LeahPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
-internal object RockTunnel_1F_EventScript_Leah : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port RockTunnel_1F_EventScript_Leah")
-}
-
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_HIKER_LUCAS, RockTunnel_1F_Text_LucasIntro, RockTunnel_1F_Text_LucasDefeat
- * msgbox RockTunnel_1F_Text_LucasPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
-internal object RockTunnel_1F_EventScript_Lucas : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port RockTunnel_1F_EventScript_Lucas")
-}
-
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_HIKER_OLIVER, RockTunnel_1F_Text_OliverIntro, RockTunnel_1F_Text_OliverDefeat
- * msgbox RockTunnel_1F_Text_OliverPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
-internal object RockTunnel_1F_EventScript_Oliver : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port RockTunnel_1F_EventScript_Oliver")
-}
-
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_HIKER_LENNY, RockTunnel_1F_Text_LennyIntro, RockTunnel_1F_Text_LennyDefeat
- * msgbox RockTunnel_1F_Text_LennyPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
-internal object RockTunnel_1F_EventScript_Lenny : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port RockTunnel_1F_EventScript_Lenny")
-}
-
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_POKEMANIAC_ASHTON, RockTunnel_1F_Text_AshtonIntro, RockTunnel_1F_Text_AshtonDefeat
- * msgbox RockTunnel_1F_Text_AshtonPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
-internal object RockTunnel_1F_EventScript_Ashton : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port RockTunnel_1F_EventScript_Ashton")
-}
-
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_REPEL
- * end
- * ```
- */
-internal object RockTunnel_1F_EventScript_ItemRepel : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port RockTunnel_1F_EventScript_ItemRepel")
-}
-
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_PEARL
- * end
- * ```
- */
-internal object RockTunnel_1F_EventScript_ItemPearl : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port RockTunnel_1F_EventScript_ItemPearl")
-}
-
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_ESCAPE_ROPE
- * end
- * ```
- */
-internal object RockTunnel_1F_EventScript_ItemEscapeRope : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port RockTunnel_1F_EventScript_ItemEscapeRope")
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_PICNICKER_DANA,
+          RockTunnel_1F.DanaIntro,
+          RockTunnel_1F.DanaDefeat,
+          RockTunnel_1F.DanaPostBattle,
+      )
+}
+
+internal object RockTunnel_1F_EventScript_Ariana : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_PICNICKER_ARIANA,
+          RockTunnel_1F.ArianaIntro,
+          RockTunnel_1F.ArianaDefeat,
+          RockTunnel_1F.ArianaPostBattle,
+      )
+}
+
+internal object RockTunnel_1F_EventScript_Leah : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_PICNICKER_LEAH,
+          RockTunnel_1F.LeahIntro,
+          RockTunnel_1F.LeahDefeat,
+          RockTunnel_1F.LeahPostBattle,
+      )
+}
+
+internal object RockTunnel_1F_EventScript_Lucas : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_HIKER_LUCAS,
+          RockTunnel_1F.LucasIntro,
+          RockTunnel_1F.LucasDefeat,
+          RockTunnel_1F.LucasPostBattle,
+      )
+}
+
+internal object RockTunnel_1F_EventScript_Oliver : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_HIKER_OLIVER,
+          RockTunnel_1F.OliverIntro,
+          RockTunnel_1F.OliverDefeat,
+          RockTunnel_1F.OliverPostBattle,
+      )
+}
+
+internal object RockTunnel_1F_EventScript_Lenny : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_HIKER_LENNY,
+          RockTunnel_1F.LennyIntro,
+          RockTunnel_1F.LennyDefeat,
+          RockTunnel_1F.LennyPostBattle,
+      )
+}
+
+internal object RockTunnel_1F_EventScript_Ashton : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_POKEMANIAC_ASHTON,
+          RockTunnel_1F.AshtonIntro,
+          RockTunnel_1F.AshtonDefeat,
+          RockTunnel_1F.AshtonPostBattle,
+      )
+}
+
+internal object RockTunnel_1F_EventScript_ItemRepel : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.REPEL)) return
+    ctx.removeNpc(7)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_ROCK_TUNNEL_1F_REPEL)
+  }
+}
+
+internal object RockTunnel_1F_EventScript_ItemPearl : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.PEARL)) return
+    ctx.removeNpc(8)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_ROCK_TUNNEL_1F_PEARL)
+  }
+}
+
+internal object RockTunnel_1F_EventScript_ItemEscapeRope : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.ESCAPE_ROPE)) return
+    ctx.removeNpc(9)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_ROCK_TUNNEL_1F_ESCAPE_ROPE)
+  }
 }
 
 internal object RockTunnel_1F_EventScript_RouteSign : Script {

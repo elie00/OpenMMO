@@ -1,77 +1,64 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.dialog.generated.kanto.PokemonTower_4F
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
+import de.fiereu.openmmo.trainer.generated.KantoTrainerIds
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_CHANNELER_LAUREL, PokemonTower_4F_Text_LaurelIntro, PokemonTower_4F_Text_LaurelDefeat
- * msgbox PokemonTower_4F_Text_LaurelPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object PokemonTower_4F_EventScript_Laurel : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PokemonTower_4F_EventScript_Laurel")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_CHANNELER_LAUREL,
+          PokemonTower_4F.LaurelIntro,
+          PokemonTower_4F.LaurelDefeat,
+          PokemonTower_4F.LaurelPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_CHANNELER_JODY, PokemonTower_4F_Text_JodyIntro, PokemonTower_4F_Text_JodyDefeat
- * msgbox PokemonTower_4F_Text_JodyPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object PokemonTower_4F_EventScript_Jody : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PokemonTower_4F_EventScript_Jody")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_CHANNELER_JODY,
+          PokemonTower_4F.JodyIntro,
+          PokemonTower_4F.JodyDefeat,
+          PokemonTower_4F.JodyPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_CHANNELER_PAULA, PokemonTower_4F_Text_PaulaIntro, PokemonTower_4F_Text_PaulaDefeat
- * msgbox PokemonTower_4F_Text_PaulaPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object PokemonTower_4F_EventScript_Paula : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PokemonTower_4F_EventScript_Paula")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_CHANNELER_PAULA,
+          PokemonTower_4F.PaulaIntro,
+          PokemonTower_4F.PaulaDefeat,
+          PokemonTower_4F.PaulaPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_ELIXIR
- * end
- * ```
- */
 internal object PokemonTower_4F_EventScript_ItemElixir : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PokemonTower_4F_EventScript_ItemElixir")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.ELIXIR)) return
+    ctx.removeNpc(3)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_POKEMON_TOWER_4F_ELIXIR)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_AWAKENING
- * end
- * ```
- */
 internal object PokemonTower_4F_EventScript_ItemAwakening : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port PokemonTower_4F_EventScript_ItemAwakening")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.AWAKENING)) return
+    ctx.removeNpc(4)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_POKEMON_TOWER_4F_AWAKENING)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_GREAT_BALL
- * end
- * ```
- */
 internal object PokemonTower_4F_EventScript_ItemGreatBall : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port PokemonTower_4F_EventScript_ItemGreatBall")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.GREAT_BALL)) return
+    ctx.removeNpc(5)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_POKEMON_TOWER_4F_GREAT_BALL)
+  }
 }
 
 internal val PokemonTower_4FScripts: Map<String, Script> =

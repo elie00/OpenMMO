@@ -1,6 +1,5 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
-import de.fiereu.openmmo.common.dialog.DialogLine
 import de.fiereu.openmmo.dialog.generated.kanto.Misc
 import de.fiereu.openmmo.dialog.generated.kanto.Route4
 import de.fiereu.openmmo.items.generated.Items
@@ -58,26 +57,6 @@ internal object Route4_EventScript_MegaKickTutor : Script {
           Misc.Text_MegaKickDeclined,
           Misc.Text_MegaKickTaught,
       )
-}
-
-/**
- * A one shot move tutor. The offer and both refusals are here, teaching is not.
- *
- * TODO Teach the tutor move The decomp calls EventScript_ChooseMoveTutorMon, a party picker that
- * writes the move onto the chosen monster. There is no party menu or move writing verb, so the
- * offer ends in the decline line rather than setting FLAG_TUTOR_* on a move the player never got,
- * and it comes back once there is a way to take it.
- */
-private suspend fun moveTutor(
-    ctx: ScriptContext,
-    taughtFlag: String,
-    offer: DialogLine,
-    declined: DialogLine,
-    taught: DialogLine,
-) {
-  if (ctx.isFlagSet(taughtFlag)) return ctx.say(taught)
-  ctx.askYesNo(offer)
-  ctx.say(declined)
 }
 
 internal object Route4_EventScript_MtMoonSign : Script {
