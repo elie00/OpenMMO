@@ -8,6 +8,10 @@ import de.fiereu.openmmo.server.game.script.ScriptContext
 import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 import de.fiereu.openmmo.trainer.generated.KantoTrainerIds
 
+private const val KANTO = 0
+private const val CERULEAN_CITY_BANK = 3
+private const val CERULEAN_CITY_MAP = 3
+
 internal object CeruleanCity_Gym_EventScript_Luis : Script {
   override suspend fun run(ctx: ScriptContext) =
       ctx.trainerBattle(
@@ -48,9 +52,8 @@ internal object CeruleanCity_Gym_EventScript_MistyDefeated : Script {
   override suspend fun run(ctx: ScriptContext) {
     ctx.setFlag(KantoFlags.FLAG_DEFEATED_MISTY)
     ctx.setFlag(KantoFlags.FLAG_BADGE02_GET)
-    // TODO Move the respawn point to Cerulean City
-    //  The decomp's setrespawn sends a whiteout here instead of back to Pewter. There is no
-    //  respawn verb, so a beaten player still wakes up wherever they started.
+    // setrespawn HEAL_LOCATION_CERULEAN_CITY, the tile its table names.
+    ctx.setRespawn(KANTO, CERULEAN_CITY_BANK, CERULEAN_CITY_MAP, x = 22, y = 20)
     // set_gym_trainers 2: this gym's two trainers are retired along with its leader.
     ctx.markTrainerBeaten(KantoTrainerIds.TRAINER_PICNICKER_DIANA)
     ctx.markTrainerBeaten(KantoTrainerIds.TRAINER_SWIMMER_MALE_LUIS)

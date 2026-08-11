@@ -1,6 +1,8 @@
 package de.fiereu.openmmo.server.game.script
 
+import de.fiereu.openmmo.common.DynamicWarp
 import de.fiereu.openmmo.common.enums.CharacterGender
+import de.fiereu.openmmo.common.enums.Direction
 import de.fiereu.openmmo.common.enums.Region
 import de.fiereu.openmmo.maps.MapManager
 import de.fiereu.openmmo.moves.MoveRegistry
@@ -8,6 +10,7 @@ import de.fiereu.openmmo.net.game.packets.NpcUpdatePacket
 import de.fiereu.openmmo.pokemon.LearnsetRegistry
 import de.fiereu.openmmo.pokemon.SpeciesRegistry
 import de.fiereu.openmmo.server.game.battle.WildMonFactory
+import de.fiereu.openmmo.server.game.script.generated.kanto.CeruleanCity_Gym_EventScript_MistyDefeated
 import de.fiereu.openmmo.server.game.script.generated.kanto.PalletTown_OnTransition
 import de.fiereu.openmmo.server.game.script.generated.kanto.PalletTown_ProfessorOaksLab_OnTransition
 import de.fiereu.openmmo.server.game.script.generated.kanto.PalletTown_RivalsHouse_OnTransition
@@ -15,6 +18,7 @@ import de.fiereu.openmmo.server.game.script.generated.kanto.PewterCity_Gym_Event
 import de.fiereu.openmmo.server.game.script.generated.kanto.ViridianCity_OnTransition
 import de.fiereu.openmmo.server.game.services.DialogService
 import de.fiereu.openmmo.server.game.services.NpcService
+import de.fiereu.openmmo.server.game.services.RespawnPoint
 import de.fiereu.openmmo.server.game.services.ScriptMovementService
 import de.fiereu.openmmo.server.game.services.StoryPlayerService
 import de.fiereu.openmmo.server.game.services.StoryService
@@ -43,6 +47,8 @@ private const val RIVALS_HOUSE_MAP = 2
 private const val VIRIDIAN_CITY_MAP = 1
 private const val PEWTER_GYM_BANK = 6
 private const val PEWTER_GYM_MAP = 2
+private const val CERULEAN_GYM_BANK = 7
+private const val CERULEAN_GYM_MAP = 5
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class KantoStoryScriptTest :
@@ -178,6 +184,31 @@ class KantoStoryScriptTest :
           ctx.hasBeatenTrainer(KantoTrainerIds.TRAINER_CAMPER_LIAM) shouldBe true
           ctx.isFlagSet(KantoFlags.FLAG_HIDE_PEWTER_CITY_GYM_GUIDE) shouldBe true
           ctx.isFlagSet(KantoFlags.FLAG_HIDE_PEWTER_CITY_RUNNING_SHOES_GUY) shouldBe false
+        }
+      }
+
+      test("a fresh character respawns at home until a gym moves the point") {
+        runTest {
+          val store = CharacterStore(FakeCharacterRepository(), EntityIdService(), backgroundScope)
+          val story = StoryService(store)
+          val (session, ctx) = context(store, story, CERULEAN_GYM_BANK, CERULEAN_GYM_MAP)
+          val charId = session.attributes[PLAYER_STATE]!!.characterId!!
+
+          RespawnPoint.of(store.getCharacter(charId)!!.storyVars) shouldBe
+              DynamicWarp(KANTO.toByte(), 3, 0, 6, 8, Direction.DOWN)
+
+          val scene = launch { CeruleanCity_Gym_EventScript_MistyDefeated.run(ctx) }
+          var boxes = 0
+          while (!scene.isCompleted && boxes++ < 10) {
+            advanceUntilIdle()
+            session.attributes[PENDING_DIALOG]?.complete(Unit)
+          }
+          advanceUntilIdle()
+          scene.join()
+
+          // HEAL_LOCATION_CERULEAN_CITY, so losing no longer sends the player back to Pallet Town.
+          RespawnPoint.of(store.getCharacter(charId)!!.storyVars) shouldBe
+              DynamicWarp(KANTO.toByte(), 3, 3, 22, 20, Direction.DOWN)
         }
       }
     })

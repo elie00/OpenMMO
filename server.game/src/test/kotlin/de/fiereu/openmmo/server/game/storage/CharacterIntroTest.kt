@@ -1,7 +1,10 @@
 package de.fiereu.openmmo.server.game.storage
 
+import de.fiereu.openmmo.common.DynamicWarp
 import de.fiereu.openmmo.common.enums.CharacterGender
+import de.fiereu.openmmo.common.enums.Direction
 import de.fiereu.openmmo.common.enums.Region
+import de.fiereu.openmmo.server.game.services.RespawnPoint
 import de.fiereu.openmmo.server.game.testsupport.FakeCharacterRepository
 import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 import de.fiereu.openmmo.story.generated.hoenn.HoennVars
@@ -67,7 +70,10 @@ class CharacterIntroTest :
           character.info.positionY shouldBe 6
           // Kanto has no truck ride, so nothing depends on the player's dynamic warp yet.
           character.info.dynamicWarp shouldBe null
-          character.storyVars shouldBe emptyMap()
+          // The only story var a new FireRed game carries is where a whiteout puts the player.
+          RespawnPoint.of(character.storyVars) shouldBe
+              DynamicWarp(
+                  regionId = 0, bankId = 3, mapId = 0, x = 6, y = 8, facing = Direction.DOWN)
           // Oak waits in the grass rather than in his lab or in town.
           (KantoFlags.FLAG_HIDE_OAK_IN_HIS_LAB in character.storyFlags) shouldBe true
           (KantoFlags.FLAG_HIDE_OAK_IN_PALLET_TOWN in character.storyFlags) shouldBe true

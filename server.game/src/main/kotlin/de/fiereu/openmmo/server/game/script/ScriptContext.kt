@@ -12,6 +12,7 @@ import de.fiereu.openmmo.server.game.services.BattleService
 import de.fiereu.openmmo.server.game.services.DialogPresentation
 import de.fiereu.openmmo.server.game.services.DialogService
 import de.fiereu.openmmo.server.game.services.MapEntryScripts
+import de.fiereu.openmmo.server.game.services.RespawnPoint
 import de.fiereu.openmmo.server.game.services.ScriptMovementService
 import de.fiereu.openmmo.server.game.services.ScriptWarpService
 import de.fiereu.openmmo.server.game.services.StoryClientState
@@ -253,6 +254,19 @@ internal constructor(
 
   /** Remove a cutscene npc and its collision (`removeobject`). */
   fun removeNpc(localId: Int) = movement.removeNpc(session, state, localId)
+
+  /**
+   * The decomp `setrespawn`: where this player wakes up after a whiteout. Gyms set it as the badge
+   * is won, so it follows the player forward through the region.
+   *
+   * TODO Send the player here when they lose Losing a battle currently just ends it, so the point
+   * is recorded and persisted but nothing acts on it yet. Making it real means healing the party
+   * and warping on BattleResult.DEFEAT, which needs a coroutine scope in BattleService and a look
+   * at what the client expects after the battle end packet.
+   */
+  fun setRespawn(regionId: Int, bankId: Int, mapId: Int, x: Int, y: Int) {
+    RespawnPoint.vars(regionId, bankId, mapId, x, y).forEach { (key, value) -> setVar(key, value) }
+  }
 
   /** Set where a MAP_DYNAMIC warp sends this player (the decomp setdynamicwarp). */
   fun setDynamicWarp(regionId: Int, bankId: Int, mapId: Int, x: Int, y: Int, facing: Direction) =

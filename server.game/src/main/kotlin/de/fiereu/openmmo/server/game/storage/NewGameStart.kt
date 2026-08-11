@@ -3,6 +3,7 @@ package de.fiereu.openmmo.server.game.storage
 import de.fiereu.openmmo.common.DynamicWarp
 import de.fiereu.openmmo.common.enums.Direction
 import de.fiereu.openmmo.common.enums.Region
+import de.fiereu.openmmo.server.game.services.RespawnPoint
 import de.fiereu.openmmo.story.generated.hoenn.HoennFlags
 import de.fiereu.openmmo.story.generated.hoenn.HoennVars
 import de.fiereu.openmmo.story.generated.kanto.KantoFlags
@@ -69,5 +70,9 @@ internal object NewGameStarts {
           x = 6,
           y = 6,
           storyFlags = KantoFlags.initiallySet,
+          // HEAL_LOCATION_PALLET_TOWN, the tile its table names in Pallet Town itself. The source
+          // game then walks a beaten player inside to mom, which needs the respawn npc's position
+          // rather than the heal location's own.
+          storyVars = RespawnPoint.vars(Region.KANTO.wireValue.toInt(), 3, 0, 6, 8),
       )
 }
