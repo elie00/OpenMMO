@@ -1,119 +1,107 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.dialog.generated.kanto.Route24
+import de.fiereu.openmmo.items.generated.Items
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
+import de.fiereu.openmmo.story.generated.kanto.KantoVars
+import de.fiereu.openmmo.trainer.generated.KantoTrainerIds
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lock
- * faceplayer
- * goto_if_eq VAR_MAP_SCENE_ROUTE24, 1, Route24_EventScript_RocketPostBattle
- * msgbox Route24_Text_JustEarnedFabulousPrize
- * checkitemspace ITEM_NUGGET
- * goto_if_eq VAR_RESULT, FALSE, Route24_EventScript_NoRoomForNugget
- * call Route24_EventScript_BattleRocket
- * release
- * end
- * ```
- */
+private const val LOCALID_TM45_BALL = 7
+
+// The six trainers up the bridge each ask ShouldTryRematchBattle before their post battle line,
+// which only the Vs Seeker can answer TRUE, so each takes the branch a fresh save takes.
+
+/** The prize at the top of Nugget Bridge, which turns out to be a Rocket recruiter. */
 internal object Route24_EventScript_Rocket : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route24_EventScript_Rocket")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.getVar(KantoVars.VAR_MAP_SCENE_ROUTE24) == 1) {
+      return ctx.say(Route24.YoudBecomeTopRocketLeader)
+    }
+    ctx.say(Route24.JustEarnedFabulousPrize)
+    if (!ctx.giveItem(Items.NUGGET)) {
+      return ctx.say(Route24.YouDontHaveAnyRoom)
+    }
+    ctx.say(Route24.ReceivedNuggetFromMysteryTrainer)
+    // trainerbattle_no_intro: the recruitment pitch is the intro box.
+    ctx.say(Route24.JoinTeamRocket)
+    if (ctx.trainerBattle(KantoTrainerIds.TRAINER_TEAM_ROCKET_GRUNT_6) != BattleResult.VICTORY) {
+      return
+    }
+    ctx.say(Route24.RocketDefeat)
+    ctx.say(Route24.YoudBecomeTopRocketLeader)
+    ctx.setVar(KantoVars.VAR_MAP_SCENE_ROUTE24, 1)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_CAMPER_ETHAN, Route24_Text_EthanIntro, Route24_Text_EthanDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, Route24_EventScript_EthanRematch
- * msgbox Route24_Text_EthanPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object Route24_EventScript_Ethan : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route24_EventScript_Ethan")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_CAMPER_ETHAN,
+          Route24.EthanIntro,
+          Route24.EthanDefeat,
+          Route24.EthanPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_LASS_RELI, Route24_Text_ReliIntro, Route24_Text_ReliDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, Route24_EventScript_ReliRematch
- * msgbox Route24_Text_ReliPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object Route24_EventScript_Reli : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route24_EventScript_Reli")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_LASS_RELI,
+          Route24.ReliIntro,
+          Route24.ReliDefeat,
+          Route24.ReliPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_YOUNGSTER_TIMMY, Route24_Text_TimmyIntro, Route24_Text_TimmyDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, Route24_EventScript_TimmyRematch
- * msgbox Route24_Text_TimmyPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object Route24_EventScript_Timmy : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route24_EventScript_Timmy")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_YOUNGSTER_TIMMY,
+          Route24.TimmyIntro,
+          Route24.TimmyDefeat,
+          Route24.TimmyPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_LASS_ALI, Route24_Text_AliIntro, Route24_Text_AliDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, Route24_EventScript_AliRematch
- * msgbox Route24_Text_AliPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object Route24_EventScript_Ali : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route24_EventScript_Ali")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_LASS_ALI,
+          Route24.AliIntro,
+          Route24.AliDefeat,
+          Route24.AliPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_BUG_CATCHER_CALE, Route24_Text_CaleIntro, Route24_Text_CaleDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, Route24_EventScript_CaleRematch
- * msgbox Route24_Text_CalePostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object Route24_EventScript_Cale : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route24_EventScript_Cale")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_BUG_CATCHER_CALE,
+          Route24.CaleIntro,
+          Route24.CaleDefeat,
+          Route24.CalePostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_CAMPER_SHANE, Route24_Text_ShaneIntro, Route24_Text_ShaneDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, Route24_EventScript_ShaneRematch
- * msgbox Route24_Text_ShanePostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object Route24_EventScript_Shane : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route24_EventScript_Shane")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_CAMPER_SHANE,
+          Route24.ShaneIntro,
+          Route24.ShaneDefeat,
+          Route24.ShanePostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_TM45
- * end
- * ```
- */
 internal object Route24_EventScript_ItemTM45 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route24_EventScript_ItemTM45")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.TM45)) return
+    ctx.removeNpc(LOCALID_TM45_BALL)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_ROUTE24_TM45)
+  }
 }
 
 internal val Route24Scripts: Map<String, Script> =
