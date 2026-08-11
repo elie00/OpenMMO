@@ -1,48 +1,38 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.dialog.generated.kanto.Route21_North
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.KantoTrainerIds
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_FISHERMAN_RONALD, Route21_North_Text_RonaldIntro, Route21_North_Text_RonaldDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, Route21_North_EventScript_RonaldRematch
- * msgbox Route21_North_Text_RonaldPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object Route21_North_EventScript_Ronald : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route21_North_EventScript_Ronald")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_FISHERMAN_RONALD,
+          Route21_North.RonaldIntro,
+          Route21_North.RonaldDefeat,
+          Route21_North.RonaldPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_FISHERMAN_WADE, Route21_North_Text_WadeIntro, Route21_North_Text_WadeDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, Route21_North_EventScript_WadeRematch
- * msgbox Route21_North_Text_WadePostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object Route21_North_EventScript_Wade : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route21_North_EventScript_Wade")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_FISHERMAN_WADE,
+          Route21_North.WadeIntro,
+          Route21_North.WadeDefeat,
+          Route21_North.WadePostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_SWIMMER_MALE_SPENCER, Route21_North_Text_SpencerIntro, Route21_North_Text_SpencerDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, Route21_North_EventScript_SpencerRematch
- * msgbox Route21_North_Text_SpencerPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object Route21_North_EventScript_Spencer : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route21_North_EventScript_Spencer")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_SWIMMER_MALE_SPENCER,
+          Route21_North.SpencerIntro,
+          Route21_North.SpencerDefeat,
+          Route21_North.SpencerPostBattle,
+      )
 }
 
 /**

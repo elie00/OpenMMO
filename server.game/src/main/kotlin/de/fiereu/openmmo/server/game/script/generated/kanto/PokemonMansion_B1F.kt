@@ -1,100 +1,70 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.PokemonMansion_B1F
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
+import de.fiereu.openmmo.trainer.generated.KantoTrainerIds
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_TM22
- * end
- * ```
- */
 internal object PokemonMansion_B1F_EventScript_ItemTM22 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port PokemonMansion_B1F_EventScript_ItemTM22")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.TM22)) return
+    ctx.removeNpc(0)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_POKEMON_MANSION_B1F_TM22)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_BURGLAR_LEWIS, PokemonMansion_B1F_Text_LewisIntro, PokemonMansion_B1F_Text_LewisDefeat
- * msgbox PokemonMansion_B1F_Text_LewisPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object PokemonMansion_B1F_EventScript_Lewis : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PokemonMansion_B1F_EventScript_Lewis")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_BURGLAR_LEWIS,
+          PokemonMansion_B1F.LewisIntro,
+          PokemonMansion_B1F.LewisDefeat,
+          PokemonMansion_B1F.LewisPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_SCIENTIST_IVAN, PokemonMansion_B1F_Text_IvanIntro, PokemonMansion_B1F_Text_IvanDefeat
- * msgbox PokemonMansion_B1F_Text_IvanPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object PokemonMansion_B1F_EventScript_Ivan : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PokemonMansion_B1F_EventScript_Ivan")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_SCIENTIST_IVAN,
+          PokemonMansion_B1F.IvanIntro,
+          PokemonMansion_B1F.IvanDefeat,
+          PokemonMansion_B1F.IvanPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_TM14
- * end
- * ```
- */
 internal object PokemonMansion_B1F_EventScript_ItemTM14 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port PokemonMansion_B1F_EventScript_ItemTM14")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.TM14)) return
+    ctx.removeNpc(3)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_POKEMON_MANSION_B1F_TM14)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_FULL_RESTORE
- * end
- * ```
- */
 internal object PokemonMansion_B1F_EventScript_ItemFullRestore : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port PokemonMansion_B1F_EventScript_ItemFullRestore")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.FULL_RESTORE)) return
+    ctx.removeNpc(4)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_POKEMON_MANSION_B1F_FULL_RESTORE)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_SECRET_KEY
- * end
- * ```
- */
 internal object PokemonMansion_B1F_EventScript_ItemSecretKey : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port PokemonMansion_B1F_EventScript_ItemSecretKey")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.SECRET_KEY)) return
+    ctx.removeNpc(5)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_POKEMON_MANSION_B1F_SECRET_KEY)
+  }
 }
 
 internal object PokemonMansion_B1F_EventScript_DiarySep1st : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(PokemonMansion_B1F.MewtwoIsFarTooPowerful)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lockall
- * setvar VAR_0x8004, 3
- * call PokemonMansion_EventScript_SecretSwitch
- * playse SE_UNLOCK
- * special DrawWholeMapView
- * waitse
- * releaseall
- * end
- * ```
- */
 internal object PokemonMansion_B1F_EventScript_Statue : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PokemonMansion_B1F_EventScript_Statue")
+  override suspend fun run(ctx: ScriptContext) = pokemonMansionSwitch(ctx)
 }
 
 internal val PokemonMansion_B1FScripts: Map<String, Script> =

@@ -1,8 +1,10 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.SeafoamIslands_B4F
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 
 /**
  * Not ported yet. Decomp body:
@@ -38,16 +40,12 @@ internal object SeafoamIslands_B4F_EventScript_Articuno : Script {
       TODO("port SeafoamIslands_B4F_EventScript_Articuno")
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_ULTRA_BALL
- * end
- * ```
- */
 internal object SeafoamIslands_B4F_EventScript_ItemUltraBall : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SeafoamIslands_B4F_EventScript_ItemUltraBall")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.ULTRA_BALL)) return
+    ctx.removeNpc(3)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_SEAFOAM_ISLANDS_B4F_ULTRA_BALL)
+  }
 }
 
 internal object SeafoamIslands_B4F_EventScript_FastCurrentSign : Script {

@@ -1,70 +1,48 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.PokemonMansion_1F
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
+import de.fiereu.openmmo.trainer.generated.KantoTrainerIds
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_BURGLAR_ARNIE, PokemonMansion_1F_Text_ArnieIntro, PokemonMansion_1F_Text_ArnieDefeat
- * msgbox PokemonMansion_1F_Text_ArniePostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object PokemonMansion_2F_EventScript_Arnie : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PokemonMansion_2F_EventScript_Arnie")
-}
-
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_CALCIUM
- * end
- * ```
- */
-internal object PokemonMansion_2F_EventScript_ItemCalcium : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port PokemonMansion_2F_EventScript_ItemCalcium")
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_BURGLAR_ARNIE,
+          PokemonMansion_1F.ArnieIntro,
+          PokemonMansion_1F.ArnieDefeat,
+          PokemonMansion_1F.ArniePostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_ZINC
- * end
- * ```
- */
+internal object PokemonMansion_2F_EventScript_ItemCalcium : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.CALCIUM)) return
+    ctx.removeNpc(1)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_POKEMON_MANSION_2F_CALCIUM)
+  }
+}
+
 internal object PokemonMansion_2F_EventScript_ItemZinc : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PokemonMansion_2F_EventScript_ItemZinc")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.ZINC)) return
+    ctx.removeNpc(2)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_POKEMON_MANSION_2F_ZINC)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_HP_UP
- * end
- * ```
- */
 internal object PokemonMansion_2F_EventScript_ItemHPUp : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PokemonMansion_2F_EventScript_ItemHPUp")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.HP_UP)) return
+    ctx.removeNpc(3)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_POKEMON_MANSION_2F_HP_UP)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lockall
- * setvar VAR_0x8004, 1
- * call PokemonMansion_EventScript_SecretSwitch
- * playse SE_UNLOCK
- * special DrawWholeMapView
- * waitse
- * releaseall
- * end
- * ```
- */
 internal object PokemonMansion_2F_EventScript_Statue : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PokemonMansion_2F_EventScript_Statue")
+  override suspend fun run(ctx: ScriptContext) = pokemonMansionSwitch(ctx)
 }
 
 internal object PokemonMansion_2F_EventScript_DiaryJuly10th : Script {

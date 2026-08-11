@@ -1,324 +1,304 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.common.dialog.DialogLine
+import de.fiereu.openmmo.dialog.generated.kanto.CinnabarIsland_Gym
+import de.fiereu.openmmo.items.generated.Items
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
+import de.fiereu.openmmo.trainer.generated.KantoTrainerIds
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_BURGLAR_QUINN, CinnabarIsland_Gym_Text_QuinnIntro, CinnabarIsland_Gym_Text_QuinnDefeat, CinnabarIsland_Gym_EventScript_DefeatedQuinn
- * msgbox CinnabarIsland_Gym_Text_QuinnPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object CinnabarIsland_Gym_EventScript_Quinn : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port CinnabarIsland_Gym_EventScript_Quinn")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_BURGLAR_QUINN,
+          CinnabarIsland_Gym.QuinnIntro,
+          CinnabarIsland_Gym.QuinnDefeat,
+          CinnabarIsland_Gym.QuinnPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_SUPER_NERD_ERIK, CinnabarIsland_Gym_Text_ErikIntro, CinnabarIsland_Gym_Text_ErikDefeat
- * msgbox CinnabarIsland_Gym_Text_ErikPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object CinnabarIsland_Gym_EventScript_Erik : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port CinnabarIsland_Gym_EventScript_Erik")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_SUPER_NERD_ERIK,
+          CinnabarIsland_Gym.ErikIntro,
+          CinnabarIsland_Gym.ErikDefeat,
+          CinnabarIsland_Gym.ErikPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_SUPER_NERD_AVERY, CinnabarIsland_Gym_Text_AveryIntro, CinnabarIsland_Gym_Text_AveryDefeat, CinnabarIsland_Gym_EventScript_DefeatedAvery
- * msgbox CinnabarIsland_Gym_Text_AveryPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object CinnabarIsland_Gym_EventScript_Avery : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port CinnabarIsland_Gym_EventScript_Avery")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_SUPER_NERD_AVERY,
+          CinnabarIsland_Gym.AveryIntro,
+          CinnabarIsland_Gym.AveryDefeat,
+          CinnabarIsland_Gym.AveryPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_BURGLAR_RAMON, CinnabarIsland_Gym_Text_RamonIntro, CinnabarIsland_Gym_Text_RamonDefeat, CinnabarIsland_Gym_EventScript_DefeatedRamon
- * msgbox CinnabarIsland_Gym_Text_RamonPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object CinnabarIsland_Gym_EventScript_Ramon : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port CinnabarIsland_Gym_EventScript_Ramon")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_BURGLAR_RAMON,
+          CinnabarIsland_Gym.RamonIntro,
+          CinnabarIsland_Gym.RamonDefeat,
+          CinnabarIsland_Gym.RamonPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_SUPER_NERD_DEREK, CinnabarIsland_Gym_Text_DerekIntro, CinnabarIsland_Gym_Text_DerekDefeat, CinnabarIsland_Gym_EventScript_DefeatedDerek
- * famechecker FAMECHECKER_BLAINE, 2
- * msgbox CinnabarIsland_Gym_Text_DerekPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object CinnabarIsland_Gym_EventScript_Derek : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port CinnabarIsland_Gym_EventScript_Derek")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_SUPER_NERD_DEREK,
+          CinnabarIsland_Gym.DerekIntro,
+          CinnabarIsland_Gym.DerekDefeat,
+          CinnabarIsland_Gym.DerekPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_BURGLAR_DUSTY, CinnabarIsland_Gym_Text_DustyIntro, CinnabarIsland_Gym_Text_DustyDefeat, CinnabarIsland_Gym_EventScript_DefeatedDusty
- * msgbox CinnabarIsland_Gym_Text_DustyPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object CinnabarIsland_Gym_EventScript_Dusty : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port CinnabarIsland_Gym_EventScript_Dusty")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_BURGLAR_DUSTY,
+          CinnabarIsland_Gym.DustyIntro,
+          CinnabarIsland_Gym.DustyDefeat,
+          CinnabarIsland_Gym.DustyPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_SUPER_NERD_ZAC, CinnabarIsland_Gym_Text_ZacIntro, CinnabarIsland_Gym_Text_ZacDefeat, CinnabarIsland_Gym_EventScript_DefeatedZac
- * msgbox CinnabarIsland_Gym_Text_ZacPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object CinnabarIsland_Gym_EventScript_Zac : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port CinnabarIsland_Gym_EventScript_Zac")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_SUPER_NERD_ZAC,
+          CinnabarIsland_Gym.ZacIntro,
+          CinnabarIsland_Gym.ZacDefeat,
+          CinnabarIsland_Gym.ZacPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * famechecker FAMECHECKER_BLAINE, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
- * trainerbattle_single TRAINER_LEADER_BLAINE, CinnabarIsland_Gym_Text_BlaineIntro, CinnabarIsland_Gym_Text_BlaineDefeat, CinnabarIsland_Gym_EventScript_DefeatedBlaine, NO_MUSIC
- * goto_if_unset FLAG_GOT_TM38_FROM_BLAINE, CinnabarIsland_Gym_EventScript_GiveTM38
- * msgbox CinnabarIsland_Gym_Text_BlainePostBattle
- * release
- * end
- * ```
- */
 internal object CinnabarIsland_Gym_EventScript_Blaine : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port CinnabarIsland_Gym_EventScript_Blaine")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.hasBeatenTrainer(KantoTrainerIds.TRAINER_LEADER_BLAINE)) {
+      ctx.say(CinnabarIsland_Gym.BlaineIntro)
+      if (ctx.trainerBattle(KantoTrainerIds.TRAINER_LEADER_BLAINE) != BattleResult.VICTORY) return
+      ctx.say(CinnabarIsland_Gym.BlaineDefeat)
+      return CinnabarIsland_Gym_EventScript_DefeatedBlaine.run(ctx)
+    }
+    if (!ctx.isFlagSet(KantoFlags.FLAG_GOT_TM38_FROM_BLAINE)) {
+      return CinnabarIsland_Gym_EventScript_GiveTM38.run(ctx)
+    }
+    ctx.say(CinnabarIsland_Gym.BlainePostBattle)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lock
- * faceplayer
- * goto_if_set FLAG_DEFEATED_BLAINE, CinnabarIsland_Gym_EventScript_GymGuyPostVictory
- * msgbox CinnabarIsland_Gym_Text_GymGuyAdvice
- * release
- * end
- * ```
- */
 internal object CinnabarIsland_Gym_EventScript_GymGuy : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port CinnabarIsland_Gym_EventScript_GymGuy")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(KantoFlags.FLAG_DEFEATED_BLAINE)) {
+      return ctx.say(CinnabarIsland_Gym.GymGuyPostVictory)
+    }
+    ctx.say(CinnabarIsland_Gym.GymGuyAdvice)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lockall
- * goto_if_set FLAG_BADGE07_GET, CinnabarIsland_Gym_EventScript_GymStatuePostVictory
- * msgbox CinnabarIsland_Gym_Text_GymStatue
- * releaseall
- * end
- * ```
- */
 internal object CinnabarIsland_Gym_EventScript_GymStatue : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port CinnabarIsland_Gym_EventScript_GymStatue")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(KantoFlags.FLAG_BADGE07_GET)) {
+      return ctx.sign(CinnabarIsland_Gym.GymStatuePlayerWon)
+    }
+    ctx.sign(CinnabarIsland_Gym.GymStatue)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lockall
- * setvar VAR_TEMP_1, 0
- * goto CinnabarIsland_Gym_EventScript_Quiz1
- * end
- * ```
- */
 internal object CinnabarIsland_Gym_EventScript_Quz1Left : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port CinnabarIsland_Gym_EventScript_Quz1Left")
+  override suspend fun run(ctx: ScriptContext) = quiz1(ctx)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lockall
- * setvar VAR_TEMP_1, 1
- * goto CinnabarIsland_Gym_EventScript_Quiz1
- * end
- * ```
- */
 internal object CinnabarIsland_Gym_EventScript_Quz1Right : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port CinnabarIsland_Gym_EventScript_Quz1Right")
+  override suspend fun run(ctx: ScriptContext) = quiz1(ctx)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lockall
- * setvar VAR_TEMP_1, 0
- * goto CinnabarIsland_Gym_EventScript_Quiz2
- * end
- * ```
- */
 internal object CinnabarIsland_Gym_EventScript_Quiz2Left : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port CinnabarIsland_Gym_EventScript_Quiz2Left")
+  override suspend fun run(ctx: ScriptContext) = quiz2(ctx)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lockall
- * setvar VAR_TEMP_1, 1
- * goto CinnabarIsland_Gym_EventScript_Quiz2
- * end
- * ```
- */
 internal object CinnabarIsland_Gym_EventScript_Quiz2Right : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port CinnabarIsland_Gym_EventScript_Quiz2Right")
+  override suspend fun run(ctx: ScriptContext) = quiz2(ctx)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lockall
- * setvar VAR_TEMP_1, 0
- * goto CinnabarIsland_Gym_EventScript_Quiz3
- * end
- * ```
- */
 internal object CinnabarIsland_Gym_EventScript_Quiz3Left : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port CinnabarIsland_Gym_EventScript_Quiz3Left")
+  override suspend fun run(ctx: ScriptContext) = quiz3(ctx)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lockall
- * setvar VAR_TEMP_1, 1
- * goto CinnabarIsland_Gym_EventScript_Quiz3
- * end
- * ```
- */
 internal object CinnabarIsland_Gym_EventScript_Quiz3Right : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port CinnabarIsland_Gym_EventScript_Quiz3Right")
+  override suspend fun run(ctx: ScriptContext) = quiz3(ctx)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lockall
- * setvar VAR_TEMP_1, 0
- * goto CinnabarIsland_Gym_EventScript_Quiz4
- * end
- * ```
- */
 internal object CinnabarIsland_Gym_EventScript_Quiz4Left : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port CinnabarIsland_Gym_EventScript_Quiz4Left")
+  override suspend fun run(ctx: ScriptContext) = quiz4(ctx)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lockall
- * setvar VAR_TEMP_1, 1
- * goto CinnabarIsland_Gym_EventScript_Quiz4
- * end
- * ```
- */
 internal object CinnabarIsland_Gym_EventScript_Quiz4Right : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port CinnabarIsland_Gym_EventScript_Quiz4Right")
+  override suspend fun run(ctx: ScriptContext) = quiz4(ctx)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lockall
- * setvar VAR_TEMP_1, 0
- * goto CinnabarIsland_Gym_EventScript_Quiz5
- * end
- * ```
- */
 internal object CinnabarIsland_Gym_EventScript_Quiz5Left : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port CinnabarIsland_Gym_EventScript_Quiz5Left")
+  override suspend fun run(ctx: ScriptContext) = quiz5(ctx)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lockall
- * setvar VAR_TEMP_1, 1
- * goto CinnabarIsland_Gym_EventScript_Quiz5
- * end
- * ```
- */
 internal object CinnabarIsland_Gym_EventScript_Quiz5Right : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port CinnabarIsland_Gym_EventScript_Quiz5Right")
+  override suspend fun run(ctx: ScriptContext) = quiz5(ctx)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lockall
- * setvar VAR_TEMP_1, 0
- * goto CinnabarIsland_Gym_EventScript_Quiz6
- * end
- * ```
- */
 internal object CinnabarIsland_Gym_EventScript_Quiz6Left : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port CinnabarIsland_Gym_EventScript_Quiz6Left")
+  override suspend fun run(ctx: ScriptContext) = quiz6(ctx)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lockall
- * setvar VAR_TEMP_1, 1
- * goto CinnabarIsland_Gym_EventScript_Quiz6
- * end
- * ```
- */
 internal object CinnabarIsland_Gym_EventScript_Quiz6Right : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port CinnabarIsland_Gym_EventScript_Quiz6Right")
+  override suspend fun run(ctx: ScriptContext) = quiz6(ctx)
+}
+
+internal object CinnabarIsland_Gym_EventScript_BlaineFujiPhoto : Script {
+  override suspend fun run(ctx: ScriptContext) = ctx.sign(CinnabarIsland_Gym.PhotoOfBlaineAndFuji)
+}
+
+/** Quiz 1. Getting it wrong means fighting the trainer behind the door instead. */
+private suspend fun quiz1(ctx: ScriptContext) {
+  ctx.sign(CinnabarIsland_Gym.PokemonQuizRules)
+  if (ctx.askYesNo(CinnabarIsland_Gym.QuizQuestion1)) {
+    return wrongAnswer(
+        ctx,
+        KantoTrainerIds.TRAINER_BURGLAR_QUINN,
+        CinnabarIsland_Gym.QuinnIntro,
+        CinnabarIsland_Gym.QuinnDefeat)
+  }
+  ctx.sign(CinnabarIsland_Gym.CorrectGoOnThrough)
+  ctx.setFlag(KantoFlags.FLAG_CINNABAR_GYM_QUIZ_1)
+}
+
+/** Quiz 2. Getting it wrong means fighting the trainer behind the door instead. */
+private suspend fun quiz2(ctx: ScriptContext) {
+  ctx.sign(CinnabarIsland_Gym.PokemonQuizRules)
+  if (!ctx.askYesNo(CinnabarIsland_Gym.QuizQuestion2)) {
+    return wrongAnswer(
+        ctx,
+        KantoTrainerIds.TRAINER_SUPER_NERD_AVERY,
+        CinnabarIsland_Gym.AveryIntro,
+        CinnabarIsland_Gym.AveryDefeat)
+  }
+  ctx.sign(CinnabarIsland_Gym.CorrectGoOnThrough)
+  ctx.setFlag(KantoFlags.FLAG_CINNABAR_GYM_QUIZ_2)
+}
+
+/** Quiz 3. Getting it wrong means fighting the trainer behind the door instead. */
+private suspend fun quiz3(ctx: ScriptContext) {
+  ctx.sign(CinnabarIsland_Gym.PokemonQuizRules)
+  if (!ctx.askYesNo(CinnabarIsland_Gym.QuizQuestion3)) {
+    return wrongAnswer(
+        ctx,
+        KantoTrainerIds.TRAINER_BURGLAR_RAMON,
+        CinnabarIsland_Gym.RamonIntro,
+        CinnabarIsland_Gym.RamonDefeat)
+  }
+  ctx.sign(CinnabarIsland_Gym.CorrectGoOnThrough)
+  ctx.setFlag(KantoFlags.FLAG_CINNABAR_GYM_QUIZ_3)
+}
+
+/** Quiz 4. Getting it wrong means fighting the trainer behind the door instead. */
+private suspend fun quiz4(ctx: ScriptContext) {
+  ctx.sign(CinnabarIsland_Gym.PokemonQuizRules)
+  if (!ctx.askYesNo(CinnabarIsland_Gym.QuizQuestion4)) {
+    return wrongAnswer(
+        ctx,
+        KantoTrainerIds.TRAINER_SUPER_NERD_DEREK,
+        CinnabarIsland_Gym.DerekIntro,
+        CinnabarIsland_Gym.DerekDefeat)
+  }
+  ctx.sign(CinnabarIsland_Gym.CorrectGoOnThrough)
+  ctx.setFlag(KantoFlags.FLAG_CINNABAR_GYM_QUIZ_4)
+}
+
+/** Quiz 5. Getting it wrong means fighting the trainer behind the door instead. */
+private suspend fun quiz5(ctx: ScriptContext) {
+  ctx.sign(CinnabarIsland_Gym.PokemonQuizRules)
+  if (ctx.askYesNo(CinnabarIsland_Gym.QuizQuestion5)) {
+    return wrongAnswer(
+        ctx,
+        KantoTrainerIds.TRAINER_BURGLAR_DUSTY,
+        CinnabarIsland_Gym.DustyIntro,
+        CinnabarIsland_Gym.DustyDefeat)
+  }
+  ctx.sign(CinnabarIsland_Gym.CorrectGoOnThrough)
+  ctx.setFlag(KantoFlags.FLAG_CINNABAR_GYM_QUIZ_5)
+}
+
+/** Quiz 6. Getting it wrong means fighting the trainer behind the door instead. */
+private suspend fun quiz6(ctx: ScriptContext) {
+  ctx.sign(CinnabarIsland_Gym.PokemonQuizRules)
+  if (!ctx.askYesNo(CinnabarIsland_Gym.QuizQuestion6)) {
+    return wrongAnswer(
+        ctx,
+        KantoTrainerIds.TRAINER_SUPER_NERD_ZAC,
+        CinnabarIsland_Gym.ZacIntro,
+        CinnabarIsland_Gym.ZacDefeat)
+  }
+  ctx.sign(CinnabarIsland_Gym.CorrectGoOnThrough)
+  ctx.setFlag(KantoFlags.FLAG_CINNABAR_GYM_QUIZ_6)
 }
 
 /**
- * Not ported yet. Decomp body:
- * ```
- * lockall
- * famechecker FAMECHECKER_BLAINE, 4
- * famechecker FAMECHECKER_MRFUJI, 4
- * msgbox CinnabarIsland_Gym_Text_PhotoOfBlaineAndFuji
- * releaseall
- * end
- * ```
+ * A wrong answer, which puts the quiz's trainer in the player's way once. The decomp walks him over
+ * from whichever side the question was asked, which is presentation this cannot follow.
  */
-internal object CinnabarIsland_Gym_EventScript_BlaineFujiPhoto : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port CinnabarIsland_Gym_EventScript_BlaineFujiPhoto")
+private suspend fun wrongAnswer(
+    ctx: ScriptContext,
+    trainerId: Int,
+    intro: DialogLine,
+    defeat: DialogLine,
+) {
+  ctx.sign(CinnabarIsland_Gym.SorryBadCall)
+  if (ctx.hasBeatenTrainer(trainerId)) return
+  ctx.trainerBattle(trainerId, intro, defeat)
+}
+
+/** What the seventh badge changes, run straight after Blaine's defeat line. */
+internal object CinnabarIsland_Gym_EventScript_DefeatedBlaine : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.setFlag(KantoFlags.FLAG_DEFEATED_BLAINE)
+    ctx.setFlag(KantoFlags.FLAG_BADGE07_GET)
+    // Bill turns up on the island once the badge is won.
+    ctx.clearFlag(KantoFlags.FLAG_HIDE_CINNABAR_BILL)
+    // set_gym_trainers 7: this gym's seven trainers are retired along with its leader.
+    ctx.markTrainerBeaten(KantoTrainerIds.TRAINER_SUPER_NERD_ERIK)
+    ctx.markTrainerBeaten(KantoTrainerIds.TRAINER_SUPER_NERD_AVERY)
+    ctx.markTrainerBeaten(KantoTrainerIds.TRAINER_SUPER_NERD_DEREK)
+    ctx.markTrainerBeaten(KantoTrainerIds.TRAINER_SUPER_NERD_ZAC)
+    ctx.markTrainerBeaten(KantoTrainerIds.TRAINER_BURGLAR_QUINN)
+    ctx.markTrainerBeaten(KantoTrainerIds.TRAINER_BURGLAR_RAMON)
+    ctx.markTrainerBeaten(KantoTrainerIds.TRAINER_BURGLAR_DUSTY)
+    CinnabarIsland_Gym_EventScript_GiveTM38.run(ctx)
+  }
+}
+
+internal object CinnabarIsland_Gym_EventScript_GiveTM38 : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(CinnabarIsland_Gym.ExplainVolcanoBadge)
+    if (!ctx.giveItem(Items.TM38)) {
+      return ctx.say(CinnabarIsland_Gym.MakeSpaceForThis)
+    }
+    ctx.say(CinnabarIsland_Gym.ReceivedTM38FromBlaine)
+    ctx.setFlag(KantoFlags.FLAG_GOT_TM38_FROM_BLAINE)
+    ctx.say(CinnabarIsland_Gym.FireBlastIsUltimateFireMove)
+  }
 }
 
 internal val CinnabarIsland_GymScripts: Map<String, Script> =
     mapOf(
+        "CinnabarIsland_Gym_EventScript_DefeatedBlaine" to
+            CinnabarIsland_Gym_EventScript_DefeatedBlaine,
+        "CinnabarIsland_Gym_EventScript_GiveTM38" to CinnabarIsland_Gym_EventScript_GiveTM38,
         "CinnabarIsland_Gym_EventScript_Quinn" to CinnabarIsland_Gym_EventScript_Quinn,
         "CinnabarIsland_Gym_EventScript_Erik" to CinnabarIsland_Gym_EventScript_Erik,
         "CinnabarIsland_Gym_EventScript_Avery" to CinnabarIsland_Gym_EventScript_Avery,

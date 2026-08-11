@@ -1,75 +1,54 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.PokemonMansion_1F
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
+import de.fiereu.openmmo.trainer.generated.KantoTrainerIds
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_BURGLAR_SIMON, PokemonMansion_1F_Text_SimonIntro, PokemonMansion_1F_Text_SimonDefeat
- * msgbox PokemonMansion_1F_Text_SimonPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object PokemonMansion_3F_EventScript_Simon : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PokemonMansion_3F_EventScript_Simon")
-}
-
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_SCIENTIST_BRAYDON, PokemonMansion_1F_Text_BraydonIntro, PokemonMansion_1F_Text_BraydonDefeat
- * msgbox PokemonMansion_1F_Text_BraydonPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
-internal object PokemonMansion_3F_EventScript_Braydon : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PokemonMansion_3F_EventScript_Braydon")
-}
-
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_MAX_POTION
- * end
- * ```
- */
-internal object PokemonMansion_3F_EventScript_ItemMaxPotion : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port PokemonMansion_3F_EventScript_ItemMaxPotion")
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_BURGLAR_SIMON,
+          PokemonMansion_1F.SimonIntro,
+          PokemonMansion_1F.SimonDefeat,
+          PokemonMansion_1F.SimonPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_IRON
- * end
- * ```
- */
+internal object PokemonMansion_3F_EventScript_Braydon : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_SCIENTIST_BRAYDON,
+          PokemonMansion_1F.BraydonIntro,
+          PokemonMansion_1F.BraydonDefeat,
+          PokemonMansion_1F.BraydonPostBattle,
+      )
+}
+
+internal object PokemonMansion_3F_EventScript_ItemMaxPotion : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.MAX_POTION)) return
+    ctx.removeNpc(2)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_POKEMON_MANSION_3F_MAX_POTION)
+  }
+}
+
 internal object PokemonMansion_3F_EventScript_ItemIron : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PokemonMansion_3F_EventScript_ItemIron")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.IRON)) return
+    ctx.removeNpc(3)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_POKEMON_MANSION_3F_IRON)
+  }
 }
 
 internal object PokemonMansion_3F_EventScript_DiaryFeb6th : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(PokemonMansion_1F.MewGaveBirthToMewtwo)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lockall
- * setvar VAR_0x8004, 2
- * call PokemonMansion_EventScript_SecretSwitch
- * playse SE_UNLOCK
- * special DrawWholeMapView
- * waitse
- * releaseall
- * end
- * ```
- */
 internal object PokemonMansion_3F_EventScript_Statue : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PokemonMansion_3F_EventScript_Statue")
+  override suspend fun run(ctx: ScriptContext) = pokemonMansionSwitch(ctx)
 }
 
 internal val PokemonMansion_3FScripts: Map<String, Script> =

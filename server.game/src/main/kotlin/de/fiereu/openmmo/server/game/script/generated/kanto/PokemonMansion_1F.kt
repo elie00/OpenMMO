@@ -1,83 +1,58 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.dialog.generated.kanto.PokemonMansion_1F
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
+import de.fiereu.openmmo.trainer.generated.KantoTrainerIds
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_SCIENTIST_TED, PokemonMansion_1F_Text_TedIntro, PokemonMansion_1F_Text_TedDefeat
- * msgbox PokemonMansion_1F_Text_TedPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object PokemonMansion_1F_EventScript_Ted : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PokemonMansion_1F_EventScript_Ted")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_SCIENTIST_TED,
+          PokemonMansion_1F.TedIntro,
+          PokemonMansion_1F.TedDefeat,
+          PokemonMansion_1F.TedPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_CARBOS
- * end
- * ```
- */
 internal object PokemonMansion_1F_EventScript_ItemCarbos : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port PokemonMansion_1F_EventScript_ItemCarbos")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.CARBOS)) return
+    ctx.removeNpc(1)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_POKEMON_MANSION_1F_CARBOS)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_ESCAPE_ROPE
- * end
- * ```
- */
 internal object PokemonMansion_1F_EventScript_ItemEscapeRope : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port PokemonMansion_1F_EventScript_ItemEscapeRope")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.ESCAPE_ROPE)) return
+    ctx.removeNpc(2)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_POKEMON_MANSION_1F_ESCAPE_ROPE)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_PROTEIN
- * end
- * ```
- */
 internal object PokemonMansion_1F_EventScript_ItemProtein : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port PokemonMansion_1F_EventScript_ItemProtein")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.PROTEIN)) return
+    ctx.removeNpc(3)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_POKEMON_MANSION_1F_PROTEIN)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_YOUNGSTER_JOHNSON, PokemonMansion_1F_Text_JohnsonIntro, PokemonMansion_1F_Text_JohnsonDefeat
- * msgbox PokemonMansion_1F_Text_JohnsonPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object PokemonMansion_1F_EventScript_Johnson : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PokemonMansion_1F_EventScript_Johnson")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_YOUNGSTER_JOHNSON,
+          PokemonMansion_1F.JohnsonIntro,
+          PokemonMansion_1F.JohnsonDefeat,
+          PokemonMansion_1F.JohnsonPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lockall
- * setvar VAR_0x8004, 0
- * call PokemonMansion_EventScript_SecretSwitch
- * playse SE_UNLOCK
- * special DrawWholeMapView
- * waitse
- * releaseall
- * end
- * ```
- */
 internal object PokemonMansion_1F_EventScript_Statue : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PokemonMansion_1F_EventScript_Statue")
+  override suspend fun run(ctx: ScriptContext) = pokemonMansionSwitch(ctx)
 }
 
 internal val PokemonMansion_1FScripts: Map<String, Script> =
