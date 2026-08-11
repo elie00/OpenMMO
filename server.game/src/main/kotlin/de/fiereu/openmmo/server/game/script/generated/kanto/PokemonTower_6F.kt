@@ -2,10 +2,35 @@ package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.PokemonTower_6F
 import de.fiereu.openmmo.items.generated.Items
+import de.fiereu.openmmo.server.game.battle.BattleResult
+import de.fiereu.openmmo.server.game.script.MovementStep
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 import de.fiereu.openmmo.story.generated.kanto.KantoFlags
+import de.fiereu.openmmo.story.generated.kanto.KantoVars
 import de.fiereu.openmmo.trainer.generated.KantoTrainerIds
+
+private const val MAROWAK = 105
+private const val GHOST_LEVEL = 30
+
+/**
+ * The ghost blocking the stairs, which the map's coord events trigger from either tile in front of
+ * it while VAR_MAP_SCENE_POKEMON_TOWER_6F is 0.
+ *
+ * The decomp's StartMarowakBattle is a wild battle that cannot be caught or fled, which is what
+ * [ScriptContext.battle] runs. Losing shoves the player back up the stairs.
+ */
+internal object PokemonTower_6F_EventScript_MarowakGhost : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.sign(PokemonTower_6F.BeGoneIntruders)
+    if (ctx.battle(MAROWAK, GHOST_LEVEL) != BattleResult.VICTORY) {
+      return ctx.moveSelf(MovementStep.WALK_UP)
+    }
+    ctx.sign(PokemonTower_6F.GhostWasCubonesMother)
+    ctx.sign(PokemonTower_6F.MothersSpiritWasCalmed)
+    ctx.setVar(KantoVars.VAR_MAP_SCENE_POKEMON_TOWER_6F, 1)
+  }
+}
 
 internal object PokemonTower_6F_EventScript_Angelica : Script {
   override suspend fun run(ctx: ScriptContext) =
@@ -55,6 +80,7 @@ internal object PokemonTower_6F_EventScript_ItemXAccuracy : Script {
 
 internal val PokemonTower_6FScripts: Map<String, Script> =
     mapOf(
+        "PokemonTower_6F_EventScript_MarowakGhost" to PokemonTower_6F_EventScript_MarowakGhost,
         "PokemonTower_6F_EventScript_Angelica" to PokemonTower_6F_EventScript_Angelica,
         "PokemonTower_6F_EventScript_Jennifer" to PokemonTower_6F_EventScript_Jennifer,
         "PokemonTower_6F_EventScript_Emilia" to PokemonTower_6F_EventScript_Emilia,
