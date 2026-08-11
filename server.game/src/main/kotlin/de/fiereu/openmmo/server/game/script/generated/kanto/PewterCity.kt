@@ -3,111 +3,79 @@ package de.fiereu.openmmo.server.game.script.generated.kanto
 import de.fiereu.openmmo.dialog.generated.kanto.PewterCity
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
+import de.fiereu.openmmo.story.generated.kanto.KantoVars
+
+// Decomp local ids of this map's object events.
+private const val LOCALID_MUSEUM_GUIDE = 1
+private const val LOCALID_GYM_GUIDE = 4
+private const val LOCALID_AIDE = 6
+
+internal object PewterCity_OnTransition : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.setFlag(KantoFlags.FLAG_WORLD_MAP_PEWTER_CITY)
+    ctx.setVar(KantoVars.VAR_MAP_SCENE_PEWTER_CITY_MUSEUM_1F, 0)
+  }
+}
 
 internal object PewterCity_EventScript_Lass : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.say(PewterCity.ClefairyCameFromMoon)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lock
- * faceplayer
- * msgbox PewterCity_Text_DidYouCheckOutMuseum, MSGBOX_YESNO
- * goto_if_eq VAR_RESULT, YES, PewterCity_EventScript_CheckedOutMuseum
- * msgbox PewterCity_Text_ReallyYouHaveToGo
- * closemessage
- * delay 10
- * playbgm MUS_FOLLOW_ME, 0
- * call_if_eq VAR_FACING, DIR_NORTH, PewterCity_EventScript_LeadToMuseumNorth
- * call_if_eq VAR_FACING, DIR_SOUTH, PewterCity_EventScript_LeadToMuseumSouth
- * call_if_eq VAR_FACING, DIR_WEST, PewterCity_EventScript_LeadToMuseumWest
- * call_if_eq VAR_FACING, DIR_EAST, PewterCity_EventScript_LeadToMuseumEast
- * msgbox PewterCity_Text_ThisIsTheMuseum
- * closemessage
- * delay 10
- * applymovement LOCALID_PEWTER_MUSEUM_GUIDE, PewterCity_Movement_MuseumGuideExit
- * waitmovement 0
- * fadedefaultbgm
- * removeobject LOCALID_PEWTER_MUSEUM_GUIDE
- * clearflag FLAG_HIDE_PEWTER_MUSEUM_GUIDE
- * release
- * end
- * ```
- */
 internal object PewterCity_EventScript_MuseumGuide : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PewterCity_EventScript_MuseumGuide")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.askYesNo(PewterCity.DidYouCheckOutMuseum)) {
+      return ctx.say(PewterCity.WerentThoseFossilsAmazing)
+    }
+    ctx.say(PewterCity.ReallyYouHaveToGo)
+    // TODO Walk the museum guide's escort
+    //  The decomp leads the player to the museum door with a movement path per facing direction,
+    //  over the MUS_FOLLOW_ME track. Both need playbgm and fadedefaultbgm script verbs, and the
+    //  paths are only correct from the tile the player talked from.
+    ctx.say(PewterCity.ThisIsTheMuseum)
+    ctx.removeNpc(LOCALID_MUSEUM_GUIDE)
+    ctx.clearFlag(KantoFlags.FLAG_HIDE_PEWTER_MUSEUM_GUIDE)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lock
- * faceplayer
- * famechecker FAMECHECKER_BROCK, 2
- * msgbox PewterCity_Text_BrockOnlySeriousTrainerHere
- * release
- * end
- * ```
- */
 internal object PewterCity_EventScript_FatMan : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PewterCity_EventScript_FatMan")
+  override suspend fun run(ctx: ScriptContext) = ctx.say(PewterCity.BrockOnlySeriousTrainerHere)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lock
- * faceplayer
- * msgbox PewterCity_Text_DoYouKnowWhatImDoing, MSGBOX_YESNO
- * goto_if_eq VAR_RESULT, YES, PewterCity_EventScript_KnowWhatTheyreDoing
- * msgbox PewterCity_Text_SprayingRepelToKeepWildMonsOut
- * release
- * end
- * ```
- */
 internal object PewterCity_EventScript_BugCatcher : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PewterCity_EventScript_BugCatcher")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.askYesNo(PewterCity.DoYouKnowWhatImDoing)) {
+      return ctx.say(PewterCity.ThatsRightItsHardWork)
+    }
+    ctx.say(PewterCity.SprayingRepelToKeepWildMonsOut)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lock
- * faceplayer
- * msgbox PewterCity_Text_BrocksLookingForChallengersFollowMe
- * closemessage
- * playbgm MUS_FOLLOW_ME, 0
- * call_if_eq VAR_FACING, DIR_EAST, PewterCity_EventScript_WalkToGymEast
- * msgbox PewterCity_Text_GoTakeOnBrock
- * closemessage
- * applymovement LOCALID_PEWTER_GYM_GUIDE, PewterCity_Movement_GymGuideExit
- * waitmovement 0
- * fadedefaultbgm
- * removeobject LOCALID_PEWTER_GYM_GUIDE
- * clearflag FLAG_HIDE_PEWTER_CITY_GYM_GUIDE
- * release
- * end
- * ```
- */
 internal object PewterCity_EventScript_GymGuide : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PewterCity_EventScript_GymGuide")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(PewterCity.BrocksLookingForChallengersFollowMe)
+    // TODO Walk the gym guide's escort
+    //  Same as the museum guide: the decomp walks the player all the way to the gym door on a
+    //  path chosen by facing direction, with its own music.
+    ctx.say(PewterCity.GoTakeOnBrock)
+    ctx.removeNpc(LOCALID_GYM_GUIDE)
+    ctx.clearFlag(KantoFlags.FLAG_HIDE_PEWTER_CITY_GYM_GUIDE)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lock
- * faceplayer
- * setvar VAR_TEMP_1, 0
- * call PewterCity_EventScript_AideGiveRunningShoes
- * release
- * end
- * ```
- */
 internal object PewterCity_EventScript_RunningShoesAide : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port PewterCity_EventScript_RunningShoesAide")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(PewterCity.OhPlayer)
+    ctx.say(PewterCity.AskedToDeliverThis)
+    ctx.say(PewterCity.ReceivedRunningShoesFromAide)
+    ctx.say(PewterCity.SwitchedShoesWithRunningShoes)
+    ctx.sign(PewterCity.ExplainRunningShoes)
+    ctx.say(PewterCity.MustBeGoingBackToLab)
+    ctx.say(PewterCity.RunningShoesLetterFromMom)
+    ctx.removeNpc(LOCALID_AIDE)
+    ctx.setFlag(KantoFlags.FLAG_SYS_B_DASH)
+    ctx.setVar(KantoVars.VAR_MAP_SCENE_PEWTER_CITY, 2)
+  }
 }
 
 internal object PewterCity_EventScript_MuseumSign : Script {
@@ -118,18 +86,8 @@ internal object PewterCity_EventScript_PoliceNotice : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(PewterCity.CallPoliceIfInfoOnThieves)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lockall
- * famechecker FAMECHECKER_BROCK, 0
- * msgbox PewterCity_Text_GymSign
- * releaseall
- * end
- * ```
- */
 internal object PewterCity_EventScript_GymSign : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port PewterCity_EventScript_GymSign")
+  override suspend fun run(ctx: ScriptContext) = ctx.sign(PewterCity.GymSign)
 }
 
 internal object PewterCity_EventScript_TrainerTips : Script {
@@ -142,6 +100,7 @@ internal object PewterCity_EventScript_CitySign : Script {
 
 internal val PewterCityScripts: Map<String, Script> =
     mapOf(
+        "PewterCity_OnTransition" to PewterCity_OnTransition,
         "PewterCity_EventScript_Lass" to PewterCity_EventScript_Lass,
         "PewterCity_EventScript_MuseumGuide" to PewterCity_EventScript_MuseumGuide,
         "PewterCity_EventScript_FatMan" to PewterCity_EventScript_FatMan,

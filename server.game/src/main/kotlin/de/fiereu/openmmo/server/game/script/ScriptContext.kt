@@ -177,6 +177,12 @@ internal constructor(
    */
   fun hasBeatenTrainer(trainerId: Int): Boolean = isFlagSet(trainerFlag(region(), trainerId))
 
+  /**
+   * The decomp's `settrainerflag`: count this trainer as beaten without fighting them, the way
+   * winning a gym retires the trainers the player walked past.
+   */
+  fun markTrainerBeaten(trainerId: Int) = setFlag(trainerFlag(region(), trainerId))
+
   private fun region(): Region =
       checkNotNull(Region.byWireValue(state.regionId.toByte())) {
         "Scene ran in unknown region ${state.regionId}"
