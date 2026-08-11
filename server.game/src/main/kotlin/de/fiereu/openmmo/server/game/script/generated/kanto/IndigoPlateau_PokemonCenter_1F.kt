@@ -23,19 +23,8 @@ internal object IndigoPlateau_PokemonCenter_1F_EventScript_Clerk : Script {
       TODO("port IndigoPlateau_PokemonCenter_1F_EventScript_Clerk")
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lock
- * faceplayer
- * call EventScript_PkmnCenterNurse
- * release
- * end
- * ```
- */
 internal object IndigoPlateau_PokemonCenter_1F_EventScript_Nurse : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port IndigoPlateau_PokemonCenter_1F_EventScript_Nurse")
+  override suspend fun run(ctx: ScriptContext) = EventScript_PkmnCenterNurse.run(ctx)
 }
 
 internal object IndigoPlateau_PokemonCenter_1F_EventScript_GymGuy : Script {

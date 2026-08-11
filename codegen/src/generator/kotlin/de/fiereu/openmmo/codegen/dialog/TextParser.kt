@@ -29,6 +29,10 @@ class TextParser(private val decompDir: File) {
           .filter { it.isFile && it.extension == "inc" }
           .forEach { file -> parseFile(file, out) }
     }
+    // Both games put a handful of shared texts straight into event_scripts.s rather than an .inc,
+    // the Pokemon Center nurse's lines among them, so the scripts that use them cannot be ported
+    // without reading it too.
+    File(decompDir, "data/event_scripts.s").takeIf { it.isFile }?.let { parseFile(it, out) }
     return out.map { DecompText(it.key, it.value) }
   }
 

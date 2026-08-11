@@ -4,19 +4,8 @@ import de.fiereu.openmmo.dialog.generated.kanto.SaffronCity_PokemonCenter_1F
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lock
- * faceplayer
- * call EventScript_PkmnCenterNurse
- * release
- * end
- * ```
- */
 internal object SaffronCity_PokemonCenter_1F_EventScript_Nurse : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SaffronCity_PokemonCenter_1F_EventScript_Nurse")
+  override suspend fun run(ctx: ScriptContext) = EventScript_PkmnCenterNurse.run(ctx)
 }
 
 internal object SaffronCity_PokemonCenter_1F_EventScript_Gentleman : Script {
