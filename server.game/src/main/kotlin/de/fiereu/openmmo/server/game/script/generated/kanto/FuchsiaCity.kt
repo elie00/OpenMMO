@@ -1,8 +1,10 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.FuchsiaCity
+import de.fiereu.openmmo.dialog.generated.kanto.Misc
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 
 internal object FuchsiaCity_EventScript_Erik : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.say(FuchsiaCity.WheresSara)
@@ -20,43 +22,19 @@ internal object FuchsiaCity_EventScript_OldMan : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.say(FuchsiaCity.SafariZoneZooInFront)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lock
- * faceplayer
- * goto_if_set FLAG_TUTOR_SUBSTITUTE, EventScript_SubstituteTaught
- * msgbox Text_SubstituteTeach, MSGBOX_YESNO
- * goto_if_eq VAR_RESULT, NO, EventScript_SubstituteDeclined
- * call EventScript_CanOnlyBeLearnedOnce
- * goto_if_eq VAR_RESULT, NO, EventScript_SubstituteDeclined
- * msgbox Text_SubstituteWhichMon
- * setvar VAR_0x8005, MOVETUTOR_SUBSTITUTE
- * call EventScript_ChooseMoveTutorMon
- * goto_if_eq VAR_RESULT, FALSE, EventScript_SubstituteDeclined
- * setflag FLAG_TUTOR_SUBSTITUTE
- * goto EventScript_SubstituteTaught
- * end
- * ```
- */
 internal object FuchsiaCity_EventScript_SubstituteTutor : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port FuchsiaCity_EventScript_SubstituteTutor")
+      moveTutor(
+          ctx,
+          KantoFlags.FLAG_TUTOR_SUBSTITUTE,
+          Misc.Text_SubstituteTeach,
+          Misc.Text_SubstituteDeclined,
+          Misc.Text_SubstituteTaught,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lock
- * faceplayer
- * famechecker FAMECHECKER_KOGA, 3
- * msgbox FuchsiaCity_Text_MyFatherIsGymLeader
- * release
- * end
- * ```
- */
 internal object FuchsiaCity_EventScript_Lass : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port FuchsiaCity_EventScript_Lass")
+  override suspend fun run(ctx: ScriptContext) = ctx.say(FuchsiaCity.MyFatherIsGymLeader)
 }
 
 internal object FuchsiaCity_EventScript_CitySign : Script {
@@ -67,125 +45,45 @@ internal object FuchsiaCity_EventScript_SafariZoneSign : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(FuchsiaCity.SafariZoneSign)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lockall
- * famechecker FAMECHECKER_KOGA, 0
- * msgbox FuchsiaCity_Text_GymSign
- * releaseall
- * end
- * ```
- */
 internal object FuchsiaCity_EventScript_GymSign : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port FuchsiaCity_EventScript_GymSign")
+  override suspend fun run(ctx: ScriptContext) = ctx.sign(FuchsiaCity.GymSign)
 }
 
 internal object FuchsiaCity_EventScript_WardensHomeSign : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(FuchsiaCity.WardensHomeSign)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lockall
- * setvar VAR_0x8004, SPECIES_VOLTORB
- * special SetSeenMon
- * showmonpic SPECIES_VOLTORB, 10, 3
- * msgbox FuchsiaCity_Text_VoltorbSign
- * hidemonpic
- * releaseall
- * end
- * ```
- */
+/** A zoo plaque. The decomp holds up the monster's picture, which has no verb. */
 internal object FuchsiaCity_EventScript_VoltorbSign : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port FuchsiaCity_EventScript_VoltorbSign")
+  override suspend fun run(ctx: ScriptContext) = ctx.sign(FuchsiaCity.VoltorbSign)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lockall
- * setvar VAR_0x8004, SPECIES_SLOWPOKE
- * special SetSeenMon
- * showmonpic SPECIES_SLOWPOKE, 10, 3
- * msgbox FuchsiaCity_Text_SlowpokeSign
- * hidemonpic
- * releaseall
- * end
- * ```
- */
+/** A zoo plaque. The decomp holds up the monster's picture, which has no verb. */
 internal object FuchsiaCity_EventScript_SlowpokeSign : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port FuchsiaCity_EventScript_SlowpokeSign")
+  override suspend fun run(ctx: ScriptContext) = ctx.sign(FuchsiaCity.SlowpokeSign)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lockall
- * setvar VAR_0x8004, SPECIES_CHANSEY
- * special SetSeenMon
- * showmonpic SPECIES_CHANSEY, 10, 3
- * msgbox FuchsiaCity_Text_ChanseySign
- * hidemonpic
- * releaseall
- * end
- * ```
- */
+/** A zoo plaque. The decomp holds up the monster's picture, which has no verb. */
 internal object FuchsiaCity_EventScript_ChanseySign : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port FuchsiaCity_EventScript_ChanseySign")
+  override suspend fun run(ctx: ScriptContext) = ctx.sign(FuchsiaCity.ChanseySign)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lockall
- * setvar VAR_0x8004, SPECIES_KANGASKHAN
- * special SetSeenMon
- * showmonpic SPECIES_KANGASKHAN, 10, 3
- * msgbox FuchsiaCity_Text_KangaskhanSign
- * hidemonpic
- * releaseall
- * end
- * ```
- */
+/** A zoo plaque. The decomp holds up the monster's picture, which has no verb. */
 internal object FuchsiaCity_EventScript_KangaskhanSign : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port FuchsiaCity_EventScript_KangaskhanSign")
+  override suspend fun run(ctx: ScriptContext) = ctx.sign(FuchsiaCity.KangaskhanSign)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lockall
- * goto_if_set FLAG_GOT_DOME_FOSSIL, FuchsiaCity_EventScript_OmanyteSign
- * setvar VAR_0x8004, SPECIES_KABUTO
- * special SetSeenMon
- * showmonpic SPECIES_KABUTO, 10, 3
- * msgbox FuchsiaCity_Text_KabutoSign
- * hidemonpic
- * releaseall
- * end
- * ```
- */
+/** The pen holds whichever fossil monster the player did not take from Mount Moon. */
 internal object FuchsiaCity_EventScript_FossilMonSign : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port FuchsiaCity_EventScript_FossilMonSign")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.sign(
+          if (ctx.isFlagSet(KantoFlags.FLAG_GOT_DOME_FOSSIL)) FuchsiaCity.OmanyteSign
+          else FuchsiaCity.KabutoSign)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lockall
- * setvar VAR_0x8004, SPECIES_LAPRAS
- * special SetSeenMon
- * showmonpic SPECIES_LAPRAS, 10, 3
- * msgbox FuchsiaCity_Text_LaprasSign
- * hidemonpic
- * releaseall
- * end
- * ```
- */
+/** A zoo plaque. The decomp holds up the monster's picture, which has no verb. */
 internal object FuchsiaCity_EventScript_LaprasSign : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port FuchsiaCity_EventScript_LaprasSign")
+  override suspend fun run(ctx: ScriptContext) = ctx.sign(FuchsiaCity.LaprasSign)
 }
 
 internal object FuchsiaCity_EventScript_SafariGameSign : Script {

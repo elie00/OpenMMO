@@ -1,91 +1,73 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.dialog.generated.kanto.Misc
 import de.fiereu.openmmo.dialog.generated.kanto.Route16
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
+import de.fiereu.openmmo.trainer.generated.KantoTrainerIds
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_BIKER_LAO, Route16_Text_LaoIntro, Route16_Text_LaoDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, Route16_EventScript_LaoRematch
- * msgbox Route16_Text_LaoPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
+private const val SNORLAX = 143
+private const val SNORLAX_LEVEL = 30
+
 internal object Route16_EventScript_Lao : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route16_EventScript_Lao")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_BIKER_LAO,
+          Route16.LaoIntro,
+          Route16.LaoDefeat,
+          Route16.LaoPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_CUE_BALL_KOJI, Route16_Text_KojiIntro, Route16_Text_KojiDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, Route16_EventScript_KojiRematch
- * msgbox Route16_Text_KojiPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object Route16_EventScript_Koji : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route16_EventScript_Koji")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_CUE_BALL_KOJI,
+          Route16.KojiIntro,
+          Route16.KojiDefeat,
+          Route16.KojiPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_CUE_BALL_LUKE, Route16_Text_LukeIntro, Route16_Text_LukeDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, Route16_EventScript_LukeRematch
- * msgbox Route16_Text_LukePostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object Route16_EventScript_Luke : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route16_EventScript_Luke")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_CUE_BALL_LUKE,
+          Route16.LukeIntro,
+          Route16.LukeDefeat,
+          Route16.LukePostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_BIKER_RUBEN, Route16_Text_RubenIntro, Route16_Text_RubenDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, Route16_EventScript_RubenRematch
- * msgbox Route16_Text_RubenPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object Route16_EventScript_Ruben : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route16_EventScript_Ruben")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_BIKER_RUBEN,
+          Route16.RubenIntro,
+          Route16.RubenDefeat,
+          Route16.RubenPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_BIKER_HIDEO, Route16_Text_HideoIntro, Route16_Text_HideoDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, Route16_EventScript_HideoRematch
- * msgbox Route16_Text_HideoPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object Route16_EventScript_Hideo : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route16_EventScript_Hideo")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_BIKER_HIDEO,
+          Route16.HideoIntro,
+          Route16.HideoDefeat,
+          Route16.HideoPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_CUE_BALL_CAMRON, Route16_Text_CamronIntro, Route16_Text_CamronDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, Route16_EventScript_CamronRematch
- * msgbox Route16_Text_CamronPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object Route16_EventScript_Camron : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route16_EventScript_Camron")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_CUE_BALL_CAMRON,
+          Route16.CamronIntro,
+          Route16.CamronDefeat,
+          Route16.CamronPostBattle,
+      )
 }
 
 /**
@@ -116,36 +98,20 @@ internal object Route16_EventScript_Jed : Script {
   override suspend fun run(ctx: ScriptContext) = TODO("port Route16_EventScript_Jed")
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lock
- * faceplayer
- * goto_if_unset FLAG_GOT_POKE_FLUTE, Route16_EventScript_SnorlaxNoPokeFlute
- * goto_if_questlog EventScript_ReleaseEnd
- * special QuestLog_CutRecording
- * msgbox Text_WantToUsePokeFlute, MSGBOX_YESNO
- * goto_if_eq VAR_RESULT, NO, Route16_EventScript_DontUsePokeFlute
- * call EventScript_AwakenSnorlax
- * setwildbattle SPECIES_SNORLAX, 30
- * waitse
- * playmoncry SPECIES_SNORLAX, CRY_MODE_ENCOUNTER
- * delay 40
- * waitmoncry
- * setflag FLAG_HIDE_ROUTE_16_SNORLAX
- * setflag FLAG_SYS_SPECIAL_WILD_BATTLE
- * dowildbattle
- * clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
- * specialvar VAR_RESULT, GetBattleOutcome
- * goto_if_eq VAR_RESULT, B_OUTCOME_WON, Route16_EventScript_FoughtSnorlax
- * goto_if_eq VAR_RESULT, B_OUTCOME_RAN, Route16_EventScript_FoughtSnorlax
- * goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, Route16_EventScript_FoughtSnorlax
- * release
- * end
- * ```
- */
+/** The Snorlax asleep across the road, which only the Poke Flute can move. */
 internal object Route16_EventScript_Snorlax : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route16_EventScript_Snorlax")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.isFlagSet(KantoFlags.FLAG_GOT_POKE_FLUTE)) {
+      return ctx.say(Route16.MonSprawledOutInSlumber)
+    }
+    if (!ctx.askYesNo(Misc.Text_WantToUsePokeFlute)) return
+    // The decomp wakes it with the flute's animation and cry, then fights it as a wild battle that
+    // is gone either way, won or fled.
+    ctx.setFlag(KantoFlags.FLAG_HIDE_ROUTE_16_SNORLAX)
+    ctx.battle(SNORLAX, SNORLAX_LEVEL)
+    ctx.removeNpc(9)
+    ctx.say(Misc.Text_SnorlaxReturnedToMountains)
+  }
 }
 
 internal object Route16_EventScript_RouteSign : Script {

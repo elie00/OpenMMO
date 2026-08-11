@@ -1,26 +1,35 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.FuchsiaCity_WardensHouse
+import de.fiereu.openmmo.dialog.generated.kanto.PokemonJournal
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lock
- * faceplayer
- * goto_if_set FLAG_GOT_HM04, FuchsiaCity_WardensHouse_EventScript_ExplainStrength
- * goto_if_set FLAG_HIDE_SAFARI_ZONE_WEST_GOLD_TEETH, FuchsiaCity_WardensHouse_EventScript_GiveGoldTeeth
- * msgbox FuchsiaCity_WardensHouse_Text_HifFuffHefifoo, MSGBOX_YESNO
- * call_if_eq VAR_RESULT, YES, FuchsiaCity_WardensHouse_EventScript_WardenYes
- * call_if_eq VAR_RESULT, NO, FuchsiaCity_WardensHouse_EventScript_WardenNo
- * release
- * end
- * ```
- */
+/** The Safari Zone warden, who trades HM04 for the gold teeth lost in the zone. */
 internal object FuchsiaCity_WardensHouse_EventScript_Warden : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port FuchsiaCity_WardensHouse_EventScript_Warden")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(KantoFlags.FLAG_GOT_HM04)) {
+      return ctx.say(FuchsiaCity_WardensHouse.ExplainStrength)
+    }
+    if (!ctx.isFlagSet(KantoFlags.FLAG_HIDE_SAFARI_ZONE_WEST_GOLD_TEETH)) {
+      // Without his teeth in, nothing he says can be made out.
+      return ctx.say(FuchsiaCity_WardensHouse.HifFuffHefifoo)
+    }
+    ctx.say(FuchsiaCity_WardensHouse.GaveGoldTeethToWarden)
+    ctx.takeItem(Items.GOLD_TEETH)
+    ctx.say(FuchsiaCity_WardensHouse.WardenPoppedInHisTeeth)
+    ctx.say(
+        if (ctx.isFemale) FuchsiaCity_WardensHouse.ThanksLassieGiveYouSomething
+        else FuchsiaCity_WardensHouse.ThanksSonGiveYouSomething)
+    if (!ctx.giveItem(Items.HM04)) {
+      return ctx.say(FuchsiaCity_WardensHouse.YouHaveTooMuchStuff)
+    }
+    ctx.say(FuchsiaCity_WardensHouse.ReceivedHM04FromWarden)
+    ctx.setFlag(KantoFlags.FLAG_GOT_HM04)
+    ctx.say(FuchsiaCity_WardensHouse.ExplainStrength)
+  }
 }
 
 /**
@@ -35,21 +44,8 @@ internal object FuchsiaCity_WardensHouse_EventScript_ItemRareCandy : Script {
       TODO("port FuchsiaCity_WardensHouse_EventScript_ItemRareCandy")
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lock
- * faceplayer
- * famechecker FAMECHECKER_KOGA, 4
- * textcolor NPC_TEXT_COLOR_NEUTRAL
- * msgbox PokemonJournal_Text_SpecialFeatureKoga
- * release
- * end
- * ```
- */
 internal object FuchsiaCity_WardensHouse_EventScript_PokemonJournalKoga : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port FuchsiaCity_WardensHouse_EventScript_PokemonJournalKoga")
+  override suspend fun run(ctx: ScriptContext) = ctx.sign(PokemonJournal.SpecialFeatureKoga)
 }
 
 internal object FuchsiaCity_WardensHouse_EventScript_DisplaySign2 : Script {

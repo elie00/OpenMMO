@@ -1,42 +1,33 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.SafariZone_North
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_PROTEIN
- * end
- * ```
- */
 internal object SafariZone_North_EventScript_ItemProtein : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SafariZone_North_EventScript_ItemProtein")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.PROTEIN)) return
+    ctx.removeNpc(0)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_SAFARI_ZONE_NORTH_PROTEIN)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_TM47
- * end
- * ```
- */
 internal object SafariZone_North_EventScript_ItemTM47 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SafariZone_North_EventScript_ItemTM47")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.TM47)) return
+    ctx.removeNpc(1)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_SAFARI_ZONE_NORTH_TM47)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_QUICK_CLAW
- * end
- * ```
- */
 internal object SafariZone_North_EventScript_ItemQuickClaw : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SafariZone_North_EventScript_ItemQuickClaw")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.QUICK_CLAW)) return
+    ctx.removeNpc(2)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_SAFARI_ZONE_NORTH_QUICK_CLAW)
+  }
 }
 
 internal object SafariZone_North_EventScript_TrainerTips1 : Script {

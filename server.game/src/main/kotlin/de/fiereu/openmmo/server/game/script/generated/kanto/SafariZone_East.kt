@@ -1,54 +1,41 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.SafariZone_East
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_MAX_POTION
- * end
- * ```
- */
 internal object SafariZone_East_EventScript_ItemMaxPotion : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SafariZone_East_EventScript_ItemMaxPotion")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.MAX_POTION)) return
+    ctx.removeNpc(0)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_SAFARI_ZONE_EAST_MAX_POTION)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_FULL_RESTORE
- * end
- * ```
- */
 internal object SafariZone_East_EventScript_ItemFullRestore : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SafariZone_East_EventScript_ItemFullRestore")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.FULL_RESTORE)) return
+    ctx.removeNpc(1)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_SAFARI_ZONE_EAST_FULL_RESTORE)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_TM11
- * end
- * ```
- */
 internal object SafariZone_East_EventScript_ItemTM11 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SafariZone_East_EventScript_ItemTM11")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.TM11)) return
+    ctx.removeNpc(2)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_SAFARI_ZONE_EAST_TM11)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_LEAF_STONE
- * end
- * ```
- */
 internal object SafariZone_East_EventScript_ItemLeafStone : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SafariZone_East_EventScript_ItemLeafStone")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.LEAF_STONE)) return
+    ctx.removeNpc(3)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_SAFARI_ZONE_EAST_LEAF_STONE)
+  }
 }
 
 internal object SafariZone_East_EventScript_AreaSign : Script {

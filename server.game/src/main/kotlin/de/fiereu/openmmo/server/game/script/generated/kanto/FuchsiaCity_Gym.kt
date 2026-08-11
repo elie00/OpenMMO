@@ -1,127 +1,139 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.dialog.generated.kanto.FuchsiaCity_Gym
+import de.fiereu.openmmo.items.generated.Items
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
+import de.fiereu.openmmo.trainer.generated.KantoTrainerIds
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_JUGGLER_KAYDEN, FuchsiaCity_Gym_Text_KaydenIntro, FuchsiaCity_Gym_Text_KaydenDefeat
- * msgbox FuchsiaCity_Gym_Text_KaydenPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object FuchsiaCity_Gym_EventScript_Kayden : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port FuchsiaCity_Gym_EventScript_Kayden")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_JUGGLER_KAYDEN,
+          FuchsiaCity_Gym.KaydenIntro,
+          FuchsiaCity_Gym.KaydenDefeat,
+          FuchsiaCity_Gym.KaydenPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_JUGGLER_SHAWN, FuchsiaCity_Gym_Text_ShawnIntro, FuchsiaCity_Gym_Text_ShawnDefeat
- * msgbox FuchsiaCity_Gym_Text_ShawnPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object FuchsiaCity_Gym_EventScript_Shawn : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port FuchsiaCity_Gym_EventScript_Shawn")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_JUGGLER_SHAWN,
+          FuchsiaCity_Gym.ShawnIntro,
+          FuchsiaCity_Gym.ShawnDefeat,
+          FuchsiaCity_Gym.ShawnPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_JUGGLER_KIRK, FuchsiaCity_Gym_Text_KirkIntro, FuchsiaCity_Gym_Text_KirkDefeat
- * famechecker FAMECHECKER_KOGA, 2
- * msgbox FuchsiaCity_Gym_Text_KirkPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object FuchsiaCity_Gym_EventScript_Kirk : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port FuchsiaCity_Gym_EventScript_Kirk")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_JUGGLER_KIRK,
+          FuchsiaCity_Gym.KirkIntro,
+          FuchsiaCity_Gym.KirkDefeat,
+          FuchsiaCity_Gym.KirkPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_TAMER_EDGAR, FuchsiaCity_Gym_Text_EdgarIntro, FuchsiaCity_Gym_Text_EdgarDefeat
- * msgbox FuchsiaCity_Gym_Text_EdgarPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object FuchsiaCity_Gym_EventScript_Edgar : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port FuchsiaCity_Gym_EventScript_Edgar")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_TAMER_EDGAR,
+          FuchsiaCity_Gym.EdgarIntro,
+          FuchsiaCity_Gym.EdgarDefeat,
+          FuchsiaCity_Gym.EdgarPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_TAMER_PHIL, FuchsiaCity_Gym_Text_PhilIntro, FuchsiaCity_Gym_Text_PhilDefeat
- * msgbox FuchsiaCity_Gym_Text_PhilPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object FuchsiaCity_Gym_EventScript_Phil : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port FuchsiaCity_Gym_EventScript_Phil")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_TAMER_PHIL,
+          FuchsiaCity_Gym.PhilIntro,
+          FuchsiaCity_Gym.PhilDefeat,
+          FuchsiaCity_Gym.PhilPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_JUGGLER_NATE, FuchsiaCity_Gym_Text_NateIntro, FuchsiaCity_Gym_Text_NateDefeat
- * msgbox FuchsiaCity_Gym_Text_NatePostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object FuchsiaCity_Gym_EventScript_Nate : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port FuchsiaCity_Gym_EventScript_Nate")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_JUGGLER_NATE,
+          FuchsiaCity_Gym.NateIntro,
+          FuchsiaCity_Gym.NateDefeat,
+          FuchsiaCity_Gym.NatePostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * famechecker FAMECHECKER_KOGA, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
- * trainerbattle_single TRAINER_LEADER_KOGA, FuchsiaCity_Gym_Text_KogaIntro, FuchsiaCity_Gym_Text_KogaDefeat, FuchsiaCity_Gym_EventScript_DefeatedKoga, NO_MUSIC
- * goto_if_unset FLAG_GOT_TM06_FROM_KOGA, FuchsiaCity_Gym_EventScript_GiveTM06
- * msgbox FuchsiaCity_Gym_Text_KogaPostBattle
- * release
- * end
- * ```
- */
 internal object FuchsiaCity_Gym_EventScript_Koga : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port FuchsiaCity_Gym_EventScript_Koga")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.hasBeatenTrainer(KantoTrainerIds.TRAINER_LEADER_KOGA)) {
+      ctx.say(FuchsiaCity_Gym.KogaIntro)
+      if (ctx.trainerBattle(KantoTrainerIds.TRAINER_LEADER_KOGA) != BattleResult.VICTORY) return
+      ctx.say(FuchsiaCity_Gym.KogaDefeat)
+      return FuchsiaCity_Gym_EventScript_DefeatedKoga.run(ctx)
+    }
+    if (!ctx.isFlagSet(KantoFlags.FLAG_GOT_TM06_FROM_KOGA)) {
+      return FuchsiaCity_Gym_EventScript_GiveTM06.run(ctx)
+    }
+    ctx.say(FuchsiaCity_Gym.KogaPostBattle)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lock
- * faceplayer
- * goto_if_set FLAG_DEFEATED_KOGA, FuchsiaCity_Gym_EventScript_GymGuyPostVictory
- * msgbox FuchsiaCity_Gym_Text_GymGuyAdvice
- * release
- * end
- * ```
- */
 internal object FuchsiaCity_Gym_EventScript_GymGuy : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port FuchsiaCity_Gym_EventScript_GymGuy")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(KantoFlags.FLAG_DEFEATED_KOGA)) {
+      return ctx.say(FuchsiaCity_Gym.GymGuyPostVictory)
+    }
+    ctx.say(FuchsiaCity_Gym.GymGuyAdvice)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lockall
- * goto_if_set FLAG_BADGE05_GET, FuchsiaCity_Gym_EventScript_GymStatuePostVictory
- * msgbox FuchsiaCity_Gym_Text_GymStatue
- * releaseall
- * end
- * ```
- */
 internal object FuchsiaCity_Gym_EventScript_GymStatue : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port FuchsiaCity_Gym_EventScript_GymStatue")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(KantoFlags.FLAG_BADGE05_GET)) {
+      return ctx.sign(FuchsiaCity_Gym.GymStatuePlayerWon)
+    }
+    ctx.sign(FuchsiaCity_Gym.GymStatue)
+  }
+}
+
+/** What the fifth badge changes, run straight after Koga's defeat line. */
+internal object FuchsiaCity_Gym_EventScript_DefeatedKoga : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.clearFlag(KantoFlags.FLAG_HIDE_FAME_CHECKER_KOGA_JOURNAL)
+    ctx.setFlag(KantoFlags.FLAG_DEFEATED_KOGA)
+    ctx.setFlag(KantoFlags.FLAG_BADGE05_GET)
+    // set_gym_trainers 5: this gym's six trainers are retired along with its leader.
+    ctx.markTrainerBeaten(KantoTrainerIds.TRAINER_TAMER_PHIL)
+    ctx.markTrainerBeaten(KantoTrainerIds.TRAINER_TAMER_EDGAR)
+    ctx.markTrainerBeaten(KantoTrainerIds.TRAINER_JUGGLER_KIRK)
+    ctx.markTrainerBeaten(KantoTrainerIds.TRAINER_JUGGLER_SHAWN)
+    ctx.markTrainerBeaten(KantoTrainerIds.TRAINER_JUGGLER_KAYDEN)
+    ctx.markTrainerBeaten(KantoTrainerIds.TRAINER_JUGGLER_NATE)
+    FuchsiaCity_Gym_EventScript_GiveTM06.run(ctx)
+  }
+}
+
+internal object FuchsiaCity_Gym_EventScript_GiveTM06 : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(FuchsiaCity_Gym.KogaExplainSoulBadge)
+    if (!ctx.giveItem(Items.TM06)) {
+      return ctx.say(FuchsiaCity_Gym.MakeSpaceForThis)
+    }
+    ctx.say(FuchsiaCity_Gym.ReceivedTM06FromKoga)
+    ctx.setFlag(KantoFlags.FLAG_GOT_TM06_FROM_KOGA)
+    ctx.say(FuchsiaCity_Gym.KogaExplainTM06)
+  }
 }
 
 internal val FuchsiaCity_GymScripts: Map<String, Script> =
     mapOf(
+        "FuchsiaCity_Gym_EventScript_DefeatedKoga" to FuchsiaCity_Gym_EventScript_DefeatedKoga,
+        "FuchsiaCity_Gym_EventScript_GiveTM06" to FuchsiaCity_Gym_EventScript_GiveTM06,
         "FuchsiaCity_Gym_EventScript_Kayden" to FuchsiaCity_Gym_EventScript_Kayden,
         "FuchsiaCity_Gym_EventScript_Shawn" to FuchsiaCity_Gym_EventScript_Shawn,
         "FuchsiaCity_Gym_EventScript_Kirk" to FuchsiaCity_Gym_EventScript_Kirk,

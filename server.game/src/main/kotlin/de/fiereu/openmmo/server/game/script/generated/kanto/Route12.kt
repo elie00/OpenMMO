@@ -1,160 +1,117 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.dialog.generated.kanto.Misc
 import de.fiereu.openmmo.dialog.generated.kanto.Route12
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
+import de.fiereu.openmmo.trainer.generated.KantoTrainerIds
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_FISHERMAN_NED, Route12_Text_NedIntro, Route12_Text_NedDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, Route12_EventScript_NedRematch
- * msgbox Route12_Text_NedPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
+private const val SNORLAX = 143
+private const val SNORLAX_LEVEL = 30
+
 internal object Route12_EventScript_Ned : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route12_EventScript_Ned")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_FISHERMAN_NED,
+          Route12.NedIntro,
+          Route12.NedDefeat,
+          Route12.NedPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_FISHERMAN_CHIP, Route12_Text_ChipIntro, Route12_Text_ChipDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, Route12_EventScript_ChipRematch
- * msgbox Route12_Text_ChipPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object Route12_EventScript_Chip : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route12_EventScript_Chip")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_FISHERMAN_CHIP,
+          Route12.ChipIntro,
+          Route12.ChipDefeat,
+          Route12.ChipPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_FISHERMAN_HANK, Route12_Text_HankIntro, Route12_Text_HankDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, Route12_EventScript_HankRematch
- * msgbox Route12_Text_HankPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object Route12_EventScript_Hank : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route12_EventScript_Hank")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_FISHERMAN_HANK,
+          Route12.HankIntro,
+          Route12.HankDefeat,
+          Route12.HankPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_FISHERMAN_ELLIOT, Route12_Text_ElliotIntro, Route12_Text_ElliotDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, Route12_EventScript_ElliotRematch
- * msgbox Route12_Text_ElliotPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object Route12_EventScript_Elliot : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route12_EventScript_Elliot")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_FISHERMAN_ELLIOT,
+          Route12.ElliotIntro,
+          Route12.ElliotDefeat,
+          Route12.ElliotPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lock
- * faceplayer
- * goto_if_unset FLAG_GOT_POKE_FLUTE, Route12_EventScript_SnorlaxNoPokeFlute
- * goto_if_questlog EventScript_ReleaseEnd
- * special QuestLog_CutRecording
- * msgbox Text_WantToUsePokeFlute, MSGBOX_YESNO
- * goto_if_eq VAR_RESULT, NO, Route12_EventScript_DontUsePokeFlute
- * call EventScript_AwakenSnorlax
- * setwildbattle SPECIES_SNORLAX, 30
- * waitse
- * playmoncry SPECIES_SNORLAX, CRY_MODE_ENCOUNTER
- * delay 40
- * waitmoncry
- * setflag FLAG_HIDE_ROUTE_12_SNORLAX
- * setflag FLAG_SYS_SPECIAL_WILD_BATTLE
- * setflag FLAG_WOKE_UP_ROUTE_12_SNORLAX
- * dowildbattle
- * clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
- * specialvar VAR_RESULT, GetBattleOutcome
- * goto_if_eq VAR_RESULT, B_OUTCOME_WON, Route12_EventScript_FoughtSnorlax
- * goto_if_eq VAR_RESULT, B_OUTCOME_RAN, Route12_EventScript_FoughtSnorlax
- * goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, Route12_EventScript_FoughtSnorlax
- * release
- * end
- * ```
- */
+/** The Snorlax asleep across the road, which only the Poke Flute can move. */
 internal object Route12_EventScript_Snorlax : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route12_EventScript_Snorlax")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.isFlagSet(KantoFlags.FLAG_GOT_POKE_FLUTE)) {
+      return ctx.say(Route12.MonSprawledOutInSlumber)
+    }
+    if (!ctx.askYesNo(Misc.Text_WantToUsePokeFlute)) return
+    // The decomp wakes it with the flute's animation and cry, then fights it as a wild battle that
+    // is gone either way, won or fled.
+    ctx.setFlag(KantoFlags.FLAG_HIDE_ROUTE_12_SNORLAX)
+    ctx.setFlag(KantoFlags.FLAG_WOKE_UP_ROUTE_12_SNORLAX)
+    ctx.battle(SNORLAX, SNORLAX_LEVEL)
+    ctx.removeNpc(4)
+    ctx.say(Misc.Text_SnorlaxReturnedToMountains)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_ROCKER_LUCA, Route12_Text_LucaIntro, Route12_Text_LucaDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, Route12_EventScript_LucaRematch
- * msgbox Route12_Text_LucaPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object Route12_EventScript_Luca : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route12_EventScript_Luca")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_ROCKER_LUCA,
+          Route12.LucaIntro,
+          Route12.LucaDefeat,
+          Route12.LucaPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_CAMPER_JUSTIN, Route12_Text_JustinIntro, Route12_Text_JustinDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, Route12_EventScript_JustinRematch
- * msgbox Route12_Text_JustinPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object Route12_EventScript_Justin : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route12_EventScript_Justin")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_CAMPER_JUSTIN,
+          Route12.JustinIntro,
+          Route12.JustinDefeat,
+          Route12.JustinPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_FISHERMAN_ANDREW, Route12_Text_AndrewIntro, Route12_Text_AndrewDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, Route12_EventScript_AndrewRematch
- * msgbox Route12_Text_AndrewPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object Route12_EventScript_Andrew : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route12_EventScript_Andrew")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_FISHERMAN_ANDREW,
+          Route12.AndrewIntro,
+          Route12.AndrewDefeat,
+          Route12.AndrewPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_TM48
- * end
- * ```
- */
 internal object Route12_EventScript_ItemTM48 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route12_EventScript_ItemTM48")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.TM48)) return
+    ctx.removeNpc(9)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_ROUTE12_TM48)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_IRON
- * end
- * ```
- */
 internal object Route12_EventScript_ItemIron : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route12_EventScript_ItemIron")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.IRON)) return
+    ctx.removeNpc(10)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_ROUTE12_IRON)
+  }
 }
 
 /**

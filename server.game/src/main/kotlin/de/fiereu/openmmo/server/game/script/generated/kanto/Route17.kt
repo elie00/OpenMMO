@@ -3,145 +3,106 @@ package de.fiereu.openmmo.server.game.script.generated.kanto
 import de.fiereu.openmmo.dialog.generated.kanto.Route17
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.KantoTrainerIds
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_BIKER_VIRGIL, Route17_Text_VirgilIntro, Route17_Text_VirgilDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, Route17_EventScript_VirgilRematch
- * msgbox Route17_Text_VirgilPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object Route17_EventScript_Virgil : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route17_EventScript_Virgil")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_BIKER_VIRGIL,
+          Route17.VirgilIntro,
+          Route17.VirgilDefeat,
+          Route17.VirgilPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_CUE_BALL_ISAIAH, Route17_Text_IsaiahIntro, Route17_Text_IsaiahDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, Route17_EventScript_IsaiahRematch
- * msgbox Route17_Text_IsaiahPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object Route17_EventScript_Isaiah : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route17_EventScript_Isaiah")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_CUE_BALL_ISAIAH,
+          Route17.IsaiahIntro,
+          Route17.IsaiahDefeat,
+          Route17.IsaiahPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_CUE_BALL_RAUL, Route17_Text_RaulIntro, Route17_Text_RaulDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, Route17_EventScript_RaulRematch
- * msgbox Route17_Text_RaulPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object Route17_EventScript_Raul : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route17_EventScript_Raul")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_CUE_BALL_RAUL,
+          Route17.RaulIntro,
+          Route17.RaulDefeat,
+          Route17.RaulPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_BIKER_NIKOLAS, Route17_Text_NikolasIntro, Route17_Text_NikolasDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, Route17_EventScript_NikolasRematch
- * msgbox Route17_Text_NikolasPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object Route17_EventScript_Nikolas : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route17_EventScript_Nikolas")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_BIKER_NIKOLAS,
+          Route17.NikolasIntro,
+          Route17.NikolasDefeat,
+          Route17.NikolasPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_BIKER_BILLY, Route17_Text_BillyIntro, Route17_Text_BillyDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, Route17_EventScript_BillyRematch
- * msgbox Route17_Text_BillyPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object Route17_EventScript_Billy : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route17_EventScript_Billy")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_BIKER_BILLY,
+          Route17.BillyIntro,
+          Route17.BillyDefeat,
+          Route17.BillyPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_CUE_BALL_JAMAL, Route17_Text_JamalIntro, Route17_Text_JamalDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, Route17_EventScript_JamalRematch
- * msgbox Route17_Text_JamalPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object Route17_EventScript_Jamal : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route17_EventScript_Jamal")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_CUE_BALL_JAMAL,
+          Route17.JamalIntro,
+          Route17.JamalDefeat,
+          Route17.JamalPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_CUE_BALL_ZEEK, Route17_Text_ZeekIntro, Route17_Text_ZeekDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, Route17_EventScript_ZeekRematch
- * msgbox Route17_Text_ZeekPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object Route17_EventScript_Zeek : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route17_EventScript_Zeek")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_CUE_BALL_ZEEK,
+          Route17.ZeekIntro,
+          Route17.ZeekDefeat,
+          Route17.ZeekPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_CUE_BALL_COREY, Route17_Text_CoreyIntro, Route17_Text_CoreyDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, Route17_EventScript_CoreyRematch
- * msgbox Route17_Text_CoreyPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object Route17_EventScript_Corey : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route17_EventScript_Corey")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_CUE_BALL_COREY,
+          Route17.CoreyIntro,
+          Route17.CoreyDefeat,
+          Route17.CoreyPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_BIKER_WILLIAM, Route17_Text_WilliamIntro, Route17_Text_WilliamDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, Route17_EventScript_WilliamRematch
- * msgbox Route17_Text_WilliamPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object Route17_EventScript_William : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route17_EventScript_William")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_BIKER_WILLIAM,
+          Route17.WilliamIntro,
+          Route17.WilliamDefeat,
+          Route17.WilliamPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_BIKER_JAXON, Route17_Text_JaxonIntro, Route17_Text_JaxonDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, Route17_EventScript_JaxonRematch
- * msgbox Route17_Text_JaxonPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object Route17_EventScript_Jaxon : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route17_EventScript_Jaxon")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_BIKER_JAXON,
+          Route17.JaxonIntro,
+          Route17.JaxonDefeat,
+          Route17.JaxonPostBattle,
+      )
 }
 
 internal object Route17_EventScript_RouteSign : Script {

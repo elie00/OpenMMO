@@ -1,54 +1,41 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.SafariZone_West
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_GOLD_TEETH
- * end
- * ```
- */
 internal object SafariZone_West_EventScript_ItemGoldTeeth : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SafariZone_West_EventScript_ItemGoldTeeth")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.GOLD_TEETH)) return
+    ctx.removeNpc(0)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_SAFARI_ZONE_WEST_GOLD_TEETH)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_TM32
- * end
- * ```
- */
 internal object SafariZone_West_EventScript_ItemTM32 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SafariZone_West_EventScript_ItemTM32")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.TM32)) return
+    ctx.removeNpc(1)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_SAFARI_ZONE_WEST_TM32)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_MAX_POTION
- * end
- * ```
- */
 internal object SafariZone_West_EventScript_ItemMaxPotion : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SafariZone_West_EventScript_ItemMaxPotion")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.MAX_POTION)) return
+    ctx.removeNpc(2)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_SAFARI_ZONE_WEST_MAX_POTION)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_MAX_REVIVE
- * end
- * ```
- */
 internal object SafariZone_West_EventScript_ItemMaxRevive : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SafariZone_West_EventScript_ItemMaxRevive")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.MAX_REVIVE)) return
+    ctx.removeNpc(3)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_SAFARI_ZONE_WEST_MAX_REVIVE)
+  }
 }
 
 internal object SafariZone_West_EventScript_LostTeethNotice : Script {
