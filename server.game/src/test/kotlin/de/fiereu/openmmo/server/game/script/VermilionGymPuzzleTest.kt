@@ -29,7 +29,7 @@ import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 
 private const val KANTO = 0
-private const val GYM_BANK = 7
+private const val GYM_BANK = 9
 private const val GYM_MAP = 6
 private const val CANS = 15
 private const val CANS_PER_ROW = 5
