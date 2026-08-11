@@ -141,6 +141,19 @@ internal constructor(
   /** Take an item back out of the bag, the decomp removeitem. False when the bag lacks it. */
   fun takeItem(itemId: Int, quantity: Int = 1): Boolean = giveItem(itemId, -quantity)
 
+  /** What the player is carrying, the decomp checkmoney. */
+  val money: Int
+    get() = checkNotNull(player) { STORY_PLAYER_UNAVAILABLE }.money(state)
+
+  /** The decomp givemoney. */
+  fun giveMoney(amount: Int) {
+    checkNotNull(player) { STORY_PLAYER_UNAVAILABLE }.changeMoney(session, state, amount)
+  }
+
+  /** The decomp paymoney. False when the player cannot afford it, and then nothing is taken. */
+  fun payMoney(amount: Int): Boolean =
+      checkNotNull(player) { STORY_PLAYER_UNAVAILABLE }.changeMoney(session, state, -amount)
+
   /** Run a non-catchable, non-escapable story battle and wait for its result. */
   suspend fun battle(dexId: Int, level: Int, vararg moveIds: Int): BattleResult =
       checkNotNull(battles) { "Battle service is unavailable" }

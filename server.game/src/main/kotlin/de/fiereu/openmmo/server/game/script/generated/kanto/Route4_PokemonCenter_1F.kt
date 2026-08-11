@@ -3,27 +3,38 @@ package de.fiereu.openmmo.server.game.script.generated.kanto
 import de.fiereu.openmmo.dialog.generated.kanto.Route4_PokemonCenter_1F
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
+
+private const val MAGIKARP = 129
+private const val MAGIKARP_LEVEL = 5
+private const val MAGIKARP_PRICE = 500
 
 internal object Route4_PokemonCenter_1F_EventScript_Nurse : Script {
   override suspend fun run(ctx: ScriptContext) = EventScript_PkmnCenterNurse.run(ctx)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lock
- * faceplayer
- * goto_if_set FLAG_BOUGHT_MAGIKARP, Route4_PokemonCenter_1F_EventScript_AlreadyBoughtMagikarp
- * showmoneybox 0, 0
- * checkplayergender
- * goto_if_eq VAR_RESULT, MALE, Route4_PokemonCenter_1F_EventScript_AskBuyMagikarpMale
- * goto_if_eq VAR_RESULT, FEMALE, Route4_PokemonCenter_1F_EventScript_AskBuyMagikarpFemale
- * end
- * ```
- */
 internal object Route4_PokemonCenter_1F_EventScript_MagikarpSalesman : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port Route4_PokemonCenter_1F_EventScript_MagikarpSalesman")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(KantoFlags.FLAG_BOUGHT_MAGIKARP)) {
+      return ctx.say(Route4_PokemonCenter_1F.IDontGiveRefunds)
+    }
+    val offer =
+        if (ctx.isFemale) Route4_PokemonCenter_1F.SweetieBuyMagikarpForJust500
+        else Route4_PokemonCenter_1F.LaddieBuyMagikarpForJust500
+    if (!ctx.askYesNo(offer)) {
+      return ctx.say(Route4_PokemonCenter_1F.OnlyDoingThisAsFavorToYou)
+    }
+    if (ctx.money < MAGIKARP_PRICE) {
+      return ctx.say(Route4_PokemonCenter_1F.YoullNeedMoreMoney)
+    }
+    // givemon answers 2 when there is no room in the party or the box, which is not modelled, so
+    // this always lands in the party. NoRoomForMorePokemon is left unused for now.
+    ctx.givePokemon(MAGIKARP, MAGIKARP_LEVEL)
+    ctx.payMoney(MAGIKARP_PRICE)
+    ctx.say(Route4_PokemonCenter_1F.PaidOutrageouslyForMagikarp)
+    ctx.setFlag(KantoFlags.FLAG_BOUGHT_MAGIKARP)
+    // The decomp then offers to nickname it, which needs the client's nickname screen.
+  }
 }
 
 internal object Route4_PokemonCenter_1F_EventScript_Gentleman : Script {

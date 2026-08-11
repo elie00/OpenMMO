@@ -6,6 +6,7 @@ import de.fiereu.openmmo.common.Pokemon
 import de.fiereu.openmmo.common.PokemonMove
 import de.fiereu.openmmo.common.enums.PokemonContainer
 import de.fiereu.openmmo.moves.MoveRegistry
+import de.fiereu.openmmo.net.game.packets.LocalCharacterDeltaPacket
 import de.fiereu.openmmo.net.game.packets.PokemonContainerPacket
 import de.fiereu.openmmo.net.game.packets.SocialListEntryAddPacket
 import de.fiereu.openmmo.net.game.packets.battle.ItemStack
@@ -95,6 +96,23 @@ constructor(
     if (!characters.addItem(characterId, itemId, quantity)) return false
     val items = characters.getCharacter(characterId)?.items ?: return false
     session.send(storyItemStacksPacket(items))
+    return true
+  }
+
+  /** What the player is carrying, the decomp's checkmoney. */
+  fun money(state: PlayerState): Int =
+      state.characterId?.let { characters.getCharacter(it)?.info?.money } ?: 0
+
+  /**
+   * Adds [amount] to the player's money, or takes it when negative, and tells the client the new
+   * balance. False when they cannot afford it, in which case nothing changes.
+   */
+  fun changeMoney(session: SessionContext, state: PlayerState, amount: Int): Boolean {
+    val characterId = state.characterId ?: return false
+    val before = characters.getCharacter(characterId)?.info?.money ?: return false
+    if (before + amount < 0) return false
+    characters.addMoney(characterId, amount)
+    session.send(LocalCharacterDeltaPacket(money = before + amount))
     return true
   }
 
