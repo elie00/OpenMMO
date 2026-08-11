@@ -3,6 +3,8 @@ package de.fiereu.openmmo.server.game.script.generated.kanto
 import de.fiereu.openmmo.dialog.generated.kanto.CeladonCity_GameCorner
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
+import de.fiereu.openmmo.trainer.generated.KantoTrainerIds
 
 internal object CeladonCity_GameCorner_EventScript_InfoClerk : Script {
   override suspend fun run(ctx: ScriptContext) =
@@ -34,34 +36,16 @@ internal object CeladonCity_GameCorner_EventScript_CoinsClerk : Script {
       TODO("port CeladonCity_GameCorner_EventScript_CoinsClerk")
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lock
- * faceplayer
- * msgbox CeladonCity_GameCorner_Text_RumoredTeamRocketRunsThisPlace
- * goto CeladonCity_GameCorner_EventScript_FaceSlotMachine
- * end
- * ```
- */
+/** The decomp turns them back to their machine afterwards, which has no verb. */
 internal object CeladonCity_GameCorner_EventScript_BaldingMan : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port CeladonCity_GameCorner_EventScript_BaldingMan")
+      ctx.say(CeladonCity_GameCorner.RumoredTeamRocketRunsThisPlace)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lock
- * faceplayer
- * msgbox CeladonCity_GameCorner_Text_ThinkMachinesHaveDifferentOdds
- * goto CeladonCity_GameCorner_EventScript_FaceSlotMachine
- * end
- * ```
- */
+/** The decomp turns them back to their machine afterwards, which has no verb. */
 internal object CeladonCity_GameCorner_EventScript_Woman1 : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port CeladonCity_GameCorner_EventScript_Woman1")
+      ctx.say(CeladonCity_GameCorner.ThinkMachinesHaveDifferentOdds)
 }
 
 /**
@@ -89,50 +73,19 @@ internal object CeladonCity_GameCorner_EventScript_Fisher : Script {
       TODO("port CeladonCity_GameCorner_EventScript_Fisher")
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lock
- * faceplayer
- * goto_if_set FLAG_DEFEATED_ERIKA, CeladonCity_GameCorner_EventScript_GymGuyPostVictory
- * msgbox CeladonCity_GameCorner_Text_GymGuyAdvice
- * goto CeladonCity_GameCorner_EventScript_FaceSlotMachine
- * end
- * ```
- */
 internal object CeladonCity_GameCorner_EventScript_GymGuy : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port CeladonCity_GameCorner_EventScript_GymGuy")
+  override suspend fun run(ctx: ScriptContext) = ctx.say(CeladonCity_GameCorner.GymGuyAdvice)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lock
- * faceplayer
- * msgbox CeladonCity_GameCorner_Text_WinOrLoseItsOnlyLuck
- * goto CeladonCity_GameCorner_EventScript_FaceSlotMachine
- * end
- * ```
- */
+/** The decomp turns them back to their machine afterwards, which has no verb. */
 internal object CeladonCity_GameCorner_EventScript_Woman2 : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port CeladonCity_GameCorner_EventScript_Woman2")
+      ctx.say(CeladonCity_GameCorner.WinOrLoseItsOnlyLuck)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lock
- * faceplayer
- * msgbox CeladonCity_GameCorner_Text_SoEasyToGetHooked
- * goto CeladonCity_GameCorner_EventScript_FaceSlotMachine
- * end
- * ```
- */
+/** The decomp turns them back to their machine afterwards, which has no verb. */
 internal object CeladonCity_GameCorner_EventScript_OldMan : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port CeladonCity_GameCorner_EventScript_OldMan")
+  override suspend fun run(ctx: ScriptContext) = ctx.say(CeladonCity_GameCorner.SoEasyToGetHooked)
 }
 
 /**
@@ -185,17 +138,14 @@ internal object CeladonCity_GameCorner_EventScript_Gentleman : Script {
       TODO("port CeladonCity_GameCorner_EventScript_Gentleman")
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_7, CeladonCity_GameCorner_Text_GruntIntro, CeladonCity_GameCorner_Text_GruntDefeat, CeladonCity_GameCorner_Text_DefeatedGrunt
- * msgbox CeladonCity_GameCorner_Text_GruntPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object CeladonCity_GameCorner_EventScript_RocketGrunt : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port CeladonCity_GameCorner_EventScript_RocketGrunt")
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_TEAM_ROCKET_GRUNT_7,
+          CeladonCity_GameCorner.GruntIntro,
+          CeladonCity_GameCorner.GruntDefeat,
+          CeladonCity_GameCorner.GruntPostBattle,
+      )
 }
 
 /**
@@ -477,18 +427,17 @@ internal object CeladonCity_GameCorner_EventScript_SlotMachine21 : Script {
 }
 
 /**
- * Not ported yet. Decomp body:
- * ```
- * lockall
- * msgbox CeladonCity_GameCorner_Text_SwitchBehindPosterPushIt
- * call_if_unset FLAG_OPENED_ROCKET_HIDEOUT, CeladonCity_GameCorner_EventScript_OpenRocketHideout
- * releaseall
- * end
- * ```
+ * The switch behind the poster, which opens the stairs down to the hideout.
+ *
+ * The decomp lays the stairs in with setmetatile. The generated map already carries them, tile
+ * (15, 2) walkable and behaving as a stair warp into RocketHideout_B1F, so pushing the switch only
+ * records that the player found it.
  */
 internal object CeladonCity_GameCorner_EventScript_Poster : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port CeladonCity_GameCorner_EventScript_Poster")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.sign(CeladonCity_GameCorner.SwitchBehindPosterPushIt)
+    ctx.setFlag(KantoFlags.FLAG_OPENED_ROCKET_HIDEOUT)
+  }
 }
 
 /**
