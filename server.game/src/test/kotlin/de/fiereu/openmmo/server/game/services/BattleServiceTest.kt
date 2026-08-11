@@ -9,6 +9,7 @@ import de.fiereu.openmmo.common.enums.EVs
 import de.fiereu.openmmo.common.enums.IVs
 import de.fiereu.openmmo.common.enums.PokemonContainer
 import de.fiereu.openmmo.common.enums.Region
+import de.fiereu.openmmo.maps.MapManager
 import de.fiereu.openmmo.moves.MoveRegistry
 import de.fiereu.openmmo.net.game.packets.EntityMovePpPacket
 import de.fiereu.openmmo.net.game.packets.EntityPresencePacket
@@ -25,10 +26,13 @@ import de.fiereu.openmmo.pokemon.LearnsetRegistry
 import de.fiereu.openmmo.pokemon.SpeciesRegistry
 import de.fiereu.openmmo.server.game.battle.BattlePacketEmitter
 import de.fiereu.openmmo.server.game.battle.BattleRegistry
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.battle.BattleRewards
 import de.fiereu.openmmo.server.game.battle.MoveLearner
 import de.fiereu.openmmo.server.game.battle.TurnEngine
 import de.fiereu.openmmo.server.game.battle.WildMonFactory
+import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.server.game.session.PLAYER_STATE
 import de.fiereu.openmmo.server.game.storage.CharacterStore
 import de.fiereu.openmmo.server.game.storage.EntityIdService
 import de.fiereu.openmmo.server.game.testsupport.FakeCharacterRepository
@@ -37,6 +41,7 @@ import de.fiereu.openmmo.server.game.world.interest.InterestManager
 import de.fiereu.openmmo.trainer.TrainerDef
 import de.fiereu.openmmo.trainer.TrainerMon
 import de.fiereu.openmmo.trainer.TrainerRegistry
+import de.fiereu.openmmo.trainer.generated.KantoTrainerIds
 import de.fiereu.openmmo.typechart.TypeChart
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.booleans.shouldBeTrue
@@ -48,6 +53,7 @@ import io.kotest.matchers.shouldBe
 import java.time.LocalDateTime
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runCurrent
@@ -105,10 +111,14 @@ private class Fixture(scope: CoroutineScope) {
           trainers = TrainerRegistry(),
       )
 
-  suspend fun playerWithParty(level: Byte = 50, hp: Short = 999): Pair<FakeSession, Long> {
-    val created = store.createCharacter(1, "Ash", CharacterGender.MALE, Region.HOENN)
+  suspend fun playerWithParty(
+      level: Byte = 50,
+      hp: Short = 999,
+      region: Region = Region.HOENN,
+  ): Pair<FakeSession, Long> {
+    val created = store.createCharacter(1, "Ash", CharacterGender.MALE, region)
     store.addPokemon(created.info.id, bulbasaur(created.info.id, level, hp))
-    return FakeSession(created.info.id) to created.info.id
+    return FakeSession(created.info.id, regionId = region.wireValue.toInt()) to created.info.id
   }
 }
 
@@ -238,6 +248,43 @@ class BattleServiceTest :
           val saved = fx.repo.saved[charId].shouldNotBeNull()
           saved.pokemon.single().moves[0].pp shouldBe (35 - rounds).toByte()
           saved.pokemon.single().xp shouldBe 57 * 2 / 7
+        }
+      }
+
+      test("winning a scripted trainer battle marks that trainer beaten") {
+        runTest {
+          val fx = Fixture(this)
+          val (session, charId) = fx.playerWithParty(region = Region.KANTO)
+          val story = StoryService(fx.store)
+          val maps = MapManager()
+          val ctx =
+              ScriptContext(
+                  session,
+                  session.attributes[PLAYER_STATE]!!,
+                  entityId = -1,
+                  DialogService(),
+                  story,
+                  ScriptMovementService(maps, NpcService(maps, fx.store), fx.store),
+                  battles = fx.service,
+              )
+          val rick = KantoTrainerIds.TRAINER_BUG_CATCHER_RICK
+          ctx.hasBeatenTrainer(rick) shouldBe false
+
+          // The script suspends on the battle, so it cannot be awaited from the test's own turn.
+          val fight = backgroundScope.async { ctx.trainerBattle(rick) }
+          runCurrent()
+
+          var rounds = 0
+          while (fx.registry.byChar(charId)?.pendingResult == null && rounds < 20) {
+            session.act(fx.service, BattleAction.MOVE, TACKLE)
+            rounds += 1
+          }
+          session.finishBattleTransition(fx.service)
+          fight.await() shouldBe BattleResult.VICTORY
+
+          // The source game's engine sets the trainer's flag, so a beaten trainer stays beaten and
+          // the script's post battle line is what the next talk shows.
+          ctx.hasBeatenTrainer(rick) shouldBe true
         }
       }
 

@@ -1,8 +1,16 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.ViridianForest
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
+import de.fiereu.openmmo.trainer.generated.KantoTrainerIds
+
+private const val LOCALID_POKE_BALL_BALL = 5
+private const val LOCALID_ANTIDOTE_BALL = 6
+private const val LOCALID_POTION_BALL = 7
+private const val LOCALID_POTION_2_BALL = 10
 
 internal object ViridianForest_EventScript_Youngster : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.say(ViridianForest.FriendsItchingToBattle)
@@ -12,110 +20,101 @@ internal object ViridianForest_EventScript_Boy : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.say(ViridianForest.RanOutOfPokeBalls)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_BUG_CATCHER_RICK, ViridianForest_Text_RickIntro, ViridianForest_Text_RickDefeat
- * msgbox ViridianForest_Text_RickPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object ViridianForest_EventScript_Rick : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port ViridianForest_EventScript_Rick")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.hasBeatenTrainer(KantoTrainerIds.TRAINER_BUG_CATCHER_RICK)) {
+      return ctx.say(ViridianForest.RickPostBattle)
+    }
+    ctx.trainerBattle(
+        KantoTrainerIds.TRAINER_BUG_CATCHER_RICK,
+        ViridianForest.RickIntro,
+        ViridianForest.RickDefeat,
+    )
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_BUG_CATCHER_DOUG, ViridianForest_Text_DougIntro, ViridianForest_Text_DougDefeat
- * msgbox ViridianForest_Text_DougPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object ViridianForest_EventScript_Doug : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port ViridianForest_EventScript_Doug")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.hasBeatenTrainer(KantoTrainerIds.TRAINER_BUG_CATCHER_DOUG)) {
+      return ctx.say(ViridianForest.DougPostBattle)
+    }
+    ctx.trainerBattle(
+        KantoTrainerIds.TRAINER_BUG_CATCHER_DOUG,
+        ViridianForest.DougIntro,
+        ViridianForest.DougDefeat,
+    )
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_BUG_CATCHER_SAMMY, ViridianForest_Text_SammyIntro, ViridianForest_Text_SammyDefeat
- * msgbox ViridianForest_Text_SammyPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object ViridianForest_EventScript_Sammy : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port ViridianForest_EventScript_Sammy")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.hasBeatenTrainer(KantoTrainerIds.TRAINER_BUG_CATCHER_SAMMY)) {
+      return ctx.say(ViridianForest.SammyPostBattle)
+    }
+    ctx.trainerBattle(
+        KantoTrainerIds.TRAINER_BUG_CATCHER_SAMMY,
+        ViridianForest.SammyIntro,
+        ViridianForest.SammyDefeat,
+    )
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_POKE_BALL
- * end
- * ```
- */
 internal object ViridianForest_EventScript_ItemPokeBall : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port ViridianForest_EventScript_ItemPokeBall")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.POKE_BALL)) return
+    ctx.removeNpc(LOCALID_POKE_BALL_BALL)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_VIRIDIAN_FOREST_POKE_BALL)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_ANTIDOTE
- * end
- * ```
- */
 internal object ViridianForest_EventScript_ItemAntidote : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port ViridianForest_EventScript_ItemAntidote")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.ANTIDOTE)) return
+    ctx.removeNpc(LOCALID_ANTIDOTE_BALL)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_VIRIDIAN_FOREST_ANTIDOTE)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_POTION
- * end
- * ```
- */
 internal object ViridianForest_EventScript_ItemPotion : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port ViridianForest_EventScript_ItemPotion")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.POTION)) return
+    ctx.removeNpc(LOCALID_POTION_BALL)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_VIRIDIAN_FOREST_POTION)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_BUG_CATCHER_ANTHONY, ViridianForest_Text_AnthonyIntro, ViridianForest_Text_AnthonyDefeat
- * msgbox ViridianForest_Text_AnthonyPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object ViridianForest_EventScript_Anthony : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port ViridianForest_EventScript_Anthony")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.hasBeatenTrainer(KantoTrainerIds.TRAINER_BUG_CATCHER_ANTHONY)) {
+      return ctx.say(ViridianForest.AnthonyPostBattle)
+    }
+    ctx.trainerBattle(
+        KantoTrainerIds.TRAINER_BUG_CATCHER_ANTHONY,
+        ViridianForest.AnthonyIntro,
+        ViridianForest.AnthonyDefeat,
+    )
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_BUG_CATCHER_CHARLIE, ViridianForest_Text_CharlieIntro, ViridianForest_Text_CharlieDefeat
- * msgbox ViridianForest_Text_CharliePostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object ViridianForest_EventScript_Charlie : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port ViridianForest_EventScript_Charlie")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.hasBeatenTrainer(KantoTrainerIds.TRAINER_BUG_CATCHER_CHARLIE)) {
+      return ctx.say(ViridianForest.CharliePostBattle)
+    }
+    ctx.trainerBattle(
+        KantoTrainerIds.TRAINER_BUG_CATCHER_CHARLIE,
+        ViridianForest.CharlieIntro,
+        ViridianForest.CharlieDefeat,
+    )
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_POTION
- * end
- * ```
- */
 internal object ViridianForest_EventScript_ItemPotion2 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port ViridianForest_EventScript_ItemPotion2")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.POTION)) return
+    ctx.removeNpc(LOCALID_POTION_2_BALL)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_VIRIDIAN_FOREST_POTION_2)
+  }
 }
 
 internal object ViridianForest_EventScript_TrainerTips1 : Script {

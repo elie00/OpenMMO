@@ -146,15 +146,41 @@ internal constructor(
       checkNotNull(battles) { "Battle service is unavailable" }
           .startScriptedBattle(session, dexId, level, moveIds.toList())
 
-  /** Fight the decomp trainer with this id, using the region the player is standing in. */
+  /**
+   * Fight the decomp trainer with this id, using the region the player is standing in. A win marks
+   * them beaten, the way the source game's engine sets the trainer's flag rather than the script.
+   */
   suspend fun trainerBattle(trainerId: Int): BattleResult {
-    val region =
-        checkNotNull(Region.byWireValue(state.regionId.toByte())) {
-          "Scene ran in unknown region ${state.regionId}"
-        }
-    return checkNotNull(battles) { "Battle service is unavailable" }
-        .startTrainerBattle(session, region, trainerId)
+    val region = region()
+    val result =
+        checkNotNull(battles) { "Battle service is unavailable" }
+            .startTrainerBattle(session, region, trainerId)
+    if (result == BattleResult.VICTORY) setFlag(trainerFlag(region, trainerId))
+    return result
   }
+
+  /**
+   * The decomp's `trainerbattle_single`: [intro] and the fight the first time, [defeat] once the
+   * player wins, and nothing at all afterwards. Pair it with [hasBeatenTrainer] when the script
+   * ends in a post battle line, since the source game only shows that line on a later talk.
+   */
+  suspend fun trainerBattle(trainerId: Int, intro: DialogLine, defeat: DialogLine) {
+    say(intro)
+    if (trainerBattle(trainerId) != BattleResult.VICTORY) return
+    say(defeat)
+  }
+
+  /**
+   * True once the player has beaten this decomp trainer. The source game keeps one flag per trainer
+   * in a block that flags.h leaves unnamed, so the key is stored server side only and never reaches
+   * the client's flag table.
+   */
+  fun hasBeatenTrainer(trainerId: Int): Boolean = isFlagSet(trainerFlag(region(), trainerId))
+
+  private fun region(): Region =
+      checkNotNull(Region.byWireValue(state.regionId.toByte())) {
+        "Scene ran in unknown region ${state.regionId}"
+      }
 
   /**
    * Walk the map npc with decomp local id [localId] (its entityIdx) through [steps] and wait for
@@ -238,5 +264,9 @@ internal constructor(
     const val NPC = 4
     const val FEMALE: Byte = 1
     const val STORY_PLAYER_UNAVAILABLE = "Story player service is unavailable"
+
+    /** Region namespaced like the generated story keys, since ids repeat across the two games. */
+    fun trainerFlag(region: Region, trainerId: Int) =
+        "${region.name.lowercase()}/TRAINER_BEATEN_$trainerId"
   }
 }
