@@ -1,304 +1,236 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.dialog.generated.kanto.VermilionCity_Gym
+import de.fiereu.openmmo.items.generated.Items
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
+import de.fiereu.openmmo.trainer.generated.KantoTrainerIds
+import kotlin.random.Random
+
+// The two cans the switches are under this round. The decomp keeps them in VAR_TEMP_0 and
+// VAR_TEMP_1, redrawn on every entry; these are story vars cleared by the transition script for the
+// same effect. FOUND_FIRST_SWITCH is its FLAG_TEMP_1.
+internal const val VAR_SWITCH_1 = "kanto/VERMILION_GYM_SWITCH_1"
+internal const val VAR_SWITCH_2 = "kanto/VERMILION_GYM_SWITCH_2"
+private const val FOUND_FIRST_SWITCH = KantoFlags.FLAG_TEMP_1
+
+private const val TRASH_CANS = 15
+private const val CANS_PER_ROW = 5
+
+internal object VermilionCity_Gym_OnTransition : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(KantoFlags.FLAG_FOUND_BOTH_VERMILION_GYM_SWITCHES)) return
+    ctx.clearFlag(FOUND_FIRST_SWITCH)
+    hideSwitches(ctx)
+  }
+}
 
 /**
- * Not ported yet. Decomp body:
- * ```
- * famechecker FAMECHECKER_LTSURGE, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
- * trainerbattle_single TRAINER_LEADER_LT_SURGE, VermilionCity_Gym_Text_LtSurgeIntro, VermilionCity_Gym_Text_LtSurgeDefeat, VermilionCity_Gym_EventScript_DefeatedLtSurge, NO_MUSIC
- * goto_if_unset FLAG_GOT_TM34_FROM_SURGE, VermilionCity_Gym_EventScript_GiveTM34
- * msgbox VermilionCity_Gym_Text_LtSurgePostBattle
- * release
- * end
- * ```
+ * SetVermilionTrashCans: the first switch is under any of the fifteen cans and the second under one
+ * next to it, so the player who finds the first has four cans left to try.
  */
+private fun hideSwitches(ctx: ScriptContext) {
+  val first = Random.nextInt(TRASH_CANS) + 1
+  val neighbours = buildList {
+    if (first % CANS_PER_ROW != 0) add(first + 1)
+    if (first % CANS_PER_ROW != 1) add(first - 1)
+    if (first + CANS_PER_ROW <= TRASH_CANS) add(first + CANS_PER_ROW)
+    if (first - CANS_PER_ROW >= 1) add(first - CANS_PER_ROW)
+  }
+  ctx.setVar(VAR_SWITCH_1, first)
+  ctx.setVar(VAR_SWITCH_2, neighbours.random())
+}
+
+/**
+ * One of the fifteen cans. The first switch opens half the barrier, the second opens the rest, and
+ * a wrong second guess resets both and hides them somewhere else.
+ *
+ * TODO Open the barrier itself The decomp follows each switch with setmetatile and
+ * DrawWholeMapView, which swap the beam tiles for floor. Map tiles are static here and the server
+ * walks the player against them, so the flags move but the barrier does not.
+ */
+private suspend fun searchTrashCan(ctx: ScriptContext, canId: Int) {
+  if (ctx.isFlagSet(KantoFlags.FLAG_FOUND_BOTH_VERMILION_GYM_SWITCHES)) {
+    return ctx.sign(VermilionCity_Gym.NopeOnlyTrashHere)
+  }
+  if (!ctx.isFlagSet(FOUND_FIRST_SWITCH)) {
+    if (canId != ctx.getVar(VAR_SWITCH_1)) {
+      return ctx.sign(VermilionCity_Gym.NopeOnlyTrashHere)
+    }
+    ctx.sign(VermilionCity_Gym.SwitchUnderTrashFirstLockOpened)
+    return ctx.setFlag(FOUND_FIRST_SWITCH)
+  }
+  if (canId != ctx.getVar(VAR_SWITCH_2)) {
+    ctx.sign(VermilionCity_Gym.OnlyTrashLocksWereReset)
+    ctx.clearFlag(FOUND_FIRST_SWITCH)
+    return hideSwitches(ctx)
+  }
+  ctx.sign(VermilionCity_Gym.SecondLockOpened)
+  ctx.setFlag(KantoFlags.FLAG_FOUND_BOTH_VERMILION_GYM_SWITCHES)
+}
+
 internal object VermilionCity_Gym_EventScript_LtSurge : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port VermilionCity_Gym_EventScript_LtSurge")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.hasBeatenTrainer(KantoTrainerIds.TRAINER_LEADER_LT_SURGE)) {
+      ctx.say(VermilionCity_Gym.LtSurgeIntro)
+      if (ctx.trainerBattle(KantoTrainerIds.TRAINER_LEADER_LT_SURGE) != BattleResult.VICTORY) return
+      ctx.say(VermilionCity_Gym.LtSurgeDefeat)
+      return VermilionCity_Gym_EventScript_DefeatedLtSurge.run(ctx)
+    }
+    if (!ctx.isFlagSet(KantoFlags.FLAG_GOT_TM34_FROM_SURGE)) {
+      return VermilionCity_Gym_EventScript_GiveTM34.run(ctx)
+    }
+    ctx.say(VermilionCity_Gym.LtSurgePostBattle)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_ENGINEER_BAILY, VermilionCity_Gym_Text_BailyIntro, VermilionCity_Gym_Text_BailyDefeat
- * msgbox VermilionCity_Gym_Text_BailyPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
+/** What the third badge changes, run straight after Lt. Surge's defeat line. */
+internal object VermilionCity_Gym_EventScript_DefeatedLtSurge : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    // Oak's aide waits outside with HM05 until the player has this badge.
+    if (!ctx.isFlagSet(KantoFlags.FLAG_GOT_HM05)) {
+      ctx.clearFlag(KantoFlags.FLAG_HIDE_VERMILION_CITY_OAKS_AIDE)
+    }
+    ctx.clearFlag(KantoFlags.FLAG_HIDE_FAME_CHECKER_LT_SURGE_JOURNAL)
+    ctx.setFlag(KantoFlags.FLAG_DEFEATED_LT_SURGE)
+    ctx.setFlag(KantoFlags.FLAG_BADGE03_GET)
+    // set_gym_trainers 3: this gym's three trainers are retired along with its leader.
+    ctx.markTrainerBeaten(KantoTrainerIds.TRAINER_SAILOR_DWAYNE)
+    ctx.markTrainerBeaten(KantoTrainerIds.TRAINER_ENGINEER_BAILY)
+    ctx.markTrainerBeaten(KantoTrainerIds.TRAINER_GENTLEMAN_TUCKER)
+    VermilionCity_Gym_EventScript_GiveTM34.run(ctx)
+  }
+}
+
+internal object VermilionCity_Gym_EventScript_GiveTM34 : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.say(VermilionCity_Gym.ExplainThunderBadgeTakeThis)
+    if (!ctx.giveItem(Items.TM34)) {
+      return ctx.say(VermilionCity_Gym.MakeRoomInYourBag)
+    }
+    ctx.say(VermilionCity_Gym.ReceivedTM34FromLtSurge)
+    ctx.setFlag(KantoFlags.FLAG_GOT_TM34_FROM_SURGE)
+    ctx.say(VermilionCity_Gym.ExplainTM34)
+  }
+}
+
 internal object VermilionCity_Gym_EventScript_Baily : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port VermilionCity_Gym_EventScript_Baily")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_ENGINEER_BAILY,
+          VermilionCity_Gym.BailyIntro,
+          VermilionCity_Gym.BailyDefeat,
+          VermilionCity_Gym.BailyPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_SAILOR_DWAYNE, VermilionCity_Gym_Text_DwayneIntro, VermilionCity_Gym_Text_DwayneDefeat
- * famechecker FAMECHECKER_LTSURGE, 4
- * msgbox VermilionCity_Gym_Text_DwaynePostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object VermilionCity_Gym_EventScript_Dwayne : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port VermilionCity_Gym_EventScript_Dwayne")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_SAILOR_DWAYNE,
+          VermilionCity_Gym.DwayneIntro,
+          VermilionCity_Gym.DwayneDefeat,
+          VermilionCity_Gym.DwaynePostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lock
- * faceplayer
- * goto_if_set FLAG_DEFEATED_LT_SURGE, VermilionCity_Gym_EventScript_GymGuyPostVictory
- * msgbox VermilionCity_Gym_Text_GymGuyAdvice
- * release
- * end
- * ```
- */
-internal object VermilionCity_Gym_EventScript_GymGuy : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port VermilionCity_Gym_EventScript_GymGuy")
-}
-
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_GENTLEMAN_TUCKER, VermilionCity_Gym_Text_TuckerIntro, VermilionCity_Gym_Text_TuckerDefeat, VermilionCity_Gym_EventScript_DefeatedTucker
- * famechecker FAMECHECKER_LTSURGE, 3
- * msgbox VermilionCity_Gym_Text_TuckerPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object VermilionCity_Gym_EventScript_Tucker : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port VermilionCity_Gym_EventScript_Tucker")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_GENTLEMAN_TUCKER,
+          VermilionCity_Gym.TuckerIntro,
+          VermilionCity_Gym.TuckerDefeat,
+          VermilionCity_Gym.TuckerPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lockall
- * goto_if_set FLAG_BADGE03_GET, VermilionCity_Gym_EventScript_GymStatuePostVictory
- * msgbox VermilionCity_Gym_Text_GymStatue
- * releaseall
- * end
- * ```
- */
+internal object VermilionCity_Gym_EventScript_GymGuy : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(KantoFlags.FLAG_DEFEATED_LT_SURGE)) {
+      return ctx.say(VermilionCity_Gym.GymGuyPostVictory)
+    }
+    ctx.say(VermilionCity_Gym.GymGuyAdvice)
+  }
+}
+
 internal object VermilionCity_Gym_EventScript_GymStatue : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port VermilionCity_Gym_EventScript_GymStatue")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(KantoFlags.FLAG_BADGE03_GET)) {
+      return ctx.sign(VermilionCity_Gym.GymStatuePlayerWon)
+    }
+    ctx.sign(VermilionCity_Gym.GymStatue)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lockall
- * setvar TRASH_CAN_ID, 1
- * goto VermilionCity_Gym_EventScript_TrashCan
- * end
- * ```
- */
 internal object VermilionCity_Gym_EventScript_TrashCan1 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port VermilionCity_Gym_EventScript_TrashCan1")
+  override suspend fun run(ctx: ScriptContext) = searchTrashCan(ctx, 1)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lockall
- * setvar TRASH_CAN_ID, 2
- * goto VermilionCity_Gym_EventScript_TrashCan
- * end
- * ```
- */
 internal object VermilionCity_Gym_EventScript_TrashCan2 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port VermilionCity_Gym_EventScript_TrashCan2")
+  override suspend fun run(ctx: ScriptContext) = searchTrashCan(ctx, 2)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lockall
- * setvar TRASH_CAN_ID, 3
- * goto VermilionCity_Gym_EventScript_TrashCan
- * end
- * ```
- */
 internal object VermilionCity_Gym_EventScript_TrashCan3 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port VermilionCity_Gym_EventScript_TrashCan3")
+  override suspend fun run(ctx: ScriptContext) = searchTrashCan(ctx, 3)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lockall
- * setvar TRASH_CAN_ID, 4
- * goto VermilionCity_Gym_EventScript_TrashCan
- * end
- * ```
- */
 internal object VermilionCity_Gym_EventScript_TrashCan4 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port VermilionCity_Gym_EventScript_TrashCan4")
+  override suspend fun run(ctx: ScriptContext) = searchTrashCan(ctx, 4)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lockall
- * setvar TRASH_CAN_ID, 5
- * goto VermilionCity_Gym_EventScript_TrashCan
- * end
- * ```
- */
 internal object VermilionCity_Gym_EventScript_TrashCan5 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port VermilionCity_Gym_EventScript_TrashCan5")
+  override suspend fun run(ctx: ScriptContext) = searchTrashCan(ctx, 5)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lockall
- * setvar TRASH_CAN_ID, 6
- * goto VermilionCity_Gym_EventScript_TrashCan
- * end
- * ```
- */
 internal object VermilionCity_Gym_EventScript_TrashCan6 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port VermilionCity_Gym_EventScript_TrashCan6")
+  override suspend fun run(ctx: ScriptContext) = searchTrashCan(ctx, 6)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lockall
- * setvar TRASH_CAN_ID, 7
- * goto VermilionCity_Gym_EventScript_TrashCan
- * end
- * ```
- */
 internal object VermilionCity_Gym_EventScript_TrashCan7 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port VermilionCity_Gym_EventScript_TrashCan7")
+  override suspend fun run(ctx: ScriptContext) = searchTrashCan(ctx, 7)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lockall
- * setvar TRASH_CAN_ID, 8
- * goto VermilionCity_Gym_EventScript_TrashCan
- * end
- * ```
- */
 internal object VermilionCity_Gym_EventScript_TrashCan8 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port VermilionCity_Gym_EventScript_TrashCan8")
+  override suspend fun run(ctx: ScriptContext) = searchTrashCan(ctx, 8)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lockall
- * setvar TRASH_CAN_ID, 9
- * goto VermilionCity_Gym_EventScript_TrashCan
- * end
- * ```
- */
 internal object VermilionCity_Gym_EventScript_TrashCan9 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port VermilionCity_Gym_EventScript_TrashCan9")
+  override suspend fun run(ctx: ScriptContext) = searchTrashCan(ctx, 9)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lockall
- * setvar TRASH_CAN_ID, 10
- * goto VermilionCity_Gym_EventScript_TrashCan
- * end
- * ```
- */
 internal object VermilionCity_Gym_EventScript_TrashCan10 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port VermilionCity_Gym_EventScript_TrashCan10")
+  override suspend fun run(ctx: ScriptContext) = searchTrashCan(ctx, 10)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lockall
- * setvar TRASH_CAN_ID, 11
- * goto VermilionCity_Gym_EventScript_TrashCan
- * end
- * ```
- */
 internal object VermilionCity_Gym_EventScript_TrashCan11 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port VermilionCity_Gym_EventScript_TrashCan11")
+  override suspend fun run(ctx: ScriptContext) = searchTrashCan(ctx, 11)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lockall
- * setvar TRASH_CAN_ID, 12
- * goto VermilionCity_Gym_EventScript_TrashCan
- * end
- * ```
- */
 internal object VermilionCity_Gym_EventScript_TrashCan12 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port VermilionCity_Gym_EventScript_TrashCan12")
+  override suspend fun run(ctx: ScriptContext) = searchTrashCan(ctx, 12)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lockall
- * setvar TRASH_CAN_ID, 13
- * goto VermilionCity_Gym_EventScript_TrashCan
- * end
- * ```
- */
 internal object VermilionCity_Gym_EventScript_TrashCan13 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port VermilionCity_Gym_EventScript_TrashCan13")
+  override suspend fun run(ctx: ScriptContext) = searchTrashCan(ctx, 13)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lockall
- * setvar TRASH_CAN_ID, 14
- * goto VermilionCity_Gym_EventScript_TrashCan
- * end
- * ```
- */
 internal object VermilionCity_Gym_EventScript_TrashCan14 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port VermilionCity_Gym_EventScript_TrashCan14")
+  override suspend fun run(ctx: ScriptContext) = searchTrashCan(ctx, 14)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lockall
- * setvar TRASH_CAN_ID, 15
- * goto VermilionCity_Gym_EventScript_TrashCan
- * end
- * ```
- */
 internal object VermilionCity_Gym_EventScript_TrashCan15 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port VermilionCity_Gym_EventScript_TrashCan15")
+  override suspend fun run(ctx: ScriptContext) = searchTrashCan(ctx, 15)
 }
 
 internal val VermilionCity_GymScripts: Map<String, Script> =
     mapOf(
+        "VermilionCity_Gym_OnTransition" to VermilionCity_Gym_OnTransition,
         "VermilionCity_Gym_EventScript_LtSurge" to VermilionCity_Gym_EventScript_LtSurge,
+        "VermilionCity_Gym_EventScript_DefeatedLtSurge" to
+            VermilionCity_Gym_EventScript_DefeatedLtSurge,
+        "VermilionCity_Gym_EventScript_GiveTM34" to VermilionCity_Gym_EventScript_GiveTM34,
         "VermilionCity_Gym_EventScript_Baily" to VermilionCity_Gym_EventScript_Baily,
         "VermilionCity_Gym_EventScript_Dwayne" to VermilionCity_Gym_EventScript_Dwayne,
         "VermilionCity_Gym_EventScript_GymGuy" to VermilionCity_Gym_EventScript_GymGuy,
