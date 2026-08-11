@@ -1,94 +1,70 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.SilphCo_10F
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
+import de.fiereu.openmmo.story.generated.kanto.KantoVars
+import de.fiereu.openmmo.trainer.generated.KantoTrainerIds
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_SCIENTIST_TRAVIS, SilphCo_10F_Text_TravisIntro, SilphCo_10F_Text_TravisDefeat
- * msgbox SilphCo_10F_Text_TravisPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
+/** VAR_MAP_SCENE_SILPH_CO_11F once Giovanni has been driven out of the building. */
+private const val ROCKETS_GONE = 1
+
 internal object SilphCo_10F_EventScript_Travis : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SilphCo_10F_EventScript_Travis")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_SCIENTIST_TRAVIS,
+          SilphCo_10F.TravisIntro,
+          SilphCo_10F.TravisDefeat,
+          SilphCo_10F.TravisPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lock
- * faceplayer
- * goto_if_ge VAR_MAP_SCENE_SILPH_CO_11F, 1, SilphCo_10F_EventScript_WorkerFRocketsGone
- * msgbox SilphCo_10F_Text_WaaaImScared
- * release
- * end
- * ```
- */
 internal object SilphCo_10F_EventScript_WorkerF : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SilphCo_10F_EventScript_WorkerF")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.say(
+          if (ctx.getVar(KantoVars.VAR_MAP_SCENE_SILPH_CO_11F) >= ROCKETS_GONE)
+              SilphCo_10F.KeepMeCryingASecret
+          else SilphCo_10F.WaaaImScared)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_39, SilphCo_10F_Text_GruntIntro, SilphCo_10F_Text_GruntDefeat
- * msgbox SilphCo_10F_Text_GruntPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object SilphCo_10F_EventScript_Grunt : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SilphCo_10F_EventScript_Grunt")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_TEAM_ROCKET_GRUNT_39,
+          SilphCo_10F.GruntIntro,
+          SilphCo_10F.GruntDefeat,
+          SilphCo_10F.GruntPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_CARBOS
- * end
- * ```
- */
 internal object SilphCo_10F_EventScript_ItemCarbos : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SilphCo_10F_EventScript_ItemCarbos")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.CARBOS)) return
+    ctx.removeNpc(3)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_SILPH_CO_10F_CARBOS)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_ULTRA_BALL
- * end
- * ```
- */
 internal object SilphCo_10F_EventScript_ItemUltraBall : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SilphCo_10F_EventScript_ItemUltraBall")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.ULTRA_BALL)) return
+    ctx.removeNpc(4)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_SILPH_CO_10F_ULTRA_BALL)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_RARE_CANDY
- * end
- * ```
- */
 internal object SilphCo_10F_EventScript_ItemRareCandy : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SilphCo_10F_EventScript_ItemRareCandy")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.RARE_CANDY)) return
+    ctx.removeNpc(5)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_SILPH_CO_10F_RARE_CANDY)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lockall
- * setvar VAR_TEMP_1, 19
- * setvar VAR_0x8004, FLAG_SILPH_10F_DOOR
- * goto_if_set FLAG_SILPH_10F_DOOR, EventScript_DoorUnlocked
- * goto EventScript_TryUnlockDoor
- * end
- * ```
- */
 internal object SilphCo_10F_EventScript_Door : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SilphCo_10F_EventScript_Door")
+  override suspend fun run(ctx: ScriptContext) = silphCoDoor(ctx, KantoFlags.FLAG_SILPH_10F_DOOR)
 }
 
 internal object SilphCo_10F_EventScript_FloorSign : Script {

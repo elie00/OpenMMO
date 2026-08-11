@@ -1,187 +1,123 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.SilphCo_7F
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
+import de.fiereu.openmmo.story.generated.kanto.KantoVars
+import de.fiereu.openmmo.trainer.generated.KantoTrainerIds
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lock
- * faceplayer
- * goto_if_set FLAG_GOT_LAPRAS_FROM_SILPH, SilphCo_7F_EventScript_AlreadyGotLapras
- * msgbox SilphCo_7F_Text_HaveMonForSavingUs
- * setvar VAR_TEMP_1, SPECIES_LAPRAS
- * givemon SPECIES_LAPRAS, 25
- * goto_if_eq VAR_RESULT, 0, SilphCo_7F_EventScript_ReceiveLaprasParty
- * goto_if_eq VAR_RESULT, 1, SilphCo_7F_EventScript_ReceiveLaprasPC
- * goto_if_eq VAR_RESULT, 2, EventScript_NoMoreRoomForPokemon
- * release
- * end
- * ```
- */
+/** VAR_MAP_SCENE_SILPH_CO_11F once Giovanni has been driven out of the building. */
+private const val ROCKETS_GONE = 1
+
+private const val LAPRAS = 131
+private const val LAPRAS_LEVEL = 25
+
 internal object SilphCo_7F_EventScript_LaprasGuy : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SilphCo_7F_EventScript_LaprasGuy")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(KantoFlags.FLAG_GOT_LAPRAS_FROM_SILPH)) {
+      return ctx.say(SilphCo_7F.ExplainLapras)
+    }
+    ctx.say(SilphCo_7F.HaveMonForSavingUs)
+    ctx.givePokemon(LAPRAS, LAPRAS_LEVEL)
+    ctx.say(SilphCo_7F.ObtainedLaprasFromEmployee)
+    ctx.setFlag(KantoFlags.FLAG_GOT_LAPRAS_FROM_SILPH)
+    // The decomp then offers to nickname it, which needs the client's naming screen.
+    ctx.say(SilphCo_7F.ExplainLapras)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_33, SilphCo_7F_Text_Grunt1Intro, SilphCo_7F_Text_Grunt1Defeat
- * msgbox SilphCo_7F_Text_Grunt1PostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object SilphCo_7F_EventScript_Grunt1 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SilphCo_7F_EventScript_Grunt1")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_TEAM_ROCKET_GRUNT_33,
+          SilphCo_7F.Grunt1Intro,
+          SilphCo_7F.Grunt1Defeat,
+          SilphCo_7F.Grunt1PostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_34, SilphCo_7F_Text_Grunt2Intro, SilphCo_7F_Text_Grunt2Defeat
- * msgbox SilphCo_7F_Text_Grunt2PostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object SilphCo_7F_EventScript_Grunt2 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SilphCo_7F_EventScript_Grunt2")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_TEAM_ROCKET_GRUNT_34,
+          SilphCo_7F.Grunt2Intro,
+          SilphCo_7F.Grunt2Defeat,
+          SilphCo_7F.Grunt2PostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_35, SilphCo_7F_Text_Grunt3Intro, SilphCo_7F_Text_Grunt3Defeat
- * msgbox SilphCo_7F_Text_Grunt3PostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object SilphCo_7F_EventScript_Grunt3 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SilphCo_7F_EventScript_Grunt3")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_TEAM_ROCKET_GRUNT_35,
+          SilphCo_7F.Grunt3Intro,
+          SilphCo_7F.Grunt3Defeat,
+          SilphCo_7F.Grunt3PostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lock
- * faceplayer
- * goto_if_ge VAR_MAP_SCENE_SILPH_CO_11F, 1, SilphCo_7F_EventScript_WorkerFRocketsGone
- * msgbox SilphCo_7F_Text_ReallyDangerousHere
- * release
- * end
- * ```
- */
 internal object SilphCo_7F_EventScript_WorkerF : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SilphCo_7F_EventScript_WorkerF")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.say(
+          if (ctx.getVar(KantoVars.VAR_MAP_SCENE_SILPH_CO_11F) >= ROCKETS_GONE)
+              SilphCo_7F.ThankYouSoMuch
+          else SilphCo_7F.ReallyDangerousHere)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lock
- * faceplayer
- * goto_if_ge VAR_MAP_SCENE_SILPH_CO_11F, 1, SilphCo_7F_EventScript_WorkerM1RocketsGone
- * msgbox SilphCo_7F_Text_RocketsAfterMasterBall
- * release
- * end
- * ```
- */
 internal object SilphCo_7F_EventScript_WorkerM1 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SilphCo_7F_EventScript_WorkerM1")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.say(
+          if (ctx.getVar(KantoVars.VAR_MAP_SCENE_SILPH_CO_11F) >= ROCKETS_GONE)
+              SilphCo_7F.CanceledMasterBallProject
+          else SilphCo_7F.RocketsAfterMasterBall)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lock
- * faceplayer
- * goto_if_ge VAR_MAP_SCENE_SILPH_CO_11F, 1, SilphCo_7F_EventScript_WorkerM2RocketsGone
- * msgbox SilphCo_7F_Text_BadIfTeamRocketTookOver
- * release
- * end
- * ```
- */
 internal object SilphCo_7F_EventScript_WorkerM2 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SilphCo_7F_EventScript_WorkerM2")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.say(
+          if (ctx.getVar(KantoVars.VAR_MAP_SCENE_SILPH_CO_11F) >= ROCKETS_GONE)
+              SilphCo_7F.WowYouChasedOffTeamRocket
+          else SilphCo_7F.BadIfTeamRocketTookOver)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_SCIENTIST_JOSHUA, SilphCo_7F_Text_JoshuaIntro, SilphCo_7F_Text_JoshuaDefeat
- * msgbox SilphCo_7F_Text_JoshuaPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object SilphCo_7F_EventScript_Joshua : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SilphCo_7F_EventScript_Joshua")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_SCIENTIST_JOSHUA,
+          SilphCo_7F.JoshuaIntro,
+          SilphCo_7F.JoshuaDefeat,
+          SilphCo_7F.JoshuaPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_CALCIUM
- * end
- * ```
- */
 internal object SilphCo_7F_EventScript_ItemCalcium : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SilphCo_7F_EventScript_ItemCalcium")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.CALCIUM)) return
+    ctx.removeNpc(9)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_SILPH_CO_7F_CALCIUM)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_TM08
- * end
- * ```
- */
 internal object SilphCo_7F_EventScript_ItemTM08 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SilphCo_7F_EventScript_ItemTM08")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.TM08)) return
+    ctx.removeNpc(10)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_SILPH_CO_7F_TM08)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lockall
- * setvar VAR_TEMP_1, 11
- * setvar VAR_0x8004, FLAG_SILPH_7F_DOOR_1
- * goto_if_set FLAG_SILPH_7F_DOOR_1, EventScript_DoorUnlocked
- * goto EventScript_TryUnlockDoor
- * end
- * ```
- */
 internal object SilphCo_7F_EventScript_Door1 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SilphCo_7F_EventScript_Door1")
+  override suspend fun run(ctx: ScriptContext) = silphCoDoor(ctx, KantoFlags.FLAG_SILPH_7F_DOOR_1)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lockall
- * setvar VAR_TEMP_1, 12
- * setvar VAR_0x8004, FLAG_SILPH_7F_DOOR_2
- * goto_if_set FLAG_SILPH_7F_DOOR_2, EventScript_DoorUnlocked
- * goto EventScript_TryUnlockDoor
- * end
- * ```
- */
 internal object SilphCo_7F_EventScript_Door2 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SilphCo_7F_EventScript_Door2")
+  override suspend fun run(ctx: ScriptContext) = silphCoDoor(ctx, KantoFlags.FLAG_SILPH_7F_DOOR_2)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lockall
- * setvar VAR_TEMP_1, 13
- * setvar VAR_0x8004, FLAG_SILPH_7F_DOOR_3
- * goto_if_set FLAG_SILPH_7F_DOOR_3, EventScript_DoorUnlocked
- * goto EventScript_TryUnlockDoor
- * end
- * ```
- */
 internal object SilphCo_7F_EventScript_Door3 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SilphCo_7F_EventScript_Door3")
+  override suspend fun run(ctx: ScriptContext) = silphCoDoor(ctx, KantoFlags.FLAG_SILPH_7F_DOOR_3)
 }
 
 internal object SilphCo_7F_EventScript_FloorSign : Script {

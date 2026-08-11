@@ -1,97 +1,69 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.dialog.generated.kanto.Misc
 import de.fiereu.openmmo.dialog.generated.kanto.SilphCo_2F
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
+import de.fiereu.openmmo.trainer.generated.KantoTrainerIds
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_24, SilphCo_2F_Text_Grunt2Intro, SilphCo_2F_Text_Grunt2Defeat
- * msgbox SilphCo_2F_Text_Grunt2PostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object SilphCo_2F_EventScript_Grunt2 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SilphCo_2F_EventScript_Grunt2")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_TEAM_ROCKET_GRUNT_24,
+          SilphCo_2F.Grunt2Intro,
+          SilphCo_2F.Grunt2Defeat,
+          SilphCo_2F.Grunt2PostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_SCIENTIST_JERRY, SilphCo_2F_Text_JerryIntro, SilphCo_2F_Text_JerryDefeat
- * msgbox SilphCo_2F_Text_JerryPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object SilphCo_2F_EventScript_Jerry : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SilphCo_2F_EventScript_Jerry")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_SCIENTIST_JERRY,
+          SilphCo_2F.JerryIntro,
+          SilphCo_2F.JerryDefeat,
+          SilphCo_2F.JerryPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_23, SilphCo_2F_Text_Grunt1Intro, SilphCo_2F_Text_Grunt1Defeat
- * msgbox SilphCo_2F_Text_Grunt1PostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object SilphCo_2F_EventScript_Grunt1 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SilphCo_2F_EventScript_Grunt1")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_TEAM_ROCKET_GRUNT_23,
+          SilphCo_2F.Grunt1Intro,
+          SilphCo_2F.Grunt1Defeat,
+          SilphCo_2F.Grunt1PostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_SCIENTIST_CONNOR, SilphCo_2F_Text_ConnorIntro, SilphCo_2F_Text_ConnorDefeat
- * msgbox SilphCo_2F_Text_ConnorPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object SilphCo_2F_EventScript_Connor : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SilphCo_2F_EventScript_Connor")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_SCIENTIST_CONNOR,
+          SilphCo_2F.ConnorIntro,
+          SilphCo_2F.ConnorDefeat,
+          SilphCo_2F.ConnorPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * goto EventScript_ThunderWaveTutor
- * end
- * ```
- */
 internal object SilphCo_2F_EventScript_ThunderWaveTutor : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port SilphCo_2F_EventScript_ThunderWaveTutor")
+      moveTutor(
+          ctx,
+          KantoFlags.FLAG_TUTOR_THUNDER_WAVE,
+          Misc.Text_ThunderWaveTeach,
+          Misc.Text_ThunderWaveDeclined,
+          Misc.Text_ThunderWaveTaught,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lockall
- * setvar VAR_TEMP_1, 1
- * setvar VAR_0x8004, FLAG_SILPH_2F_DOOR_1
- * goto_if_set FLAG_SILPH_2F_DOOR_1, EventScript_DoorUnlocked
- * goto EventScript_TryUnlockDoor
- * end
- * ```
- */
 internal object SilphCo_2F_EventScript_Door1 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SilphCo_2F_EventScript_Door1")
+  override suspend fun run(ctx: ScriptContext) = silphCoDoor(ctx, KantoFlags.FLAG_SILPH_2F_DOOR_1)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lockall
- * setvar VAR_TEMP_1, 2
- * setvar VAR_0x8004, FLAG_SILPH_2F_DOOR_2
- * goto_if_set FLAG_SILPH_2F_DOOR_2, EventScript_DoorUnlocked
- * goto EventScript_TryUnlockDoor
- * end
- * ```
- */
 internal object SilphCo_2F_EventScript_Door2 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SilphCo_2F_EventScript_Door2")
+  override suspend fun run(ctx: ScriptContext) = silphCoDoor(ctx, KantoFlags.FLAG_SILPH_2F_DOOR_2)
 }
 
 internal object SilphCo_2F_EventScript_FloorSign : Script {

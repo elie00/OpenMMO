@@ -3,6 +3,7 @@ package de.fiereu.openmmo.server.game.script.generated.kanto
 import de.fiereu.openmmo.dialog.generated.kanto.SaffronCity
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 
 internal object SaffronCity_EventScript_RocketGrunt1 : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.say(SaffronCity.WhatDoYouWantGetLost)
@@ -24,20 +25,14 @@ internal object SaffronCity_EventScript_RocketGrunt5 : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.say(SaffronCity.CriminalLifeMakesMeFeelAlive)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lock
- * goto_if_set FLAG_RESCUED_MR_FUJI, SaffronCity_EventScript_DoorGuardAsleep
- * applymovement LOCALID_SAFFRON_DOOR_GUARD_GRUNT, Common_Movement_FacePlayer
- * waitmovement 0
- * msgbox SaffronCity_Text_ImASecurityGuard
- * release
- * end
- * ```
- */
+/** A Rocket in a guard's uniform, who dozes off once Mr Fuji is home. */
 internal object SaffronCity_EventScript_DoorGuardGrunt : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SaffronCity_EventScript_DoorGuardGrunt")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(KantoFlags.FLAG_RESCUED_MR_FUJI)) {
+      return ctx.say(SaffronCity.HesTakingASnooze)
+    }
+    ctx.say(SaffronCity.ImASecurityGuard)
+  }
 }
 
 internal object SaffronCity_EventScript_RocketGrunt7 : Script {
@@ -64,40 +59,17 @@ internal object SaffronCity_EventScript_Boy : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.say(SaffronCity.FlewHereOnPidgeot)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lock
- * faceplayer
- * waitse
- * playmoncry SPECIES_PIDGEOT, CRY_MODE_NORMAL
- * msgbox SaffronCity_Text_Pidgeot
- * waitmoncry
- * release
- * end
- * ```
- */
+/** The decomp plays its cry around the box, which has no verb. */
 internal object SaffronCity_EventScript_Pidgeot : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SaffronCity_EventScript_Pidgeot")
+  override suspend fun run(ctx: ScriptContext) = ctx.say(SaffronCity.Pidgeot)
 }
 
 internal object SaffronCity_EventScript_Lass : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.say(SaffronCity.PeopleComingBackToSaffron)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lock
- * faceplayer
- * famechecker FAMECHECKER_LANCE, 2
- * msgbox SaffronCity_Text_HowCanClubNotRecognizeLance
- * release
- * end
- * ```
- */
 internal object SaffronCity_EventScript_CrushGirl : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SaffronCity_EventScript_CrushGirl")
+  override suspend fun run(ctx: ScriptContext) = ctx.say(SaffronCity.HowCanClubNotRecognizeLance)
 }
 
 internal object SaffronCity_EventScript_CitySign : Script {
@@ -124,18 +96,8 @@ internal object SaffronCity_EventScript_TrainerTips1 : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(SaffronCity.FullHealCuresStatus)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lockall
- * famechecker FAMECHECKER_SABRINA, 0
- * msgbox SaffronCity_Text_GymSign
- * releaseall
- * end
- * ```
- */
 internal object SaffronCity_EventScript_GymSign : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SaffronCity_EventScript_GymSign")
+  override suspend fun run(ctx: ScriptContext) = ctx.sign(SaffronCity.GymSign)
 }
 
 internal object SaffronCity_EventScript_MrPsychicsHouseSign : Script {

@@ -1,117 +1,103 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.SaffronCity_Dojo
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
+import de.fiereu.openmmo.story.generated.kanto.KantoVars
+import de.fiereu.openmmo.trainer.generated.KantoTrainerIds
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_BLACK_BELT_HITOSHI, SaffronCity_Dojo_Text_HitoshiIntro, SaffronCity_Dojo_Text_HitoshiDefeat
- * msgbox SaffronCity_Dojo_Text_HitoshiPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
-internal object SaffronCity_Dojo_EventScript_Hitoshi : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SaffronCity_Dojo_EventScript_Hitoshi")
-}
+private const val HITMONLEE = 106
+private const val HITMONCHAN = 107
+private const val DOJO_PRIZE_LEVEL = 25
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_BLACK_BELT_HIDEKI, SaffronCity_Dojo_Text_HidekiIntro, SaffronCity_Dojo_Text_HidekiDefeat
- * msgbox SaffronCity_Dojo_Text_HidekiPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
-internal object SaffronCity_Dojo_EventScript_Hideki : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SaffronCity_Dojo_EventScript_Hideki")
-}
-
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_BLACK_BELT_AARON, SaffronCity_Dojo_Text_AaronIntro, SaffronCity_Dojo_Text_AaronDefeat
- * msgbox SaffronCity_Dojo_Text_AaronPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
-internal object SaffronCity_Dojo_EventScript_Aaron : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SaffronCity_Dojo_EventScript_Aaron")
-}
-
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_BLACK_BELT_MIKE, SaffronCity_Dojo_Text_MikeIntro, SaffronCity_Dojo_Text_MikeDefeat
- * msgbox SaffronCity_Dojo_Text_MikePostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
-internal object SaffronCity_Dojo_EventScript_Mike : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SaffronCity_Dojo_EventScript_Mike")
-}
-
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_BLACK_BELT_KOICHI, SaffronCity_Dojo_Text_MasterKoichiIntro, SaffronCity_Dojo_Text_MasterKoichiDefeat, SaffronCity_Dojo_EventScript_DefeatedMasterKoichi
- * goto_if_set FLAG_GOT_HITMON_FROM_DOJO, SaffronCity_Dojo_EventScript_MasterKoichiAlreadyGotHitmon
- * msgbox SaffronCity_Dojo_Text_ChoosePrizedFightingMon, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
+/** The karate master. Beating him is what puts the two prize balls out behind him. */
 internal object SaffronCity_Dojo_EventScript_MasterKoichi : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SaffronCity_Dojo_EventScript_MasterKoichi")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.hasBeatenTrainer(KantoTrainerIds.TRAINER_BLACK_BELT_KOICHI)) {
+      ctx.say(SaffronCity_Dojo.MasterKoichiIntro)
+      if (ctx.trainerBattle(KantoTrainerIds.TRAINER_BLACK_BELT_KOICHI) != BattleResult.VICTORY) {
+        return
+      }
+      ctx.say(SaffronCity_Dojo.MasterKoichiDefeat)
+      ctx.setVar(KantoVars.VAR_MAP_SCENE_SAFFRON_CITY_DOJO, 1)
+    }
+    if (ctx.isFlagSet(KantoFlags.FLAG_GOT_HITMON_FROM_DOJO)) {
+      return ctx.say(SaffronCity_Dojo.StayAndTrainWithUs)
+    }
+    ctx.say(SaffronCity_Dojo.ChoosePrizedFightingMon)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lock
- * faceplayer
- * goto_if_set FLAG_GOT_HITMON_FROM_DOJO, SaffronCity_Dojo_EventScript_AlreadyGotHitmon
- * showmonpic SPECIES_HITMONLEE, 10, 3
- * setvar VAR_TEMP_1, SPECIES_HITMONLEE
- * applymovement LOCALID_KARATE_MASTER, Common_Movement_WalkInPlaceFasterUp
- * waitmovement 0
- * textcolor NPC_TEXT_COLOR_MALE
- * msgbox SaffronCity_Dojo_Text_YouWantHitmonlee, MSGBOX_YESNO
- * call EventScript_RestorePrevTextColor
- * goto_if_eq VAR_RESULT, YES, SaffronCity_Dojo_EventScript_GiveHitmon
- * hidemonpic
- * release
- * end
- * ```
- */
+internal object SaffronCity_Dojo_EventScript_Hitoshi : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_BLACK_BELT_HITOSHI,
+          SaffronCity_Dojo.HitoshiIntro,
+          SaffronCity_Dojo.HitoshiDefeat,
+          SaffronCity_Dojo.HitoshiPostBattle,
+      )
+}
+
+internal object SaffronCity_Dojo_EventScript_Hideki : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_BLACK_BELT_HIDEKI,
+          SaffronCity_Dojo.HidekiIntro,
+          SaffronCity_Dojo.HidekiDefeat,
+          SaffronCity_Dojo.HidekiPostBattle,
+      )
+}
+
+internal object SaffronCity_Dojo_EventScript_Aaron : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_BLACK_BELT_AARON,
+          SaffronCity_Dojo.AaronIntro,
+          SaffronCity_Dojo.AaronDefeat,
+          SaffronCity_Dojo.AaronPostBattle,
+      )
+}
+
+internal object SaffronCity_Dojo_EventScript_Mike : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_BLACK_BELT_MIKE,
+          SaffronCity_Dojo.MikeIntro,
+          SaffronCity_Dojo.MikeDefeat,
+          SaffronCity_Dojo.MikePostBattle,
+      )
+}
+
 internal object SaffronCity_Dojo_EventScript_HitmonleeBall : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SaffronCity_Dojo_EventScript_HitmonleeBall")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(KantoFlags.FLAG_GOT_HITMON_FROM_DOJO)) {
+      return ctx.say(SaffronCity_Dojo.BetterNotGetGreedy)
+    }
+    // The decomp holds up its picture first, which showmonpic has no verb for.
+    if (!ctx.askYesNo(SaffronCity_Dojo.YouWantHitmonlee)) {
+      return ctx.say(SaffronCity_Dojo.BetterNotGetGreedy)
+    }
+    ctx.givePokemon(HITMONLEE, DOJO_PRIZE_LEVEL)
+    ctx.say(SaffronCity_Dojo.ReceivedMonFromKarateMaster)
+    ctx.setFlag(KantoFlags.FLAG_GOT_HITMON_FROM_DOJO)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lock
- * faceplayer
- * goto_if_set FLAG_GOT_HITMON_FROM_DOJO, SaffronCity_Dojo_EventScript_AlreadyGotHitmon
- * showmonpic SPECIES_HITMONCHAN, 10, 3
- * setvar VAR_TEMP_1, SPECIES_HITMONCHAN
- * applymovement LOCALID_KARATE_MASTER, Common_Movement_WalkInPlaceFasterUp
- * waitmovement 0
- * textcolor NPC_TEXT_COLOR_MALE
- * msgbox SaffronCity_Dojo_Text_YouWantHitmonchan, MSGBOX_YESNO
- * call EventScript_RestorePrevTextColor
- * goto_if_eq VAR_RESULT, YES, SaffronCity_Dojo_EventScript_GiveHitmon
- * hidemonpic
- * release
- * end
- * ```
- */
 internal object SaffronCity_Dojo_EventScript_HitmonchanBall : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SaffronCity_Dojo_EventScript_HitmonchanBall")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.isFlagSet(KantoFlags.FLAG_GOT_HITMON_FROM_DOJO)) {
+      return ctx.say(SaffronCity_Dojo.BetterNotGetGreedy)
+    }
+    // The decomp holds up its picture first, which showmonpic has no verb for.
+    if (!ctx.askYesNo(SaffronCity_Dojo.YouWantHitmonchan)) {
+      return ctx.say(SaffronCity_Dojo.BetterNotGetGreedy)
+    }
+    ctx.givePokemon(HITMONCHAN, DOJO_PRIZE_LEVEL)
+    ctx.say(SaffronCity_Dojo.ReceivedMonFromKarateMaster2)
+    ctx.setFlag(KantoFlags.FLAG_GOT_HITMON_FROM_DOJO)
+  }
 }
 
 internal object SaffronCity_Dojo_EventScript_Statue : Script {
