@@ -87,7 +87,9 @@ Everything goes through `ctx`, the `ScriptContext`:
 | `ctx.givePokemon(dexId, level, ...moveIds)` / `ctx.healParty()` | Party changes. |
 | `ctx.giveItem(itemId, n)` / `ctx.takeItem(itemId, n)` | Bag changes. Ids come from the generated `Items`. |
 | `ctx.battle(dexId, level, ...moveIds)` | A story battle against one monster. Waits and returns the result. |
-| `ctx.trainerBattle(trainerId)` | A decomp trainer and its whole party, in the region the player is standing in. |
+| `ctx.trainerBattle(trainerId)` | A decomp trainer and its whole party, in the region the player is standing in. A win marks them beaten. |
+| `ctx.trainerBattle(trainerId, intro, defeat)` | The same fight with its two lines around it, the decomp `trainerbattle_single`. |
+| `ctx.hasBeatenTrainer(id)` / `ctx.markTrainerBeaten(id)` | Whether a trainer is already beaten, and the decomp `settrainerflag`. |
 | `ctx.warp(...)` | Move the player to another map, then run that map's entry scripts. |
 | `ctx.setDynamicWarp(...)` | Point this player's `MAP_DYNAMIC` warp somewhere. |
 | `ctx.isFemale` / `ctx.facingDirection` / `ctx.entityId` | The player's gender, their facing, and the npc that was talked to (`-1` for a sign or map script). |

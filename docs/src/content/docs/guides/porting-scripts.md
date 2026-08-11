@@ -24,8 +24,8 @@ works, see [The script system](../../concepts/scripts/).
 5. Build and run it in the client.
 
 Pick small scripts first. A `lock` / `faceplayer` / `msgbox` / `release` / `end`
-body is one line of Kotlin; a body with `special`, `trainerbattle` or door
-animations is not portable yet at all.
+body is one line of Kotlin; a body with `special` or door animations is not
+portable yet at all.
 
 ## Command reference
 
@@ -64,6 +64,8 @@ end of your function.
 | `givemon SPECIES, level` | `ctx.givePokemon(dexId, level, ...moveIds)` |
 | `giveitem`, `additem` / `removeitem` | `ctx.giveItem(Items.X, n)` / `ctx.takeItem(Items.X, n)` |
 | `special HealPlayerParty` | `ctx.healParty()` |
+| `trainerbattle_single T, Intro, Defeat` | `ctx.trainerBattle(KantoTrainerIds.T, Map.Intro, Map.Defeat)` |
+| `settrainerflag T` | `ctx.markTrainerBeaten(KantoTrainerIds.T)` |
 | `warp MAP, x, y` | `ctx.warp(region, bank, map, x, y, facing)` |
 | `setdynamicwarp ...` | `ctx.setDynamicWarp(region, bank, map, x, y, facing)` |
 
@@ -73,6 +75,28 @@ so every item the games know about is in it. The client keys an item by
 `regionId * 1000 + itemId` and holds one item table per region, so the ids in
 `Items` sit in the region whose table matches the decomp numbering. Sending the
 same number under another region reaches a different item entirely.
+
+Trainer ids come from the generated `KantoTrainerIds` / `HoennTrainerIds`, whose
+constants are the decomp's own opponents.h names. The line after a
+`trainerbattle_single` is almost always the trainer's post battle box, and the
+source game only reaches it when the trainer was *already* beaten, so guard it
+rather than writing it after the fight:
+
+```kotlin
+// trainerbattle_single TRAINER_BUG_CATCHER_RICK, RickIntro, RickDefeat
+// msgbox ViridianForest_Text_RickPostBattle, MSGBOX_AUTOCLOSE
+if (ctx.hasBeatenTrainer(KantoTrainerIds.TRAINER_BUG_CATCHER_RICK)) {
+  return ctx.say(ViridianForest.RickPostBattle)
+}
+ctx.trainerBattle(
+    KantoTrainerIds.TRAINER_BUG_CATCHER_RICK,
+    ViridianForest.RickIntro,
+    ViridianForest.RickDefeat,
+)
+```
+
+Winning sets the trainer's flag, exactly like the source game's engine rather
+than its scripts, so nothing in the port has to remember the win itself.
 
 `ctx.warp` continues into the destination map's ON_TRANSITION and ON_FRAME
 scripts on the same coroutine, exactly the way the decomp's `warp` does, so a
