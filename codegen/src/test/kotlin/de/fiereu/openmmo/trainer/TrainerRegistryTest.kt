@@ -4,6 +4,8 @@ import de.fiereu.openmmo.common.MAX_MOVE_SLOTS
 import de.fiereu.openmmo.common.MAX_PARTY_SIZE
 import de.fiereu.openmmo.common.enums.MAX_IV
 import de.fiereu.openmmo.common.enums.Region
+import de.fiereu.openmmo.trainer.generated.HoennTrainerIds
+import de.fiereu.openmmo.trainer.generated.KantoTrainerIds
 import io.kotest.assertions.withClue
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.ints.shouldBeGreaterThan
@@ -48,6 +50,20 @@ class TrainerRegistryTest :
 
       test("the same id in the other region is a different trainer") {
         trainers.get(Region.HOENN, BROCK) shouldNotBe trainers.get(Region.KANTO, BROCK)
+      }
+
+      test("the generated ids name the trainer they are registered under") {
+        // The ids ported scripts battle by name, so a shifted constant would silently send the
+        // player against somebody else.
+        KantoTrainerIds.TRAINER_LEADER_BROCK shouldBe BROCK
+        trainers
+            .get(Region.KANTO, KantoTrainerIds.TRAINER_BUG_CATCHER_RICK)
+            .shouldNotBeNull()
+            .name shouldBe "RICK"
+        trainers
+            .get(Region.HOENN, HoennTrainerIds.TRAINER_ROXANNE_1)
+            .shouldNotBeNull()
+            .name shouldBe "ROXANNE"
       }
 
       test("every trainer has a usable party") {

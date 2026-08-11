@@ -6,7 +6,10 @@ import gg.jte.output.FileOutput
 import gg.jte.resolve.DirectoryCodeResolver
 import java.io.File
 
-/** Emits one object of trainer registrations per region, namespaced the same way story keys are. */
+/**
+ * Emits two objects per region: the registrations the [de.fiereu.openmmo.trainer.TrainerRegistry]
+ * loads, and the opponents.h id constants ported scripts battle by name.
+ */
 class TrainerRenderer(
     private val region: String,
     private val templatesDir: File,
@@ -24,20 +27,31 @@ class TrainerRenderer(
             ContentType.Plain,
         )
 
-    val objectName = "Generated${region.replaceFirstChar { it.uppercase() }}Trainers"
+    val capitalizedRegion = region.replaceFirstChar { it.uppercase() }
+    write(
+        engine,
+        "TrainerRegistry.jte",
+        "Generated${capitalizedRegion}Trainers",
+        mapOf("region" to region, "chunks" to trainers.chunked(chunkSize)),
+    )
+    write(
+        engine,
+        "TrainerIds.jte",
+        "${capitalizedRegion}TrainerIds",
+        mapOf("trainers" to trainers),
+    )
+  }
+
+  private fun write(
+      engine: TemplateEngine,
+      template: String,
+      objectName: String,
+      params: Map<String, Any>,
+  ) {
     val file = File(outputDir, "${BASE_PACKAGE.replace('.', '/')}/$objectName.kt")
     file.parentFile.mkdirs()
     FileOutput(file.toPath()).use { out ->
-      engine.render(
-          "TrainerRegistry.jte",
-          mapOf(
-              "pkg" to BASE_PACKAGE,
-              "objectName" to objectName,
-              "region" to region,
-              "chunks" to trainers.chunked(chunkSize),
-          ),
-          out,
-      )
+      engine.render(template, params + ("pkg" to BASE_PACKAGE) + ("objectName" to objectName), out)
     }
   }
 

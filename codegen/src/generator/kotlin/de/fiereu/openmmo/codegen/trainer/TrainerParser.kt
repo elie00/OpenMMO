@@ -35,6 +35,7 @@ class TrainerParser(private val rootDir: File) {
           }
           ParsedTrainer(
               id = id,
+              constant = entry.constant,
               name = entry.name,
               trainerClass = classIds[entry.trainerClass] ?: 0,
               doubleBattle = entry.doubleBattle,

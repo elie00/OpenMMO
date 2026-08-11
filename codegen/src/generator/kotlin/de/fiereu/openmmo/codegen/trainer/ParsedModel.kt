@@ -11,6 +11,8 @@ data class ParsedTrainerMon(
 
 data class ParsedTrainer(
     val id: Int,
+    /** The decomp's opponents.h constant, for example TRAINER_BUG_CATCHER_RICK. */
+    val constant: String,
     val name: String,
     val trainerClass: Int,
     val doubleBattle: Boolean,
