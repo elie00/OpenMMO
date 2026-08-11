@@ -1,65 +1,52 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.dialog.generated.kanto.RocketHideout_B2F
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
+import de.fiereu.openmmo.trainer.generated.KantoTrainerIds
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_13, RocketHideout_B2F_Text_GruntIntro, RocketHideout_B2F_Text_GruntDefeat
- * msgbox RocketHideout_B2F_Text_GruntPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object RocketHideout_B2F_EventScript_Grunt : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port RocketHideout_B2F_EventScript_Grunt")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_TEAM_ROCKET_GRUNT_13,
+          RocketHideout_B2F.GruntIntro,
+          RocketHideout_B2F.GruntDefeat,
+          RocketHideout_B2F.GruntPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_X_SPEED
- * end
- * ```
- */
 internal object RocketHideout_B2F_EventScript_ItemXSpeed : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port RocketHideout_B2F_EventScript_ItemXSpeed")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.X_SPEED)) return
+    ctx.removeNpc(1)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_ROCKET_HIDEOUT_B2F_X_SPEED)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_MOON_STONE
- * end
- * ```
- */
 internal object RocketHideout_B2F_EventScript_ItemMoonStone : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port RocketHideout_B2F_EventScript_ItemMoonStone")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.MOON_STONE)) return
+    ctx.removeNpc(2)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_ROCKET_HIDEOUT_B2F_MOON_STONE)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_TM12
- * end
- * ```
- */
 internal object RocketHideout_B2F_EventScript_ItemTM12 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port RocketHideout_B2F_EventScript_ItemTM12")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.TM12)) return
+    ctx.removeNpc(3)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_ROCKET_HIDEOUT_B2F_TM12)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_SUPER_POTION
- * end
- * ```
- */
 internal object RocketHideout_B2F_EventScript_ItemSuperPotion : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port RocketHideout_B2F_EventScript_ItemSuperPotion")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.SUPER_POTION)) return
+    ctx.removeNpc(4)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_ROCKET_HIDEOUT_B2F_SUPER_POTION)
+  }
 }
 
 internal val RocketHideout_B2FScripts: Map<String, Script> =

@@ -1,65 +1,54 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.dialog.generated.kanto.RocketHideout_B3F
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
+import de.fiereu.openmmo.trainer.generated.KantoTrainerIds
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_15, RocketHideout_B3F_Text_Grunt2Intro, RocketHideout_B3F_Text_Grunt2Defeat
- * msgbox RocketHideout_B3F_Text_Grunt2PostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object RocketHideout_B3F_EventScript_Grunt2 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port RocketHideout_B3F_EventScript_Grunt2")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_TEAM_ROCKET_GRUNT_15,
+          RocketHideout_B3F.Grunt2Intro,
+          RocketHideout_B3F.Grunt2Defeat,
+          RocketHideout_B3F.Grunt2PostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_14, RocketHideout_B3F_Text_Grunt1Intro, RocketHideout_B3F_Text_Grunt1Defeat
- * msgbox RocketHideout_B3F_Text_Grunt1PostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object RocketHideout_B3F_EventScript_Grunt1 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port RocketHideout_B3F_EventScript_Grunt1")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_TEAM_ROCKET_GRUNT_14,
+          RocketHideout_B3F.Grunt1Intro,
+          RocketHideout_B3F.Grunt1Defeat,
+          RocketHideout_B3F.Grunt1PostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_RARE_CANDY
- * end
- * ```
- */
 internal object RocketHideout_B3F_EventScript_ItemRareCandy : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port RocketHideout_B3F_EventScript_ItemRareCandy")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.RARE_CANDY)) return
+    ctx.removeNpc(2)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_ROCKET_HIDEOUT_B3F_RARE_CANDY)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_TM21
- * end
- * ```
- */
 internal object RocketHideout_B3F_EventScript_ItemTM21 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port RocketHideout_B3F_EventScript_ItemTM21")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.TM21)) return
+    ctx.removeNpc(3)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_ROCKET_HIDEOUT_B3F_TM21)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_BLACK_GLASSES
- * end
- * ```
- */
 internal object RocketHideout_B3F_EventScript_ItemBlackGlasses : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port RocketHideout_B3F_EventScript_ItemBlackGlasses")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.BLACK_GLASSES)) return
+    ctx.removeNpc(4)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_ROCKET_HIDEOUT_B3F_BLACK_GLASSES)
+  }
 }
 
 internal val RocketHideout_B3FScripts: Map<String, Script> =
