@@ -3,80 +3,56 @@ package de.fiereu.openmmo.server.game.script.generated.kanto
 import de.fiereu.openmmo.dialog.generated.kanto.VermilionCity
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
+import de.fiereu.openmmo.story.generated.kanto.KantoVars
+
+/** VAR_MAP_SCENE_VERMILION_CITY once the S.S. Anne has sailed. */
+private const val SS_ANNE_GONE = 3
 
 internal object VermilionCity_EventScript_Woman : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.say(VermilionCity.GrimerMultipliesInSludge)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lock
- * faceplayer
- * goto_if_eq VAR_MAP_SCENE_VERMILION_CITY, 3, VermilionCity_EventScript_OldMan1SSAnneLeft
- * msgbox VermilionCity_Text_DidYouSeeSSAnneInHarbor
- * release
- * end
- * ```
- */
 internal object VermilionCity_EventScript_OldMan1 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port VermilionCity_EventScript_OldMan1")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.getVar(KantoVars.VAR_MAP_SCENE_VERMILION_CITY) == SS_ANNE_GONE) {
+      return ctx.say(VermilionCity.SSAnneHasDepartedForYear)
+    }
+    ctx.say(VermilionCity.DidYouSeeSSAnneInHarbor)
+  }
 }
 
 internal object VermilionCity_EventScript_OldMan2 : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.say(VermilionCity.BuildingOnThisLand)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lock
- * faceplayer
- * waitse
- * playmoncry SPECIES_MACHOP, CRY_MODE_NORMAL
- * msgbox VermilionCity_Text_Machop
- * waitmoncry
- * msgbox VermilionCity_Text_MachopStompingLandFlat
- * release
- * end
- * ```
- */
 internal object VermilionCity_EventScript_Machop : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port VermilionCity_EventScript_Machop")
+  override suspend fun run(ctx: ScriptContext) {
+    // The decomp plays Machop's cry between the two boxes, which has no verb.
+    ctx.say(VermilionCity.Machop)
+    ctx.say(VermilionCity.MachopStompingLandFlat)
+  }
 }
 
 internal object VermilionCity_EventScript_Sailor : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.say(VermilionCity.SSAnneVisitsOnceAYear)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lock
- * faceplayer
- * goto_if_eq VAR_MAP_SCENE_VERMILION_CITY, 3, VermilionCity_EventScript_CheckSeagallopPresent
- * msgbox VermilionCity_Text_WelcomeToTheSSAnne
- * release
- * end
- * ```
- */
 internal object VermilionCity_EventScript_FerrySailor : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port VermilionCity_EventScript_FerrySailor")
+  override suspend fun run(ctx: ScriptContext) {
+    if (ctx.getVar(KantoVars.VAR_MAP_SCENE_VERMILION_CITY) == SS_ANNE_GONE) {
+      // The decomp offers the Seagallop to the Sevii Islands here, which needs a destination menu.
+      return ctx.say(VermilionCity.TheShipSetSail)
+    }
+    ctx.say(VermilionCity.WelcomeToTheSSAnne)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lock
- * faceplayer
- * setflag FLAG_TALKED_TO_OAKS_AIDE_IN_VERMILION
- * msgbox VermilionCity_Text_Route2AideHasPackageForYou
- * release
- * end
- * ```
- */
 internal object VermilionCity_EventScript_OaksAide : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port VermilionCity_EventScript_OaksAide")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.setFlag(KantoFlags.FLAG_TALKED_TO_OAKS_AIDE_IN_VERMILION)
+    ctx.say(VermilionCity.Route2AideHasPackageForYou)
+  }
 }
 
 internal object VermilionCity_EventScript_CitySign : Script {
@@ -87,18 +63,8 @@ internal object VermilionCity_EventScript_PokemonFanClubSign : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(VermilionCity.PokemonFanClubSign)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lockall
- * famechecker FAMECHECKER_LTSURGE, 0
- * msgbox VermilionCity_Text_GymSign
- * releaseall
- * end
- * ```
- */
 internal object VermilionCity_EventScript_GymSign : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port VermilionCity_EventScript_GymSign")
+  override suspend fun run(ctx: ScriptContext) = ctx.sign(VermilionCity.GymSign)
 }
 
 internal object VermilionCity_EventScript_HarborSign : Script {
