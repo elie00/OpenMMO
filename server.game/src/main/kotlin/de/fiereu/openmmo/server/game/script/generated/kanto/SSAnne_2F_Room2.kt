@@ -1,42 +1,38 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.dialog.generated.kanto.SSAnne_2F_Room2
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
+import de.fiereu.openmmo.trainer.generated.KantoTrainerIds
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_FISHERMAN_DALE, SSAnne_2F_Room2_Text_DaleIntro, SSAnne_2F_Room2_Text_DaleDefeat
- * msgbox SSAnne_2F_Room2_Text_DalePostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object SSAnne_2F_Room2_EventScript_Dale : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SSAnne_2F_Room2_EventScript_Dale")
-}
-
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_GENTLEMAN_BROOKS, SSAnne_2F_Room2_Text_BrooksIntro, SSAnne_2F_Room2_Text_BrooksDefeat
- * msgbox SSAnne_2F_Room2_Text_BrooksPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
-internal object SSAnne_2F_Room2_EventScript_Brooks : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SSAnne_2F_Room2_EventScript_Brooks")
-}
-
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_STARDUST
- * end
- * ```
- */
-internal object SSAnne_2F_Room2_EventScript_ItemStardust : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port SSAnne_2F_Room2_EventScript_ItemStardust")
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_FISHERMAN_DALE,
+          SSAnne_2F_Room2.DaleIntro,
+          SSAnne_2F_Room2.DaleDefeat,
+          SSAnne_2F_Room2.DalePostBattle,
+      )
+}
+
+internal object SSAnne_2F_Room2_EventScript_Brooks : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_GENTLEMAN_BROOKS,
+          SSAnne_2F_Room2.BrooksIntro,
+          SSAnne_2F_Room2.BrooksDefeat,
+          SSAnne_2F_Room2.BrooksPostBattle,
+      )
+}
+
+internal object SSAnne_2F_Room2_EventScript_ItemStardust : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.STARDUST)) return
+    ctx.removeNpc(2)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_SSANNE_2F_ROOM2_STARDUST)
+  }
 }
 
 internal val SSAnne_2F_Room2Scripts: Map<String, Script> =
