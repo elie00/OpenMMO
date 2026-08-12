@@ -1,43 +1,29 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.dialog.generated.kanto.Misc
 import de.fiereu.openmmo.dialog.generated.kanto.SeafoamIslands_B4F
 import de.fiereu.openmmo.items.generated.Items
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * goto_if_questlog EventScript_ReleaseEnd
- * special QuestLog_CutRecording
- * lock
- * faceplayer
- * setwildbattle SPECIES_ARTICUNO, 50
- * waitse
- * playmoncry SPECIES_ARTICUNO, CRY_MODE_ENCOUNTER
- * message Text_Gyaoo
- * waitmessage
- * waitmoncry
- * delay 10
- * playbgm MUS_ENCOUNTER_GYM_LEADER, 0
- * waitbuttonpress
- * setflag FLAG_SYS_SPECIAL_WILD_BATTLE
- * special StartLegendaryBattle
- * waitstate
- * clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
- * specialvar VAR_RESULT, GetBattleOutcome
- * goto_if_eq VAR_RESULT, B_OUTCOME_WON, SeafoamIslands_B4F_EventScript_DefeatedArticuno
- * goto_if_eq VAR_RESULT, B_OUTCOME_RAN, SeafoamIslands_B4F_EventScript_RanFromArticuno
- * goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, SeafoamIslands_B4F_EventScript_RanFromArticuno
- * setflag FLAG_FOUGHT_ARTICUNO
- * release
- * end
- * ```
- */
+private const val ARTICUNO = 144
+private const val ARTICUNO_LEVEL = 50
+private const val LOCALID_ARTICUNO = 2
+
+/** The legendary standing here, which the player may catch or run from. Either way it leaves. */
 internal object SeafoamIslands_B4F_EventScript_Articuno : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SeafoamIslands_B4F_EventScript_Articuno")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.sign(Misc.Text_Gyaoo)
+    val outcome = ctx.legendaryBattle(ARTICUNO, ARTICUNO_LEVEL)
+    ctx.removeNpc(LOCALID_ARTICUNO)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_ARTICUNO)
+    if (outcome == BattleResult.VICTORY || outcome == BattleResult.CAUGHT) {
+      return ctx.setFlag(KantoFlags.FLAG_FOUGHT_ARTICUNO)
+    }
+    ctx.sign(Misc.Text_MonFlewAway)
+  }
 }
 
 internal object SeafoamIslands_B4F_EventScript_ItemUltraBall : Script {

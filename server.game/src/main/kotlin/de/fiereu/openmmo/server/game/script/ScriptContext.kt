@@ -163,8 +163,15 @@ internal constructor(
 
   /** Run a non-catchable, non-escapable story battle and wait for its result. */
   suspend fun battle(dexId: Int, level: Int, vararg moveIds: Int): BattleResult =
-      checkNotNull(battles) { "Battle service is unavailable" }
+      checkNotNull(battles) { BATTLE_UNAVAILABLE }
           .startScriptedBattle(session, dexId, level, moveIds.toList())
+
+  /**
+   * The decomp's `StartLegendaryBattle`: the standing encounters the player is meant to be able to
+   * catch, like the birds and the Electrode guarding them. Waits for the result.
+   */
+  suspend fun legendaryBattle(dexId: Int, level: Int): BattleResult =
+      checkNotNull(battles) { BATTLE_UNAVAILABLE }.startLegendaryBattle(session, dexId, level)
 
   /**
    * Fight the decomp trainer with this id, using the region the player is standing in. A win marks
@@ -173,8 +180,7 @@ internal constructor(
   suspend fun trainerBattle(trainerId: Int): BattleResult {
     val region = region()
     val result =
-        checkNotNull(battles) { "Battle service is unavailable" }
-            .startTrainerBattle(session, region, trainerId)
+        checkNotNull(battles) { BATTLE_UNAVAILABLE }.startTrainerBattle(session, region, trainerId)
     if (result == BattleResult.VICTORY) setFlag(trainerFlag(region, trainerId))
     return result
   }
@@ -335,6 +341,7 @@ internal constructor(
     const val NPC = 4
     const val FEMALE: Byte = 1
     const val STORY_PLAYER_UNAVAILABLE = "Story player service is unavailable"
+    const val BATTLE_UNAVAILABLE = "Battle service is unavailable"
 
     /**
      * The tile attribute byte for "nothing blocks this square". [de.fiereu.openmmo.common.Tile2D]

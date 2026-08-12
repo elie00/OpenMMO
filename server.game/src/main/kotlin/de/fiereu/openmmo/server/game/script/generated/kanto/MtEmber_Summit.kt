@@ -1,39 +1,27 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.dialog.generated.kanto.Misc
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * goto_if_questlog EventScript_ReleaseEnd
- * special QuestLog_CutRecording
- * lock
- * faceplayer
- * setwildbattle SPECIES_MOLTRES, 50
- * waitse
- * playmoncry SPECIES_MOLTRES, CRY_MODE_ENCOUNTER
- * message Text_Gyaoo
- * waitmessage
- * waitmoncry
- * delay 10
- * playbgm MUS_ENCOUNTER_GYM_LEADER, 0
- * waitbuttonpress
- * setflag FLAG_SYS_SPECIAL_WILD_BATTLE
- * special StartLegendaryBattle
- * waitstate
- * clearflag FLAG_SYS_SPECIAL_WILD_BATTLE
- * specialvar VAR_RESULT, GetBattleOutcome
- * goto_if_eq VAR_RESULT, B_OUTCOME_WON, MtEmber_Summit_EventScript_DefeatedMoltres
- * goto_if_eq VAR_RESULT, B_OUTCOME_RAN, MtEmber_Summit_EventScript_RanFromMoltres
- * goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, MtEmber_Summit_EventScript_RanFromMoltres
- * setflag FLAG_FOUGHT_MOLTRES
- * release
- * end
- * ```
- */
+private const val MOLTRES = 146
+private const val MOLTRES_LEVEL = 50
+private const val LOCALID_MOLTRES = 0
+
+/** The legendary standing here, which the player may catch or run from. Either way it leaves. */
 internal object MtEmber_Summit_EventScript_Moltres : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtEmber_Summit_EventScript_Moltres")
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.sign(Misc.Text_Gyaoo)
+    val outcome = ctx.legendaryBattle(MOLTRES, MOLTRES_LEVEL)
+    ctx.removeNpc(LOCALID_MOLTRES)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_MOLTRES)
+    if (outcome == BattleResult.VICTORY || outcome == BattleResult.CAUGHT) {
+      return ctx.setFlag(KantoFlags.FLAG_FOUGHT_MOLTRES)
+    }
+    ctx.sign(Misc.Text_MonFlewAway)
+  }
 }
 
 internal val MtEmber_SummitScripts: Map<String, Script> =

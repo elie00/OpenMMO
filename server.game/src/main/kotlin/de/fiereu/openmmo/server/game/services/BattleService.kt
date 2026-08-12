@@ -163,6 +163,21 @@ constructor(
     createWildBattle(session, dexId, level, catchable = true, escapable = true)
   }
 
+  /**
+   * The decomp's StartLegendaryBattle: a scripted encounter the player may catch or run from,
+   * unlike [startScriptedBattle]. Waits for its scene, so the script can tell a win from a flight.
+   */
+  suspend fun startLegendaryBattle(
+      session: SessionContext,
+      dexId: Int,
+      level: Int,
+  ): BattleResult {
+    val battle =
+        createWildBattle(session, dexId, level, catchable = true, escapable = true)
+            ?: return BattleResult.FAILED
+    return battle.completion.await()
+  }
+
   /** Runs a story battle and waits for its scene. */
   suspend fun startScriptedBattle(
       session: SessionContext,

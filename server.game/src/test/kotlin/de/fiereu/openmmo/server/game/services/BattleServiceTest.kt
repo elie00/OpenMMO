@@ -61,6 +61,7 @@ import kotlinx.coroutines.test.runTest
 
 private const val TACKLE: Short = 33
 private const val RATTATA = 19
+private const val ZAPDOS = 145
 
 private fun bulbasaur(ownerId: Long, level: Byte, hp: Short): Pokemon =
     Pokemon(
@@ -285,6 +286,36 @@ class BattleServiceTest :
           // The source game's engine sets the trainer's flag, so a beaten trainer stays beaten and
           // the script's post battle line is what the next talk shows.
           ctx.hasBeatenTrainer(rick) shouldBe true
+        }
+      }
+
+      test("a legendary can be caught and run from, unlike a scripted battle") {
+        runTest {
+          val fx = Fixture(this)
+          val (session, charId) = fx.playerWithParty(region = Region.KANTO)
+          val maps = MapManager()
+          val ctx =
+              ScriptContext(
+                  session,
+                  session.attributes[PLAYER_STATE]!!,
+                  entityId = -1,
+                  DialogService(),
+                  StoryService(fx.store),
+                  ScriptMovementService(maps, NpcService(maps, fx.store), fx.store),
+                  battles = fx.service,
+              )
+
+          val legendary = backgroundScope.async { ctx.legendaryBattle(ZAPDOS, 50) }
+          runCurrent()
+
+          // The whole point of the verb: the bird is meant to be catchable and escapable.
+          val battle = fx.registry.byChar(charId).shouldNotBeNull()
+          battle.catchable.shouldBeTrue()
+          battle.escapable.shouldBeTrue()
+
+          session.act(fx.service, BattleAction.RUN)
+          session.finishBattleTransition(fx.service)
+          legendary.await() shouldBe BattleResult.FLED
         }
       }
 
