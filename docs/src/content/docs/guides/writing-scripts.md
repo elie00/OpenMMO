@@ -89,7 +89,12 @@ Everything goes through `ctx`, the `ScriptContext`:
 | `ctx.battle(dexId, level, ...moveIds)` | A story battle against one monster. Waits and returns the result. |
 | `ctx.trainerBattle(trainerId)` | A decomp trainer and its whole party, in the region the player is standing in. A win marks them beaten. |
 | `ctx.trainerBattle(trainerId, intro, defeat)` | The same fight with its two lines around it, the decomp `trainerbattle_single`. |
+| `ctx.trainerBattle(trainerId, intro, defeat, postBattle)` | The same, plus the box a later talk shows. This is what most ports want. |
 | `ctx.hasBeatenTrainer(id)` / `ctx.markTrainerBeaten(id)` | Whether a trainer is already beaten, and the decomp `settrainerflag`. |
+| `ctx.hasItem(itemId)` | The decomp `checkitem`. |
+| `ctx.money` / `ctx.giveMoney(n)` / `ctx.payMoney(n)` | The decomp `checkmoney`, `givemoney` and `paymoney`. Paying returns false and changes nothing when the player is short. |
+| `ctx.openTile(x, y)` | Let this player through a tile the map blocks, the walkable half of `setmetatile`. The tile keeps its graphics. |
+| `ctx.setRespawn(region, bank, map, x, y)` | The decomp `setrespawn`. Recorded, but losing a battle does not act on it yet. |
 | `ctx.warp(...)` | Move the player to another map, then run that map's entry scripts. |
 | `ctx.setDynamicWarp(...)` | Point this player's `MAP_DYNAMIC` warp somewhere. |
 | `ctx.isFemale` / `ctx.facingDirection` / `ctx.entityId` | The player's gender, their facing, and the npc that was talked to (`-1` for a sign or map script). |

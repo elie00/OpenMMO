@@ -161,13 +161,12 @@ There is no verb for these. Do not fake them:
 
 - **More than two answers.** `multichoice`. Yes/no works, a longer menu does not.
 - **Doors.** `opendoor`, `closedoor`, `waitdooranim`.
-- **Shops.** `pokemart` and its item list.
+- **Shops.** `pokemart` and its item list. The money verbs exist, the shop screen
+  does not, so a script can take payment but not offer a counter.
 - **Hiding the player.** `hideplayer`/`showplayer`. Npcs can be hidden with
   `removeNpc` or by ending a movement with `SET_INVISIBLE`, the player cannot.
-- **Money.** Buying and selling.
-- **Temporary state.** `VAR_TEMP_*` and `FLAG_TEMP_*` reset when the player
-  leaves the map in the source game. Story flags and vars here are persistent,
-  so a script that leans on a temp value needs another way to say the same thing.
+- **Teaching a move.** `EventScript_ChooseMoveTutorMon` and the naming screen:
+  there is no party picker and no way to write a move onto a monster.
 - **Presentation.** `playse`, `playfanfare`, `waitfanfare`, `fadescreen`,
   `delay`, `showmonpic`, emotes like the exclamation mark, and `special` calls
   into engine C code generally.
@@ -187,6 +186,57 @@ ctx.setVar(HoennVars.VAR_LITTLEROOT_INTRO_STATE, 3)
 A named `TODO` comment is much better than a `TODO(...)` stub: the script now does
 something useful, and the next person knows exactly what is left. Prefer leaving
 the branch a fresh save would take when a condition cannot be evaluated yet.
+
+### Temporary flags and vars
+
+`VAR_TEMP_*` and `FLAG_TEMP_*` reset when the player leaves the map in the source
+game, and the story keys here are persistent. Clear them in the map's
+`ON_TRANSITION` script instead, which runs on every arrival: the player cannot
+tell the difference between a value cleared on the way out and one cleared on the
+way in. Bill's cottage is the model.
+
+### setmetatile
+
+Several puzzles move tiles: the Vermilion gym barrier, the Silph Co doors, the
+mansion switches, the Game Corner stairs. Check what the generated map already
+holds before writing anything, because it usually carries the **open** layout
+already and the script only has to record the state:
+
+```
+python3 - <<'EOF'
+import base64, re, glob
+p = glob.glob('codegen/build/generated/source/maps/**/<Map>.kt', recursive=True)[0]
+s = open(p).read()
+w = int(re.search(r"width = (\d+)", s).group(1))
+b = base64.b64decode(re.search(r'blockData = "([^"]+)"', s).group(1))
+for (x, y) in [(5, 6)]:
+    raw = b[(y * w + x) * 2] | (b[(y * w + x) * 2 + 1] << 8)
+    print((x, y), "collision", (raw >> 10) & 3)
+EOF
+```
+
+When a tile really is blocking, [`ctx.openTile`](../writing-scripts/) opens it for
+that one player and tells the client. It cannot change the graphics, so an opened
+barrier is still drawn closed.
+
+## Scripts a map reaches without an npc
+
+A map's coord events fire when the player walks onto a tile: rival ambushes, gym
+guides calling out, badge guards, healing squares. They are listed as
+`MapCoordScript` entries in the generated map, and the generator that bootstrapped
+the stubs only covered object and bg events, so **many of them point at scripts
+that were never written**. A file with no `TODO("port ...")` left can still be
+missing half its scenes.
+
+Find the gaps for a region by comparing the two sides:
+
+```
+grep -o 'MapCoordScript([^)]*script = "\w*"' <generated map>.kt   # what the map calls
+grep -oE '"(\w+)" to\b' <script file>.kt                          # what exists
+```
+
+Write the missing object and add it to the file's `<Map>Scripts` map, or it will
+never be reached.
 
 ## Testing a port
 
