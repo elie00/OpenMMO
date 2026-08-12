@@ -36,8 +36,47 @@ internal object Route23_EventScript_VictoryRoadGateSign : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(Route23.VictoryRoadGateSign)
 }
 
+internal object Route23_EventScript_CascadeBadgeGuardTrigger : Script {
+  override suspend fun run(ctx: ScriptContext) = badgeGuard(ctx, 2, LEAGUE_BADGES[1])
+}
+
+internal object Route23_EventScript_ThunderBadgeGuardTrigger : Script {
+  override suspend fun run(ctx: ScriptContext) = badgeGuard(ctx, 3, LEAGUE_BADGES[2])
+}
+
+internal object Route23_EventScript_RainbowBadgeGuardTrigger : Script {
+  override suspend fun run(ctx: ScriptContext) = badgeGuard(ctx, 4, LEAGUE_BADGES[3])
+}
+
+internal object Route23_EventScript_SoulBadgeGuardTrigger : Script {
+  override suspend fun run(ctx: ScriptContext) = badgeGuard(ctx, 5, LEAGUE_BADGES[4])
+}
+
+internal object Route23_EventScript_MarshBadgeGuardTrigger : Script {
+  override suspend fun run(ctx: ScriptContext) = badgeGuard(ctx, 6, LEAGUE_BADGES[5])
+}
+
+internal object Route23_EventScript_VolcanoBadgeGuardTrigger : Script {
+  override suspend fun run(ctx: ScriptContext) = badgeGuard(ctx, 7, LEAGUE_BADGES[6])
+}
+
+internal object Route23_EventScript_EarthBadgeGuardTrigger : Script {
+  override suspend fun run(ctx: ScriptContext) = badgeGuard(ctx, 8, LEAGUE_BADGES[7])
+}
+
 internal val Route23Scripts: Map<String, Script> =
     mapOf(
+        "Route23_EventScript_CascadeBadgeGuardTrigger" to
+            Route23_EventScript_CascadeBadgeGuardTrigger,
+        "Route23_EventScript_ThunderBadgeGuardTrigger" to
+            Route23_EventScript_ThunderBadgeGuardTrigger,
+        "Route23_EventScript_RainbowBadgeGuardTrigger" to
+            Route23_EventScript_RainbowBadgeGuardTrigger,
+        "Route23_EventScript_SoulBadgeGuardTrigger" to Route23_EventScript_SoulBadgeGuardTrigger,
+        "Route23_EventScript_MarshBadgeGuardTrigger" to Route23_EventScript_MarshBadgeGuardTrigger,
+        "Route23_EventScript_VolcanoBadgeGuardTrigger" to
+            Route23_EventScript_VolcanoBadgeGuardTrigger,
+        "Route23_EventScript_EarthBadgeGuardTrigger" to Route23_EventScript_EarthBadgeGuardTrigger,
         "Route23_EventScript_CascadeBadgeGuard" to Route23_EventScript_CascadeBadgeGuard,
         "Route23_EventScript_ThunderBadgeGuard" to Route23_EventScript_ThunderBadgeGuard,
         "Route23_EventScript_RainbowBadgeGuard" to Route23_EventScript_RainbowBadgeGuard,

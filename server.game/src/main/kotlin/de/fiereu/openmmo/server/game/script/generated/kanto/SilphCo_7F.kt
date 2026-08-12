@@ -2,11 +2,14 @@ package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.SilphCo_7F
 import de.fiereu.openmmo.items.generated.Items
+import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 import de.fiereu.openmmo.story.generated.kanto.KantoVars
 import de.fiereu.openmmo.trainer.generated.KantoTrainerIds
+
+private const val LOCALID_RIVAL = 0
 
 /** VAR_MAP_SCENE_SILPH_CO_11F once Giovanni has been driven out of the building. */
 private const val ROCKETS_GONE = 1
@@ -124,8 +127,40 @@ internal object SilphCo_7F_EventScript_FloorSign : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.sign(SilphCo_7F.FloorSign)
 }
 
+/** The rival, who fights with the starter that beats the player's wherever he turns up. */
+internal object SilphCo_7F_EventScript_RivalScene : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    val rival =
+        when (Starter.byStarterNumber(ctx.getVar(KantoVars.VAR_STARTER_MON))?.rival) {
+          Starter.BULBASAUR_BALL -> KantoTrainerIds.TRAINER_RIVAL_SILPH_BULBASAUR
+          Starter.SQUIRTLE_BALL -> KantoTrainerIds.TRAINER_RIVAL_SILPH_SQUIRTLE
+          Starter.CHARMANDER_BALL -> KantoTrainerIds.TRAINER_RIVAL_SILPH_CHARMANDER
+          null -> return
+        }
+    ctx.sayNpc(LOCALID_RIVAL, SilphCo_7F.RivalWhatKeptYou)
+    ctx.sayNpc(LOCALID_RIVAL, SilphCo_7F.RivalIntro)
+    // trainerbattle_no_intro: the intro box above is his.
+    if (ctx.trainerBattle(rival) != BattleResult.VICTORY) return
+    ctx.sayNpc(LOCALID_RIVAL, SilphCo_7F.RivalDefeat)
+    ctx.sayNpc(LOCALID_RIVAL, SilphCo_7F.RivalPostBattle)
+    ctx.removeNpc(LOCALID_RIVAL)
+    ctx.setVar(KantoVars.VAR_MAP_SCENE_SILPH_CO_7F, 1)
+  }
+}
+
+internal object SilphCo_7F_EventScript_RivalTriggerTop : Script {
+  override suspend fun run(ctx: ScriptContext) = SilphCo_7F_EventScript_RivalScene.run(ctx)
+}
+
+internal object SilphCo_7F_EventScript_RivalTriggerBottom : Script {
+  override suspend fun run(ctx: ScriptContext) = SilphCo_7F_EventScript_RivalScene.run(ctx)
+}
+
 internal val SilphCo_7FScripts: Map<String, Script> =
     mapOf(
+        "SilphCo_7F_EventScript_RivalScene" to SilphCo_7F_EventScript_RivalScene,
+        "SilphCo_7F_EventScript_RivalTriggerTop" to SilphCo_7F_EventScript_RivalTriggerTop,
+        "SilphCo_7F_EventScript_RivalTriggerBottom" to SilphCo_7F_EventScript_RivalTriggerBottom,
         "SilphCo_7F_EventScript_LaprasGuy" to SilphCo_7F_EventScript_LaprasGuy,
         "SilphCo_7F_EventScript_Grunt1" to SilphCo_7F_EventScript_Grunt1,
         "SilphCo_7F_EventScript_Grunt2" to SilphCo_7F_EventScript_Grunt2,
