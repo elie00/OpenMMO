@@ -1,136 +1,104 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.dialog.generated.kanto.Misc
+import de.fiereu.openmmo.dialog.generated.kanto.VictoryRoad_2F
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
+import de.fiereu.openmmo.trainer.generated.KantoTrainerIds
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_POKEMANIAC_DAWSON, VictoryRoad_2F_Text_DawsonIntro, VictoryRoad_2F_Text_DawsonDefeat
- * msgbox VictoryRoad_2F_Text_DawsonPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object VictoryRoad_2F_EventScript_Dawson : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port VictoryRoad_2F_EventScript_Dawson")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_POKEMANIAC_DAWSON,
+          VictoryRoad_2F.DawsonIntro,
+          VictoryRoad_2F.DawsonDefeat,
+          VictoryRoad_2F.DawsonPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_BLACK_BELT_DAISUKE, VictoryRoad_2F_Text_DaisukeIntro, VictoryRoad_2F_Text_DaisukeDefeat
- * msgbox VictoryRoad_2F_Text_DaisukePostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object VictoryRoad_2F_EventScript_Daisuke : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port VictoryRoad_2F_EventScript_Daisuke")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_BLACK_BELT_DAISUKE,
+          VictoryRoad_2F.DaisukeIntro,
+          VictoryRoad_2F.DaisukeDefeat,
+          VictoryRoad_2F.DaisukePostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_JUGGLER_NELSON, VictoryRoad_2F_Text_NelsonIntro, VictoryRoad_2F_Text_NelsonDefeat
- * msgbox VictoryRoad_2F_Text_NelsonPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object VictoryRoad_2F_EventScript_Nelson : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port VictoryRoad_2F_EventScript_Nelson")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_JUGGLER_NELSON,
+          VictoryRoad_2F.NelsonIntro,
+          VictoryRoad_2F.NelsonDefeat,
+          VictoryRoad_2F.NelsonPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_TAMER_VINCENT, VictoryRoad_2F_Text_VincentIntro, VictoryRoad_2F_Text_VincentDefeat
- * msgbox VictoryRoad_2F_Text_VincentPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object VictoryRoad_2F_EventScript_Vincent : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port VictoryRoad_2F_EventScript_Vincent")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_TAMER_VINCENT,
+          VictoryRoad_2F.VincentIntro,
+          VictoryRoad_2F.VincentDefeat,
+          VictoryRoad_2F.VincentPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_JUGGLER_GREGORY, VictoryRoad_2F_Text_GregoryIntro, VictoryRoad_2F_Text_GregoryDefeat
- * msgbox VictoryRoad_2F_Text_GregoryPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object VictoryRoad_2F_EventScript_Gregory : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port VictoryRoad_2F_EventScript_Gregory")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_JUGGLER_GREGORY,
+          VictoryRoad_2F.GregoryIntro,
+          VictoryRoad_2F.GregoryDefeat,
+          VictoryRoad_2F.GregoryPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_GUARD_SPEC
- * end
- * ```
- */
 internal object VictoryRoad_2F_EventScript_ItemGuardSpec : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port VictoryRoad_2F_EventScript_ItemGuardSpec")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.GUARD_SPEC)) return
+    ctx.removeNpc(5)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_VICTORY_ROAD_2F_GUARD_SPEC)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_TM07
- * end
- * ```
- */
 internal object VictoryRoad_2F_EventScript_ItemTM07 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port VictoryRoad_2F_EventScript_ItemTM07")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.TM07)) return
+    ctx.removeNpc(6)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_VICTORY_ROAD_2F_TM07)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_FULL_HEAL
- * end
- * ```
- */
 internal object VictoryRoad_2F_EventScript_ItemFullHeal : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port VictoryRoad_2F_EventScript_ItemFullHeal")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.FULL_HEAL)) return
+    ctx.removeNpc(7)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_VICTORY_ROAD_2F_FULL_HEAL)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_TM37
- * end
- * ```
- */
 internal object VictoryRoad_2F_EventScript_ItemTM37 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port VictoryRoad_2F_EventScript_ItemTM37")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.TM37)) return
+    ctx.removeNpc(8)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_VICTORY_ROAD_2F_TM37)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lock
- * faceplayer
- * goto_if_set FLAG_TUTOR_DOUBLE_EDGE, EventScript_DoubleEdgeTaught
- * msgbox Text_DoubleEdgeTeach, MSGBOX_YESNO
- * goto_if_eq VAR_RESULT, NO, EventScript_DoubleEdgeDeclined
- * call EventScript_CanOnlyBeLearnedOnce
- * goto_if_eq VAR_RESULT, NO, EventScript_DoubleEdgeDeclined
- * msgbox Text_DoubleEdgeWhichMon
- * setvar VAR_0x8005, MOVETUTOR_DOUBLE_EDGE
- * call EventScript_ChooseMoveTutorMon
- * goto_if_eq VAR_RESULT, FALSE, EventScript_DoubleEdgeDeclined
- * setflag FLAG_TUTOR_DOUBLE_EDGE
- * goto EventScript_DoubleEdgeTaught
- * end
- * ```
- */
 internal object VictoryRoad_2F_EventScript_DoubleEdgeTutor : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port VictoryRoad_2F_EventScript_DoubleEdgeTutor")
+      moveTutor(
+          ctx,
+          KantoFlags.FLAG_TUTOR_DOUBLE_EDGE,
+          Misc.Text_DoubleEdgeTeach,
+          Misc.Text_DoubleEdgeDeclined,
+          Misc.Text_DoubleEdgeTaught,
+      )
 }
 
 internal val VictoryRoad_2FScripts: Map<String, Script> =

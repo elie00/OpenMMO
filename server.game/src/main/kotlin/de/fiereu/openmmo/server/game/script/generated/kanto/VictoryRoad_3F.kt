@@ -1,101 +1,88 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.dialog.generated.kanto.VictoryRoad_3F
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
+import de.fiereu.openmmo.trainer.generated.KantoTrainerIds
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_COOLTRAINER_GEORGE, VictoryRoad_3F_Text_GeorgeIntro, VictoryRoad_3F_Text_GeorgeDefeat
- * msgbox VictoryRoad_3F_Text_GeorgePostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object VictoryRoad_3F_EventScript_George : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port VictoryRoad_3F_EventScript_George")
-}
-
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_COOLTRAINER_ALEXA, VictoryRoad_3F_Text_AlexaIntro, VictoryRoad_3F_Text_AlexaDefeat
- * msgbox VictoryRoad_3F_Text_AlexaPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
-internal object VictoryRoad_3F_EventScript_Alexa : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port VictoryRoad_3F_EventScript_Alexa")
-}
-
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_COOLTRAINER_COLBY, VictoryRoad_3F_Text_ColbyIntro, VictoryRoad_3F_Text_ColbyDefeat
- * msgbox VictoryRoad_3F_Text_ColbyPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
-internal object VictoryRoad_3F_EventScript_Colby : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port VictoryRoad_3F_EventScript_Colby")
-}
-
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_COOLTRAINER_CAROLINE, VictoryRoad_3F_Text_CarolineIntro, VictoryRoad_3F_Text_CarolineDefeat
- * msgbox VictoryRoad_3F_Text_CarolinePostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
-internal object VictoryRoad_3F_EventScript_Caroline : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port VictoryRoad_3F_EventScript_Caroline")
-}
-
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_MAX_REVIVE
- * end
- * ```
- */
-internal object VictoryRoad_3F_EventScript_ItemMaxRevive : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port VictoryRoad_3F_EventScript_ItemMaxRevive")
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_COOLTRAINER_GEORGE,
+          VictoryRoad_3F.GeorgeIntro,
+          VictoryRoad_3F.GeorgeDefeat,
+          VictoryRoad_3F.GeorgePostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_TM50
- * end
- * ```
- */
+internal object VictoryRoad_3F_EventScript_Alexa : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_COOLTRAINER_ALEXA,
+          VictoryRoad_3F.AlexaIntro,
+          VictoryRoad_3F.AlexaDefeat,
+          VictoryRoad_3F.AlexaPostBattle,
+      )
+}
+
+internal object VictoryRoad_3F_EventScript_Colby : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_COOLTRAINER_COLBY,
+          VictoryRoad_3F.ColbyIntro,
+          VictoryRoad_3F.ColbyDefeat,
+          VictoryRoad_3F.ColbyPostBattle,
+      )
+}
+
+internal object VictoryRoad_3F_EventScript_Caroline : Script {
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_COOLTRAINER_CAROLINE,
+          VictoryRoad_3F.CarolineIntro,
+          VictoryRoad_3F.CarolineDefeat,
+          VictoryRoad_3F.CarolinePostBattle,
+      )
+}
+
+internal object VictoryRoad_3F_EventScript_ItemMaxRevive : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.MAX_REVIVE)) return
+    ctx.removeNpc(4)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_VICTORY_ROAD_3F_MAX_REVIVE)
+  }
+}
+
 internal object VictoryRoad_3F_EventScript_ItemTM50 : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port VictoryRoad_3F_EventScript_ItemTM50")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.TM50)) return
+    ctx.removeNpc(5)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_VICTORY_ROAD_3F_TM50)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_double TRAINER_COOL_COUPLE_RAY_TYRA, VictoryRoad_3F_Text_RayIntro, VictoryRoad_3F_Text_RayDefeat, VictoryRoad_3F_Text_RayNotEnoughMons
- * msgbox VictoryRoad_3F_Text_RayPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
+/** trainerbattle_double: the couple share one trainer id, fought here as a single. */
 internal object VictoryRoad_3F_EventScript_Ray : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port VictoryRoad_3F_EventScript_Ray")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_COOL_COUPLE_RAY_TYRA,
+          VictoryRoad_3F.RayIntro,
+          VictoryRoad_3F.RayDefeat,
+          VictoryRoad_3F.RayPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_double TRAINER_COOL_COUPLE_RAY_TYRA, VictoryRoad_3F_Text_TyraIntro, VictoryRoad_3F_Text_TyraDefeat, VictoryRoad_3F_Text_TyraNotEnoughMons
- * msgbox VictoryRoad_3F_Text_TyraPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
+/** trainerbattle_double: the couple share one trainer id, fought here as a single. */
 internal object VictoryRoad_3F_EventScript_Tyra : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port VictoryRoad_3F_EventScript_Tyra")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_COOL_COUPLE_RAY_TYRA,
+          VictoryRoad_3F.TyraIntro,
+          VictoryRoad_3F.TyraDefeat,
+          VictoryRoad_3F.TyraPostBattle,
+      )
 }
 
 internal val VictoryRoad_3FScripts: Map<String, Script> =
