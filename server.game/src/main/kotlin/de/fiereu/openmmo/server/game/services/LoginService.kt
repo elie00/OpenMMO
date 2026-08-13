@@ -195,6 +195,9 @@ constructor(
     }
 
     state.characterId = charId
+    // Nothing stops a client selecting a second character on the same session, and the tiles a
+    // script opened belong to the character that opened them, not to the connection.
+    state.openedTiles.clear()
     sessionRegistry.bindCharacter(ctx, charId)
     log.info { "Player selected character '${stored.info.name}' (id=$charId)" }
 

@@ -219,6 +219,16 @@ When a tile really is blocking, [`ctx.openTile`](../writing-scripts/) opens it f
 that one player and tells the client. It cannot change the graphics, so an opened
 barrier is still drawn closed.
 
+Opened tiles live on the session, not on the save: they are cleared when a
+character is selected, so **the map's `ON_TRANSITION` script must open them again**
+for a player who already solved the puzzle. Vermilion gym is the model — it reads
+its "both switches found" flag on the way in and reopens the barrier. A puzzle
+that only opens tiles at the moment it is solved leaves the player shut out after
+a relog.
+
+Both are per player, which is what an MMO needs: one trainer's opened barrier is
+not another's.
+
 ## Scripts a map reaches without an npc
 
 A map's coord events fire when the player walks onto a tile: rival ambushes, gym

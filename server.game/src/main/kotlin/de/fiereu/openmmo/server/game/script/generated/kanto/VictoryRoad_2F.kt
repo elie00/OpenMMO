@@ -6,7 +6,11 @@ import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
 import de.fiereu.openmmo.story.generated.kanto.KantoFlags
+import de.fiereu.openmmo.story.generated.kanto.KantoVars
 import de.fiereu.openmmo.trainer.generated.KantoTrainerIds
+
+/** What the source game writes once the plate is held down. */
+private const val PRESSED = 100
 
 internal object VictoryRoad_2F_EventScript_Dawson : Script {
   override suspend fun run(ctx: ScriptContext) =
@@ -101,8 +105,40 @@ internal object VictoryRoad_2F_EventScript_DoubleEdgeTutor : Script {
       )
 }
 
+/**
+ * A floor switch, which the map fires only while its var holds 99. The source game writes that 99
+ * when a boulder is pushed onto the plate, so without a Strength verb nothing can arm it. The
+ * script itself is here and correct for the day that verb exists.
+ *
+ * Its rock barrier is already walkable in the generated map, so opening it is belt and braces.
+ */
+internal object VictoryRoad_2F_EventScript_FloorSwitch1 : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.openTile(13, 10)
+    ctx.openTile(13, 11)
+    ctx.setVar(KantoVars.VAR_MAP_SCENE_VICTORY_ROAD_2F_BOULDER1, PRESSED)
+  }
+}
+
+/**
+ * A floor switch, which the map fires only while its var holds 99. The source game writes that 99
+ * when a boulder is pushed onto the plate, so without a Strength verb nothing can arm it. The
+ * script itself is here and correct for the day that verb exists.
+ *
+ * Its rock barrier is already walkable in the generated map, so opening it is belt and braces.
+ */
+internal object VictoryRoad_2F_EventScript_FloorSwitch2 : Script {
+  override suspend fun run(ctx: ScriptContext) {
+    ctx.openTile(33, 16)
+    ctx.openTile(33, 17)
+    ctx.setVar(KantoVars.VAR_MAP_SCENE_VICTORY_ROAD_2F_BOULDER2, PRESSED)
+  }
+}
+
 internal val VictoryRoad_2FScripts: Map<String, Script> =
     mapOf(
+        "VictoryRoad_2F_EventScript_FloorSwitch2" to VictoryRoad_2F_EventScript_FloorSwitch2,
+        "VictoryRoad_2F_EventScript_FloorSwitch1" to VictoryRoad_2F_EventScript_FloorSwitch1,
         "VictoryRoad_2F_EventScript_Dawson" to VictoryRoad_2F_EventScript_Dawson,
         "VictoryRoad_2F_EventScript_Daisuke" to VictoryRoad_2F_EventScript_Daisuke,
         "VictoryRoad_2F_EventScript_Nelson" to VictoryRoad_2F_EventScript_Nelson,
