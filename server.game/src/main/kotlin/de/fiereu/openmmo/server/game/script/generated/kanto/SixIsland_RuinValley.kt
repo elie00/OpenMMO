@@ -1,7 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.dialog.generated.kanto.SixIsland_RuinValley
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
+import de.fiereu.openmmo.trainer.generated.KantoTrainerIds
 
 /**
  * Not ported yet. Decomp body:
@@ -22,113 +26,78 @@ internal object SixIsland_RuinValley_EventScript_Scientist : Script {
       TODO("port SixIsland_RuinValley_EventScript_Scientist")
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_RUIN_MANIAC_STANLY, SixIsland_RuinValley_Text_StanlyIntro, SixIsland_RuinValley_Text_StanlyDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, SixIsland_RuinValley_EventScript_StanlyRematch
- * msgbox SixIsland_RuinValley_Text_StanlyPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object SixIsland_RuinValley_EventScript_Stanly : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port SixIsland_RuinValley_EventScript_Stanly")
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_RUIN_MANIAC_STANLY,
+          SixIsland_RuinValley.StanlyIntro,
+          SixIsland_RuinValley.StanlyDefeat,
+          SixIsland_RuinValley.StanlyPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_RUIN_MANIAC_FOSTER, SixIsland_RuinValley_Text_FosterIntro, SixIsland_RuinValley_Text_FosterDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, SixIsland_RuinValley_EventScript_FosterRematch
- * msgbox SixIsland_RuinValley_Text_FosterPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object SixIsland_RuinValley_EventScript_Foster : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port SixIsland_RuinValley_EventScript_Foster")
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_RUIN_MANIAC_FOSTER,
+          SixIsland_RuinValley.FosterIntro,
+          SixIsland_RuinValley.FosterDefeat,
+          SixIsland_RuinValley.FosterPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_RUIN_MANIAC_LARRY, SixIsland_RuinValley_Text_LarryIntro, SixIsland_RuinValley_Text_LarryDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, SixIsland_RuinValley_EventScript_LarryRematch
- * msgbox SixIsland_RuinValley_Text_LarryPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object SixIsland_RuinValley_EventScript_Larry : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SixIsland_RuinValley_EventScript_Larry")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_RUIN_MANIAC_LARRY,
+          SixIsland_RuinValley.LarryIntro,
+          SixIsland_RuinValley.LarryDefeat,
+          SixIsland_RuinValley.LarryPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_HIKER_DARYL, SixIsland_RuinValley_Text_DarylIntro, SixIsland_RuinValley_Text_DarylDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, SixIsland_RuinValley_EventScript_DarylRematch
- * msgbox SixIsland_RuinValley_Text_DarylPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object SixIsland_RuinValley_EventScript_Daryl : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port SixIsland_RuinValley_EventScript_Daryl")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_HIKER_DARYL,
+          SixIsland_RuinValley.DarylIntro,
+          SixIsland_RuinValley.DarylDefeat,
+          SixIsland_RuinValley.DarylPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_POKEMANIAC_HECTOR, SixIsland_RuinValley_Text_HectorIntro, SixIsland_RuinValley_Text_HectorDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, SixIsland_RuinValley_EventScript_HectorRematch
- * msgbox SixIsland_RuinValley_Text_HectorPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object SixIsland_RuinValley_EventScript_Hector : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port SixIsland_RuinValley_EventScript_Hector")
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_POKEMANIAC_HECTOR,
+          SixIsland_RuinValley.HectorIntro,
+          SixIsland_RuinValley.HectorDefeat,
+          SixIsland_RuinValley.HectorPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_HP_UP
- * end
- * ```
- */
 internal object SixIsland_RuinValley_EventScript_ItemHPUp : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SixIsland_RuinValley_EventScript_ItemHPUp")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.HP_UP)) return
+    ctx.removeNpc(14)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_SIX_ISLAND_RUIN_VALLEY_HP_UP)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_FULL_RESTORE
- * end
- * ```
- */
 internal object SixIsland_RuinValley_EventScript_ItemFullRestore : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SixIsland_RuinValley_EventScript_ItemFullRestore")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.FULL_RESTORE)) return
+    ctx.removeNpc(15)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_SIX_ISLAND_RUIN_VALLEY_FULL_RESTORE)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_SUN_STONE
- * end
- * ```
- */
 internal object SixIsland_RuinValley_EventScript_ItemSunStone : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SixIsland_RuinValley_EventScript_ItemSunStone")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.SUN_STONE)) return
+    ctx.removeNpc(16)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_SIX_ISLAND_RUIN_VALLEY_SUN_STONE)
+  }
 }
 
 /**

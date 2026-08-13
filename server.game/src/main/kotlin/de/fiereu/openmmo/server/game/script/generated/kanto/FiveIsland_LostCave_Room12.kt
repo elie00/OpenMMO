@@ -1,18 +1,16 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_SEA_INCENSE
- * end
- * ```
- */
 internal object FiveIsland_LostCave_Room12_EventScript_ItemSeaIncense : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port FiveIsland_LostCave_Room12_EventScript_ItemSeaIncense")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.SEA_INCENSE)) return
+    ctx.removeNpc(0)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_FIVE_ISLAND_LOST_CAVE_ROOM12_SEA_INCENSE)
+  }
 }
 
 internal val FiveIsland_LostCave_Room12Scripts: Map<String, Script> =

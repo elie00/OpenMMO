@@ -1,8 +1,10 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.ThreeIsland
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 
 /**
  * Not ported yet. Decomp body:
@@ -49,15 +51,12 @@ internal object ThreeIsland_EventScript_Biker : Script {
   override suspend fun run(ctx: ScriptContext) = TODO("port ThreeIsland_EventScript_Biker")
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_ZINC
- * end
- * ```
- */
 internal object ThreeIsland_EventScript_ItemZinc : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port ThreeIsland_EventScript_ItemZinc")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.ZINC)) return
+    ctx.removeNpc(9)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_THREE_ISLAND_ZINC)
+  }
 }
 
 internal object ThreeIsland_EventScript_Woman : Script {

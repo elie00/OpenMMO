@@ -32,16 +32,12 @@ internal object FuchsiaCity_WardensHouse_EventScript_Warden : Script {
   }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_RARE_CANDY
- * end
- * ```
- */
 internal object FuchsiaCity_WardensHouse_EventScript_ItemRareCandy : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port FuchsiaCity_WardensHouse_EventScript_ItemRareCandy")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.RARE_CANDY)) return
+    ctx.removeNpc(2)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_FUCHSIA_CITY_WARDENS_HOUSE_RARE_CANDY)
+  }
 }
 
 internal object FuchsiaCity_WardensHouse_EventScript_PokemonJournalKoga : Script {

@@ -1,8 +1,10 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.ThreeIsland_BerryForest
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 
 /**
  * Not ported yet. Decomp body:
@@ -46,40 +48,28 @@ internal object ThreeIsland_BerryForest_EventScript_Lostelle : Script {
       TODO("port ThreeIsland_BerryForest_EventScript_Lostelle")
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_MAX_ETHER
- * end
- * ```
- */
 internal object ThreeIsland_BerryForest_EventScript_ItemMaxEther : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port ThreeIsland_BerryForest_EventScript_ItemMaxEther")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.MAX_ETHER)) return
+    ctx.removeNpc(11)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_THREE_ISLAND_BERRY_FOREST_MAX_ETHER)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_FULL_HEAL
- * end
- * ```
- */
 internal object ThreeIsland_BerryForest_EventScript_ItemFullHeal : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port ThreeIsland_BerryForest_EventScript_ItemFullHeal")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.FULL_HEAL)) return
+    ctx.removeNpc(12)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_THREE_ISLAND_BERRY_FOREST_FULL_HEAL)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_MAX_ELIXIR
- * end
- * ```
- */
 internal object ThreeIsland_BerryForest_EventScript_ItemMaxElixir : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port ThreeIsland_BerryForest_EventScript_ItemMaxElixir")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.MAX_ELIXIR)) return
+    ctx.removeNpc(13)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_THREE_ISLAND_BERRY_FOREST_MAX_ELIXIR)
+  }
 }
 
 internal object ThreeIsland_BerryForest_EventScript_BewareSign : Script {

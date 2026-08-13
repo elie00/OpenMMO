@@ -1,8 +1,10 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.FourIsland
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 
 /**
  * Not ported yet. Decomp body:
@@ -40,26 +42,20 @@ internal object FourIsland_EventScript_OldWoman : Script {
   override suspend fun run(ctx: ScriptContext) = TODO("port FourIsland_EventScript_OldWoman")
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_STAR_PIECE
- * end
- * ```
- */
 internal object FourIsland_EventScript_ItemStarPiece : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port FourIsland_EventScript_ItemStarPiece")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.STAR_PIECE)) return
+    ctx.removeNpc(7)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_FOUR_ISLAND_STAR_PIECE)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_STARDUST
- * end
- * ```
- */
 internal object FourIsland_EventScript_ItemStardust : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port FourIsland_EventScript_ItemStardust")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.STARDUST)) return
+    ctx.removeNpc(8)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_FOUR_ISLAND_STARDUST)
+  }
 }
 
 internal object FourIsland_EventScript_FatMan : Script {

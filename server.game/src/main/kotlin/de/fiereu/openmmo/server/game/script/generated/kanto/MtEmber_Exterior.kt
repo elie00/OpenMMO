@@ -1,7 +1,11 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.dialog.generated.kanto.MtEmber_Exterior
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
+import de.fiereu.openmmo.trainer.generated.KantoTrainerIds
 
 /**
  * Not ported yet. Decomp body:
@@ -61,76 +65,58 @@ internal object MtEmber_Exterior_EventScript_Grunt2 : Script {
   override suspend fun run(ctx: ScriptContext) = TODO("port MtEmber_Exterior_EventScript_Grunt2")
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_CRUSH_GIRL_JOCELYN, MtEmber_Exterior_Text_JocelynIntro, MtEmber_Exterior_Text_JocelynDefeat
- * msgbox MtEmber_Exterior_Text_JocelynPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object MtEmber_Exterior_EventScript_Jocelyn : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtEmber_Exterior_EventScript_Jocelyn")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_CRUSH_GIRL_JOCELYN,
+          MtEmber_Exterior.JocelynIntro,
+          MtEmber_Exterior.JocelynDefeat,
+          MtEmber_Exterior.JocelynPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_PKMN_RANGER_LOGAN, MtEmber_Exterior_Text_LoganIntro, MtEmber_Exterior_Text_LoganDefeat
- * msgbox MtEmber_Exterior_Text_LoganPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object MtEmber_Exterior_EventScript_Logan : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtEmber_Exterior_EventScript_Logan")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_PKMN_RANGER_LOGAN,
+          MtEmber_Exterior.LoganIntro,
+          MtEmber_Exterior.LoganDefeat,
+          MtEmber_Exterior.LoganPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_PKMN_RANGER_BETH, MtEmber_Exterior_Text_BethIntro, MtEmber_Exterior_Text_BethDefeat
- * msgbox MtEmber_Exterior_Text_BethPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object MtEmber_Exterior_EventScript_Beth : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port MtEmber_Exterior_EventScript_Beth")
+  override suspend fun run(ctx: ScriptContext) =
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_PKMN_RANGER_BETH,
+          MtEmber_Exterior.BethIntro,
+          MtEmber_Exterior.BethDefeat,
+          MtEmber_Exterior.BethPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_ULTRA_BALL
- * end
- * ```
- */
 internal object MtEmber_Exterior_EventScript_ItemUltraBall : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port MtEmber_Exterior_EventScript_ItemUltraBall")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.ULTRA_BALL)) return
+    ctx.removeNpc(17)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_MT_EMBER_EXTERIOR_ULTRA_BALL)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_FIRE_STONE
- * end
- * ```
- */
 internal object MtEmber_Exterior_EventScript_ItemFireStone : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port MtEmber_Exterior_EventScript_ItemFireStone")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.FIRE_STONE)) return
+    ctx.removeNpc(18)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_MT_EMBER_EXTERIOR_FIRE_STONE)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_DIRE_HIT
- * end
- * ```
- */
 internal object MtEmber_Exterior_EventScript_ItemDireHit : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port MtEmber_Exterior_EventScript_ItemDireHit")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.DIRE_HIT)) return
+    ctx.removeNpc(19)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_MT_EMBER_EXTERIOR_DIRE_HIT)
+  }
 }
 
 internal val MtEmber_ExteriorScripts: Map<String, Script> =

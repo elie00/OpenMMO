@@ -3,80 +3,56 @@ package de.fiereu.openmmo.server.game.script.generated.kanto
 import de.fiereu.openmmo.dialog.generated.kanto.ThreeIsland_BondBridge
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.trainer.generated.KantoTrainerIds
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_AROMA_LADY_NIKKI, ThreeIsland_BondBridge_Text_NikkiIntro, ThreeIsland_BondBridge_Text_NikkiDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, ThreeIsland_BondBridge_EventScript_NikkiRematch
- * msgbox ThreeIsland_BondBridge_Text_NikkiPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object ThreeIsland_BondBridge_EventScript_Nikki : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port ThreeIsland_BondBridge_EventScript_Nikki")
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_AROMA_LADY_NIKKI,
+          ThreeIsland_BondBridge.NikkiIntro,
+          ThreeIsland_BondBridge.NikkiDefeat,
+          ThreeIsland_BondBridge.NikkiPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_AROMA_LADY_VIOLET, ThreeIsland_BondBridge_Text_VioletIntro, ThreeIsland_BondBridge_Text_VioletDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, ThreeIsland_BondBridge_EventScript_VioletRematch
- * msgbox ThreeIsland_BondBridge_Text_VioletPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object ThreeIsland_BondBridge_EventScript_Violet : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port ThreeIsland_BondBridge_EventScript_Violet")
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_AROMA_LADY_VIOLET,
+          ThreeIsland_BondBridge.VioletIntro,
+          ThreeIsland_BondBridge.VioletDefeat,
+          ThreeIsland_BondBridge.VioletPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_TUBER_AMIRA, ThreeIsland_BondBridge_Text_AmiraIntro, ThreeIsland_BondBridge_Text_AmiraDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, ThreeIsland_BondBridge_EventScript_AmiraRematch
- * msgbox ThreeIsland_BondBridge_Text_AmiraPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object ThreeIsland_BondBridge_EventScript_Amira : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port ThreeIsland_BondBridge_EventScript_Amira")
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_TUBER_AMIRA,
+          ThreeIsland_BondBridge.AmiraIntro,
+          ThreeIsland_BondBridge.AmiraDefeat,
+          ThreeIsland_BondBridge.AmiraPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_TUBER_ALEXIS, ThreeIsland_BondBridge_Text_AlexisIntro, ThreeIsland_BondBridge_Text_AlexisDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, ThreeIsland_BondBridge_EventScript_AlexisRematch
- * msgbox ThreeIsland_BondBridge_Text_AlexisPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object ThreeIsland_BondBridge_EventScript_Alexis : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port ThreeIsland_BondBridge_EventScript_Alexis")
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_TUBER_ALEXIS,
+          ThreeIsland_BondBridge.AlexisIntro,
+          ThreeIsland_BondBridge.AlexisDefeat,
+          ThreeIsland_BondBridge.AlexisPostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_SWIMMER_FEMALE_TISHA, ThreeIsland_BondBridge_Text_TishaIntro, ThreeIsland_BondBridge_Text_TishaDefeat
- * specialvar VAR_RESULT, ShouldTryRematchBattle
- * goto_if_eq VAR_RESULT, TRUE, ThreeIsland_BondBridge_EventScript_TishaRematch
- * msgbox ThreeIsland_BondBridge_Text_TishaPostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object ThreeIsland_BondBridge_EventScript_Tisha : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port ThreeIsland_BondBridge_EventScript_Tisha")
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_SWIMMER_FEMALE_TISHA,
+          ThreeIsland_BondBridge.TishaIntro,
+          ThreeIsland_BondBridge.TishaDefeat,
+          ThreeIsland_BondBridge.TishaPostBattle,
+      )
 }
 
 /**

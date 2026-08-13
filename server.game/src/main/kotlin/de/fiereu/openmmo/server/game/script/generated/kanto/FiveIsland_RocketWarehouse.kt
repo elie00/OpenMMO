@@ -1,33 +1,30 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
 import de.fiereu.openmmo.dialog.generated.kanto.FiveIsland_RocketWarehouse
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
+import de.fiereu.openmmo.trainer.generated.KantoTrainerIds
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_47, FiveIsland_RocketWarehouse_Text_Grunt2Intro, FiveIsland_RocketWarehouse_Text_Grunt2Defeat
- * msgbox FiveIsland_RocketWarehouse_Text_Grunt2PostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object FiveIsland_RocketWarehouse_EventScript_Grunt2 : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port FiveIsland_RocketWarehouse_EventScript_Grunt2")
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_TEAM_ROCKET_GRUNT_47,
+          FiveIsland_RocketWarehouse.Grunt2Intro,
+          FiveIsland_RocketWarehouse.Grunt2Defeat,
+          FiveIsland_RocketWarehouse.Grunt2PostBattle,
+      )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_48, FiveIsland_RocketWarehouse_Text_Grunt3Intro, FiveIsland_RocketWarehouse_Text_Grunt3Defeat
- * msgbox FiveIsland_RocketWarehouse_Text_Grunt3PostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object FiveIsland_RocketWarehouse_EventScript_Grunt3 : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port FiveIsland_RocketWarehouse_EventScript_Grunt3")
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_TEAM_ROCKET_GRUNT_48,
+          FiveIsland_RocketWarehouse.Grunt3Intro,
+          FiveIsland_RocketWarehouse.Grunt3Defeat,
+          FiveIsland_RocketWarehouse.Grunt3PostBattle,
+      )
 }
 
 /**
@@ -56,17 +53,14 @@ internal object FiveIsland_RocketWarehouse_EventScript_Admin2 : Script {
       TODO("port FiveIsland_RocketWarehouse_EventScript_Admin2")
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * trainerbattle_single TRAINER_TEAM_ROCKET_GRUNT_42, FiveIsland_RocketWarehouse_Text_Grunt1Intro, FiveIsland_RocketWarehouse_Text_Grunt1Defeat
- * msgbox FiveIsland_RocketWarehouse_Text_Grunt1PostBattle, MSGBOX_AUTOCLOSE
- * end
- * ```
- */
 internal object FiveIsland_RocketWarehouse_EventScript_Grunt1 : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port FiveIsland_RocketWarehouse_EventScript_Grunt1")
+      ctx.trainerBattle(
+          KantoTrainerIds.TRAINER_TEAM_ROCKET_GRUNT_42,
+          FiveIsland_RocketWarehouse.Grunt1Intro,
+          FiveIsland_RocketWarehouse.Grunt1Defeat,
+          FiveIsland_RocketWarehouse.Grunt1PostBattle,
+      )
 }
 
 /**
@@ -83,52 +77,36 @@ internal object FiveIsland_RocketWarehouse_EventScript_Gideon : Script {
       TODO("port FiveIsland_RocketWarehouse_EventScript_Gideon")
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_BIG_PEARL
- * end
- * ```
- */
 internal object FiveIsland_RocketWarehouse_EventScript_ItemBigPearl : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port FiveIsland_RocketWarehouse_EventScript_ItemBigPearl")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.BIG_PEARL)) return
+    ctx.removeNpc(6)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_FIVE_ISLAND_ROCKET_WAREHOUSE_BIG_PEARL)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_TM36
- * end
- * ```
- */
 internal object FiveIsland_RocketWarehouse_EventScript_ItemTM36 : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port FiveIsland_RocketWarehouse_EventScript_ItemTM36")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.TM36)) return
+    ctx.removeNpc(7)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_FIVE_ISLAND_ROCKET_WAREHOUSE_TM36)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_PEARL
- * end
- * ```
- */
 internal object FiveIsland_RocketWarehouse_EventScript_ItemPearl : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port FiveIsland_RocketWarehouse_EventScript_ItemPearl")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.PEARL)) return
+    ctx.removeNpc(8)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_FIVE_ISLAND_ROCKET_WAREHOUSE_PEARL)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_UP_GRADE
- * end
- * ```
- */
 internal object FiveIsland_RocketWarehouse_EventScript_ItemUpGrade : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port FiveIsland_RocketWarehouse_EventScript_ItemUpGrade")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.UP_GRADE)) return
+    ctx.removeNpc(9)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_FIVE_ISLAND_ROCKET_WAREHOUSE_UP_GRADE)
+  }
 }
 
 /**

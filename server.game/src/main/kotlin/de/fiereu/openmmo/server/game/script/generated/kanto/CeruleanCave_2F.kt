@@ -1,41 +1,32 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
+import de.fiereu.openmmo.story.generated.kanto.KantoFlags
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_PP_UP
- * end
- * ```
- */
 internal object CeruleanCave_2F_EventScript_ItemPPUp : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port CeruleanCave_2F_EventScript_ItemPPUp")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.PP_UP)) return
+    ctx.removeNpc(0)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_CERULEAN_CAVE_2F_PP_UP)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_ULTRA_BALL
- * end
- * ```
- */
 internal object CeruleanCave_2F_EventScript_ItemUltraBall : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port CeruleanCave_2F_EventScript_ItemUltraBall")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.ULTRA_BALL)) return
+    ctx.removeNpc(1)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_CERULEAN_CAVE_2F_ULTRA_BALL)
+  }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * finditem ITEM_FULL_RESTORE
- * end
- * ```
- */
 internal object CeruleanCave_2F_EventScript_ItemFullRestore : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port CeruleanCave_2F_EventScript_ItemFullRestore")
+  override suspend fun run(ctx: ScriptContext) {
+    if (!ctx.giveItem(Items.FULL_RESTORE)) return
+    ctx.removeNpc(2)
+    ctx.setFlag(KantoFlags.FLAG_HIDE_CERULEAN_CAVE_2F_FULL_RESTORE)
+  }
 }
 
 internal val CeruleanCave_2FScripts: Map<String, Script> =
