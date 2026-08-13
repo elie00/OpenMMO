@@ -37,6 +37,7 @@ import de.fiereu.openmmo.server.game.storage.CharacterStore
 import de.fiereu.openmmo.server.game.storage.EntityIdService
 import de.fiereu.openmmo.server.game.testsupport.FakeCharacterRepository
 import de.fiereu.openmmo.server.game.testsupport.FakeSession
+import de.fiereu.openmmo.server.game.testsupport.whiteoutService
 import de.fiereu.openmmo.server.game.world.interest.InterestManager
 import de.fiereu.openmmo.trainer.TrainerDef
 import de.fiereu.openmmo.trainer.TrainerMon
@@ -110,6 +111,7 @@ private class Fixture(scope: CoroutineScope) {
           speciesRegistry = SpeciesRegistry(),
           moveRegistry = MoveRegistry(),
           trainers = TrainerRegistry(),
+          whiteoutService = whiteoutService(store),
       )
 
   suspend fun playerWithParty(

@@ -31,6 +31,7 @@ import de.fiereu.openmmo.server.game.battle.TurnEngine
 import de.fiereu.openmmo.server.game.battle.WildMonFactory
 import de.fiereu.openmmo.server.game.battle.acquiredMonsterDelta
 import de.fiereu.openmmo.server.game.session.PLAYER_STATE
+import de.fiereu.openmmo.server.game.session.SCRIPT_SCOPE
 import de.fiereu.openmmo.server.game.storage.CharacterStore
 import de.fiereu.openmmo.server.game.world.interest.InterestManager
 import de.fiereu.openmmo.trainer.TrainerDef
@@ -40,6 +41,10 @@ import java.time.LocalDateTime
 import java.util.concurrent.ConcurrentHashMap
 import javax.inject.Inject
 import javax.inject.Singleton
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
 
 private val log = KotlinLogging.logger {}
 
@@ -75,6 +80,7 @@ constructor(
     private val speciesRegistry: SpeciesRegistry,
     private val moveRegistry: MoveRegistry,
     private val trainers: TrainerRegistry,
+    private val whiteoutService: WhiteoutService,
 ) {
 
   private val pendingLearns = ConcurrentHashMap<Long, PendingMoveLearn>()
@@ -150,10 +156,20 @@ constructor(
   /** Resumes scripts after returning to the overworld. */
   fun onClientReady(event: PacketEvent<MapLoadedAckPacket>) {
     if (event.packet.data.isNotEmpty()) return
-    val charId = event.session.attributes[PLAYER_STATE]?.characterId ?: return
+    val state = event.session.attributes[PLAYER_STATE] ?: return
+    val charId = state.characterId ?: return
     val battle = battles.byChar(charId) ?: return
     val result = battle.pendingResult ?: return
     finishBattle(battle, result)
+    // Only once the client is back in the overworld, since the whiteout warp is a map transition of
+    // its own and the client cannot load two at a time.
+    if (result == BattleResult.DEFEAT) {
+      val scope =
+          event.session.attributes.getOrPut(SCRIPT_SCOPE) {
+            CoroutineScope(SupervisorJob() + Dispatchers.Default)
+          }
+      scope.launch { whiteoutService.whiteout(event.session, state) }
+    }
   }
 
   /** True while the character has a battle running, so callers can skip starting another. */

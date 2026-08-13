@@ -19,6 +19,7 @@ import de.fiereu.openmmo.server.game.services.ScriptWarpService
 import de.fiereu.openmmo.server.game.services.StoryClientState
 import de.fiereu.openmmo.server.game.services.StoryPlayerService
 import de.fiereu.openmmo.server.game.services.StoryService
+import de.fiereu.openmmo.server.game.services.WhiteoutService
 import de.fiereu.openmmo.server.game.session.PlayerState
 import de.fiereu.openmmo.server.game.session.openedTileKey
 import de.fiereu.openmmo.server.game.storage.CharacterStore
@@ -269,12 +270,8 @@ internal constructor(
 
   /**
    * The decomp `setrespawn`: where this player wakes up after a whiteout. Gyms set it as the badge
-   * is won, so it follows the player forward through the region.
-   *
-   * TODO Send the player here when they lose Losing a battle currently just ends it, so the point
-   * is recorded and persisted but nothing acts on it yet. Making it real means healing the party
-   * and warping on BattleResult.DEFEAT, which needs a coroutine scope in BattleService and a look
-   * at what the client expects after the battle end packet.
+   * is won, so it follows the player forward through the region. [WhiteoutService] sends them here
+   * when they lose.
    */
   fun setRespawn(regionId: Int, bankId: Int, mapId: Int, x: Int, y: Int) {
     RespawnPoint.vars(regionId, bankId, mapId, x, y).forEach { (key, value) -> setVar(key, value) }

@@ -26,6 +26,7 @@ import de.fiereu.openmmo.server.game.services.ScriptWarpService
 import de.fiereu.openmmo.server.game.services.StoryPlayerService
 import de.fiereu.openmmo.server.game.services.StoryService
 import de.fiereu.openmmo.server.game.services.WarpService
+import de.fiereu.openmmo.server.game.services.WhiteoutService
 import de.fiereu.openmmo.server.game.storage.CharacterStore
 import de.fiereu.openmmo.server.game.storage.EntityIdService
 import de.fiereu.openmmo.server.game.world.interest.InterestManager
@@ -62,6 +63,7 @@ fun movementService(
           speciesRegistry = species,
           moveRegistry = moves,
           trainers = TrainerRegistry(),
+          whiteoutService = whiteoutService(store, mapManager),
       )
   val entryScripts = MapEntryScripts(ScriptRegistry(emptyMap()), story)
   val runner =
@@ -85,5 +87,26 @@ fun movementService(
       store,
       EncounterService(store, battles),
       MapScriptService(entryScripts, runner),
+  )
+}
+
+/** The real [WhiteoutService], whose collaborators are all cheap to build for real. */
+fun whiteoutService(store: CharacterStore, mapManager: MapManager = MapManager()): WhiteoutService {
+  val mapLoad = MapLoadService(mapManager)
+  val species = SpeciesRegistry()
+  val moves = MoveRegistry()
+  return WhiteoutService(
+      StoryService(store),
+      StoryPlayerService(
+          store,
+          WildMonFactory(species, moves, LearnsetRegistry(), EntityIdService()),
+          species,
+          moves),
+      ScriptWarpService(
+          mapManager,
+          mapLoad,
+          store,
+          PresenceService(InterestManager(), PassThroughInterestPolicy(), mapLoad, store)),
+      store,
   )
 }
