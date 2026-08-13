@@ -1,5 +1,6 @@
 package de.fiereu.openmmo.server.game.script.generated.kanto
 
+import de.fiereu.openmmo.dialog.generated.kanto.SevenIsland_SevaultCanyon_House
 import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.server.game.script.Script
 import de.fiereu.openmmo.server.game.script.ScriptContext
@@ -43,22 +44,8 @@ internal object SevenIsland_SevaultCanyon_House_EventScript_ChanseyDanceMan : Sc
       TODO("port SevenIsland_SevaultCanyon_House_EventScript_ChanseyDanceMan")
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lock
- * faceplayer
- * waitse
- * playmoncry SPECIES_CHANSEY, CRY_MODE_NORMAL
- * msgbox SevenIsland_SevaultCanyon_House_Text_Chansey
- * waitmoncry
- * release
- * end
- * ```
- */
 internal object SevenIsland_SevaultCanyon_House_EventScript_Chansey : Script {
-  override suspend fun run(ctx: ScriptContext) =
-      TODO("port SevenIsland_SevaultCanyon_House_EventScript_Chansey")
+  override suspend fun run(ctx: ScriptContext) = ctx.say(SevenIsland_SevaultCanyon_House.Chansey)
 }
 
 internal object SevenIsland_SevaultCanyon_House_EventScript_ItemLuckyPunch : Script {

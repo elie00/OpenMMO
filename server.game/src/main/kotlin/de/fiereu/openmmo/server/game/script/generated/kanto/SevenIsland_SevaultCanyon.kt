@@ -121,20 +121,9 @@ internal object SevenIsland_SevaultCanyon_EventScript_ItemNugget : Script {
   }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lock
- * faceplayer
- * famechecker FAMECHECKER_BRUNO, 5
- * msgbox SevenIsland_SevaultCanyon_Text_BrunoTrainedWithBrawly
- * release
- * end
- * ```
- */
 internal object SevenIsland_SevaultCanyon_EventScript_BlackBelt : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port SevenIsland_SevaultCanyon_EventScript_BlackBelt")
+      ctx.say(SevenIsland_SevaultCanyon.BrunoTrainedWithBrawly)
 }
 
 internal object SevenIsland_SevaultCanyon_EventScript_RouteSign : Script {

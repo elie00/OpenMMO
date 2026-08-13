@@ -62,19 +62,8 @@ internal object FourIsland_EventScript_FatMan : Script {
   override suspend fun run(ctx: ScriptContext) = ctx.say(FourIsland.MadeSlushieUsingIcefallCaveIce)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lock
- * faceplayer
- * famechecker FAMECHECKER_LORELEI, 4
- * msgbox FourIsland_Text_LoreleiHasLotsOfStuffedDolls
- * release
- * end
- * ```
- */
 internal object FourIsland_EventScript_LittleGirl : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port FourIsland_EventScript_LittleGirl")
+  override suspend fun run(ctx: ScriptContext) = ctx.say(FourIsland.LoreleiHasLotsOfStuffedDolls)
 }
 
 internal object FourIsland_EventScript_IslandSign : Script {

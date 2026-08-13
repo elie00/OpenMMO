@@ -105,19 +105,8 @@ internal object Route20_EventScript_Tiffany : Script {
       )
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lock
- * faceplayer
- * famechecker FAMECHECKER_MISTY, 3
- * msgbox Route20_Text_MistyTrainsHere
- * release
- * end
- * ```
- */
 internal object Route20_EventScript_Camper : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port Route20_EventScript_Camper")
+  override suspend fun run(ctx: ScriptContext) = ctx.say(Route20.MistyTrainsHere)
 }
 
 internal object Route20_EventScript_SeafoamIslandsSign : Script {

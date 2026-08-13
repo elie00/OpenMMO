@@ -28,19 +28,8 @@ internal object TwoIsland_EventScript_Woman : Script {
       ctx.say(TwoIsland.ShopkeepersBrotherWorksGameCorner)
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lock
- * faceplayer
- * famechecker FAMECHECKER_BRUNO, 4
- * msgbox TwoIsland_Text_BrunoCameToIslandWhileBack
- * release
- * end
- * ```
- */
 internal object TwoIsland_EventScript_Beauty : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port TwoIsland_EventScript_Beauty")
+  override suspend fun run(ctx: ScriptContext) = ctx.say(TwoIsland.BrunoCameToIslandWhileBack)
 }
 
 internal object TwoIsland_EventScript_Sailor : Script {
