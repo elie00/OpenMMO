@@ -27,19 +27,13 @@ internal object FourIsland_EventScript_DaycareMan : Script {
   override suspend fun run(ctx: ScriptContext) = TODO("port FourIsland_EventScript_DaycareMan")
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lock
- * faceplayer
- * goto_if_set FLAG_SYS_CAN_LINK_WITH_RS, FourIsland_EventScript_OldWomanLoreleiLeft
- * msgbox FourIsland_Text_LoreleiHasReturned
- * release
- * end
- * ```
- */
 internal object FourIsland_EventScript_OldWoman : Script {
-  override suspend fun run(ctx: ScriptContext) = TODO("port FourIsland_EventScript_OldWoman")
+  override suspend fun run(ctx: ScriptContext) =
+      when {
+        ctx.isFlagSet(KantoFlags.FLAG_SYS_CAN_LINK_WITH_RS) ->
+            ctx.say(FourIsland.LoreleiMetLaprasAsChild)
+        else -> ctx.say(FourIsland.LoreleiHasReturned)
+      }
 }
 
 internal object FourIsland_EventScript_ItemStarPiece : Script {

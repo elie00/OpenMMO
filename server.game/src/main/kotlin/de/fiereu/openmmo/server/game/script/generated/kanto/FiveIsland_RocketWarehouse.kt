@@ -109,19 +109,13 @@ internal object FiveIsland_RocketWarehouse_EventScript_ItemUpGrade : Script {
   }
 }
 
-/**
- * Not ported yet. Decomp body:
- * ```
- * lockall
- * goto_if_set FLAG_DEFEATED_ROCKETS_IN_WAREHOUSE, FiveIsland_RocketWarehouse_EventScript_CageUnlocked
- * msgbox FiveIsland_RocketWarehouse_Text_ManyMonsLockedInPen
- * releaseall
- * end
- * ```
- */
 internal object FiveIsland_RocketWarehouse_EventScript_Cage : Script {
   override suspend fun run(ctx: ScriptContext) =
-      TODO("port FiveIsland_RocketWarehouse_EventScript_Cage")
+      when {
+        ctx.isFlagSet(KantoFlags.FLAG_DEFEATED_ROCKETS_IN_WAREHOUSE) ->
+            ctx.say(FiveIsland_RocketWarehouse.PenUnlockedMonsFled)
+        else -> ctx.say(FiveIsland_RocketWarehouse.ManyMonsLockedInPen)
+      }
 }
 
 internal object FiveIsland_RocketWarehouse_EventScript_Computer : Script {
