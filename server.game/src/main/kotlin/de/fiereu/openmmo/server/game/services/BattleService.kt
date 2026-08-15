@@ -3,6 +3,7 @@ package de.fiereu.openmmo.server.game.services
 import de.fiereu.network.PacketEvent
 import de.fiereu.network.SessionContext
 import de.fiereu.openmmo.common.PokemonMove
+import de.fiereu.openmmo.common.enums.Ability
 import de.fiereu.openmmo.common.enums.BattleAction
 import de.fiereu.openmmo.common.enums.IVs
 import de.fiereu.openmmo.common.enums.PokemonContainer
@@ -12,11 +13,13 @@ import de.fiereu.openmmo.moves.MoveRegistry
 import de.fiereu.openmmo.net.game.packets.MapLoadedAckPacket
 import de.fiereu.openmmo.net.game.packets.SocialListEntryAddPacket
 import de.fiereu.openmmo.net.game.packets.battle.BattleActionSelectPacket
+import de.fiereu.openmmo.net.game.packets.battle.BattleEntityDeltaPacket
 import de.fiereu.openmmo.net.game.packets.battle.BattleListEventDetail
 import de.fiereu.openmmo.net.game.packets.battle.BattleListEventPacket
 import de.fiereu.openmmo.net.game.packets.battle.moves.MoveLearnPromptPacket
 import de.fiereu.openmmo.net.game.packets.battle.moves.MoveLearnReplyPacket
 import de.fiereu.openmmo.pokemon.SpeciesRegistry
+import de.fiereu.openmmo.server.game.battle.BattleEvent
 import de.fiereu.openmmo.server.game.battle.BattleInstance
 import de.fiereu.openmmo.server.game.battle.BattleMonState
 import de.fiereu.openmmo.server.game.battle.BattlePacketEmitter
@@ -25,7 +28,11 @@ import de.fiereu.openmmo.server.game.battle.BattleResult
 import de.fiereu.openmmo.server.game.battle.BattleRewards
 import de.fiereu.openmmo.server.game.battle.BattleRng
 import de.fiereu.openmmo.server.game.battle.BattleRules
+import de.fiereu.openmmo.server.game.battle.BattleStat
+import de.fiereu.openmmo.server.game.battle.CatchCalculator
 import de.fiereu.openmmo.server.game.battle.MoveLearner
+import de.fiereu.openmmo.server.game.battle.PrimaryStatus
+import de.fiereu.openmmo.server.game.battle.RewardResult
 import de.fiereu.openmmo.server.game.battle.StatCalculator
 import de.fiereu.openmmo.server.game.battle.TurnEngine
 import de.fiereu.openmmo.server.game.battle.WildMonFactory
@@ -93,7 +100,7 @@ constructor(
     if (battle.activeMon().fainted && action.action != BattleAction.SWITCH) return
     when (action.action) {
       BattleAction.MOVE -> resolveTurn(battle, action.moveOrItemId)
-      BattleAction.ITEM -> catchWild(battle)
+      BattleAction.ITEM -> useItem(battle, action.moveOrItemId.toInt(), action.targetEntityId)
       BattleAction.SWITCH -> switchMon(battle, action.moveOrItemId)
       BattleAction.RUN -> flee(battle)
     }
@@ -134,7 +141,7 @@ constructor(
   /** Throws a ball at the monster. False when the character is not in a battle. */
   fun catchActiveWild(charId: Long): Boolean {
     val battle = battles.byChar(charId) ?: return false
-    catchWild(battle)
+    useItem(battle, Items.POKE_BALL, 0L)
     return true
   }
 
@@ -274,8 +281,6 @@ constructor(
                     } + List((4 - spec.moveIds.size).coerceAtLeast(0)) { PokemonMove(0, 0) })
       }
       val def = speciesRegistry.get(spec.dexId)!!
-      // A trainer's monsters are built to a fixed difficulty, so they must not keep the rolled
-      // IVs. Max hp moves with them, and the monster comes out full.
       if (spec.iv != null) {
         val ivs =
             IVs().apply {
@@ -305,6 +310,11 @@ constructor(
     battle.seenActive.add(firstAlive)
     interestManager.join(session, battle.key)
     emitter.sendStart(battle, stored.info.name)
+
+    // Trigger Intimidate on initial battle start
+    checkIntimidateOnEntry(battle, battle.activeMon(), battle.opponentMon())
+    checkIntimidateOnEntry(battle, battle.opponentMon(), battle.activeMon())
+
     return battle
   }
 
@@ -323,8 +333,6 @@ constructor(
           awardXp(battle, battle.opponentMon())
           sendOutNextOpponent(battle)
         }
-        // The active mon fainted with a live backup. Open the switch screen instead of the action
-        // prompt. The replacement arrives as a normal SWITCH action.
         if (battle.activeMon().fainted) {
           emitter.sendSwitchPrompt(battle)
         } else {
@@ -335,12 +343,233 @@ constructor(
     }
   }
 
+  private fun useItem(battle: BattleInstance, itemId: Int, targetEntityId: Long) {
+    val stored = characterStore.getCharacter(battle.charId) ?: return
+    val qty = stored.items[itemId] ?: 0
+    if (qty <= 0) {
+      emitter.sendNotice(battle, "You don't have any left.")
+      emitter.sendPrompt(battle)
+      return
+    }
+
+    if (CatchCalculator.isPokeBall(itemId)) {
+      if (!battle.catchable) {
+        emitter.sendNotice(battle, "You can't catch this monster.")
+        emitter.sendPrompt(battle)
+        return
+      }
+
+      // Consume 1 Pokéball
+      characterStore.addItem(battle.charId, itemId, -1)
+
+      val target = battle.opponentMon()
+      val caught = CatchCalculator.attemptCatch(itemId, target, battle.turn, battle.rng)
+
+      if (caught) {
+        val nextSlot = ((stored.pokemon.maxOfOrNull { it.containerSlot } ?: -1) + 1).toShort()
+        val caughtMon =
+            target.source.copy(
+                ownerId = battle.charId,
+                container = PokemonContainer.PARTY,
+                containerSlot = nextSlot,
+                ot = stored.info.name,
+                hp = target.currentHp.toShort(),
+                moves = target.moves.map { PokemonMove(it.id, it.pp) },
+                caughtAt = LocalDateTime.now(),
+            )
+        log.info { "Caught wild ${target.species.name} for char=${battle.charId} with item $itemId" }
+        battle.session.send(SocialListEntryAddPacket(caughtMon))
+        battle.session.send(acquiredMonsterDelta(caughtMon, target.species))
+        battle.session.send(
+            BattleListEventPacket(
+                kind = 0,
+                value = itemId.toShort(),
+                subKind = 4,
+                detail = BattleListEventDetail(listType = 1, value = 1),
+            ),
+        )
+        characterStore.addPokemon(battle.charId, caughtMon)
+        endBattle(battle, BattleResult.CAUGHT)
+      } else {
+        emitter.sendNotice(battle, "Oh no! The Pokémon broke free!")
+        battle.session.send(
+            BattleListEventPacket(
+                kind = 0,
+                value = itemId.toShort(),
+                subKind = 4,
+                detail = BattleListEventDetail(listType = 1, value = 1),
+            ),
+        )
+        val events = engine.resolveItemTurn(battle)
+        emitter.sendEvents(battle, events)
+        afterTurn(battle)
+      }
+      return
+    }
+
+    // Healing / Status / Revive / Stat booster items
+    val targetMon =
+        if (targetEntityId != 0L) battle.party.firstOrNull { it.entityId == targetEntityId } ?: battle.activeMon()
+        else battle.activeMon()
+
+    val used = applyHealingItem(battle, itemId, targetMon)
+    if (!used) {
+      emitter.sendNotice(battle, "It won't have any effect.")
+      emitter.sendPrompt(battle)
+      return
+    }
+
+    characterStore.addItem(battle.charId, itemId, -1)
+
+    // Item uses player's turn, opponent attacks
+    val events = engine.resolveItemTurn(battle)
+    emitter.sendEvents(battle, events)
+    afterTurn(battle)
+  }
+
+  private fun applyHealingItem(battle: BattleInstance, itemId: Int, target: BattleMonState): Boolean {
+    when (itemId) {
+      Items.POTION -> {
+        if (target.fainted || target.currentHp >= target.stats.hp) return false
+        val healed = 20
+        target.currentHp = (target.currentHp + healed).coerceAtMost(target.stats.hp)
+        emitter.broadcast(battle, BattleEntityDeltaPacket(entityId = target.entityId, currentHp = target.currentHp.toShort()))
+        emitter.sendNotice(battle, "${target.species.name} recovered $healed HP!")
+        return true
+      }
+      Items.SUPER_POTION -> {
+        if (target.fainted || target.currentHp >= target.stats.hp) return false
+        val healed = 50
+        target.currentHp = (target.currentHp + healed).coerceAtMost(target.stats.hp)
+        emitter.broadcast(battle, BattleEntityDeltaPacket(entityId = target.entityId, currentHp = target.currentHp.toShort()))
+        emitter.sendNotice(battle, "${target.species.name} recovered $healed HP!")
+        return true
+      }
+      Items.HYPER_POTION -> {
+        if (target.fainted || target.currentHp >= target.stats.hp) return false
+        val healed = 200
+        target.currentHp = (target.currentHp + healed).coerceAtMost(target.stats.hp)
+        emitter.broadcast(battle, BattleEntityDeltaPacket(entityId = target.entityId, currentHp = target.currentHp.toShort()))
+        emitter.sendNotice(battle, "${target.species.name} recovered $healed HP!")
+        return true
+      }
+      Items.MAX_POTION -> {
+        if (target.fainted || target.currentHp >= target.stats.hp) return false
+        target.currentHp = target.stats.hp
+        emitter.broadcast(battle, BattleEntityDeltaPacket(entityId = target.entityId, currentHp = target.currentHp.toShort()))
+        emitter.sendNotice(battle, "${target.species.name} fully restored its HP!")
+        return true
+      }
+      Items.FULL_RESTORE -> {
+        if (target.fainted || (target.currentHp >= target.stats.hp && target.primaryStatus == PrimaryStatus.NONE && !target.isConfused)) return false
+        target.currentHp = target.stats.hp
+        target.cureStatus()
+        target.cureVolatiles()
+        emitter.broadcast(battle, BattleEntityDeltaPacket(entityId = target.entityId, currentHp = target.currentHp.toShort()))
+        emitter.broadcast(battle, de.fiereu.openmmo.net.game.packets.battle.BattlePokemonStatusPacket(target.entityId, PrimaryStatus.NONE.id, null))
+        emitter.sendNotice(battle, "${target.species.name} fully restored HP and cured all status!")
+        return true
+      }
+      Items.ANTIDOTE -> {
+        if (target.primaryStatus != PrimaryStatus.POISON && target.primaryStatus != PrimaryStatus.TOXIC) return false
+        target.cureStatus()
+        emitter.broadcast(battle, de.fiereu.openmmo.net.game.packets.battle.BattlePokemonStatusPacket(target.entityId, PrimaryStatus.NONE.id, null))
+        emitter.sendNotice(battle, "${target.species.name} was cured of poison!")
+        return true
+      }
+      Items.BURN_HEAL -> {
+        if (target.primaryStatus != PrimaryStatus.BURN) return false
+        target.cureStatus()
+        emitter.broadcast(battle, de.fiereu.openmmo.net.game.packets.battle.BattlePokemonStatusPacket(target.entityId, PrimaryStatus.NONE.id, null))
+        emitter.sendNotice(battle, "${target.species.name} was cured of its burn!")
+        return true
+      }
+      Items.ICE_HEAL -> {
+        if (target.primaryStatus != PrimaryStatus.FREEZE) return false
+        target.cureStatus()
+        emitter.broadcast(battle, de.fiereu.openmmo.net.game.packets.battle.BattlePokemonStatusPacket(target.entityId, PrimaryStatus.NONE.id, null))
+        emitter.sendNotice(battle, "${target.species.name} thawed out!")
+        return true
+      }
+      Items.AWAKENING -> {
+        if (target.primaryStatus != PrimaryStatus.SLEEP) return false
+        target.cureStatus()
+        emitter.broadcast(battle, de.fiereu.openmmo.net.game.packets.battle.BattlePokemonStatusPacket(target.entityId, PrimaryStatus.NONE.id, null))
+        emitter.sendNotice(battle, "${target.species.name} woke up!")
+        return true
+      }
+      Items.PARALYZE_HEAL -> {
+        if (target.primaryStatus != PrimaryStatus.PARALYSIS) return false
+        target.cureStatus()
+        emitter.broadcast(battle, de.fiereu.openmmo.net.game.packets.battle.BattlePokemonStatusPacket(target.entityId, PrimaryStatus.NONE.id, null))
+        emitter.sendNotice(battle, "${target.species.name} was cured of paralysis!")
+        return true
+      }
+      Items.FULL_HEAL -> {
+        if (target.primaryStatus == PrimaryStatus.NONE && !target.isConfused) return false
+        target.cureStatus()
+        target.cureVolatiles()
+        emitter.broadcast(battle, de.fiereu.openmmo.net.game.packets.battle.BattlePokemonStatusPacket(target.entityId, PrimaryStatus.NONE.id, null))
+        emitter.sendNotice(battle, "${target.species.name} was cured of all status conditions!")
+        return true
+      }
+      Items.REVIVE -> {
+        if (!target.fainted) return false
+        target.currentHp = target.stats.hp / 2
+        target.cureStatus()
+        target.cureVolatiles()
+        emitter.broadcast(battle, BattleEntityDeltaPacket(entityId = target.entityId, currentHp = target.currentHp.toShort()))
+        emitter.sendNotice(battle, "${target.species.name} was revived!")
+        return true
+      }
+      Items.MAX_REVIVE -> {
+        if (!target.fainted) return false
+        target.currentHp = target.stats.hp
+        target.cureStatus()
+        target.cureVolatiles()
+        emitter.broadcast(battle, BattleEntityDeltaPacket(entityId = target.entityId, currentHp = target.currentHp.toShort()))
+        emitter.sendNotice(battle, "${target.species.name} was fully revived!")
+        return true
+      }
+      Items.X_ATTACK -> {
+        if (target.fainted) return false
+        target.changeStage(BattleStat.ATTACK, 1)
+        emitter.sendNotice(battle, "X Attack boosted ${target.species.name}'s Attack!")
+        return true
+      }
+      Items.X_DEFEND -> {
+        if (target.fainted) return false
+        target.changeStage(BattleStat.DEFENSE, 1)
+        emitter.sendNotice(battle, "X Defend boosted ${target.species.name}'s Defense!")
+        return true
+      }
+      Items.X_SPEED -> {
+        if (target.fainted) return false
+        target.changeStage(BattleStat.SPEED, 1)
+        emitter.sendNotice(battle, "X Speed boosted ${target.species.name}'s Speed!")
+        return true
+      }
+      Items.X_SPECIAL -> {
+        if (target.fainted) return false
+        target.changeStage(BattleStat.SP_ATTACK, 1)
+        emitter.sendNotice(battle, "X Special boosted ${target.species.name}'s Sp. Atk!")
+        return true
+      }
+      Items.X_ACCURACY -> {
+        if (target.fainted) return false
+        target.changeStage(BattleStat.ACCURACY, 1)
+        emitter.sendNotice(battle, "X Accuracy boosted ${target.species.name}'s Accuracy!")
+        return true
+      }
+      else -> return false
+    }
+  }
+
   private fun switchMon(battle: BattleInstance, partyIndex: Short) {
     val target = partyIndex.toInt()
     val mon = battle.party.getOrNull(target)
     val forced = battle.activeMon().fainted
     if (mon == null || mon.fainted || target == battle.activeSlot) {
-      // Reopen the switch screen on an invalid forced choice, otherwise re-prompt for an action.
       if (forced) {
         emitter.sendSwitchPrompt(battle)
       } else {
@@ -349,18 +578,38 @@ constructor(
       }
       return
     }
-    // A forced switch confirms the choice before the switch-in. The captures pair the confirm with
-    // a full block for a new mon and with a return block for a mon that was already active.
+
+    val outgoing = battle.activeMon()
+    if (outgoing.ability == Ability.NATURAL_CURE && outgoing.primaryStatus != PrimaryStatus.NONE) {
+      outgoing.cureStatus()
+    }
+
     if (forced) emitter.sendSwitchConfirm(battle)
     performSwitch(battle, target)
+
+    checkIntimidateOnEntry(battle, battle.activeMon(), battle.opponentMon())
+
     if (forced) {
-      // Replacing a fainted mon does not spend a turn, the new mon acts next.
       battle.turn += 1
       emitter.sendPrompt(battle)
     } else {
-      // A voluntary switch spends the turn, so the wild attacks the incoming mon.
       emitter.sendEvents(battle, engine.resolveSwitchTurn(battle))
       afterTurn(battle)
+    }
+  }
+
+  private fun checkIntimidateOnEntry(battle: BattleInstance, incoming: BattleMonState, opponent: BattleMonState) {
+    if (incoming.ability == Ability.INTIMIDATE && !opponent.fainted) {
+      if (opponent.ability != Ability.CLEAR_BODY && opponent.ability != Ability.WHITE_SMOKE) {
+        val delta = opponent.changeStage(BattleStat.ATTACK, -1)
+        emitter.sendEvents(
+            battle,
+            listOf(
+                BattleEvent.AbilityTriggered(incoming.entityId, Ability.INTIMIDATE, "Intimidate cut ${opponent.species.name}'s Attack!"),
+                BattleEvent.StageChanged(opponent.entityId, BattleStat.ATTACK, opponent.stage(BattleStat.ATTACK), opponent.effective(BattleStat.ATTACK), -1, delta == 0)
+            )
+        )
+      }
     }
   }
 
@@ -373,6 +622,8 @@ constructor(
     battle.opponentSeen.add(next)
     log.info { "Opponent sends out slot $next for char=${battle.charId}" }
     emitter.sendOpponentSwitchIn(battle, oldSlot, fullBlock)
+
+    checkIntimidateOnEntry(battle, battle.opponentMon(), battle.activeMon())
   }
 
   private fun performSwitch(battle: BattleInstance, target: Int) {
@@ -395,45 +646,6 @@ constructor(
     battle.pendingResult = BattleResult.FLED
   }
 
-  private fun catchWild(battle: BattleInstance) {
-    if (!battle.catchable) {
-      emitter.sendNotice(battle, "You can't catch this monster.")
-      emitter.sendPrompt(battle)
-      return
-    }
-    val stored = characterStore.getCharacter(battle.charId) ?: return
-    val nextSlot = ((stored.pokemon.maxOfOrNull { it.containerSlot } ?: -1) + 1).toShort()
-    val caught =
-        battle
-            .opponentMon()
-            .source
-            .copy(
-                ownerId = battle.charId,
-                container = PokemonContainer.PARTY,
-                containerSlot = nextSlot,
-                ot = stored.info.name,
-                hp = battle.opponentMon().currentHp.toShort(),
-                moves = battle.opponentMon().moves.map { PokemonMove(it.id, it.pp) },
-                caughtAt = LocalDateTime.now(),
-            )
-    log.info { "Caught wild ${battle.opponentMon().species.name} for char=${battle.charId}" }
-    // The caught monster is sent as a full 148-byte record on opcode 0x14 before the ball-throw
-    // event, so the client can resolve the monster when the throw lands.
-    battle.session.send(SocialListEntryAddPacket(caught))
-    battle.session.send(acquiredMonsterDelta(caught, battle.opponentMon().species))
-    // "Player threw a Poke Ball" event.
-    battle.session.send(
-        BattleListEventPacket(
-            kind = 0,
-            value = POKE_BALL_ITEM,
-            subKind = 4,
-            detail = BattleListEventDetail(listType = 1, value = 1),
-        ),
-    )
-    characterStore.addPokemon(battle.charId, caught)
-    endBattle(battle, BattleResult.CAUGHT)
-  }
-
   private fun endVictory(battle: BattleInstance) {
     awardXp(battle, battle.opponentMon())
     val prize = battle.trainer?.let { rewards.trainerPrize(it, battle.opponent.last().level) } ?: 0
@@ -444,10 +656,6 @@ constructor(
     endBattle(battle, BattleResult.VICTORY, battle.activeMon().entityId, prize)
   }
 
-  /**
-   * Pays the active monster for knocking [defeated] out. A trainer's team is paid for one at a
-   * time, as each faints, which is when the captures show the delta going out.
-   */
   private fun awardXp(battle: BattleInstance, defeated: BattleMonState) {
     val winner = battle.activeMon()
     val reward = rewards.apply(winner, defeated.species, defeated.level, battle.trainer != null)
@@ -483,7 +691,6 @@ constructor(
     endBattle(battle, BattleResult.DEFEAT)
   }
 
-  // Known issue: the caught monster does not show up in the party until the client reopens it.
   private fun endBattle(
       battle: BattleInstance,
       result: BattleResult,
@@ -496,7 +703,6 @@ constructor(
     battle.pendingResult = result
   }
 
-  /** Write the battle's live hp and pp back into the party and flush the character. */
   private fun persistParty(battle: BattleInstance, skip: Long? = null) {
     for (state in battle.party) {
       if (state.entityId == skip) continue
