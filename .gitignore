@@ -52,3 +52,12 @@ docker-compose.override.yml
 # global gitignore excludes SQL files.
 !server.game/src/main/resources/db/migration/*.sql
 !server.login/src/main/resources/db/migration/*.sql
+
+### Local tools and binaries ###
+.claude/
+*.dmg
+*.zip
+*.gba
+*.nds
+roms/
+
