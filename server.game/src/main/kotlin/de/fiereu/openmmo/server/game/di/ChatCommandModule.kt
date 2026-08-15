@@ -47,5 +47,9 @@ interface ChatCommandModule {
 
   @Binds @IntoSet fun setVarCommand(command: SetVarCommand): ChatCommand
 
-  @Binds @IntoSet fun tradeCommand(command: de.fiereu.openmmo.server.game.services.command.TradeCommand): ChatCommand
+  @Binds
+  @IntoSet
+  fun tradeCommand(
+      command: de.fiereu.openmmo.server.game.services.command.TradeCommand
+  ): ChatCommand
 }

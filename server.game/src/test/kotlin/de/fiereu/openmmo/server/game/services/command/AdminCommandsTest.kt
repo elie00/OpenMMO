@@ -35,7 +35,8 @@ class AdminCommandsTest :
           val store = CharacterStore(FakeCharacterRepository(), EntityIdService(), backgroundScope)
           val charId = store.createCharacter(1, "Red", CharacterGender.MALE, Region.KANTO).info.id
           val info = store.getCharacter(charId)!!.info
-          store.updateCharacter(info.copy(permissions = info.permissions or CharacterPermissions.DEVELOPER))
+          store.updateCharacter(
+              info.copy(permissions = info.permissions or CharacterPermissions.DEVELOPER))
 
           val species = SpeciesRegistry()
           val moves = MoveRegistry()
@@ -46,13 +47,19 @@ class AdminCommandsTest :
 
           // Add a damaged Pokemon
           val base = monFactory.create(1, 5, BattleRng())!!
-          val p = base.copy(
-              ownerId = charId,
-              container = PokemonContainer.PARTY,
-              containerSlot = 0,
-              hp = 1,
-              moves = listOf(PokemonMove(33, 0), PokemonMove(45, 0), PokemonMove(0, 0), PokemonMove(0, 0)),
-          )
+          val p =
+              base.copy(
+                  ownerId = charId,
+                  container = PokemonContainer.PARTY,
+                  containerSlot = 0,
+                  hp = 1,
+                  moves =
+                      listOf(
+                          PokemonMove(33, 0),
+                          PokemonMove(45, 0),
+                          PokemonMove(0, 0),
+                          PokemonMove(0, 0)),
+              )
           store.addPokemon(charId, p)
 
           val session = FakeSession(characterId = charId)
@@ -63,7 +70,11 @@ class AdminCommandsTest :
           session.replies().single() shouldContain "Party fully healed!"
 
           val updated = store.getCharacter(charId)!!.pokemon.first()
-          val maxHp = de.fiereu.openmmo.server.game.battle.StatCalculator.computeAll(species.get(1)!!, updated).hp.toShort()
+          val maxHp =
+              de.fiereu.openmmo.server.game.battle.StatCalculator.computeAll(
+                      species.get(1)!!, updated)
+                  .hp
+                  .toShort()
           updated.hp shouldBe maxHp
           updated.moves[0].pp shouldBe 35
           updated.moves[1].pp shouldBe 40
@@ -75,7 +86,8 @@ class AdminCommandsTest :
           val store = CharacterStore(FakeCharacterRepository(), EntityIdService(), backgroundScope)
           val charId = store.createCharacter(1, "Red", CharacterGender.MALE, Region.KANTO).info.id
           val info = store.getCharacter(charId)!!.info
-          store.updateCharacter(info.copy(permissions = info.permissions or CharacterPermissions.DEVELOPER))
+          store.updateCharacter(
+              info.copy(permissions = info.permissions or CharacterPermissions.DEVELOPER))
 
           val species = SpeciesRegistry()
           val moves = MoveRegistry()
@@ -103,7 +115,8 @@ class AdminCommandsTest :
           val store = CharacterStore(FakeCharacterRepository(), EntityIdService(), backgroundScope)
           val charId = store.createCharacter(1, "Red", CharacterGender.MALE, Region.KANTO).info.id
           val info = store.getCharacter(charId)!!.info
-          store.updateCharacter(info.copy(permissions = info.permissions or CharacterPermissions.DEVELOPER))
+          store.updateCharacter(
+              info.copy(permissions = info.permissions or CharacterPermissions.DEVELOPER))
 
           val species = SpeciesRegistry()
           val moves = MoveRegistry()
@@ -129,7 +142,9 @@ class AdminCommandsTest :
           val store = CharacterStore(FakeCharacterRepository(), EntityIdService(), backgroundScope)
           val charId = store.createCharacter(1, "Red", CharacterGender.MALE, Region.KANTO).info.id
           val info = store.getCharacter(charId)!!.info
-          store.updateCharacter(info.copy(permissions = info.permissions or CharacterPermissions.DEVELOPER, money = 1000))
+          store.updateCharacter(
+              info.copy(
+                  permissions = info.permissions or CharacterPermissions.DEVELOPER, money = 1000))
 
           val session = FakeSession(characterId = charId)
           val moneyCommand = MoneyCommand(store)
@@ -147,7 +162,8 @@ class AdminCommandsTest :
           val store = CharacterStore(FakeCharacterRepository(), EntityIdService(), backgroundScope)
           val charId = store.createCharacter(1, "Red", CharacterGender.MALE, Region.KANTO).info.id
           val info = store.getCharacter(charId)!!.info
-          store.updateCharacter(info.copy(permissions = info.permissions or CharacterPermissions.DEVELOPER))
+          store.updateCharacter(
+              info.copy(permissions = info.permissions or CharacterPermissions.DEVELOPER))
 
           val session = FakeSession(characterId = charId)
           val setFlag = SetFlagCommand(store)
@@ -159,7 +175,7 @@ class AdminCommandsTest :
           store.getCharacter(charId)!!.storyFlags shouldContain "FLAG_TEST"
 
           service.tryHandle(session, "/clearflag FLAG_TEST") shouldBe true
-          ( "FLAG_TEST" in store.getCharacter(charId)!!.storyFlags ) shouldBe false
+          ("FLAG_TEST" in store.getCharacter(charId)!!.storyFlags) shouldBe false
 
           service.tryHandle(session, "/setvar VAR_TEST 42") shouldBe true
           store.getCharacter(charId)!!.storyVars["VAR_TEST"] shouldBe 42

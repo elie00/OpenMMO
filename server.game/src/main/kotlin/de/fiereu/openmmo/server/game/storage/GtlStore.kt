@@ -45,7 +45,10 @@ data class GtlListingRecord(
                 expiresAt = expiresAt,
                 quantity = quantity,
                 pokemon = pokemon,
-                stats = pokemon?.let { listOf(it.hp, 0.toShort(), 0.toShort(), 0.toShort(), 0.toShort(), 0.toShort()) } ?: emptyList(),
+                stats =
+                    pokemon?.let {
+                      listOf(it.hp, 0.toShort(), 0.toShort(), 0.toShort(), 0.toShort(), 0.toShort())
+                    } ?: emptyList(),
             )
       }
 }
@@ -62,18 +65,27 @@ data class GtlTradeLogRecord(
 
 interface GtlStore {
   fun addListing(listing: GtlListingRecord): GtlListingRecord
+
   fun getListing(listingId: Long): GtlListingRecord?
+
   fun removeListing(listingId: Long): GtlListingRecord?
-  fun getListings(kind: GtlListKind?, categoryId: Byte, page: Int, pageSize: Int): Pair<Int, List<GtlListingRecord>>
+
+  fun getListings(
+      kind: GtlListKind?,
+      categoryId: Byte,
+      page: Int,
+      pageSize: Int
+  ): Pair<Int, List<GtlListingRecord>>
+
   fun getListingsBySeller(sellerCharId: Long): List<GtlListingRecord>
+
   fun addTradeLog(log: GtlTradeLogRecord)
+
   fun getTradeLogs(charId: Long): List<GtlTradeLogRecord>
 }
 
 @Singleton
-class InMemoryGtlStore
-@Inject
-constructor() : GtlStore {
+class InMemoryGtlStore @Inject constructor() : GtlStore {
   private val listings = ConcurrentHashMap<Long, GtlListingRecord>()
   private val tradeLogs = ConcurrentHashMap<Long, CopyOnWriteArrayList<GtlTradeLogRecord>>()
   private val nextId = AtomicLong(1000L)
@@ -96,9 +108,7 @@ constructor() : GtlStore {
       pageSize: Int,
   ): Pair<Int, List<GtlListingRecord>> {
     val filtered =
-        listings.values
-            .filter { kind == null || it.listKind == kind }
-            .sortedBy { it.price }
+        listings.values.filter { kind == null || it.listKind == kind }.sortedBy { it.price }
     val totalCount = filtered.size
     val offset = (page * pageSize).coerceAtMost(totalCount)
     val pageListings = filtered.drop(offset).take(pageSize)

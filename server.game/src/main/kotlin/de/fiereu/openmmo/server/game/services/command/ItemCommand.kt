@@ -38,9 +38,7 @@ class ItemCommand @Inject constructor(private val storyPlayerService: StoryPlaye
 
     val itemArg = ctx.args[0].lowercase().replace("-", "_").replace(" ", "_")
     val itemId =
-        itemArg.toIntOrNull()
-            ?: itemNamesToId[itemArg]
-            ?: itemNamesToId[itemArg.replace("_", "")]
+        itemArg.toIntOrNull() ?: itemNamesToId[itemArg] ?: itemNamesToId[itemArg.replace("_", "")]
 
     if (itemId == null || itemId <= 0) {
       ctx.reply("Unknown item: ${ctx.args[0]}")

@@ -20,9 +20,9 @@ import de.fiereu.openmmo.server.game.testsupport.FakeCharacterRepository
 import de.fiereu.openmmo.server.game.testsupport.FakeSession
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
+import java.time.LocalDateTime
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import java.time.LocalDateTime
 
 class TradeServiceTest :
     FunSpec({
@@ -39,29 +39,30 @@ class TradeServiceTest :
         s1.attributes[PLAYER_STATE] = PlayerState(1, p1.info.id)
         sessions.bindCharacter(s1, p1.info.id)
 
-        val pikachu = Pokemon(
-            id = 1001L,
-            ownerId = p1.info.id,
-            container = PokemonContainer.PARTY,
-            containerSlot = 0,
-            dexId = 25,
-            seed = 0,
-            ot = "Red",
-            nickname = "Pikachu",
-            level = 25,
-            hp = 60,
-            xp = 0,
-            eVs = EVs(),
-            iVs = IVs(),
-            moves = listOf(PokemonMove(33, 35)),
-            isShiny = false,
-            hasHiddenAbility = false,
-            isAlpha = false,
-            isSecret = false,
-            isFatefulEncounter = false,
-            isRaidEncounter = false,
-            caughtAt = LocalDateTime.now(),
-        )
+        val pikachu =
+            Pokemon(
+                id = 1001L,
+                ownerId = p1.info.id,
+                container = PokemonContainer.PARTY,
+                containerSlot = 0,
+                dexId = 25,
+                seed = 0,
+                ot = "Red",
+                nickname = "Pikachu",
+                level = 25,
+                hp = 60,
+                xp = 0,
+                eVs = EVs(),
+                iVs = IVs(),
+                moves = listOf(PokemonMove(33, 35)),
+                isShiny = false,
+                hasHiddenAbility = false,
+                isAlpha = false,
+                isSecret = false,
+                isFatefulEncounter = false,
+                isRaidEncounter = false,
+                caughtAt = LocalDateTime.now(),
+            )
         store.addPokemon(p1.info.id, pikachu)
 
         // Create player 2 (Blue)
@@ -70,29 +71,30 @@ class TradeServiceTest :
         s2.attributes[PLAYER_STATE] = PlayerState(2, p2.info.id)
         sessions.bindCharacter(s2, p2.info.id)
 
-        val eevee = Pokemon(
-            id = 1002L,
-            ownerId = p2.info.id,
-            container = PokemonContainer.PARTY,
-            containerSlot = 0,
-            dexId = 133,
-            seed = 0,
-            ot = "Blue",
-            nickname = "Eevee",
-            level = 25,
-            hp = 65,
-            xp = 0,
-            eVs = EVs(),
-            iVs = IVs(),
-            moves = listOf(PokemonMove(33, 35)),
-            isShiny = false,
-            hasHiddenAbility = false,
-            isAlpha = false,
-            isSecret = false,
-            isFatefulEncounter = false,
-            isRaidEncounter = false,
-            caughtAt = LocalDateTime.now(),
-        )
+        val eevee =
+            Pokemon(
+                id = 1002L,
+                ownerId = p2.info.id,
+                container = PokemonContainer.PARTY,
+                containerSlot = 0,
+                dexId = 133,
+                seed = 0,
+                ot = "Blue",
+                nickname = "Eevee",
+                level = 25,
+                hp = 65,
+                xp = 0,
+                eVs = EVs(),
+                iVs = IVs(),
+                moves = listOf(PokemonMove(33, 35)),
+                isShiny = false,
+                hasHiddenAbility = false,
+                isAlpha = false,
+                isSecret = false,
+                isFatefulEncounter = false,
+                isRaidEncounter = false,
+                caughtAt = LocalDateTime.now(),
+            )
         store.addPokemon(p2.info.id, eevee)
 
         // Red requests trade with Blue, Blue accepts

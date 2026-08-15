@@ -30,7 +30,6 @@ import de.fiereu.openmmo.net.game.packets.TileInteractPacket
 import de.fiereu.openmmo.net.game.packets.TradeActionPacket
 import de.fiereu.openmmo.net.game.packets.TradeSelectMonPacket
 import de.fiereu.openmmo.net.game.packets.UnblockPlayerPacket
-import de.fiereu.openmmo.net.game.packets.gtl.*
 import de.fiereu.openmmo.net.game.packets.battle.BattleActionPacket
 import de.fiereu.openmmo.net.game.packets.battle.BattleActionSelectPacket
 import de.fiereu.openmmo.net.game.packets.battle.BattleActionSubmitPacket
@@ -53,6 +52,7 @@ import de.fiereu.openmmo.net.game.packets.battle.BattleTransitionReadyPacket
 import de.fiereu.openmmo.net.game.packets.battle.BattleUseItemPacket
 import de.fiereu.openmmo.net.game.packets.battle.moves.MoveLearnReplyPacket
 import de.fiereu.openmmo.net.game.packets.dialog.DialogActionResponsePacket
+import de.fiereu.openmmo.net.game.packets.gtl.*
 import de.fiereu.openmmo.net.game.packets.guild.GuildActivityLogPageRequestPacket
 import de.fiereu.openmmo.net.game.packets.guild.GuildCreatePacket
 import de.fiereu.openmmo.net.game.packets.guild.GuildDisbandPacket

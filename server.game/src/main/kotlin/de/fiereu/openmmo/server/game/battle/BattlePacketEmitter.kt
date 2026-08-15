@@ -139,28 +139,36 @@ class BattlePacketEmitter @Inject constructor(private val interestManager: Inter
         }
         is BattleEvent.StatusInflicted -> {
           broadcast(battle, BattlePokemonStatusPacket(event.targetId, event.status.id, null))
-          sendNotice(battle, "${monName(battle, event.targetId)} is ${event.status.displayName.lowercase()}!")
+          sendNotice(
+              battle,
+              "${monName(battle, event.targetId)} is ${event.status.displayName.lowercase()}!")
         }
         is BattleEvent.StatusCured -> {
           broadcast(battle, BattlePokemonStatusPacket(event.targetId, PrimaryStatus.NONE.id, null))
           sendNotice(battle, "${monName(battle, event.targetId)} was cured of its status!")
         }
         is BattleEvent.StatusDamage -> {
-          broadcast(battle, BattleEntityDeltaPacket(entityId = event.targetId, currentHp = event.newHp.toShort()))
-          sendNotice(battle, "${monName(battle, event.targetId)} took ${event.damage} damage from ${event.status.displayName.lowercase()}!")
+          broadcast(
+              battle,
+              BattleEntityDeltaPacket(entityId = event.targetId, currentHp = event.newHp.toShort()))
+          sendNotice(
+              battle,
+              "${monName(battle, event.targetId)} took ${event.damage} damage from ${event.status.displayName.lowercase()}!")
         }
         is BattleEvent.Sleeping -> {
           sendNotice(battle, "${monName(battle, event.attackerId)} is fast asleep!")
         }
         is BattleEvent.WokeUp -> {
-          broadcast(battle, BattlePokemonStatusPacket(event.attackerId, PrimaryStatus.NONE.id, null))
+          broadcast(
+              battle, BattlePokemonStatusPacket(event.attackerId, PrimaryStatus.NONE.id, null))
           sendNotice(battle, "${monName(battle, event.attackerId)} woke up!")
         }
         is BattleEvent.FullyParalyzed -> {
           sendNotice(battle, "${monName(battle, event.attackerId)} is paralyzed! It can't move!")
         }
         is BattleEvent.Thawed -> {
-          broadcast(battle, BattlePokemonStatusPacket(event.attackerId, PrimaryStatus.NONE.id, null))
+          broadcast(
+              battle, BattlePokemonStatusPacket(event.attackerId, PrimaryStatus.NONE.id, null))
           sendNotice(battle, "${monName(battle, event.attackerId)} thawed out!")
         }
         is BattleEvent.Confused -> {
@@ -170,22 +178,33 @@ class BattlePacketEmitter @Inject constructor(private val interestManager: Inter
           sendNotice(battle, "${monName(battle, event.attackerId)} snapped out of confusion!")
         }
         is BattleEvent.ConfusedSelfHit -> {
-          broadcast(battle, BattleEntityDeltaPacket(entityId = event.attackerId, currentHp = event.newHp.toShort()))
+          broadcast(
+              battle,
+              BattleEntityDeltaPacket(
+                  entityId = event.attackerId, currentHp = event.newHp.toShort()))
           sendNotice(battle, "It hurt itself in its confusion!")
         }
         is BattleEvent.Flinched -> {
           sendNotice(battle, "${monName(battle, event.attackerId)} flinched and couldn't move!")
         }
         is BattleEvent.AbsorbHealed -> {
-          broadcast(battle, BattleEntityDeltaPacket(entityId = event.attackerId, currentHp = event.newHp.toShort()))
+          broadcast(
+              battle,
+              BattleEntityDeltaPacket(
+                  entityId = event.attackerId, currentHp = event.newHp.toShort()))
           sendNotice(battle, "${monName(battle, event.attackerId)} regained ${event.healed} HP!")
         }
         is BattleEvent.RecoilDamage -> {
-          broadcast(battle, BattleEntityDeltaPacket(entityId = event.attackerId, currentHp = event.newHp.toShort()))
+          broadcast(
+              battle,
+              BattleEntityDeltaPacket(
+                  entityId = event.attackerId, currentHp = event.newHp.toShort()))
           sendNotice(battle, "${monName(battle, event.attackerId)} was hit with recoil!")
         }
         is BattleEvent.HpRestored -> {
-          broadcast(battle, BattleEntityDeltaPacket(entityId = event.targetId, currentHp = event.newHp.toShort()))
+          broadcast(
+              battle,
+              BattleEntityDeltaPacket(entityId = event.targetId, currentHp = event.newHp.toShort()))
           sendNotice(battle, "${monName(battle, event.targetId)} restored ${event.healed} HP!")
         }
         is BattleEvent.AbilityTriggered -> {
@@ -201,8 +220,9 @@ class BattlePacketEmitter @Inject constructor(private val interestManager: Inter
   }
 
   private fun monName(battle: BattleInstance, entityId: Long): String {
-    val mon = battle.party.firstOrNull { it.entityId == entityId }
-        ?: battle.opponent.firstOrNull { it.entityId == entityId }
+    val mon =
+        battle.party.firstOrNull { it.entityId == entityId }
+            ?: battle.opponent.firstOrNull { it.entityId == entityId }
     return mon?.species?.name ?: "Pokémon"
   }
 

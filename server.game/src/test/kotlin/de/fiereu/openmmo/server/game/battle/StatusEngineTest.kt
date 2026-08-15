@@ -10,8 +10,6 @@ import de.fiereu.openmmo.pokemon.SpeciesRegistry
 import de.fiereu.openmmo.server.game.testsupport.FakeSession
 import de.fiereu.openmmo.typechart.TypeChart
 import io.kotest.core.spec.style.FunSpec
-import io.kotest.matchers.booleans.shouldBeFalse
-import io.kotest.matchers.booleans.shouldBeTrue
 import io.kotest.matchers.collections.shouldNotBeEmpty
 import io.kotest.matchers.ints.shouldBeGreaterThan
 import io.kotest.matchers.ints.shouldBeLessThan
@@ -34,33 +32,39 @@ private fun createTestMon(dexId: Int, level: Int, moves: List<Short>, id: Long):
   val moveRegistry = MoveRegistry()
   val padded = List(4) { i -> moves.getOrNull(i) ?: 0 }
   val def = speciesRegistry.get(dexId)!!
-  val p = Pokemon(
-      id = id,
-      ownerId = 0,
-      container = PokemonContainer.PARTY,
-      containerSlot = 0,
-      dexId = dexId,
-      seed = 0,
-      ot = "Ash",
-      nickname = "",
-      level = level.toByte(),
-      hp = Short.MAX_VALUE,
-      xp = 0,
-      eVs = EVs(),
-      iVs = IVs(),
-      moves = padded.map { PokemonMove(it, (moveRegistry.get(it.toInt())?.pp ?: 0).toByte()) },
-      isShiny = false,
-      hasHiddenAbility = false,
-      isAlpha = false,
-      isSecret = false,
-      isFatefulEncounter = false,
-      isRaidEncounter = false,
-      caughtAt = LocalDateTime.now(),
-  )
-  return BattleMonState(id, def, if (id == PLAYER_ID) 0 else null, p, StatCalculator.computeAll(def, p))
+  val p =
+      Pokemon(
+          id = id,
+          ownerId = 0,
+          container = PokemonContainer.PARTY,
+          containerSlot = 0,
+          dexId = dexId,
+          seed = 0,
+          ot = "Ash",
+          nickname = "",
+          level = level.toByte(),
+          hp = Short.MAX_VALUE,
+          xp = 0,
+          eVs = EVs(),
+          iVs = IVs(),
+          moves = padded.map { PokemonMove(it, (moveRegistry.get(it.toInt())?.pp ?: 0).toByte()) },
+          isShiny = false,
+          hasHiddenAbility = false,
+          isAlpha = false,
+          isSecret = false,
+          isFatefulEncounter = false,
+          isRaidEncounter = false,
+          caughtAt = LocalDateTime.now(),
+      )
+  return BattleMonState(
+      id, def, if (id == PLAYER_ID) 0 else null, p, StatCalculator.computeAll(def, p))
 }
 
-private fun testBattle(player: BattleMonState, wild: BattleMonState, seed: Long = 1L): BattleInstance =
+private fun testBattle(
+    player: BattleMonState,
+    wild: BattleMonState,
+    seed: Long = 1L
+): BattleInstance =
     BattleInstance(1L, 100L, FakeSession(100L), listOf(player), listOf(wild), BattleRng(seed))
 
 class StatusEngineTest :
@@ -76,7 +80,8 @@ class StatusEngineTest :
 
         wild.primaryStatus shouldBe PrimaryStatus.PARALYSIS
         wild.effective(BattleStat.SPEED) shouldBe initialSpeed / 2
-        events.filterIsInstance<BattleEvent.StatusInflicted>().first().status shouldBe PrimaryStatus.PARALYSIS
+        events.filterIsInstance<BattleEvent.StatusInflicted>().first().status shouldBe
+            PrimaryStatus.PARALYSIS
       }
 
       test("Will-O-Wisp inflicts burn and deals end of turn burn damage") {
@@ -88,7 +93,8 @@ class StatusEngineTest :
 
         wild.primaryStatus shouldBe PrimaryStatus.BURN
         wild.currentHp shouldBeLessThan beforeHp
-        events.filterIsInstance<BattleEvent.StatusDamage>().first().status shouldBe PrimaryStatus.BURN
+        events.filterIsInstance<BattleEvent.StatusDamage>().first().status shouldBe
+            PrimaryStatus.BURN
       }
 
       test("Toxic deals damage that increases progressively each turn") {

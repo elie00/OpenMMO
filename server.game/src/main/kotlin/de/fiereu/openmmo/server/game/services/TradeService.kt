@@ -104,7 +104,9 @@ constructor(
     // Register pending trade request
     pendingRequests[targetId] = sourceCharId
     sourceSession.send(notice("Trade request sent to ${targetChar.info.name}."))
-    targetSession.send(notice("${sourceChar.info.name} wants to trade with you. Type /trade ${sourceChar.info.name} to accept."))
+    targetSession.send(
+        notice(
+            "${sourceChar.info.name} wants to trade with you. Type /trade ${sourceChar.info.name} to accept."))
   }
 
   fun onTradeSelectMon(event: PacketEvent<TradeSelectMonPacket>) {
@@ -142,7 +144,9 @@ constructor(
 
     when (event.packet.action.toInt()) {
       0 -> { // Cancel / Exit trade
-        cancelTrade(trade, "Trade cancelled by ${characterStore.getCharacter(charId)?.info?.name ?: "player"}.")
+        cancelTrade(
+            trade,
+            "Trade cancelled by ${characterStore.getCharacter(charId)?.info?.name ?: "player"}.")
       }
       1 -> { // Lock offer / Confirm
         self.confirmed = true
@@ -216,14 +220,24 @@ constructor(
       p1Party.removeIf { it.id == mon1.id }
       p2Party.removeIf { it.id == mon2.id }
 
-      val transferred1 = mon1.copy(ownerId = p2.charId, container = PokemonContainer.PARTY, containerSlot = p2Party.size.toShort())
-      val transferred2 = mon2.copy(ownerId = p1.charId, container = PokemonContainer.PARTY, containerSlot = p1Party.size.toShort())
+      val transferred1 =
+          mon1.copy(
+              ownerId = p2.charId,
+              container = PokemonContainer.PARTY,
+              containerSlot = p2Party.size.toShort())
+      val transferred2 =
+          mon2.copy(
+              ownerId = p1.charId,
+              container = PokemonContainer.PARTY,
+              containerSlot = p1Party.size.toShort())
 
       p1Party.add(transferred2)
       p2Party.add(transferred1)
 
-      characterStore.replaceProgress(p1.charId, p1Party, char1.items, char1.storyFlags, char1.storyVars)
-      characterStore.replaceProgress(p2.charId, p2Party, char2.items, char2.storyFlags, char2.storyVars)
+      characterStore.replaceProgress(
+          p1.charId, p1Party, char1.items, char1.storyFlags, char1.storyVars)
+      characterStore.replaceProgress(
+          p2.charId, p2Party, char2.items, char2.storyFlags, char2.storyVars)
 
       characterStore.flushCharacterAsync(p1.charId)
       characterStore.flushCharacterAsync(p2.charId)

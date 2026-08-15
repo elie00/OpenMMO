@@ -56,7 +56,18 @@ class TpCommand @Inject constructor(private val scriptWarpService: ScriptWarpSer
   override fun run(ctx: CommandContext) {
     if (ctx.args.isEmpty()) {
       ctx.reply("Usage: $usage")
-      val kantoKeys = listOf("pallet", "viridian", "pewter", "cerulean", "vermilion", "celadon", "fuchsia", "saffron", "cinnabar", "indigo")
+      val kantoKeys =
+          listOf(
+              "pallet",
+              "viridian",
+              "pewter",
+              "cerulean",
+              "vermilion",
+              "celadon",
+              "fuchsia",
+              "saffron",
+              "cinnabar",
+              "indigo")
       ctx.reply("Known locations: ${kantoKeys.joinToString(", ")}")
       return
     }
@@ -88,7 +99,8 @@ class TpCommand @Inject constructor(private val scriptWarpService: ScriptWarpSer
 
     scope.launch {
       scriptWarpService.warp(ctx.session, ctx.state, target)
-      ctx.reply("Teleported to region ${target.regionId} bank ${target.bankId} map ${target.mapId} (${target.x}, ${target.y})")
+      ctx.reply(
+          "Teleported to region ${target.regionId} bank ${target.bankId} map ${target.mapId} (${target.x}, ${target.y})")
     }
   }
 }

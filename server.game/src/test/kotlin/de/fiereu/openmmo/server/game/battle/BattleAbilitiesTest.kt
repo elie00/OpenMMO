@@ -11,8 +11,6 @@ import de.fiereu.openmmo.pokemon.SpeciesRegistry
 import de.fiereu.openmmo.server.game.testsupport.FakeSession
 import de.fiereu.openmmo.typechart.TypeChart
 import io.kotest.core.spec.style.FunSpec
-import io.kotest.matchers.booleans.shouldBeFalse
-import io.kotest.matchers.booleans.shouldBeTrue
 import io.kotest.matchers.collections.shouldNotBeEmpty
 import io.kotest.matchers.ints.shouldBeGreaterThan
 import io.kotest.matchers.shouldBe
@@ -31,41 +29,54 @@ private const val GROWL: Short = 45
 
 private val speciesRegistry = SpeciesRegistry()
 
-private fun makeMon(dexId: Int, level: Int, moves: List<Short>, id: Long, customAbility: Ability? = null): BattleMonState {
+private fun makeMon(
+    dexId: Int,
+    level: Int,
+    moves: List<Short>,
+    id: Long,
+    customAbility: Ability? = null
+): BattleMonState {
   val moveRegistry = MoveRegistry()
   val padded = List(4) { i -> moves.getOrNull(i) ?: 0 }
   val def = speciesRegistry.get(dexId)!!
-  val p = Pokemon(
-      id = id,
-      ownerId = 0,
-      container = PokemonContainer.PARTY,
-      containerSlot = 0,
-      dexId = dexId,
-      seed = 0,
-      ot = "Blue",
-      nickname = "",
-      level = level.toByte(),
-      hp = Short.MAX_VALUE,
-      xp = 0,
-      eVs = EVs(),
-      iVs = IVs(),
-      moves = padded.map { PokemonMove(it, (moveRegistry.get(it.toInt())?.pp ?: 0).toByte()) },
-      isShiny = false,
-      hasHiddenAbility = false,
-      isAlpha = false,
-      isSecret = false,
-      isFatefulEncounter = false,
-      isRaidEncounter = false,
-      caughtAt = LocalDateTime.now(),
-  )
-  val state = BattleMonState(id, def, if (id == PLAYER_ID) 0 else null, p, StatCalculator.computeAll(def, p))
+  val p =
+      Pokemon(
+          id = id,
+          ownerId = 0,
+          container = PokemonContainer.PARTY,
+          containerSlot = 0,
+          dexId = dexId,
+          seed = 0,
+          ot = "Blue",
+          nickname = "",
+          level = level.toByte(),
+          hp = Short.MAX_VALUE,
+          xp = 0,
+          eVs = EVs(),
+          iVs = IVs(),
+          moves = padded.map { PokemonMove(it, (moveRegistry.get(it.toInt())?.pp ?: 0).toByte()) },
+          isShiny = false,
+          hasHiddenAbility = false,
+          isAlpha = false,
+          isSecret = false,
+          isFatefulEncounter = false,
+          isRaidEncounter = false,
+          caughtAt = LocalDateTime.now(),
+      )
+  val state =
+      BattleMonState(
+          id, def, if (id == PLAYER_ID) 0 else null, p, StatCalculator.computeAll(def, p))
   if (customAbility != null) {
     state.ability = customAbility
   }
   return state
 }
 
-private fun testBattle(player: BattleMonState, wild: BattleMonState, seed: Long = 1L): BattleInstance =
+private fun testBattle(
+    player: BattleMonState,
+    wild: BattleMonState,
+    seed: Long = 1L
+): BattleInstance =
     BattleInstance(1L, 100L, FakeSession(100L), listOf(player), listOf(wild), BattleRng(seed))
 
 class BattleAbilitiesTest :
@@ -74,7 +85,13 @@ class BattleAbilitiesTest :
 
       test("Levitate makes Pokémon immune to Ground moves") {
         val player = makeMon(143, 40, listOf(EARTHQUAKE), PLAYER_ID)
-        val wild = makeMon(94, 40, listOf(TACKLE), WILD_ID, customAbility = Ability.LEVITATE) // Gengar with Levitate
+        val wild =
+            makeMon(
+                94,
+                40,
+                listOf(TACKLE),
+                WILD_ID,
+                customAbility = Ability.LEVITATE) // Gengar with Levitate
 
         val beforeHp = wild.currentHp
         val events = engine.resolveTurn(testBattle(player, wild, seed = 5), EARTHQUAKE)
@@ -85,7 +102,9 @@ class BattleAbilitiesTest :
 
       test("Water Absorb heals the Pokémon when hit by Water moves") {
         val player = makeMon(130, 40, listOf(SURF), PLAYER_ID) // Gyarados
-        val wild = makeMon(134, 40, listOf(TACKLE), WILD_ID, customAbility = Ability.WATER_ABSORB) // Vaporeon
+        val wild =
+            makeMon(
+                134, 40, listOf(TACKLE), WILD_ID, customAbility = Ability.WATER_ABSORB) // Vaporeon
         wild.currentHp = 50
 
         val events = engine.resolveTurn(testBattle(player, wild, seed = 7), SURF)
@@ -96,7 +115,8 @@ class BattleAbilitiesTest :
 
       test("Flash Fire grants immunity to Fire moves") {
         val player = makeMon(6, 40, listOf(FLAMETHROWER), PLAYER_ID)
-        val wild = makeMon(59, 40, listOf(TACKLE), WILD_ID, customAbility = Ability.FLASH_FIRE) // Arcanine
+        val wild =
+            makeMon(59, 40, listOf(TACKLE), WILD_ID, customAbility = Ability.FLASH_FIRE) // Arcanine
 
         val beforeHp = wild.currentHp
         val events = engine.resolveTurn(testBattle(player, wild, seed = 2), FLAMETHROWER)
@@ -107,7 +127,13 @@ class BattleAbilitiesTest :
 
       test("Wonder Guard only allows super-effective attacks") {
         val player = makeMon(143, 30, listOf(TACKLE, SHADOW_BALL), PLAYER_ID)
-        val wild = makeMon(292, 30, listOf(TACKLE), WILD_ID, customAbility = Ability.WONDER_GUARD) // Shedinja (Bug/Ghost)
+        val wild =
+            makeMon(
+                292,
+                30,
+                listOf(TACKLE),
+                WILD_ID,
+                customAbility = Ability.WONDER_GUARD) // Shedinja (Bug/Ghost)
 
         // Tackle is Normal -> immune
         val events1 = engine.resolveTurn(testBattle(player, wild, seed = 1), TACKLE)
@@ -119,13 +145,15 @@ class BattleAbilitiesTest :
       }
 
       test("Overgrow boosts Grass move damage when HP is below 1/3") {
-        val playerNormal = makeMon(1, 30, listOf(VINE_WHIP), PLAYER_ID, customAbility = Ability.OVERGROW)
+        val playerNormal =
+            makeMon(1, 30, listOf(VINE_WHIP), PLAYER_ID, customAbility = Ability.OVERGROW)
         val wild = makeMon(143, 30, listOf(TACKLE), WILD_ID)
         val before1 = wild.currentHp
         engine.resolveTurn(testBattle(playerNormal, wild, seed = 1), VINE_WHIP)
         val normalDmg = before1 - wild.currentHp
 
-        val playerLowHp = makeMon(1, 30, listOf(VINE_WHIP), PLAYER_ID, customAbility = Ability.OVERGROW)
+        val playerLowHp =
+            makeMon(1, 30, listOf(VINE_WHIP), PLAYER_ID, customAbility = Ability.OVERGROW)
         playerLowHp.currentHp = playerLowHp.stats.hp / 4 // < 1/3 HP
         val wild2 = makeMon(143, 30, listOf(TACKLE), WILD_ID)
         val before2 = wild2.currentHp
@@ -137,7 +165,9 @@ class BattleAbilitiesTest :
 
       test("Clear Body prevents stat stage reduction from opponent moves") {
         val player = makeMon(1, 10, listOf(GROWL), PLAYER_ID)
-        val wild = makeMon(376, 50, listOf(TACKLE), WILD_ID, customAbility = Ability.CLEAR_BODY) // Metagross
+        val wild =
+            makeMon(
+                376, 50, listOf(TACKLE), WILD_ID, customAbility = Ability.CLEAR_BODY) // Metagross
 
         engine.resolveTurn(testBattle(player, wild, seed = 1), GROWL)
 

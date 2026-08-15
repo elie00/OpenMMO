@@ -29,10 +29,13 @@ constructor(
     val arg = ctx.args[0].lowercase().replace("-", "_").replace(" ", "_")
     val dexId =
         arg.toIntOrNull()
-            ?: speciesRegistry.all().find {
-              val formatted = it.name.lowercase().removePrefix("species_")
-              formatted == arg || formatted.replace("_", "") == arg
-            }?.id
+            ?: speciesRegistry
+                .all()
+                .find {
+                  val formatted = it.name.lowercase().removePrefix("species_")
+                  formatted == arg || formatted.replace("_", "") == arg
+                }
+                ?.id
 
     if (dexId == null || dexId <= 0) {
       ctx.reply("Unknown Pokemon: ${ctx.args[0]}")

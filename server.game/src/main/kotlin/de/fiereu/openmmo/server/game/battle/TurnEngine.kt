@@ -303,7 +303,9 @@ constructor(
 
     // Levitate: immune to ground moves
     if (defender.ability == Ability.LEVITATE && move.type == PokemonType.GROUND) {
-      events += BattleEvent.AbilityTriggered(defender.entityId, Ability.LEVITATE, "Levitate avoids Ground moves!")
+      events +=
+          BattleEvent.AbilityTriggered(
+              defender.entityId, Ability.LEVITATE, "Levitate avoids Ground moves!")
       events += BattleEvent.MoveFailed(attacker.entityId, moveId)
       return true
     }
@@ -312,7 +314,9 @@ constructor(
     if (defender.ability == Ability.WATER_ABSORB && move.type == PokemonType.WATER) {
       val heal = defender.stats.hp / 4
       defender.currentHp = (defender.currentHp + heal).coerceAtMost(defender.stats.hp)
-      events += BattleEvent.AbilityTriggered(defender.entityId, Ability.WATER_ABSORB, "Water Absorb restored HP!")
+      events +=
+          BattleEvent.AbilityTriggered(
+              defender.entityId, Ability.WATER_ABSORB, "Water Absorb restored HP!")
       events += BattleEvent.AbsorbHealed(defender.entityId, heal, defender.currentHp)
       return true
     }
@@ -321,14 +325,18 @@ constructor(
     if (defender.ability == Ability.VOLT_ABSORB && move.type == PokemonType.ELECTRIC) {
       val heal = defender.stats.hp / 4
       defender.currentHp = (defender.currentHp + heal).coerceAtMost(defender.stats.hp)
-      events += BattleEvent.AbilityTriggered(defender.entityId, Ability.VOLT_ABSORB, "Volt Absorb restored HP!")
+      events +=
+          BattleEvent.AbilityTriggered(
+              defender.entityId, Ability.VOLT_ABSORB, "Volt Absorb restored HP!")
       events += BattleEvent.AbsorbHealed(defender.entityId, heal, defender.currentHp)
       return true
     }
 
     // Flash Fire: immune to fire moves
     if (defender.ability == Ability.FLASH_FIRE && move.type == PokemonType.FIRE) {
-      events += BattleEvent.AbilityTriggered(defender.entityId, Ability.FLASH_FIRE, "Flash Fire absorbed the fire!")
+      events +=
+          BattleEvent.AbilityTriggered(
+              defender.entityId, Ability.FLASH_FIRE, "Flash Fire absorbed the fire!")
       events += BattleEvent.MoveFailed(attacker.entityId, moveId)
       return true
     }
@@ -398,7 +406,9 @@ constructor(
     if (dmg < 1) dmg = 1
 
     // Sturdy check: if defender has full HP and damage would faint it
-    if (defender.ability == Ability.STURDY && defender.currentHp == defender.stats.hp && dmg >= defender.currentHp) {
+    if (defender.ability == Ability.STURDY &&
+        defender.currentHp == defender.stats.hp &&
+        dmg >= defender.currentHp) {
       dmg = defender.currentHp - 1
     }
 
@@ -443,7 +453,8 @@ constructor(
       }
     }
 
-    // Secondary status effects (e.g. Flamethrower 10% burn, Thunderbolt 10% paralyze, Ice Beam 10% freeze)
+    // Secondary status effects (e.g. Flamethrower 10% burn, Thunderbolt 10% paralyze, Ice Beam 10%
+    // freeze)
     applySecondaryStatus(battle, attacker, defender, move, events)
   }
 
@@ -456,7 +467,9 @@ constructor(
     if (defender.ability == Ability.ROUGH_SKIN) {
       val recoil = (attacker.stats.hp / 16).coerceAtLeast(1)
       attacker.currentHp = (attacker.currentHp - recoil).coerceAtLeast(0)
-      events += BattleEvent.AbilityTriggered(defender.entityId, Ability.ROUGH_SKIN, "Rough Skin hurt the attacker!")
+      events +=
+          BattleEvent.AbilityTriggered(
+              defender.entityId, Ability.ROUGH_SKIN, "Rough Skin hurt the attacker!")
       events += BattleEvent.RecoilDamage(attacker.entityId, recoil, attacker.currentHp)
       if (attacker.fainted) {
         events += BattleEvent.Fainted(attacker.entityId)
@@ -468,19 +481,27 @@ constructor(
       if (defender.ability == Ability.STATIC && battle.rng.accuracyRoll() <= 30) {
         if (attacker.ability != Ability.LIMBER) {
           attacker.primaryStatus = PrimaryStatus.PARALYSIS
-          events += BattleEvent.AbilityTriggered(defender.entityId, Ability.STATIC, "Static paralyzed the attacker!")
+          events +=
+              BattleEvent.AbilityTriggered(
+                  defender.entityId, Ability.STATIC, "Static paralyzed the attacker!")
           events += BattleEvent.StatusInflicted(attacker.entityId, PrimaryStatus.PARALYSIS)
         }
       } else if (defender.ability == Ability.FLAME_BODY && battle.rng.accuracyRoll() <= 30) {
         if (attacker.ability != Ability.WATER_VEIL && !attacker.species.hasType(PokemonType.FIRE)) {
           attacker.primaryStatus = PrimaryStatus.BURN
-          events += BattleEvent.AbilityTriggered(defender.entityId, Ability.FLAME_BODY, "Flame Body burned the attacker!")
+          events +=
+              BattleEvent.AbilityTriggered(
+                  defender.entityId, Ability.FLAME_BODY, "Flame Body burned the attacker!")
           events += BattleEvent.StatusInflicted(attacker.entityId, PrimaryStatus.BURN)
         }
       } else if (defender.ability == Ability.POISON_POINT && battle.rng.accuracyRoll() <= 30) {
-        if (attacker.ability != Ability.IMMUNITY && !attacker.species.hasType(PokemonType.POISON) && !attacker.species.hasType(PokemonType.STEEL)) {
+        if (attacker.ability != Ability.IMMUNITY &&
+            !attacker.species.hasType(PokemonType.POISON) &&
+            !attacker.species.hasType(PokemonType.STEEL)) {
           attacker.primaryStatus = PrimaryStatus.POISON
-          events += BattleEvent.AbilityTriggered(defender.entityId, Ability.POISON_POINT, "Poison Point poisoned the attacker!")
+          events +=
+              BattleEvent.AbilityTriggered(
+                  defender.entityId, Ability.POISON_POINT, "Poison Point poisoned the attacker!")
           events += BattleEvent.StatusInflicted(attacker.entityId, PrimaryStatus.POISON)
         }
       }
@@ -558,19 +579,23 @@ constructor(
 
     when (status) {
       PrimaryStatus.SLEEP -> {
-        if (target.ability == Ability.INSOMNIA || target.ability == Ability.VITAL_SPIRIT) return false
+        if (target.ability == Ability.INSOMNIA || target.ability == Ability.VITAL_SPIRIT)
+            return false
       }
       PrimaryStatus.POISON,
       PrimaryStatus.TOXIC -> {
         if (target.ability == Ability.IMMUNITY ||
             target.species.hasType(PokemonType.POISON) ||
-            target.species.hasType(PokemonType.STEEL)) return false
+            target.species.hasType(PokemonType.STEEL))
+            return false
       }
       PrimaryStatus.BURN -> {
-        if (target.ability == Ability.WATER_VEIL || target.species.hasType(PokemonType.FIRE)) return false
+        if (target.ability == Ability.WATER_VEIL || target.species.hasType(PokemonType.FIRE))
+            return false
       }
       PrimaryStatus.FREEZE -> {
-        if (target.ability == Ability.MAGMA_ARMOR || target.species.hasType(PokemonType.ICE)) return false
+        if (target.ability == Ability.MAGMA_ARMOR || target.species.hasType(PokemonType.ICE))
+            return false
       }
       PrimaryStatus.PARALYSIS -> {
         if (target.ability == Ability.LIMBER) return false
@@ -585,17 +610,20 @@ constructor(
   }
 
   private fun isHealingMove(effect: MoveEffect): Boolean =
-      effect == MoveEffect.RESTORE_HP || effect == MoveEffect.SOFTBOILED || effect == MoveEffect.SYNTHESIS
+      effect == MoveEffect.RESTORE_HP ||
+          effect == MoveEffect.SOFTBOILED ||
+          effect == MoveEffect.SYNTHESIS
 
   private fun isStatusInflictingMove(effect: MoveEffect): Boolean =
-      effect in listOf(
-          MoveEffect.SLEEP,
-          MoveEffect.POISON,
-          MoveEffect.TOXIC,
-          MoveEffect.PARALYZE,
-          MoveEffect.WILL_O_WISP,
-          MoveEffect.CONFUSE,
-      )
+      effect in
+          listOf(
+              MoveEffect.SLEEP,
+              MoveEffect.POISON,
+              MoveEffect.TOXIC,
+              MoveEffect.PARALYZE,
+              MoveEffect.WILL_O_WISP,
+              MoveEffect.CONFUSE,
+          )
 
   private fun applyHeal(
       action: TurnAction,
@@ -620,10 +648,20 @@ constructor(
     val target = if (effect.onSelf) action.attacker else action.defender
 
     // Clear Body / White Smoke protects from stat drops caused by the opponent
-    if (!effect.onSelf && effect.delta < 0 &&
+    if (!effect.onSelf &&
+        effect.delta < 0 &&
         (target.ability == Ability.CLEAR_BODY || target.ability == Ability.WHITE_SMOKE)) {
-      events += BattleEvent.AbilityTriggered(target.entityId, target.ability, "${target.ability.name} prevents stat loss!")
-      events += BattleEvent.StageChanged(target.entityId, effect.stat, target.stage(effect.stat), target.effective(effect.stat), 0, true)
+      events +=
+          BattleEvent.AbilityTriggered(
+              target.entityId, target.ability, "${target.ability.name} prevents stat loss!")
+      events +=
+          BattleEvent.StageChanged(
+              target.entityId,
+              effect.stat,
+              target.stage(effect.stat),
+              target.effective(effect.stat),
+              0,
+              true)
       return
     }
 
@@ -654,7 +692,9 @@ constructor(
         if (battle.rng.accuracyRoll() <= 33) {
           val old = mon.primaryStatus
           mon.cureStatus()
-          events += BattleEvent.AbilityTriggered(mon.entityId, Ability.SHED_SKIN, "Shed Skin cured the status!")
+          events +=
+              BattleEvent.AbilityTriggered(
+                  mon.entityId, Ability.SHED_SKIN, "Shed Skin cured the status!")
           events += BattleEvent.StatusCured(mon.entityId, old)
         }
       }
@@ -663,8 +703,17 @@ constructor(
       if (mon.ability == Ability.SPEED_BOOST) {
         val applied = mon.changeStage(BattleStat.SPEED, 1)
         if (applied != 0) {
-          events += BattleEvent.AbilityTriggered(mon.entityId, Ability.SPEED_BOOST, "Speed Boost increased Speed!")
-          events += BattleEvent.StageChanged(mon.entityId, BattleStat.SPEED, mon.stage(BattleStat.SPEED), mon.effective(BattleStat.SPEED), 1, false)
+          events +=
+              BattleEvent.AbilityTriggered(
+                  mon.entityId, Ability.SPEED_BOOST, "Speed Boost increased Speed!")
+          events +=
+              BattleEvent.StageChanged(
+                  mon.entityId,
+                  BattleStat.SPEED,
+                  mon.stage(BattleStat.SPEED),
+                  mon.effective(BattleStat.SPEED),
+                  1,
+                  false)
         }
       }
 

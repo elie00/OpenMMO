@@ -1,7 +1,6 @@
 package de.fiereu.openmmo.server.game.services
 
 import de.fiereu.network.PacketEvent
-import de.fiereu.network.SessionContext
 import de.fiereu.openmmo.common.enums.ChatType
 import de.fiereu.openmmo.common.enums.Language
 import de.fiereu.openmmo.common.enums.PokemonContainer
@@ -124,8 +123,7 @@ constructor(
       characterStore.flushCharacterAsync(charId)
 
       val listingId =
-          if (gtlStore is InMemoryGtlStore) gtlStore.newListingId()
-          else System.currentTimeMillis()
+          if (gtlStore is InMemoryGtlStore) gtlStore.newListingId() else System.currentTimeMillis()
 
       val nowSec = (System.currentTimeMillis() / 1000).toInt()
       val record =
@@ -210,14 +208,17 @@ constructor(
             charId = buyerCharId,
             isBuyer = true,
             counterpartyName = listing.sellerName,
-            itemName = if (listing.listKind == GtlListKind.ITEM) "Item #${listing.itemId}" else (listing.pokemon?.nickname ?: "Pokemon"),
+            itemName =
+                if (listing.listKind == GtlListKind.ITEM) "Item #${listing.itemId}"
+                else (listing.pokemon?.nickname ?: "Pokemon"),
             price = cost,
             timestamp = nowSec,
-        )
-    )
+        ))
 
     session.send(notice("Successfully purchased for $$cost!"))
-    log.info { "char=$buyerCharId bought listing $listingId from char=${listing.sellerCharId} for $$cost" }
+    log.info {
+      "char=$buyerCharId bought listing $listingId from char=${listing.sellerCharId} for $$cost"
+    }
 
     // Notify seller if online
     val sellerSession = sessionRegistry.getByCharacterId(listing.sellerCharId)

@@ -125,7 +125,8 @@ class GtlServiceTest :
         val listing = gtlStore.getListingsBySeller(seller.info.id).first()
 
         // Cancel listing
-        gtlService.onListingCancel(PacketEvent(GtlListingCancelPacket(listingId = listing.listingId.toString()), sSession))
+        gtlService.onListingCancel(
+            PacketEvent(GtlListingCancelPacket(listingId = listing.listingId.toString()), sSession))
 
         // Items returned to bag (1 + 2 = 3)
         store.getCharacter(seller.info.id)!!.items[Items.SUPER_POTION] shouldBe 3

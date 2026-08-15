@@ -7,20 +7,21 @@ import kotlin.math.pow
 object CatchCalculator {
 
   fun isPokeBall(itemId: Int): Boolean =
-      itemId in listOf(
-          Items.MASTER_BALL,
-          Items.ULTRA_BALL,
-          Items.GREAT_BALL,
-          Items.POKE_BALL,
-          Items.SAFARI_BALL,
-          Items.NET_BALL,
-          Items.DIVE_BALL,
-          Items.NEST_BALL,
-          Items.REPEAT_BALL,
-          Items.TIMER_BALL,
-          Items.LUXURY_BALL,
-          Items.PREMIER_BALL,
-      )
+      itemId in
+          listOf(
+              Items.MASTER_BALL,
+              Items.ULTRA_BALL,
+              Items.GREAT_BALL,
+              Items.POKE_BALL,
+              Items.SAFARI_BALL,
+              Items.NET_BALL,
+              Items.DIVE_BALL,
+              Items.NEST_BALL,
+              Items.REPEAT_BALL,
+              Items.TIMER_BALL,
+              Items.LUXURY_BALL,
+              Items.PREMIER_BALL,
+          )
 
   fun ballMultiplier(itemId: Int, target: BattleMonState, turn: Int): Double =
       when (itemId) {
@@ -29,13 +30,13 @@ object CatchCalculator {
         Items.GREAT_BALL,
         Items.SAFARI_BALL -> 1.5
         Items.NET_BALL -> {
-          if (target.species.hasType(PokemonType.WATER) || target.species.hasType(PokemonType.BUG)) 3.0
+          if (target.species.hasType(PokemonType.WATER) || target.species.hasType(PokemonType.BUG))
+              3.0
           else 1.0
         }
         Items.NEST_BALL -> {
           val lvl = target.level
-          if (lvl in 1..29) ((40.0 - lvl) / 10.0).coerceAtLeast(1.0)
-          else 1.0
+          if (lvl in 1..29) ((40.0 - lvl) / 10.0).coerceAtLeast(1.0) else 1.0
         }
         Items.TIMER_BALL -> ((1.0 + (turn * 0.1))).coerceAtMost(4.0)
         else -> 1.0
@@ -52,10 +53,7 @@ object CatchCalculator {
         PrimaryStatus.NONE -> 1.0
       }
 
-  /**
-   * Evaluates whether a throw succeeds.
-   * Returns true if caught, false if broken out.
-   */
+  /** Evaluates whether a throw succeeds. Returns true if caught, false if broken out. */
   fun attemptCatch(
       itemId: Int,
       target: BattleMonState,
