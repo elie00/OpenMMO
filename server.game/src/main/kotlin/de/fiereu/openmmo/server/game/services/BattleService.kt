@@ -433,191 +433,243 @@ constructor(
       battle: BattleInstance,
       itemId: Int,
       target: BattleMonState
-  ): Boolean {
-    when (itemId) {
-      Items.POTION -> {
-        if (target.fainted || target.currentHp >= target.stats.hp) return false
-        val healed = 20
-        target.currentHp = (target.currentHp + healed).coerceAtMost(target.stats.hp)
-        emitter.broadcast(
-            battle,
-            BattleEntityDeltaPacket(
-                entityId = target.entityId, currentHp = target.currentHp.toShort()))
-        emitter.sendNotice(battle, "${target.species.name} recovered $healed HP!")
-        return true
+  ): Boolean =
+      when (itemId) {
+        Items.POTION -> {
+          if (target.fainted || target.currentHp >= target.stats.hp) {
+            false
+          } else {
+            val healed = 20
+            target.currentHp = (target.currentHp + healed).coerceAtMost(target.stats.hp)
+            emitter.broadcast(
+                battle,
+                BattleEntityDeltaPacket(
+                    entityId = target.entityId, currentHp = target.currentHp.toShort()))
+            emitter.sendNotice(battle, "${target.species.name} recovered $healed HP!")
+            true
+          }
+        }
+        Items.SUPER_POTION -> {
+          if (target.fainted || target.currentHp >= target.stats.hp) {
+            false
+          } else {
+            val healed = 50
+            target.currentHp = (target.currentHp + healed).coerceAtMost(target.stats.hp)
+            emitter.broadcast(
+                battle,
+                BattleEntityDeltaPacket(
+                    entityId = target.entityId, currentHp = target.currentHp.toShort()))
+            emitter.sendNotice(battle, "${target.species.name} recovered $healed HP!")
+            true
+          }
+        }
+        Items.HYPER_POTION -> {
+          if (target.fainted || target.currentHp >= target.stats.hp) {
+            false
+          } else {
+            val healed = 200
+            target.currentHp = (target.currentHp + healed).coerceAtMost(target.stats.hp)
+            emitter.broadcast(
+                battle,
+                BattleEntityDeltaPacket(
+                    entityId = target.entityId, currentHp = target.currentHp.toShort()))
+            emitter.sendNotice(battle, "${target.species.name} recovered $healed HP!")
+            true
+          }
+        }
+        Items.MAX_POTION -> {
+          if (target.fainted || target.currentHp >= target.stats.hp) {
+            false
+          } else {
+            target.currentHp = target.stats.hp
+            emitter.broadcast(
+                battle,
+                BattleEntityDeltaPacket(
+                    entityId = target.entityId, currentHp = target.currentHp.toShort()))
+            emitter.sendNotice(battle, "${target.species.name} fully restored its HP!")
+            true
+          }
+        }
+        Items.FULL_RESTORE -> {
+          if (target.fainted ||
+              (target.currentHp >= target.stats.hp &&
+                  target.primaryStatus == PrimaryStatus.NONE &&
+                  !target.isConfused)) {
+            false
+          } else {
+            target.currentHp = target.stats.hp
+            target.cureStatus()
+            target.cureVolatiles()
+            emitter.broadcast(
+                battle,
+                BattleEntityDeltaPacket(
+                    entityId = target.entityId, currentHp = target.currentHp.toShort()))
+            emitter.broadcast(
+                battle,
+                de.fiereu.openmmo.net.game.packets.battle.BattlePokemonStatusPacket(
+                    target.entityId, PrimaryStatus.NONE.id, null))
+            emitter.sendNotice(
+                battle, "${target.species.name} fully restored HP and cured all status!")
+            true
+          }
+        }
+        Items.ANTIDOTE -> {
+          if (target.primaryStatus != PrimaryStatus.POISON &&
+              target.primaryStatus != PrimaryStatus.TOXIC) {
+            false
+          } else {
+            target.cureStatus()
+            emitter.broadcast(
+                battle,
+                de.fiereu.openmmo.net.game.packets.battle.BattlePokemonStatusPacket(
+                    target.entityId, PrimaryStatus.NONE.id, null))
+            emitter.sendNotice(battle, "${target.species.name} was cured of poison!")
+            true
+          }
+        }
+        Items.BURN_HEAL -> {
+          if (target.primaryStatus != PrimaryStatus.BURN) {
+            false
+          } else {
+            target.cureStatus()
+            emitter.broadcast(
+                battle,
+                de.fiereu.openmmo.net.game.packets.battle.BattlePokemonStatusPacket(
+                    target.entityId, PrimaryStatus.NONE.id, null))
+            emitter.sendNotice(battle, "${target.species.name} was cured of its burn!")
+            true
+          }
+        }
+        Items.ICE_HEAL -> {
+          if (target.primaryStatus != PrimaryStatus.FREEZE) {
+            false
+          } else {
+            target.cureStatus()
+            emitter.broadcast(
+                battle,
+                de.fiereu.openmmo.net.game.packets.battle.BattlePokemonStatusPacket(
+                    target.entityId, PrimaryStatus.NONE.id, null))
+            emitter.sendNotice(battle, "${target.species.name} thawed out!")
+            true
+          }
+        }
+        Items.AWAKENING -> {
+          if (target.primaryStatus != PrimaryStatus.SLEEP) {
+            false
+          } else {
+            target.cureStatus()
+            emitter.broadcast(
+                battle,
+                de.fiereu.openmmo.net.game.packets.battle.BattlePokemonStatusPacket(
+                    target.entityId, PrimaryStatus.NONE.id, null))
+            emitter.sendNotice(battle, "${target.species.name} woke up!")
+            true
+          }
+        }
+        Items.PARALYZE_HEAL -> {
+          if (target.primaryStatus != PrimaryStatus.PARALYSIS) {
+            false
+          } else {
+            target.cureStatus()
+            emitter.broadcast(
+                battle,
+                de.fiereu.openmmo.net.game.packets.battle.BattlePokemonStatusPacket(
+                    target.entityId, PrimaryStatus.NONE.id, null))
+            emitter.sendNotice(battle, "${target.species.name} was cured of paralysis!")
+            true
+          }
+        }
+        Items.FULL_HEAL -> {
+          if (target.primaryStatus == PrimaryStatus.NONE && !target.isConfused) {
+            false
+          } else {
+            target.cureStatus()
+            target.cureVolatiles()
+            emitter.broadcast(
+                battle,
+                de.fiereu.openmmo.net.game.packets.battle.BattlePokemonStatusPacket(
+                    target.entityId, PrimaryStatus.NONE.id, null))
+            emitter.sendNotice(battle, "${target.species.name} was cured of all status conditions!")
+            true
+          }
+        }
+        Items.REVIVE -> {
+          if (!target.fainted) {
+            false
+          } else {
+            target.currentHp = target.stats.hp / 2
+            target.cureStatus()
+            target.cureVolatiles()
+            emitter.broadcast(
+                battle,
+                BattleEntityDeltaPacket(
+                    entityId = target.entityId, currentHp = target.currentHp.toShort()))
+            emitter.sendNotice(battle, "${target.species.name} was revived!")
+            true
+          }
+        }
+        Items.MAX_REVIVE -> {
+          if (!target.fainted) {
+            false
+          } else {
+            target.currentHp = target.stats.hp
+            target.cureStatus()
+            target.cureVolatiles()
+            emitter.broadcast(
+                battle,
+                BattleEntityDeltaPacket(
+                    entityId = target.entityId, currentHp = target.currentHp.toShort()))
+            emitter.sendNotice(battle, "${target.species.name} was fully revived!")
+            true
+          }
+        }
+        Items.X_ATTACK -> {
+          if (target.fainted) {
+            false
+          } else {
+            target.changeStage(BattleStat.ATTACK, 1)
+            emitter.sendNotice(battle, "X Attack boosted ${target.species.name}'s Attack!")
+            true
+          }
+        }
+        Items.X_DEFEND -> {
+          if (target.fainted) {
+            false
+          } else {
+            target.changeStage(BattleStat.DEFENSE, 1)
+            emitter.sendNotice(battle, "X Defend boosted ${target.species.name}'s Defense!")
+            true
+          }
+        }
+        Items.X_SPEED -> {
+          if (target.fainted) {
+            false
+          } else {
+            target.changeStage(BattleStat.SPEED, 1)
+            emitter.sendNotice(battle, "X Speed boosted ${target.species.name}'s Speed!")
+            true
+          }
+        }
+        Items.X_SPECIAL -> {
+          if (target.fainted) {
+            false
+          } else {
+            target.changeStage(BattleStat.SP_ATTACK, 1)
+            emitter.sendNotice(battle, "X Special boosted ${target.species.name}'s Sp. Atk!")
+            true
+          }
+        }
+        Items.X_ACCURACY -> {
+          if (target.fainted) {
+            false
+          } else {
+            target.changeStage(BattleStat.ACCURACY, 1)
+            emitter.sendNotice(battle, "X Accuracy boosted ${target.species.name}'s Accuracy!")
+            true
+          }
+        }
+        else -> false
       }
-      Items.SUPER_POTION -> {
-        if (target.fainted || target.currentHp >= target.stats.hp) return false
-        val healed = 50
-        target.currentHp = (target.currentHp + healed).coerceAtMost(target.stats.hp)
-        emitter.broadcast(
-            battle,
-            BattleEntityDeltaPacket(
-                entityId = target.entityId, currentHp = target.currentHp.toShort()))
-        emitter.sendNotice(battle, "${target.species.name} recovered $healed HP!")
-        return true
-      }
-      Items.HYPER_POTION -> {
-        if (target.fainted || target.currentHp >= target.stats.hp) return false
-        val healed = 200
-        target.currentHp = (target.currentHp + healed).coerceAtMost(target.stats.hp)
-        emitter.broadcast(
-            battle,
-            BattleEntityDeltaPacket(
-                entityId = target.entityId, currentHp = target.currentHp.toShort()))
-        emitter.sendNotice(battle, "${target.species.name} recovered $healed HP!")
-        return true
-      }
-      Items.MAX_POTION -> {
-        if (target.fainted || target.currentHp >= target.stats.hp) return false
-        target.currentHp = target.stats.hp
-        emitter.broadcast(
-            battle,
-            BattleEntityDeltaPacket(
-                entityId = target.entityId, currentHp = target.currentHp.toShort()))
-        emitter.sendNotice(battle, "${target.species.name} fully restored its HP!")
-        return true
-      }
-      Items.FULL_RESTORE -> {
-        if (target.fainted ||
-            (target.currentHp >= target.stats.hp &&
-                target.primaryStatus == PrimaryStatus.NONE &&
-                !target.isConfused))
-            return false
-        target.currentHp = target.stats.hp
-        target.cureStatus()
-        target.cureVolatiles()
-        emitter.broadcast(
-            battle,
-            BattleEntityDeltaPacket(
-                entityId = target.entityId, currentHp = target.currentHp.toShort()))
-        emitter.broadcast(
-            battle,
-            de.fiereu.openmmo.net.game.packets.battle.BattlePokemonStatusPacket(
-                target.entityId, PrimaryStatus.NONE.id, null))
-        emitter.sendNotice(battle, "${target.species.name} fully restored HP and cured all status!")
-        return true
-      }
-      Items.ANTIDOTE -> {
-        if (target.primaryStatus != PrimaryStatus.POISON &&
-            target.primaryStatus != PrimaryStatus.TOXIC)
-            return false
-        target.cureStatus()
-        emitter.broadcast(
-            battle,
-            de.fiereu.openmmo.net.game.packets.battle.BattlePokemonStatusPacket(
-                target.entityId, PrimaryStatus.NONE.id, null))
-        emitter.sendNotice(battle, "${target.species.name} was cured of poison!")
-        return true
-      }
-      Items.BURN_HEAL -> {
-        if (target.primaryStatus != PrimaryStatus.BURN) return false
-        target.cureStatus()
-        emitter.broadcast(
-            battle,
-            de.fiereu.openmmo.net.game.packets.battle.BattlePokemonStatusPacket(
-                target.entityId, PrimaryStatus.NONE.id, null))
-        emitter.sendNotice(battle, "${target.species.name} was cured of its burn!")
-        return true
-      }
-      Items.ICE_HEAL -> {
-        if (target.primaryStatus != PrimaryStatus.FREEZE) return false
-        target.cureStatus()
-        emitter.broadcast(
-            battle,
-            de.fiereu.openmmo.net.game.packets.battle.BattlePokemonStatusPacket(
-                target.entityId, PrimaryStatus.NONE.id, null))
-        emitter.sendNotice(battle, "${target.species.name} thawed out!")
-        return true
-      }
-      Items.AWAKENING -> {
-        if (target.primaryStatus != PrimaryStatus.SLEEP) return false
-        target.cureStatus()
-        emitter.broadcast(
-            battle,
-            de.fiereu.openmmo.net.game.packets.battle.BattlePokemonStatusPacket(
-                target.entityId, PrimaryStatus.NONE.id, null))
-        emitter.sendNotice(battle, "${target.species.name} woke up!")
-        return true
-      }
-      Items.PARALYZE_HEAL -> {
-        if (target.primaryStatus != PrimaryStatus.PARALYSIS) return false
-        target.cureStatus()
-        emitter.broadcast(
-            battle,
-            de.fiereu.openmmo.net.game.packets.battle.BattlePokemonStatusPacket(
-                target.entityId, PrimaryStatus.NONE.id, null))
-        emitter.sendNotice(battle, "${target.species.name} was cured of paralysis!")
-        return true
-      }
-      Items.FULL_HEAL -> {
-        if (target.primaryStatus == PrimaryStatus.NONE && !target.isConfused) return false
-        target.cureStatus()
-        target.cureVolatiles()
-        emitter.broadcast(
-            battle,
-            de.fiereu.openmmo.net.game.packets.battle.BattlePokemonStatusPacket(
-                target.entityId, PrimaryStatus.NONE.id, null))
-        emitter.sendNotice(battle, "${target.species.name} was cured of all status conditions!")
-        return true
-      }
-      Items.REVIVE -> {
-        if (!target.fainted) return false
-        target.currentHp = target.stats.hp / 2
-        target.cureStatus()
-        target.cureVolatiles()
-        emitter.broadcast(
-            battle,
-            BattleEntityDeltaPacket(
-                entityId = target.entityId, currentHp = target.currentHp.toShort()))
-        emitter.sendNotice(battle, "${target.species.name} was revived!")
-        return true
-      }
-      Items.MAX_REVIVE -> {
-        if (!target.fainted) return false
-        target.currentHp = target.stats.hp
-        target.cureStatus()
-        target.cureVolatiles()
-        emitter.broadcast(
-            battle,
-            BattleEntityDeltaPacket(
-                entityId = target.entityId, currentHp = target.currentHp.toShort()))
-        emitter.sendNotice(battle, "${target.species.name} was fully revived!")
-        return true
-      }
-      Items.X_ATTACK -> {
-        if (target.fainted) return false
-        target.changeStage(BattleStat.ATTACK, 1)
-        emitter.sendNotice(battle, "X Attack boosted ${target.species.name}'s Attack!")
-        return true
-      }
-      Items.X_DEFEND -> {
-        if (target.fainted) return false
-        target.changeStage(BattleStat.DEFENSE, 1)
-        emitter.sendNotice(battle, "X Defend boosted ${target.species.name}'s Defense!")
-        return true
-      }
-      Items.X_SPEED -> {
-        if (target.fainted) return false
-        target.changeStage(BattleStat.SPEED, 1)
-        emitter.sendNotice(battle, "X Speed boosted ${target.species.name}'s Speed!")
-        return true
-      }
-      Items.X_SPECIAL -> {
-        if (target.fainted) return false
-        target.changeStage(BattleStat.SP_ATTACK, 1)
-        emitter.sendNotice(battle, "X Special boosted ${target.species.name}'s Sp. Atk!")
-        return true
-      }
-      Items.X_ACCURACY -> {
-        if (target.fainted) return false
-        target.changeStage(BattleStat.ACCURACY, 1)
-        emitter.sendNotice(battle, "X Accuracy boosted ${target.species.name}'s Accuracy!")
-        return true
-      }
-      else -> return false
-    }
-  }
 
   private fun switchMon(battle: BattleInstance, partyIndex: Short) {
     val target = partyIndex.toInt()
@@ -657,24 +709,25 @@ constructor(
       incoming: BattleMonState,
       opponent: BattleMonState
   ) {
-    if (incoming.ability == Ability.INTIMIDATE && !opponent.fainted) {
-      if (opponent.ability != Ability.CLEAR_BODY && opponent.ability != Ability.WHITE_SMOKE) {
-        val delta = opponent.changeStage(BattleStat.ATTACK, -1)
-        emitter.sendEvents(
-            battle,
-            listOf(
-                BattleEvent.AbilityTriggered(
-                    incoming.entityId,
-                    Ability.INTIMIDATE,
-                    "Intimidate cut ${opponent.species.name}'s Attack!"),
-                BattleEvent.StageChanged(
-                    opponent.entityId,
-                    BattleStat.ATTACK,
-                    opponent.stage(BattleStat.ATTACK),
-                    opponent.effective(BattleStat.ATTACK),
-                    -1,
-                    delta == 0)))
-      }
+    if (incoming.ability == Ability.INTIMIDATE &&
+        !opponent.fainted &&
+        opponent.ability != Ability.CLEAR_BODY &&
+        opponent.ability != Ability.WHITE_SMOKE) {
+      val delta = opponent.changeStage(BattleStat.ATTACK, -1)
+      emitter.sendEvents(
+          battle,
+          listOf(
+              BattleEvent.AbilityTriggered(
+                  incoming.entityId,
+                  Ability.INTIMIDATE,
+                  "Intimidate cut ${opponent.species.name}'s Attack!"),
+              BattleEvent.StageChanged(
+                  opponent.entityId,
+                  BattleStat.ATTACK,
+                  opponent.stage(BattleStat.ATTACK),
+                  opponent.effective(BattleStat.ATTACK),
+                  -1,
+                  delta == 0)))
     }
   }
 

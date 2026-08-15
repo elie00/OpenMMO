@@ -243,7 +243,7 @@ constructor(
       characterStore.addItem(charId, listing.itemId, listing.quantity.toInt())
     } else if (listing.pokemon != null) {
       val stored = characterStore.getCharacter(charId)
-      val nextSlot = (((stored?.pokemon?.maxOfOrNull { it.containerSlot } ?: -1)) + 1).toShort()
+      val nextSlot = ((stored?.pokemon?.maxOfOrNull { it.containerSlot } ?: -1) + 1).toShort()
       val returnedMon = listing.pokemon.copy(containerSlot = nextSlot)
       characterStore.addPokemon(charId, returnedMon)
     }

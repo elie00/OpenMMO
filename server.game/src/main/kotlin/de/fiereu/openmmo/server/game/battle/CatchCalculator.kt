@@ -38,7 +38,7 @@ object CatchCalculator {
           val lvl = target.level
           if (lvl in 1..29) ((40.0 - lvl) / 10.0).coerceAtLeast(1.0) else 1.0
         }
-        Items.TIMER_BALL -> ((1.0 + (turn * 0.1))).coerceAtMost(4.0)
+        Items.TIMER_BALL -> (1.0 + turn * 0.1).coerceAtMost(4.0)
         else -> 1.0
       }
 

@@ -71,9 +71,13 @@ constructor(
           characterStore.getCharacter(id)?.info?.name?.equals(targetName, ignoreCase = true) == true
         }
 
-    val targetChar = targetId?.let { characterStore.getCharacter(it) }
+    if (targetId == null) {
+      sourceSession.send(notice("Player '$targetName' is not online."))
+      return
+    }
 
-    if (targetChar == null || targetId == null) {
+    val targetChar = characterStore.getCharacter(targetId)
+    if (targetChar == null) {
       sourceSession.send(notice("Player '$targetName' is not online."))
       return
     }

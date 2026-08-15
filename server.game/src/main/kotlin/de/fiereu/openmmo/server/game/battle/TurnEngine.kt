@@ -130,16 +130,7 @@ constructor(
     return events
   }
 
-  fun resolveItemTurn(battle: BattleInstance): List<BattleEvent> {
-    val events = mutableListOf<BattleEvent>()
-    val enemy = battle.opponentMon()
-    if (enemy.fainted) return events
-    execute(battle, TurnAction(enemy, battle.activeMon(), pickEnemyMove(battle, enemy)), events)
-    if (!battle.activeMon().fainted && !enemy.fainted) {
-      endOfTurn(battle, events)
-    }
-    return events
-  }
+  fun resolveItemTurn(battle: BattleInstance): List<BattleEvent> = resolveSwitchTurn(battle)
 
   private fun pickEnemyMove(battle: BattleInstance, enemy: BattleMonState): MoveDef? {
     val usable = enemy.moves.filter { it.id.toInt() != 0 && it.pp > 0 }
@@ -259,11 +250,9 @@ constructor(
     }
 
     // Paralysis check
-    if (attacker.primaryStatus == PrimaryStatus.PARALYSIS) {
-      if (battle.rng.accuracyRoll() <= 25) {
-        events += BattleEvent.FullyParalyzed(attacker.entityId)
-        return false
-      }
+    if (attacker.primaryStatus == PrimaryStatus.PARALYSIS && battle.rng.accuracyRoll() <= 25) {
+      events += BattleEvent.FullyParalyzed(attacker.entityId)
+      return false
     }
 
     // Confusion check
@@ -384,13 +373,12 @@ constructor(
 
     // Overgrow / Blaze / Torrent / Swarm boosts (1.5x power when HP <= 1/3)
     val lowHp = attacker.currentHp <= attacker.stats.hp / 3
-    if (lowHp) {
-      if ((attacker.ability == Ability.OVERGROW && move.type == PokemonType.GRASS) ||
-          (attacker.ability == Ability.BLAZE && move.type == PokemonType.FIRE) ||
-          (attacker.ability == Ability.TORRENT && move.type == PokemonType.WATER) ||
-          (attacker.ability == Ability.SWARM && move.type == PokemonType.BUG)) {
-        dmg = dmg * 3 / 2
-      }
+    if (lowHp &&
+        ((attacker.ability == Ability.OVERGROW && move.type == PokemonType.GRASS) ||
+            (attacker.ability == Ability.BLAZE && move.type == PokemonType.FIRE) ||
+            (attacker.ability == Ability.TORRENT && move.type == PokemonType.WATER) ||
+            (attacker.ability == Ability.SWARM && move.type == PokemonType.BUG))) {
+      dmg = dmg * 3 / 2
     }
 
     // Thick Fat ability on defender
@@ -424,14 +412,13 @@ constructor(
     }
 
     // Recoil damage (e.g. Double-Edge, Take Down)
-    if (move.effect == MoveEffect.RECOIL || move.effect == MoveEffect.DOUBLE_EDGE) {
-      if (attacker.ability != Ability.ROCK_HEAD) {
-        val recoil = (actualDamage / 3).coerceAtLeast(1)
-        attacker.currentHp = (attacker.currentHp - recoil).coerceAtLeast(0)
-        events += BattleEvent.RecoilDamage(attacker.entityId, recoil, attacker.currentHp)
-        if (attacker.fainted) {
-          events += BattleEvent.Fainted(attacker.entityId)
-        }
+    if ((move.effect == MoveEffect.RECOIL || move.effect == MoveEffect.DOUBLE_EDGE) &&
+        attacker.ability != Ability.ROCK_HEAD) {
+      val recoil = (actualDamage / 3).coerceAtLeast(1)
+      attacker.currentHp = (attacker.currentHp - recoil).coerceAtLeast(0)
+      events += BattleEvent.RecoilDamage(attacker.entityId, recoil, attacker.currentHp)
+      if (attacker.fainted) {
+        events += BattleEvent.Fainted(attacker.entityId)
       }
     }
 
@@ -455,7 +442,7 @@ constructor(
 
     // Secondary status effects (e.g. Flamethrower 10% burn, Thunderbolt 10% paralyze, Ice Beam 10%
     // freeze)
-    applySecondaryStatus(battle, attacker, defender, move, events)
+    applySecondaryStatus(battle, defender, move, events)
   }
 
   private fun checkDefensiveContactAbilities(
@@ -477,40 +464,45 @@ constructor(
       }
     }
 
-    if (attacker.primaryStatus == PrimaryStatus.NONE) {
-      if (defender.ability == Ability.STATIC && battle.rng.accuracyRoll() <= 30) {
-        if (attacker.ability != Ability.LIMBER) {
-          attacker.primaryStatus = PrimaryStatus.PARALYSIS
-          events +=
-              BattleEvent.AbilityTriggered(
-                  defender.entityId, Ability.STATIC, "Static paralyzed the attacker!")
-          events += BattleEvent.StatusInflicted(attacker.entityId, PrimaryStatus.PARALYSIS)
+    if (attacker.primaryStatus == PrimaryStatus.NONE && battle.rng.accuracyRoll() <= 30) {
+      when (defender.ability) {
+        Ability.STATIC -> {
+          if (attacker.ability != Ability.LIMBER) {
+            attacker.primaryStatus = PrimaryStatus.PARALYSIS
+            events +=
+                BattleEvent.AbilityTriggered(
+                    defender.entityId, Ability.STATIC, "Static paralyzed the attacker!")
+            events += BattleEvent.StatusInflicted(attacker.entityId, PrimaryStatus.PARALYSIS)
+          }
         }
-      } else if (defender.ability == Ability.FLAME_BODY && battle.rng.accuracyRoll() <= 30) {
-        if (attacker.ability != Ability.WATER_VEIL && !attacker.species.hasType(PokemonType.FIRE)) {
-          attacker.primaryStatus = PrimaryStatus.BURN
-          events +=
-              BattleEvent.AbilityTriggered(
-                  defender.entityId, Ability.FLAME_BODY, "Flame Body burned the attacker!")
-          events += BattleEvent.StatusInflicted(attacker.entityId, PrimaryStatus.BURN)
+        Ability.FLAME_BODY -> {
+          if (attacker.ability != Ability.WATER_VEIL &&
+              !attacker.species.hasType(PokemonType.FIRE)) {
+            attacker.primaryStatus = PrimaryStatus.BURN
+            events +=
+                BattleEvent.AbilityTriggered(
+                    defender.entityId, Ability.FLAME_BODY, "Flame Body burned the attacker!")
+            events += BattleEvent.StatusInflicted(attacker.entityId, PrimaryStatus.BURN)
+          }
         }
-      } else if (defender.ability == Ability.POISON_POINT && battle.rng.accuracyRoll() <= 30) {
-        if (attacker.ability != Ability.IMMUNITY &&
-            !attacker.species.hasType(PokemonType.POISON) &&
-            !attacker.species.hasType(PokemonType.STEEL)) {
-          attacker.primaryStatus = PrimaryStatus.POISON
-          events +=
-              BattleEvent.AbilityTriggered(
-                  defender.entityId, Ability.POISON_POINT, "Poison Point poisoned the attacker!")
-          events += BattleEvent.StatusInflicted(attacker.entityId, PrimaryStatus.POISON)
+        Ability.POISON_POINT -> {
+          if (attacker.ability != Ability.IMMUNITY &&
+              !attacker.species.hasType(PokemonType.POISON) &&
+              !attacker.species.hasType(PokemonType.STEEL)) {
+            attacker.primaryStatus = PrimaryStatus.POISON
+            events +=
+                BattleEvent.AbilityTriggered(
+                    defender.entityId, Ability.POISON_POINT, "Poison Point poisoned the attacker!")
+            events += BattleEvent.StatusInflicted(attacker.entityId, PrimaryStatus.POISON)
+          }
         }
+        else -> Unit
       }
     }
   }
 
   private fun applySecondaryStatus(
       battle: BattleInstance,
-      attacker: BattleMonState,
       defender: BattleMonState,
       move: MoveDef,
       events: MutableList<BattleEvent>,
@@ -688,15 +680,15 @@ constructor(
       if (mon.fainted) continue
 
       // Shed Skin ability (33% chance to cure status at end of turn)
-      if (mon.ability == Ability.SHED_SKIN && mon.primaryStatus != PrimaryStatus.NONE) {
-        if (battle.rng.accuracyRoll() <= 33) {
-          val old = mon.primaryStatus
-          mon.cureStatus()
-          events +=
-              BattleEvent.AbilityTriggered(
-                  mon.entityId, Ability.SHED_SKIN, "Shed Skin cured the status!")
-          events += BattleEvent.StatusCured(mon.entityId, old)
-        }
+      if (mon.ability == Ability.SHED_SKIN &&
+          mon.primaryStatus != PrimaryStatus.NONE &&
+          battle.rng.accuracyRoll() <= 33) {
+        val old = mon.primaryStatus
+        mon.cureStatus()
+        events +=
+            BattleEvent.AbilityTriggered(
+                mon.entityId, Ability.SHED_SKIN, "Shed Skin cured the status!")
+        events += BattleEvent.StatusCured(mon.entityId, old)
       }
 
       // Speed Boost ability (+1 Speed at end of turn)
