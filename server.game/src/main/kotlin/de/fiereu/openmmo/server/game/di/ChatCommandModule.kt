@@ -46,4 +46,6 @@ interface ChatCommandModule {
   @Binds @IntoSet fun clearFlagCommand(command: ClearFlagCommand): ChatCommand
 
   @Binds @IntoSet fun setVarCommand(command: SetVarCommand): ChatCommand
+
+  @Binds @IntoSet fun tradeCommand(command: de.fiereu.openmmo.server.game.services.command.TradeCommand): ChatCommand
 }
