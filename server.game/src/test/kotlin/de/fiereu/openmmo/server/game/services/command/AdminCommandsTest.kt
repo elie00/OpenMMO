@@ -1,7 +1,6 @@
 package de.fiereu.openmmo.server.game.services.command
 
 import de.fiereu.openmmo.common.CharacterPermissions
-import de.fiereu.openmmo.common.Pokemon
 import de.fiereu.openmmo.common.PokemonMove
 import de.fiereu.openmmo.common.enums.CharacterGender
 import de.fiereu.openmmo.common.enums.PokemonContainer
@@ -10,19 +9,15 @@ import de.fiereu.openmmo.items.generated.Items
 import de.fiereu.openmmo.moves.MoveRegistry
 import de.fiereu.openmmo.net.game.packets.ChatMessagePacket
 import de.fiereu.openmmo.net.game.packets.LocalCharacterDeltaPacket
-import de.fiereu.openmmo.net.game.packets.PokemonContainerPacket
 import de.fiereu.openmmo.pokemon.LearnsetRegistry
 import de.fiereu.openmmo.pokemon.SpeciesRegistry
+import de.fiereu.openmmo.server.game.battle.BattleRng
 import de.fiereu.openmmo.server.game.battle.WildMonFactory
-import de.fiereu.openmmo.server.game.services.MapLoadService
-import de.fiereu.openmmo.server.game.services.PresenceService
-import de.fiereu.openmmo.server.game.services.ScriptWarpService
 import de.fiereu.openmmo.server.game.services.StoryPlayerService
 import de.fiereu.openmmo.server.game.storage.CharacterStore
 import de.fiereu.openmmo.server.game.storage.EntityIdService
 import de.fiereu.openmmo.server.game.testsupport.FakeCharacterRepository
 import de.fiereu.openmmo.server.game.testsupport.FakeSession
-import de.fiereu.openmmo.server.game.testsupport.Services
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.collections.shouldContain
 import io.kotest.matchers.shouldBe
@@ -50,17 +45,12 @@ class AdminCommandsTest :
           val storyService = StoryPlayerService(store, monFactory, species, moves)
 
           // Add a damaged Pokemon
-          val p = Pokemon(
-              id = 100L,
+          val base = monFactory.create(1, 5, BattleRng())!!
+          val p = base.copy(
               ownerId = charId,
               container = PokemonContainer.PARTY,
               containerSlot = 0,
-              dexId = 1,
-              seed = 0,
-              ot = "Red",
-              level = 5,
               hp = 1,
-              xp = 100,
               moves = listOf(PokemonMove(33, 0), PokemonMove(45, 0), PokemonMove(0, 0), PokemonMove(0, 0)),
           )
           store.addPokemon(charId, p)
@@ -73,7 +63,8 @@ class AdminCommandsTest :
           session.replies().single() shouldContain "Party fully healed!"
 
           val updated = store.getCharacter(charId)!!.pokemon.first()
-          updated.hp shouldBe 19
+          val maxHp = de.fiereu.openmmo.server.game.battle.StatCalculator.computeAll(species.get(1)!!, updated).hp.toShort()
+          updated.hp shouldBe maxHp
           updated.moves[0].pp shouldBe 35
           updated.moves[1].pp shouldBe 40
         }
