@@ -27,7 +27,10 @@ import de.fiereu.openmmo.net.game.packets.RequestPlayerPacket
 import de.fiereu.openmmo.net.game.packets.RequestSocialProfilePacket
 import de.fiereu.openmmo.net.game.packets.SelectCharacterPacket
 import de.fiereu.openmmo.net.game.packets.TileInteractPacket
+import de.fiereu.openmmo.net.game.packets.TradeActionPacket
+import de.fiereu.openmmo.net.game.packets.TradeSelectMonPacket
 import de.fiereu.openmmo.net.game.packets.UnblockPlayerPacket
+import de.fiereu.openmmo.net.game.packets.gtl.*
 import de.fiereu.openmmo.net.game.packets.battle.BattleActionPacket
 import de.fiereu.openmmo.net.game.packets.battle.BattleActionSelectPacket
 import de.fiereu.openmmo.net.game.packets.battle.BattleActionSubmitPacket
@@ -93,6 +96,8 @@ constructor(
     private val socialService: SocialService,
     private val guildService: GuildService,
     private val battleService: BattleService,
+    private val tradeService: de.fiereu.openmmo.server.game.services.TradeService,
+    private val gtlService: de.fiereu.openmmo.server.game.services.GtlService,
     private val chatCommandService: ChatCommandService,
     private val sessionRegistry: SessionRegistry,
     private val characterStore: CharacterStore,
@@ -160,6 +165,17 @@ constructor(
     on<BattleRewardSelectPacket> { event -> battleService.onBattlePacket(event) }
     on<MapLoadedAckPacket> { event -> battleService.onClientReady(event) }
 
+    on<TradeSelectMonPacket> { event -> tradeService.onTradeSelectMon(event) }
+    on<TradeActionPacket> { event -> tradeService.onTradeAction(event) }
+
+    on<GtlOpenSessionPacket> { event -> gtlService.onOpenSession(event) }
+    on<GtlListingsPageRequestPacket> { event -> gtlService.onListingsPageRequest(event) }
+    on<GtlSearchPageRequestPacket> { event -> gtlService.onSearchPageRequest(event) }
+    on<GtlCreateListingPacket> { event -> gtlService.onCreateListing(event) }
+    on<GtlPurchaseListingPacket> { event -> gtlService.onPurchaseListing(event) }
+    on<GtlListingCancelPacket> { event -> gtlService.onListingCancel(event) }
+    on<GtlTradeLogRequestPacket> { event -> gtlService.onTradeLogRequest(event) }
+
     // The client sends an empty heartbeat packet.
     on<NullPacket> {}
     on<KeepAlivePacket> { event -> event.session.send(event.packet) }
@@ -180,6 +196,7 @@ constructor(
     if (charId != null) {
       // The battle flush must land before the unload evicts the character from the cache.
       battleService.onDisconnect(session)
+      tradeService.onDisconnect(charId)
       presenceService.leave(session)
       sessionRegistry.unbindCharacter(charId)
       characterStore.unloadCharacterAsync(charId)

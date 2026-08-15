@@ -72,6 +72,8 @@ object GameServerModule {
 
   @Provides @Singleton fun guildStore(impl: JooqGuildStore): GuildStore = impl
 
+  @Provides @Singleton fun gtlStore(impl: de.fiereu.openmmo.server.game.storage.InMemoryGtlStore): de.fiereu.openmmo.server.game.storage.GtlStore = impl
+
   // Never touch the database while building the Dagger graph. The explicit
   // migrate() call in main() is the fail-fast connection check.
   @Provides
