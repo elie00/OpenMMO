@@ -14,9 +14,9 @@ INSERT INTO characters (
 -- 264 is the 8 these characters already carried plus CharacterPermissions.DEVELOPER, 0x100.
 VALUES
   (102400, 1, 'Test', '', 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 30000, 264,
-   0, 0, 0, 0, 0, 1, 51, 3, 4, 4, 0, 0, 0, 0),
+   0, 0, 0, 0, 0, 0, 4, 1, 6, 6, 0, 0, 0, 0),
   (364544, 2, 'Test2', '', 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 30000, 264,
-   0, 0, 0, 0, 0, 1, 51, 3, 4, 4, 0, 0, 0, 0);
+   0, 0, 0, 0, 0, 0, 4, 1, 6, 6, 0, 0, 0, 0);
 
 INSERT INTO pokemon (
   id, owner_id, container, container_slot, dex_id, seed, ot, pokemon_level, hp, xp,
